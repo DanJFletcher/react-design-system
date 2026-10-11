@@ -4,6 +4,7 @@ import styles from "./Button.module.css";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost";
 export type ButtonSize = "sm" | "md" | "lg";
+export type ButtonShape = "rounded" | "square" | "pill";
 
 export type ButtonProps = Omit<
   ComponentPropsWithRef<"button">,
@@ -11,6 +12,8 @@ export type ButtonProps = Omit<
 > & {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  shape?: ButtonShape;
+  fullWidth?: boolean;
   loading?: boolean;
   style?: DesignSystemStyle;
   children?: ReactNode;
@@ -20,6 +23,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   {
     variant = "primary",
     size = "md",
+    shape,
+    fullWidth = false,
     loading = false,
     type = "button",
     disabled = false,
@@ -35,6 +40,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     styles.button,
     styles[variant],
     styles[size],
+    shape && styles[shape],
+    fullWidth && styles.fullWidth,
     className,
   ].filter(Boolean).join(" ");
 

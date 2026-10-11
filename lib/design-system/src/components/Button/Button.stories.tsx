@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
-import { Button } from "./Button";
+import { Button, type ButtonShape } from "./Button";
 
 const meta = {
   title: "Components/Button",
@@ -12,6 +12,8 @@ const meta = {
   argTypes: {
     variant: { control: "inline-radio", options: ["primary", "secondary", "ghost"] },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
+    shape: { control: "inline-radio", options: ["rounded", "square", "pill"] },
+    fullWidth: { control: "boolean" },
     loading: { control: "boolean" },
     disabled: { control: "boolean" },
     type: { control: "inline-radio", options: ["button", "submit", "reset"] },
@@ -40,6 +42,36 @@ export const AllVariantsAndSizes: Story = {
       ))}
     </div>
   ),
+};
+
+export const ShapeOptionsAndFullWidth: Story = {
+  render: () => (
+    <div style={{ display: "grid", justifyItems: "start", gap: "1rem", width: "24rem", maxWidth: "100%" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+        {(["rounded", "square", "pill"] as const).map((shape) => (
+          <Button key={shape} shape={shape}>
+            {shape}
+          </Button>
+        ))}
+      </div>
+      <Button fullWidth>Full width</Button>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const shapeRadii: Array<[ButtonShape, string]> = [
+      ["rounded", "12px"],
+      ["square", "0px"],
+      ["pill", "9999px"],
+    ];
+    for (const [shape, radius] of shapeRadii) {
+      const button = canvas.getByRole("button", { name: shape });
+      await expect(getComputedStyle(button).borderTopLeftRadius).toBe(radius);
+    }
+    const fullWidthButton = canvas.getByRole("button", { name: "Full width" });
+    const containerWidth = fullWidthButton.parentElement!.getBoundingClientRect().width;
+    await expect(fullWidthButton.getBoundingClientRect().width).toBe(containerWidth);
+  },
 };
 
 export const Disabled: Story = { args: { disabled: true } };

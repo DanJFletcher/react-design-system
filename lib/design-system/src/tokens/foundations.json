@@ -34,6 +34,8 @@
     "font.weight.semibold": { "type": "fontWeight", "value": 600, "description": "Semibold font weight." },
     "line.height.tight": { "type": "lineHeight", "value": 1.2, "description": "Compact unitless line height." },
     "line.height.normal": { "type": "lineHeight", "value": 1.5, "description": "Default unitless line height." },
+    "radius.shape.rounded": { "type": "dimension", "value": { "amount": 12, "unit": "px" }, "description": "Rounded shape for explicit button shape choices." },
+    "radius.shape.square": { "type": "dimension", "value": { "amount": 0, "unit": "px" }, "description": "Square shape for explicit button shape choices." },
     "radius.full": { "type": "dimension", "value": { "amount": 9999, "unit": "px" }, "description": "Fully rounded component corner." },
     "border.width.default": { "type": "dimension", "value": { "amount": 1, "unit": "px" }, "description": "Standard border width." },
     "focus.width": { "type": "dimension", "value": { "amount": 3, "unit": "px" }, "description": "Keyboard-focus outline width." },

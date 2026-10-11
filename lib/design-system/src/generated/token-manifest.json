@@ -147,6 +147,18 @@
       "description": "Fully rounded component corner."
     },
     {
+      "name": "radius.shape.rounded",
+      "type": "dimension",
+      "value": "12px",
+      "description": "Rounded shape for explicit button shape choices."
+    },
+    {
+      "name": "radius.shape.square",
+      "type": "dimension",
+      "value": "0px",
+      "description": "Square shape for explicit button shape choices."
+    },
+    {
       "name": "space.0",
       "type": "dimension",
       "value": "0px",

@@ -5,13 +5,19 @@ import * as ButtonStories from "./Button.stories";
 
 <Title>Button</Title>
 
-<Subtitle>A native, token-driven action with three variants and three target-size-aware sizes.</Subtitle>
+<Subtitle>A native, token-driven action with variants, sizes, three shape options, and full-width support.</Subtitle>
 
 ## Variants and sizes
 
 <Canvas of={ButtonStories.AllVariantsAndSizes} />
 
 Change the global theme selector to compare every combination in ACME, Luna, and the Orchid custom theme.
+
+## Shape and width
+
+<Canvas of={ButtonStories.ShapeOptionsAndFullWidth} />
+
+`shape` accepts `rounded`, `square`, or `pill`. When omitted, the button keeps the active theme's control radius. `fullWidth` makes the button fill its containing block; it defaults to `false`.
 
 ## States and accessible names
 

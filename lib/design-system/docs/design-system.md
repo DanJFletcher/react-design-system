@@ -48,6 +48,8 @@ type ButtonProps = Omit<
 > & {
   variant?: "primary" | "secondary" | "ghost";
   size?: "sm" | "md" | "lg";
+  shape?: "rounded" | "square" | "pill";
+  fullWidth?: boolean;
   loading?: boolean;
   style?: DesignSystemStyle;
 };
@@ -56,6 +58,8 @@ type ButtonProps = Omit<
 Defaults are `variant="primary"`, `size="md"`, and `type="button"`. Native refs, `className`, form properties, accessible naming attributes, and remaining button props are forwarded. The component owns `aria-busy` and `aria-disabled`.
 
 Small, medium, and large targets have minimum block sizes of 44, 48, and 56px. Padding is tokenized and controls grow with the user's typography settings; the component has no fixed height. Long labels wrap.
+
+The optional `shape` prop selects rounded (12px), square, or pill corners. When omitted, the button uses the active theme's control radius. `fullWidth` makes it fill its containing block and defaults to `false`.
 
 Native disabled uses the native `disabled` attribute. Loading preserves focus with `aria-disabled` and `aria-busy`, suppresses the forwarded click callback and the click's default submit/reset activation, and retains the accessible name. The label stays in layout with zero opacity while an `aria-hidden` spinner is centered over it. Hover and pressed states do not apply while disabled or loading. Reduced-motion and forced-colors preferences receive explicit treatment. Keyboard focus uses a visible tokenized outline.
 

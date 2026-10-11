@@ -108,6 +108,22 @@
   --_button-padding-inline: var(--ds-button-lg-padding-inline, var(--ds-space-5));
 }
 
+.rounded {
+  border-radius: var(--ds-button-radius, var(--ds-radius-shape-rounded));
+}
+
+.square {
+  border-radius: var(--ds-button-radius, var(--ds-radius-shape-square));
+}
+
+.pill {
+  border-radius: var(--ds-button-radius, var(--ds-radius-full));
+}
+
+.fullWidth {
+  inline-size: 100%;
+}
+
 .label {
   display: inline-flex;
   align-items: center;
