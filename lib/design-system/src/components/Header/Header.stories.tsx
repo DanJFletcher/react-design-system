@@ -49,15 +49,16 @@ export const HeightExamples: Story = {
   render: () => (
     <div style={{ display: "grid", gap: "var(--ds-space-4)" }}>
       {(["sm", "md", "lg"] as const).map((size) => (
-        <Header
-          key={size}
-          logo={<strong>ACME · {size.toUpperCase()}</strong>}
-          logoLabel={`ACME ${size} header home`}
-          navItems={navItems}
-          cta={<Button size="sm">Get started</Button>}
-          navigationLabel={`${size.toUpperCase()} navigation`}
-          size={size}
-        />
+        <section key={size} aria-label={`${size.toUpperCase()} header example`}>
+          <Header
+            logo={<strong>ACME · {size.toUpperCase()}</strong>}
+            logoLabel={`ACME ${size.toUpperCase()} header home`}
+            navItems={navItems}
+            cta={<Button size="sm">Get started</Button>}
+            navigationLabel={`${size.toUpperCase()} navigation`}
+            size={size}
+          />
+        </section>
       ))}
     </div>
   ),

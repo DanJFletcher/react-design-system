@@ -10,9 +10,9 @@ const withTheme: Decorator = (Story, context) => {
   const activeTheme = context.globals.theme;
   const theme = activeTheme === "luna" || activeTheme === "orchid" ? activeTheme : "acme";
   return (
-    <main className="storybook-canvas" data-ds-theme={theme}>
+    <div className="storybook-canvas" data-ds-theme={theme}>
       <Story />
-    </main>
+    </div>
   );
 };
 
