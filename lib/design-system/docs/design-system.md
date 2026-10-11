@@ -70,6 +70,26 @@ Native disabled uses the native `disabled` attribute. Loading preserves focus wi
 
 The owning form manages longer asynchronous submission state. Children may contain decorative icons, which should be hidden from assistive technology. `href`, `asChild`, toggle semantics, groups, and an icon-only convenience API are out of scope.
 
+## Core form controls
+
+```tsx
+<TextField label="Email" type="email" required description="Used for account updates." />
+<Textarea label="Message" rows={4} />
+<Select label="Region" name="region"><option value="ca">Canada</option></Select>
+<Checkbox label="Receive updates" name="updates" value="yes" />
+<RadioGroup
+  label="Contact method"
+  name="contact"
+  options={[{ value: "email", label: "Email" }, { value: "phone", label: "Phone" }]}
+/>
+```
+
+All five controls require a visible `label` and forward native props, refs, controlled/uncontrolled values, and form behavior. `TextField`, `Textarea`, and `Select` use their native input elements; `Checkbox` uses a native checkbox; `RadioGroup` uses a `fieldset`, `legend`, and native radios with a required shared `name`.
+
+`description` and `error` content are connected with `aria-describedby` while preserving IDs supplied by the caller. An `error` sets `aria-invalid`; use `invalid` when an invalid state has no message. Native `required` and `disabled` behavior is retained. The controls do not provide a form state manager, validation rules, or asynchronous submission handling.
+
+Error copy and invalid borders use `color.text.error` and `color.border.error`. Their contrast is checked against canvas and surface colors in ACME, Luna, and Orchid. Form control styling uses semantic text, surface, border, focus, spacing, and radius tokens.
+
 ## Enforcement
 
 `pnpm check` is the complete gate. Token sources and output, raw component styling values, type/prop contracts, contrast, interaction, visual snapshots, and the packaged consumer are mechanically checked. Storybook documentation includes manual keyboard-navigation, screen-reader naming, zoom, and focus-clipping checks; automated accessibility checks do not replace them.

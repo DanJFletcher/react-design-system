@@ -1,6 +1,6 @@
 # Component development
 
-The first milestone intentionally contains one component. Do not add another component until it has a written API and an approved roadmap dependency.
+The initial scope established Button. The approved core form-control set adds TextField, Textarea, native Select, Checkbox, and RadioGroup. Any further component must have a written API and an approved roadmap dependency before implementation.
 
 For a future component, use this planning template:
 

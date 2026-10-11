@@ -1,0 +1,44 @@
+import { Canvas, Meta, Title } from "@storybook/addon-docs/blocks";
+import * as FormControlsStories from "./FormControls.stories";
+
+<Meta of={FormControlsStories} />
+
+<Title>Form controls</Title>
+
+These native, theme-aware controls share accessible labels, descriptions, required states, and validation messaging. They do not manage form state or validation rules for you.
+
+## TextField
+
+<Canvas of={FormControlsStories.TextFieldStates} />
+
+Use `TextField` for a single-line input. It forwards native input attributes such as `type`, `name`, `autoComplete`, `value`, `defaultValue`, and `onChange`. `label` is required; `description`, `error`, `required`, `disabled`, and `invalid` are optional.
+
+## Textarea
+
+<Canvas of={FormControlsStories.TextareaBasics} />
+
+`Textarea` forwards native multiline input props, including `rows`, `maxLength`, and native change handlers. It defaults to four rows and can be resized vertically.
+
+## Select
+
+<Canvas of={FormControlsStories.SelectInteraction} />
+
+`Select` renders a native `<select>` and accepts native `<option>` or `<optgroup>` children. This keeps platform keyboard navigation and form submission behavior.
+
+## Checkbox and RadioGroup
+
+<Canvas of={FormControlsStories.CheckboxInteraction} />
+<Canvas of={FormControlsStories.RadioGroupKeyboard} />
+
+`Checkbox` is a native checkbox. `RadioGroup` renders a native `<fieldset>` and `<legend>` with radio inputs that share the required `name`; provide the available `options` and an optional controlled `value` or `defaultValue`.
+
+## Validation and accessible names
+
+Each control requires a visible `label`. `description` and `error` are connected to the control or group through `aria-describedby`; an error also sets `aria-invalid`. Set `invalid` when the control is invalid but has no message. Existing `aria-describedby` IDs are preserved and combined. Native `required` and `disabled` behavior is retained.
+
+## Themes
+
+<Canvas of={FormControlsStories.ThemeCoverage} />
+<Canvas of={FormControlsStories.NestedThemeBoundaries} />
+
+Controls use the active theme's semantic text, surface, border, focus, spacing, and radius tokens. Error text and invalid borders use dedicated semantic roles with contrast checked across ACME, Luna, and Orchid.

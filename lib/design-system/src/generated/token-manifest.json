@@ -331,6 +331,11 @@
       "description": "Control boundary."
     },
     {
+      "name": "color.border.error",
+      "type": "color",
+      "description": "Control boundary indicating a validation error."
+    },
+    {
       "name": "color.canvas",
       "type": "color",
       "description": "Default page canvas."
@@ -344,6 +349,11 @@
       "name": "color.surface.primary",
       "type": "color",
       "description": "Primary content surface."
+    },
+    {
+      "name": "color.text.error",
+      "type": "color",
+      "description": "Text that explains a form validation error."
     },
     {
       "name": "color.text.muted",
@@ -597,7 +607,9 @@
       "color.surface.primary": "#FFFFFF",
       "color.text.primary": "#0F172A",
       "color.text.muted": "#475569",
+      "color.text.error": "#B42318",
       "color.border.control": "#64748B",
+      "color.border.error": "#B42318",
       "color.action.primary.bg": "#1D4ED8",
       "color.action.primary.hover": "#1E40AF",
       "color.action.primary.pressed": "#1E3A8A",
@@ -621,7 +633,9 @@
       "color.surface.primary": "#1B1730",
       "color.text.primary": "#FBF5FF",
       "color.text.muted": "#CDBFE1",
+      "color.text.error": "#FF91A4",
       "color.border.control": "#B7A4CE",
+      "color.border.error": "#FF91A4",
       "color.action.primary.bg": "#F6B8D8",
       "color.action.primary.hover": "#F08AC4",
       "color.action.primary.pressed": "#DC6DAF",
@@ -645,7 +659,9 @@
       "color.surface.primary": "#FFFAFE",
       "color.text.primary": "#38143D",
       "color.text.muted": "#693B6F",
+      "color.text.error": "#A61E2E",
       "color.border.control": "#8B5E88",
+      "color.border.error": "#A61E2E",
       "color.action.primary.bg": "#703B91",
       "color.action.primary.hover": "#5D2B78",
       "color.action.primary.pressed": "#48205F",
@@ -752,6 +768,20 @@
     },
     {
       "theme": "acme",
+      "name": "Error text on canvas",
+      "ratio": 6.284,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Error text on surface",
+      "ratio": 6.574,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
       "name": "Accent",
       "ratio": 8.49,
       "minimum": 4.5,
@@ -775,6 +805,20 @@
       "theme": "acme",
       "name": "Control boundary on canvas",
       "ratio": 4.548,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Error boundary on canvas",
+      "ratio": 6.284,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Error boundary on surface",
+      "ratio": 6.574,
       "minimum": 3,
       "kind": "indicator"
     },
@@ -864,6 +908,20 @@
     },
     {
       "theme": "luna",
+      "name": "Error text on canvas",
+      "ratio": 8.889,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Error text on surface",
+      "ratio": 8.118,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
       "name": "Accent",
       "ratio": 10.543,
       "minimum": 4.5,
@@ -887,6 +945,20 @@
       "theme": "luna",
       "name": "Control boundary on canvas",
       "ratio": 8.326,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Error boundary on canvas",
+      "ratio": 8.889,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Error boundary on surface",
+      "ratio": 8.118,
       "minimum": 3,
       "kind": "indicator"
     },
@@ -976,6 +1048,20 @@
     },
     {
       "theme": "orchid",
+      "name": "Error text on canvas",
+      "ratio": 6.805,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Error text on surface",
+      "ratio": 7.152,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
       "name": "Accent",
       "ratio": 10.512,
       "minimum": 4.5,
@@ -999,6 +1085,20 @@
       "theme": "orchid",
       "name": "Control boundary on canvas",
       "ratio": 4.778,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Error boundary on canvas",
+      "ratio": 6.805,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Error boundary on surface",
+      "ratio": 7.152,
       "minimum": 3,
       "kind": "indicator"
     }

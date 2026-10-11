@@ -10,7 +10,7 @@ Remove an unused theme source in `src/tokens/themes/`, remove its export from `p
 
 ## Remove unused components and variants
 
-This milestone has one Button. When a later fork removes a component or variant, also remove its stories, hooks that no longer have a consumer, tests, documentation, exports, and CSS entrypoint. Keep token validation, contrast checks for retained themes, type checking, package smoke tests, and accessibility checks.
+The package includes Button plus the core native form controls: TextField, Textarea, Select, Checkbox, and RadioGroup. When a later fork removes a component or variant, also remove its stories, hooks that no longer have a consumer, tests, documentation, exports, and CSS entrypoint. Keep token validation, contrast checks for retained themes, type checking, package smoke tests, and accessibility checks.
 
 ## Verify a fork
 

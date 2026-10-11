@@ -102,9 +102,11 @@
   --ds-color-action-secondary-hover: #453153;
   --ds-color-action-secondary-pressed: #261B36;
   --ds-color-border-control: #B7A4CE;
+  --ds-color-border-error: #FF91A4;
   --ds-color-canvas: #100E21;
   --ds-color-focus-ring: #E6C4FF;
   --ds-color-surface-primary: #1B1730;
+  --ds-color-text-error: #FF91A4;
   --ds-color-text-muted: #CDBFE1;
   --ds-color-text-primary: #FBF5FF;
   --ds-radius-control: 9999px;

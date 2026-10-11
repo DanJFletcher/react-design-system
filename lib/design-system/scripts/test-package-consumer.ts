@@ -39,7 +39,7 @@ try {
     include: ["consumer.tsx"],
   }, null, 2));
   await writeFile(join(temporary, "consumer.tsx"), [
-    'import { Button, ThemeScope, type ButtonIconPosition, type ButtonShape } from "@workspace/design-system";',
+    'import { Button, Checkbox, RadioGroup, Select, TextField, Textarea, ThemeScope, type ButtonIconPosition, type ButtonShape } from "@workspace/design-system";',
     'import "@workspace/design-system/tokens.css";',
     'import "@workspace/design-system/styles.css";',
     'import "@workspace/design-system/themes/acme.css";',
@@ -47,15 +47,20 @@ try {
     'import "@workspace/design-system/themes/orchid.css";',
     'const shape: ButtonShape = "pill";',
     'const iconPosition: ButtonIconPosition = "right";',
-    'export const example = <ThemeScope theme="luna" style={{ "--ds-button-radius": "12px" }}><Button variant="secondary" shape={shape} icon={<span>★</span>} iconPosition={iconPosition}>Continue</Button><Button iconOnly icon={<span>×</span>} aria-label="Close dialog" /></ThemeScope>;',
+    'export const example = <ThemeScope theme="luna" style={{ "--ds-button-radius": "12px" }}><Button variant="secondary" shape={shape} icon={<span>★</span>} iconPosition={iconPosition}>Continue</Button><Button iconOnly icon={<span>×</span>} aria-label="Close dialog" /><TextField label="Email" type="email" required /><Textarea label="Notes" rows={4} /><Select label="Region" defaultValue="ca"><option value="ca">Canada</option></Select><Checkbox label="Subscribe" name="subscribe" value="yes" /><RadioGroup label="Contact method" name="contact" options={[{ value: "email", label: "Email" }]} /></ThemeScope>;',
     "",
   ].join("\n"));
   execFileSync("pnpm", ["install", "--ignore-workspace"], { cwd: temporary, stdio: "inherit" });
   execFileSync("pnpm", ["exec", "tsc", "-p", "tsconfig.json"], { cwd: temporary, stdio: "inherit" });
   execFileSync("pnpm", ["exec", "node", "--input-type=module", "-e", [
     'import assert from "node:assert/strict";',
-    'import { Button, ThemeScope } from "@workspace/design-system";',
+    'import { Button, Checkbox, RadioGroup, Select, TextField, Textarea, ThemeScope } from "@workspace/design-system";',
     'assert.equal(typeof Button, "object");',
+    'assert.equal(typeof Checkbox, "object");',
+    'assert.equal(typeof RadioGroup, "object");',
+    'assert.equal(typeof Select, "object");',
+    'assert.equal(typeof TextField, "object");',
+    'assert.equal(typeof Textarea, "object");',
     'assert.equal(typeof ThemeScope, "function");',
   ].join("")], { cwd: temporary, stdio: "inherit" });
   for (const file of ["tokens.css", "styles.css", "themes/acme.css", "themes/luna.css", "themes/orchid.css"]) {

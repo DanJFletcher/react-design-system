@@ -1,15 +1,15 @@
 # Deferred roadmap
 
-The following work is documented but deliberately not part of the first milestone.
+The core native form controls are part of the current foundation. The following additional capabilities remain deferred.
 
 | Phase | Capabilities | Required foundation |
 | --- | --- | --- |
 | Visual atoms | Text, Heading, Icon | Typography and semantic color rules |
 | Layout primitives | Stack, Inline, Grid, Container | Pixel spacing and responsive layout rules |
-| Form atoms | Label, Input, Textarea, Checkbox, Radio, Switch | Labeling, validation, and focus conventions |
-| Form composition | Field, HelpText, ValidationMessage | Form atoms and shared accessible relationships |
+| Additional form atoms | Switch, date/time inputs, file input | Extend the existing labeling, validation-message, and focus conventions |
+| Form composition | Public Field, Form, shared validation messages and state | Core form controls and a separately defined state/validation contract |
 | Interaction infrastructure | Focus management, dismissal, positioning, themed portals | Tested accessibility primitives and theme-boundary policy |
-| Compound controls | Tabs, Accordion, Menu, Dialog, Select, Combobox | Shared state and keyboard interaction contracts |
+| Compound controls | Tabs, Accordion, Menu, Dialog, Combobox, custom popover Select | Shared state and keyboard interaction contracts |
 | Larger compositions | Navigation, complex forms, data displays | Stable atoms and compound controls |
 
 Every future compound component must document its parts, state ownership, controlled/uncontrolled behavior, keyboard model, labeling relationships, and public styling hooks. Consumers must not need to target private DOM structures.

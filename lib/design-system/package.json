@@ -1,7 +1,7 @@
 {
   "name": "@workspace/design-system",
   "version": "0.1.0",
-  "description": "A forkable React design-system foundation with typed tokens, scoped themes, and an accessible Button.",
+  "description": "A forkable React design-system foundation with typed tokens, scoped themes, and accessible action and form controls.",
   "type": "module",
   "license": "MIT",
   "files": [

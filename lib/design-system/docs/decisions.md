@@ -20,6 +20,10 @@ The compiler implements only the types and validation rules used here. It does n
 
 Orchid demonstrates extending Luna while retaining a flattened output map. It is a source example, not a commitment to add more built-in themes.
 
+## Form controls use native elements
+
+The core form controls preserve native input, select, checkbox, radio, and fieldset behavior. Shared internal helpers provide consistent labels and accessible description/error relationships; form state and validation rules remain the consumer's responsibility.
+
 ## Storybook and visual checks are documentation, not a deployable app
 
 Storybook stays with the package and runs as its development/documentation environment. This project remains a shared library; it does not introduce a publishable end-user application.
