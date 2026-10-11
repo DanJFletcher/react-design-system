@@ -44,6 +44,10 @@ Card uses an article container rather than making the entire surface a click tar
 
 PricingDetails renders consumer-supplied price and line-item content. It does not compute totals, format currencies, or initiate payment, keeping financial rules and localization with the consuming product.
 
+## Carousel navigation is manual and focus-safe
+
+Carousel does not auto-advance. Inactive slides are inert and hidden from assistive technology; keyboard and touch navigation are opt-in through focus or gesture, and reduced-motion preferences disable transitions.
+
 ## Menus use the ARIA menu interaction model
 
 The configurable Menu supports nested action/link items and separators. It keeps native buttons and links as the activation elements while applying menu roles and managed arrow-key focus; nested menus open inline on narrow screens to avoid viewport overflow. Menu-specific component hooks extend scoped theming without adding new semantic tokens.

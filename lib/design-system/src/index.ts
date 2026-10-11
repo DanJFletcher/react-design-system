@@ -19,6 +19,15 @@ export type {
   CardSize,
   CardVariant,
 } from "./components/Card/Card";
+export { Carousel } from "./components/Carousel/Carousel";
+export type {
+  CarouselControlsPosition,
+  CarouselIndicator,
+  CarouselProps,
+  CarouselSize,
+  CarouselSlide,
+  CarouselVariant,
+} from "./components/Carousel/Carousel";
 export { TextField } from "./components/FormControls/TextField";
 export type { TextFieldProps } from "./components/FormControls/TextField";
 export { Textarea } from "./components/FormControls/Textarea";

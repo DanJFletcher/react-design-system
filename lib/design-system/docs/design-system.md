@@ -153,6 +153,25 @@ The `card.*` component hooks customize the surface, text, border, radius, paddin
 
 `PricingDetails` presents consumer-provided price content, billing context, optional comparison price, structured definition-list rows, features, footnote, and action slots. It supports stacked or responsive split layout, five visual variants, three sizes, start/center alignment, and rounded/square shapes. It does not calculate totals, format currency, or initiate checkout; callers own localization and payment behavior. The `pricing.*` hooks customize its theme-aware surface, text, price, borders, spacing, and shape.
 
+## Carousel
+
+```tsx
+<Carousel
+  label="Featured stories"
+  slides={[
+    { id: "focus", label: "Find your focus", content: <FeaturedStory /> },
+    { id: "flow", label: "Build your flow", content: <TeamStory /> },
+  ]}
+  loop
+  indicators="dots"
+  controlsPosition="below"
+/>
+```
+
+`Carousel` supports controlled or uncontrolled slide selection, optional looping, previous/next buttons, dot or fraction indicators, overlay/below control placement, custom slide content, and an empty state. Keyboard users can focus the carousel and use Left/Right Arrow, Home, and End; touch users can swipe horizontally. Inactive slides are hidden and inert. Autoplay is intentionally not included.
+
+Provide an accessible `label` and unique slide `id` values. Use `getSlideLabel` and `getIndicatorLabel` for localized accessible names. The `carousel.*` hooks customize theme colors, controls, indicators, spacing, and corners; reduced-motion preferences disable slide transitions.
+
 ## Action menu
 
 ```tsx

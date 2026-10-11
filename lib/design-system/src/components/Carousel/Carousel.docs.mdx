@@ -1,0 +1,39 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as CarouselStories from "./Carousel.stories";
+
+<Meta of={CarouselStories} />
+
+<Title>Carousel</Title>
+
+<Subtitle>An accessible, theme-aware carousel with caller-owned slides, touch navigation, and configurable controls.</Subtitle>
+
+## Playground
+
+<Canvas of={CarouselStories.Playground} />
+
+`slides` is an array of `{ id, content, label? }` records. Each `id` must be unique. The carousel requires a concise accessible `label`; slide content can be any React node.
+
+## Controls and layouts
+
+<Canvas of={CarouselStories.ControlsExamples} />
+<Canvas of={CarouselStories.VariantExamples} />
+
+`loop` wraps navigation at the first and last slides. `showControls` displays previous/next buttons. `indicators` accepts `dots`, `fraction`, or `none`; controls can be placed `below` the slides or overlaid. `variant` accepts `surface`, `outlined`, `subtle`, or `accent`, and `size` accepts `sm`, `md`, or `lg`.
+
+Keyboard users can focus the carousel and use Left/Right Arrow, Home, and End. Touch users can swipe horizontally; vertical page scrolling remains available. Inactive slides are hidden from assistive technology and removed from keyboard focus. The carousel is manual—there is no autoplay.
+
+## Themes, controlled state, and empty content
+
+<Canvas of={CarouselStories.ThemeCoverage} />
+<Canvas of={CarouselStories.Controlled} />
+<Canvas of={CarouselStories.LocalizedLabels} />
+<Canvas of={CarouselStories.CustomHookOverrides} />
+<Canvas of={CarouselStories.EmptyState} />
+
+Set `index` with `onIndexChange` for controlled state; otherwise `defaultIndex` sets the initial slide. `getSlideLabel` and `getIndicatorLabel` customize accessible labels for localization. `emptyMessage` replaces the default text when `slides` is empty.
+
+Registered `carousel.*` hooks customize surface, text, border, radius, padding, controls, indicators, and slide radius. Hooks reset at nested theme boundaries. Reduced-motion preferences disable slide transitions. Native section props and `className` are forwarded.
+
+## Accessibility
+
+The component renders a labeled section with `aria-roledescription="carousel"`. Each active slide is a named group; inactive slides have `aria-hidden` and `inert`. Previous/next buttons are named and disabled at non-looping boundaries. Focus remains on the navigation control or carousel after changing slides.

@@ -669,6 +669,84 @@
       "cssVariable": "--ds-card-text"
     },
     {
+      "name": "carousel.background",
+      "type": "color",
+      "description": "Carousel background color.",
+      "cssVariable": "--ds-carousel-background"
+    },
+    {
+      "name": "carousel.border",
+      "type": "color",
+      "description": "Carousel border color.",
+      "cssVariable": "--ds-carousel-border"
+    },
+    {
+      "name": "carousel.control-bg",
+      "type": "color",
+      "description": "Carousel navigation button background.",
+      "cssVariable": "--ds-carousel-control-bg"
+    },
+    {
+      "name": "carousel.control-border",
+      "type": "color",
+      "description": "Carousel navigation button border.",
+      "cssVariable": "--ds-carousel-control-border"
+    },
+    {
+      "name": "carousel.control-fg",
+      "type": "color",
+      "description": "Carousel navigation button foreground.",
+      "cssVariable": "--ds-carousel-control-fg"
+    },
+    {
+      "name": "carousel.gap",
+      "type": "dimension",
+      "description": "Carousel control and content spacing.",
+      "cssVariable": "--ds-carousel-gap"
+    },
+    {
+      "name": "carousel.indicator",
+      "type": "color",
+      "description": "Carousel inactive indicator color.",
+      "cssVariable": "--ds-carousel-indicator"
+    },
+    {
+      "name": "carousel.indicator-active",
+      "type": "color",
+      "description": "Carousel active indicator color.",
+      "cssVariable": "--ds-carousel-indicator-active"
+    },
+    {
+      "name": "carousel.indicator-surface",
+      "type": "color",
+      "description": "Carousel overlay indicator surface.",
+      "cssVariable": "--ds-carousel-indicator-surface"
+    },
+    {
+      "name": "carousel.padding",
+      "type": "dimension",
+      "description": "Carousel internal padding.",
+      "cssVariable": "--ds-carousel-padding"
+    },
+    {
+      "name": "carousel.radius",
+      "type": "dimension",
+      "description": "Carousel outer corner radius.",
+      "cssVariable": "--ds-carousel-radius"
+    },
+    {
+      "name": "carousel.slide-radius",
+      "type": "dimension",
+      "description": "Carousel slide viewport corner radius.",
+      "cssVariable": "--ds-carousel-slide-radius"
+    },
+    {
+      "name": "carousel.text",
+      "type": "color",
+      "description": "Carousel foreground color.",
+      "cssVariable": "--ds-carousel-text"
+    },
+    {
       "name": "hero.background",
       "type": "color",
       "description": "Hero background color.",

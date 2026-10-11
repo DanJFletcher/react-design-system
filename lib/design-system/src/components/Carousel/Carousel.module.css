@@ -1,0 +1,218 @@
+.carousel {
+  --_carousel-background: var(--ds-color-surface-primary);
+  --_carousel-text: var(--ds-color-text-primary);
+  --_carousel-border: var(--ds-color-border-control);
+  --_carousel-control-bg: var(--ds-color-surface-primary);
+  --_carousel-control-fg: var(--ds-color-text-primary);
+  --_carousel-indicator: var(--ds-color-border-control);
+  --_carousel-indicator-active: var(--ds-color-action-primary-bg);
+  --_carousel-padding: var(--ds-space-4);
+  --_carousel-gap: var(--ds-space-3);
+  --_carousel-radius: var(--ds-radius-shape-rounded);
+
+  box-sizing: border-box;
+  min-inline-size: 0;
+  padding: var(--ds-carousel-padding, var(--_carousel-padding));
+  border: var(--ds-border-width-default) solid var(--ds-carousel-border, var(--_carousel-border));
+  border-radius: var(--ds-carousel-radius, var(--_carousel-radius));
+  background-color: var(--ds-carousel-background, var(--_carousel-background));
+  color: var(--ds-carousel-text, var(--_carousel-text));
+}
+
+.carousel[data-variant="outlined"] {
+  --_carousel-background: transparent;
+}
+
+.carousel[data-variant="subtle"] {
+  --_carousel-background: var(--ds-color-canvas);
+  --_carousel-border: transparent;
+}
+
+.carousel[data-variant="accent"] {
+  --_carousel-background: var(--ds-color-accent-bg);
+  --_carousel-text: var(--ds-color-accent-fg);
+  --_carousel-border: var(--ds-color-accent-bg);
+  --_carousel-control-bg: var(--ds-color-accent-fg);
+  --_carousel-control-fg: var(--ds-color-accent-bg);
+  --_carousel-indicator: var(--ds-color-accent-fg);
+  --_carousel-indicator-active: var(--ds-color-accent-fg);
+}
+
+.carousel[data-size="sm"] {
+  --_carousel-padding: var(--ds-space-3);
+  --_carousel-gap: var(--ds-space-2);
+}
+
+.carousel[data-size="lg"] {
+  --_carousel-padding: var(--ds-space-6);
+  --_carousel-gap: var(--ds-space-4);
+}
+
+.frame {
+  position: relative;
+  min-inline-size: 0;
+}
+
+.viewport {
+  min-inline-size: 0;
+  overflow: hidden;
+  border-radius: var(--ds-carousel-slide-radius, var(--ds-radius-shape-rounded));
+  touch-action: pan-y;
+}
+
+.track {
+  display: grid;
+  min-inline-size: 0;
+  overflow: hidden;
+}
+
+.slide {
+  grid-area: 1 / 1;
+  min-inline-size: 0;
+  transition: transform var(--ds-motion-duration-fast) ease;
+}
+
+.empty {
+  display: grid;
+  min-block-size: var(--ds-space-24);
+  place-items: center;
+  color: var(--ds-color-text-muted);
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-carousel-gap, var(--_carousel-gap));
+}
+
+.controls[data-position="below"] {
+  margin-block-start: var(--ds-carousel-gap, var(--_carousel-gap));
+}
+
+.controls[data-position="overlay"] {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.controlButton {
+  appearance: none;
+  box-sizing: border-box;
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  min-inline-size: var(--ds-control-min-block-size-md);
+  min-block-size: var(--ds-control-min-block-size-md);
+  padding: var(--ds-space-2);
+  border: var(--ds-border-width-default) solid var(--ds-carousel-control-border, var(--_carousel-border));
+  border-radius: var(--ds-radius-shape-rounded);
+  background-color: var(--ds-carousel-control-bg, var(--_carousel-control-bg));
+  color: var(--ds-carousel-control-fg, var(--_carousel-control-fg));
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.controlButton:focus-visible,
+.indicator:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.controlButton:hover:not(:disabled) {
+  border-color: var(--ds-color-border-strong);
+}
+
+.controlButton:disabled {
+  color: var(--ds-color-action-disabled-fg);
+  cursor: not-allowed;
+}
+
+.arrow {
+  inline-size: var(--ds-font-size-lg);
+  block-size: var(--ds-font-size-lg);
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+}
+
+.controls[data-position="overlay"] .indicators {
+  position: absolute;
+  inset-block-end: var(--ds-carousel-gap, var(--_carousel-gap));
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-full);
+  background-color: var(--ds-carousel-indicator-surface, var(--ds-color-surface-primary));
+}
+
+.indicator {
+  appearance: none;
+  box-sizing: border-box;
+  inline-size: var(--ds-space-2);
+  block-size: var(--ds-space-2);
+  padding: 0;
+  border: 0;
+  border-radius: var(--ds-radius-full);
+  background-color: var(--ds-carousel-indicator, var(--_carousel-indicator));
+  cursor: pointer;
+}
+
+.indicator[aria-current="true"] {
+  inline-size: var(--ds-space-6);
+  background-color: var(--ds-carousel-indicator-active, var(--_carousel-indicator-active));
+}
+
+.fraction {
+  margin-inline: auto;
+  color: var(--ds-color-text-muted);
+  font-size: var(--ds-font-size-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.controls[data-position="overlay"] .fraction {
+  position: absolute;
+  inset-block-end: var(--ds-carousel-gap, var(--_carousel-gap));
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  padding: var(--ds-space-1) var(--ds-space-3);
+  border-radius: var(--ds-radius-full);
+  background-color: var(--ds-carousel-indicator-surface, var(--ds-color-surface-primary));
+}
+
+.carousel:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide {
+    transition-duration: 0ms;
+  }
+}
+
+@media (forced-colors: active) {
+  .carousel {
+    border-color: CanvasText;
+  }
+
+  .controlButton,
+  .indicator {
+    border: var(--ds-border-width-default) solid ButtonText;
+  }
+
+  .controlButton:focus-visible,
+  .indicator:focus-visible,
+  .carousel:focus-visible {
+    outline-color: Highlight;
+  }
+}

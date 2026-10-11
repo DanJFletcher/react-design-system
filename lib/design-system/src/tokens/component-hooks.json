@@ -71,6 +71,19 @@
     "pricing.detail-border": { "type": "color", "description": "Pricing details section separator color." },
     "pricing.radius": { "type": "dimension", "description": "Pricing details corner radius." },
     "pricing.padding": { "type": "dimension", "description": "Pricing details internal padding." },
-    "pricing.gap": { "type": "dimension", "description": "Pricing details section spacing." }
+    "pricing.gap": { "type": "dimension", "description": "Pricing details section spacing." },
+    "carousel.background": { "type": "color", "description": "Carousel background color." },
+    "carousel.text": { "type": "color", "description": "Carousel foreground color." },
+    "carousel.border": { "type": "color", "description": "Carousel border color." },
+    "carousel.radius": { "type": "dimension", "description": "Carousel outer corner radius." },
+    "carousel.slide-radius": { "type": "dimension", "description": "Carousel slide viewport corner radius." },
+    "carousel.padding": { "type": "dimension", "description": "Carousel internal padding." },
+    "carousel.gap": { "type": "dimension", "description": "Carousel control and content spacing." },
+    "carousel.control-bg": { "type": "color", "description": "Carousel navigation button background." },
+    "carousel.control-fg": { "type": "color", "description": "Carousel navigation button foreground." },
+    "carousel.control-border": { "type": "color", "description": "Carousel navigation button border." },
+    "carousel.indicator": { "type": "color", "description": "Carousel inactive indicator color." },
+    "carousel.indicator-active": { "type": "color", "description": "Carousel active indicator color." },
+    "carousel.indicator-surface": { "type": "color", "description": "Carousel overlay indicator surface." }
   }
 }
