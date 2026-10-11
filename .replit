@@ -18,19 +18,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Design System Storybook"
-
-[[workflows.workflow]]
-name = "Design System Storybook"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "pnpm --filter @workspace/design-system exec storybook dev --ci --host 0.0.0.0 --port 6000"
-waitForPort = 6000
-
-[workflows.workflow.metadata]
-outputType = "webview"
+args = "artifacts/design-system-docs: web"
 
 [agent]
 stack = "PNPM_WORKSPACE"

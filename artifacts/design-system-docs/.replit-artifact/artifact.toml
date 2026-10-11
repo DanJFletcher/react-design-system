@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Design System Docs"
+description = "A root-route website for the existing Storybook documentation of the design-system package, including its tokens, themes, and Button component."
+version = "1.0.0"
+id = "artifacts/design-system-docs"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24802
+
+[services.development]
+run = "pnpm --filter @workspace/design-system exec storybook dev --ci --host 0.0.0.0 --port $PORT"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/design-system", "run", "build-storybook" ]
+serve = "static"
+publicDir = "lib/design-system/storybook-static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24802"
+BASE_PATH = "/"
