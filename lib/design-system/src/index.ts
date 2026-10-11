@@ -24,6 +24,17 @@ export { Switch } from "./components/FormControls/Switch";
 export type { SwitchProps } from "./components/FormControls/Switch";
 export { Header } from "./components/Header/Header";
 export type { HeaderNavItem, HeaderProps, HeaderSize } from "./components/Header/Header";
+export { Menu } from "./components/Menu/Menu";
+export type {
+  MenuActionItem,
+  MenuDividerItem,
+  MenuEntry,
+  MenuLinkProps,
+  MenuPlacement,
+  MenuProps,
+  MenuSelectEvent,
+  MenuSubmenuItem,
+} from "./components/Menu/Menu";
 export { FieldGroup } from "./components/FormControls/FieldGroup";
 export type { FieldGroupProps } from "./components/FormControls/FieldGroup";
 export { FormLayout } from "./components/FormControls/FormLayout";

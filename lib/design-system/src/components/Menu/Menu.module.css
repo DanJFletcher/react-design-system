@@ -1,0 +1,192 @@
+.root {
+  position: relative;
+  display: inline-block;
+  max-inline-size: 100%;
+  color: var(--ds-menu-text, var(--ds-color-text-primary));
+  font-family: var(--ds-font-family-sans);
+}
+
+.trigger {
+  max-inline-size: 100%;
+}
+
+.menu {
+  box-sizing: border-box;
+  z-index: 30;
+  min-inline-size: var(--ds-space-32);
+  max-inline-size: calc(100vw - var(--ds-space-8));
+  max-block-size: 70vh;
+  overflow: auto;
+  margin: 0;
+  padding: var(--ds-space-1);
+  border: var(--ds-border-width-default) solid var(--ds-menu-border, var(--ds-color-border-control));
+  border-radius: var(--ds-menu-radius, var(--ds-radius-control));
+  background-color: var(--ds-menu-surface, var(--ds-color-surface-primary));
+  color: var(--ds-menu-text, var(--ds-color-text-primary));
+  list-style: none;
+  overscroll-behavior: contain;
+}
+
+.panel {
+  position: absolute;
+  inset-block-start: calc(100% + var(--ds-space-1));
+  inset-inline-start: 0;
+}
+
+.root[data-placement^="top"] > .panel {
+  inset-block-start: auto;
+  inset-block-end: calc(100% + var(--ds-space-1));
+}
+
+.root[data-placement$="end"] > .panel {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+}
+
+.submenu {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: calc(100% + var(--ds-space-1));
+  z-index: 1;
+}
+
+.root[data-placement$="end"] .submenu {
+  inset-inline-start: auto;
+  inset-inline-end: calc(100% + var(--ds-space-1));
+}
+
+.menu > li {
+  margin: 0;
+  padding: 0;
+}
+
+.submenuItem {
+  position: relative;
+}
+
+.menuItem {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  inline-size: 100%;
+  min-block-size: var(--ds-control-min-block-size-md);
+  padding-block: var(--ds-space-2);
+  padding-inline: var(--ds-space-3);
+  border: 0;
+  border-radius: var(--ds-radius-control);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: var(--ds-font-size-md);
+  line-height: var(--ds-line-height-normal);
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menuItem:hover:not(:disabled):not([aria-disabled="true"]),
+.menuItem[aria-expanded="true"] {
+  background-color: var(--ds-menu-item-hover-bg, var(--ds-color-action-ghost-hover));
+  color: var(--ds-menu-item-hover-fg, var(--ds-color-action-ghost-fg));
+}
+
+.menuItem:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-menu-focus-color, var(--ds-color-focus-ring));
+  outline-offset: var(--ds-focus-offset);
+}
+
+.menuItem:disabled,
+.menuItem[aria-disabled="true"] {
+  color: var(--ds-menu-item-disabled-fg, var(--ds-color-text-muted));
+  cursor: not-allowed;
+}
+
+.submenuTrigger {
+  text-align: start;
+}
+
+.itemIcon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--ds-space-4);
+  block-size: var(--ds-space-4);
+  line-height: 0;
+}
+
+.itemIcon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.itemLabel {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+}
+
+.submenuChevron {
+  display: block;
+  flex: 0 0 auto;
+  inline-size: var(--ds-space-4);
+  block-size: var(--ds-space-4);
+  margin-inline-start: auto;
+}
+
+.divider {
+  box-sizing: border-box;
+  block-size: 0;
+  margin-block: var(--ds-space-1);
+  border-block-start: var(--ds-border-width-default) solid var(--ds-menu-border, var(--ds-color-border-control));
+}
+
+.emptyItem {
+  cursor: default;
+}
+
+.menu[data-size="sm"] .menuItem {
+  min-block-size: var(--ds-control-min-block-size-sm);
+  padding-inline: var(--ds-space-2);
+  font-size: var(--ds-font-size-sm);
+}
+
+.menu[data-size="lg"] .menuItem {
+  min-block-size: var(--ds-control-min-block-size-lg);
+  padding-inline: var(--ds-space-4);
+  font-size: var(--ds-font-size-lg);
+}
+
+@media (max-width: 32rem) {
+  .submenu {
+    position: static;
+    min-inline-size: 0;
+    max-inline-size: 100%;
+    margin-block-start: var(--ds-space-1);
+    margin-inline-start: var(--ds-space-3);
+    border-block: 0;
+    border-inline-end: 0;
+    border-inline-start: var(--ds-border-width-default) solid var(--ds-menu-border, var(--ds-color-border-control));
+    border-radius: 0;
+  }
+
+  .root[data-placement$="end"] .submenu {
+    inset-inline-start: auto;
+    inset-inline-end: auto;
+  }
+}
+
+@media (forced-colors: active) {
+  .menu {
+    border-color: CanvasText;
+  }
+
+  .menuItem:focus-visible {
+    outline-color: Highlight;
+  }
+
+  .divider {
+    border-color: CanvasText;
+  }
+}

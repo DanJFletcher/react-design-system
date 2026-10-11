@@ -10,6 +10,6 @@ Before changing `lib/design-system/`, read `docs/design-system.md` and the relev
 - Update docs and changelogs for public changes; record architectural changes in `docs/decisions.md`.
 - Edit token sources, never `src/generated/` by hand.
 - Run relevant checks and report their results.
-- The initial scope established the token foundation and Button. The approved core form-control scope adds TextField, Textarea, native Select, Checkbox, and RadioGroup; other component families, polymorphic rendering, and a general plugin system remain deferred unless separately approved.
+- The initial scope established the token foundation and Button. The approved core form-control scope adds TextField, Textarea, native Select, Checkbox, and RadioGroup. The Menu component is separately approved; other component families, polymorphic rendering, and a general plugin system remain deferred unless separately approved.
 
 New semantic tokens need a documented purpose, a clear distinction from existing roles, complete theme coverage, and applicable contrast checks.

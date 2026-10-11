@@ -1,0 +1,48 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as MenuStories from "./Menu.stories";
+
+<Meta of={MenuStories} />
+
+<Title>Menu</Title>
+
+<Subtitle>A configurable action menu with links, nested submenus, icons, separators, and scoped theme hooks.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={MenuStories.Playground} />
+<Canvas of={MenuStories.OpenPreview} />
+
+Edit `triggerLabel`, `menuLabel`, `items`, `placement`, `size`, trigger variant and shape, disabled state, and close behavior in the Controls panel. Item `icon` values in the story control can be `Folder`, `Grid`, `List`, `Book`, or `Sparkle`.
+
+## Keyboard navigation
+
+<Canvas of={MenuStories.KeyboardNavigation} />
+
+The trigger opens with Enter or Space and moves focus to the first enabled item. Arrow Up/Down move through the current menu; Home/End go to its first/last item. Typing a letter or number moves focus to the next item whose label starts with that text. Arrow Right opens a focused submenu and moves focus into it; Arrow Left or Escape returns to the parent item. Escape at the root closes the menu and restores focus to its trigger. Tab closes the menu without blocking the browser's normal focus movement.
+
+## Sizes, placement, and themes
+
+<Canvas of={MenuStories.SizeAndPlacementExamples} />
+<Canvas of={MenuStories.ThemeCoverage} />
+
+The `size` prop accepts `sm`, `md`, and `lg`; `placement` accepts `bottom-start`, `bottom-end`, `top-start`, and `top-end`. Nested menus open inline on narrow screens. The component uses semantic surface, text, border, focus, and action tokens and works in ACME, Luna, Orchid, and custom themes.
+
+## Scoped customization and state
+
+<Canvas of={MenuStories.ScopedHookOverrides} />
+<Canvas of={MenuStories.ControlledOpenState} />
+<Canvas of={MenuStories.EmptyAndDisabledStates} />
+
+`style` accepts typed `DesignSystemStyle` values for `--ds-menu-surface`, `--ds-menu-text`, `--ds-menu-border`, `--ds-menu-radius`, `--ds-menu-item-hover-bg`, `--ds-menu-item-hover-fg`, `--ds-menu-item-disabled-fg`, and `--ds-menu-focus-color`. These hooks have semantic fallbacks and reset at nested theme boundaries. `open` with `onOpenChange` makes the component controlled; use `defaultOpen` for an initial uncontrolled state.
+
+## Item configuration and selection
+
+`items` is a recursively nestable array:
+
+- `{ type: "item", id, label, icon?, disabled?, href?, linkProps?, onSelect? }` renders an action button or, when `href` is supplied, a native link. `linkProps` forwards native anchor attributes other than the component-owned href, role, focus, and activation handlers.
+- `{ type: "submenu", id, label, icon?, disabled?, items }` renders a nested menu.
+- `{ type: "divider", id }` renders a horizontal separator.
+
+All labels remain visible text; icons are decorative. IDs must be unique among siblings. Action and link items close the menu after selection by default. Set `closeOnSelect={false}` to keep it open, or call `event.preventDefault()` inside `onSelect` to keep it open for that item activation. Outside pointer activation closes the menu. Empty lists display the configurable `emptyMessage`.
+
+The root `className`, `menuClassName`, `itemClassName`, and `triggerClassName` props provide CSS customization points. The menu panel is positioned within its wrapper rather than portaled; an ancestor with clipping overflow can clip it.

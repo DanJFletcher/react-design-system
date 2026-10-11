@@ -38,6 +38,14 @@
     "button.focus.color": { "type": "color", "description": "Button focus outline color." },
     "button.focus.width": { "type": "dimension", "description": "Button focus outline width." },
     "button.focus.offset": { "type": "dimension", "description": "Button focus outline offset." },
-    "button.motion.duration": { "type": "duration", "description": "Button state transition duration." }
+    "button.motion.duration": { "type": "duration", "description": "Button state transition duration." },
+    "menu.surface": { "type": "color", "description": "Menu panel background color." },
+    "menu.text": { "type": "color", "description": "Menu text color." },
+    "menu.border": { "type": "color", "description": "Menu panel and divider border color." },
+    "menu.radius": { "type": "dimension", "description": "Menu panel corner radius." },
+    "menu.item.hover-bg": { "type": "color", "description": "Menu item hover and expanded-submenu background." },
+    "menu.item.hover-fg": { "type": "color", "description": "Menu item hover and expanded-submenu text." },
+    "menu.item.disabled-fg": { "type": "color", "description": "Disabled menu item text color." },
+    "menu.focus.color": { "type": "color", "description": "Menu item keyboard-focus outline color." }
   }
 }

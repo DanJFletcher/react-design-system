@@ -12,7 +12,7 @@ Token sources use a deliberately small schema in `src/tokens/schema.json`; this 
 
 1. **Foundations** (`foundations.json`) define shared scales and internal palette references. The palette is used at compile time and is not emitted as a public CSS API.
 2. **Semantic tokens** (`contract.json`) name public roles by purpose and are fully specified by every effective theme.
-3. **Component hooks** (`component-hooks.json`) are optional documented Button overrides. They are unset by the component, have local CSS fallbacks, and reset at theme boundaries.
+3. **Component hooks** (`component-hooks.json`) are optional documented component overrides. They are unset by the component, have local CSS fallbacks, and reset at theme boundaries.
 
 Every token has a stable dotted name, a supported type, a value, and a description. Dimensions are constrained by category: font sizes are `rem`; spacing, layout, control, focus, radius, and border values are `px`; line heights are unitless; font weights are numeric; motion durations are `ms`. Structural CSS values such as `0`, `auto`, `currentColor`, and `transparent` are permitted where appropriate.
 
@@ -92,6 +92,34 @@ The owning form manages longer asynchronous submission state. Children may conta
 `Header` accepts a React-node logo and CTA, native anchor props for each navigation item, an optional accessible navigation name, three minimum bar heights (`sm` 48px, `md` 64px, `lg` 80px), `sticky`, and `borderBottom`. The logo is linked to `logoHref` and named by `logoLabel`; the default label is "Home". The border is on by default and stickiness is off by default.
 
 The layout is mobile-first, with the desktop navigation at 48rem. On mobile, the accessible menu button discloses the navigation and places the single CTA slot below it. On desktop, navigation and CTA sit inline. Escape closes the mobile menu and returns focus to its button; selecting a navigation link closes the menu. The CTA stays in one DOM location across breakpoints, so consumers do not get duplicate IDs or state.
+
+## Action menu
+
+```tsx
+<Menu
+  triggerLabel="Workspace actions"
+  menuLabel="Workspace actions"
+  placement="bottom-end"
+  items={[
+    { type: "item", id: "new", label: "New project", icon: <FolderIcon />, onSelect: createProject },
+    { type: "divider", id: "divider-1" },
+    {
+      type: "submenu",
+      id: "view",
+      label: "View",
+      items: [{ type: "item", id: "grid", label: "Grid view", onSelect: showGrid }],
+    },
+  ]}
+/>
+```
+
+`Menu` renders a button trigger and a nested `role="menu"` tree. Items are action buttons or native links (`href`), submenus are disclosure buttons with their own labeled menus, and dividers use `role="separator"`. Icons are decorative; each menu action must have a text label. Sibling `id` values must be unique.
+
+`trigger`, `triggerIcon`, `triggerAriaLabel`, `triggerVariant`, `triggerShape`, `size`, `placement`, `disabled`, `emptyMessage`, `closeOnSelect`, and `menuLabel` configure the trigger and menu. `open` with `onOpenChange` controls the menu; otherwise it is uncontrolled with `defaultOpen`. `menuClassName`, `itemClassName`, and `triggerClassName` allow scoped CSS customization, and `style` accepts the typed `DesignSystemStyle` hooks.
+
+Keyboard users open the menu with Enter or Space on its trigger. The first enabled item receives focus; Up/Down, Home, and End move among items, while type-ahead moves to a matching label. Right Arrow opens a submenu, Left Arrow or Escape returns to its parent, and Escape at the root closes the menu and restores trigger focus. Tab closes the menu without preventing normal focus movement. Pointer activation outside also closes it. Selecting an action or link closes the menu by default; `closeOnSelect={false}` keeps it open, and an `onSelect` handler can call `preventDefault()` to keep it open for that activation.
+
+The menu uses semantic surface, text, border, focus, spacing, and action tokens. The `menu.*` component hooks customize its panel, item interaction colors, radius, disabled text, and focus outline; they reset at nested theme boundaries like other hooks.
 
 ## Core form controls
 

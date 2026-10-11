@@ -82,6 +82,14 @@
   --ds-button-sm-min-block-size: initial;
   --ds-button-sm-padding-block: initial;
   --ds-button-sm-padding-inline: initial;
+  --ds-menu-border: initial;
+  --ds-menu-focus-color: initial;
+  --ds-menu-item-disabled-fg: initial;
+  --ds-menu-item-hover-bg: initial;
+  --ds-menu-item-hover-fg: initial;
+  --ds-menu-radius: initial;
+  --ds-menu-surface: initial;
+  --ds-menu-text: initial;
 }
 :root:not([data-ds-theme]),
 :root[data-ds-theme="orchid"],
