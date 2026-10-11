@@ -124,6 +124,31 @@
   inline-size: 100%;
 }
 
+.iconOnly {
+  inline-size: var(--_button-min-block-size);
+  padding-inline: 0;
+}
+
+.iconOnly.fullWidth {
+  inline-size: 100%;
+}
+
+.icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--_button-font-size);
+  block-size: var(--_button-font-size);
+  line-height: 0;
+}
+
+.icon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
 .label {
   display: inline-flex;
   align-items: center;
@@ -132,6 +157,10 @@
 }
 
 .button[aria-busy="true"] .label {
+  opacity: 0;
+}
+
+.button[aria-busy="true"] .icon {
   opacity: 0;
 }
 

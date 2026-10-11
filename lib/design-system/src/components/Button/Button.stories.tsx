@@ -74,6 +74,50 @@ export const ShapeOptionsAndFullWidth: Story = {
   },
 };
 
+export const IconControls: Story = {
+  args: {
+    children: "Save to favorites",
+    iconPosition: "left",
+    iconOnly: false,
+    "aria-label": "Save to favorites",
+  },
+  argTypes: {
+    icon: { control: false },
+    iconPosition: { control: "inline-radio", options: ["left", "right"] },
+    iconOnly: { control: "boolean" },
+  },
+  render: (args) => (
+    <div className="button-story-row">
+      <Button {...args} icon={<SparkleIcon />} />
+      <Button icon={<SparkleIcon />} iconPosition="right">
+        Continue
+      </Button>
+      <Button iconOnly icon={<SparkleIcon />} aria-label="Open favorites" variant="ghost" />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const button = within(canvasElement).getByRole("button", { name: "Save to favorites" });
+    await expect(button).toBeVisible();
+    await expect(button.querySelector('[aria-hidden="true"]')).not.toBeNull();
+    const rightIconButton = within(canvasElement).getByRole("button", { name: "Continue" });
+    await expect(rightIconButton.firstElementChild?.getAttribute("aria-hidden")).toBeNull();
+    await expect(rightIconButton.lastElementChild?.getAttribute("aria-hidden")).toBe("true");
+    await expect(within(canvasElement).getByRole("button", { name: "Open favorites" })).toBeVisible();
+  },
+};
+
+export const IconOnly: Story = {
+  render: () => (
+    <Button iconOnly icon={<SparkleIcon />} aria-label="Save to favorites" variant="ghost" />
+  ),
+  play: async ({ canvasElement }) => {
+    const button = within(canvasElement).getByRole("button", { name: "Save to favorites" });
+    await expect(button).toBeVisible();
+    await expect(button.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
+    await expect(button.textContent).toBe("");
+  },
+};
+
 export const Disabled: Story = { args: { disabled: true } };
 export const Loading: Story = { args: { loading: true } };
 export const InteractionStates: Story = {
@@ -238,5 +282,14 @@ function LoadingTransition() {
     <Button loading={loading} onClick={() => setLoading(true)}>
       Start action
     </Button>
+  );
+}
+
+function SparkleIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <path d="m12 3 2.7 6.3L21 12l-6.3 2.7L12 21l-2.7-6.3L3 12l6.3-2.7L12 3Z" />
+      <path d="m19 2 .7 1.3L21 4l-1.3.7L19 6l-.7-1.3L17 4l1.3-.7L19 2Z" />
+    </svg>
   );
 }

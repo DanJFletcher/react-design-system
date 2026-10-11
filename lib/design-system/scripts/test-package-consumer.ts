@@ -39,13 +39,15 @@ try {
     include: ["consumer.tsx"],
   }, null, 2));
   await writeFile(join(temporary, "consumer.tsx"), [
-    'import { Button, ThemeScope } from "@workspace/design-system";',
+    'import { Button, ThemeScope, type ButtonIconPosition, type ButtonShape } from "@workspace/design-system";',
     'import "@workspace/design-system/tokens.css";',
     'import "@workspace/design-system/styles.css";',
     'import "@workspace/design-system/themes/acme.css";',
     'import "@workspace/design-system/themes/luna.css";',
     'import "@workspace/design-system/themes/orchid.css";',
-    'export const example = <ThemeScope theme="luna" style={{ "--ds-button-radius": "12px" }}><Button variant="secondary">Continue</Button></ThemeScope>;',
+    'const shape: ButtonShape = "pill";',
+    'const iconPosition: ButtonIconPosition = "right";',
+    'export const example = <ThemeScope theme="luna" style={{ "--ds-button-radius": "12px" }}><Button variant="secondary" shape={shape} icon={<span>★</span>} iconPosition={iconPosition}>Continue</Button><Button iconOnly icon={<span>×</span>} aria-label="Close dialog" /></ThemeScope>;',
     "",
   ].join("\n"));
   execFileSync("pnpm", ["install", "--ignore-workspace"], { cwd: temporary, stdio: "inherit" });

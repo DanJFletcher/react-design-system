@@ -5,19 +5,38 @@ import styles from "./Button.module.css";
 export type ButtonVariant = "primary" | "secondary" | "ghost";
 export type ButtonSize = "sm" | "md" | "lg";
 export type ButtonShape = "rounded" | "square" | "pill";
+export type ButtonIconPosition = "left" | "right";
 
-export type ButtonProps = Omit<
+type ButtonBaseProps = Omit<
   ComponentPropsWithRef<"button">,
-  "style" | "aria-busy" | "aria-disabled"
+  "style" | "aria-busy" | "aria-disabled" | "aria-label" | "aria-labelledby" | "children"
 > & {
   variant?: ButtonVariant;
   size?: ButtonSize;
   shape?: ButtonShape;
   fullWidth?: boolean;
+  icon?: ReactNode;
+  iconPosition?: ButtonIconPosition;
   loading?: boolean;
   style?: DesignSystemStyle;
-  children?: ReactNode;
 };
+
+type AccessibleIconOnlyName =
+  | { "aria-label": string; "aria-labelledby"?: never }
+  | { "aria-label"?: never; "aria-labelledby": string };
+
+export type ButtonProps =
+  | (ButtonBaseProps & {
+      iconOnly?: false;
+      children?: ReactNode;
+      "aria-label"?: string;
+      "aria-labelledby"?: string;
+    })
+  | (ButtonBaseProps & {
+      iconOnly: true;
+      icon: ReactNode;
+      children?: never;
+    } & AccessibleIconOnlyName);
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
@@ -25,6 +44,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     size = "md",
     shape,
     fullWidth = false,
+    icon,
+    iconPosition = "left",
+    iconOnly = false,
     loading = false,
     type = "button",
     disabled = false,
@@ -42,8 +64,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     styles[size],
     shape && styles[shape],
     fullWidth && styles.fullWidth,
+    iconOnly && styles.iconOnly,
     className,
   ].filter(Boolean).join(" ");
+  const iconElement = icon == null || typeof icon === "boolean"
+    ? null
+    : <span className={styles.icon} aria-hidden="true">{icon}</span>;
 
   return (
     <button
@@ -64,7 +90,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       className={classes}
       style={style as CSSProperties | undefined}
     >
-      <span className={styles.label}>{children}</span>
+      {iconPosition === "left" && iconElement}
+      {!iconOnly && <span className={styles.label}>{children}</span>}
+      {iconPosition === "right" && iconElement}
       {loading && (
         <span className={styles.spinner} aria-hidden="true" />
       )}
