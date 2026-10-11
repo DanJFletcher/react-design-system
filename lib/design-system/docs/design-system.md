@@ -101,7 +101,7 @@ All five controls require a visible `label` and forward native props, refs, cont
 
 Error copy and invalid borders use `color.text.error` and `color.border.error`. Their contrast is checked against canvas and surface colors in ACME, Luna, and Orchid. Form control styling uses semantic text, surface, border, focus, spacing, and radius tokens.
 
-Form fields and field groups use `radius.form-control`, independently of the action-button `radius.control`. Luna uses a 20px form-control radius for rounded rectangles while retaining its pill-shaped buttons.
+Single-line text and select controls use `radius.form-control`; textareas and field groups use the independent `radius.textarea` and `radius.form-group` tokens. Luna keeps text inputs, selects, and buttons pill-shaped, with a 24px radius for both textareas and field groups.
 
 ## Enforcement
 

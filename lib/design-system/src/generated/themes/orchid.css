@@ -111,4 +111,6 @@
   --ds-color-text-primary: #38143D;
   --ds-radius-control: 16px;
   --ds-radius-form-control: 16px;
+  --ds-radius-form-group: 16px;
+  --ds-radius-textarea: 16px;
 }

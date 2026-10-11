@@ -325,7 +325,11 @@ export const NestedThemeBoundaries: Story = {
           backgroundColor: "var(--ds-color-canvas)",
         }}
       >
-        <TextField label="Luna nested field" defaultValue="20px radius" />
+        <TextField label="Luna nested field" defaultValue="pill radius" />
+        <Select label="Luna nested select" defaultValue="private">
+          <option value="private">Private</option>
+          <option value="public">Public</option>
+        </Select>
         <FieldGroup label="Luna profile group">
           <Textarea label="Luna notes" rows={3} placeholder="Add a note..." />
         </FieldGroup>
@@ -361,9 +365,10 @@ export const NestedThemeBoundaries: Story = {
     const canvas = within(canvasElement);
     const radii = [
       { role: "textbox", name: "ACME outer field", radius: "6px" },
-      { role: "textbox", name: "Luna nested field", radius: "20px" },
-      { role: "textbox", name: "Luna notes", radius: "20px" },
-      { role: "group", name: "Luna profile group", radius: "20px" },
+      { role: "textbox", name: "Luna nested field", radius: "9999px" },
+      { role: "combobox", name: "Luna nested select", radius: "9999px" },
+      { role: "textbox", name: "Luna notes", radius: "24px" },
+      { role: "group", name: "Luna profile group", radius: "24px" },
       { role: "button", name: "Luna action remains pill", radius: "9999px" },
       { role: "combobox", name: "Orchid nested select", radius: "16px" },
       { role: "textbox", name: "ACME restored field", radius: "6px" },

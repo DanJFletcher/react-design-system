@@ -53,6 +53,7 @@
 
 .textarea {
   resize: vertical;
+  border-radius: var(--ds-radius-textarea);
 }
 
 .select {
@@ -146,7 +147,7 @@
   margin: 0;
   padding: var(--ds-space-4);
   border: var(--ds-border-width-default) solid var(--ds-color-border-control);
-  border-radius: var(--ds-radius-form-control);
+  border-radius: var(--ds-radius-form-group);
   background-color: var(--ds-color-surface-primary);
   color: var(--ds-color-text-primary);
   gap: var(--ds-space-3);

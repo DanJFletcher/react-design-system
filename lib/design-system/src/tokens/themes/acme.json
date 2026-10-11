@@ -26,6 +26,8 @@
     "color.accent.bg": "#DBEAFE",
     "color.accent.fg": "#1E3A8A",
     "radius.control": { "amount": 6, "unit": "px" },
-    "radius.form-control": { "amount": 6, "unit": "px" }
+    "radius.form-control": { "amount": 6, "unit": "px" },
+    "radius.form-group": { "amount": 6, "unit": "px" },
+    "radius.textarea": { "amount": 6, "unit": "px" }
   }
 }

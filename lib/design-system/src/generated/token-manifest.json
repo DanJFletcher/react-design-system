@@ -373,7 +373,17 @@
     {
       "name": "radius.form-control",
       "type": "dimension",
-      "description": "Corner radius for form fields and groups, independent of action buttons."
+      "description": "Corner radius for single-line text and select controls."
+    },
+    {
+      "name": "radius.form-group",
+      "type": "dimension",
+      "description": "Corner radius for grouped form fieldsets."
+    },
+    {
+      "name": "radius.textarea",
+      "type": "dimension",
+      "description": "Corner radius for multi-line text controls."
     }
   ],
   "componentHooks": [
@@ -632,7 +642,9 @@
       "color.accent.bg": "#DBEAFE",
       "color.accent.fg": "#1E3A8A",
       "radius.control": "6px",
-      "radius.form-control": "6px"
+      "radius.form-control": "6px",
+      "radius.form-group": "6px",
+      "radius.textarea": "6px"
     },
     "luna": {
       "color.canvas": "#100E21",
@@ -659,7 +671,9 @@
       "color.accent.bg": "#F5D36D",
       "color.accent.fg": "#2D2034",
       "radius.control": "9999px",
-      "radius.form-control": "20px"
+      "radius.form-control": "9999px",
+      "radius.form-group": "24px",
+      "radius.textarea": "24px"
     },
     "orchid": {
       "color.canvas": "#FFF2FD",
@@ -686,7 +700,9 @@
       "color.accent.bg": "#F6CF67",
       "color.accent.fg": "#38143D",
       "radius.control": "16px",
-      "radius.form-control": "16px"
+      "radius.form-control": "16px",
+      "radius.form-group": "16px",
+      "radius.textarea": "16px"
     }
   },
   "contrast": [

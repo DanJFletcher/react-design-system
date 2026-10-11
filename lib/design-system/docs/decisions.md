@@ -24,9 +24,9 @@ Orchid demonstrates extending Luna while retaining a flattened output map. It is
 
 The core form controls preserve native input, select, checkbox, radio, and fieldset behavior. Shared internal helpers provide consistent labels and accessible description/error relationships; form state and validation rules remain the consumer's responsibility.
 
-## Form-control radius is independent from action buttons
+## Form-control radii are independently themed
 
-Form fields and field groups use `radius.form-control`; action buttons keep `radius.control`. This lets a theme use rounded-rectangle fields without forcing the same shape on its buttons.
+Single-line inputs, textareas, field groups, and action buttons each have separate radius tokens. This lets Luna keep its pill-shaped text/select controls while giving textareas and field groups a 24px rounded-rectangle shape.
 
 ## Storybook and visual checks are documentation, not a deployable app
 
