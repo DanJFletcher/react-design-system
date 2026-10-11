@@ -24,6 +24,19 @@ export { Switch } from "./components/FormControls/Switch";
 export type { SwitchProps } from "./components/FormControls/Switch";
 export { Header } from "./components/Header/Header";
 export type { HeaderNavItem, HeaderProps, HeaderSize } from "./components/Header/Header";
+export { Hero } from "./components/Hero/Hero";
+export type {
+  HeroAlignment,
+  HeroBackground,
+  HeroContentWidth,
+  HeroHeadingLevel,
+  HeroLayout,
+  HeroMediaAspectRatio,
+  HeroMediaFit,
+  HeroMediaPosition,
+  HeroProps,
+  HeroSize,
+} from "./components/Hero/Hero";
 export { Menu } from "./components/Menu/Menu";
 export type {
   MenuActionItem,

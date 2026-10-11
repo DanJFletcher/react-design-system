@@ -1,0 +1,41 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as HeroStories from "./Hero.stories";
+
+<Meta of={HeroStories} />
+
+<Title>Hero</Title>
+
+<Subtitle>A responsive, theme-aware introduction section with flexible content, media, and action slots.</Subtitle>
+
+## Playground
+
+<Canvas of={HeroStories.Playground} />
+
+Use the controls to choose split or stacked layout, alignment, media side and crop, size, background, content width, and heading level. Content and media accept React nodes, so consumers can use custom artwork and any buttons or links.
+
+## Layouts
+
+<Canvas of={HeroStories.LayoutExamples} />
+
+`layout` accepts `split` or `stacked`. Split layouts use two columns on wider screens and stack on mobile. `mediaPosition` controls which side or row the media occupies. `alignment` adjusts content and action alignment independently of the media.
+
+## Theme coverage and backgrounds
+
+<Canvas of={HeroStories.ThemeCoverage} />
+<Canvas of={HeroStories.AccentBackground} />
+
+The built-in backgrounds are `transparent`, `surface`, and `accent`. They use semantic tokens, so color and contrast follow ACME, Luna, Orchid, and custom themes.
+
+## Slots and customization
+
+`eyebrow`, `title`, `description`, `media`, `primaryAction`, `secondaryAction`, and `actions` accept React nodes. Use `actions` to provide a custom action row; when set, it replaces the primary and secondary action slots. The media slot may contain an image, video, or composed illustration. Provide meaningful alternative text for informative images; mark decorative visuals as hidden from assistive technology.
+
+`mediaAspectRatio` accepts `auto`, `square`, `landscape`, or `portrait`; `mediaFit` controls image and video cropping with `cover` or `contain`. `contentWidth` accepts `narrow`, `normal`, `wide`, or `full`. Set `headingLevel` to match the page outline; it defaults to `1`.
+
+<Canvas of={HeroStories.CustomHookOverrides} />
+
+The registered `hero.*` hooks customize background, text, eyebrow, description, vertical padding, content/media gap, and media radius. Hooks reset at nested theme boundaries. `className` and native section props are forwarded for additional layout and integration needs.
+
+## Accessibility
+
+The component renders a native `section` labeled by its heading by default. `headingLevel` lets the consumer preserve a logical document outline. Native buttons and links supplied in action slots retain their own accessible names and keyboard behavior.

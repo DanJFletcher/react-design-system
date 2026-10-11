@@ -32,6 +32,10 @@ Single-line inputs, textareas, field groups, and action buttons each have separa
 
 The Header keeps its logo, native-link navigation, and CTA in one component tree. CSS Grid places the same CTA inline on desktop and inside the expanded mobile menu, avoiding duplicate interactive elements and IDs. The mobile menu remains a disclosure rather than a custom navigation system.
 
+## Hero uses content slots and semantic layout options
+
+Hero content, media, and actions remain caller-owned React nodes; layout, alignment, responsive stacking, and semantic backgrounds are component options. This keeps the component flexible without imposing a media library or coupling action behavior to the presentation section.
+
 ## Menus use the ARIA menu interaction model
 
 The configurable Menu supports nested action/link items and separators. It keeps native buttons and links as the activation elements while applying menu roles and managed arrow-key focus; nested menus open inline on narrow screens to avoid viewport overflow. Menu-specific component hooks extend scoped theming without adding new semantic tokens.

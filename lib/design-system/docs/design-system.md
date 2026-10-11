@@ -93,6 +93,26 @@ The owning form manages longer asynchronous submission state. Children may conta
 
 The layout is mobile-first, with the desktop navigation at 48rem. On mobile, the accessible menu button discloses the navigation and places the single CTA slot below it. On desktop, navigation and CTA sit inline. Escape closes the mobile menu and returns focus to its button; selecting a navigation link closes the menu. The CTA stays in one DOM location across breakpoints, so consumers do not get duplicate IDs or state.
 
+## Responsive hero
+
+```tsx
+<Hero
+  eyebrow="A clearer way forward"
+  title="Make room for your next big idea"
+  description="Bring your team and plans together in one workspace."
+  media={<ProductIllustration />}
+  layout="split"
+  mediaPosition="end"
+  background="surface"
+  primaryAction={<Button>Start for free</Button>}
+  secondaryAction={<Button variant="ghost">Explore features</Button>}
+/>
+```
+
+`Hero` renders a labeled native section with a configurable heading level. Content slots include `eyebrow`, `title`, `description`, `media`, primary/secondary actions, or a custom `actions` row. It supports split and stacked layouts, start/center alignment, media position and crop, three sizes, semantic background variants, and four content widths. Split layouts stack on mobile. All supplied content and action slots remain in a single DOM tree.
+
+The media slot accepts images, video, or composed React nodes. Informative images need consumer-provided alternative text. `style` accepts typed `hero.*` component hooks for colors, vertical padding, spacing, and media radius; native section props and `className` are forwarded.
+
 ## Action menu
 
 ```tsx

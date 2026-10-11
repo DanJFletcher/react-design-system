@@ -621,6 +621,48 @@
       "cssVariable": "--ds-button-sm-padding-inline"
     },
     {
+      "name": "hero.background",
+      "type": "color",
+      "description": "Hero background color.",
+      "cssVariable": "--ds-hero-background"
+    },
+    {
+      "name": "hero.description",
+      "type": "color",
+      "description": "Hero supporting-copy color.",
+      "cssVariable": "--ds-hero-description"
+    },
+    {
+      "name": "hero.eyebrow",
+      "type": "color",
+      "description": "Hero eyebrow text color.",
+      "cssVariable": "--ds-hero-eyebrow"
+    },
+    {
+      "name": "hero.gap",
+      "type": "dimension",
+      "description": "Hero content and media spacing.",
+      "cssVariable": "--ds-hero-gap"
+    },
+    {
+      "name": "hero.media-radius",
+      "type": "dimension",
+      "description": "Hero media corner radius.",
+      "cssVariable": "--ds-hero-media-radius"
+    },
+    {
+      "name": "hero.padding-block",
+      "type": "dimension",
+      "description": "Hero vertical section padding.",
+      "cssVariable": "--ds-hero-padding-block"
+    },
+    {
+      "name": "hero.text",
+      "type": "color",
+      "description": "Hero title and foreground color.",
+      "cssVariable": "--ds-hero-text"
+    },
+    {
       "name": "menu.border",
       "type": "color",
       "description": "Menu panel and divider border color.",

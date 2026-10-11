@@ -46,6 +46,13 @@
     "menu.item.hover-bg": { "type": "color", "description": "Menu item hover and expanded-submenu background." },
     "menu.item.hover-fg": { "type": "color", "description": "Menu item hover and expanded-submenu text." },
     "menu.item.disabled-fg": { "type": "color", "description": "Disabled menu item text color." },
-    "menu.focus.color": { "type": "color", "description": "Menu item keyboard-focus outline color." }
+    "menu.focus.color": { "type": "color", "description": "Menu item keyboard-focus outline color." },
+    "hero.background": { "type": "color", "description": "Hero background color." },
+    "hero.text": { "type": "color", "description": "Hero title and foreground color." },
+    "hero.description": { "type": "color", "description": "Hero supporting-copy color." },
+    "hero.eyebrow": { "type": "color", "description": "Hero eyebrow text color." },
+    "hero.padding-block": { "type": "dimension", "description": "Hero vertical section padding." },
+    "hero.gap": { "type": "dimension", "description": "Hero content and media spacing." },
+    "hero.media-radius": { "type": "dimension", "description": "Hero media corner radius." }
   }
 }
