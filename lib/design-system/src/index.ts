@@ -6,6 +6,19 @@ export type {
   ButtonSize,
   ButtonVariant,
 } from "./components/Button/Button";
+export { Card } from "./components/Card/Card";
+export type {
+  CardAlignment,
+  CardHeadingLevel,
+  CardLayout,
+  CardMediaAspectRatio,
+  CardMediaFit,
+  CardMediaPosition,
+  CardProps,
+  CardShape,
+  CardSize,
+  CardVariant,
+} from "./components/Card/Card";
 export { TextField } from "./components/FormControls/TextField";
 export type { TextFieldProps } from "./components/FormControls/TextField";
 export { Textarea } from "./components/FormControls/Textarea";

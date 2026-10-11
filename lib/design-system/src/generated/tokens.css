@@ -82,6 +82,14 @@
   --ds-button-sm-min-block-size: initial;
   --ds-button-sm-padding-block: initial;
   --ds-button-sm-padding-inline: initial;
+  --ds-card-background: initial;
+  --ds-card-border: initial;
+  --ds-card-gap: initial;
+  --ds-card-media-radius: initial;
+  --ds-card-muted: initial;
+  --ds-card-padding: initial;
+  --ds-card-radius: initial;
+  --ds-card-text: initial;
   --ds-hero-background: initial;
   --ds-hero-description: initial;
   --ds-hero-eyebrow: initial;

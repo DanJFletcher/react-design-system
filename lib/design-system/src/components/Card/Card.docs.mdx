@@ -1,0 +1,41 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as CardStories from "./Card.stories";
+
+<Meta of={CardStories} />
+
+<Title>Card</Title>
+
+<Subtitle>A flexible content container with theme-aware treatments, responsive media layouts, and composable content slots.</Subtitle>
+
+## Playground
+
+<Canvas of={CardStories.Playground} />
+
+Use the controls to configure variant, layout, alignment, media placement and crop, size, shape, and heading level. Each card stays a semantic article; its actions remain independent native controls.
+
+## Layouts and variants
+
+<Canvas of={CardStories.LayoutExamples} />
+<Canvas of={CardStories.VariantExamples} />
+
+`layout` accepts `vertical` or `horizontal`. Horizontal cards stack on narrow screens and use a media/content split on wider screens. `mediaPosition` controls whether the media appears before or after card content.
+
+`variant` accepts `surface`, `outlined`, `subtle`, or `accent`. `size` controls padding and title scale; `shape` accepts `rounded` or `square`. The component uses semantic theme colors and works with ACME, Luna, Orchid, and custom themes.
+
+## Content and theme coverage
+
+<Canvas of={CardStories.ContentSlots} />
+<Canvas of={CardStories.ThemeCoverage} />
+
+`eyebrow`, `title`, `description`, `metadata`, `headerActions`, `media`, `children`, `footer`, and `actions` are independent React-node slots. `headingLevel` defaults to `2`; choose a level that fits the page outline. If both `footer` and `actions` are supplied, they share the footer row.
+
+`mediaAspectRatio` accepts `auto`, `square`, `landscape`, `wide`, or `portrait`; `mediaFit` accepts `cover` and `contain`. The media slot accepts images, video, or composed content. Provide meaningful alternative text for informative images and hide decorative visuals from assistive technology.
+
+<Canvas of={CardStories.CustomHookOverrides} />
+<Canvas of={CardStories.TextOnly} />
+
+Registered `card.*` hooks customize background, foreground, supporting text, borders, corner radius, internal spacing, and media radius. Hooks reset at nested theme boundaries. Native article props and `className` are forwarded. The card itself is not made clickable; place links and buttons in its content or action slots to preserve expected keyboard and focus behavior.
+
+## Accessibility
+
+When a title is supplied, the article is labeled by its heading unless the consumer provides an `aria-label` or `aria-labelledby`. When no title is supplied, the article remains available as an unnamed article unless a label is provided. Action slots preserve their own native semantics and accessible names.

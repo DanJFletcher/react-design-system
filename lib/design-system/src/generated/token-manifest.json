@@ -621,6 +621,54 @@
       "cssVariable": "--ds-button-sm-padding-inline"
     },
     {
+      "name": "card.background",
+      "type": "color",
+      "description": "Card background color.",
+      "cssVariable": "--ds-card-background"
+    },
+    {
+      "name": "card.border",
+      "type": "color",
+      "description": "Card and footer separator border color.",
+      "cssVariable": "--ds-card-border"
+    },
+    {
+      "name": "card.gap",
+      "type": "dimension",
+      "description": "Card content spacing.",
+      "cssVariable": "--ds-card-gap"
+    },
+    {
+      "name": "card.media-radius",
+      "type": "dimension",
+      "description": "Card media corner radius.",
+      "cssVariable": "--ds-card-media-radius"
+    },
+    {
+      "name": "card.muted",
+      "type": "color",
+      "description": "Card supporting text color.",
+      "cssVariable": "--ds-card-muted"
+    },
+    {
+      "name": "card.padding",
+      "type": "dimension",
+      "description": "Card internal padding.",
+      "cssVariable": "--ds-card-padding"
+    },
+    {
+      "name": "card.radius",
+      "type": "dimension",
+      "description": "Card corner radius.",
+      "cssVariable": "--ds-card-radius"
+    },
+    {
+      "name": "card.text",
+      "type": "color",
+      "description": "Card primary text color.",
+      "cssVariable": "--ds-card-text"
+    },
+    {
       "name": "hero.background",
       "type": "color",
       "description": "Hero background color.",

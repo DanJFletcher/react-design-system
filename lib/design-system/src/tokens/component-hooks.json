@@ -53,6 +53,14 @@
     "hero.eyebrow": { "type": "color", "description": "Hero eyebrow text color." },
     "hero.padding-block": { "type": "dimension", "description": "Hero vertical section padding." },
     "hero.gap": { "type": "dimension", "description": "Hero content and media spacing." },
-    "hero.media-radius": { "type": "dimension", "description": "Hero media corner radius." }
+    "hero.media-radius": { "type": "dimension", "description": "Hero media corner radius." },
+    "card.background": { "type": "color", "description": "Card background color." },
+    "card.text": { "type": "color", "description": "Card primary text color." },
+    "card.muted": { "type": "color", "description": "Card supporting text color." },
+    "card.border": { "type": "color", "description": "Card and footer separator border color." },
+    "card.radius": { "type": "dimension", "description": "Card corner radius." },
+    "card.padding": { "type": "dimension", "description": "Card internal padding." },
+    "card.gap": { "type": "dimension", "description": "Card content spacing." },
+    "card.media-radius": { "type": "dimension", "description": "Card media corner radius." }
   }
 }

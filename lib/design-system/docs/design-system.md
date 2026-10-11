@@ -113,6 +113,25 @@ The layout is mobile-first, with the desktop navigation at 48rem. On mobile, the
 
 The media slot accepts images, video, or composed React nodes. Informative images need consumer-provided alternative text. `style` accepts typed `hero.*` component hooks for colors, vertical padding, spacing, and media radius; native section props and `className` are forwarded.
 
+## Card
+
+```tsx
+<Card
+  eyebrow="Workspace"
+  title="Design project overview"
+  description="Keep the latest updates, files, and decisions in one place."
+  media={<ProjectArtwork />}
+  layout="horizontal"
+  mediaPosition="start"
+  variant="surface"
+  actions={<Button size="sm">Open card</Button>}
+/>
+```
+
+`Card` renders a semantic article with independent eyebrow, title, description, metadata, header-action, media, body, footer, and action slots. It supports vertical or responsive horizontal layout, four variants, three sizes, start/center alignment, square/rounded shape, configurable media crop, and heading levels. The card itself is not a link or button; interactive content remains in explicit action slots.
+
+The `card.*` component hooks customize the surface, text, border, radius, padding, spacing, and media corners. Its colors use semantic theme tokens and its media slot accepts images, video, or composed React nodes.
+
 ## Action menu
 
 ```tsx
