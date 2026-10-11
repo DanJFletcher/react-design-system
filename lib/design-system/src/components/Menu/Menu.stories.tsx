@@ -158,6 +158,19 @@ export const OpenPreview: Story = {
   },
 };
 
+export const LunaOpenPreview: Story = {
+  render: () => (
+    <div data-ds-theme="luna" style={{ padding: "var(--ds-space-8)" }}>
+      <Menu
+        triggerLabel="Workspace"
+        menuLabel="Workspace actions"
+        items={resolveItems(menuItems)}
+        defaultOpen
+      />
+    </div>
+  ),
+};
+
 export const ThemeCoverage: Story = {
   render: () => (
     <div style={{ display: "grid", gap: "var(--ds-space-6)" }}>

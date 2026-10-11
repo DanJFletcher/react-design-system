@@ -27,6 +27,7 @@
     "radius.control": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Default action button corner radius." },
     "radius.form-control": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Corner radius for single-line text and select controls." },
     "radius.form-group": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Corner radius for grouped form fieldsets." },
-    "radius.textarea": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Corner radius for multi-line text controls." }
+    "radius.textarea": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Corner radius for multi-line text controls." },
+    "radius.menu": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Corner radius for dropdown menu panels." }
   }
 }

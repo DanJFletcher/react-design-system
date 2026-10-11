@@ -50,12 +50,25 @@ test("Menu follows theme tokens and accepts scoped component-hook overrides", as
   await page.getByRole("button", { name: "acme actions" }).click();
   const acmeMenu = page.getByRole("menu", { name: "acme workspace actions" });
   const acmeSurface = await acmeMenu.evaluate((element) => getComputedStyle(element).backgroundColor);
+  await expect.poll(() => acmeMenu.evaluate((element) =>
+    getComputedStyle(element).borderTopLeftRadius,
+  )).toBe("6px");
   await page.keyboard.press("Escape");
 
   await page.getByRole("button", { name: "luna actions" }).click();
   const lunaMenu = page.getByRole("menu", { name: "luna workspace actions" });
   const lunaSurface = await lunaMenu.evaluate((element) => getComputedStyle(element).backgroundColor);
   expect(lunaSurface).not.toBe(acmeSurface);
+  await expect.poll(() => lunaMenu.evaluate((element) =>
+    getComputedStyle(element).borderTopLeftRadius,
+  )).toBe("24px");
+  await page.keyboard.press("Escape");
+
+  await page.getByRole("button", { name: "orchid actions" }).click();
+  const orchidMenu = page.getByRole("menu", { name: "orchid workspace actions" });
+  await expect.poll(() => orchidMenu.evaluate((element) =>
+    getComputedStyle(element).borderTopLeftRadius,
+  )).toBe("16px");
 
   await page.goto("/iframe.html?id=components-menu--scoped-hook-overrides&viewMode=story");
   await page.getByRole("button", { name: "Default menu" }).click();

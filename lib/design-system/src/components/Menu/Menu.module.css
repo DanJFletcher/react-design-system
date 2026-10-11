@@ -20,7 +20,7 @@
   margin: 0;
   padding: var(--ds-space-1);
   border: var(--ds-border-width-default) solid var(--ds-menu-border, var(--ds-color-border-control));
-  border-radius: var(--ds-menu-radius, var(--ds-radius-control));
+  border-radius: var(--ds-menu-radius, var(--ds-radius-menu));
   background-color: var(--ds-menu-surface, var(--ds-color-surface-primary));
   color: var(--ds-menu-text, var(--ds-color-text-primary));
   list-style: none;

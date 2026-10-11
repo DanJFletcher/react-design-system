@@ -29,6 +29,7 @@
     "radius.control": { "amount": 9999, "unit": "px" },
     "radius.form-control": { "amount": 9999, "unit": "px" },
     "radius.form-group": { "amount": 24, "unit": "px" },
-    "radius.textarea": { "amount": 24, "unit": "px" }
+    "radius.textarea": { "amount": 24, "unit": "px" },
+    "radius.menu": { "amount": 24, "unit": "px" }
   }
 }

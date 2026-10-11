@@ -119,7 +119,7 @@ The layout is mobile-first, with the desktop navigation at 48rem. On mobile, the
 
 Keyboard users open the menu with Enter or Space on its trigger. The first enabled item receives focus; Up/Down, Home, and End move among items, while type-ahead moves to a matching label. Right Arrow opens a submenu, Left Arrow or Escape returns to its parent, and Escape at the root closes the menu and restores trigger focus. Tab closes the menu without preventing normal focus movement. Pointer activation outside also closes it. Selecting an action or link closes the menu by default; `closeOnSelect={false}` keeps it open, and an `onSelect` handler can call `preventDefault()` to keep it open for that activation.
 
-The menu uses semantic surface, text, border, focus, spacing, and action tokens. The `menu.*` component hooks customize its panel, item interaction colors, radius, disabled text, and focus outline; they reset at nested theme boundaries like other hooks.
+The menu uses semantic surface, text, border, focus, spacing, action, and `radius.menu` tokens. The dropdown panel radius is 6px in ACME, 24px in Luna, and 16px in Orchid. The `menu.*` component hooks customize its panel, item interaction colors, radius, disabled text, and focus outline; they reset at nested theme boundaries like other hooks.
 
 ## Core form controls
 
