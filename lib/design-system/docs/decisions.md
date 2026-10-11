@@ -28,6 +28,10 @@ The core form controls preserve native input, select, checkbox, radio, and field
 
 Single-line inputs, textareas, field groups, and action buttons each have separate radius tokens. This lets Luna keep its pill-shaped text/select controls while giving textareas and field groups a 24px rounded-rectangle shape.
 
+## Header uses one responsive navigation and CTA slot
+
+The Header keeps its logo, native-link navigation, and CTA in one component tree. CSS Grid places the same CTA inline on desktop and inside the expanded mobile menu, avoiding duplicate interactive elements and IDs. The mobile menu remains a disclosure rather than a custom navigation system.
+
 ## Storybook and visual checks are documentation, not a deployable app
 
 Storybook stays with the package and runs as its development/documentation environment. This project remains a shared library; it does not introduce a publishable end-user application.

@@ -1,0 +1,38 @@
+import { Canvas, Meta, Story, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as HeaderStories from "./Header.stories";
+
+<Meta of={HeaderStories} />
+
+<Title>Header</Title>
+
+<Subtitle>A responsive site header with logo, navigation, a CTA slot, and Storybook controls for size, stickiness, and its bottom border.</Subtitle>
+
+## Responsive playground
+
+<Canvas of={HeaderStories.Playground} />
+
+Use the Storybook controls to edit navigation links, the accessible logo link, the three height sizes, sticky behavior, and the bottom border. On mobile, the menu button reveals the navigation and moves the single CTA slot into the menu; on desktop, the links and CTA appear inline.
+
+## Height sizes
+
+<Canvas of={HeaderStories.HeightExamples} />
+
+`size` accepts `sm`, `md`, or `lg`, with minimum header heights of 48px, 64px, and 80px. The expanded mobile menu adds the height its content needs.
+
+## Sticky and border options
+
+<Canvas of={HeaderStories.StickyWithoutBorder} />
+
+`sticky` is off by default. When enabled, the header sticks to the top of its scrolling container. `borderBottom` is on by default and can be disabled independently.
+
+## Theme coverage
+
+<Canvas of={HeaderStories.ThemeCoverage} />
+
+The component uses semantic surface, text, border, focus, and spacing tokens, so the same props work in ACME, Luna, Orchid, and custom themes.
+
+## Accessibility and API
+
+`logo` accepts any React node; `logoHref` and `logoLabel` configure its home link. Provide a useful `logoLabel` when replacing the default logo. `navItems` is an array of native anchor props plus a required `label` and `href`; set `current` for the current page. `cta` accepts a React node so it can contain the design-system `Button` or another custom action.
+
+The mobile menu button exposes `aria-expanded` and `aria-controls`. Escape closes the menu and returns focus to its button; choosing a navigation link closes the menu. Navigation and CTA remain native links/buttons, and keyboard focus is visible.

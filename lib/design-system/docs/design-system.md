@@ -70,6 +70,29 @@ Native disabled uses the native `disabled` attribute. Loading preserves focus wi
 
 The owning form manages longer asynchronous submission state. Children may contain decorative icons, which should be hidden from assistive technology. `href`, `asChild`, toggle semantics, groups, and an icon-only convenience API are out of scope.
 
+## Responsive header
+
+```tsx
+<Header
+  logo={<BrandMark />}
+  logoHref="/"
+  logoLabel="Acme home"
+  navItems={[
+    { label: "Products", href: "/products" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "About", href: "/about", current: true },
+  ]}
+  cta={<Button>Get started</Button>}
+  size="md"
+  sticky={false}
+  borderBottom
+/>
+```
+
+`Header` accepts a React-node logo and CTA, native anchor props for each navigation item, an optional accessible navigation name, three minimum bar heights (`sm` 48px, `md` 64px, `lg` 80px), `sticky`, and `borderBottom`. The logo is linked to `logoHref` and named by `logoLabel`; the default label is "Home". The border is on by default and stickiness is off by default.
+
+The layout is mobile-first, with the desktop navigation at 48rem. On mobile, the accessible menu button discloses the navigation and places the single CTA slot below it. On desktop, navigation and CTA sit inline. Escape closes the mobile menu and returns focus to its button; selecting a navigation link closes the menu. The CTA stays in one DOM location across breakpoints, so consumers do not get duplicate IDs or state.
+
 ## Core form controls
 
 ```tsx

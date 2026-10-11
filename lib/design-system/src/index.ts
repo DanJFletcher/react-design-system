@@ -22,6 +22,8 @@ export { FileField } from "./components/FormControls/FileField";
 export type { FileFieldProps } from "./components/FormControls/FileField";
 export { Switch } from "./components/FormControls/Switch";
 export type { SwitchProps } from "./components/FormControls/Switch";
+export { Header } from "./components/Header/Header";
+export type { HeaderNavItem, HeaderProps, HeaderSize } from "./components/Header/Header";
 export { FieldGroup } from "./components/FormControls/FieldGroup";
 export type { FieldGroupProps } from "./components/FormControls/FieldGroup";
 export { FormLayout } from "./components/FormControls/FormLayout";
