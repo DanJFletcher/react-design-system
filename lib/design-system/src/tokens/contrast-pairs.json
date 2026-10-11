@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "textPairs": [
+    { "name": "Primary action", "foreground": "color.action.primary.fg", "background": "color.action.primary.bg", "minimum": 4.5 },
+    { "name": "Primary hover", "foreground": "color.action.primary.fg", "background": "color.action.primary.hover", "minimum": 4.5 },
+    { "name": "Primary pressed", "foreground": "color.action.primary.fg", "background": "color.action.primary.pressed", "minimum": 4.5 },
+    { "name": "Secondary action", "foreground": "color.action.secondary.fg", "background": "color.action.secondary.bg", "minimum": 4.5 },
+    { "name": "Secondary hover", "foreground": "color.action.secondary.fg", "background": "color.action.secondary.hover", "minimum": 4.5 },
+    { "name": "Secondary pressed", "foreground": "color.action.secondary.fg", "background": "color.action.secondary.pressed", "minimum": 4.5 },
+    { "name": "Ghost action", "foreground": "color.action.ghost.fg", "background": "color.canvas", "minimum": 4.5 },
+    { "name": "Ghost hover", "foreground": "color.action.ghost.fg", "background": "color.action.ghost.hover", "minimum": 4.5 },
+    { "name": "Ghost pressed", "foreground": "color.action.ghost.fg", "background": "color.action.ghost.pressed", "minimum": 4.5 },
+    { "name": "Disabled action", "foreground": "color.action.disabled.fg", "background": "color.action.disabled.bg", "minimum": 4.5 },
+    { "name": "Primary text", "foreground": "color.text.primary", "background": "color.canvas", "minimum": 4.5 },
+    { "name": "Muted text", "foreground": "color.text.muted", "background": "color.canvas", "minimum": 4.5 },
+    { "name": "Accent", "foreground": "color.accent.fg", "background": "color.accent.bg", "minimum": 4.5 }
+  ],
+  "indicatorPairs": [
+    { "name": "Focus ring on canvas", "foreground": "color.focus.ring", "background": "color.canvas", "minimum": 3 },
+    { "name": "Focus ring on surface", "foreground": "color.focus.ring", "background": "color.surface.primary", "minimum": 3 },
+    { "name": "Control boundary on canvas", "foreground": "color.border.control", "background": "color.canvas", "minimum": 3 }
+  ]
+}

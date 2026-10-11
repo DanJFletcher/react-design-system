@@ -1,0 +1,17 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+import manifest from "../../src/generated/token-manifest.json";
+
+<Meta title="Foundations/Typography" />
+
+<Title>Typography</Title>
+
+Font sizes use `rem` so browser root-font preferences remain effective. Line heights are unitless; font weights are numeric. Do not set a fixed pixel size on the document root.
+
+<table>
+  <thead><tr><th>Token</th><th>Value</th><th>Purpose</th></tr></thead>
+  <tbody>
+    {manifest.foundations.filter((token) => token.name.startsWith("font.") || token.name.startsWith("line.height.")).map((token) => (
+      <tr key={token.name}><td><code>{token.name}</code></td><td><code>{String(token.value)}</code></td><td>{token.description}</td></tr>
+    ))}
+  </tbody>
+</table>

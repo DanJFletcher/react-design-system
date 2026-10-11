@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": false,
+    "incremental": false,
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "rootDir": "src",
+    "outDir": "dist",
+    "types": ["react", "vite/client"]
+  },
+  "include": [
+    "src/index.ts",
+    "src/theme/**/*.ts",
+    "src/theme/**/*.tsx",
+    "src/components/Button/Button.tsx",
+    "src/generated/token-types.ts",
+    "src/styles.d.ts"
+  ]
+}

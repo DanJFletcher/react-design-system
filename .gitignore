@@ -31,6 +31,9 @@ node_modules
 /.sass-cache
 /connect.lock
 /coverage
+/lib/design-system/storybook-static/
+/lib/design-system/test-results/
+/lib/design-system/playwright-report/
 /libpeerconnection.log
 npm-debug.log
 yarn-error.log

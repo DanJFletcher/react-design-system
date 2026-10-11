@@ -1,0 +1,68 @@
+{
+  "name": "@workspace/design-system",
+  "version": "0.1.0",
+  "description": "A forkable React design-system foundation with typed tokens, scoped themes, and an accessible Button.",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./theme": {
+      "types": "./dist/theme/index.d.ts",
+      "import": "./dist/theme/index.js"
+    },
+    "./tokens.css": "./dist/tokens.css",
+    "./styles.css": "./dist/styles.css",
+    "./themes/acme.css": "./dist/themes/acme.css",
+    "./themes/luna.css": "./dist/themes/luna.css",
+    "./themes/orchid.css": "./dist/themes/orchid.css"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "scripts": {
+    "tokens:build": "tsx scripts/build-tokens.ts",
+    "tokens:check": "tsx scripts/build-tokens.ts --check",
+    "lint": "tsx scripts/check-design-rules.ts",
+    "typecheck": "tsc -p tsconfig.check.json --noEmit",
+    "test:tokens": "tsx --test tests/tokens/*.test.ts",
+    "test:storybook": "vitest run --project=storybook",
+    "build": "pnpm tokens:build && vite build && tsc -p tsconfig.build.json",
+    "build-storybook": "storybook build --output-dir storybook-static",
+    "storybook": "storybook dev",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots",
+    "test:package": "tsx scripts/test-package-consumer.ts",
+    "check": "pnpm tokens:build && pnpm tokens:check && pnpm lint && pnpm typecheck && pnpm test:tokens && pnpm test:storybook && pnpm build && pnpm build-storybook && pnpm test:visual && pnpm test:package"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0",
+    "@storybook/addon-a11y": "10.6.1",
+    "@storybook/addon-docs": "10.6.1",
+    "@storybook/addon-vitest": "10.6.1",
+    "@storybook/react": "10.6.1",
+    "@storybook/react-vite": "10.6.1",
+    "@testing-library/jest-dom": "7.0.1",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "@vitest/browser-playwright": "5.0.3",
+    "postcss": "8.5.29",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "storybook": "10.6.1",
+    "tsx": "catalog:",
+    "typescript": "5.9.3",
+    "vite": "catalog:",
+    "vitest": "5.0.3"
+  }
+}

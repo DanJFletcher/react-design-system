@@ -1,0 +1,994 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "scripts/build-tokens.ts",
+  "foundations": [
+    {
+      "name": "border.width.default",
+      "type": "dimension",
+      "value": "1px",
+      "description": "Standard border width."
+    },
+    {
+      "name": "control.min-block-size.lg",
+      "type": "dimension",
+      "value": "56px",
+      "description": "Minimum large control target size."
+    },
+    {
+      "name": "control.min-block-size.md",
+      "type": "dimension",
+      "value": "48px",
+      "description": "Minimum medium control target size."
+    },
+    {
+      "name": "control.min-block-size.sm",
+      "type": "dimension",
+      "value": "44px",
+      "description": "Minimum small control target size."
+    },
+    {
+      "name": "focus.offset",
+      "type": "dimension",
+      "value": "2px",
+      "description": "Keyboard-focus outline offset."
+    },
+    {
+      "name": "focus.width",
+      "type": "dimension",
+      "value": "3px",
+      "description": "Keyboard-focus outline width."
+    },
+    {
+      "name": "font.family.sans",
+      "type": "fontFamily",
+      "value": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "description": "System sans-serif stack; browser root-font preferences remain effective."
+    },
+    {
+      "name": "font.size.2xl",
+      "type": "dimension",
+      "value": "1.5rem",
+      "description": "2x-large type size."
+    },
+    {
+      "name": "font.size.3xl",
+      "type": "dimension",
+      "value": "1.875rem",
+      "description": "3x-large type size."
+    },
+    {
+      "name": "font.size.4xl",
+      "type": "dimension",
+      "value": "2.25rem",
+      "description": "4x-large type size."
+    },
+    {
+      "name": "font.size.5xl",
+      "type": "dimension",
+      "value": "3rem",
+      "description": "5x-large type size."
+    },
+    {
+      "name": "font.size.lg",
+      "type": "dimension",
+      "value": "1.125rem",
+      "description": "Large type size."
+    },
+    {
+      "name": "font.size.md",
+      "type": "dimension",
+      "value": "1rem",
+      "description": "Default body and control type size."
+    },
+    {
+      "name": "font.size.sm",
+      "type": "dimension",
+      "value": "0.875rem",
+      "description": "Small type size."
+    },
+    {
+      "name": "font.size.xl",
+      "type": "dimension",
+      "value": "1.25rem",
+      "description": "Extra-large type size."
+    },
+    {
+      "name": "font.size.xs",
+      "type": "dimension",
+      "value": "0.75rem",
+      "description": "Extra-small type size."
+    },
+    {
+      "name": "font.weight.medium",
+      "type": "fontWeight",
+      "value": 500,
+      "description": "Medium font weight."
+    },
+    {
+      "name": "font.weight.regular",
+      "type": "fontWeight",
+      "value": 400,
+      "description": "Regular font weight."
+    },
+    {
+      "name": "font.weight.semibold",
+      "type": "fontWeight",
+      "value": 600,
+      "description": "Semibold font weight."
+    },
+    {
+      "name": "line.height.normal",
+      "type": "lineHeight",
+      "value": 1.5,
+      "description": "Default unitless line height."
+    },
+    {
+      "name": "line.height.tight",
+      "type": "lineHeight",
+      "value": 1.2,
+      "description": "Compact unitless line height."
+    },
+    {
+      "name": "motion.duration.fast",
+      "type": "duration",
+      "value": "120ms",
+      "description": "Fast state transition duration."
+    },
+    {
+      "name": "motion.duration.spinner",
+      "type": "duration",
+      "value": "750ms",
+      "description": "Button loading indicator rotation duration."
+    },
+    {
+      "name": "radius.full",
+      "type": "dimension",
+      "value": "9999px",
+      "description": "Fully rounded component corner."
+    },
+    {
+      "name": "space.0",
+      "type": "dimension",
+      "value": "0px",
+      "description": "Zero spatial unit."
+    },
+    {
+      "name": "space.1",
+      "type": "dimension",
+      "value": "4px",
+      "description": "Compact spatial unit."
+    },
+    {
+      "name": "space.10",
+      "type": "dimension",
+      "value": "40px",
+      "description": "Extended spatial unit."
+    },
+    {
+      "name": "space.12",
+      "type": "dimension",
+      "value": "48px",
+      "description": "Section spatial unit."
+    },
+    {
+      "name": "space.16",
+      "type": "dimension",
+      "value": "64px",
+      "description": "Wide spatial unit."
+    },
+    {
+      "name": "space.2",
+      "type": "dimension",
+      "value": "8px",
+      "description": "Small spatial unit."
+    },
+    {
+      "name": "space.20",
+      "type": "dimension",
+      "value": "80px",
+      "description": "Extra-wide spatial unit."
+    },
+    {
+      "name": "space.24",
+      "type": "dimension",
+      "value": "96px",
+      "description": "Large layout spatial unit."
+    },
+    {
+      "name": "space.3",
+      "type": "dimension",
+      "value": "12px",
+      "description": "Medium-small spatial unit."
+    },
+    {
+      "name": "space.32",
+      "type": "dimension",
+      "value": "128px",
+      "description": "Maximum layout spatial unit."
+    },
+    {
+      "name": "space.4",
+      "type": "dimension",
+      "value": "16px",
+      "description": "Standard spatial unit."
+    },
+    {
+      "name": "space.5",
+      "type": "dimension",
+      "value": "20px",
+      "description": "Medium-large spatial unit."
+    },
+    {
+      "name": "space.6",
+      "type": "dimension",
+      "value": "24px",
+      "description": "Large spatial unit."
+    },
+    {
+      "name": "space.8",
+      "type": "dimension",
+      "value": "32px",
+      "description": "Extra-large spatial unit."
+    },
+    {
+      "name": "space.half",
+      "type": "dimension",
+      "value": "2px",
+      "description": "Half-step spatial unit."
+    }
+  ],
+  "semantic": [
+    {
+      "name": "color.accent.bg",
+      "type": "color",
+      "description": "Accent surface."
+    },
+    {
+      "name": "color.accent.fg",
+      "type": "color",
+      "description": "Text on the accent surface."
+    },
+    {
+      "name": "color.action.disabled.bg",
+      "type": "color",
+      "description": "Disabled action background."
+    },
+    {
+      "name": "color.action.disabled.fg",
+      "type": "color",
+      "description": "Disabled action foreground."
+    },
+    {
+      "name": "color.action.ghost.fg",
+      "type": "color",
+      "description": "Ghost action foreground."
+    },
+    {
+      "name": "color.action.ghost.hover",
+      "type": "color",
+      "description": "Ghost action hover background."
+    },
+    {
+      "name": "color.action.ghost.pressed",
+      "type": "color",
+      "description": "Ghost action pressed background."
+    },
+    {
+      "name": "color.action.primary.bg",
+      "type": "color",
+      "description": "Primary action background."
+    },
+    {
+      "name": "color.action.primary.fg",
+      "type": "color",
+      "description": "Primary action foreground."
+    },
+    {
+      "name": "color.action.primary.hover",
+      "type": "color",
+      "description": "Primary action hover background."
+    },
+    {
+      "name": "color.action.primary.pressed",
+      "type": "color",
+      "description": "Primary action pressed background."
+    },
+    {
+      "name": "color.action.secondary.bg",
+      "type": "color",
+      "description": "Secondary action background."
+    },
+    {
+      "name": "color.action.secondary.fg",
+      "type": "color",
+      "description": "Secondary action foreground."
+    },
+    {
+      "name": "color.action.secondary.hover",
+      "type": "color",
+      "description": "Secondary action hover background."
+    },
+    {
+      "name": "color.action.secondary.pressed",
+      "type": "color",
+      "description": "Secondary action pressed background."
+    },
+    {
+      "name": "color.border.control",
+      "type": "color",
+      "description": "Control boundary."
+    },
+    {
+      "name": "color.canvas",
+      "type": "color",
+      "description": "Default page canvas."
+    },
+    {
+      "name": "color.focus.ring",
+      "type": "color",
+      "description": "Visible keyboard-focus ring."
+    },
+    {
+      "name": "color.surface.primary",
+      "type": "color",
+      "description": "Primary content surface."
+    },
+    {
+      "name": "color.text.muted",
+      "type": "color",
+      "description": "Supporting readable text."
+    },
+    {
+      "name": "color.text.primary",
+      "type": "color",
+      "description": "Primary readable text."
+    },
+    {
+      "name": "radius.control",
+      "type": "dimension",
+      "description": "Default control corner radius."
+    }
+  ],
+  "componentHooks": [
+    {
+      "name": "button.border-width",
+      "type": "dimension",
+      "description": "Button border width.",
+      "cssVariable": "--ds-button-border-width"
+    },
+    {
+      "name": "button.disabled.bg",
+      "type": "color",
+      "description": "Disabled button background.",
+      "cssVariable": "--ds-button-disabled-bg"
+    },
+    {
+      "name": "button.disabled.fg",
+      "type": "color",
+      "description": "Disabled button foreground.",
+      "cssVariable": "--ds-button-disabled-fg"
+    },
+    {
+      "name": "button.focus.color",
+      "type": "color",
+      "description": "Button focus outline color.",
+      "cssVariable": "--ds-button-focus-color"
+    },
+    {
+      "name": "button.focus.offset",
+      "type": "dimension",
+      "description": "Button focus outline offset.",
+      "cssVariable": "--ds-button-focus-offset"
+    },
+    {
+      "name": "button.focus.width",
+      "type": "dimension",
+      "description": "Button focus outline width.",
+      "cssVariable": "--ds-button-focus-width"
+    },
+    {
+      "name": "button.font-weight",
+      "type": "fontWeight",
+      "description": "Button label weight.",
+      "cssVariable": "--ds-button-font-weight"
+    },
+    {
+      "name": "button.gap",
+      "type": "dimension",
+      "description": "Button content and icon gap.",
+      "cssVariable": "--ds-button-gap"
+    },
+    {
+      "name": "button.ghost.bg",
+      "type": "color",
+      "description": "Ghost button resting background.",
+      "cssVariable": "--ds-button-ghost-bg"
+    },
+    {
+      "name": "button.ghost.border",
+      "type": "color",
+      "description": "Ghost button border.",
+      "cssVariable": "--ds-button-ghost-border"
+    },
+    {
+      "name": "button.ghost.fg",
+      "type": "color",
+      "description": "Ghost button foreground.",
+      "cssVariable": "--ds-button-ghost-fg"
+    },
+    {
+      "name": "button.ghost.hover-bg",
+      "type": "color",
+      "description": "Ghost button hover background.",
+      "cssVariable": "--ds-button-ghost-hover-bg"
+    },
+    {
+      "name": "button.ghost.pressed-bg",
+      "type": "color",
+      "description": "Ghost button pressed background.",
+      "cssVariable": "--ds-button-ghost-pressed-bg"
+    },
+    {
+      "name": "button.lg.font-size",
+      "type": "dimension",
+      "description": "Large button font size.",
+      "cssVariable": "--ds-button-lg-font-size"
+    },
+    {
+      "name": "button.lg.min-block-size",
+      "type": "dimension",
+      "description": "Large button minimum target size.",
+      "cssVariable": "--ds-button-lg-min-block-size"
+    },
+    {
+      "name": "button.lg.padding-block",
+      "type": "dimension",
+      "description": "Large button block padding.",
+      "cssVariable": "--ds-button-lg-padding-block"
+    },
+    {
+      "name": "button.lg.padding-inline",
+      "type": "dimension",
+      "description": "Large button inline padding.",
+      "cssVariable": "--ds-button-lg-padding-inline"
+    },
+    {
+      "name": "button.line-height",
+      "type": "lineHeight",
+      "description": "Button label line height.",
+      "cssVariable": "--ds-button-line-height"
+    },
+    {
+      "name": "button.md.font-size",
+      "type": "dimension",
+      "description": "Medium button font size.",
+      "cssVariable": "--ds-button-md-font-size"
+    },
+    {
+      "name": "button.md.min-block-size",
+      "type": "dimension",
+      "description": "Medium button minimum target size.",
+      "cssVariable": "--ds-button-md-min-block-size"
+    },
+    {
+      "name": "button.md.padding-block",
+      "type": "dimension",
+      "description": "Medium button block padding.",
+      "cssVariable": "--ds-button-md-padding-block"
+    },
+    {
+      "name": "button.md.padding-inline",
+      "type": "dimension",
+      "description": "Medium button inline padding.",
+      "cssVariable": "--ds-button-md-padding-inline"
+    },
+    {
+      "name": "button.motion.duration",
+      "type": "duration",
+      "description": "Button state transition duration.",
+      "cssVariable": "--ds-button-motion-duration"
+    },
+    {
+      "name": "button.primary.bg",
+      "type": "color",
+      "description": "Primary button resting background.",
+      "cssVariable": "--ds-button-primary-bg"
+    },
+    {
+      "name": "button.primary.border",
+      "type": "color",
+      "description": "Primary button border.",
+      "cssVariable": "--ds-button-primary-border"
+    },
+    {
+      "name": "button.primary.fg",
+      "type": "color",
+      "description": "Primary button foreground.",
+      "cssVariable": "--ds-button-primary-fg"
+    },
+    {
+      "name": "button.primary.hover-bg",
+      "type": "color",
+      "description": "Primary button hover background.",
+      "cssVariable": "--ds-button-primary-hover-bg"
+    },
+    {
+      "name": "button.primary.pressed-bg",
+      "type": "color",
+      "description": "Primary button pressed background.",
+      "cssVariable": "--ds-button-primary-pressed-bg"
+    },
+    {
+      "name": "button.radius",
+      "type": "dimension",
+      "description": "Button corner radius.",
+      "cssVariable": "--ds-button-radius"
+    },
+    {
+      "name": "button.secondary.bg",
+      "type": "color",
+      "description": "Secondary button resting background.",
+      "cssVariable": "--ds-button-secondary-bg"
+    },
+    {
+      "name": "button.secondary.border",
+      "type": "color",
+      "description": "Secondary button border.",
+      "cssVariable": "--ds-button-secondary-border"
+    },
+    {
+      "name": "button.secondary.fg",
+      "type": "color",
+      "description": "Secondary button foreground.",
+      "cssVariable": "--ds-button-secondary-fg"
+    },
+    {
+      "name": "button.secondary.hover-bg",
+      "type": "color",
+      "description": "Secondary button hover background.",
+      "cssVariable": "--ds-button-secondary-hover-bg"
+    },
+    {
+      "name": "button.secondary.pressed-bg",
+      "type": "color",
+      "description": "Secondary button pressed background.",
+      "cssVariable": "--ds-button-secondary-pressed-bg"
+    },
+    {
+      "name": "button.sm.font-size",
+      "type": "dimension",
+      "description": "Small button font size.",
+      "cssVariable": "--ds-button-sm-font-size"
+    },
+    {
+      "name": "button.sm.min-block-size",
+      "type": "dimension",
+      "description": "Small button minimum target size.",
+      "cssVariable": "--ds-button-sm-min-block-size"
+    },
+    {
+      "name": "button.sm.padding-block",
+      "type": "dimension",
+      "description": "Small button block padding.",
+      "cssVariable": "--ds-button-sm-padding-block"
+    },
+    {
+      "name": "button.sm.padding-inline",
+      "type": "dimension",
+      "description": "Small button inline padding.",
+      "cssVariable": "--ds-button-sm-padding-inline"
+    }
+  ],
+  "themes": {
+    "acme": {
+      "color.canvas": "#F8FAFC",
+      "color.surface.primary": "#FFFFFF",
+      "color.text.primary": "#0F172A",
+      "color.text.muted": "#475569",
+      "color.border.control": "#64748B",
+      "color.action.primary.bg": "#1D4ED8",
+      "color.action.primary.hover": "#1E40AF",
+      "color.action.primary.pressed": "#1E3A8A",
+      "color.action.primary.fg": "#FFFFFF",
+      "color.action.secondary.bg": "#FFFFFF",
+      "color.action.secondary.fg": "#1E40AF",
+      "color.action.secondary.hover": "#EEF2FF",
+      "color.action.secondary.pressed": "#E0E7FF",
+      "color.action.ghost.fg": "#1E40AF",
+      "color.action.ghost.hover": "#EFF6FF",
+      "color.action.ghost.pressed": "#DBEAFE",
+      "color.action.disabled.bg": "#E2E8F0",
+      "color.action.disabled.fg": "#475569",
+      "color.focus.ring": "#1D4ED8",
+      "color.accent.bg": "#DBEAFE",
+      "color.accent.fg": "#1E3A8A",
+      "radius.control": "6px"
+    },
+    "luna": {
+      "color.canvas": "#FFF5FB",
+      "color.surface.primary": "#FFFBFE",
+      "color.text.primary": "#321846",
+      "color.text.muted": "#6F3D73",
+      "color.border.control": "#8B5E88",
+      "color.action.primary.bg": "#8B2674",
+      "color.action.primary.hover": "#741C62",
+      "color.action.primary.pressed": "#5B154C",
+      "color.action.primary.fg": "#FFFFFF",
+      "color.action.secondary.bg": "#F2E5FF",
+      "color.action.secondary.fg": "#54208B",
+      "color.action.secondary.hover": "#E8D4F8",
+      "color.action.secondary.pressed": "#DCC0F2",
+      "color.action.ghost.fg": "#6A2491",
+      "color.action.ghost.hover": "#F5E8FC",
+      "color.action.ghost.pressed": "#EAD2F5",
+      "color.action.disabled.bg": "#EBDCEB",
+      "color.action.disabled.fg": "#67506E",
+      "color.focus.ring": "#6A2491",
+      "color.accent.bg": "#F6CF67",
+      "color.accent.fg": "#321846",
+      "radius.control": "9999px"
+    },
+    "orchid": {
+      "color.canvas": "#FFF2FD",
+      "color.surface.primary": "#FFFAFE",
+      "color.text.primary": "#38143D",
+      "color.text.muted": "#693B6F",
+      "color.border.control": "#8B5E88",
+      "color.action.primary.bg": "#703B91",
+      "color.action.primary.hover": "#5D2B78",
+      "color.action.primary.pressed": "#48205F",
+      "color.action.primary.fg": "#FFFFFF",
+      "color.action.secondary.bg": "#EFE4F5",
+      "color.action.secondary.fg": "#54208B",
+      "color.action.secondary.hover": "#E4D2EB",
+      "color.action.secondary.pressed": "#D6C0E2",
+      "color.action.ghost.fg": "#6A2491",
+      "color.action.ghost.hover": "#F5E8FC",
+      "color.action.ghost.pressed": "#EAD2F5",
+      "color.action.disabled.bg": "#EBDCEB",
+      "color.action.disabled.fg": "#67506E",
+      "color.focus.ring": "#6A2491",
+      "color.accent.bg": "#F6CF67",
+      "color.accent.fg": "#38143D",
+      "radius.control": "16px"
+    }
+  },
+  "contrast": [
+    {
+      "theme": "acme",
+      "name": "Primary action",
+      "ratio": 6.702,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Primary hover",
+      "ratio": 8.722,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Primary pressed",
+      "ratio": 10.358,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Secondary action",
+      "ratio": 8.722,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Secondary hover",
+      "ratio": 7.8,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Secondary pressed",
+      "ratio": 7.079,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Ghost action",
+      "ratio": 8.337,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Ghost hover",
+      "ratio": 8.015,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Ghost pressed",
+      "ratio": 7.149,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Disabled action",
+      "ratio": 6.147,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Primary text",
+      "ratio": 17.063,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Muted text",
+      "ratio": 7.243,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Accent",
+      "ratio": 8.49,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Focus ring on canvas",
+      "ratio": 6.405,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Focus ring on surface",
+      "ratio": 6.702,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Control boundary on canvas",
+      "ratio": 4.548,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Primary action",
+      "ratio": 7.993,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Primary hover",
+      "ratio": 10.072,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Primary pressed",
+      "ratio": 12.678,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Secondary action",
+      "ratio": 8.908,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Secondary hover",
+      "ratio": 7.771,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Secondary pressed",
+      "ratio": 6.576,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Ghost action",
+      "ratio": 8.666,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Ghost hover",
+      "ratio": 7.841,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Ghost pressed",
+      "ratio": 6.612,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Disabled action",
+      "ratio": 5.415,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Primary text",
+      "ratio": 14.546,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Muted text",
+      "ratio": 7.606,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Accent",
+      "ratio": 10.363,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Focus ring on canvas",
+      "ratio": 8.666,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Focus ring on surface",
+      "ratio": 9.007,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Control boundary on canvas",
+      "ratio": 4.86,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Primary action",
+      "ratio": 7.711,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Primary hover",
+      "ratio": 10.086,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Primary pressed",
+      "ratio": 12.747,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Secondary action",
+      "ratio": 8.733,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Secondary hover",
+      "ratio": 7.523,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Secondary pressed",
+      "ratio": 6.388,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Ghost action",
+      "ratio": 8.518,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Ghost hover",
+      "ratio": 7.841,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Ghost pressed",
+      "ratio": 6.612,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Disabled action",
+      "ratio": 5.415,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Primary text",
+      "ratio": 14.504,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Muted text",
+      "ratio": 7.888,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Accent",
+      "ratio": 10.512,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Focus ring on canvas",
+      "ratio": 8.518,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Focus ring on surface",
+      "ratio": 8.952,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Control boundary on canvas",
+      "ratio": 4.778,
+      "minimum": 3,
+      "kind": "indicator"
+    }
+  ]
+}

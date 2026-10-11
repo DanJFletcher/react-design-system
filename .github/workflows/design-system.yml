@@ -1,0 +1,43 @@
+name: Design system
+
+on:
+  push:
+    paths:
+      - "lib/design-system/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "tsconfig.json"
+      - ".github/workflows/design-system.yml"
+  pull_request:
+    paths:
+      - "lib/design-system/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "tsconfig.json"
+      - ".github/workflows/design-system.yml"
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.26.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @workspace/design-system exec playwright install --with-deps chromium
+      - run: pnpm check
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: design-system-visual-results
+          path: |
+            lib/design-system/test-results/
+            lib/design-system/playwright-report/
+          if-no-files-found: ignore

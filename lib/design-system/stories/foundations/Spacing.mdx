@@ -1,0 +1,17 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+import manifest from "../../src/generated/token-manifest.json";
+
+<Meta title="Foundations/Spacing" />
+
+<Title>Spacing</Title>
+
+Spatial values, gutters, padding, and dimensional limits use fixed `px` tokens. Grid track sizing may still use `fr`, percentages, and `minmax()`. Structural values such as `0`, `auto`, `currentColor`, and `transparent` remain valid.
+
+<table>
+  <thead><tr><th>Token</th><th>Value</th><th>Purpose</th></tr></thead>
+  <tbody>
+    {manifest.foundations.filter((token) => token.name.startsWith("space.")).map((token) => (
+      <tr key={token.name}><td><code>{token.name}</code></td><td><code>{String(token.value)}</code></td><td>{token.description}</td></tr>
+    ))}
+  </tbody>
+</table>

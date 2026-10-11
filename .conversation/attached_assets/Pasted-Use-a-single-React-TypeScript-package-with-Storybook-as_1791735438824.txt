@@ -1,0 +1,507 @@
+Use a single React/TypeScript package, with Storybook as its documentation and development environment. CSS variables should be the public styling API; React should handle rendering and interaction.
+
+The first milestone is complete when one Button works across ACME, Luna, and a custom theme—with documented tokens, automated checks, and contribution rules that future agents can follow. Implementation should stop there.
+
+1. Establish the project scope and architecture.
+
+   Use this starting stack:
+
+   Concern	Choice
+
+   Components	React and TypeScript
+   Styling	CSS Modules consuming CSS variables
+   Documentation	Storybook with React/Vite
+   Interaction tests	Storybook’s Vitest addon
+   Browser and visual checks	Playwright
+   Accessibility checks	Storybook accessibility addon
+   Package management	pnpm
+   Token generation	A small TypeScript compiler
+
+
+   Pin compatible stable versions during setup and commit the lockfile. Keep token generation independent of React.
+
+   The initial deliverables are:
+
+   - A typed token source and deterministic generation pipeline.
+   - Complete ACME and Luna theme definitions.
+   - CSS-only theme switching and scoped customization.
+   - An optional, lightweight React ThemeScope helper.
+   - One production-ready Button.
+   - Storybook foundation pages and Button documentation.
+   - Contribution rules, CI checks, a roadmap, and a fork guide.
+
+   Defer additional components, dark mode, polymorphic rendering, and a general plugin system.
+
+2. Create a small, forkable repository.
+
+   Start with one package. Separate concerns through directories and package exports rather than a monorepo.
+
+   .storybook/
+     main.ts
+     preview.tsx
+     vitest.setup.ts
+
+   src/
+     tokens/
+       schema.json
+       foundations.json
+       contract.json
+       component-hooks.json
+       contrast-pairs.json
+       themes/
+         acme.json
+         luna.json
+
+     generated/
+       tokens.css
+       token-types.ts
+       token-manifest.json
+       themes/
+         acme.css
+         luna.css
+
+     theme/
+       ThemeScope.tsx
+       types.ts
+
+     components/
+       Button/
+         Button.tsx
+         Button.module.css
+         Button.stories.tsx
+         Button.docs.mdx
+
+     index.ts
+
+   stories/
+     foundations/
+
+   scripts/
+     build-tokens.ts
+     check-design-rules.ts
+
+   tests/
+     tokens/
+     visual/
+     package-consumer/
+
+   docs/
+     implementation-plan.md
+     design-system.md
+     theming.md
+     component-development.md
+     roadmap.md
+     fork-guide.md
+     decisions.md
+
+   AGENTS.md
+
+   Publish ESM, TypeScript declarations, and explicit CSS entry points. Keep React external to the bundle and preserve CSS through the package’s sideEffects configuration.
+
+   The intended consumption pattern is:
+
+   import { Button } from '@your-org/ui';
+   import '@your-org/ui/tokens.css';
+   import '@your-org/ui/styles.css';
+
+   Also expose individual theme stylesheets so a project can retain ACME or Luna independently.
+
+3. Define the token contract before styling the Button.
+
+   Use three authoring layers:
+
+   Layer	Purpose	Example
+
+   Foundation values	Shared scales and reference palettes	space.4, font.size.md, palette.blue.700
+   Semantic tokens	Describe the purpose of a value	color.action.primary.bg, color.text.primary
+   Component hooks	Optional overrides for one component	--ds-button-primary-bg, --ds-button-radius
+
+
+   Components consume semantic tokens and component hooks. Palette references remain internal to token authoring.
+
+   Give every token a stable name, type, value, and description. Use a deliberately small project schema; do not claim compatibility with an external token standard unless that compatibility is implemented.
+
+   A source excerpt could look like:
+
+   {
+     "schemaVersion": 1,
+     "tokens": {
+       "space.4": {
+         "type": "dimension",
+         "value": { "amount": 16, "unit": "px" },
+         "description": "Standard spacing step."
+       },
+       "font.size.md": {
+         "type": "dimension",
+         "value": { "amount": 1, "unit": "rem" },
+         "description": "Default body and control font size."
+       },
+       "color.action.primary.bg": {
+         "type": "color",
+         "value": { "ref": "palette.blue.700" },
+         "description": "Primary action background."
+       }
+     }
+   }
+
+   The compiler must:
+
+   - Validate names, types, units, and required descriptions.
+   - Resolve references and detect cycles.
+   - Reject references to incompatible token types.
+   - Detect collisions in generated CSS variable names.
+   - Normalize each theme into a complete public token map.
+   - Generate CSS, TypeScript names, and a documentation manifest.
+   - Produce identical output for identical input.
+
+   Generated artifacts should be checked in and marked as generated. CI must detect differences between source and generated output.
+
+   Apply these unit rules:
+
+   Category	Rule
+
+   Font sizes	rem
+   Line heights	Unitless
+   Font weights	Numeric
+   Letter spacing	Proportional em, where needed
+   Spacing	Fixed px tokens
+   Grid gaps, margins, padding	Spatial tokens
+   Container limits and control dimensions	Fixed px tokens
+   Radius, border width, focus dimensions	Dedicated px tokens
+   Motion duration	ms tokens
+
+
+   Start with this type scale:
+
+   xs    0.75rem
+   sm    0.875rem
+   md    1rem
+   lg    1.125rem
+   xl    1.25rem
+   2xl   1.5rem
+   3xl   1.875rem
+   4xl   2.25rem
+   5xl   3rem
+
+   Do not set a fixed pixel font size on the document root. Browser font preferences must continue to affect typography.
+
+   Start with this spatial scale:
+
+   half   2px
+   0      0px
+   1      4px
+   2      8px
+   3      12px
+   4      16px
+   5      20px
+   6      24px
+   8      32px
+   10     40px
+   12     48px
+   16     64px
+   20     80px
+   24     96px
+   32     128px
+
+   Grid track sizing may use fr, percentages, and minmax(). Gutters and dimensional limits still come from pixel tokens:
+
+   .layout-example {
+     display: grid;
+     grid-template-columns: repeat(2, minmax(0, 1fr));
+     gap: var(--ds-space-4);
+     padding: var(--ds-space-6);
+     margin-block: var(--ds-space-8);
+     max-inline-size: var(--ds-layout-content-max);
+     margin-inline: auto;
+   }
+
+   Define structural exceptions such as 0, auto, and fluid widths explicitly. CSS variables cannot supply ordinary media-query conditions; future breakpoint tokens should generate traceable query literals.
+
+4. Specify ACME and Luna through the same semantic contract.
+
+   ACME should use restrained blue actions, neutral surfaces, modest rounding, and a system sans-serif stack.
+
+   Luna should use blush and lavender surfaces, deep plum actions, moonlit gold accents, and softer shapes. Keep text and action colors sufficiently dark against the pastel surfaces.
+
+   Use these starting values:
+
+   Semantic role	ACME	Luna
+
+   Canvas	#F8FAFC	#FFF5FB
+   Surface	#FFFFFF	#FFFBFE
+   Primary text	#0F172A	#321846
+   Muted text	#475569	#6F3D73
+   Control border	#64748B	#8B5E88
+   Primary action background	#1D4ED8	#8B2674
+   Primary hover background	#1E40AF	#741C62
+   Primary pressed background	#1E3A8A	#5B154C
+   Primary foreground	#FFFFFF	#FFFFFF
+   Secondary background	#FFFFFF	#F2E5FF
+   Secondary foreground	#1E40AF	#54208B
+   Secondary hover background	#EEF2FF	#E8D4F8
+   Secondary pressed background	#E0E7FF	#DCC0F2
+   Ghost foreground	#1E40AF	#6A2491
+   Ghost hover background	#EFF6FF	#F5E8FC
+   Ghost pressed background	#DBEAFE	#EAD2F5
+   Focus ring	#1D4ED8	#6A2491
+   Disabled background	#E2E8F0	#EBDCEB
+   Disabled foreground	#475569	#67506E
+   Accent background	#DBEAFE	#F6CF67
+   Accent foreground	#1E3A8A	#321846
+
+
+   Ghost’s resting background is transparent.
+
+   Use a Button radius of 6px for ACME and a pill radius token for Luna. Keep the initial type and spacing scales consistent between themes; both remain customizable.
+
+   The proposed white-on-primary combinations measure 6.70:1 for ACME and 7.99:1 for Luna. These are seed checks; implementation must validate hover, pressed, secondary, ghost, disabled, and focus treatments too.
+
+5. Make theme boundaries and overrides predictable.
+
+   Theme selection must work through ordinary HTML:
+
+   <section data-ds-theme="acme">
+     <Button>Save changes</Button>
+
+     <section data-ds-theme="luna">
+       <Button>Moon prism power</Button>
+     </section>
+   </section>
+
+   Emit a complete effective token map at each theme boundary. ACME should also be the default for an unthemed document.
+
+   Resolve authoring references to concrete values during generation. CSS custom-property aliases resolve where declared, which can otherwise make descendant overrides behave unexpectedly. MDN documents custom-property inheritance and resolution.
+
+   The public runtime contract should therefore be:
+
+   - Semantic variables are directly overridable.
+   - Source palette changes propagate through the compiler.
+   - Runtime state tokens are independent; overriding a primary background does not implicitly change its hover background.
+   - A nested theme restores that theme’s complete defaults.
+   - Local overrides apply within their scope.
+
+   Component hooks should remain unset on the component itself. Consume them through local fallbacks:
+
+   .button[data-variant="primary"] {
+     background-color:
+       var(--ds-button-primary-bg,
+         var(--ds-color-action-primary-bg));
+   }
+
+   Reset registered component hooks at each theme boundary:
+
+   :where([data-ds-theme]) {
+     --ds-button-primary-bg: initial;
+     --ds-button-radius: initial;
+     /* Generated resets for all registered component hooks. */
+   }
+
+   This makes outer component overrides stop at an inner theme. Overrides placed on the inner boundary then apply normally. Keep these hooks as unregistered custom properties so initial permits the fallback.
+
+   Generate a DesignSystemStyle type containing the documented public variable names. Use it for scoped React overrides:
+
+   <ThemeScope
+     theme="luna"
+     style={{ '--ds-button-radius': '12px' }}
+   >
+     <Button>Continue</Button>
+   </ThemeScope>
+
+   ThemeScope should render a simple wrapper with a theme attribute and typed styles. It should not mutate global document state.
+
+   Custom themes can extend ACME or Luna in source, but compilation must output a complete independent theme. Custom theme authors must run the same unit and contrast checks.
+
+6. Build a native Button with a deliberately small API.
+
+   Use this public shape:
+
+   type ButtonProps = Omit<
+     React.ComponentPropsWithRef<'button'>,
+     'style' | 'aria-busy' | 'aria-disabled'
+   > & {
+     variant?: 'primary' | 'secondary' | 'ghost';
+     size?: 'sm' | 'md' | 'lg';
+     loading?: boolean;
+     style?: DesignSystemStyle;
+   };
+
+   Defaults are variant="primary", size="md", and type="button".
+
+   Forward the native ref, className, form attributes, accessible naming attributes, and other supported native props. The component owns aria-busy and aria-disabled.
+
+   Use this initial size mapping:
+
+   Size	Font size	Block padding	Inline padding	Minimum control size
+
+   sm	0.875rem	8px	12px	44px
+   md	1rem	12px	16px	48px
+   lg	1.125rem	16px	20px	56px
+
+
+   All values must resolve through tokens. Minimum dimensions allow controls to grow as typography grows; do not impose fixed heights. The target sizes are a project standard informed by WCAG target-size guidance.
+
+   Define the behavior before coding:
+
+   - Native disabled uses the native attribute.
+   - Loading preserves focus with aria-disabled and aria-busy.
+   - Loading suppresses the forwarded onClick and the button’s default submit/reset activation.
+   - The owning form remains responsible for broader asynchronous submission state.
+   - Retain the accessible name during loading.
+   - Keep the label in layout with opacity: 0 and show an absolutely centered, aria-hidden spinner. This preserves dimensions.
+   - Respect reduced motion and provide usable forced-colors styling.
+   - Show a clear :focus-visible outline with tokenized width, offset, and color.
+   - Suppress hover and pressed styling while loading or disabled.
+   - Permit long labels to wrap.
+
+   Icons can be supplied within children; decorative icons should be hidden from assistive technology. Keep the spinner private to Button. Defer href, asChild, toggle behavior, button groups, and an icon-only convenience API.
+
+   Document override hooks for:
+
+   - Variant foregrounds, backgrounds, borders, hover, and pressed states.
+   - Disabled colors.
+   - Font size, padding, gap, and minimum dimensions.
+   - Radius and border width.
+   - Focus treatment and motion.
+
+   Use private aliases such as --_button-bg when selecting internal values. Components must contain no ACME/Luna branches.
+
+7. Make Storybook the living specification.
+
+   Create foundation pages for principles, semantic colors, typography, spacing, themes, and customization. Generate token tables from the manifest.
+
+   Add a theme toolbar. Its decorator should apply the selected theme, semantic canvas background, and default typography to the preview.
+
+   Button documentation must show:
+
+   - All variants and sizes in both themes.
+   - Default, hover, pressed, focus, disabled, and loading states.
+   - Decorative icons, long labels, and wrapping.
+   - Default non-submit behavior and explicit submit behavior.
+   - Nested ACME/Luna boundaries.
+   - Semantic overrides and component overrides.
+   - A custom theme extending a built-in theme.
+   - Available hooks, accessibility behavior, and API limits.
+
+   Use real pointer and keyboard interactions to validate pseudo-states. Storybook’s Vitest addon supports story-based component tests in a real browser with Vite. Official setup guidance.
+
+8. Enforce the design rules through CI.
+
+   Documentation provides guidance; mechanical checks provide enforcement.
+
+   Implement these gates:
+
+   Gate	Required result
+
+   Token validation	Valid types, units, references, and complete effective theme contracts
+   Generation check	Checked-in outputs match deterministic regeneration
+   Styling rules	Components use tokens for visual values
+   Type checking	Public props, refs, and override types compile
+   Interaction tests	Native behavior and loading policy work
+   Contrast checks	Intended text pairs meet a project minimum of 4.5:1
+   Focus/boundary checks	Intended essential indicators meet the chosen 3:1 contrast requirement
+   Visual checks	Theme/state changes produce reviewable snapshots
+   Package smoke test	Built exports, declarations, and CSS work in a clean consumer
+
+
+   Use AST-based CSS checks with a small documented exception list. Reject raw component colors, pixel font sizes, arbitrary spacing, and literal radii or shadows. Permit structural values such as 0, auto, currentColor, transparent, and fluid grid sizing.
+
+   Meaningful Button tests should prove:
+
+   - Accessible role and name.
+   - Native prop and ref forwarding.
+   - Default non-submit and explicit submit behavior.
+   - Pointer, Enter, and Space activation.
+   - Disabled and loading activation suppression.
+   - Loading focus and dimension continuity.
+   - Correct styles after theme changes.
+   - Local overrides and nested-theme resets.
+   - Usability with increased root font size, reduced motion, and forced colors.
+
+   Add manual checks for keyboard navigation, screen-reader naming, zoom, and focus clipping. Automated accessibility checks do not cover all of these.
+
+   Define these repository scripts:
+
+   pnpm tokens:build
+   pnpm tokens:check
+   pnpm lint
+   pnpm typecheck
+   pnpm test:tokens
+   pnpm test:storybook
+   pnpm build
+   pnpm build-storybook
+   pnpm test:visual
+   pnpm test:package
+   pnpm check
+
+   pnpm check should run the required gates in dependency order. Snapshot updates require inspection of the resulting differences.
+
+9. Give future agents a repeatable development contract.
+
+   Store this plan in docs/implementation-plan.md. Make docs/design-system.md the canonical specification.
+
+   AGENTS.md should require every contributor to:
+
+   - Read the design-system specification and relevant component documentation before editing.
+   - Define a component’s responsibility, semantics, and API before implementation.
+   - Use native HTML semantics where applicable.
+   - Use public semantic tokens or registered component hooks.
+   - Document interaction, focus, disabled, and loading behavior where relevant.
+   - Cover both themes, scoped customization, and nested boundaries.
+   - Update documentation and changelogs for public changes.
+   - Modify token sources rather than generated artifacts.
+   - Run the relevant checks and report their results.
+
+   A new semantic token requires a documented purpose, a distinction from existing roles, complete theme coverage, and applicable contrast tests.
+
+   Use one contribution template for future components:
+
+   Objective and user need
+   Dependencies
+   Scope and exclusions
+   Public API
+   HTML and accessibility semantics
+   Interaction and state ownership
+   Tokens and customization hooks
+   Storybook examples
+   Validation commands
+   Completion checklist
+
+   Record architectural changes in docs/decisions.md. Documentation-only rules should be identified separately from rules enforced by CI.
+
+10. Implement the first milestone in gated stages.
+
+    Stage	Work	Exit criterion
+
+    A — Bootstrap	Tooling, repository, documentation, agent rules	Empty Storybook builds; type checking and linting run
+    B — Tokens	Schema, scales, references, compiler	Validation rejects invalid sources; generation is deterministic
+    C — Themes	ACME, Luna, custom-theme extension	Complete maps render correctly in nested scopes
+    D — Foundations	Storybook token pages and theme controls	Documentation reflects generated token data
+    E — Button	API, native behavior, CSS, loading	Interaction and customization tests pass
+    F — Verification	Contrast, visuals, package fixture	Required checks pass against built artifacts
+    G — Handoff	Contribution guide, roadmap, fork guide	Another agent can follow the documented workflow
+
+
+    Complete each exit criterion before moving to dependent work. At the end, report implemented files, checks run, remaining limitations, and documented decisions.
+
+11. Build the remaining library through dependencies and composition.
+
+    Document this roadmap now; implement it after the foundation milestone.
+
+    Phase	Components or capabilities	Required foundation
+
+    Visual atoms	Text, Heading, Icon	Typography and semantic color rules
+    Layout primitives	Stack, Inline, Grid, Container	Pixel spacing and responsive layout rules
+    Form atoms	Label, Input, Textarea, Checkbox, Radio, Switch	Labeling, validation, and focus conventions
+    Form composition	Field, HelpText, ValidationMessage	Form atoms and shared accessibility relationships
+    Interaction infrastructure	Focus management, dismissal, positioning, themed portals	Tested accessibility primitives and theme-boundary policy
+    Compound controls	Tabs, Accordion, Menu, Dialog, Select, Combobox	Shared state and keyboard interaction contracts
+    Larger compositions	Navigation, complex forms, data displays	Stable atoms and compounds
+
+
+    Every compound component must document its parts, state ownership, controlled/uncontrolled behavior, keyboard model, labeling relationships, and public styling hooks. Consumers should not need to target private DOM structures.
+
+    Before adding portalled components, define how their containers receive the active theme and scoped overrides. CSS variables follow DOM ancestry.
+
+    The fork guide should explain how to remove unused themes, variants, stories, and components; retain token validation and accessibility checks; and build the simplified package. Source-level theme inheritance must be flattened in generated output so removing a base theme does not break the retained theme.
+
+    The foundation is ready for the next component when a consumer can add a third theme, alter Button appearance without editing its implementation, and remove an unused theme while all required checks still pass.

@@ -1,0 +1,33 @@
+:root {
+  font-family: var(--ds-font-family-sans);
+  color: var(--ds-color-text-primary);
+  background: var(--ds-color-canvas);
+}
+
+body {
+  margin: 0;
+  font-family: var(--ds-font-family-sans);
+  color: var(--ds-color-text-primary);
+  background: var(--ds-color-canvas);
+}
+
+.storybook-canvas {
+  box-sizing: border-box;
+  min-block-size: 100vh;
+  padding: var(--ds-space-8);
+  color: var(--ds-color-text-primary);
+  background: var(--ds-color-canvas);
+}
+
+.button-story-grid,
+.theme-story-stack {
+  display: grid;
+  gap: var(--ds-space-6);
+}
+
+.button-story-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ds-space-4);
+}

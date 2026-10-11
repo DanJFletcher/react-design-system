@@ -1,6 +1,6 @@
-# [Project name]
+# Themed React UI Foundation
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+One forkable React/TypeScript package for semantic design tokens, scoped themes, Storybook documentation, and an accessible Button foundation.
 
 ## Run & Operate
 
@@ -10,6 +10,7 @@ _Replace the heading above with the project's name, and this line with one sente
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 - Required env: `DATABASE_URL` — Postgres connection string
+- `pnpm --filter @workspace/design-system run storybook` — run the token and Button documentation
 
 ## Stack
 
@@ -19,18 +20,26 @@ _Replace the heading above with the project's name, and this line with one sente
 - Validation: Zod (`zod/v4`), `drizzle-zod`
 - API codegen: Orval (from OpenAPI spec)
 - Build: esbuild (CJS bundle)
+- Design system: `lib/design-system`, React 19 peer-compatible ESM, TypeScript, CSS Modules, Storybook 10, Vite 7, pnpm
+- Design-system source of truth: `lib/design-system/docs/design-system.md` and `lib/design-system/src/tokens/`
+- Design-system full gate: `pnpm check`
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `lib/design-system/src/tokens/` — typed token source, ACME/Luna themes, hook registry, and contrast pairs
+- `lib/design-system/src/generated/` — deterministic checked-in CSS, type names, and documentation manifest
+- `lib/design-system/src/components/Button/` — public Button and its Storybook specification
+- `lib/design-system/docs/` — design-system spec, theming, contribution, roadmap, and fork guidance
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Theme selection is CSS-only through nested `data-ds-theme` boundaries; components do not branch on theme names.
+- Palette references are resolved by the compiler and are not runtime CSS variables.
+- Component hooks reset at theme boundaries to prevent an outer override from leaking into an inner theme.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Provides one reusable Button across ACME, Luna, and a custom example theme, with generated tokens and living Storybook documentation.
 
 ## User preferences
 

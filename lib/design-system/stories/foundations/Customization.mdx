@@ -1,0 +1,28 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+import manifest from "../../src/generated/token-manifest.json";
+
+<Meta title="Foundations/Customization" />
+
+<Title>Customization</Title>
+
+Semantic variables are the stable styling API. Override them directly on any scoped element; semantic variables resolve to concrete values during generation.
+
+```css
+.campaign {
+  --ds-color-action-primary-bg: #343A40;
+  --ds-color-action-primary-hover: #252A2F;
+}
+```
+
+Component hooks are optional Button-specific overrides. They remain unset by the component and use local fallbacks. A hook set outside a nested theme is reset at that boundary; a hook set on the inner boundary takes effect there.
+
+<table>
+  <thead><tr><th>Hook</th><th>CSS variable</th><th>Type</th><th>Purpose</th></tr></thead>
+  <tbody>
+    {manifest.componentHooks.map((hook) => (
+      <tr key={hook.name}><td>{hook.name}</td><td><code>{hook.cssVariable}</code></td><td>{hook.type}</td><td>{hook.description}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+`ThemeScope` is an optional wrapper for a theme name and a typed hook-only `style` object. It does not mutate `document` or define global theme state.

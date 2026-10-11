@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "name": "orchid",
+  "extends": "luna",
+  "values": {
+    "color.canvas": "#FFF2FD",
+    "color.surface.primary": "#FFFAFE",
+    "color.text.primary": "#38143D",
+    "color.text.muted": "#693B6F",
+    "color.border.control": "#8B5E88",
+    "color.action.primary.bg": "#703B91",
+    "color.action.primary.hover": "#5D2B78",
+    "color.action.primary.pressed": "#48205F",
+    "color.action.primary.fg": "#FFFFFF",
+    "color.action.secondary.bg": "#EFE4F5",
+    "color.action.secondary.fg": "#54208B",
+    "color.action.secondary.hover": "#E4D2EB",
+    "color.action.secondary.pressed": "#D6C0E2",
+    "color.action.ghost.fg": "#6A2491",
+    "color.action.ghost.hover": "#F5E8FC",
+    "color.action.ghost.pressed": "#EAD2F5",
+    "color.action.disabled.bg": "#EBDCEB",
+    "color.action.disabled.fg": "#67506E",
+    "color.focus.ring": "#6A2491",
+    "color.accent.bg": "#F6CF67",
+    "color.accent.fg": "#38143D",
+    "radius.control": { "amount": 16, "unit": "px" }
+  }
+}

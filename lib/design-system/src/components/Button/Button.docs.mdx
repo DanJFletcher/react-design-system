@@ -1,0 +1,49 @@
+import { Canvas, Meta, Story, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as ButtonStories from "./Button.stories";
+
+<Meta of={ButtonStories} />
+
+<Title>Button</Title>
+
+<Subtitle>A native, token-driven action with three variants and three target-size-aware sizes.</Subtitle>
+
+## Variants and sizes
+
+<Canvas of={ButtonStories.AllVariantsAndSizes} />
+
+Change the global theme selector to compare every combination in ACME, Luna, and the Orchid custom theme.
+
+## States and accessible names
+
+<Canvas of={ButtonStories.Disabled} />
+<Canvas of={ButtonStories.Loading} />
+<Canvas of={ButtonStories.InteractionStates} />
+<Canvas of={ButtonStories.DecorativeIcon} />
+<Canvas of={ButtonStories.LongWrappingLabel} />
+<Canvas of={ButtonStories.RefAndNativeProps} />
+
+Loading keeps the button focused and named, sets `aria-busy` and `aria-disabled`, prevents click activation and native form submission, and keeps the label in layout while an accessible-hidden spinner is shown.
+
+## Interaction and form behavior
+
+<Canvas of={ButtonStories.ClickActivation} />
+<Canvas of={ButtonStories.LoadingSuppressesActivation} />
+<Canvas of={ButtonStories.DisabledSuppressesActivation} />
+<Canvas of={ButtonStories.KeyboardActivation} />
+<Canvas of={ButtonStories.LoadingKeepsDimensionsAndFocus} />
+<Canvas of={ButtonStories.DefaultIsNotSubmit} />
+
+The default `type` is `button`; opt into form submission with `type="submit"`. Native `disabled` uses the browser's disabled behavior. The form owns asynchronous submission state outside this component.
+
+## Theme boundaries and customization
+
+<Canvas of={ButtonStories.NestedThemes} />
+<Canvas of={ButtonStories.CustomThemeAndScopedOverride} />
+
+Semantic variables are direct values, so overriding a resting action color does not alter its hover or pressed states. Register no new hook without documenting its purpose and adding it to `src/tokens/component-hooks.json`; every hook resets at nested theme boundaries.
+
+## API limits
+
+`Button` forwards native button props, refs, accessible naming attributes, `className`, and form attributes. Icons may be children; hide decorative icons from assistive technology. The component deliberately does not provide `href`, `asChild`, toggle semantics, groups, or an icon-only convenience API.
+
+Visual overrides are limited to the generated `DesignSystemStyle` custom-property type. Public hook names and fallback tokens are documented in the **Foundations / Customization** page.

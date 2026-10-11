@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "tokens": {
+    "color.canvas": { "type": "color", "value": "#F8FAFC", "description": "Default page canvas." },
+    "color.surface.primary": { "type": "color", "value": "#FFFFFF", "description": "Primary content surface." },
+    "color.text.primary": { "type": "color", "value": "#0F172A", "description": "Primary readable text." },
+    "color.text.muted": { "type": "color", "value": "#475569", "description": "Supporting readable text." },
+    "color.border.control": { "type": "color", "value": "#64748B", "description": "Control boundary." },
+    "color.action.primary.bg": { "type": "color", "value": { "ref": "palette.blue.700" }, "description": "Primary action background." },
+    "color.action.primary.hover": { "type": "color", "value": { "ref": "palette.blue.800" }, "description": "Primary action hover background." },
+    "color.action.primary.pressed": { "type": "color", "value": { "ref": "palette.blue.900" }, "description": "Primary action pressed background." },
+    "color.action.primary.fg": { "type": "color", "value": "#FFFFFF", "description": "Primary action foreground." },
+    "color.action.secondary.bg": { "type": "color", "value": "#FFFFFF", "description": "Secondary action background." },
+    "color.action.secondary.fg": { "type": "color", "value": "#1E40AF", "description": "Secondary action foreground." },
+    "color.action.secondary.hover": { "type": "color", "value": "#EEF2FF", "description": "Secondary action hover background." },
+    "color.action.secondary.pressed": { "type": "color", "value": "#E0E7FF", "description": "Secondary action pressed background." },
+    "color.action.ghost.fg": { "type": "color", "value": "#1E40AF", "description": "Ghost action foreground." },
+    "color.action.ghost.hover": { "type": "color", "value": "#EFF6FF", "description": "Ghost action hover background." },
+    "color.action.ghost.pressed": { "type": "color", "value": "#DBEAFE", "description": "Ghost action pressed background." },
+    "color.action.disabled.bg": { "type": "color", "value": "#E2E8F0", "description": "Disabled action background." },
+    "color.action.disabled.fg": { "type": "color", "value": "#475569", "description": "Disabled action foreground." },
+    "color.focus.ring": { "type": "color", "value": "#1D4ED8", "description": "Visible keyboard-focus ring." },
+    "color.accent.bg": { "type": "color", "value": "#DBEAFE", "description": "Accent surface." },
+    "color.accent.fg": { "type": "color", "value": "#1E3A8A", "description": "Text on the accent surface." },
+    "radius.control": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Default control corner radius." }
+  }
+}

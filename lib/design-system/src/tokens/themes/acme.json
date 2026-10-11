@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "name": "acme",
+  "values": {
+    "color.canvas": "#F8FAFC",
+    "color.surface.primary": "#FFFFFF",
+    "color.text.primary": "#0F172A",
+    "color.text.muted": "#475569",
+    "color.border.control": "#64748B",
+    "color.action.primary.bg": { "ref": "palette.blue.700" },
+    "color.action.primary.hover": { "ref": "palette.blue.800" },
+    "color.action.primary.pressed": { "ref": "palette.blue.900" },
+    "color.action.primary.fg": "#FFFFFF",
+    "color.action.secondary.bg": "#FFFFFF",
+    "color.action.secondary.fg": "#1E40AF",
+    "color.action.secondary.hover": "#EEF2FF",
+    "color.action.secondary.pressed": "#E0E7FF",
+    "color.action.ghost.fg": "#1E40AF",
+    "color.action.ghost.hover": "#EFF6FF",
+    "color.action.ghost.pressed": "#DBEAFE",
+    "color.action.disabled.bg": "#E2E8F0",
+    "color.action.disabled.fg": "#475569",
+    "color.focus.ring": "#1D4ED8",
+    "color.accent.bg": "#DBEAFE",
+    "color.accent.fg": "#1E3A8A",
+    "radius.control": { "amount": 6, "unit": "px" }
+  }
+}

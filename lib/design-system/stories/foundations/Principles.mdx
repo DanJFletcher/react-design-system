@@ -1,0 +1,11 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Principles" />
+
+<Title>Principles</Title>
+
+The library keeps rendering and interaction in React while CSS custom properties form the styling API. Token sources are authored in `src/tokens/`; generated files are committed but never edited by hand.
+
+The system uses three authoring layers: shared foundation scales and internal palette values, purpose-named semantic tokens, and optional component hooks. Theme files resolve to complete semantic maps before CSS is generated.
+
+The public theme contract is ordinary CSS. Add `data-ds-theme="acme"`, `"luna"`, or a compiled custom theme to any element. Nested boundaries replace the full semantic map and stop inherited component-hook overrides.

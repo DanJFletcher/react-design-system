@@ -1,0 +1,19 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+import manifest from "../../src/generated/token-manifest.json";
+
+<Meta title="Foundations/Themes" />
+
+<Title>Themes</Title>
+
+ACME is the default for an unthemed document. Luna adds blush and lavender surfaces, plum actions, gold accents, and softer control corners. Orchid is a small custom example that extends Luna and overrides only selected roles.
+
+<table>
+  <thead><tr><th>Theme</th><th>Resolved semantic tokens</th><th>Canvas</th><th>Primary action</th></tr></thead>
+  <tbody>
+    {Object.entries(manifest.themes).map(([name, tokens]) => (
+      <tr key={name}><td>{name}</td><td>{Object.keys(tokens).length}</td><td><code>{String(tokens["color.canvas"])}</code></td><td><code>{String(tokens["color.action.primary.bg"])}</code></td></tr>
+    ))}
+  </tbody>
+</table>
+
+Theme selection is DOM-scoped: `<section data-ds-theme="luna">...</section>`. A nested theme restores its complete defaults rather than inheriting a partial outer theme.

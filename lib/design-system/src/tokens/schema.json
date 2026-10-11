@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "tokenNamePattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$",
+  "types": {
+    "color": ["hex", "reference"],
+    "dimension": ["px", "rem", "em", "%", "reference"],
+    "duration": ["ms", "reference"],
+    "fontFamily": ["string", "reference"],
+    "fontWeight": ["number", "reference"],
+    "lineHeight": ["number", "reference"],
+    "number": ["number", "reference"]
+  },
+  "units": ["px", "rem", "em", "%", "ms"],
+  "requiredFields": ["type", "value", "description"]
+}

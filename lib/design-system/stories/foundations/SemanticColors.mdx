@@ -1,0 +1,19 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+import manifest from "../../src/generated/token-manifest.json";
+
+<Meta title="Foundations/Semantic colors" />
+
+<Title>Semantic colors</Title>
+
+Each theme implements the same color roles. Hover and pressed values are independent tokens; changing the resting action color does not silently change interaction states.
+
+<table>
+  <thead><tr><th>Token</th><th>Type</th><th>Purpose</th></tr></thead>
+  <tbody>
+    {manifest.semantic.filter((token) => token.type === "color").map((token) => (
+      <tr key={token.name}><td><code>{token.name}</code></td><td>{token.type}</td><td>{token.description}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+Use the theme toolbar to compare the resolved color map. Contrast ratios for action text, muted text, disabled text, accents, focus rings, and control boundaries are generated and validated with the token manifest.

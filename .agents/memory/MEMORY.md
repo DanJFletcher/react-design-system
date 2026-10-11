@@ -1,0 +1,1 @@
+- [Playwright in NixOS](playwright-nixos.md) — browser downloads need Nix shared libraries as well as Playwright's Chromium install.

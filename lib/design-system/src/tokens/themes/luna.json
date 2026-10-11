@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "name": "luna",
+  "extends": "acme",
+  "values": {
+    "color.canvas": "#FFF5FB",
+    "color.surface.primary": "#FFFBFE",
+    "color.text.primary": "#321846",
+    "color.text.muted": "#6F3D73",
+    "color.border.control": "#8B5E88",
+    "color.action.primary.bg": "#8B2674",
+    "color.action.primary.hover": "#741C62",
+    "color.action.primary.pressed": "#5B154C",
+    "color.action.primary.fg": "#FFFFFF",
+    "color.action.secondary.bg": "#F2E5FF",
+    "color.action.secondary.fg": "#54208B",
+    "color.action.secondary.hover": "#E8D4F8",
+    "color.action.secondary.pressed": "#DCC0F2",
+    "color.action.ghost.fg": "#6A2491",
+    "color.action.ghost.hover": "#F5E8FC",
+    "color.action.ghost.pressed": "#EAD2F5",
+    "color.action.disabled.bg": "#EBDCEB",
+    "color.action.disabled.fg": "#67506E",
+    "color.focus.ring": "#6A2491",
+    "color.accent.bg": "#F6CF67",
+    "color.accent.fg": "#321846",
+    "radius.control": { "amount": 9999, "unit": "px" }
+  }
+}

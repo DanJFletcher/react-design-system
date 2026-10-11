@@ -6,7 +6,18 @@
     "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
     "build": "pnpm run typecheck && pnpm -r --if-present run build",
     "typecheck:libs": "tsc --build",
-    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
+    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck",
+    "tokens:build": "pnpm --filter @workspace/design-system run tokens:build",
+    "tokens:check": "pnpm --filter @workspace/design-system run tokens:check",
+    "lint": "pnpm --filter @workspace/design-system run lint",
+    "typecheck:design-system": "pnpm --filter @workspace/design-system run typecheck",
+    "test:tokens": "pnpm --filter @workspace/design-system run test:tokens",
+    "test:storybook": "pnpm --filter @workspace/design-system run test:storybook",
+    "build:design-system": "pnpm --filter @workspace/design-system run build",
+    "build-storybook": "pnpm --filter @workspace/design-system run build-storybook",
+    "test:visual": "pnpm --filter @workspace/design-system run test:visual",
+    "test:package": "pnpm --filter @workspace/design-system run test:package",
+    "check": "pnpm --filter @workspace/design-system run check"
   },
   "private": true,
   "dependencies": {

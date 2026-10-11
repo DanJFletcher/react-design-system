@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "lib": ["dom", "es2022"],
+    "jsx": "react-jsx",
+    "types": ["react", "vite/client"]
+  },
+  "include": [
+    "src/index.ts",
+    "src/theme/**/*.ts",
+    "src/theme/**/*.tsx",
+    "src/components/Button/Button.tsx",
+    "src/generated/token-types.ts",
+    "src/styles.d.ts"
+  ],
+  "exclude": ["dist", "node_modules"]
+}
