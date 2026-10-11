@@ -23,6 +23,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const iconChoices = {
+  Sparkle: <SparkleIcon />,
+  "Arrow right": <ArrowRightIcon />,
+  Heart: <HeartIcon />,
+  Moon: <MoonIcon />,
+};
+type StoryIconName = keyof typeof iconChoices;
+
 export const Primary: Story = {};
 export const Secondary: Story = { args: { variant: "secondary" } };
 export const Ghost: Story = { args: { variant: "ghost" } };
@@ -77,28 +85,36 @@ export const ShapeOptionsAndFullWidth: Story = {
 export const IconControls: Story = {
   args: {
     children: "Save to favorites",
+    icon: "Sparkle",
     iconPosition: "left",
     iconOnly: false,
     "aria-label": "Save to favorites",
   },
   argTypes: {
-    icon: { control: false },
+    icon: { control: "select", options: Object.keys(iconChoices) },
     iconPosition: { control: "inline-radio", options: ["left", "right"] },
     iconOnly: { control: "boolean" },
   },
-  render: (args) => (
-    <div className="button-story-row">
-      <Button {...args} icon={<SparkleIcon />} />
-      <Button icon={<SparkleIcon />} iconPosition="right">
-        Continue
-      </Button>
-      <Button iconOnly icon={<SparkleIcon />} aria-label="Open favorites" variant="ghost" />
-    </div>
-  ),
+  render: (args) => {
+    const iconName =
+      typeof args.icon === "string" && args.icon in iconChoices
+        ? (args.icon as StoryIconName)
+        : "Sparkle";
+    const selectedIcon = iconChoices[iconName];
+    return (
+      <div className="button-story-row">
+        <Button {...args} icon={selectedIcon} />
+        <Button icon={selectedIcon} iconPosition="right">
+          Continue
+        </Button>
+        <Button iconOnly icon={selectedIcon} aria-label="Open favorites" variant="ghost" />
+      </div>
+    );
+  },
   play: async ({ canvasElement }) => {
     const button = within(canvasElement).getByRole("button", { name: "Save to favorites" });
     await expect(button).toBeVisible();
-    await expect(button.querySelector('[aria-hidden="true"]')).not.toBeNull();
+    await expect(button.querySelector('[aria-hidden="true"] svg')).toBeInTheDocument();
     const rightIconButton = within(canvasElement).getByRole("button", { name: "Continue" });
     await expect(rightIconButton.firstElementChild?.getAttribute("aria-hidden")).toBeNull();
     await expect(rightIconButton.lastElementChild?.getAttribute("aria-hidden")).toBe("true");
@@ -290,6 +306,31 @@ function SparkleIcon() {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
       <path d="m12 3 2.7 6.3L21 12l-6.3 2.7L12 21l-2.7-6.3L3 12l6.3-2.7L12 3Z" />
       <path d="m19 2 .7 1.3L21 4l-1.3.7L19 6l-.7-1.3L17 4l1.3-.7L19 2Z" />
+    </svg>
+  );
+}
+
+function ArrowRightIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <path d="M4 12h15m-6-6 6 6-6 6" />
+    </svg>
+  );
+}
+
+function HeartIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <path d="M20.8 8.8c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.6 8.6 0 1 0 20.2 15.2Z" />
+      <path d="m17 3 .6 1.4L19 5l-1.4.6L17 7l-.6-1.4L15 5l1.4-.6L17 3Z" />
     </svg>
   );
 }
