@@ -51,6 +51,24 @@
   cursor: not-allowed;
 }
 
+.fileInput::file-selector-button {
+  margin-inline-end: var(--ds-space-3);
+  padding-block: var(--ds-space-2);
+  padding-inline: var(--ds-space-3);
+  border: 0;
+  border-radius: var(--ds-radius-form-control);
+  background-color: var(--ds-color-action-secondary-bg);
+  color: var(--ds-color-action-secondary-fg);
+  font: inherit;
+  cursor: pointer;
+}
+
+.fileInput:disabled::file-selector-button {
+  background-color: var(--ds-color-action-disabled-bg);
+  color: var(--ds-color-action-disabled-fg);
+  cursor: not-allowed;
+}
+
 .textarea {
   resize: vertical;
   border-radius: var(--ds-radius-textarea);
@@ -115,6 +133,11 @@
   line-height: var(--ds-line-height-normal);
 }
 
+.choiceLabel[data-disabled="true"] {
+  color: var(--ds-color-action-disabled-fg);
+  cursor: not-allowed;
+}
+
 .choiceControl {
   box-sizing: border-box;
   flex: 0 0 auto;
@@ -122,6 +145,63 @@
   block-size: var(--ds-space-6);
   margin: 0;
   accent-color: var(--ds-color-action-primary-bg);
+}
+
+.switch {
+  position: relative;
+  inline-size: var(--ds-space-10);
+  block-size: var(--ds-space-6);
+  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  border-radius: var(--ds-radius-full);
+  appearance: none;
+  background-color: var(--ds-color-surface-primary);
+  cursor: pointer;
+  transition:
+    background-color var(--ds-motion-duration-fast),
+    border-color var(--ds-motion-duration-fast);
+}
+
+.switch::before {
+  position: absolute;
+  inset-block-start: var(--ds-space-1);
+  inset-inline-start: var(--ds-space-1);
+  inline-size: var(--ds-space-4);
+  block-size: var(--ds-space-4);
+  border-radius: var(--ds-radius-full);
+  background-color: var(--ds-color-border-control);
+  content: "";
+  transition:
+    background-color var(--ds-motion-duration-fast),
+    transform var(--ds-motion-duration-fast);
+}
+
+.switch:checked {
+  border-color: var(--ds-color-action-primary-bg);
+  background-color: var(--ds-color-action-primary-bg);
+}
+
+.switch:checked::before {
+  transform: translateX(var(--ds-space-4));
+  background-color: var(--ds-color-surface-primary);
+}
+
+.switch:disabled {
+  border-color: var(--ds-color-action-disabled-bg);
+  background-color: var(--ds-color-action-disabled-bg);
+  cursor: not-allowed;
+}
+
+.switch:disabled::before {
+  background-color: var(--ds-color-action-disabled-fg);
+}
+
+.switch[aria-invalid="true"] {
+  border-color: var(--ds-color-border-error);
+}
+
+.switch:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
 }
 
 .choiceControl[aria-invalid="true"] {
@@ -200,5 +280,30 @@
   .control:focus-visible,
   .choiceControl:focus-visible {
     outline-color: Highlight;
+  }
+
+  .switch,
+  .switch:disabled {
+    border-color: CanvasText;
+  }
+
+  .switch::before {
+    background-color: CanvasText;
+  }
+
+  .switch:checked {
+    border-color: Highlight;
+    background-color: Highlight;
+  }
+
+  .switch:checked::before {
+    background-color: HighlightText;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switch,
+  .switch::before {
+    transition: none;
   }
 }

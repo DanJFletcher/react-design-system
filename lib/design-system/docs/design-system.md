@@ -77,6 +77,10 @@ The owning form manages longer asynchronous submission state. Children may conta
 <Textarea label="Message" rows={4} />
 <Select label="Region" name="region"><option value="ca">Canada</option></Select>
 <Checkbox label="Receive updates" name="updates" value="yes" />
+<DateField label="Start date" name="startDate" required />
+<DateField label="Review time" name="reviewTime" type="time" />
+<FileField label="Attachments" name="attachments" accept=".pdf" multiple />
+<Switch label="Enable reminders" name="reminders" value="yes" />
 <RadioGroup
   label="Contact method"
   name="contact"
@@ -93,13 +97,15 @@ The owning form manages longer asynchronous submission state. Children may conta
 </FormLayout>
 ```
 
-All five controls require a visible `label` and forward native props, refs, controlled/uncontrolled values, and form behavior. `TextField`, `Textarea`, and `Select` use their native input elements; `Checkbox` uses a native checkbox; `RadioGroup` uses a `fieldset`, `legend`, and native radios with a required shared `name`.
+Every individual control requires a visible `label` and forwards native props, refs, controlled/uncontrolled values, and form behavior. `TextField`, `DateField`, `FileField`, `Textarea`, and `Select` use native input elements; `Checkbox` and `Switch` use native checkboxes; `RadioGroup` uses a `fieldset`, `legend`, and native radios with a required shared `name`.
 
 `description` and `error` content are connected with `aria-describedby` while preserving IDs supplied by the caller. An `error` sets `aria-invalid`; use `invalid` when an invalid state has no message. Native `required` and `disabled` behavior is retained. The controls do not provide a form state manager, validation rules, or asynchronous submission handling.
 
+`DateField` allows `date`, `datetime-local`, `month`, `time`, and `week` input types, defaulting to `date`. `FileField` keeps browser-native file selection and accepts the native `accept` and `multiple` attributes; it intentionally does not expose controlled file values. `Switch` is a checkbox with switch role semantics, so native checked state, keyboard activation, required validation, and `name`/`value` form submission are preserved.
+
 `FieldGroup` adds semantic grouping through a native `fieldset` and `legend`; setting `disabled` applies native fieldset disabling to its descendant controls. `FormLayout` provides a responsive, one- or two-column grid and spacing choices without changing form semantics. Both leave values, submission, and validation with the owning form and controls.
 
-Error copy and invalid borders use `color.text.error` and `color.border.error`. Their contrast is checked against canvas and surface colors in ACME, Luna, and Orchid. Form control styling uses semantic text, surface, border, focus, spacing, and radius tokens.
+Error copy and invalid borders use `color.text.error` and `color.border.error`. Their contrast is checked against canvas and surface colors in ACME, Luna, and Orchid. The native file-picker action uses the secondary action colors, and the active switch uses primary action background with the surface color as its thumb; both combinations have theme contrast checks. Form control styling uses semantic text, surface, border, focus, spacing, and radius tokens.
 
 Single-line text and select controls use `radius.form-control`; textareas and field groups use the independent `radius.textarea` and `radius.form-group` tokens. Luna keeps text inputs, selects, and buttons pill-shaped, with a 24px radius for both textareas and field groups.
 

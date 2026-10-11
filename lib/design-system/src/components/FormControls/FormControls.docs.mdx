@@ -32,6 +32,16 @@ Use `TextField` for a single-line input. It forwards native input attributes suc
 
 `Checkbox` is a native checkbox. `RadioGroup` renders a native `<fieldset>` and `<legend>` with radio inputs that share the required `name`; provide the available `options` and an optional controlled `value` or `defaultValue`.
 
+## DateField, FileField, and Switch
+
+<Canvas of={FormControlsStories.DateFileAndSwitchInteraction} />
+
+`DateField` wraps a native date/time input. Its `type` is limited to `date`, `datetime-local`, `month`, `time`, or `week`, and defaults to `date`; native date constraints such as `min`, `max`, and `step` remain available.
+
+`FileField` wraps a native file input and supports browser-native `accept`, `multiple`, and file-selection behavior. File inputs cannot be controlled through `value` or `defaultValue`; use the browser's native file picker and read selected files from the input or owning form.
+
+`Switch` is a native checkbox with switch semantics. It supports controlled and uncontrolled checked state, `name` and `value` form submission, native required validation, descriptions, errors, and disabled behavior. Space toggles the focused switch, and the visible focus indicator remains keyboard accessible.
+
 ## Organize longer forms
 
 <Canvas of={FormControlsStories.FieldGroupingAndLayout} />
@@ -42,11 +52,11 @@ These primitives do not manage values, submission, or validation. Keep those res
 
 ## Validation and accessible names
 
-Each control requires a visible `label`. `description` and `error` are connected to the control or group through `aria-describedby`; an error also sets `aria-invalid`. Set `invalid` when the control is invalid but has no message. Existing `aria-describedby` IDs are preserved and combined. Native `required` and `disabled` behavior is retained.
+Each individual control requires a visible `label`. `description` and `error` are connected to the control or group through `aria-describedby`; an error also sets `aria-invalid`. Set `invalid` when the control is invalid but has no message. Existing `aria-describedby` IDs are preserved and combined. Native `required` and `disabled` behavior is retained.
 
 ## Themes
 
 <Canvas of={FormControlsStories.ThemeCoverage} />
 <Canvas of={FormControlsStories.NestedThemeBoundaries} />
 
-Controls use the active theme's semantic text, surface, border, focus, spacing, and radius tokens. Luna keeps single-line text and select controls pill-shaped and uses a 24px radius for both textareas and field groups. Error text and invalid borders use dedicated semantic roles with contrast checked across ACME, Luna, and Orchid.
+Controls use the active theme's semantic text, surface, border, focus, spacing, and radius tokens. ACME, Luna, and Orchid theme coverage includes date, file, and switch examples. Control boundaries, file-picker action text, disabled actions, and active switch tracks have documented contrast checks. Luna keeps single-line text and select controls pill-shaped and uses a 24px radius for both textareas and field groups. Error text and invalid borders use dedicated semantic roles with contrast checked across all themes.

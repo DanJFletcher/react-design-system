@@ -15,12 +15,16 @@
     { "name": "Muted text", "foreground": "color.text.muted", "background": "color.canvas", "minimum": 4.5 },
     { "name": "Error text on canvas", "foreground": "color.text.error", "background": "color.canvas", "minimum": 4.5 },
     { "name": "Error text on surface", "foreground": "color.text.error", "background": "color.surface.primary", "minimum": 4.5 },
-    { "name": "Accent", "foreground": "color.accent.fg", "background": "color.accent.bg", "minimum": 4.5 }
+    { "name": "Accent", "foreground": "color.accent.fg", "background": "color.accent.bg", "minimum": 4.5 },
+    { "name": "File action", "foreground": "color.action.secondary.fg", "background": "color.action.secondary.bg", "minimum": 4.5 },
+    { "name": "Disabled file action", "foreground": "color.action.disabled.fg", "background": "color.action.disabled.bg", "minimum": 4.5 }
   ],
   "indicatorPairs": [
     { "name": "Focus ring on canvas", "foreground": "color.focus.ring", "background": "color.canvas", "minimum": 3 },
     { "name": "Focus ring on surface", "foreground": "color.focus.ring", "background": "color.surface.primary", "minimum": 3 },
     { "name": "Control boundary on canvas", "foreground": "color.border.control", "background": "color.canvas", "minimum": 3 },
+    { "name": "Control boundary on surface", "foreground": "color.border.control", "background": "color.surface.primary", "minimum": 3 },
+    { "name": "Active switch track and thumb", "foreground": "color.surface.primary", "background": "color.action.primary.bg", "minimum": 3 },
     { "name": "Error boundary on canvas", "foreground": "color.border.error", "background": "color.canvas", "minimum": 3 },
     { "name": "Error boundary on surface", "foreground": "color.border.error", "background": "color.surface.primary", "minimum": 3 }
   ]

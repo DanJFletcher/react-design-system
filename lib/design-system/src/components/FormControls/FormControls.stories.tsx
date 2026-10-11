@@ -3,10 +3,13 @@ import { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { Button } from "../Button/Button";
 import { Checkbox } from "./Checkbox";
+import { DateField } from "./DateField";
+import { FileField } from "./FileField";
 import { FieldGroup } from "./FieldGroup";
 import { FormLayout } from "./FormLayout";
 import { RadioGroup } from "./RadioGroup";
 import { Select } from "./Select";
+import { Switch } from "./Switch";
 import { Textarea } from "./Textarea";
 import { TextField } from "./TextField";
 
@@ -180,6 +183,129 @@ export const RadioGroupKeyboard: Story = {
   },
 };
 
+function NativeDateFileSwitchExample() {
+  const [submittedSummary, setSubmittedSummary] = useState("");
+
+  return (
+    <>
+      <form
+        aria-label="Schedule and preferences"
+        onSubmit={(event) => {
+          event.preventDefault();
+          const formData = new FormData(event.currentTarget);
+          const attachmentName =
+            event.currentTarget.querySelector<HTMLInputElement>('input[name="attachments"]')
+              ?.files?.[0]?.name ?? "";
+          setSubmittedSummary([
+            String(formData.get("startDate") ?? ""),
+            attachmentName,
+            formData.has("reminders") ? "on" : "off",
+          ].join(" · "));
+        }}
+      >
+        <div style={{ display: "grid", gap: "var(--ds-space-4)", maxWidth: "32rem" }}>
+          <DateField
+            label="Start date"
+            name="startDate"
+            defaultValue="2026-10-11"
+            required
+            description="Choose the first day of the schedule."
+            error="Confirm the start date before submitting."
+          />
+          <DateField
+            label="Review time"
+            name="reviewTime"
+            type="time"
+            disabled
+            defaultValue="09:30"
+          />
+          <FileField
+            label="Attachments"
+            name="attachments"
+            accept=".pdf,application/pdf"
+            multiple
+            description="Select one or more PDF files."
+          />
+          <FileField label="Archived attachments" disabled />
+          <Switch
+            label="Enable reminders"
+            name="reminders"
+            value="enabled"
+            required
+            description="Send a reminder before the schedule starts."
+            error="This preference needs review."
+          />
+          <Button type="submit">Save schedule</Button>
+          <output aria-live="polite">{submittedSummary}</output>
+        </div>
+      </form>
+      <div style={{ marginBlockStart: "var(--ds-space-4)", maxWidth: "32rem" }}>
+        <FileField label="Required attachments" required />
+      </div>
+    </>
+  );
+}
+
+export const DateFileAndSwitchInteraction: Story = {
+  render: () => <NativeDateFileSwitchExample />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const form = canvas.getByRole("form", { name: "Schedule and preferences" });
+    const date = canvas.getByLabelText(/Start date/) as HTMLInputElement;
+    const time = canvas.getByLabelText("Review time");
+    const files = canvas.getByLabelText(/Attachments/);
+    const requiredFiles = canvas.getByLabelText(/Required attachments/);
+    const reminders = canvas.getByRole("switch", { name: "Enable reminders" });
+
+    await expect(date).toHaveAttribute("type", "date");
+    await expect(date).toBeRequired();
+    await expect(date).toHaveValue("2026-10-11");
+    await expect(date).toHaveAttribute("aria-invalid", "true");
+    await expect(date).toHaveAttribute("aria-describedby", expect.stringContaining("description"));
+    await expect(time).toHaveAttribute("type", "time");
+    await expect(time).toBeDisabled();
+    await expect(files).toHaveAttribute("accept", ".pdf,application/pdf");
+    await expect(files).toHaveAttribute("multiple");
+    await expect(requiredFiles).toBeRequired();
+    await expect(canvas.getByLabelText("Archived attachments")).toBeDisabled();
+    date.value = "2026-10-12";
+    date.dispatchEvent(new Event("input", { bubbles: true }));
+    date.dispatchEvent(new Event("change", { bubbles: true }));
+    await expect(date).toHaveValue("2026-10-12");
+    await expect(reminders).not.toBeChecked();
+    await expect(reminders).toBeRequired();
+    await userEvent.click(reminders);
+    await expect(reminders).toBeChecked();
+    reminders.focus();
+    await userEvent.keyboard(" ");
+    await expect(reminders).not.toBeChecked();
+    await userEvent.keyboard(" ");
+    await expect(reminders).toBeChecked();
+    await expect(reminders).toHaveAttribute("aria-invalid", "true");
+    await expect(reminders).toHaveAttribute("aria-describedby", expect.stringContaining("error"));
+
+    const attachments = [
+      new File(["agenda"], "agenda.pdf", { type: "application/pdf" }),
+      new File(["notes"], "notes.pdf", { type: "application/pdf" }),
+    ];
+    await userEvent.upload(files, attachments);
+    await expect(files).toHaveValue("C:\\fakepath\\agenda.pdf");
+    await expect(files).toHaveProperty("files.length", 2);
+    const formElement = form as HTMLFormElement;
+    const invalidInputs = Array.from(formElement.elements)
+      .filter((element): element is HTMLInputElement => element instanceof HTMLInputElement)
+      .filter((element) => !element.checkValidity())
+      .map((element) => element.name || element.type);
+    await expect(invalidInputs).toEqual([]);
+    await userEvent.click(canvas.getByRole("button", { name: "Save schedule" }));
+    await expect(canvas.getByText("2026-10-12 · agenda.pdf · on")).toBeVisible();
+
+    const submitted = new FormData(formElement);
+    expect(submitted.get("startDate")).toBe("2026-10-12");
+    expect(submitted.get("reminders")).toBe("enabled");
+  },
+};
+
 function ConsumerOwnedFormExample() {
   const [submittedName, setSubmittedName] = useState("");
 
@@ -285,9 +411,12 @@ export const ThemeCoverage: Story = {
             <option value="private">Private</option>
             <option value="public">Public</option>
           </Select>
+          <DateField label="Start date" type="date" defaultValue="2026-10-11" />
+          <FileField label="Supporting document" accept=".pdf" />
           <FormLayout gap="sm">
             <FieldGroup label="Notifications">
               <Checkbox label="Enable notifications" defaultChecked />
+              <Switch label="Enable reminders" defaultChecked />
             </FieldGroup>
             <RadioGroup
               label="Plan"
@@ -345,6 +474,8 @@ export const NestedThemeBoundaries: Story = {
           <option value="private">Private</option>
           <option value="public">Public</option>
         </Select>
+        <DateField label="Luna nested date" defaultValue="2026-10-11" />
+        <Switch label="Luna nested switch" defaultChecked />
         <FieldGroup label="Luna profile group">
           <Textarea label="Luna notes" rows={3} placeholder="Add a note..." />
         </FieldGroup>
@@ -362,6 +493,7 @@ export const NestedThemeBoundaries: Story = {
           <Select label="Orchid nested select" defaultValue="ready">
             <option value="ready">Ready</option>
           </Select>
+          <FileField label="Orchid nested file" accept=".pdf" />
           <RadioGroup
             label="Orchid nested radio group"
             name="orchid-mode"

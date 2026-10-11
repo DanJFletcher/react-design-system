@@ -813,6 +813,20 @@
     },
     {
       "theme": "acme",
+      "name": "File action",
+      "ratio": 8.722,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Disabled file action",
+      "ratio": 6.147,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
       "name": "Focus ring on canvas",
       "ratio": 6.405,
       "minimum": 3,
@@ -829,6 +843,20 @@
       "theme": "acme",
       "name": "Control boundary on canvas",
       "ratio": 4.548,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Control boundary on surface",
+      "ratio": 4.759,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Active switch track and thumb",
+      "ratio": 6.702,
       "minimum": 3,
       "kind": "indicator"
     },
@@ -953,6 +981,20 @@
     },
     {
       "theme": "luna",
+      "name": "File action",
+      "ratio": 11.028,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Disabled file action",
+      "ratio": 7.208,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
       "name": "Focus ring on canvas",
       "ratio": 12.382,
       "minimum": 3,
@@ -969,6 +1011,20 @@
       "theme": "luna",
       "name": "Control boundary on canvas",
       "ratio": 8.326,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Control boundary on surface",
+      "ratio": 7.604,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Active switch track and thumb",
+      "ratio": 10.535,
       "minimum": 3,
       "kind": "indicator"
     },
@@ -1093,6 +1149,20 @@
     },
     {
       "theme": "orchid",
+      "name": "File action",
+      "ratio": 8.733,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Disabled file action",
+      "ratio": 5.415,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
       "name": "Focus ring on canvas",
       "ratio": 8.518,
       "minimum": 3,
@@ -1109,6 +1179,20 @@
       "theme": "orchid",
       "name": "Control boundary on canvas",
       "ratio": 4.778,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Control boundary on surface",
+      "ratio": 5.021,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Active switch track and thumb",
+      "ratio": 7.475,
       "minimum": 3,
       "kind": "indicator"
     },
