@@ -132,6 +132,27 @@ The media slot accepts images, video, or composed React nodes. Informative image
 
 The `card.*` component hooks customize the surface, text, border, radius, padding, spacing, and media corners. Its colors use semantic theme tokens and its media slot accepts images, video, or composed React nodes.
 
+## Pricing details
+
+```tsx
+<PricingDetails
+  eyebrow="Annual plan"
+  title="Professional"
+  description="Everything your growing team needs to stay on track."
+  price="$39"
+  billingPeriod="per user / month, billed annually"
+  variant="featured"
+  layout="split"
+  details={[
+    { id: "members", label: "Team members", value: "Up to 10" },
+    { id: "support", label: "Support", value: "Priority", emphasis: true },
+  ]}
+  primaryAction={<Button>Start a trial</Button>}
+/>
+```
+
+`PricingDetails` presents consumer-provided price content, billing context, optional comparison price, structured definition-list rows, features, footnote, and action slots. It supports stacked or responsive split layout, five visual variants, three sizes, start/center alignment, and rounded/square shapes. It does not calculate totals, format currency, or initiate checkout; callers own localization and payment behavior. The `pricing.*` hooks customize its theme-aware surface, text, price, borders, spacing, and shape.
+
 ## Action menu
 
 ```tsx

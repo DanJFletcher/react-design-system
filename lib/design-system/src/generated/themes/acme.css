@@ -105,6 +105,16 @@
   --ds-menu-radius: initial;
   --ds-menu-surface: initial;
   --ds-menu-text: initial;
+  --ds-pricing-background: initial;
+  --ds-pricing-border: initial;
+  --ds-pricing-detail-border: initial;
+  --ds-pricing-featured-border: initial;
+  --ds-pricing-gap: initial;
+  --ds-pricing-muted: initial;
+  --ds-pricing-padding: initial;
+  --ds-pricing-price: initial;
+  --ds-pricing-radius: initial;
+  --ds-pricing-text: initial;
 }
 :root:not([data-ds-theme]),
 :root[data-ds-theme="acme"],

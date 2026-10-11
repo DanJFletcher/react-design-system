@@ -61,6 +61,17 @@ export type {
   MenuSelectEvent,
   MenuSubmenuItem,
 } from "./components/Menu/Menu";
+export { PricingDetails } from "./components/PricingDetails/PricingDetails";
+export type {
+  PricingDetailItem,
+  PricingDetailsAlignment,
+  PricingDetailsHeadingLevel,
+  PricingDetailsLayout,
+  PricingDetailsProps,
+  PricingDetailsShape,
+  PricingDetailsSize,
+  PricingDetailsVariant,
+} from "./components/PricingDetails/PricingDetails";
 export { FieldGroup } from "./components/FormControls/FieldGroup";
 export type { FieldGroupProps } from "./components/FormControls/FieldGroup";
 export { FormLayout } from "./components/FormControls/FormLayout";

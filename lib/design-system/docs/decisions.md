@@ -40,6 +40,10 @@ Hero content, media, and actions remain caller-owned React nodes; layout, alignm
 
 Card uses an article container rather than making the entire surface a click target. Links and buttons stay in caller-owned content, header-action, and action slots so focus order and nested controls remain predictable.
 
+## Pricing details are presentational
+
+PricingDetails renders consumer-supplied price and line-item content. It does not compute totals, format currencies, or initiate payment, keeping financial rules and localization with the consuming product.
+
 ## Menus use the ARIA menu interaction model
 
 The configurable Menu supports nested action/link items and separators. It keeps native buttons and links as the activation elements while applying menu roles and managed arrow-key focus; nested menus open inline on narrow screens to avoid viewport overflow. Menu-specific component hooks extend scoped theming without adding new semantic tokens.

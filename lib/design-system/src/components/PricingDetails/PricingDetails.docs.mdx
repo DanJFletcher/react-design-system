@@ -1,0 +1,37 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as PricingStories from "./PricingDetails.stories";
+
+<Meta of={PricingStories} />
+
+<Title>Pricing details</Title>
+
+<Subtitle>A theme-aware price presentation with configurable billing context, detail rows, features, and actions.</Subtitle>
+
+## Playground
+
+<Canvas of={PricingStories.Playground} />
+
+Use the controls to configure heading, price, billing period, variant, layout, alignment, size, shape, and heading level. Price content is supplied by the consumer so it can use the correct currency, locale, and application-specific formatting.
+
+## Layouts and treatments
+
+<Canvas of={PricingStories.LayoutExamples} />
+<Canvas of={PricingStories.VariantExamples} />
+
+`layout` accepts `stacked` or `split`. Split layouts arrange the main price and details side by side on wider screens, then stack them on narrow screens. `variant` accepts `surface`, `outlined`, `subtle`, `accent`, or `featured`. `size` accepts `sm`, `md`, or `lg`; `shape` accepts `rounded` or `square`.
+
+## Price details and order summaries
+
+<Canvas of={PricingStories.OrderSummary} />
+<Canvas of={PricingStories.ThemeCoverage} />
+
+`price`, `pricePrefix`, `priceSuffix`, `billingPeriod`, `compareAtPrice`, `badge`, `features`, `detailsLabel`, and `footer` accept React nodes. `details` is an array of `{ id, label, value, description?, emphasis? }` rows rendered as a definition list; keep each `id` unique. The component displays supplied content only—it does not calculate totals, format currency, validate a price, or run checkout behavior.
+
+<Canvas of={PricingStories.CustomHookOverrides} />
+<Canvas of={PricingStories.TextOnly} />
+
+Registered `pricing.*` hooks customize background, text, price, borders, radius, padding, and section spacing. The hooks reset at nested theme boundaries. Native article props and `className` are forwarded. `actions` replaces `primaryAction` and `secondaryAction` when supplied.
+
+## Accessibility
+
+The component renders an article and labels it by its title by default. Provide `aria-label` or `aria-labelledby` when a title is omitted or a different article name is needed. Set `headingLevel` to match the page outline. Price is read in the supplied DOM order; use `priceLabel` to provide a concise accessible label when the visible price pieces need a combined spoken form. Native buttons and links supplied in the action slots retain their own keyboard and focus behavior.

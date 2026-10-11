@@ -61,6 +61,16 @@
     "card.radius": { "type": "dimension", "description": "Card corner radius." },
     "card.padding": { "type": "dimension", "description": "Card internal padding." },
     "card.gap": { "type": "dimension", "description": "Card content spacing." },
-    "card.media-radius": { "type": "dimension", "description": "Card media corner radius." }
+    "card.media-radius": { "type": "dimension", "description": "Card media corner radius." },
+    "pricing.background": { "type": "color", "description": "Pricing details background color." },
+    "pricing.text": { "type": "color", "description": "Pricing details primary text color." },
+    "pricing.muted": { "type": "color", "description": "Pricing details supporting text color." },
+    "pricing.price": { "type": "color", "description": "Pricing details displayed price color." },
+    "pricing.border": { "type": "color", "description": "Pricing details outline and row separator color." },
+    "pricing.featured-border": { "type": "color", "description": "Featured pricing details border color." },
+    "pricing.detail-border": { "type": "color", "description": "Pricing details section separator color." },
+    "pricing.radius": { "type": "dimension", "description": "Pricing details corner radius." },
+    "pricing.padding": { "type": "dimension", "description": "Pricing details internal padding." },
+    "pricing.gap": { "type": "dimension", "description": "Pricing details section spacing." }
   }
 }
