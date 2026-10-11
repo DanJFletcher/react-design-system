@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { Checkbox } from "./Checkbox";
+import { FieldGroup } from "./FieldGroup";
+import { FormLayout } from "./FormLayout";
 import { RadioGroup } from "./RadioGroup";
 import { Select } from "./Select";
 import { Textarea } from "./Textarea";
@@ -174,6 +177,87 @@ export const RadioGroupKeyboard: Story = {
   },
 };
 
+function ConsumerOwnedFormExample() {
+  const [submittedName, setSubmittedName] = useState("");
+
+  return (
+    <form
+      aria-label="Profile details"
+      onSubmit={(event) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        setSubmittedName(String(formData.get("fullName") ?? ""));
+      }}
+    >
+      <FormLayout columns={2} gap="lg">
+        <FieldGroup
+          label="Profile"
+          description="Tell us how to address you."
+        >
+          <TextField label="Full name" name="fullName" required />
+          <TextField label="Email address" name="email" type="email" required />
+        </FieldGroup>
+        <FieldGroup label="Preferences">
+          <Checkbox label="Send me product updates" name="updates" value="yes" />
+          <RadioGroup
+            label="Contact method"
+            name="contactMethod"
+            defaultValue="email"
+            options={[
+              { value: "email", label: "Email" },
+              { value: "phone", label: "Phone" },
+            ]}
+          />
+        </FieldGroup>
+      </FormLayout>
+      <button type="submit" style={{ marginBlockStart: "var(--ds-space-4)" }}>
+        Save profile
+      </button>
+      <output aria-live="polite" style={{ display: "block", marginBlockStart: "var(--ds-space-2)" }}>
+        {submittedName ? `Submitted for ${submittedName}` : ""}
+      </output>
+    </form>
+  );
+}
+
+export const FieldGroupingAndLayout: Story = {
+  render: () => (
+    <div style={{ maxWidth: "56rem" }}>
+      <ConsumerOwnedFormExample />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const form = canvas.getByRole("form");
+    const profileGroup = canvas.getByRole("group", { name: "Profile" });
+    const name = canvas.getByRole("textbox", { name: "Full name" });
+    const email = canvas.getByRole("textbox", { name: "Email address" });
+    const emailRadio = canvas.getByRole("radio", { name: "Email" });
+    const phoneRadio = canvas.getByRole("radio", { name: "Phone" });
+
+    await expect(profileGroup).toHaveAttribute("aria-describedby", expect.stringContaining("description"));
+    await expect(name).toBeRequired();
+    await expect(email).toBeRequired();
+    await expect(form).not.toHaveAttribute("novalidate");
+
+    await userEvent.tab();
+    await expect(name).toHaveFocus();
+    await userEvent.type(name, "Avery Chen");
+    await userEvent.tab();
+    await expect(email).toHaveFocus();
+    await userEvent.type(email, "avery@example.com");
+    await userEvent.tab();
+    await expect(canvas.getByRole("checkbox", { name: "Send me product updates" })).toHaveFocus();
+    await userEvent.tab();
+    await expect(emailRadio).toHaveFocus();
+    await userEvent.keyboard("{ArrowDown}");
+    await expect(phoneRadio).toBeChecked();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Save profile" }));
+    await expect(canvas.getByText("Submitted for Avery Chen")).toBeVisible();
+  },
+};
+
 export const ThemeCoverage: Story = {
   render: () => (
     <div style={{ display: "grid", gap: "var(--ds-space-6)", gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))" }}>
@@ -198,16 +282,20 @@ export const ThemeCoverage: Story = {
             <option value="private">Private</option>
             <option value="public">Public</option>
           </Select>
-          <Checkbox label="Enable notifications" defaultChecked />
-          <RadioGroup
-            label="Plan"
-            name={`plan-${theme}`}
-            defaultValue="standard"
-            options={[
-              { value: "standard", label: "Standard" },
-              { value: "premium", label: "Premium" },
-            ]}
-          />
+          <FormLayout gap="sm">
+            <FieldGroup label="Notifications">
+              <Checkbox label="Enable notifications" defaultChecked />
+            </FieldGroup>
+            <RadioGroup
+              label="Plan"
+              name={`plan-${theme}`}
+              defaultValue="standard"
+              options={[
+                { value: "standard", label: "Standard" },
+                { value: "premium", label: "Premium" },
+              ]}
+            />
+          </FormLayout>
         </section>
       ))}
     </div>

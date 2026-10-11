@@ -82,11 +82,22 @@ The owning form manages longer asynchronous submission state. Children may conta
   name="contact"
   options={[{ value: "email", label: "Email" }, { value: "phone", label: "Phone" }]}
 />
+<FormLayout columns={2} gap="lg">
+  <FieldGroup label="Profile" description="Your account details.">
+    <TextField label="Name" name="name" required />
+    <TextField label="Email" name="email" type="email" required />
+  </FieldGroup>
+  <FieldGroup label="Preferences">
+    <Checkbox label="Send updates" name="updates" value="yes" />
+  </FieldGroup>
+</FormLayout>
 ```
 
 All five controls require a visible `label` and forward native props, refs, controlled/uncontrolled values, and form behavior. `TextField`, `Textarea`, and `Select` use their native input elements; `Checkbox` uses a native checkbox; `RadioGroup` uses a `fieldset`, `legend`, and native radios with a required shared `name`.
 
 `description` and `error` content are connected with `aria-describedby` while preserving IDs supplied by the caller. An `error` sets `aria-invalid`; use `invalid` when an invalid state has no message. Native `required` and `disabled` behavior is retained. The controls do not provide a form state manager, validation rules, or asynchronous submission handling.
+
+`FieldGroup` adds semantic grouping through a native `fieldset` and `legend`; setting `disabled` applies native fieldset disabling to its descendant controls. `FormLayout` provides a responsive, one- or two-column grid and spacing choices without changing form semantics. Both leave values, submission, and validation with the owning form and controls.
 
 Error copy and invalid borders use `color.text.error` and `color.border.error`. Their contrast is checked against canvas and surface colors in ACME, Luna, and Orchid. Form control styling uses semantic text, surface, border, focus, spacing, and radius tokens.
 

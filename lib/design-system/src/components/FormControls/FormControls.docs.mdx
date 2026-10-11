@@ -32,6 +32,14 @@ Use `TextField` for a single-line input. It forwards native input attributes suc
 
 `Checkbox` is a native checkbox. `RadioGroup` renders a native `<fieldset>` and `<legend>` with radio inputs that share the required `name`; provide the available `options` and an optional controlled `value` or `defaultValue`.
 
+## Organize longer forms
+
+<Canvas of={FormControlsStories.FieldGroupingAndLayout} />
+
+`FieldGroup` groups related controls with a native `<fieldset>` and `<legend>`. Its `disabled` prop uses native fieldset behavior, and `description`, `error`, `invalid`, and caller-provided `aria-describedby` work like the individual controls. `FormLayout` is a presentation-only grid wrapper: it stacks fields by default and can display two columns on wider screens with `columns={2}`. Set `gap` to `"sm"`, `"md"`, or `"lg"`, and use `className` for custom layout needs.
+
+These primitives do not manage values, submission, or validation. Keep those responsibilities in the owning `<form>` and on its native controls. Native tab order, radio arrow-key behavior, required validation, and form submission remain intact.
+
 ## Validation and accessible names
 
 Each control requires a visible `label`. `description` and `error` are connected to the control or group through `aria-describedby`; an error also sets `aria-invalid`. Set `invalid` when the control is invalid but has no message. Existing `aria-describedby` IDs are preserved and combined. Native `required` and `disabled` behavior is retained.
