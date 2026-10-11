@@ -44,9 +44,9 @@ Card uses an article container rather than making the entire surface a click tar
 
 PricingDetails renders consumer-supplied price and line-item content. It does not compute totals, format currencies, or initiate payment, keeping financial rules and localization with the consuming product.
 
-## Carousel navigation is manual and focus-safe
+## Carousel autoplay is opt-in and focus-safe
 
-Carousel does not auto-advance. Inactive slides are inert and hidden from assistive technology; keyboard and touch navigation are opt-in through focus or gesture, and reduced-motion preferences disable transitions.
+Carousel only auto-advances when explicitly enabled and always exposes a pause/start control. Hover temporarily pauses rotation; keyboard focus and manual navigation stop it until restarted. Reduced-motion preferences disable autoplay and transitions, and non-looping carousels stop on the final slide.
 
 ## Menus use the ARIA menu interaction model
 

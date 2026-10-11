@@ -158,17 +158,30 @@
 .indicator {
   appearance: none;
   box-sizing: border-box;
-  inline-size: var(--ds-space-2);
-  block-size: var(--ds-space-2);
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  inline-size: var(--ds-space-6);
+  block-size: var(--ds-space-6);
   padding: 0;
   border: 0;
-  border-radius: var(--ds-radius-full);
-  background-color: var(--ds-carousel-indicator, var(--_carousel-indicator));
+  border-radius: var(--ds-radius-shape-rounded);
+  background-color: transparent;
   cursor: pointer;
 }
 
-.indicator[aria-current="true"] {
-  inline-size: var(--ds-space-6);
+.indicator::before {
+  content: "";
+  inline-size: var(--ds-space-2);
+  block-size: var(--ds-space-2);
+  border-radius: var(--ds-radius-full);
+  background-color: var(--ds-carousel-indicator, var(--_carousel-indicator));
+}
+
+.indicator[aria-current="true"]::before {
+  inline-size: var(--ds-space-5);
+  block-size: var(--ds-space-2);
+  border-radius: var(--ds-radius-full);
   background-color: var(--ds-carousel-indicator-active, var(--_carousel-indicator-active));
 }
 
@@ -208,6 +221,14 @@
   .controlButton,
   .indicator {
     border: var(--ds-border-width-default) solid ButtonText;
+  }
+
+  .indicator::before {
+    background-color: ButtonText;
+  }
+
+  .indicator[aria-current="true"]::before {
+    background-color: Highlight;
   }
 
   .controlButton:focus-visible,

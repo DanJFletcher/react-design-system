@@ -62,6 +62,13 @@ const meta = {
     getIndicatorLabel: { control: false },
     loop: { control: "boolean" },
     showControls: { control: "boolean" },
+    autoPlay: { control: "boolean" },
+    autoPlayInterval: {
+      control: { type: "number", min: 1000, max: 30000, step: 500 },
+    },
+    pauseLabel: { control: "text" },
+    playLabel: { control: "text" },
+    reducedMotionLabel: { control: "text" },
     indicators: { control: "inline-radio", options: ["dots", "fraction", "none"] },
     controlsPosition: { control: "inline-radio", options: ["overlay", "below"] },
     previousLabel: { control: "text" },
@@ -92,6 +99,15 @@ export const Playground: Story = {
     await expect(canvas.getByRole("group", { name: "Move forward, 3 of 3" })).toBeVisible();
     await userEvent.keyboard("{ArrowRight}");
     await expect(canvas.getByRole("group", { name: "Find your focus, 1 of 3" })).toBeVisible();
+  },
+};
+
+export const AutoPlay: Story = {
+  args: {
+    label: "Auto-advancing stories",
+    autoPlay: true,
+    autoPlayInterval: 1600,
+    loop: true,
   },
 };
 

@@ -20,7 +20,13 @@ import * as CarouselStories from "./Carousel.stories";
 
 `loop` wraps navigation at the first and last slides. `showControls` displays previous/next buttons. `indicators` accepts `dots`, `fraction`, or `none`; controls can be placed `below` the slides or overlaid. `variant` accepts `surface`, `outlined`, `subtle`, or `accent`, and `size` accepts `sm`, `md`, or `lg`.
 
-Keyboard users can focus the carousel and use Left/Right Arrow, Home, and End. Touch users can swipe horizontally; vertical page scrolling remains available. Inactive slides are hidden from assistive technology and removed from keyboard focus. The carousel is manual—there is no autoplay.
+Keyboard users can focus the carousel and use Left/Right Arrow, Home, and End. Touch users can swipe horizontally; vertical page scrolling remains available. Inactive slides are hidden from assistive technology and removed from keyboard focus.
+
+## Automatic rotation
+
+<Canvas of={CarouselStories.AutoPlay} />
+
+`autoPlay` is opt-in and defaults to `false`. When enabled, slides advance at `autoPlayInterval` milliseconds (default `5000`; values below `1000` are clamped). A named pause/start button remains available. Rotation pauses while hovered, stops when the carousel receives keyboard focus or the user navigates manually, and stops at the final slide unless `loop` is enabled. Reduced-motion preferences disable automatic rotation; transitions are also removed.
 
 ## Themes, controlled state, and empty content
 
@@ -32,8 +38,8 @@ Keyboard users can focus the carousel and use Left/Right Arrow, Home, and End. T
 
 Set `index` with `onIndexChange` for controlled state; otherwise `defaultIndex` sets the initial slide. `getSlideLabel` and `getIndicatorLabel` customize accessible labels for localization. `emptyMessage` replaces the default text when `slides` is empty.
 
-Registered `carousel.*` hooks customize surface, text, border, radius, padding, controls, indicators, and slide radius. Hooks reset at nested theme boundaries. Reduced-motion preferences disable slide transitions. Native section props and `className` are forwarded.
+Registered `carousel.*` hooks customize surface, text, border, radius, padding, controls, indicators, and slide radius. Hooks reset at nested theme boundaries. Native section props and `className` are forwarded.
 
 ## Accessibility
 
-The component renders a labeled section with `aria-roledescription="carousel"`. Each active slide is a named group; inactive slides have `aria-hidden` and `inert`. Previous/next buttons are named and disabled at non-looping boundaries. Focus remains on the navigation control or carousel after changing slides.
+The component renders a labeled section with `aria-roledescription="carousel"`. Each active slide is a named group; inactive slides have `aria-hidden` and `inert`. Previous/next buttons are named and disabled at non-looping boundaries. Automatic rotation has an explicit pause/start control and stops on keyboard focus or manual navigation; its slide announcements are suppressed while rotating.

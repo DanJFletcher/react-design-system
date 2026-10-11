@@ -168,9 +168,11 @@ The `card.*` component hooks customize the surface, text, border, radius, paddin
 />
 ```
 
-`Carousel` supports controlled or uncontrolled slide selection, optional looping, previous/next buttons, dot or fraction indicators, overlay/below control placement, custom slide content, and an empty state. Keyboard users can focus the carousel and use Left/Right Arrow, Home, and End; touch users can swipe horizontally. Inactive slides are hidden and inert. Autoplay is intentionally not included.
+`Carousel` supports controlled or uncontrolled slide selection, optional looping and autoplay, previous/next buttons, dot or fraction indicators, overlay/below control placement, custom slide content, and an empty state. Keyboard users can focus the carousel and use Left/Right Arrow, Home, and End; touch users can swipe horizontally. Inactive slides are hidden and inert.
 
-Provide an accessible `label` and unique slide `id` values. Use `getSlideLabel` and `getIndicatorLabel` for localized accessible names. The `carousel.*` hooks customize theme colors, controls, indicators, spacing, and corners; reduced-motion preferences disable slide transitions.
+Autoplay is opt-in through `autoPlay` and advances at `autoPlayInterval` (default 5 seconds). Its pause/start control is always available when enabled. Rotation pauses on hover, stops on keyboard focus or manual navigation, and stops on the last slide unless looping is enabled. Reduced-motion preferences disable autoplay and slide transitions.
+
+Provide an accessible `label` and unique slide `id` values. Use `getSlideLabel` and `getIndicatorLabel` for localized accessible names. The `carousel.*` hooks customize theme colors, controls, indicators, spacing, and corners.
 
 ## Action menu
 

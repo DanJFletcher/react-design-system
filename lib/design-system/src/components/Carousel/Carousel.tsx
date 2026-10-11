@@ -41,6 +41,11 @@ export type CarouselProps = Omit<
   controlsPosition?: CarouselControlsPosition;
   previousLabel?: string;
   nextLabel?: string;
+  autoPlay?: boolean;
+  autoPlayInterval?: number;
+  pauseLabel?: string;
+  playLabel?: string;
+  reducedMotionLabel?: string;
   emptyMessage?: ReactNode;
   variant?: CarouselVariant;
   size?: CarouselSize;
@@ -68,6 +73,11 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
     controlsPosition = "below",
     previousLabel = "Previous slide",
     nextLabel = "Next slide",
+    autoPlay = false,
+    autoPlayInterval = 5000,
+    pauseLabel = "Pause automatic slide rotation",
+    playLabel = "Start automatic slide rotation",
+    reducedMotionLabel = "Automatic slide rotation is disabled by your reduced-motion preference",
     emptyMessage = "No slides to display.",
     variant = "surface",
     size = "md",
@@ -76,6 +86,9 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
     "aria-label": ariaLabel,
     "aria-labelledby": ariaLabelledby,
     onKeyDown,
+    onFocusCapture,
+    onMouseEnter,
+    onMouseLeave,
     ...sectionProps
   },
   ref,
@@ -83,18 +96,80 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
   const carouselId = useId();
   const isControlled = index !== undefined;
   const [internalIndex, setInternalIndex] = useState(defaultIndex);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() =>
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+  const [rotationEnabled, setRotationEnabled] = useState(
+    autoPlay && !prefersReducedMotion
+  );
+  const [isHovered, setIsHovered] = useState(false);
   const requestedIndex = isControlled ? index : internalIndex;
   const normalizedIndex = Number.isFinite(requestedIndex) ? Math.trunc(requestedIndex) : 0;
   const activeIndex = slides.length === 0
     ? 0
     : Math.min(Math.max(normalizedIndex, 0), slides.length - 1);
+  const rotationInterval = Number.isFinite(autoPlayInterval)
+    ? Math.max(1000, Math.trunc(autoPlayInterval))
+    : 5000;
   const pointerStart = useRef<PointerStart | null>(null);
+
+  useEffect(() => {
+    if (typeof window.matchMedia !== "function") return;
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncPreference = () => setPrefersReducedMotion(mediaQuery.matches);
+    syncPreference();
+    mediaQuery.addEventListener("change", syncPreference);
+    return () => mediaQuery.removeEventListener("change", syncPreference);
+  }, []);
+
+  useEffect(() => {
+    setRotationEnabled(autoPlay && !prefersReducedMotion);
+  }, [autoPlay]);
+
+  useEffect(() => {
+    if (prefersReducedMotion) setRotationEnabled(false);
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
     if (!isControlled && internalIndex !== activeIndex) {
       setInternalIndex(activeIndex);
     }
   }, [activeIndex, internalIndex, isControlled]);
+
+  useEffect(() => {
+    if (
+      !autoPlay ||
+      !rotationEnabled ||
+      isHovered ||
+      prefersReducedMotion ||
+      slides.length < 2
+    ) {
+      return;
+    }
+
+    if (!loop && activeIndex === slides.length - 1) {
+      setRotationEnabled(false);
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      goTo(activeIndex + 1);
+    }, rotationInterval);
+    return () => window.clearTimeout(timeoutId);
+  }, [
+    activeIndex,
+    autoPlay,
+    isControlled,
+    isHovered,
+    loop,
+    onIndexChange,
+    prefersReducedMotion,
+    rotationEnabled,
+    rotationInterval,
+    slides.length,
+  ]);
 
   const goTo = (requested: number) => {
     if (slides.length < 2) return;
@@ -121,15 +196,19 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
 
     if (event.key === "ArrowRight") {
       event.preventDefault();
+      if (autoPlay) setRotationEnabled(false);
       move(1);
     } else if (event.key === "ArrowLeft") {
       event.preventDefault();
+      if (autoPlay) setRotationEnabled(false);
       move(-1);
     } else if (event.key === "Home") {
       event.preventDefault();
+      if (autoPlay) setRotationEnabled(false);
       goTo(0);
     } else if (event.key === "End") {
       event.preventDefault();
+      if (autoPlay) setRotationEnabled(false);
       goTo(slides.length - 1);
     }
   };
@@ -144,6 +223,7 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
       return;
     }
     pointerStart.current = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    if (autoPlay) setRotationEnabled(false);
   };
 
   const handlePointerUp = (event: PointerEvent<HTMLDivElement>) => {
@@ -161,7 +241,7 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
   const canMovePrevious = loop || activeIndex > 0;
   const canMoveNext = loop || activeIndex < slides.length - 1;
   const shouldRenderControls = slides.length > 1 && (
-    showControls || indicators !== "none"
+    showControls || indicators !== "none" || autoPlay
   );
 
   return (
@@ -177,6 +257,25 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
       aria-roledescription="carousel"
       tabIndex={0}
       onKeyDown={handleKeyDown}
+      onFocusCapture={(event) => {
+        onFocusCapture?.(event);
+        const target = event.target;
+        if (
+          !event.defaultPrevented &&
+          autoPlay &&
+          !(target instanceof Element && target.closest('[data-slot="rotation-toggle"]'))
+        ) {
+          setRotationEnabled(false);
+        }
+      }}
+      onMouseEnter={(event) => {
+        onMouseEnter?.(event);
+        setIsHovered(true);
+      }}
+      onMouseLeave={(event) => {
+        onMouseLeave?.(event);
+        setIsHovered(false);
+      }}
       style={style as CSSProperties | undefined}
     >
       <div className={styles.frame}>
@@ -195,7 +294,11 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
               pointerStart.current = null;
             }}
           >
-            <div className={styles.track} data-slot="track" aria-live="polite">
+            <div
+              className={styles.track}
+              data-slot="track"
+              aria-live={rotationEnabled && !prefersReducedMotion ? "off" : "polite"}
+            >
               {slides.map((slide, slideIndex) => {
                 const isActive = slideIndex === activeIndex;
                 const positionLabel = getSlideLabel
@@ -227,6 +330,32 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
 
         {shouldRenderControls && (
           <div className={styles.controls} data-position={controlsPosition} data-slot="controls">
+            {autoPlay && (
+              <button
+                className={styles.controlButton}
+                type="button"
+                data-slot="rotation-toggle"
+                aria-label={prefersReducedMotion
+                  ? reducedMotionLabel
+                  : rotationEnabled
+                    ? pauseLabel
+                    : playLabel}
+                aria-pressed={rotationEnabled}
+                aria-controls={carouselId}
+                disabled={prefersReducedMotion}
+                onClick={() => {
+                  if (rotationEnabled) {
+                    setRotationEnabled(false);
+                  } else if (!prefersReducedMotion) {
+                    if (!loop && activeIndex === slides.length - 1) goTo(0);
+                    setRotationEnabled(true);
+                  }
+                }}
+              >
+                <RotationIcon playing={rotationEnabled && !prefersReducedMotion} />
+              </button>
+            )}
+
             {showControls && (
               <button
                 className={styles.controlButton}
@@ -234,7 +363,10 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
                 aria-label={previousLabel}
                 aria-controls={carouselId}
                 disabled={!canMovePrevious}
-                onClick={() => move(-1)}
+                onClick={() => {
+                  if (autoPlay) setRotationEnabled(false);
+                  move(-1);
+                }}
               >
                 <ArrowIcon direction="left" />
               </button>
@@ -252,14 +384,21 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
                       : `Go to slide ${slideIndex + 1}`}
                     aria-current={slideIndex === activeIndex ? "true" : undefined}
                     aria-controls={carouselId}
-                    onClick={() => goTo(slideIndex)}
+                    onClick={() => {
+                      if (autoPlay) setRotationEnabled(false);
+                      goTo(slideIndex);
+                    }}
                   />
                 ))}
               </div>
             )}
 
             {indicators === "fraction" && (
-              <div className={styles.fraction} aria-live="polite" aria-atomic="true">
+              <div
+                className={styles.fraction}
+                aria-live={rotationEnabled && !prefersReducedMotion ? "off" : "polite"}
+                aria-atomic="true"
+              >
                 {activeIndex + 1} / {slides.length}
               </div>
             )}
@@ -271,7 +410,10 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
                 aria-label={nextLabel}
                 aria-controls={carouselId}
                 disabled={!canMoveNext}
-                onClick={() => move(1)}
+                onClick={() => {
+                  if (autoPlay) setRotationEnabled(false);
+                  move(1);
+                }}
               >
                 <ArrowIcon direction="right" />
               </button>
@@ -298,6 +440,27 @@ function ArrowIcon({ direction }: { direction: "left" | "right" }) {
         <path d="m14.5 5-7 7 7 7" />
       ) : (
         <path d="m9.5 5 7 7-7 7" />
+      )}
+    </svg>
+  );
+}
+
+function RotationIcon({ playing }: { playing: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+      className={styles.arrow}
+    >
+      {playing ? (
+        <>
+          <path d="M8 6v12" />
+          <path d="M16 6v12" />
+        </>
+      ) : (
+        <path d="m8 5 11 7-11 7V5Z" />
       )}
     </svg>
   );
