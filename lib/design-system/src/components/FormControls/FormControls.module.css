@@ -56,12 +56,35 @@
   border-radius: var(--ds-radius-textarea);
 }
 
+.selectWrapper {
+  position: relative;
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
 .select {
+  appearance: none;
+  padding-inline-end: calc(var(--ds-space-3) + var(--ds-space-6));
   cursor: pointer;
 }
 
 .select:disabled {
   cursor: not-allowed;
+}
+
+.selectIndicator {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: var(--ds-space-3);
+  inline-size: var(--ds-space-4);
+  block-size: var(--ds-space-4);
+  transform: translateY(-50%);
+  color: var(--ds-color-text-primary);
+  pointer-events: none;
+}
+
+.select:disabled + .selectIndicator {
+  color: var(--ds-color-action-disabled-fg);
 }
 
 .description,

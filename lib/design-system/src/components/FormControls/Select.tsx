@@ -28,16 +28,33 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
   return (
     <div className={styles.field}>
       <FieldLabel id={field.id} label={label} required={required} />
-      <select
-        {...selectProps}
-        ref={ref}
-        id={field.id}
-        required={required}
-        disabled={disabled}
-        aria-describedby={field.describedBy}
-        aria-invalid={field.invalid || undefined}
-        className={controlClassName}
-      />
+      <div className={styles.selectWrapper}>
+        <select
+          {...selectProps}
+          ref={ref}
+          id={field.id}
+          required={required}
+          disabled={disabled}
+          aria-describedby={field.describedBy}
+          aria-invalid={field.invalid || undefined}
+          className={controlClassName}
+        />
+        <svg
+          className={styles.selectIndicator}
+          viewBox="0 0 16 16"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="m2 6 6 6 6-6"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+          />
+        </svg>
+      </div>
       <FieldMessages
         description={description}
         descriptionId={field.descriptionId}

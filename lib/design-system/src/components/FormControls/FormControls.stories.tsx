@@ -96,6 +96,8 @@ export const SelectInteraction: Story = {
   play: async ({ canvasElement }) => {
     const select = within(canvasElement).getByRole("combobox", { name: "Primary region" });
     await expect(select).toBeRequired();
+    await expect(getComputedStyle(select).appearance).toBe("none");
+    await expect(select.nextElementSibling).toHaveAttribute("aria-hidden", "true");
     await userEvent.selectOptions(select, "ca");
     await expect(select).toHaveValue("ca");
   },
@@ -301,6 +303,19 @@ export const ThemeCoverage: Story = {
       ))}
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const selects = within(canvasElement).getAllByRole("combobox");
+    await expect(selects).toHaveLength(3);
+    for (const select of selects) {
+      const indicator = select.nextElementSibling;
+      if (!(indicator instanceof SVGElement)) {
+        throw new Error("The select chevron should follow its native select.");
+      }
+      await expect(getComputedStyle(indicator).insetInlineEnd).toBe(
+        getComputedStyle(select).paddingInlineStart,
+      );
+    }
+  },
 };
 
 export const NestedThemeBoundaries: Story = {
