@@ -26,6 +26,7 @@
     "color.focus.ring": "#E6C4FF",
     "color.accent.bg": "#F5D36D",
     "color.accent.fg": "#2D2034",
-    "radius.control": { "amount": 9999, "unit": "px" }
+    "radius.control": { "amount": 9999, "unit": "px" },
+    "radius.form-control": { "amount": 20, "unit": "px" }
   }
 }

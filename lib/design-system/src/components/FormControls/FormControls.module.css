@@ -26,7 +26,7 @@
   padding-block: var(--ds-space-3);
   padding-inline: var(--ds-space-3);
   border: var(--ds-border-width-default) solid var(--ds-color-border-control);
-  border-radius: var(--ds-radius-control);
+  border-radius: var(--ds-radius-form-control);
   background-color: var(--ds-color-surface-primary);
   color: var(--ds-color-text-primary);
   font-family: var(--ds-font-family-sans);
@@ -146,7 +146,7 @@
   margin: 0;
   padding: var(--ds-space-4);
   border: var(--ds-border-width-default) solid var(--ds-color-border-control);
-  border-radius: var(--ds-radius-control);
+  border-radius: var(--ds-radius-form-control);
   background-color: var(--ds-color-surface-primary);
   color: var(--ds-color-text-primary);
   gap: var(--ds-space-3);

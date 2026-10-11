@@ -101,6 +101,8 @@ All five controls require a visible `label` and forward native props, refs, cont
 
 Error copy and invalid borders use `color.text.error` and `color.border.error`. Their contrast is checked against canvas and surface colors in ACME, Luna, and Orchid. Form control styling uses semantic text, surface, border, focus, spacing, and radius tokens.
 
+Form fields and field groups use `radius.form-control`, independently of the action-button `radius.control`. Luna uses a 20px form-control radius for rounded rectangles while retaining its pill-shaped buttons.
+
 ## Enforcement
 
 `pnpm check` is the complete gate. Token sources and output, raw component styling values, type/prop contracts, contrast, interaction, visual snapshots, and the packaged consumer are mechanically checked. Storybook documentation includes manual keyboard-navigation, screen-reader naming, zoom, and focus-clipping checks; automated accessibility checks do not replace them.

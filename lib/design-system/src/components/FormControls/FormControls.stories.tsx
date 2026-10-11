@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
+import { Button } from "../Button/Button";
 import { Checkbox } from "./Checkbox";
 import { FieldGroup } from "./FieldGroup";
 import { FormLayout } from "./FormLayout";
@@ -324,8 +325,12 @@ export const NestedThemeBoundaries: Story = {
           backgroundColor: "var(--ds-color-canvas)",
         }}
       >
-        <TextField label="Luna nested field" defaultValue="pill radius" />
+        <TextField label="Luna nested field" defaultValue="20px radius" />
+        <FieldGroup label="Luna profile group">
+          <Textarea label="Luna notes" rows={3} placeholder="Add a note..." />
+        </FieldGroup>
         <Checkbox label="Luna checkbox" defaultChecked />
+        <Button>Luna action remains pill</Button>
         <div
           data-ds-theme="orchid"
           style={{
@@ -355,13 +360,16 @@ export const NestedThemeBoundaries: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const radii = [
-      ["ACME outer field", "6px"],
-      ["Luna nested field", "9999px"],
-      ["Orchid nested select", "16px"],
-      ["ACME restored field", "6px"],
+      { role: "textbox", name: "ACME outer field", radius: "6px" },
+      { role: "textbox", name: "Luna nested field", radius: "20px" },
+      { role: "textbox", name: "Luna notes", radius: "20px" },
+      { role: "group", name: "Luna profile group", radius: "20px" },
+      { role: "button", name: "Luna action remains pill", radius: "9999px" },
+      { role: "combobox", name: "Orchid nested select", radius: "16px" },
+      { role: "textbox", name: "ACME restored field", radius: "6px" },
     ] as const;
-    for (const [name, radius] of radii) {
-      const control = canvas.getByRole(name === "Orchid nested select" ? "combobox" : "textbox", { name });
+    for (const { role, name, radius } of radii) {
+      const control = canvas.getByRole(role, { name });
       await expect(getComputedStyle(control).borderTopLeftRadius).toBe(radius);
     }
   },

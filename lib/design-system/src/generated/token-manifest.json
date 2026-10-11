@@ -368,7 +368,12 @@
     {
       "name": "radius.control",
       "type": "dimension",
-      "description": "Default control corner radius."
+      "description": "Default action button corner radius."
+    },
+    {
+      "name": "radius.form-control",
+      "type": "dimension",
+      "description": "Corner radius for form fields and groups, independent of action buttons."
     }
   ],
   "componentHooks": [
@@ -626,7 +631,8 @@
       "color.focus.ring": "#1D4ED8",
       "color.accent.bg": "#DBEAFE",
       "color.accent.fg": "#1E3A8A",
-      "radius.control": "6px"
+      "radius.control": "6px",
+      "radius.form-control": "6px"
     },
     "luna": {
       "color.canvas": "#100E21",
@@ -652,7 +658,8 @@
       "color.focus.ring": "#E6C4FF",
       "color.accent.bg": "#F5D36D",
       "color.accent.fg": "#2D2034",
-      "radius.control": "9999px"
+      "radius.control": "9999px",
+      "radius.form-control": "20px"
     },
     "orchid": {
       "color.canvas": "#FFF2FD",
@@ -678,7 +685,8 @@
       "color.focus.ring": "#6A2491",
       "color.accent.bg": "#F6CF67",
       "color.accent.fg": "#38143D",
-      "radius.control": "16px"
+      "radius.control": "16px",
+      "radius.form-control": "16px"
     }
   },
   "contrast": [

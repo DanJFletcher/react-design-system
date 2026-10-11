@@ -24,6 +24,7 @@
     "color.focus.ring": { "type": "color", "value": "#1D4ED8", "description": "Visible keyboard-focus ring." },
     "color.accent.bg": { "type": "color", "value": "#DBEAFE", "description": "Accent surface." },
     "color.accent.fg": { "type": "color", "value": "#1E3A8A", "description": "Text on the accent surface." },
-    "radius.control": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Default control corner radius." }
+    "radius.control": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Default action button corner radius." },
+    "radius.form-control": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Corner radius for form fields and groups, independent of action buttons." }
   }
 }

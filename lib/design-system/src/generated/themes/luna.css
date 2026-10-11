@@ -110,4 +110,5 @@
   --ds-color-text-muted: #CDBFE1;
   --ds-color-text-primary: #FBF5FF;
   --ds-radius-control: 9999px;
+  --ds-radius-form-control: 20px;
 }
