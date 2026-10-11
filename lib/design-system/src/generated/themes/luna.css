@@ -84,26 +84,26 @@
 :root:not([data-ds-theme]),
 :root[data-ds-theme="luna"],
 [data-ds-theme="luna"] {
-  --ds-color-accent-bg: #F6CF67;
-  --ds-color-accent-fg: #321846;
-  --ds-color-action-disabled-bg: #EBDCEB;
-  --ds-color-action-disabled-fg: #67506E;
-  --ds-color-action-ghost-fg: #6A2491;
-  --ds-color-action-ghost-hover: #F5E8FC;
-  --ds-color-action-ghost-pressed: #EAD2F5;
-  --ds-color-action-primary-bg: #8B2674;
-  --ds-color-action-primary-fg: #FFFFFF;
-  --ds-color-action-primary-hover: #741C62;
-  --ds-color-action-primary-pressed: #5B154C;
-  --ds-color-action-secondary-bg: #F2E5FF;
-  --ds-color-action-secondary-fg: #54208B;
-  --ds-color-action-secondary-hover: #E8D4F8;
-  --ds-color-action-secondary-pressed: #DCC0F2;
-  --ds-color-border-control: #8B5E88;
-  --ds-color-canvas: #FFF5FB;
-  --ds-color-focus-ring: #6A2491;
-  --ds-color-surface-primary: #FFFBFE;
-  --ds-color-text-muted: #6F3D73;
-  --ds-color-text-primary: #321846;
+  --ds-color-accent-bg: #F5D36D;
+  --ds-color-accent-fg: #2D2034;
+  --ds-color-action-disabled-bg: #30283D;
+  --ds-color-action-disabled-fg: #C1B5D0;
+  --ds-color-action-ghost-fg: #FFD8F2;
+  --ds-color-action-ghost-hover: #261A35;
+  --ds-color-action-ghost-pressed: #38244A;
+  --ds-color-action-primary-bg: #F6B8D8;
+  --ds-color-action-primary-fg: #2B1937;
+  --ds-color-action-primary-hover: #F08AC4;
+  --ds-color-action-primary-pressed: #DC6DAF;
+  --ds-color-action-secondary-bg: #332643;
+  --ds-color-action-secondary-fg: #F5DDF4;
+  --ds-color-action-secondary-hover: #453153;
+  --ds-color-action-secondary-pressed: #261B36;
+  --ds-color-border-control: #B7A4CE;
+  --ds-color-canvas: #100E21;
+  --ds-color-focus-ring: #E6C4FF;
+  --ds-color-surface-primary: #1B1730;
+  --ds-color-text-muted: #CDBFE1;
+  --ds-color-text-primary: #FBF5FF;
   --ds-radius-control: 9999px;
 }

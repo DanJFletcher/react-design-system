@@ -20,7 +20,7 @@ The compiler validates names, descriptions, types, units, references, cycles, re
 
 ## Theme contract
 
-ACME is the default unthemed document. Luna uses blush/lavender surfaces, deep plum actions, moonlit gold accents, and softer shapes. Both built-in themes share the same type and spatial scales. Orchid demonstrates a third theme extending Luna.
+ACME is the default unthemed document. Luna is a dark, Sailor Moon-inspired palette with midnight-indigo surfaces, moonlight and lavender text, rose-pink actions, crescent-gold accents, and softer shapes. Both built-in themes share the same type and spatial scales. Orchid demonstrates a distinct custom theme extending Luna.
 
 Use ordinary markup:
 

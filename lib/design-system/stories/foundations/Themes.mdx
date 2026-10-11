@@ -1,11 +1,12 @@
 import { Meta, Title } from "@storybook/addon-docs/blocks";
+import { Button } from "../../src/components/Button/Button";
 import manifest from "../../src/generated/token-manifest.json";
 
 <Meta title="Foundations/Themes" />
 
 <Title>Themes</Title>
 
-ACME is the default for an unthemed document. Luna adds blush and lavender surfaces, plum actions, gold accents, and softer control corners. Orchid is a small custom example that extends Luna and overrides only selected roles.
+ACME is the default for an unthemed document. Luna is a dark, Sailor Moon-inspired theme with midnight-indigo surfaces, moonlight and lavender text, rose-pink actions, crescent-gold accents, and softer control corners. Orchid remains a distinct custom example extending Luna.
 
 <table>
   <thead><tr><th>Theme</th><th>Resolved semantic tokens</th><th>Canvas</th><th>Primary action</th></tr></thead>
@@ -17,3 +18,54 @@ ACME is the default for an unthemed document. Luna adds blush and lavender surfa
 </table>
 
 Theme selection is DOM-scoped: `<section data-ds-theme="luna">...</section>`. A nested theme restores its complete defaults rather than inheriting a partial outer theme.
+
+## Luna · Moonlit dark
+
+<section
+  aria-label="Luna dark theme preview"
+  data-ds-theme="luna"
+  style={{
+    display: "grid",
+    gap: "1.25rem",
+    padding: "2rem",
+    border: "1px solid var(--ds-color-border-control)",
+    borderRadius: "1.5rem",
+    background: "var(--ds-color-canvas)",
+    color: "var(--ds-color-text-primary)",
+  }}
+>
+  <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+    <span aria-hidden="true" style={{ color: "var(--ds-color-accent-bg)", fontSize: "1.75rem" }}>☾</span>
+    <div>
+      <h3 style={{ margin: 0, color: "var(--ds-color-text-primary)" }}>A little moonlight</h3>
+      <div style={{ marginTop: "0.25rem", color: "var(--ds-color-text-muted)" }}>
+        {"Midnight skies, rose magic, and a touch of celestial gold."}
+      </div>
+    </div>
+  </div>
+  <div
+    style={{
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
+      gap: "0.75rem",
+      padding: "1.25rem",
+      borderRadius: "1rem",
+      background: "var(--ds-color-surface-primary)",
+    }}
+  >
+    <Button>Make a wish</Button>
+    <Button variant="secondary">Explore the stars</Button>
+    <Button variant="ghost">Later</Button>
+    <span
+      style={{
+        padding: "0.5rem 0.75rem",
+        borderRadius: "9999px",
+        background: "var(--ds-color-accent-bg)",
+        color: "var(--ds-color-accent-fg)",
+      }}
+    >
+      Crescent gold
+    </span>
+  </div>
+</section>
