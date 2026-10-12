@@ -9,6 +9,11 @@ test("marketing site composes the library's main sections and signup form", asyn
   await expect(page.getByRole("region", { name: "Customer stories" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Starter", level: 3 })).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Footer navigation" })).toBeVisible();
+  const faqQuestion = page.getByRole("button", { name: "Can we start small?" });
+  await faqQuestion.click();
+  await expect(faqQuestion).toHaveAttribute("aria-expanded", "true");
+  await expect(page.getByRole("region", { name: "Can we start small?" })).toBeVisible();
+  await expect(page.getByRole("contentinfo")).toContainText("Orbit");
 
   await page.getByLabel("Work email").fill("team@example.com");
   await page.getByRole("button", { name: "Join the list" }).click();

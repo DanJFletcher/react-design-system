@@ -174,6 +174,44 @@ Autoplay is opt-in through `autoPlay` and advances at `autoPlayInterval` (defaul
 
 Provide an accessible `label` and unique slide `id` values. Use `getSlideLabel` and `getIndicatorLabel` for localized accessible names. The `carousel.*` hooks customize theme colors, controls, indicators, spacing, and corners.
 
+## Accordion
+
+```tsx
+<Accordion
+  label="Frequently asked questions"
+  items={[
+    { id: "billing", title: "How does billing work?", content: <BillingDetails /> },
+    { id: "cancel", title: "Can I cancel?", content: "Yes, at any time." },
+  ]}
+  multiple={false}
+  variant="divided"
+/>
+```
+
+`Accordion` renders a group of disclosures with unique item IDs, React-node titles and content, and optional disabled items. It supports single-open (default) or multi-open behavior, controlled or uncontrolled open-item state, three variants, three sizes, rounded/square corners, and configurable heading levels.
+
+Each trigger is a native button inside a heading and connects to its panel with `aria-expanded`, `aria-controls`, and `aria-labelledby`. Panels use `role="region"` and remain mounted while closed. Native keyboard activation and Tab order are retained; there is no custom roving focus behavior. The component uses semantic theme tokens and accepts `className` and typed `style`.
+
+## Footer
+
+```tsx
+<Footer
+  brand={<Brand />}
+  description="A short description of the company."
+  logoHref="/"
+  logoLabel="Company home"
+  linkGroups={[
+    { id: "company", title: "Company", links: [{ id: "about", label: "About", href: "/about" }] },
+  ]}
+  copyright="© 2026 Company"
+  legalLinks={[{ id: "privacy", label: "Privacy", href: "/privacy" }]}
+/>
+```
+
+`Footer` renders a responsive semantic footer with optional brand and description, grouped navigation, social links, legal links, custom content, and bottom content. It supports three visual variants and sizes and configurable link-group heading levels. Links are native anchors; navigation, destinations, and any stateful content belong to the consumer. Each non-empty link collection has its own accessible `nav` label. Icon-only links need a supplied `aria-label`.
+
+The footer uses semantic text, surface, border, focus, spacing, and radius tokens and accepts `className` and typed `style`.
+
 ## Action menu
 
 ```tsx

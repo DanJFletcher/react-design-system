@@ -6,6 +6,15 @@ export type {
   ButtonSize,
   ButtonVariant,
 } from "./components/Button/Button";
+export { Accordion } from "./components/Accordion/Accordion";
+export type {
+  AccordionHeadingLevel,
+  AccordionItem,
+  AccordionProps,
+  AccordionShape,
+  AccordionSize,
+  AccordionVariant,
+} from "./components/Accordion/Accordion";
 export { Card } from "./components/Card/Card";
 export type {
   CardAlignment,
@@ -46,6 +55,15 @@ export { Switch } from "./components/FormControls/Switch";
 export type { SwitchProps } from "./components/FormControls/Switch";
 export { Header } from "./components/Header/Header";
 export type { HeaderNavItem, HeaderProps, HeaderSize } from "./components/Header/Header";
+export { Footer } from "./components/Footer/Footer";
+export type {
+  FooterHeadingLevel,
+  FooterLink,
+  FooterLinkGroup,
+  FooterProps,
+  FooterSize,
+  FooterVariant,
+} from "./components/Footer/Footer";
 export { Hero } from "./components/Hero/Hero";
 export type {
   HeroAlignment,

@@ -1,0 +1,107 @@
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect, userEvent, within } from "storybook/test";
+import { Accordion, type AccordionItem } from "./Accordion";
+
+const faqItems: AccordionItem[] = [
+  {
+    id: "start",
+    title: "Can we start small?",
+    content: "Yes. Start with the free plan and move to a team plan when you need shared spaces and reporting.",
+  },
+  {
+    id: "tools",
+    title: "Will Orbit replace every tool we use?",
+    content: "Orbit gives your projects and decisions a home. Keep the tools your team already relies on and connect them as needed.",
+  },
+  {
+    id: "plans",
+    title: "Can I change plans later?",
+    content: "Yes. You can change or cancel your plan at any time; there is no long-term contract.",
+  },
+];
+
+const meta = {
+  title: "Components/Accordion",
+  component: Accordion,
+  args: {
+    items: faqItems,
+    label: "Frequently asked questions",
+    multiple: false,
+    variant: "divided",
+    size: "md",
+    shape: "rounded",
+    headingLevel: 3,
+  },
+  argTypes: {
+    items: { control: "object" },
+    label: { control: "text" },
+    multiple: { control: "boolean" },
+    openItems: { control: false },
+    defaultOpenItems: { control: "object" },
+    onOpenItemsChange: { control: false },
+    variant: { control: "inline-radio", options: ["divided", "outlined", "surface"] },
+    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
+    shape: { control: "inline-radio", options: ["rounded", "square"] },
+    headingLevel: { control: "select", options: [1, 2, 3, 4, 5, 6] },
+    className: { control: false },
+    style: { control: false },
+  },
+} satisfies Meta<typeof Accordion>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Playground: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const firstQuestion = canvas.getByRole("button", { name: "Can we start small?" });
+    await expect(firstQuestion).toHaveAttribute("aria-expanded", "false");
+    await userEvent.click(firstQuestion);
+    await expect(firstQuestion).toHaveAttribute("aria-expanded", "true");
+    await expect(canvas.getByRole("region", { name: "Can we start small?" })).toBeVisible();
+    await userEvent.keyboard("{TAB}");
+    await expect(canvas.getByRole("button", { name: "Will Orbit replace every tool we use?" })).toHaveFocus();
+  },
+};
+
+export const MultiOpen: Story = {
+  args: {
+    multiple: true,
+    defaultOpenItems: ["start", "tools"],
+  },
+};
+
+export const VariantExamples: Story = {
+  render: () => (
+    <div style={{ display: "grid", gap: "var(--ds-space-6)" }}>
+      {(["divided", "outlined", "surface"] as const).map((variant) => (
+        <section key={variant} aria-label={`${variant} accordion`}>
+          <h2 style={{ marginBlock: "0 var(--ds-space-3)" }}>{variant}</h2>
+          <Accordion items={faqItems.slice(0, 2)} label={`${variant} questions`} variant={variant} />
+        </section>
+      ))}
+    </div>
+  ),
+};
+
+export const ThemeCoverage: Story = {
+  render: () => (
+    <div style={{ display: "grid", gap: "var(--ds-space-5)" }}>
+      {(["acme", "luna", "orchid"] as const).map((theme) => (
+        <section data-ds-theme={theme} key={theme} aria-label={`${theme} theme`}>
+          <h2>{theme.toUpperCase()}</h2>
+          <Accordion items={faqItems.slice(0, 2)} label={`${theme} questions`} variant="surface" />
+        </section>
+      ))}
+    </div>
+  ),
+};
+
+export const DisabledItem: Story = {
+  args: {
+    items: [
+      ...faqItems.slice(0, 2),
+      { id: "unavailable", title: "Not available yet", content: "This answer is not ready.", disabled: true },
+    ],
+  },
+};

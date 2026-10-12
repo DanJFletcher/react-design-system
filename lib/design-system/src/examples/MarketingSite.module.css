@@ -604,46 +604,6 @@
   text-align: start;
 }
 
-.faqList {
-  display: grid;
-}
-
-.faqList details {
-  border-block-end: var(--ds-border-width-default) solid var(--ds-color-border-control);
-}
-
-.faqList summary {
-  position: relative;
-  padding: var(--ds-space-4) var(--ds-space-8) var(--ds-space-4) 0;
-  font-weight: var(--ds-font-weight-semibold);
-  cursor: pointer;
-  list-style: none;
-}
-
-.faqList summary::-webkit-details-marker {
-  display: none;
-}
-
-.faqList summary::after {
-  position: absolute;
-  inset-inline-end: var(--ds-space-1);
-  content: "+";
-  color: var(--ds-color-accent-fg);
-  font-size: var(--ds-font-size-xl);
-  line-height: 1;
-}
-
-.faqList details[open] summary::after {
-  content: "−";
-}
-
-.faqList details p {
-  margin: 0;
-  padding: 0 var(--ds-space-8) var(--ds-space-4) 0;
-  color: var(--ds-color-text-muted);
-  line-height: var(--ds-line-height-relaxed);
-}
-
 .signup {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.75fr);
@@ -677,37 +637,9 @@
   font-size: var(--ds-font-size-xs);
 }
 
-.footer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--ds-space-4);
-  padding: var(--ds-space-6) max(var(--ds-space-6), calc((100vw - var(--_site-width)) / 2));
-  border-block-start: var(--ds-border-width-default) solid var(--ds-color-border-control);
-  color: var(--ds-color-text-muted);
-  font-size: var(--ds-font-size-xs);
-}
-
-.footerBrand {
-  color: var(--ds-color-text-primary);
-  text-decoration: none;
-}
-
-.footer nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--ds-space-4);
-}
-
-.footer nav a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.footer nav a:hover {
-  color: var(--ds-color-text-primary);
-  text-decoration: underline;
+.marketingFooter {
+  max-inline-size: var(--_site-width);
+  margin-inline: auto;
 }
 
 @media (max-width: 920px) {
@@ -793,11 +725,6 @@
     grid-column: 1;
   }
 
-  .footer {
-    align-items: flex-start;
-    flex-direction: column;
-    padding-inline: var(--ds-space-4);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

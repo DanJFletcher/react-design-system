@@ -1,0 +1,36 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as AccordionStories from "./Accordion.stories";
+
+<Meta of={AccordionStories} />
+
+<Title>Accordion</Title>
+
+<Subtitle>A responsive disclosure group for FAQs and expandable information, with controlled state and single- or multi-open behavior.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={AccordionStories.Playground} />
+
+Use the controls to choose a variant, size, shape, heading level, and whether multiple panels may remain open. Each title is a native button; Enter or Space toggles it and normal Tab order is retained.
+
+## Multi-open, variants, and disabled items
+
+<Canvas of={AccordionStories.MultiOpen} />
+
+<Canvas of={AccordionStories.VariantExamples} />
+
+<Canvas of={AccordionStories.DisabledItem} />
+
+`items` requires a unique `id` per item and accepts `title`, `content`, and optional `disabled`. The default `multiple={false}` closes another open panel when a new one opens. Use `multiple` to let each panel toggle independently.
+
+## Theme coverage
+
+<Canvas of={AccordionStories.ThemeCoverage} />
+
+The component uses semantic text, surface, border, focus, spacing, and radius tokens, so variants follow ACME, Luna, Orchid, and custom themes. Pass `className` or typed `style` for scoped customization.
+
+## State and accessibility
+
+`defaultOpenItems` initializes uncontrolled state. `openItems` with `onOpenItemsChange` provides controlled state. In controlled mode, the parent updates `openItems` in response to the callback. Disabled items cannot be toggled. Panels remain mounted and use `hidden` while closed.
+
+Each heading contains a native button with `aria-expanded` and `aria-controls`; its panel uses `role="region"` and `aria-labelledby`. Set a useful `label` when the accordion should be named as a group. Choose `headingLevel` to match the surrounding page hierarchy.

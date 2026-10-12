@@ -1,0 +1,34 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as FooterStories from "./Footer.stories";
+
+<Meta of={FooterStories} />
+
+<Title>Footer</Title>
+
+<Subtitle>A responsive site footer with optional brand content, grouped navigation, social links, legal links, and custom content.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={FooterStories.Playground} />
+
+Use the controls to compare three visual variants, compact/standard/large spacing, and the heading level used for link-group titles.
+
+## Variants and custom content
+
+<Canvas of={FooterStories.SurfaceVariant} />
+
+<Canvas of={FooterStories.AccentVariant} />
+
+<Canvas of={FooterStories.CustomContent} />
+
+`brand` and `description` are optional. Use `logoHref` and `logoLabel` to make the brand a named home link. `linkGroups` creates a labeled navigation with headings; `socialLinks` and `legalLinks` create separate labeled navigation regions. Links accept native anchor attributes, including `target`, `rel`, and event handlers.
+
+## Theme coverage
+
+<Canvas of={FooterStories.ThemeCoverage} />
+
+The footer uses semantic text, surface, border, focus, and spacing tokens, so the same props work in ACME, Luna, Orchid, and custom themes. This example uses Luna; the plain playground follows Storybook's active theme. Pass `className` or typed `style` for scoped customization. The `children` slot and `bottomContent` accept consumer-owned content.
+
+## Semantics
+
+The component renders a native `footer`; each non-empty link collection uses a native `nav` with its own accessible name. Provide visible text for links, or an `aria-label` when a link uses only an icon. Group titles are headings; choose `headingLevel` to match the page hierarchy. Footer navigation and destinations are stateless and remain under consumer control.

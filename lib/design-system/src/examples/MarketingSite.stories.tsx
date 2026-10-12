@@ -1,9 +1,11 @@
 import { useState, type FormEvent } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
+  Accordion,
   Button,
   Card,
   Carousel,
+  Footer,
   Header,
   Hero,
   PricingDetails,
@@ -276,20 +278,28 @@ function MarketingSite() {
             <div className={styles.eyebrow}>A few good questions</div>
             <h2 id="faq-title">Good to know.</h2>
           </div>
-          <div className={styles.faqList}>
-            <details>
-              <summary>Can we start small?</summary>
-              <p>Yes. Start with the free plan and move to a team plan when you need shared spaces and reporting.</p>
-            </details>
-            <details>
-              <summary>Will Orbit replace every tool we use?</summary>
-              <p>Orbit gives your projects and decisions a home. Keep the tools your team already relies on and connect them as needed.</p>
-            </details>
-            <details>
-              <summary>Can I change plans later?</summary>
-              <p>Yes. You can change or cancel your plan at any time; there is no long-term contract.</p>
-            </details>
-          </div>
+          <Accordion
+            label="Frequently asked questions"
+            items={[
+              {
+                id: "start",
+                title: "Can we start small?",
+                content: "Yes. Start with the free plan and move to a team plan when you need shared spaces and reporting.",
+              },
+              {
+                id: "tools",
+                title: "Will Orbit replace every tool we use?",
+                content: "Orbit gives your projects and decisions a home. Keep the tools your team already relies on and connect them as needed.",
+              },
+              {
+                id: "plans",
+                title: "Can I change plans later?",
+                content: "Yes. You can change or cancel your plan at any time; there is no long-term contract.",
+              },
+            ]}
+            variant="divided"
+            size="md"
+          />
         </section>
 
         <section className={styles.signup} id="join" aria-labelledby="join-title">
@@ -312,15 +322,33 @@ function MarketingSite() {
         </section>
       </main>
 
-      <footer className={styles.footer}>
-        <a className={styles.footerBrand} href="#top" aria-label="Orbit home"><Brand /></a>
-        <span>© 2026 Orbit. Make room for good work.</span>
-        <nav aria-label="Footer navigation">
-          <a href="#features">Product</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#faq">Questions</a>
-        </nav>
-      </footer>
+      <Footer
+        className={styles.marketingFooter}
+        brand={<Brand />}
+        description="A calmer place for teams to plan, build, and see what matters next."
+        logoHref="#top"
+        logoLabel="Orbit home"
+        linkGroups={[
+          {
+            id: "product",
+            title: "Product",
+            links: [
+              { id: "features", label: "Features", href: "#features" },
+              { id: "stories", label: "Customer stories", href: "#stories" },
+              { id: "pricing", label: "Pricing", href: "#pricing" },
+            ],
+          },
+          {
+            id: "explore",
+            title: "Explore",
+            links: [
+              { id: "faq", label: "Questions", href: "#faq" },
+              { id: "join", label: "Join the list", href: "#join" },
+            ],
+          },
+        ]}
+        copyright="© 2026 Orbit. Make room for good work."
+      />
     </div>
   );
 }
