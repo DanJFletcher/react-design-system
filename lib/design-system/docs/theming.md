@@ -43,6 +43,8 @@ For a component-only override, use a registered hook:
 
 `DesignSystemStyle` is generated from documented hooks. Hooks are unset on the component and selected through local fallbacks. Every `[data-ds-theme]` boundary resets the full registered hook set, preventing outer overrides from crossing nested theme boundaries. Put the desired override on the inner boundary.
 
+The native `Dialog` uses `showModal()` and is painted in the browser's top layer, but it remains in its original DOM position. Semantic theme tokens and scoped component hooks continue to inherit from its ancestors; Dialog does not create a portal or require a theme bridge.
+
 To add a custom theme, add a JSON source under `src/tokens/themes/`, optionally extend ACME or Luna, provide overrides for all semantic roles not inherited, and run `pnpm tokens:build`. The compiler emits a complete map; your fork can remove the inherited theme afterwards without breaking the generated result.
 
 CSS custom properties inherit through DOM ancestry. Portalled components added in a later phase must define how their portal container receives active theme values and scoped overrides before implementation begins.

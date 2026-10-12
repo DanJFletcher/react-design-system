@@ -1,0 +1,42 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as DialogStories from "./Dialog.stories";
+
+<Meta of={DialogStories} />
+
+<Title>Dialog</Title>
+
+<Subtitle>A controlled, theme-aware modal built on the native dialog element, with content slots and configurable dismissal.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={DialogStories.Playground} />
+
+The consumer owns the open state. Use the trigger outside the dialog to set `open` to `true`; `onOpenChange(false)` reports close requests from the close button, Escape, or a native `form method="dialog"`.
+
+## Sizing and dismissal
+
+<Canvas of={DialogStories.SmallSize} />
+
+<Canvas of={DialogStories.LargeSize} />
+
+<Canvas of={DialogStories.EscapeDisabled} />
+
+<Canvas of={DialogStories.BackdropDismissal} />
+
+<Canvas of={DialogStories.NativeCloseForm} />
+
+The default size is `md`; `sm` and `lg` change the maximum width while the dialog remains within the viewport. Escape closes by default. Backdrop clicks do not close by default; enable `closeOnBackdropClick` when that behavior is appropriate. `showCloseButton` defaults to `true`, and `closeLabel` configures its accessible name.
+
+## Theme and scoped styling
+
+<Canvas of={DialogStories.ThemeCoverage} />
+
+<Canvas of={DialogStories.CustomHooks} />
+
+The native modal stays in its DOM ancestry while the browser paints it in the top layer. Theme tokens and scoped hooks therefore inherit normally; no portal theme bridge is needed. The `dialog.*` hooks customize surface, text, border, backdrop, radius, padding, and size widths.
+
+## Accessibility and state
+
+`Dialog` is modal-only and controlled by the required `open` and `onOpenChange` props. An accessible trigger is owned by the consumer. The native element provides modal focus containment, makes the rest of the page inert, chooses initial focus, and returns focus when closed. Provide `heading` or `aria-label`/`aria-labelledby` to name the dialog; `description` is associated through `aria-describedby`.
+
+Use `headingLevel` to match the page hierarchy. Native dialog props, `className`, refs, and typed `style` are forwarded; the component coordinates its native `open`, `onClose`, `onCancel`, and `onClick` behavior. A consumer `onCancel` handler can call `preventDefault()` to veto Escape; `closeOnEscape={false}` also blocks it.

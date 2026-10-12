@@ -84,6 +84,15 @@
     "carousel.control-border": { "type": "color", "description": "Carousel navigation button border." },
     "carousel.indicator": { "type": "color", "description": "Carousel inactive indicator color." },
     "carousel.indicator-active": { "type": "color", "description": "Carousel active indicator color." },
-    "carousel.indicator-surface": { "type": "color", "description": "Carousel overlay indicator surface." }
+    "carousel.indicator-surface": { "type": "color", "description": "Carousel overlay indicator surface." },
+    "dialog.surface": { "type": "color", "description": "Dialog panel background color." },
+    "dialog.text": { "type": "color", "description": "Dialog panel text color." },
+    "dialog.border": { "type": "color", "description": "Dialog panel border color." },
+    "dialog.backdrop": { "type": "color", "description": "Dialog modal backdrop base color." },
+    "dialog.radius": { "type": "dimension", "description": "Dialog panel corner radius." },
+    "dialog.padding": { "type": "dimension", "description": "Dialog panel internal padding." },
+    "dialog.width.sm": { "type": "dimension", "description": "Dialog small maximum inline size." },
+    "dialog.width.md": { "type": "dimension", "description": "Dialog medium maximum inline size." },
+    "dialog.width.lg": { "type": "dimension", "description": "Dialog large maximum inline size." }
   }
 }

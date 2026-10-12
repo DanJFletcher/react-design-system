@@ -103,6 +103,15 @@
   --ds-carousel-radius: initial;
   --ds-carousel-slide-radius: initial;
   --ds-carousel-text: initial;
+  --ds-dialog-backdrop: initial;
+  --ds-dialog-border: initial;
+  --ds-dialog-padding: initial;
+  --ds-dialog-radius: initial;
+  --ds-dialog-surface: initial;
+  --ds-dialog-text: initial;
+  --ds-dialog-width-lg: initial;
+  --ds-dialog-width-md: initial;
+  --ds-dialog-width-sm: initial;
   --ds-hero-background: initial;
   --ds-hero-description: initial;
   --ds-hero-eyebrow: initial;

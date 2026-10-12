@@ -747,6 +747,60 @@
       "cssVariable": "--ds-carousel-text"
     },
     {
+      "name": "dialog.backdrop",
+      "type": "color",
+      "description": "Dialog modal backdrop base color.",
+      "cssVariable": "--ds-dialog-backdrop"
+    },
+    {
+      "name": "dialog.border",
+      "type": "color",
+      "description": "Dialog panel border color.",
+      "cssVariable": "--ds-dialog-border"
+    },
+    {
+      "name": "dialog.padding",
+      "type": "dimension",
+      "description": "Dialog panel internal padding.",
+      "cssVariable": "--ds-dialog-padding"
+    },
+    {
+      "name": "dialog.radius",
+      "type": "dimension",
+      "description": "Dialog panel corner radius.",
+      "cssVariable": "--ds-dialog-radius"
+    },
+    {
+      "name": "dialog.surface",
+      "type": "color",
+      "description": "Dialog panel background color.",
+      "cssVariable": "--ds-dialog-surface"
+    },
+    {
+      "name": "dialog.text",
+      "type": "color",
+      "description": "Dialog panel text color.",
+      "cssVariable": "--ds-dialog-text"
+    },
+    {
+      "name": "dialog.width.lg",
+      "type": "dimension",
+      "description": "Dialog large maximum inline size.",
+      "cssVariable": "--ds-dialog-width-lg"
+    },
+    {
+      "name": "dialog.width.md",
+      "type": "dimension",
+      "description": "Dialog medium maximum inline size.",
+      "cssVariable": "--ds-dialog-width-md"
+    },
+    {
+      "name": "dialog.width.sm",
+      "type": "dimension",
+      "description": "Dialog small maximum inline size.",
+      "cssVariable": "--ds-dialog-width-sm"
+    },
+    {
       "name": "hero.background",
       "type": "color",
       "description": "Hero background color.",

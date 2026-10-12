@@ -1,2 +1,3 @@
 - [Playwright in NixOS](playwright-nixos.md) — browser downloads need Nix shared libraries as well as Playwright's Chromium install.
 - [Storybook file-input tests](storybook-file-input-tests.md) — iframe-based stories may expose uploaded files on the input but not through cross-realm `File`/`FormData` assumptions.
+- [Native dialog tests](storybook-native-dialog-tests.md) — use browser keyboard events for native Escape behavior and open through a trigger when checking focus return.

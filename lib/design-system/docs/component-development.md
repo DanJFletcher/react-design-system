@@ -17,7 +17,7 @@ For a future component, use this planning template:
 
 ## Approved component scope
 
-The user approved implementing `Accordion` and `Footer` as the next component additions. Their API and accessibility contracts are:
+The user approved implementing `Accordion`, `Footer`, and `Dialog` as component additions. Their API and accessibility contracts are:
 
 ### Accordion
 
@@ -36,6 +36,16 @@ The user approved implementing `Accordion` and `Footer` as the next component ad
 - State: stateless; navigation and destinations belong to the consumer.
 - Customization: use semantic tokens, CSS Modules, responsive layout, public variants and size props; do not add theme-specific branches or undocumented private hooks.
 - Validation: Storybook playground, layout variants and themes; visual mobile/desktop checks; lint, typecheck, Storybook and package-consumer checks.
+
+### Dialog
+
+- Objective: accessible modal content for confirmations, forms, and focused tasks.
+- API: `open` and `onOpenChange` are required controlled props; `heading`, `description`, `children`, and `footer` provide content slots. `size` (`sm`, `md`, `lg`), `headingLevel`, `showCloseButton`, `closeLabel`, `closeOnEscape`, and `closeOnBackdropClick` configure presentation and dismissal. Native dialog props, refs, `className`, and typed `style` are forwarded, excluding native `open`, `onClose`, `onCancel`, `onClick`, and `style` which the component coordinates.
+- Semantics and interaction: render a native `<dialog>` opened with `showModal()`, not a React portal. The browser provides modal focus containment, background inertness, initial focus, and return focus. A visible close button is shown by default. Escape closes by default; backdrop clicks do not close by default. Native cancel/close handlers and dialog children remain supported.
+- State: the consumer owns `open`; the component reports dismissal requests through `onOpenChange(false)`. Consumer-supplied close handlers run without bypassing that contract.
+- Theme behavior: CSS variables continue to inherit through the dialog's DOM ancestry; the native top layer changes paint order, not the element's parent relationship. No separate portal-theme bridge is needed.
+- Customization: register documented `dialog.*` styling hooks for its surface, text, border, radius, padding, width, and backdrop; use semantic tokens for focus and text styles.
+- Validation: Storybook open/closed and size/theme examples; browser tests for focus, Escape, backdrop, controlled state, mobile fit, and nested theme styling; lint, typecheck, Storybook and package-consumer checks.
 
 Every component must use native HTML semantics when applicable, public semantic tokens or registered component hooks, and documented focus, disabled, loading, keyboard, and state behavior as relevant. Cover ACME, Luna, custom themes, scoped overrides, and nested boundaries.
 

@@ -64,6 +64,12 @@ export type {
   FooterSize,
   FooterVariant,
 } from "./components/Footer/Footer";
+export { Dialog } from "./components/Dialog/Dialog";
+export type {
+  DialogHeadingLevel,
+  DialogProps,
+  DialogSize,
+} from "./components/Dialog/Dialog";
 export { Hero } from "./components/Hero/Hero";
 export type {
   HeroAlignment,

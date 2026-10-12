@@ -1,0 +1,156 @@
+.dialog {
+  --_dialog-surface: var(--ds-color-surface-primary);
+  --_dialog-text: var(--ds-color-text-primary);
+  --_dialog-border: var(--ds-color-border-control);
+  --_dialog-radius: var(--ds-radius-shape-rounded);
+  --_dialog-padding: var(--ds-space-6);
+  --_dialog-width: var(--ds-dialog-width-md, calc(var(--ds-space-32) + var(--ds-space-32) + var(--ds-space-32) + var(--ds-space-32)));
+
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  inline-size: calc(100vw - var(--ds-space-8));
+  max-inline-size: var(--_dialog-width);
+  max-block-size: calc(100vh - var(--ds-space-8));
+  overflow: hidden;
+  margin: auto;
+  padding: 0;
+  border: var(--ds-border-width-default) solid var(--ds-dialog-border, var(--_dialog-border));
+  border-radius: var(--ds-dialog-radius, var(--_dialog-radius));
+  background-color: var(--ds-dialog-surface, var(--_dialog-surface));
+  color: var(--ds-dialog-text, var(--_dialog-text));
+  font-family: var(--ds-font-family-sans);
+}
+
+.dialog:not([open]) {
+  display: none;
+}
+
+.dialog[data-size="sm"] {
+  --_dialog-width: var(--ds-dialog-width-sm, calc(var(--ds-space-32) + var(--ds-space-32) + var(--ds-space-32)));
+}
+
+.dialog[data-size="md"] {
+  --_dialog-width: var(--ds-dialog-width-md, calc(var(--ds-space-32) + var(--ds-space-32) + var(--ds-space-32) + var(--ds-space-32)));
+}
+
+.dialog[data-size="lg"] {
+  --_dialog-width: var(--ds-dialog-width-lg, calc(var(--ds-space-32) + var(--ds-space-32) + var(--ds-space-32) + var(--ds-space-32) + var(--ds-space-32)));
+}
+
+.dialog::backdrop {
+  background-color: color-mix(
+    in srgb,
+    var(--ds-dialog-backdrop, var(--ds-color-text-primary)) 56%,
+    transparent
+  );
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ds-space-4);
+  padding: var(--ds-dialog-padding, var(--_dialog-padding));
+  border-block-end: var(--ds-border-width-default) solid var(--ds-dialog-border, var(--_dialog-border));
+}
+
+.headingGroup {
+  display: grid;
+  gap: var(--ds-space-2);
+  min-inline-size: 0;
+}
+
+.heading {
+  margin: 0;
+  color: inherit;
+  font-size: var(--ds-font-size-xl);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+.description {
+  color: var(--ds-color-text-muted);
+  font-size: var(--ds-font-size-md);
+  line-height: var(--ds-line-height-normal);
+}
+
+.closeButton {
+  display: grid;
+  flex: 0 0 auto;
+  inline-size: var(--ds-control-min-block-size-md);
+  min-inline-size: var(--ds-control-min-block-size-md);
+  min-block-size: var(--ds-control-min-block-size-md);
+  place-items: center;
+  margin-block-start: calc(-1 * var(--ds-space-1));
+  margin-inline-end: calc(-1 * var(--ds-space-1));
+  border: 0;
+  border-radius: var(--ds-radius-control);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background: var(--ds-color-action-ghost-hover);
+  color: var(--ds-color-action-ghost-fg);
+}
+
+.closeButton:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.closeButton svg {
+  inline-size: var(--ds-space-5);
+  block-size: var(--ds-space-5);
+}
+
+.body {
+  min-block-size: 0;
+  overflow: auto;
+  padding: var(--ds-dialog-padding, var(--_dialog-padding));
+  overscroll-behavior: contain;
+  font-size: var(--ds-font-size-md);
+  line-height: var(--ds-line-height-relaxed);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ds-space-3);
+  padding: var(--ds-dialog-padding, var(--_dialog-padding));
+  border-block-start: var(--ds-border-width-default) solid var(--ds-dialog-border, var(--_dialog-border));
+}
+
+@media (max-width: 32rem) {
+  .dialog {
+    max-block-size: calc(100vh - var(--ds-space-6));
+  }
+
+  .header,
+  .body,
+  .footer {
+    padding: var(--ds-space-4);
+  }
+}
+
+@media (forced-colors: active) {
+  .dialog {
+    border-color: CanvasText;
+  }
+
+  .dialog::backdrop {
+    background: Canvas;
+    opacity: 0.7;
+  }
+
+  .closeButton:focus-visible {
+    outline-color: Highlight;
+  }
+}

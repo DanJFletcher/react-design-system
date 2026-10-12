@@ -212,6 +212,28 @@ Each trigger is a native button inside a heading and connects to its panel with 
 
 The footer uses semantic text, surface, border, focus, spacing, and radius tokens and accepts `className` and typed `style`.
 
+## Dialog
+
+```tsx
+<Dialog
+  open={isOpen}
+  onOpenChange={setIsOpen}
+  heading="Delete this draft?"
+  description="This action cannot be undone."
+  size="md"
+  closeOnEscape
+  footer={<Button onClick={() => setIsOpen(false)}>Delete draft</Button>}
+>
+  <p>Are you sure you want to delete the draft?</p>
+</Dialog>
+```
+
+`Dialog` is a controlled, modal-only component built on the native `<dialog>` element. `open` and `onOpenChange` are required; an external trigger updates the consumer's state. `heading`, `description`, `children`, and `footer` compose the content. It supports three maximum-width sizes, configurable heading level, a visible close button by default, Escape dismissal by default, and optional backdrop-click dismissal (off by default).
+
+The native modal provides top-layer rendering, focus containment, background inertness, initial focus, and return focus. A native `form method="dialog"` can close the panel; the resulting close event calls `onOpenChange(false)`. Escape and backdrop dismissal request a controlled close rather than changing native open state behind the consumer. Use `aria-label` or `aria-labelledby` when omitting `heading`; `description` is connected with `aria-describedby`.
+
+The `dialog.*` hooks customize surface, text, border, backdrop, radius, padding, and size widths. The dialog is not portalled: theme variables and scoped hooks inherit from its DOM ancestors even while the browser paints it in the top layer.
+
 ## Action menu
 
 ```tsx
