@@ -220,6 +220,29 @@ Provide an accessible `label` and unique slide `id` values. Use `getSlideLabel` 
 
 Each trigger is a native button inside a heading and connects to its panel with `aria-expanded`, `aria-controls`, and `aria-labelledby`. Panels use `role="region"` and remain mounted while closed. Native keyboard activation and Tab order are retained; there is no custom roving focus behavior. The component uses semantic theme tokens and accepts `className` and typed `style`.
 
+## Tabs
+
+```tsx
+<Tabs
+  label="Account settings"
+  defaultValue="profile"
+  items={[
+    { id: "profile", label: "Profile", content: <ProfilePanel /> },
+    { id: "security", label: "Security", content: <SecurityPanel /> },
+    { id: "notifications", label: "Notifications", content: <NotificationPanel /> },
+  ]}
+  orientation="horizontal"
+  activationMode="automatic"
+  variant="line"
+/>
+```
+
+`Tabs` switches between related panels in one view. Each item needs a unique `id`, visible `label`, and `content`; `disabled` removes an item from selection and keyboard navigation. Use `ariaLabel` only when the visible label does not provide an accessible name, such as an icon-only label. The required `label` names the tab list.
+
+Selection can be uncontrolled with `defaultValue` or controlled with `value` and `onValueChange`. `orientation` is `horizontal` or `vertical`; horizontal lists respond to Left/Right Arrow and vertical lists to Up/Down Arrow. Home/End move to the first/last enabled tab. In automatic mode (default), arrow navigation also selects; manual mode moves focus without switching panels until Enter, Space, or a click. Horizontal arrow direction respects right-to-left text. Inactive panels stay mounted and hidden; the active panel is focusable.
+
+Choose `variant="line"` or `variant="pills"`, `size="sm" | "md" | "lg"`, and `fullWidth` to control presentation. Styling uses semantic tokens, so tab states inherit ACME, Luna, Orchid, and custom theme colors without theme-specific rendering. Native `div` props, refs, `className`, and typed `style` are forwarded.
+
 ## Footer
 
 ```tsx

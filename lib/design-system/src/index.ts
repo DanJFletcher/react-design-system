@@ -15,6 +15,15 @@ export type {
   AccordionSize,
   AccordionVariant,
 } from "./components/Accordion/Accordion";
+export { Tabs } from "./components/Tabs/Tabs";
+export type {
+  TabsActivationMode,
+  TabsItem,
+  TabsOrientation,
+  TabsProps,
+  TabsSize,
+  TabsVariant,
+} from "./components/Tabs/Tabs";
 export { Card } from "./components/Card/Card";
 export type {
   CardAlignment,

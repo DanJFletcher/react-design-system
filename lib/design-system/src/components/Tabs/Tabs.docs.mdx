@@ -1,0 +1,44 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as TabsStories from "./Tabs.stories";
+
+<Meta of={TabsStories} />
+
+<Title>Tabs</Title>
+
+<Subtitle>Switch between related panels with an accessible, theme-aware tab list.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={TabsStories.Playground} />
+
+Use the controls to choose orientation, activation mode, visual variant, size, and whether horizontal tabs fill the available width. Tabs scroll horizontally when their labels do not fit.
+
+## Layout and states
+
+<Canvas of={TabsStories.Vertical} />
+
+<Canvas of={TabsStories.ManualActivation} />
+
+<Canvas of={TabsStories.DisabledTab} />
+
+<Canvas of={TabsStories.FullWidth} />
+
+<Canvas of={TabsStories.VariantAndSizeExamples} />
+
+Each item requires a unique `id`, a visible `label`, and `content`; optionally set `disabled` to exclude an item from selection and keyboard navigation. Use `ariaLabel` only if the visible label does not provide an accessible name. The required `label` prop names the tab list.
+
+## Theme coverage
+
+<Canvas of={TabsStories.ThemeCoverage} />
+
+<Canvas of={TabsStories.NestedThemeBoundary} />
+
+Tabs use semantic tokens for action, text, border, focus, spacing, radius, and typography. Styles follow ACME, Luna, Orchid, custom themes, and nested theme boundaries.
+
+## State and keyboard access
+
+`defaultValue` initializes uncontrolled state. Use `value` and `onValueChange` for controlled state; the parent must update `value` when it accepts a change. If the selected item becomes missing or disabled, the first enabled item is shown. An empty or fully disabled list has no selected panel.
+
+The named `role="tablist"` contains native buttons with `role="tab"`, `aria-selected`, `aria-controls`, and roving `tabIndex`. Panels use `role="tabpanel"` and `aria-labelledby`; inactive panels remain mounted but hidden. The selected panel is focusable.
+
+Horizontal tab lists use Left/Right Arrow and vertical tab lists use Up/Down Arrow. Horizontal arrow direction follows right-to-left text. Home/End focus the first/last enabled tab. In automatic mode, moving focus also selects the tab; in manual mode, Enter, Space, or pointer activation selects the focused tab.
