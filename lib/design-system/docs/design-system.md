@@ -234,6 +234,39 @@ The native modal provides top-layer rendering, focus containment, background ine
 
 The `dialog.*` hooks customize surface, text, border, backdrop, radius, padding, and size widths. The dialog is not portalled: theme variables and scoped hooks inherit from its DOM ancestors even while the browser paints it in the top layer.
 
+## Toast
+
+```tsx
+function SaveButton() {
+  const { showToast } = useToast();
+
+  return (
+    <Button
+      onClick={() => showToast({
+        title: "Changes saved",
+        description: "Your profile is up to date.",
+        variant: "success",
+        action: { label: "View profile", onClick: openProfile },
+      })}
+    >
+      Save profile
+    </Button>
+  );
+}
+
+<ThemeScope theme="luna">
+  <ToastProvider position="bottom-end">
+    <SaveButton />
+  </ToastProvider>
+</ThemeScope>
+```
+
+`Toast` is the individual notification; `ToastProvider` owns the FIFO queue and renders a labeled viewport, and `useToast` exposes `showToast`, `dismissToast`, and `dismissAll`. New messages are queued while the visible limit is reached (`maxVisible`, default `5`); dismissing a visible message promotes the next queued message. The hook returns each notification's ID so a caller may dismiss it directly.
+
+Toast titles and optional descriptions are consumer-provided content. Variants are `info` (default), `success`, `warning`, and `error`. All variants announce with `role="status"` except errors, which announce with `role="alert"`. The close control has an accessible name. Optional actions invoke their callback and then dismiss the toast.
+
+`duration` defaults to five seconds. Set it to `0` (or a negative value) to keep a toast visible until the user dismisses it; the timer pauses while the pointer or keyboard focus is inside a toast. Position accepts `top-start`, `top-end`, `bottom-start`, or `bottom-end`, defaulting to `bottom-end`. Place the provider under the desired theme boundary; it does not portal, so scoped theme values and hooks inherit normally. The `toast.*` hooks customize the viewport spacing/width and toast surface, text, border, radius, padding, and per-variant accent colors.
+
 ## Action menu
 
 ```tsx

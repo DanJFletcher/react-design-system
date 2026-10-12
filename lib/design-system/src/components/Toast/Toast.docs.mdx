@@ -1,0 +1,38 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as ToastStories from "./Toast.stories";
+
+<Meta of={ToastStories} />
+
+<Title>Toast</Title>
+
+<Subtitle>Theme-aware status notifications with accessible announcements, optional actions, automatic dismissal, and a provider-owned queue.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={ToastStories.Playground} />
+
+`ToastProvider` renders a viewport for its descendants. Call `useToast()` from a child component to show or dismiss notifications. The viewport defaults to the lower end of the screen; notifications appear there in the order they were added. When `maxVisible` is reached, remaining notifications wait in a FIFO queue.
+
+## Variants, actions, and placement
+
+<Canvas of={ToastStories.Variants} />
+
+<Canvas of={ToastStories.Action} />
+
+<Canvas of={ToastStories.Queue} />
+
+<Canvas of={ToastStories.TopStart} />
+
+`info`, `success`, and `warning` notifications use `role="status"` and a polite announcement. `error` uses `role="alert"` for an assertive announcement. The close control is a named button; an optional action runs its callback and dismisses the toast. The default duration is 5000ms; set `duration={0}` for persistent messages. Timers pause while a toast is hovered or focused.
+
+## Theme and scoped styling
+
+<Canvas of={ToastStories.ThemeCoverage} />
+
+<Canvas of={ToastStories.CustomHooks} />
+
+Mount the provider inside the desired theme boundary. It does not use a portal, so the viewport inherits theme variables and hook overrides from its ancestors. The `toast.*` hooks customize surface, text, border, radius, padding, spacing, maximum width, screen inset, and each variant accent. The provider supports `top-start`, `top-end`, `bottom-start`, and `bottom-end` positions.
+
+## API
+
+`Toast` is also exported as a presentational component. It requires a `title` and `onDismiss` callback; the caller removes or hides it when dismissal is requested. `ToastProvider` accepts `position`, `label`, `maxVisible`, `defaultDuration`, `className`, and typed `style`. `useToast()` returns `showToast(options)` (with the generated ID), `dismissToast(id)`, and `dismissAll()`.

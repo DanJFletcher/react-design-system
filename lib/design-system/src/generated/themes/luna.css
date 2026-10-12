@@ -137,6 +137,19 @@
   --ds-pricing-price: initial;
   --ds-pricing-radius: initial;
   --ds-pricing-text: initial;
+  --ds-toast-border: initial;
+  --ds-toast-error-accent: initial;
+  --ds-toast-gap: initial;
+  --ds-toast-info-accent: initial;
+  --ds-toast-padding: initial;
+  --ds-toast-radius: initial;
+  --ds-toast-success-accent: initial;
+  --ds-toast-surface: initial;
+  --ds-toast-text: initial;
+  --ds-toast-viewport-gap: initial;
+  --ds-toast-viewport-inset: initial;
+  --ds-toast-warning-accent: initial;
+  --ds-toast-width: initial;
 }
 :root:not([data-ds-theme]),
 :root[data-ds-theme="luna"],

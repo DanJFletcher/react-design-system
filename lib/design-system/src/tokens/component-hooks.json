@@ -93,6 +93,19 @@
     "dialog.padding": { "type": "dimension", "description": "Dialog panel internal padding." },
     "dialog.width.sm": { "type": "dimension", "description": "Dialog small maximum inline size." },
     "dialog.width.md": { "type": "dimension", "description": "Dialog medium maximum inline size." },
-    "dialog.width.lg": { "type": "dimension", "description": "Dialog large maximum inline size." }
+    "dialog.width.lg": { "type": "dimension", "description": "Dialog large maximum inline size." },
+    "toast.surface": { "type": "color", "description": "Toast notification background color." },
+    "toast.text": { "type": "color", "description": "Toast notification primary text color." },
+    "toast.border": { "type": "color", "description": "Toast notification border color." },
+    "toast.radius": { "type": "dimension", "description": "Toast notification corner radius." },
+    "toast.padding": { "type": "dimension", "description": "Toast notification internal padding." },
+    "toast.gap": { "type": "dimension", "description": "Toast notification icon and content spacing." },
+    "toast.width": { "type": "dimension", "description": "Toast viewport maximum inline size." },
+    "toast.viewport-inset": { "type": "dimension", "description": "Toast viewport offset from the screen edge." },
+    "toast.viewport-gap": { "type": "dimension", "description": "Spacing between stacked toast notifications." },
+    "toast.info-accent": { "type": "color", "description": "Toast informational accent color." },
+    "toast.success-accent": { "type": "color", "description": "Toast success accent color." },
+    "toast.warning-accent": { "type": "color", "description": "Toast warning accent color." },
+    "toast.error-accent": { "type": "color", "description": "Toast error accent color." }
   }
 }

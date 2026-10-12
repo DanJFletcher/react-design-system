@@ -949,6 +949,84 @@
       "type": "color",
       "description": "Pricing details primary text color.",
       "cssVariable": "--ds-pricing-text"
+    },
+    {
+      "name": "toast.border",
+      "type": "color",
+      "description": "Toast notification border color.",
+      "cssVariable": "--ds-toast-border"
+    },
+    {
+      "name": "toast.error-accent",
+      "type": "color",
+      "description": "Toast error accent color.",
+      "cssVariable": "--ds-toast-error-accent"
+    },
+    {
+      "name": "toast.gap",
+      "type": "dimension",
+      "description": "Toast notification icon and content spacing.",
+      "cssVariable": "--ds-toast-gap"
+    },
+    {
+      "name": "toast.info-accent",
+      "type": "color",
+      "description": "Toast informational accent color.",
+      "cssVariable": "--ds-toast-info-accent"
+    },
+    {
+      "name": "toast.padding",
+      "type": "dimension",
+      "description": "Toast notification internal padding.",
+      "cssVariable": "--ds-toast-padding"
+    },
+    {
+      "name": "toast.radius",
+      "type": "dimension",
+      "description": "Toast notification corner radius.",
+      "cssVariable": "--ds-toast-radius"
+    },
+    {
+      "name": "toast.success-accent",
+      "type": "color",
+      "description": "Toast success accent color.",
+      "cssVariable": "--ds-toast-success-accent"
+    },
+    {
+      "name": "toast.surface",
+      "type": "color",
+      "description": "Toast notification background color.",
+      "cssVariable": "--ds-toast-surface"
+    },
+    {
+      "name": "toast.text",
+      "type": "color",
+      "description": "Toast notification primary text color.",
+      "cssVariable": "--ds-toast-text"
+    },
+    {
+      "name": "toast.viewport-gap",
+      "type": "dimension",
+      "description": "Spacing between stacked toast notifications.",
+      "cssVariable": "--ds-toast-viewport-gap"
+    },
+    {
+      "name": "toast.viewport-inset",
+      "type": "dimension",
+      "description": "Toast viewport offset from the screen edge.",
+      "cssVariable": "--ds-toast-viewport-inset"
+    },
+    {
+      "name": "toast.warning-accent",
+      "type": "color",
+      "description": "Toast warning accent color.",
+      "cssVariable": "--ds-toast-warning-accent"
+    },
+    {
+      "name": "toast.width",
+      "type": "dimension",
+      "description": "Toast viewport maximum inline size.",
+      "cssVariable": "--ds-toast-width"
     }
   ],
   "themes": {

@@ -1,6 +1,6 @@
 # Component development
 
-The initial scope established Button. The approved core form-control set adds TextField, Textarea, native Select, Checkbox, and RadioGroup. Any further component must have a written API and an approved roadmap dependency before implementation.
+The initial scope established Button. The approved core form-control set adds TextField, Textarea, native Select, Checkbox, and RadioGroup. Further additions require a written API and an approved roadmap entry before implementation.
 
 For a future component, use this planning template:
 
@@ -17,7 +17,7 @@ For a future component, use this planning template:
 
 ## Approved component scope
 
-The user approved implementing `Accordion`, `Footer`, and `Dialog` as component additions. Their API and accessibility contracts are:
+The user approved implementing `Accordion`, `Footer`, `Dialog`, and `Toast` as component additions. Their API and accessibility contracts are:
 
 ### Accordion
 
@@ -46,6 +46,17 @@ The user approved implementing `Accordion`, `Footer`, and `Dialog` as component 
 - Theme behavior: CSS variables continue to inherit through the dialog's DOM ancestry; the native top layer changes paint order, not the element's parent relationship. No separate portal-theme bridge is needed.
 - Customization: register documented `dialog.*` styling hooks for its surface, text, border, radius, padding, width, and backdrop; use semantic tokens for focus and text styles.
 - Validation: Storybook open/closed and size/theme examples; browser tests for focus, Escape, backdrop, controlled state, mobile fit, and nested theme styling; lint, typecheck, Storybook and package-consumer checks.
+
+### Toast
+
+- Objective: short, accessible status notifications with optional actions for app-wide feedback.
+- Dependencies: existing semantic tokens, generated component hooks, and the React design-system package; no external notification or portal dependency.
+- Scope: a presentational `Toast`, a `ToastProvider`, and a `useToast` hook. Provider positions are `top-start`, `top-end`, `bottom-start`, and `bottom-end`; it shows up to five notifications and queues the rest FIFO.
+- Public API: `Toast` requires `title` and `onDismiss`; `description`, `variant` (`info`, `success`, `warning`, `error`), decorative `icon`, an action `{ label, onClick }`, accessible close label, and `duration` are optional. A zero or negative duration disables automatic dismissal. `ToastProvider` accepts children, position, accessible viewport label, visible limit, default duration, class name, and typed style. `useToast` returns `showToast(options)` (which returns an ID), `dismissToast(id)`, and `dismissAll()`.
+- Semantics and interaction: notifications use `role="status"` with polite announcements except errors, which use `role="alert"`. The viewport is a labeled region. Each toast has a named native dismiss button; an optional action invokes its callback and then dismisses. Automatic dismissal pauses while the pointer or keyboard focus is within the toast. Actions and close controls retain visible focus indicators.
+- State and theme behavior: the provider owns its FIFO queue and removes dismissed toasts; the consumer owns the content and any action side effects. No portal is used, so mount the provider under the desired `data-ds-theme`/`ThemeScope` boundary. Duration defaults to five seconds and can be disabled for persistent messages.
+- Customization: use semantic tokens and registered `toast.*` hooks for surface, text, border, radius, padding, width, accent colors, viewport inset, and stack spacing. CSS Modules provide responsive positioning and forced-colors support.
+- Validation: Storybook playground, variants, actions, placement, queue, and scoped-theme stories; browser tests for announcement roles, manual and automatic dismissal, pausing, FIFO behavior, mobile fit, and theme inheritance; lint, typecheck, Storybook and package-consumer checks.
 
 Every component must use native HTML semantics when applicable, public semantic tokens or registered component hooks, and documented focus, disabled, loading, keyboard, and state behavior as relevant. Cover ACME, Luna, custom themes, scoped overrides, and nested boundaries.
 

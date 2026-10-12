@@ -1,0 +1,169 @@
+.viewport {
+  --_toast-inset: var(--ds-toast-viewport-inset, var(--ds-space-4));
+
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-toast-viewport-gap, var(--ds-space-3));
+  box-sizing: border-box;
+  inline-size: min(
+    var(--ds-toast-width, calc(var(--ds-space-32) + var(--ds-space-32) + var(--ds-space-32))),
+    calc(100vw - var(--_toast-inset) - var(--_toast-inset))
+  );
+  max-block-size: calc(100vh - var(--_toast-inset) - var(--_toast-inset));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  pointer-events: none;
+}
+
+.viewport[data-position^="top"] {
+  inset-block-start: var(--_toast-inset);
+}
+
+.viewport[data-position^="bottom"] {
+  inset-block-end: var(--_toast-inset);
+}
+
+.viewport[data-position$="start"] {
+  inset-inline-start: var(--_toast-inset);
+}
+
+.viewport[data-position$="end"] {
+  inset-inline-end: var(--_toast-inset);
+}
+
+.toast {
+  --_toast-surface: var(--ds-color-surface-primary);
+  --_toast-text: var(--ds-color-text-primary);
+  --_toast-border: var(--ds-color-border-control);
+  --_toast-accent: var(--ds-color-accent-fg);
+
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--ds-toast-gap, var(--ds-space-3));
+  box-sizing: border-box;
+  padding: var(--ds-toast-padding, var(--ds-space-4));
+  border: var(--ds-border-width-default) solid var(--ds-toast-border, var(--_toast-border));
+  border-inline-start: var(--ds-space-1) solid var(--_toast-accent);
+  border-radius: var(--ds-toast-radius, var(--ds-radius-shape-rounded));
+  background-color: var(--ds-toast-surface, var(--_toast-surface));
+  color: var(--ds-toast-text, var(--_toast-text));
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-sm);
+  line-height: var(--ds-line-height-normal);
+  pointer-events: auto;
+}
+
+.toast[data-variant="info"] {
+  --_toast-accent: var(--ds-toast-info-accent, var(--ds-color-accent-fg));
+}
+
+.toast[data-variant="success"] {
+  --_toast-accent: var(--ds-toast-success-accent, var(--ds-color-action-primary-bg));
+}
+
+.toast[data-variant="warning"] {
+  --_toast-accent: var(--ds-toast-warning-accent, var(--ds-color-text-muted));
+}
+
+.toast[data-variant="error"] {
+  --_toast-accent: var(--ds-toast-error-accent, var(--ds-color-text-error));
+}
+
+.icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--ds-space-5);
+  block-size: var(--ds-space-5);
+  margin-block-start: var(--ds-space-half);
+  color: var(--_toast-accent);
+}
+
+.icon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.content {
+  display: grid;
+  justify-items: start;
+  gap: var(--ds-space-1);
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.title {
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.description {
+  color: var(--ds-color-text-muted);
+}
+
+.action,
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--ds-radius-control);
+  background: transparent;
+  color: var(--_toast-accent);
+  font: inherit;
+  cursor: pointer;
+}
+
+.action {
+  min-block-size: var(--ds-control-min-block-size-sm);
+  margin-block-start: var(--ds-space-1);
+  padding-inline: var(--ds-space-2);
+  font-weight: var(--ds-font-weight-semibold);
+  text-align: start;
+  text-decoration: underline;
+  text-underline-offset: var(--ds-space-half);
+}
+
+.closeButton {
+  flex: 0 0 auto;
+  inline-size: var(--ds-control-min-block-size-sm);
+  min-inline-size: var(--ds-control-min-block-size-sm);
+  min-block-size: var(--ds-control-min-block-size-sm);
+  margin-block-start: calc(-1 * var(--ds-space-2));
+  margin-inline-end: calc(-1 * var(--ds-space-2));
+}
+
+.action:hover,
+.closeButton:hover {
+  background: var(--ds-color-action-ghost-hover);
+}
+
+.action:focus-visible,
+.closeButton:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.closeButton svg {
+  inline-size: var(--ds-space-5);
+  block-size: var(--ds-space-5);
+}
+
+@media (forced-colors: active) {
+  .toast {
+    border-color: CanvasText;
+  }
+
+  .toast[data-variant] {
+    --_toast-accent: Highlight;
+  }
+
+  .action:focus-visible,
+  .closeButton:focus-visible {
+    outline-color: Highlight;
+  }
+}
