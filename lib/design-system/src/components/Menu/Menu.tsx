@@ -12,6 +12,7 @@ import {
   type ReactNode,
 } from "react";
 import { Button, type ButtonShape, type ButtonSize, type ButtonVariant } from "../Button/Button";
+import { Icon } from "../Icon/Icon";
 import type { DesignSystemStyle } from "../../generated/token-types";
 import styles from "./Menu.module.css";
 
@@ -83,7 +84,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
     triggerLabel,
     items,
     trigger,
-    triggerIcon = <ChevronDownIcon />,
+    triggerIcon = <Icon name="chevron-down" />,
     triggerAriaLabel,
     triggerVariant = "secondary",
     triggerShape,
@@ -468,7 +469,7 @@ function SubmenuEntry({
         onClick={onToggle}
       >
         <ItemContent label={item.label} icon={item.icon} />
-        <ChevronRightIcon />
+        <Icon className={styles.submenuChevron} name="chevron-right" size="sm" />
       </button>
       {open && (
         <MenuList
@@ -506,20 +507,4 @@ function getEnabledMenuItems(menu: HTMLUListElement | null): HTMLElement[] {
   if (!menu) return [];
   return Array.from(menu.querySelectorAll<HTMLElement>(":scope > li > [role='menuitem']"))
     .filter((item) => !item.hasAttribute("disabled") && item.getAttribute("aria-disabled") !== "true");
-}
-
-function ChevronDownIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="m6 9 6 6 6-6" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
-    </svg>
-  );
-}
-
-function ChevronRightIcon() {
-  return (
-    <svg className={styles.submenuChevron} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="m9 6 6 6-6 6" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
-    </svg>
-  );
 }

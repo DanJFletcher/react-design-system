@@ -31,6 +31,19 @@ test("Toast timer pauses while hovered and resumes after pointer exit", async ({
 
 test("Toast uses assertive semantics for errors and promotes queued notifications", async ({ page }) => {
   await page.goto("/iframe.html?id=components-toast--variants&viewMode=story");
+  const iconByVariant = {
+    info: "circle-info",
+    success: "circle-check",
+    warning: "triangle-alert",
+    error: "circle-close",
+  } as const;
+  for (const [variant, iconName] of Object.entries(iconByVariant)) {
+    await page.getByRole("button", { name: `Show ${variant}` }).click();
+    await expect(page.locator(`[data-variant="${variant}"]`).last()
+      .locator(`[data-icon="${iconName}"]`)).toBeVisible();
+  }
+
+  await page.goto("/iframe.html?id=components-toast--variants&viewMode=story");
   await page.getByRole("button", { name: "Show error" }).click();
   await expect(page.getByRole("alert")).toContainText("Error notification");
 

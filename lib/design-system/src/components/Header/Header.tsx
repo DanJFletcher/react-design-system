@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import { Button } from "../Button/Button";
+import { Icon } from "../Icon/Icon";
 import type { DesignSystemStyle } from "../../generated/token-types";
 import styles from "./Header.module.css";
 
@@ -111,7 +112,7 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(function Header(
             variant="ghost"
             size="sm"
             shape="rounded"
-            icon={<MenuIcon open={menuOpen} />}
+            icon={<Icon name={menuOpen ? "close" : "menu"} />}
             iconOnly
             aria-label={menuOpen ? "Close navigation" : "Open navigation"}
             aria-expanded={menuOpen}
@@ -150,25 +151,3 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(function Header(
 });
 
 Header.displayName = "Header";
-
-function MenuIcon({ open }: { open: boolean }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      {open ? (
-        <path
-          d="m6 6 12 12M18 6 6 18"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeWidth="1.8"
-        />
-      ) : (
-        <path
-          d="M4 6h16M4 12h16M4 18h16"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeWidth="1.8"
-        />
-      )}
-    </svg>
-  );
-}

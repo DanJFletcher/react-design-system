@@ -5,8 +5,12 @@ const iconNames = [
   "arrow-right",
   "book",
   "check",
+  "chevron-left",
   "chevron-down",
   "chevron-right",
+  "circle-check",
+  "circle-close",
+  "circle-info",
   "close",
   "folder",
   "grid",
@@ -19,6 +23,7 @@ const iconNames = [
   "search",
   "settings",
   "sparkle",
+  "triangle-alert",
 ];
 
 test("Icon playground exposes the named icon select and decorative semantics", async ({ page }) => {

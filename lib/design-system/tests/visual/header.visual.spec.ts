@@ -14,22 +14,26 @@ test("Header mobile navigation opens and closes accessibly", async ({ page }) =>
 
   await expect(menuButton).toBeVisible();
   await expect(menuButton).toHaveAttribute("aria-expanded", "false");
+  await expect(menuButton.locator('[data-icon="menu"]')).toBeVisible();
   await expect(navigation).not.toBeVisible();
 
   await menuButton.click();
   await expect(menuButton).toHaveAttribute("aria-expanded", "true");
+  await expect(menuButton.locator('[data-icon="close"]')).toBeVisible();
   await expect(navigation).toBeVisible();
   await expect(page.getByRole("link", { name: "Products" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Get started" })).toBeVisible();
 
   await page.keyboard.press("Escape");
   await expect(menuButton).toHaveAttribute("aria-expanded", "false");
+  await expect(menuButton.locator('[data-icon="menu"]')).toBeVisible();
   await expect(menuButton).toBeFocused();
   await expect(navigation).not.toBeVisible();
 
   await menuButton.click();
   await page.getByRole("link", { name: "Pricing" }).click();
   await expect(menuButton).toHaveAttribute("aria-expanded", "false");
+  await expect(menuButton.locator('[data-icon="menu"]')).toBeVisible();
   await expect(navigation).not.toBeVisible();
 });
 

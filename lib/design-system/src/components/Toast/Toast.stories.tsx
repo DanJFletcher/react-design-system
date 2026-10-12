@@ -47,8 +47,12 @@ export const Playground: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button", { name: "Show toast" }));
-    await expect(canvas.getByRole("status")).toHaveTextContent("Changes saved");
-    await userEvent.click(canvas.getByRole("button", { name: "Dismiss notification" }));
+    const toast = canvas.getByRole("status");
+    await expect(toast).toHaveTextContent("Changes saved");
+    await expect(toast.querySelector('[data-icon="circle-info"]')).toBeInTheDocument();
+    const closeButton = canvas.getByRole("button", { name: "Dismiss notification" });
+    await expect(closeButton.querySelector('[data-icon="close"]')).toBeInTheDocument();
+    await userEvent.click(closeButton);
     await expect(canvas.queryByRole("status")).not.toBeInTheDocument();
   },
 };

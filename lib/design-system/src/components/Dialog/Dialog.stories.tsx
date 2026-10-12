@@ -64,7 +64,9 @@ export const EscapeDisabled: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button", { name: "Open dialog" }));
     await expect(canvas.getByRole("dialog", { name: "Confirm the changes?" })).toBeVisible();
-    await userEvent.click(canvas.getByRole("button", { name: "Close dialog" }));
+    const closeButton = canvas.getByRole("button", { name: "Close dialog" });
+    await expect(closeButton.querySelector('[data-icon="close"]')).toBeInTheDocument();
+    await userEvent.click(closeButton);
     await expect(canvas.queryByRole("dialog")).not.toBeInTheDocument();
   },
 };

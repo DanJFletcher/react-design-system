@@ -12,6 +12,7 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
+import { Icon, type IconName } from "../Icon/Icon";
 import type { DesignSystemStyle } from "../../generated/token-types";
 import styles from "./Toast.module.css";
 
@@ -120,7 +121,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(function Toast(
         onClick={onDismiss}
         type="button"
       >
-        <CloseIcon />
+        <Icon name="close" />
       </button>
     </div>
   );
@@ -241,47 +242,11 @@ function ToastEntry({
 }
 
 function ToastGlyph({ variant }: { variant: ToastVariant }) {
-  if (variant === "success") {
-    return (
-      <svg fill="none" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
-        <path d="m8 12 2.5 2.5L16.5 9" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
-      </svg>
-    );
-  }
-  if (variant === "warning") {
-    return (
-      <svg fill="none" viewBox="0 0 24 24">
-        <path d="M12 3.5 21 20H3L12 3.5Z" stroke="currentColor" strokeLinejoin="round" strokeWidth="1.8" />
-        <path d="M12 9v5m0 2.5v.1" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
-      </svg>
-    );
-  }
-  if (variant === "error") {
-    return (
-      <svg fill="none" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
-        <path d="m9 9 6 6m0-6-6 6" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
-      </svg>
-    );
-  }
-  return (
-    <svg fill="none" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M12 11v5m0-8v.1" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
-    </svg>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg aria-hidden="true" fill="none" viewBox="0 0 20 20">
-      <path
-        d="m5 5 10 10M15 5 5 15"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="1.7"
-      />
-    </svg>
-  );
+  const iconByVariant: Record<ToastVariant, IconName> = {
+    info: "circle-info",
+    success: "circle-check",
+    warning: "triangle-alert",
+    error: "circle-close",
+  };
+  return <Icon name={iconByVariant[variant]} />;
 }

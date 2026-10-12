@@ -8,6 +8,10 @@ test("Carousel buttons, indicators, keyboard navigation, and slide focus state w
   await expect(carousel.getByRole("group", { name: "Find your focus, 1 of 3" })).toBeVisible();
   await expect(carousel.locator('[data-slot="rotation-toggle"]')).toHaveCount(0);
   await expect(carousel.getByRole("button", { name: "Previous slide" })).toBeEnabled();
+  await expect(carousel.locator('button[aria-label="Previous slide"] [data-icon="chevron-left"]'))
+    .toBeVisible();
+  await expect(carousel.locator('button[aria-label="Next slide"] [data-icon="chevron-right"]'))
+    .toBeVisible();
 
   await carousel.getByRole("button", { name: "Previous slide" }).click();
   await expect(carousel.getByRole("group", { name: "Move forward, 3 of 3" })).toBeVisible();
@@ -43,15 +47,18 @@ test("Carousel autoplay advances slides and its control pauses and resumes rotat
   await expect(carousel.getByRole("group", { name: "Build your flow, 2 of 3" })).toBeVisible({
     timeout: 5000,
   });
+  await expect(rotationToggle.locator('[data-icon="pause"]')).toBeVisible();
 
   await rotationToggle.click();
   await expect(rotationToggle).toHaveAttribute("aria-pressed", "false");
+  await expect(rotationToggle.locator('[data-icon="play"]')).toBeVisible();
   const pausedIndex = await carousel.getAttribute("data-index");
   await page.waitForTimeout(1800);
   await expect(carousel).toHaveAttribute("data-index", pausedIndex ?? "");
 
   await rotationToggle.click();
   await expect(rotationToggle).toHaveAttribute("aria-pressed", "true");
+  await expect(rotationToggle.locator('[data-icon="pause"]')).toBeVisible();
   await page.mouse.move(0, 0);
   await expect.poll(() => carousel.getAttribute("data-index"), { timeout: 5000 }).not.toBe(pausedIndex);
 });
@@ -77,15 +84,16 @@ test("Carousel stops rotation on focus and disables autoplay for reduced motion"
     "aria-label",
     "Automatic slide rotation is disabled by your reduced-motion preference",
   );
+  await expect(rotationToggle.locator('[data-icon="play"]')).toBeVisible();
   await page.waitForTimeout(1800);
   await expect(reducedMotionCarousel).toHaveAttribute("data-index", "0");
 });
 
 test("Carousel touch swipe navigates without introducing horizontal page overflow", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/iframe.html?id=components-carousel--playground&viewMode=story");
+  await page.goto("/iframe.html?id=components-carousel--swipe-example&viewMode=story");
 
-  const carousel = page.getByRole("region", { name: "Featured stories" });
+  const carousel = page.getByRole("region", { name: "Swipe example" });
   const viewport = carousel.locator('[data-slot="viewport"]');
   await viewport.dispatchEvent("pointerdown", {
     pointerId: 1,

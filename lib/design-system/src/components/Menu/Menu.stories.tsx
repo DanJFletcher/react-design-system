@@ -90,6 +90,7 @@ export const Playground: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const trigger = canvas.getByRole("button", { name: "Workspace" });
+    await expect(trigger.querySelector('[data-icon="chevron-down"]')).toBeInTheDocument();
     await userEvent.click(trigger);
 
     const menu = canvas.getByRole("menu", { name: "Workspace actions" });
@@ -102,6 +103,8 @@ export const Playground: Story = {
     await userEvent.click(within(menu).getByRole("menuitem", { name: "View" }));
     const submenu = canvas.getByRole("menu", { name: "View" });
     await expect(submenu).toBeVisible();
+    await expect(within(menu).getByRole("menuitem", { name: "View" })
+      .querySelector('[data-icon="chevron-right"]')).toBeInTheDocument();
     await userEvent.click(within(submenu).getByRole("menuitem", { name: "List view" }));
     await expect(showList).toHaveBeenCalledOnce();
     await expect(canvas.queryByRole("menu", { name: "Workspace actions" })).not.toBeInTheDocument();

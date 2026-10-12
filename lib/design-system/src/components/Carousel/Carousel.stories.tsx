@@ -111,6 +111,12 @@ export const AutoPlay: Story = {
   },
 };
 
+export const SwipeExample: Story = {
+  args: {
+    label: "Swipe example",
+  },
+};
+
 export const ControlsExamples: Story = {
   render: () => (
     <div style={{ display: "grid", gap: "var(--ds-space-6)" }}>

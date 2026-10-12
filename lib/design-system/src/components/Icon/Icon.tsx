@@ -12,8 +12,12 @@ export const iconNames = [
   "arrow-right",
   "book",
   "check",
+  "chevron-left",
   "chevron-down",
   "chevron-right",
+  "circle-check",
+  "circle-close",
+  "circle-info",
   "close",
   "folder",
   "grid",
@@ -26,6 +30,7 @@ export const iconNames = [
   "search",
   "settings",
   "sparkle",
+  "triangle-alert",
 ] as const;
 
 export type IconName = (typeof iconNames)[number];
@@ -61,8 +66,28 @@ const paths: Record<IconName, ReactNode> = {
     </>
   ),
   check: <path d="m5 12 4.5 4.5L19 7" />,
+  "chevron-left": <path d="m15 6-6 6 6 6" />,
   "chevron-down": <path d="m6 9 6 6 6-6" />,
   "chevron-right": <path d="m9 6 6 6-6 6" />,
+  "circle-check": (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m8 12 2.5 2.5L16.5 9" />
+    </>
+  ),
+  "circle-close": (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m9 9 6 6m0-6-6 6" />
+    </>
+  ),
+  "circle-info": (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 11v5" />
+      <circle cx="12" cy="8" r=".65" fill="currentColor" stroke="none" />
+    </>
+  ),
   close: <path d="m6 6 12 12M18 6 6 18" />,
   folder: (
     <>
@@ -106,6 +131,12 @@ const paths: Record<IconName, ReactNode> = {
     <path d="m10.3 3.8.4-1h2.6l.4 1a2 2 0 0 0 2.7 1.1l1-.5 1.8 1.8-.5 1a2 2 0 0 0 1.1 2.7l1 .4v2.6l-1 .4a2 2 0 0 0-1.1 2.7l.5 1-1.8 1.8-1-.5a2 2 0 0 0-2.7 1.1l-.4 1h-2.6l-.4-1a2 2 0 0 0-2.7-1.1l-1 .5-1.8-1.8.5-1a2 2 0 0 0-1.1-2.7l-1-.4v-2.6l1-.4a2 2 0 0 0 1.1-2.7l-.5-1 1.8-1.8 1 .5a2 2 0 0 0 2.7-1.1Z" />
   ),
   sparkle: <path d="m12 3 2.7 6.3L21 12l-6.3 2.7L12 21l-2.7-6.3L3 12l6.3-2.7L12 3Z" />,
+  "triangle-alert": (
+    <>
+      <path d="M12 3.5 21 20H3L12 3.5Z" />
+      <path d="M12 9v5m0 2.5v.1" />
+    </>
+  ),
 };
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(

@@ -10,6 +10,7 @@ import {
   type PointerEvent,
   type ReactNode,
 } from "react";
+import { Icon } from "../Icon/Icon";
 import type { DesignSystemStyle } from "../../generated/token-types";
 import styles from "./Carousel.module.css";
 
@@ -429,39 +430,14 @@ Carousel.displayName = "Carousel";
 
 function ArrowIcon({ direction }: { direction: "left" | "right" }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
+    <Icon
       className={styles.arrow}
-    >
-      {direction === "left" ? (
-        <path d="m14.5 5-7 7 7 7" />
-      ) : (
-        <path d="m9.5 5 7 7-7 7" />
-      )}
-    </svg>
+      name={direction === "left" ? "chevron-left" : "chevron-right"}
+      size="lg"
+    />
   );
 }
 
 function RotationIcon({ playing }: { playing: boolean }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-      className={styles.arrow}
-    >
-      {playing ? (
-        <>
-          <path d="M8 6v12" />
-          <path d="M16 6v12" />
-        </>
-      ) : (
-        <path d="m8 5 11 7-11 7V5Z" />
-      )}
-    </svg>
-  );
+  return <Icon className={styles.arrow} name={playing ? "pause" : "play"} size="lg" />;
 }

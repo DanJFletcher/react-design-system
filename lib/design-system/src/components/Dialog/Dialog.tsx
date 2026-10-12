@@ -9,6 +9,7 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
+import { Icon } from "../Icon/Icon";
 import type { DesignSystemStyle } from "../../generated/token-types";
 import styles from "./Dialog.module.css";
 
@@ -136,7 +137,7 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
               onClick={() => onOpenChange(false)}
               type="button"
             >
-              <CloseIcon />
+              <Icon name="close" />
             </button>
           )}
         </header>
@@ -148,16 +149,3 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
 });
 
 Dialog.displayName = "Dialog";
-
-function CloseIcon() {
-  return (
-    <svg aria-hidden="true" fill="none" viewBox="0 0 20 20">
-      <path
-        d="m5 5 10 10M15 5 5 15"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="1.7"
-      />
-    </svg>
-  );
-}
