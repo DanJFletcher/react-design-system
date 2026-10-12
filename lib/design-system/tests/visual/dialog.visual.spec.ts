@@ -14,6 +14,39 @@ test("Dialog opens modally, closes on Escape, and restores trigger focus", async
   await expect(trigger).toBeFocused();
 });
 
+test("Tooltip inside a dialog is topmost and consumes Escape before the dialog", async ({ page }) => {
+  await page.goto("/iframe.html?id=components-dialog--tooltip-inside-dialog&viewMode=story");
+
+  const openDialog = page.getByRole("button", { name: "Open dialog" });
+  await openDialog.click();
+  const dialog = page.getByRole("dialog", { name: "Confirm the changes?" });
+  const trigger = page.getByRole("button", { name: "Dialog help" });
+  await expect(dialog).toBeVisible();
+  await trigger.focus();
+
+  const tooltip = page.getByRole("tooltip");
+  await expect(tooltip).toBeVisible();
+  expect(
+    await tooltip.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      const hit = element.ownerDocument.elementFromPoint(
+        bounds.left + bounds.width / 2,
+        bounds.top + bounds.height / 2,
+      );
+      return hit !== null && element.contains(hit);
+    }),
+  ).toBe(true);
+
+  await page.keyboard.press("Escape");
+  await expect(tooltip).toBeHidden();
+  await expect(dialog).toBeVisible();
+  await expect(trigger).toBeFocused();
+
+  await page.keyboard.press("Escape");
+  await expect(dialog).not.toBeVisible();
+  await expect(openDialog).toBeFocused();
+});
+
 test("Dialog blocks Escape when configured and remains closeable", async ({ page }) => {
   await page.goto("/iframe.html?id=components-dialog--escape-disabled&viewMode=story");
   await page.getByRole("button", { name: "Open dialog" }).click();

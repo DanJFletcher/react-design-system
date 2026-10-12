@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "storybook/test";
 import { Button } from "../Button/Button";
+import { Tooltip } from "../Tooltip/Tooltip";
 import { Dialog, type DialogProps } from "./Dialog";
 
 const meta = {
@@ -48,6 +49,16 @@ export const Playground: Story = {};
 
 export const InitiallyOpen: Story = {
   render: (args) => <DialogPlayground {...args} initiallyOpen />,
+};
+
+export const TooltipInsideDialog: Story = {
+  render: (args) => (
+    <DialogPlayground {...args}>
+      <Tooltip content="Additional context for this dialog action.">
+        <Button variant="secondary">Dialog help</Button>
+      </Tooltip>
+    </DialogPlayground>
+  ),
 };
 
 export const SmallSize: Story = {

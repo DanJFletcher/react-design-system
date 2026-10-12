@@ -29,6 +29,25 @@ type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {};
 
+export const NativePopover: Story = {
+  render: () => (
+    <div style={{ padding: "var(--ds-space-8)" }}>
+      <button popoverTarget="tooltip-native-popover" type="button">
+        Open help panel
+      </button>
+      <div
+        id="tooltip-native-popover"
+        popover="auto"
+        style={{ padding: "var(--ds-space-8)" }}
+      >
+        <Tooltip content="Additional context inside this popover.">
+          <Button variant="secondary">Popover help</Button>
+        </Tooltip>
+      </div>
+    </div>
+  ),
+};
+
 export const PlacementExamples: Story = {
   render: () => (
     <div style={{ display: "grid", gridTemplateColumns: "repeat(2, max-content)", gap: "var(--ds-space-8)", padding: "var(--ds-space-16)" }}>

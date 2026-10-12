@@ -82,6 +82,7 @@ export const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(function Toolti
 
     const dismissOnEscape = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
+      event.preventDefault();
       setDismissed(true);
       setTouchOpen(false);
     };

@@ -22,6 +22,37 @@ test("Tooltip relates its trigger, opens on focus and hover, and dismisses with 
   await expect(tooltip).toBeHidden();
 });
 
+test("Tooltip inside a native popover consumes Escape before the popover", async ({ page }) => {
+  await page.goto("/iframe.html?id=components-tooltip--native-popover&viewMode=story");
+
+  await page.getByRole("button", { name: "Open help panel" }).click();
+  const popover = page.locator("#tooltip-native-popover");
+  await expect(popover).toBeVisible();
+  const trigger = page.getByRole("button", { name: "Popover help" });
+  await trigger.focus();
+
+  const tooltip = page.getByRole("tooltip");
+  await expect(tooltip).toBeVisible();
+  expect(
+    await tooltip.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      const hit = element.ownerDocument.elementFromPoint(
+        bounds.left + bounds.width / 2,
+        bounds.top + bounds.height / 2,
+      );
+      return hit !== null && element.contains(hit);
+    }),
+  ).toBe(true);
+
+  await page.keyboard.press("Escape");
+  await expect(tooltip).toBeHidden();
+  await expect(popover).toBeVisible();
+  await expect(trigger).toBeFocused();
+
+  await page.keyboard.press("Escape");
+  await expect(popover).toBeHidden();
+});
+
 test("Tooltip flips and stays within a narrow viewport, including with reduced motion", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 568 });
   await page.emulateMedia({ reducedMotion: "reduce" });
