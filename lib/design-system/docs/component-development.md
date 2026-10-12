@@ -17,7 +17,7 @@ For a future component, use this planning template:
 
 ## Approved component scope
 
-The user approved implementing `Accordion`, `Footer`, `Dialog`, and `Toast` as component additions. Their API and accessibility contracts are:
+The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, and `Heading` as component additions. Their API and accessibility contracts are:
 
 ### Accordion
 
@@ -57,6 +57,16 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, and `Toast` as c
 - State and theme behavior: the provider owns its FIFO queue and removes dismissed toasts; the consumer owns the content and any action side effects. No portal is used, so mount the provider under the desired `data-ds-theme`/`ThemeScope` boundary. Duration defaults to five seconds and can be disabled for persistent messages.
 - Customization: use semantic tokens and registered `toast.*` hooks for surface, text, border, radius, padding, width, accent colors, viewport inset, and stack spacing. CSS Modules provide responsive positioning and forced-colors support.
 - Validation: Storybook playground, variants, actions, placement, queue, and scoped-theme stories; browser tests for announcement roles, manual and automatic dismissal, pausing, FIFO behavior, mobile fit, and theme inheritance; lint, typecheck, Storybook and package-consumer checks.
+
+### Typography (Text and Heading)
+
+- Objective: reusable, theme-aware text primitives with explicit semantic markup and type-scale controls.
+- Dependencies: existing font-size, font-weight, line-height, and text-color tokens; no new semantic tokens or component hooks.
+- Public API: `Text` renders `p` by default and may render `span` or `div` through `as`; `size` accepts `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, or `5xl`; `weight` accepts `regular`, `medium`, or `semibold`; `tone` accepts `primary` or `muted`. `Heading` renders the actual `h1`–`h6` selected by `level` (default `2`); `size` uses the same font scale and defaults by semantic level (`h1` → `5xl`, `h2` → `4xl`, `h3` → `3xl`, `h4` → `2xl`, `h5` → `xl`, `h6` → `lg`); it also accepts `weight` and `tone`. Both forward native HTML attributes, children, refs, `className`, and typed `DesignSystemStyle`.
+- Semantics and interaction: headings remain native heading elements, with visual `size` independent from document-outline `level`; text defaults to a paragraph and can use inline or generic block markup. Neither adds implicit ARIA roles or interaction.
+- Defaults: `Text` uses `md`, `regular`, and `primary`; `Heading` uses a size tied to `level`, `semibold`, and `primary`. Text line height is normal; heading line height is tight. Both reset browser margins.
+- Customization: use the shared theme font and semantic text tokens, CSS Modules, and the documented size/weight/tone props. Keep ACME, Luna, Orchid, and custom themes on the same markup path; no theme-specific React branches or undocumented hooks.
+- Validation: Storybook playgrounds for scale, semantic levels, weights, tones, and all themes; browser checks for heading semantics, visual-size overrides, mobile wrapping, and nested theme inheritance; lint, typecheck, Storybook, build, and package-consumer checks.
 
 Every component must use native HTML semantics when applicable, public semantic tokens or registered component hooks, and documented focus, disabled, loading, keyboard, and state behavior as relevant. Cover ACME, Luna, custom themes, scoped overrides, and nested boundaries.
 

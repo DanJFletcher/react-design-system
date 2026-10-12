@@ -1,0 +1,35 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as TypographyStories from "./Typography.stories";
+
+<Meta of={TypographyStories} />
+
+<Title>Typography</Title>
+
+<Subtitle>Theme-aware text and heading primitives built on the shared font scale.</Subtitle>
+
+## Text
+
+<Canvas of={TypographyStories.Playground} />
+<Canvas of={TypographyStories.TextScale} />
+<Canvas of={TypographyStories.TextElements} />
+
+`Text` renders a paragraph by default; use `as="span"` or `as="div"` when the surrounding content requires different HTML semantics. `size` accepts the shared `xs` through `5xl` scale, `weight` accepts `regular`, `medium`, or `semibold`, and `tone` accepts `primary` or `muted`.
+
+## Heading
+
+<Canvas of={TypographyStories.HeadingLevels} />
+
+`Heading` renders the native `h1` through `h6` selected by `level`. Visual `size` is independent of the semantic heading level; it defaults to a descending scale from `5xl` for `h1` to `lg` for `h6`. Use the level that matches the document outline, even when choosing a different visual size.
+
+## Weight, tone, and themes
+
+<Canvas of={TypographyStories.WeightsAndTones} />
+<Canvas of={TypographyStories.ThemeCoverage} />
+<Canvas of={TypographyStories.NestedThemeBoundary} />
+<Canvas of={TypographyStories.ResponsiveWrapping} />
+
+Both components use the active theme's font-family, font-size, font-weight, line-height, and semantic text-color tokens. They work in ACME, Luna, Orchid, and custom themes without theme-specific rendering. Native HTML attributes, children, refs, `className`, and typed `DesignSystemStyle` are forwarded.
+
+## Accessibility
+
+Choose heading levels according to page structure rather than visual size. `Text` adds no implicit role; its selected element retains native browser semantics. Long headings wrap instead of clipping, and forced-colors mode uses the system text color.

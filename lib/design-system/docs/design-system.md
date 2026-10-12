@@ -70,6 +70,18 @@ Native disabled uses the native `disabled` attribute. Loading preserves focus wi
 
 The owning form manages longer asynchronous submission state. Children may contain decorative icons, which should be hidden from assistive technology. `href`, `asChild`, toggle semantics, groups, and an icon-only convenience API are out of scope.
 
+## Typography
+
+```tsx
+<Heading level={2}>Build with a clear hierarchy</Heading>
+<Text size="lg">Supporting copy follows the active theme's type scale.</Text>
+<Text as="span" tone="muted" size="sm">Updated today</Text>
+```
+
+`Heading` renders the semantic heading element selected by `level` (`1`–`6`); its optional `size` is independent from that semantic level. It defaults from `5xl` at level 1 down to `lg` at level 6. `Text` renders a paragraph by default and accepts `as="span"` or `as="div"` when different native markup is needed. Both support the shared size scale (`xs`–`5xl`), weights (`regular`, `medium`, `semibold`), and text tones (`primary`, `muted`); they use the active theme's typography and text-color tokens.
+
+Both components forward native HTML attributes, refs, children, `className`, and typed `DesignSystemStyle`. Choose heading levels to match the document outline, not their visual appearance. Text and heading colors and typography inherit from the active theme; no typography-specific hooks or theme branches are needed.
+
 ## Responsive header
 
 ```tsx

@@ -1,0 +1,98 @@
+.text,
+.heading {
+  margin: 0;
+  color: var(--ds-color-text-primary);
+  font-family: var(--ds-font-family-sans);
+  font-weight: var(--_typography-weight, var(--ds-font-weight-regular));
+}
+
+.text {
+  --_typography-size: var(--ds-font-size-md);
+  --_typography-weight: var(--ds-font-weight-regular);
+  --_typography-line-height: var(--ds-line-height-normal);
+
+  font-size: var(--_typography-size);
+  line-height: var(--_typography-line-height);
+}
+
+.heading {
+  --_typography-size: var(--ds-font-size-4xl);
+  --_typography-weight: var(--ds-font-weight-semibold);
+  --_typography-line-height: var(--ds-line-height-tight);
+
+  font-size: var(--_typography-size);
+  line-height: var(--_typography-line-height);
+  overflow-wrap: anywhere;
+}
+
+.text[data-size="xs"],
+.heading[data-size="xs"] {
+  --_typography-size: var(--ds-font-size-xs);
+}
+
+.text[data-size="sm"],
+.heading[data-size="sm"] {
+  --_typography-size: var(--ds-font-size-sm);
+}
+
+.text[data-size="md"],
+.heading[data-size="md"] {
+  --_typography-size: var(--ds-font-size-md);
+}
+
+.text[data-size="lg"],
+.heading[data-size="lg"] {
+  --_typography-size: var(--ds-font-size-lg);
+}
+
+.text[data-size="xl"],
+.heading[data-size="xl"] {
+  --_typography-size: var(--ds-font-size-xl);
+}
+
+.text[data-size="2xl"],
+.heading[data-size="2xl"] {
+  --_typography-size: var(--ds-font-size-2xl);
+}
+
+.text[data-size="3xl"],
+.heading[data-size="3xl"] {
+  --_typography-size: var(--ds-font-size-3xl);
+}
+
+.text[data-size="4xl"],
+.heading[data-size="4xl"] {
+  --_typography-size: var(--ds-font-size-4xl);
+}
+
+.text[data-size="5xl"],
+.heading[data-size="5xl"] {
+  --_typography-size: var(--ds-font-size-5xl);
+}
+
+.text[data-weight="regular"],
+.heading[data-weight="regular"] {
+  --_typography-weight: var(--ds-font-weight-regular);
+}
+
+.text[data-weight="medium"],
+.heading[data-weight="medium"] {
+  --_typography-weight: var(--ds-font-weight-medium);
+}
+
+.text[data-weight="semibold"],
+.heading[data-weight="semibold"] {
+  --_typography-weight: var(--ds-font-weight-semibold);
+}
+
+.text[data-tone="muted"],
+.heading[data-tone="muted"] {
+  color: var(--ds-color-text-muted);
+}
+
+@media (forced-colors: active) {
+  .text,
+  .heading {
+    color: CanvasText;
+  }
+}

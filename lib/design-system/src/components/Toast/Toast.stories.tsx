@@ -54,7 +54,7 @@ export const Playground: Story = {
 };
 
 export const AutoDismiss: Story = {
-  args: { duration: 500 },
+  args: { duration: 1500 },
 };
 
 export const Variants: Story = {

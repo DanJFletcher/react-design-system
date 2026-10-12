@@ -80,6 +80,16 @@ export type {
   ToastProps,
   ToastVariant,
 } from "./components/Toast/Toast";
+export { Heading, Text } from "./components/Typography/Typography";
+export type {
+  HeadingLevel,
+  HeadingProps,
+  TextElement,
+  TextProps,
+  TypographySize,
+  TypographyTone,
+  TypographyWeight,
+} from "./components/Typography/Typography";
 export { Hero } from "./components/Hero/Hero";
 export type {
   HeroAlignment,
