@@ -100,14 +100,16 @@ export const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(function Toolti
   }, [open]);
 
   useLayoutEffect(() => {
+    const tooltip = tooltipRef.current;
     if (!open) {
+      if (tooltip?.matches(":popover-open")) tooltip.hidePopover();
       setPositioned(false);
       return;
     }
 
     const anchor = anchorRef.current;
-    const tooltip = tooltipRef.current;
     if (!anchor || !tooltip) return;
+    if (!tooltip.matches(":popover-open")) tooltip.showPopover();
 
     const updatePosition = () => {
       const anchorRect = anchor.getBoundingClientRect();
@@ -251,6 +253,7 @@ export const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(function Toolti
         data-side={side}
         hidden={!open}
         id={id}
+        popover="manual"
         ref={tooltipRef}
         role="tooltip"
         style={{ left: coordinates.x, top: coordinates.y }}

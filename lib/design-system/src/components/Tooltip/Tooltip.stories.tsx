@@ -90,6 +90,51 @@ export const ViewportEdge: Story = {
   ),
 };
 
+export const TransformedClippedPanel: Story = {
+  render: () => (
+    <div
+      data-testid="transformed-clipped-panel"
+      style={{
+        boxSizing: "border-box",
+        inlineSize: "18rem",
+        blockSize: "7rem",
+        margin: "8rem",
+        overflow: "hidden",
+        padding: "var(--ds-space-2)",
+        border: "1px solid var(--ds-color-border-default)",
+        transform: "translateZ(0)",
+      }}
+    >
+      <Tooltip content="This tooltip escapes the transformed, clipped panel.">
+        <Button variant="secondary">Panel help</Button>
+      </Tooltip>
+    </div>
+  ),
+};
+
+export const ScrollablePanel: Story = {
+  render: () => (
+    <div
+      data-testid="scrollable-panel"
+      style={{
+        boxSizing: "border-box",
+        inlineSize: "20rem",
+        blockSize: "9rem",
+        margin: "8rem",
+        overflow: "auto",
+        padding: "var(--ds-space-2)",
+        border: "1px solid var(--ds-color-border-default)",
+      }}
+    >
+      <div style={{ blockSize: "12rem" }} />
+      <Tooltip content="This tooltip follows its trigger as the panel scrolls.">
+        <Button variant="secondary">Scrollable help</Button>
+      </Tooltip>
+      <div style={{ blockSize: "20rem" }} />
+    </div>
+  ),
+};
+
 export const CustomHooks: Story = {
   render: () => (
     <Tooltip

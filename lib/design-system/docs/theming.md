@@ -45,10 +45,12 @@ For a component-only override, use a registered hook:
 
 The native `Dialog` uses `showModal()` and is painted in the browser's top layer, but it remains in its original DOM position. Semantic theme tokens and scoped component hooks continue to inherit from its ancestors; Dialog does not create a portal or require a theme bridge.
 
-`ToastProvider` likewise keeps its viewport in the DOM subtree where it is mounted, so notifications inherit a surrounding `ThemeScope` and any local `toast.*` hook overrides. Mount the provider inside the intended theme boundary.
+`ToastProvider` keeps its viewport in the DOM subtree where it is mounted, so notifications inherit a surrounding `ThemeScope` and any local `toast.*` hook overrides. Mount the provider inside the intended theme boundary.
+
+`Tooltip` uses the browser's popover top layer to escape transformed and overflow-clipped ancestors. It remains in its original DOM subtree, so it continues to inherit the active theme and local `tooltip.*` hook overrides. Mount it inside the intended theme boundary.
 
 `Text` and `Heading` use the active theme's shared font scale and semantic primary/muted text colors. Their markup stays identical across themes; visual heading `size` can vary independently from semantic `level`.
 
 To add a custom theme, add a JSON source under `src/tokens/themes/`, optionally extend ACME or Luna, provide overrides for all semantic roles not inherited, and run `pnpm tokens:build`. The compiler emits a complete map; your fork can remove the inherited theme afterwards without breaking the generated result.
 
-CSS custom properties inherit through DOM ancestry. Portalled components added in a later phase must define how their portal container receives active theme values and scoped overrides before implementation begins.
+CSS custom properties inherit through DOM ancestry. Components rendered in a separate portal must define how their portal container receives active theme values and scoped overrides before implementation begins; top-layer popovers that remain in the DOM subtree continue to inherit them.

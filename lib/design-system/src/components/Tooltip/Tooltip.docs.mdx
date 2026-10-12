@@ -11,7 +11,7 @@ import * as TooltipStories from "./Tooltip.stories";
 
 <Canvas of={TooltipStories.Playground} />
 
-Use the placement control to choose the preferred side. The component flips to the opposite side when space is limited and clamps the result to the viewport. The tooltip stays in its theme boundary rather than moving to a global portal.
+Use the placement control to choose the preferred side. The component flips to the opposite side when space is limited and clamps the result to the viewport. It uses the browser's popover top layer to escape transformed and clipped ancestors while remaining in its DOM subtree, so theme values continue to inherit normally.
 
 ## Placements, themes, and viewport edges
 

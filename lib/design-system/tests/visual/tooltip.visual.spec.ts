@@ -56,6 +56,78 @@ test("Tooltip follows ACME, Luna, and Orchid colors through nested theme boundar
   expect(new Set(colors).size).toBe(3);
 });
 
+test("Tooltip escapes transformed and clipped panels", async ({ page }) => {
+  await page.goto("/iframe.html?id=components-tooltip--transformed-clipped-panel&viewMode=story");
+  const panel = page.getByTestId("transformed-clipped-panel");
+  const trigger = page.getByRole("button", { name: "Panel help" });
+  await trigger.hover();
+
+  const tooltip = page.getByRole("tooltip");
+  await expect(tooltip).toBeVisible();
+  const panelBounds = await panel.boundingBox();
+  const tooltipBounds = await tooltip.boundingBox();
+  expect(panelBounds).not.toBeNull();
+  expect(tooltipBounds).not.toBeNull();
+  expect(tooltipBounds!.y).toBeLessThan(panelBounds!.y);
+  expect(
+    await tooltip.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      const hit = document.elementFromPoint(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2);
+      return hit !== null && element.contains(hit);
+    }),
+  ).toBe(true);
+});
+
+test("Tooltip keeps local style-hook overrides in the top layer", async ({ page }) => {
+  await page.goto("/iframe.html?id=components-tooltip--custom-hooks&viewMode=story");
+  await page.getByRole("button", { name: "Custom tooltip" }).hover();
+
+  const tooltip = page.getByRole("tooltip");
+  await expect(tooltip).toBeVisible();
+  const styles = await tooltip.evaluate((element) => {
+    const tooltipStyle = getComputedStyle(element);
+    const rootStyle = getComputedStyle(element.parentElement!);
+    return {
+      surfaceOverride: tooltipStyle.getPropertyValue("--ds-tooltip-surface").trim(),
+      inheritedSurfaceOverride: rootStyle.getPropertyValue("--ds-tooltip-surface").trim(),
+      radiusOverride: tooltipStyle.getPropertyValue("--ds-tooltip-radius").trim(),
+      inheritedRadiusOverride: rootStyle.getPropertyValue("--ds-tooltip-radius").trim(),
+    };
+  });
+  expect(styles.surfaceOverride).toBe(styles.inheritedSurfaceOverride);
+  expect(styles.radiusOverride).toBe(styles.inheritedRadiusOverride);
+});
+
+test("Tooltip tracks its trigger while a scrollable panel moves it past the panel edge", async ({ page }) => {
+  await page.goto("/iframe.html?id=components-tooltip--scrollable-panel&viewMode=story");
+  const panel = page.getByTestId("scrollable-panel");
+  const trigger = page.getByRole("button", { name: "Scrollable help" });
+  await panel.evaluate((element) => {
+    element.scrollTop = 170;
+  });
+  await trigger.focus();
+
+  const tooltip = page.getByRole("tooltip");
+  await expect(tooltip).toBeVisible();
+  const panelBounds = await panel.boundingBox();
+  const before = await tooltip.boundingBox();
+  expect(panelBounds).not.toBeNull();
+  expect(before).not.toBeNull();
+  expect(before!.y).toBeLessThan(panelBounds!.y);
+
+  await panel.evaluate((element) => {
+    element.scrollTop += 24;
+  });
+  await expect.poll(async () => (await tooltip.boundingBox())?.y).toBe(before!.y - 24);
+  expect(
+    await tooltip.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      const hit = document.elementFromPoint(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2);
+      return hit !== null && element.contains(hit);
+    }),
+  ).toBe(true);
+});
+
 test("Touch users can open and dismiss a tooltip without hover", async ({ browser }) => {
   const context = await browser.newContext({
     viewport: { width: 390, height: 720 },
