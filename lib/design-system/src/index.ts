@@ -14,6 +14,8 @@ export type {
   BadgeSize,
   BadgeTone,
 } from "./components/Badge/Badge";
+export { Tooltip } from "./components/Tooltip/Tooltip";
+export type { TooltipPlacement, TooltipProps } from "./components/Tooltip/Tooltip";
 export { Accordion } from "./components/Accordion/Accordion";
 export type {
   AccordionHeadingLevel,

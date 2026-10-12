@@ -1,0 +1,109 @@
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "../Button/Button";
+import { Tooltip, type TooltipPlacement } from "./Tooltip";
+
+type PlaygroundArgs = {
+  content: string;
+  placement: TooltipPlacement;
+};
+
+const meta = {
+  title: "Components/Tooltip",
+  args: {
+    content: "Brief contextual help appears on hover or keyboard focus.",
+    placement: "top",
+  },
+  argTypes: {
+    content: { control: "text" },
+    placement: { control: "select", options: ["top", "right", "bottom", "left"] },
+  },
+  render: ({ content, placement }) => (
+    <Tooltip content={content} placement={placement}>
+      <Button variant="secondary">More information</Button>
+    </Tooltip>
+  ),
+} satisfies Meta<PlaygroundArgs>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Playground: Story = {};
+
+export const PlacementExamples: Story = {
+  render: () => (
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, max-content)", gap: "var(--ds-space-8)", padding: "var(--ds-space-16)" }}>
+      {(["top", "right", "bottom", "left"] as const).map((placement) => (
+        <Tooltip key={placement} content={`Tooltip placed ${placement}.`} placement={placement}>
+          <Button variant="secondary">{placement}</Button>
+        </Tooltip>
+      ))}
+    </div>
+  ),
+};
+
+export const ThemeCoverage: Story = {
+  render: () => (
+    <div
+      data-ds-theme="acme"
+      style={{
+        display: "grid",
+        gap: "var(--ds-space-4)",
+        padding: "var(--ds-space-4)",
+        color: "var(--ds-color-text-primary)",
+        backgroundColor: "var(--ds-color-canvas)",
+      }}
+    >
+      <Tooltip content="This tooltip inherits ACME colors and spacing.">
+        <Button variant="secondary">ACME tooltip</Button>
+      </Tooltip>
+      <section
+        data-ds-theme="luna"
+        style={{ display: "grid", gap: "var(--ds-space-4)", padding: "var(--ds-space-4)", backgroundColor: "var(--ds-color-canvas)" }}
+      >
+        <Tooltip content="This tooltip remains within the nested Luna theme.">
+          <Button variant="secondary">Luna tooltip</Button>
+        </Tooltip>
+        <section
+          data-ds-theme="orchid"
+          style={{ display: "grid", gap: "var(--ds-space-4)", padding: "var(--ds-space-4)", backgroundColor: "var(--ds-color-canvas)" }}
+        >
+          <Tooltip content="This tooltip follows the nested Orchid theme.">
+            <Button variant="secondary">Orchid tooltip</Button>
+          </Tooltip>
+        </section>
+      </section>
+    </div>
+  ),
+};
+
+export const ViewportEdge: Story = {
+  args: {
+    content: "A longer tooltip description that wraps naturally and stays inside the visible browser window, even when the trigger is close to the edge.",
+    placement: "top",
+  },
+  render: ({ content, placement }) => (
+    <div style={{ position: "fixed", insetBlockStart: "var(--ds-space-1)", insetInlineStart: "var(--ds-space-1)" }}>
+      <Tooltip content={content} placement={placement}>
+        <Button variant="secondary">Near the viewport edge</Button>
+      </Tooltip>
+    </div>
+  ),
+};
+
+export const CustomHooks: Story = {
+  render: () => (
+    <Tooltip
+      content="Scoped hook values style only this tooltip."
+      style={{
+        "--ds-tooltip-surface": "var(--ds-color-accent-bg)",
+        "--ds-tooltip-text": "var(--ds-color-accent-fg)",
+        "--ds-tooltip-border": "var(--ds-color-accent-fg)",
+        "--ds-tooltip-radius": "var(--ds-space-4)",
+        "--ds-tooltip-padding-block": "var(--ds-space-3)",
+        "--ds-tooltip-padding-inline": "var(--ds-space-4)",
+      }}
+    >
+      <Button variant="secondary">Custom tooltip</Button>
+    </Tooltip>
+  ),
+};

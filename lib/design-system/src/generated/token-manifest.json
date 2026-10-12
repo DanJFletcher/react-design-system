@@ -1057,6 +1057,48 @@
       "type": "dimension",
       "description": "Toast viewport maximum inline size.",
       "cssVariable": "--ds-toast-width"
+    },
+    {
+      "name": "tooltip.border",
+      "type": "color",
+      "description": "Tooltip outline color.",
+      "cssVariable": "--ds-tooltip-border"
+    },
+    {
+      "name": "tooltip.max-width",
+      "type": "dimension",
+      "description": "Tooltip maximum inline size.",
+      "cssVariable": "--ds-tooltip-max-width"
+    },
+    {
+      "name": "tooltip.padding-block",
+      "type": "dimension",
+      "description": "Tooltip vertical internal spacing.",
+      "cssVariable": "--ds-tooltip-padding-block"
+    },
+    {
+      "name": "tooltip.padding-inline",
+      "type": "dimension",
+      "description": "Tooltip horizontal internal spacing.",
+      "cssVariable": "--ds-tooltip-padding-inline"
+    },
+    {
+      "name": "tooltip.radius",
+      "type": "dimension",
+      "description": "Tooltip corner radius.",
+      "cssVariable": "--ds-tooltip-radius"
+    },
+    {
+      "name": "tooltip.surface",
+      "type": "color",
+      "description": "Tooltip content background.",
+      "cssVariable": "--ds-tooltip-surface"
+    },
+    {
+      "name": "tooltip.text",
+      "type": "color",
+      "description": "Tooltip content text color.",
+      "cssVariable": "--ds-tooltip-text"
     }
   ],
   "themes": {

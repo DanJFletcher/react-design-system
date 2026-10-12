@@ -1,0 +1,40 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as TooltipStories from "./Tooltip.stories";
+
+<Meta of={TooltipStories} />
+
+<Title>Tooltip</Title>
+
+<Subtitle>Short supplementary help revealed by pointer hover, keyboard focus, or touch.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={TooltipStories.Playground} />
+
+Use the placement control to choose the preferred side. The component flips to the opposite side when space is limited and clamps the result to the viewport. The tooltip stays in its theme boundary rather than moving to a global portal.
+
+## Placements, themes, and viewport edges
+
+<Canvas of={TooltipStories.PlacementExamples} />
+
+<Canvas of={TooltipStories.ThemeCoverage} />
+
+<Canvas of={TooltipStories.ViewportEdge} />
+
+The tooltip uses the active theme's text and surface colors and inherits scoped tooltip hooks through nested theme boundaries. Its content width and position adapt to narrow viewports and long text.
+
+## Accessibility and dismissal
+
+The trigger must be a single element and should be keyboard-focusable whenever the help is needed. Tooltip adds its ID to the trigger's existing `aria-describedby` value without replacing other descriptions. Focus and pointer hover reveal the tooltip; Escape dismisses it without moving focus. On touch, tap the trigger to toggle help and tap elsewhere to dismiss it.
+
+Tooltips are supplementary, non-interactive descriptions. Do not put links, controls, or essential instructions in them; use a dialog or popover for interactive content. The component does not make a non-focusable trigger keyboard-focusable.
+
+## Theme hooks
+
+<Canvas of={TooltipStories.CustomHooks} />
+
+The `tooltip.*` hooks customize surface, text, border, radius, padding, and maximum width. Hooks reset at theme boundaries; to change tooltip styling inside a nested theme, set the override on that boundary or the tooltip itself.
+
+## API
+
+`content` is the supplementary description. `placement` accepts `top`, `right`, `bottom`, or `left` and defaults to `top`. Pass exactly one trigger element as `children`; `className`, a ref, native span attributes, and typed `style` are forwarded to the anchor.

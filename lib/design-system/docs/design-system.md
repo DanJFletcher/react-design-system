@@ -92,6 +92,20 @@ An optional `icon` is decorative and appears on the left by default; set `iconPo
 
 `Badge` renders a native `span` and adds no interaction or live-region behavior. It forwards native span props, refs, `className`, and typed `style`. The component follows ACME, Luna, Orchid, nested, and custom themes without theme-specific rendering.
 
+## Tooltip
+
+```tsx
+<Tooltip content="Your changes are saved automatically." placement="right">
+  <Button variant="ghost" aria-label="About automatic saving">
+    More information
+  </Button>
+</Tooltip>
+```
+
+`Tooltip` reveals brief supplementary help on pointer hover and keyboard focus, and can be opened or dismissed by touch. It preserves any existing `aria-describedby` IDs on the single trigger element and adds its own description ID. Escape closes the tooltip without moving focus; outside pointer activation dismisses it.
+
+Tooltip content is non-interactive and must not contain essential instructions by itself. The component keeps its fixed-position content in the trigger's DOM subtree, preserving semantic tokens and scoped hooks across ACME, Luna, Orchid, and nested theme boundaries. It flips placement when necessary and clamps to the viewport. `placement` accepts `top`, `right`, `bottom`, or `left`; `tooltip.*` hooks customize visual details.
+
 ## Icon
 
 ```tsx

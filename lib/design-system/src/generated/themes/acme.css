@@ -150,6 +150,13 @@
   --ds-toast-viewport-inset: initial;
   --ds-toast-warning-accent: initial;
   --ds-toast-width: initial;
+  --ds-tooltip-border: initial;
+  --ds-tooltip-max-width: initial;
+  --ds-tooltip-padding-block: initial;
+  --ds-tooltip-padding-inline: initial;
+  --ds-tooltip-radius: initial;
+  --ds-tooltip-surface: initial;
+  --ds-tooltip-text: initial;
 }
 :root:not([data-ds-theme]),
 :root[data-ds-theme="acme"],

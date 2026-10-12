@@ -52,6 +52,10 @@ Carousel only auto-advances when explicitly enabled and always exposes a pause/s
 
 The configurable Menu supports nested action/link items and separators. It keeps native buttons and links as the activation elements while applying menu roles and managed arrow-key focus; nested menus open inline on narrow screens to avoid viewport overflow. Menu-specific component hooks extend scoped theming without adding new semantic tokens.
 
+## Tooltips stay in their theme subtree
+
+Tooltip content uses fixed positioning but remains a DOM descendant of its trigger, rather than moving into a body portal. Viewport flipping and clamping provide visible placement while inherited semantic tokens and scoped component hooks remain correct across nested theme boundaries.
+
 ## Storybook and visual checks are documentation, not a deployable app
 
 Storybook stays with the package and runs as its development/documentation environment. This project remains a shared library; it does not introduce a publishable end-user application.

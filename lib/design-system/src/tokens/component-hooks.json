@@ -106,6 +106,13 @@
     "toast.info-accent": { "type": "color", "description": "Toast informational accent color." },
     "toast.success-accent": { "type": "color", "description": "Toast success accent color." },
     "toast.warning-accent": { "type": "color", "description": "Toast warning accent color." },
-    "toast.error-accent": { "type": "color", "description": "Toast error accent color." }
+    "toast.error-accent": { "type": "color", "description": "Toast error accent color." },
+    "tooltip.surface": { "type": "color", "description": "Tooltip content background." },
+    "tooltip.text": { "type": "color", "description": "Tooltip content text color." },
+    "tooltip.border": { "type": "color", "description": "Tooltip outline color." },
+    "tooltip.radius": { "type": "dimension", "description": "Tooltip corner radius." },
+    "tooltip.padding-block": { "type": "dimension", "description": "Tooltip vertical internal spacing." },
+    "tooltip.padding-inline": { "type": "dimension", "description": "Tooltip horizontal internal spacing." },
+    "tooltip.max-width": { "type": "dimension", "description": "Tooltip maximum inline size." }
   }
 }

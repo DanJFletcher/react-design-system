@@ -87,6 +87,16 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - Customization: use public tone, size, and shape props with semantic tokens and CSS Modules; do not add theme-specific rendering, undocumented hooks, or interaction semantics.
 - Validation: Storybook tone, size, shape, icon/dot, ACME/Luna/Orchid, and nested-theme examples; browser checks for contrast, static semantics, indicators, and dimensions; token contrast checks, lint, typecheck, Storybook, package build, and package-consumer checks.
 
+### Tooltip
+
+- Objective: reveal short, non-essential explanations consistently on pointer hover, keyboard focus, and touch.
+- Dependencies: existing React package, CSS Modules, shared semantic text/surface tokens, and registered tooltip hooks; no portal or runtime positioning dependency.
+- Public API: `content` is supplementary `ReactNode`; `placement` accepts `top`, `right`, `bottom`, or `left` (default `top`). `children` is one trigger element. Native span props, `className`, refs, and typed `DesignSystemStyle` are forwarded to its anchor.
+- Semantics and interaction: the caller supplies a keyboard-focusable trigger as needed. Tooltip adds its generated ID to the trigger's existing `aria-describedby` value. Hover and focus open it; Escape dismisses without moving focus; touch activation toggles it and outside pointer activation dismisses it. Tooltip content is non-interactive; use a dialog or popover for controls and links.
+- Position and theme behavior: use a fixed-position tooltip in the anchor's DOM subtree so semantic tokens and scoped hooks inherit from ACME, Luna, Orchid, and nested boundaries. Prefer the requested side, flip when needed, and clamp to the visible viewport.
+- Customization: register `tooltip.*` hooks for surface, text, border, radius, padding, and maximum width; retain semantic defaults and reduced-motion/forced-color support.
+- Validation: Storybook placement, theme, custom-hook, and viewport examples; browser checks for trigger relationships, hover, focus, Escape, touch dismissal, viewport fit, nested themes, and reduced motion; lint, typecheck, Storybook, package build, and package-consumer checks.
+
 ### Tabs
 
 - Objective: switch between related panels such as settings sections, feature details, or documentation categories without navigating away.
