@@ -70,6 +70,22 @@ Native disabled uses the native `disabled` attribute. Loading preserves focus wi
 
 The owning form manages longer asynchronous submission state. Children may contain decorative icons, which should be hidden from assistive technology. `href`, `asChild`, toggle semantics, groups, and an icon-only convenience API are out of scope.
 
+## Icon
+
+```tsx
+import { Icon } from "@workspace/design-system";
+
+<Icon name="sparkle" />
+<Icon name="search" size="lg" />
+<Icon name="search" decorative={false} label="Search" />
+```
+
+`Icon` renders a named SVG from the built-in icon catalog: `arrow-left`, `arrow-right`, `book`, `check`, `chevron-down`, `chevron-right`, `close`, `folder`, `grid`, `heart`, `list`, `menu`, `moon`, `pause`, `play`, `search`, `settings`, and `sparkle`. The package exports the `IconName` type and `iconNames` list for typed APIs and controls.
+
+Icons are decorative and hidden from assistive technology by default. Set `decorative={false}` and provide a concise, non-empty `label` when the icon itself communicates meaning. `size` accepts `xs`, `sm`, `md`, `lg`, or `xl` and maps to 12px, 16px, 20px, 24px, or 32px from the shared spacing tokens. SVG attributes, refs, `className`, and typed `style` are forwarded.
+
+The paths use `currentColor`, so icons inherit the surrounding text color in ACME, Luna, Orchid, and custom themes. The catalog is inline SVG and adds no third-party icon dependency.
+
 ## Typography
 
 ```tsx

@@ -1,0 +1,39 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+import * as IconStories from "./Icon.stories";
+
+<Meta of={IconStories} />
+
+# Icon
+
+`Icon` renders a named, theme-neutral SVG from the package's built-in icon set. It has no external icon-library dependency and uses `currentColor` so it inherits the surrounding text color.
+
+## Interactive playground
+
+Choose a name from the **name** select and adjust its size.
+
+<Canvas of={IconStories.Playground} />
+
+## Available icons
+
+The built-in names are `arrow-left`, `arrow-right`, `book`, `check`, `chevron-down`, `chevron-right`, `close`, `folder`, `grid`, `heart`, `list`, `menu`, `moon`, `pause`, `play`, `search`, `settings`, and `sparkle`.
+
+<Canvas of={IconStories.Catalog} />
+
+## Sizing
+
+Sizes use the shared spacing scale: `xs` (12px), `sm` (16px), `md` (20px), `lg` (24px), and `xl` (32px). The default is `md`.
+
+<Canvas of={IconStories.Sizes} />
+
+## Accessibility
+
+Icons are decorative by default and hidden from assistive technology. For a standalone icon that conveys meaning, pass `decorative={false}` and a concise, non-empty `label`; the SVG is exposed as an image with that accessible name. Inside a button or a control that already has an accessible name, leave the icon decorative.
+
+<Canvas of={IconStories.Accessibility} />
+
+## Themes
+
+The same SVG markup works across all themes. Icons inherit `currentColor`; they do not choose a color based on theme name.
+
+<Canvas of={IconStories.ThemeCoverage} />
+<Canvas of={IconStories.NestedThemeBoundary} />

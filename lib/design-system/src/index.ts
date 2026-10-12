@@ -90,6 +90,8 @@ export type {
   TypographyTone,
   TypographyWeight,
 } from "./components/Typography/Typography";
+export { Icon, iconNames } from "./components/Icon/Icon";
+export type { IconName, IconProps, IconSize } from "./components/Icon/Icon";
 export { Hero } from "./components/Hero/Hero";
 export type {
   HeroAlignment,

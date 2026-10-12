@@ -17,7 +17,7 @@ For a future component, use this planning template:
 
 ## Approved component scope
 
-The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, and `Heading` as component additions. Their API and accessibility contracts are:
+The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, `Heading`, and `Icon` as component additions. Their API and accessibility contracts are:
 
 ### Accordion
 
@@ -67,6 +67,15 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - Defaults: `Text` uses `md`, `regular`, and `primary`; `Heading` uses a size tied to `level`, `semibold`, and `primary`. Text line height is normal; heading line height is tight. Both reset browser margins.
 - Customization: use the shared theme font and semantic text tokens, CSS Modules, and the documented size/weight/tone props. Keep ACME, Luna, Orchid, and custom themes on the same markup path; no theme-specific React branches or undocumented hooks.
 - Validation: Storybook playgrounds for scale, semantic levels, weights, tones, and all themes; browser checks for heading semantics, visual-size overrides, mobile wrapping, and nested theme inheritance; lint, typecheck, Storybook, build, and package-consumer checks.
+
+### Icon
+
+- Objective: provide consistent, named SVG icons that can be reused across application controls and Storybook examples.
+- Dependencies and source policy: render a curated, built-in inline SVG catalog; add no icon-library dependency, semantic color token, or component hook. All paths use `currentColor`.
+- Public API: `name` is one of the exported `iconNames` (`arrow-left`, `arrow-right`, `book`, `check`, `chevron-down`, `chevron-right`, `close`, `folder`, `grid`, `heart`, `list`, `menu`, `moon`, `pause`, `play`, `search`, `settings`, `sparkle`). `size` accepts `xs`, `sm`, `md`, `lg`, or `xl`, defaulting to `md` (20px); sizes map to shared spacing tokens from 12px through 32px. `decorative` defaults to `true`. When `decorative={false}`, `label` is required and becomes the SVG's accessible name. Native SVG attributes, class name, refs, and typed style are forwarded; callers cannot override the accessibility role/name contract.
+- Semantics and theme behavior: decorative SVGs use `aria-hidden="true"`; meaning-bearing SVGs use `role="img"` and a non-empty label. Icons inherit `currentColor` and spacing values from active themes without theme-specific rendering.
+- Customization: use the public `size` prop and SVG `className`/typed `style`; no icon-specific hooks are registered.
+- Validation: Storybook name-select playground, complete icon catalog, sizing, accessibility, all themes and nested theme stories; browser tests for catalog coverage, dimensions, accessible naming, and color inheritance; lint, typecheck, Storybook, package build, and package-consumer checks.
 
 Every component must use native HTML semantics when applicable, public semantic tokens or registered component hooks, and documented focus, disabled, loading, keyboard, and state behavior as relevant. Cover ACME, Luna, custom themes, scoped overrides, and nested boundaries.
 

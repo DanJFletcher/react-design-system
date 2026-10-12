@@ -1,13 +1,13 @@
 # Deferred roadmap
 
-The core native form controls are part of the current foundation. `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, and `Heading` are approved components; the remaining capabilities stay deferred.
+The core native form controls are part of the current foundation. `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, `Heading`, and `Icon` are approved components; the remaining capabilities stay deferred.
 
 | Phase | Capabilities | Required foundation |
 | --- | --- | --- |
 | Approved compositions | Accordion, Footer, Dialog | Public APIs and accessibility/state contracts in `component-development.md` |
 | Approved notifications | Toast | Provider-owned queue, timed dismissal, announcements, and theme-scoped viewport in `component-development.md` |
 | Approved typography atoms | Text, Heading | Native heading outline, shared type scale, and semantic text colors |
-| Visual atoms | Icon | Icon naming, sizing, decorative/accessible semantics, and source policy |
+| Approved icon atom | Icon | Curated named SVG catalog, token-based sizing, and decorative/accessible semantics |
 | Layout primitives | Stack, Inline, Grid, Container | Pixel spacing and responsive layout rules |
 | Additional form atoms | Switch, date/time inputs, file input | Extend the existing labeling, validation-message, and focus conventions |
 | Form composition | Public Field, Form, shared validation messages and state | Core form controls and a separately defined state/validation contract |

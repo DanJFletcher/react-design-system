@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
+import { Icon } from "../Icon/Icon";
 import { Menu, type MenuEntry } from "./Menu";
 
 const createProject = fn();
@@ -31,11 +32,11 @@ const menuItems: MenuEntry[] = [
 ];
 
 const iconChoices = {
-  Folder: <FolderIcon />,
-  Grid: <GridIcon />,
-  List: <ListIcon />,
-  Book: <BookIcon />,
-  Sparkle: <SparkleIcon />,
+  Folder: <Icon name="folder" size="sm" />,
+  Grid: <Icon name="grid" size="sm" />,
+  List: <Icon name="list" size="sm" />,
+  Book: <Icon name="book" size="sm" />,
+  Sparkle: <Icon name="sparkle" size="sm" />,
 };
 type StoryIconName = keyof typeof iconChoices;
 
@@ -260,50 +261,3 @@ function resolveItems(items: readonly MenuEntry[]): MenuEntry[] {
   });
 }
 
-function FolderIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-      <path d="M3.5 6.5h6l2 2h9v9a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-11Z" />
-      <path d="M3.5 9h17" />
-    </svg>
-  );
-}
-
-function GridIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-      <rect x="4" y="4" width="6" height="6" rx="1" />
-      <rect x="14" y="4" width="6" height="6" rx="1" />
-      <rect x="4" y="14" width="6" height="6" rx="1" />
-      <rect x="14" y="14" width="6" height="6" rx="1" />
-    </svg>
-  );
-}
-
-function ListIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-      <path d="M9 6h11M9 12h11M9 18h11" />
-      <circle cx="4.5" cy="6" r=".75" fill="currentColor" />
-      <circle cx="4.5" cy="12" r=".75" fill="currentColor" />
-      <circle cx="4.5" cy="18" r=".75" fill="currentColor" />
-    </svg>
-  );
-}
-
-function BookIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-      <path d="M5 4.5h12a2 2 0 0 1 2 2v13H7a2 2 0 0 1-2-2v-13Z" />
-      <path d="M5 17.5c0-1.1.9-2 2-2h12M9 8h6" />
-    </svg>
-  );
-}
-
-function SparkleIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-      <path d="m12 3 2.7 6.3L21 12l-6.3 2.7L12 21l-2.7-6.3L3 12l6.3-2.7L12 3Z" />
-    </svg>
-  );
-}

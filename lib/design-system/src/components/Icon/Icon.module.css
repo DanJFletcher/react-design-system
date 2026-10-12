@@ -1,0 +1,31 @@
+.icon {
+  --_icon-size: var(--ds-space-5);
+
+  display: inline-block;
+  flex: 0 0 auto;
+  inline-size: var(--_icon-size);
+  block-size: var(--_icon-size);
+  overflow: visible;
+  color: currentColor;
+  vertical-align: middle;
+}
+
+.icon[data-size="xs"] {
+  --_icon-size: var(--ds-space-3);
+}
+
+.icon[data-size="sm"] {
+  --_icon-size: var(--ds-space-4);
+}
+
+.icon[data-size="md"] {
+  --_icon-size: var(--ds-space-5);
+}
+
+.icon[data-size="lg"] {
+  --_icon-size: var(--ds-space-6);
+}
+
+.icon[data-size="xl"] {
+  --_icon-size: var(--ds-space-8);
+}
