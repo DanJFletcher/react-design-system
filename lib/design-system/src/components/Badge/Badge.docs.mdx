@@ -1,0 +1,40 @@
+import { Canvas, Meta, Story, Controls } from "@storybook/addon-docs/blocks";
+import * as BadgeStories from "./Badge.stories";
+
+<Meta of={BadgeStories} />
+
+# Badge
+
+Small, static labels for status, category, and highlight text.
+
+## Interactive playground
+
+<Canvas of={BadgeStories.Playground} />
+<Controls of={BadgeStories.Playground} />
+
+## Tones, sizes, and shapes
+
+<Canvas of={BadgeStories.ToneExamples} />
+<Canvas of={BadgeStories.SizeAndShapeExamples} />
+
+## Icons and dots
+
+Use the icon selector to choose from the shared icon catalog. Icons and dots are decorative; the visible label should communicate the status.
+
+<Canvas of={BadgeStories.IconSelector} />
+<Canvas of={BadgeStories.IconAndDotIndicators} />
+
+## Themes
+
+<Canvas of={BadgeStories.ThemeCoverage} />
+<Canvas of={BadgeStories.NestedThemeBoundary} />
+
+## Behavior
+
+- Renders a native `span`; it is not a button, live region, or interactive control.
+- `tone` is `neutral` (default), `accent`, `success`, `warning`, or `error`.
+- `size` is `sm`, `md` (default), or `lg`. `shape` is `rounded`, `square`, or `pill`; when omitted, it follows the active theme's control radius.
+- `icon` is optional and appears at the left by default. Set `iconPosition="right"` to place it after the label. `dot` adds a decorative status marker; both can be used together.
+- Icons and dots are hidden from assistive technology. The visible label remains the source of meaning, so status is never conveyed by color alone.
+- Status background/foreground pairs are semantic tokens and are checked for readable contrast across ACME, Luna, and Orchid.
+- Native span props, refs, `className`, and typed `style` are forwarded.

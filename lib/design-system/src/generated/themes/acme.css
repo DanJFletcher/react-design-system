@@ -173,6 +173,12 @@
   --ds-color-border-error: #B42318;
   --ds-color-canvas: #F8FAFC;
   --ds-color-focus-ring: #1D4ED8;
+  --ds-color-status-error-bg: #FEE4E2;
+  --ds-color-status-error-fg: #B42318;
+  --ds-color-status-success-bg: #DCFCE7;
+  --ds-color-status-success-fg: #166534;
+  --ds-color-status-warning-bg: #FEF3C7;
+  --ds-color-status-warning-fg: #92400E;
   --ds-color-surface-primary: #FFFFFF;
   --ds-color-text-error: #B42318;
   --ds-color-text-muted: #475569;

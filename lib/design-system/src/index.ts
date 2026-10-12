@@ -6,6 +6,14 @@ export type {
   ButtonSize,
   ButtonVariant,
 } from "./components/Button/Button";
+export { Badge } from "./components/Badge/Badge";
+export type {
+  BadgeIconPosition,
+  BadgeProps,
+  BadgeShape,
+  BadgeSize,
+  BadgeTone,
+} from "./components/Badge/Badge";
 export { Accordion } from "./components/Accordion/Accordion";
 export type {
   AccordionHeadingLevel,

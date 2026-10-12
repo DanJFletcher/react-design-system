@@ -16,6 +16,9 @@
     { "name": "Error text on canvas", "foreground": "color.text.error", "background": "color.canvas", "minimum": 4.5 },
     { "name": "Error text on surface", "foreground": "color.text.error", "background": "color.surface.primary", "minimum": 4.5 },
     { "name": "Accent", "foreground": "color.accent.fg", "background": "color.accent.bg", "minimum": 4.5 },
+    { "name": "Success status", "foreground": "color.status.success.fg", "background": "color.status.success.bg", "minimum": 4.5 },
+    { "name": "Warning status", "foreground": "color.status.warning.fg", "background": "color.status.warning.bg", "minimum": 4.5 },
+    { "name": "Error status", "foreground": "color.status.error.fg", "background": "color.status.error.bg", "minimum": 4.5 },
     { "name": "File action", "foreground": "color.action.secondary.fg", "background": "color.action.secondary.bg", "minimum": 4.5 },
     { "name": "Disabled file action", "foreground": "color.action.disabled.fg", "background": "color.action.disabled.bg", "minimum": 4.5 }
   ],

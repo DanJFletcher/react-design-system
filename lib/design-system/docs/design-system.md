@@ -70,6 +70,28 @@ Native disabled uses the native `disabled` attribute. Loading preserves focus wi
 
 The owning form manages longer asynchronous submission state. Children may contain decorative icons, which should be hidden from assistive technology. `href`, `asChild`, toggle semantics, groups, and an icon-only convenience API are out of scope.
 
+## Badge
+
+```tsx
+<Badge tone="success" size="sm" dot>
+  Published
+</Badge>
+
+<Badge
+  tone="accent"
+  shape="pill"
+  icon={<Icon name="sparkle" size="sm" />}
+>
+  New
+</Badge>
+```
+
+`Badge` is a static, inline label for status, category, and highlight text. `tone` accepts `neutral` (default), `accent`, `success`, `warning`, or `error`; status tones use semantic theme color pairs with verified text contrast. `size` accepts `sm`, `md` (default), or `lg`. Omit `shape` to use the active theme's control radius, or choose `rounded`, `square`, or `pill`.
+
+An optional `icon` is decorative and appears on the left by default; set `iconPosition="right"` to place it after the label. `dot` adds a decorative status marker. If both are supplied, both are shown. Icons and dots are hidden from assistive technology, so keep the visible label meaningful and do not use color alone to convey status.
+
+`Badge` renders a native `span` and adds no interaction or live-region behavior. It forwards native span props, refs, `className`, and typed `style`. The component follows ACME, Luna, Orchid, nested, and custom themes without theme-specific rendering.
+
 ## Icon
 
 ```tsx

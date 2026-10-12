@@ -1,0 +1,126 @@
+.badge {
+  --_badge-bg: var(--ds-color-surface-primary);
+  --_badge-fg: var(--ds-color-text-primary);
+  --_badge-border: var(--ds-color-border-control);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  box-sizing: border-box;
+  max-inline-size: 100%;
+  border: var(--ds-border-width-default) solid var(--_badge-border);
+  border-radius: var(--ds-radius-control);
+  background-color: var(--_badge-bg);
+  color: var(--_badge-fg);
+  font-family: var(--ds-font-family-sans);
+  font-weight: var(--ds-font-weight-medium);
+  line-height: var(--ds-line-height-normal);
+  vertical-align: middle;
+}
+
+.badge[data-tone="accent"] {
+  --_badge-bg: var(--ds-color-accent-bg);
+  --_badge-fg: var(--ds-color-accent-fg);
+  --_badge-border: transparent;
+}
+
+.badge[data-tone="success"] {
+  --_badge-bg: var(--ds-color-status-success-bg);
+  --_badge-fg: var(--ds-color-status-success-fg);
+  --_badge-border: transparent;
+}
+
+.badge[data-tone="warning"] {
+  --_badge-bg: var(--ds-color-status-warning-bg);
+  --_badge-fg: var(--ds-color-status-warning-fg);
+  --_badge-border: transparent;
+}
+
+.badge[data-tone="error"] {
+  --_badge-bg: var(--ds-color-status-error-bg);
+  --_badge-fg: var(--ds-color-status-error-fg);
+  --_badge-border: transparent;
+}
+
+.sm {
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-half) var(--ds-space-2);
+  font-size: var(--ds-font-size-xs);
+}
+
+.md {
+  padding: var(--ds-space-1) var(--ds-space-3);
+  font-size: var(--ds-font-size-sm);
+}
+
+.lg {
+  padding: var(--ds-space-2) var(--ds-space-4);
+  font-size: var(--ds-font-size-md);
+}
+
+.rounded {
+  border-radius: var(--ds-radius-shape-rounded);
+}
+
+.square {
+  border-radius: var(--ds-radius-shape-square);
+}
+
+.pill {
+  border-radius: var(--ds-radius-full);
+}
+
+.label {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--ds-space-4);
+  block-size: var(--ds-space-4);
+}
+
+.sm .icon {
+  inline-size: var(--ds-space-3);
+  block-size: var(--ds-space-3);
+}
+
+.lg .icon {
+  inline-size: var(--ds-space-5);
+  block-size: var(--ds-space-5);
+}
+
+.icon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.dot {
+  flex: 0 0 auto;
+  inline-size: var(--ds-space-2);
+  block-size: var(--ds-space-2);
+  border-radius: var(--ds-radius-full);
+  background-color: currentColor;
+}
+
+.lg .dot {
+  inline-size: var(--ds-space-3);
+  block-size: var(--ds-space-3);
+}
+
+@media (forced-colors: active) {
+  .badge {
+    border-color: CanvasText;
+    background-color: Canvas;
+    color: CanvasText;
+  }
+
+  .dot {
+    background-color: CanvasText;
+  }
+}

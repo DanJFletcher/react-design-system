@@ -77,6 +77,16 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - Customization: use the public `size` prop and SVG `className`/typed `style`; no icon-specific hooks are registered.
 - Validation: Storybook name-select playground, complete icon catalog, sizing, accessibility, all themes and nested theme stories; browser tests for catalog coverage, dimensions, accessible naming, and color inheritance; lint, typecheck, Storybook, package build, and package-consumer checks.
 
+### Badge
+
+- Objective: concise, non-interactive labels for statuses, categories, and highlights.
+- Dependencies: existing React package, CSS Modules, and shared semantic text, surface, border, spacing, radius, and type tokens; status tones add contrast-checked semantic success, warning, and error surface/foreground pairs across every theme. No runtime dependency or badge-specific hook is needed.
+- Public API: `children` is the visible label. `tone` accepts `neutral`, `accent`, `success`, `warning`, or `error` (default `neutral`); `size` accepts `sm`, `md`, or `lg` (default `md`); optional `shape` accepts `rounded`, `square`, or `pill` and otherwise follows the active theme's control radius. Optional `icon` is decorative and placed according to `iconPosition` (`left` or `right`, default `left`); `dot` adds an additional decorative status marker. Native `span` props, refs, `className`, and typed `DesignSystemStyle` are forwarded.
+- Semantics and interaction: render a static native `span` with no implicit live-region or interactive role. The visible children carry the badge's meaning; icon and dot indicators are hidden from assistive technology. Color is supplemental and not the sole status cue.
+- State: stateless; status meaning and updates belong to the consumer.
+- Customization: use public tone, size, and shape props with semantic tokens and CSS Modules; do not add theme-specific rendering, undocumented hooks, or interaction semantics.
+- Validation: Storybook tone, size, shape, icon/dot, ACME/Luna/Orchid, and nested-theme examples; browser checks for contrast, static semantics, indicators, and dimensions; token contrast checks, lint, typecheck, Storybook, package build, and package-consumer checks.
+
 ### Tabs
 
 - Objective: switch between related panels such as settings sections, feature details, or documentation categories without navigating away.

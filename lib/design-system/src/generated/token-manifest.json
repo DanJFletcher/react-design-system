@@ -346,6 +346,36 @@
       "description": "Visible keyboard-focus ring."
     },
     {
+      "name": "color.status.error.bg",
+      "type": "color",
+      "description": "Error status surface."
+    },
+    {
+      "name": "color.status.error.fg",
+      "type": "color",
+      "description": "Text on the error status surface."
+    },
+    {
+      "name": "color.status.success.bg",
+      "type": "color",
+      "description": "Success status surface."
+    },
+    {
+      "name": "color.status.success.fg",
+      "type": "color",
+      "description": "Text on the success status surface."
+    },
+    {
+      "name": "color.status.warning.bg",
+      "type": "color",
+      "description": "Warning status surface."
+    },
+    {
+      "name": "color.status.warning.fg",
+      "type": "color",
+      "description": "Text on the warning status surface."
+    },
+    {
       "name": "color.surface.primary",
       "type": "color",
       "description": "Primary content surface."
@@ -1054,6 +1084,12 @@
       "color.focus.ring": "#1D4ED8",
       "color.accent.bg": "#DBEAFE",
       "color.accent.fg": "#1E3A8A",
+      "color.status.success.bg": "#DCFCE7",
+      "color.status.success.fg": "#166534",
+      "color.status.warning.bg": "#FEF3C7",
+      "color.status.warning.fg": "#92400E",
+      "color.status.error.bg": "#FEE4E2",
+      "color.status.error.fg": "#B42318",
       "radius.control": "6px",
       "radius.form-control": "6px",
       "radius.form-group": "6px",
@@ -1084,6 +1120,12 @@
       "color.focus.ring": "#E6C4FF",
       "color.accent.bg": "#F5D36D",
       "color.accent.fg": "#2D2034",
+      "color.status.success.bg": "#173D31",
+      "color.status.success.fg": "#A7F3D0",
+      "color.status.warning.bg": "#47391B",
+      "color.status.warning.fg": "#FFE08A",
+      "color.status.error.bg": "#4A202C",
+      "color.status.error.fg": "#FFADBE",
       "radius.control": "9999px",
       "radius.form-control": "9999px",
       "radius.form-group": "24px",
@@ -1114,6 +1156,12 @@
       "color.focus.ring": "#6A2491",
       "color.accent.bg": "#F6CF67",
       "color.accent.fg": "#38143D",
+      "color.status.success.bg": "#E6F5E9",
+      "color.status.success.fg": "#275A3B",
+      "color.status.warning.bg": "#FFF2D0",
+      "color.status.warning.fg": "#794A12",
+      "color.status.error.bg": "#FDE7EB",
+      "color.status.error.fg": "#821F35",
       "radius.control": "16px",
       "radius.form-control": "16px",
       "radius.form-group": "16px",
@@ -1224,6 +1272,27 @@
       "theme": "acme",
       "name": "Accent",
       "ratio": 8.49,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Success status",
+      "ratio": 6.492,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Warning status",
+      "ratio": 6.367,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Error status",
+      "ratio": 5.45,
       "minimum": 4.5,
       "kind": "text"
     },
@@ -1397,6 +1466,27 @@
     },
     {
       "theme": "luna",
+      "name": "Success status",
+      "ratio": 9.366,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Warning status",
+      "ratio": 8.711,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Error status",
+      "ratio": 7.804,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
       "name": "File action",
       "ratio": 11.028,
       "minimum": 4.5,
@@ -1560,6 +1650,27 @@
       "theme": "orchid",
       "name": "Accent",
       "ratio": 10.512,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Success status",
+      "ratio": 7.122,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Warning status",
+      "ratio": 6.734,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Error status",
+      "ratio": 8.107,
       "minimum": 4.5,
       "kind": "text"
     },
