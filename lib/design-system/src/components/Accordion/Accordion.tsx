@@ -7,6 +7,7 @@ import {
   type ReactNode,
 } from "react";
 import type { DesignSystemStyle } from "../../generated/token-types";
+import { Icon } from "../Icon/Icon";
 import styles from "./Accordion.module.css";
 
 export type AccordionVariant = "divided" | "outlined" | "surface";
@@ -135,20 +136,12 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
                 type="button"
               >
                 <span className={styles.title}>{item.title}</span>
-                <svg
+                <Icon
                   aria-hidden="true"
                   className={styles.chevron}
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    d="m5 7.5 5 5 5-5"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.7"
-                  />
-                </svg>
+                  name="chevron-down"
+                  size="md"
+                />
               </button>
             </Heading>
             <div

@@ -1,4 +1,5 @@
 import { forwardRef, type ComponentPropsWithRef } from "react";
+import { Icon } from "../Icon/Icon";
 import { FieldLabel, FieldMessages, type FormFieldProps, useFormField } from "./FormField";
 import styles from "./FormControls.module.css";
 
@@ -39,21 +40,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
           aria-invalid={field.invalid || undefined}
           className={controlClassName}
         />
-        <svg
+        <Icon
           className={styles.selectIndicator}
-          viewBox="0 0 16 16"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path
-            d="m2 6 6 6 6-6"
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1.5"
-          />
-        </svg>
+          name="chevron-down"
+          size="sm"
+        />
       </div>
       <FieldMessages
         description={description}

@@ -100,7 +100,11 @@ export const SelectInteraction: Story = {
     const select = within(canvasElement).getByRole("combobox", { name: "Primary region" });
     await expect(select).toBeRequired();
     await expect(getComputedStyle(select).appearance).toBe("none");
-    await expect(select.nextElementSibling).toHaveAttribute("aria-hidden", "true");
+    const indicator = select.nextElementSibling;
+    await expect(indicator).toHaveAttribute("data-icon", "chevron-down");
+    await expect(indicator).toHaveAttribute("data-size", "sm");
+    await expect(indicator).toHaveAttribute("aria-hidden", "true");
+    await expect(getComputedStyle(indicator as SVGElement).inlineSize).toBe("16px");
     await userEvent.selectOptions(select, "ca");
     await expect(select).toHaveValue("ca");
   },

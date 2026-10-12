@@ -55,9 +55,14 @@ export const Playground: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const firstQuestion = canvas.getByRole("button", { name: "Can we start small?" });
+    const firstChevron = firstQuestion.querySelector('[data-icon="chevron-down"]');
+    await expect(firstChevron).toHaveAttribute("aria-hidden", "true");
+    await expect(firstChevron).toHaveAttribute("data-size", "md");
+    await expect(getComputedStyle(firstChevron as SVGElement).inlineSize).toBe("20px");
     await expect(firstQuestion).toHaveAttribute("aria-expanded", "false");
     await userEvent.click(firstQuestion);
     await expect(firstQuestion).toHaveAttribute("aria-expanded", "true");
+    await expect(firstQuestion.querySelector('[data-icon="chevron-down"]')).toBeInTheDocument();
     await expect(canvas.getByRole("region", { name: "Can we start small?" })).toBeVisible();
     await userEvent.keyboard("{TAB}");
     await expect(canvas.getByRole("button", { name: "Will Orbit replace every tool we use?" })).toHaveFocus();
