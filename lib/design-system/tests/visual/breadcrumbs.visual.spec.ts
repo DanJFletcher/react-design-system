@@ -134,6 +134,136 @@ test("deep trails collapse intermediate levels on narrow screens and expand by k
   ).toBeHidden();
 });
 
+test("deep breadcrumbs remain usable at 200% browser zoom", async ({
+  browser,
+}) => {
+  // A 640 CSS-pixel viewport at 2x device scale models a 1280-pixel display at 200% zoom.
+  const context = await browser.newContext({
+    deviceScaleFactor: 2,
+    viewport: { width: 640, height: 400 },
+  });
+  const page = await context.newPage();
+  await page.goto(
+    "http://127.0.0.1:6007/iframe.html?id=components-breadcrumbs--narrow-screen&viewMode=story",
+  );
+
+  const navigation = page.getByRole("navigation", {
+    name: "Narrow-screen breadcrumb",
+  });
+  const home = navigation.getByRole("link", { name: "Home", exact: true });
+  const current = navigation.getByText(
+    "A detailed current page name with enough words to demonstrate readable wrapping",
+  );
+  const collapsed = navigation.getByRole("button", {
+    name: "Show 4 hidden breadcrumb levels",
+  });
+
+  expect(await page.evaluate(() => window.devicePixelRatio)).toBe(2);
+  await expect(home).toBeVisible();
+  await expect(current).toBeVisible();
+  await expect(collapsed).toBeVisible();
+  await expect(collapsed).toHaveAttribute("aria-expanded", "false");
+
+  const collapsedDimensions = await page.evaluate(() => ({
+    documentWidth: document.documentElement.scrollWidth,
+    viewportWidth: document.documentElement.clientWidth,
+  }));
+  expect(collapsedDimensions.documentWidth).toBeLessThanOrEqual(
+    collapsedDimensions.viewportWidth,
+  );
+
+  await collapsed.focus();
+  await page.keyboard.press("Enter");
+  const expanded = navigation.getByRole("button", {
+    name: "Hide intermediate breadcrumb levels",
+  });
+  await expect(expanded).toBeFocused();
+  await expect(expanded).toHaveAttribute("aria-expanded", "true");
+  await expect(
+    navigation.getByRole("link", { name: "Heating systems" }),
+  ).toBeVisible();
+
+  const expandedDimensions = await page.evaluate(() => ({
+    documentWidth: document.documentElement.scrollWidth,
+    viewportWidth: document.documentElement.clientWidth,
+  }));
+  expect(expandedDimensions.documentWidth).toBeLessThanOrEqual(
+    expandedDimensions.viewportWidth,
+  );
+
+  await expanded.click();
+  await expect(collapsed).toBeVisible();
+  await expect(collapsed).toHaveAttribute("aria-expanded", "false");
+
+  await context.close();
+});
+
+test("deep breadcrumbs remain usable in a short landscape viewport", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 640, height: 360 });
+  await page.goto(
+    "/iframe.html?id=components-breadcrumbs--narrow-screen&viewMode=story",
+  );
+
+  const navigation = page.getByRole("navigation", {
+    name: "Narrow-screen breadcrumb",
+  });
+  const home = navigation.getByRole("link", { name: "Home", exact: true });
+  const current = navigation.getByText(
+    "A detailed current page name with enough words to demonstrate readable wrapping",
+  );
+  const collapsed = navigation.getByRole("button", {
+    name: "Show 4 hidden breadcrumb levels",
+  });
+
+  await expect(home).toBeVisible();
+  await expect(current).toBeVisible();
+  await expect(collapsed).toBeVisible();
+  await expect(collapsed).toHaveAttribute("aria-expanded", "false");
+
+  const collapsedDimensions = await page.evaluate(() => ({
+    documentWidth: document.documentElement.scrollWidth,
+    viewportWidth: document.documentElement.clientWidth,
+  }));
+  expect(collapsedDimensions.documentWidth).toBeLessThanOrEqual(
+    collapsedDimensions.viewportWidth,
+  );
+
+  await collapsed.click();
+  const expanded = navigation.getByRole("button", {
+    name: "Hide intermediate breadcrumb levels",
+  });
+  await expect(home).toBeVisible();
+  await expect(current).toBeVisible();
+  await expect(expanded).toBeVisible();
+  await expect(expanded).toHaveAttribute("aria-expanded", "true");
+  for (const ancestor of [
+    "Products",
+    "Home services",
+    "Heating and cooling",
+    "Heating systems",
+  ]) {
+    await expect(
+      navigation.getByRole("link", { name: ancestor }),
+    ).toBeVisible();
+  }
+
+  const expandedDimensions = await page.evaluate(() => ({
+    documentWidth: document.documentElement.scrollWidth,
+    viewportWidth: document.documentElement.clientWidth,
+  }));
+  expect(expandedDimensions.documentWidth).toBeLessThanOrEqual(
+    expandedDimensions.viewportWidth,
+  );
+
+  await expanded.click();
+  await expect(collapsed).toBeVisible();
+  await expect(collapsed).toHaveAttribute("aria-expanded", "false");
+  await expect(home).toBeVisible();
+  await expect(current).toBeVisible();
+});
+
 test("wide breadcrumb layouts retain every ancestor without a collapse control", async ({
   page,
 }) => {

@@ -133,7 +133,7 @@ export const NarrowScreen: Story = {
     ],
   },
   render: (args) => (
-    <div style={{ inlineSize: "min(100%, 18rem)", marginInline: "auto" }}>
+    <div style={{ inlineSize: "min(100%, 36rem)", marginInline: "auto" }}>
       <Breadcrumbs {...args} />
     </div>
   ),
