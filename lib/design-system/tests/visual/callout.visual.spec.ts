@@ -11,7 +11,7 @@ test("Callout is persistent content with optional decorative icons and no implic
   await expect(callout.locator('[aria-hidden="true"] [data-icon="check"]')).toBeVisible();
 });
 
-test("Callout tones maintain readable text contrast in every built-in theme", async ({ page }) => {
+test("Callout tones maintain readable contrast and a shared outline in every built-in theme", async ({ page }) => {
   await page.goto("/iframe.html?id=components-callout--theme-coverage&viewMode=story");
 
   const callouts = page.locator("[data-ds-theme] [data-tone]");
@@ -20,12 +20,25 @@ test("Callout tones maintain readable text contrast in every built-in theme", as
   const styles = await callouts.evaluateAll((elements) =>
     elements.map((element) => {
       const computed = getComputedStyle(element);
-      return { color: computed.color, background: computed.backgroundColor };
+      return {
+        color: computed.color,
+        background: computed.backgroundColor,
+        border: computed.borderTopColor,
+        borderWidth: computed.borderTopWidth,
+      };
     }),
   );
 
   for (const { color, background } of styles) {
     expect(contrastRatio(color, background)).toBeGreaterThanOrEqual(4.5);
+  }
+
+  for (let themeStart = 0; themeStart < styles.length; themeStart += 5) {
+    const neutralOutline = styles[themeStart + 4]!;
+    for (let toneIndex = 0; toneIndex < 5; toneIndex += 1) {
+      expect(styles[themeStart + toneIndex]!.border).toBe(neutralOutline.border);
+      expect(styles[themeStart + toneIndex]!.borderWidth).toBe(neutralOutline.borderWidth);
+    }
   }
 });
 

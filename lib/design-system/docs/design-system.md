@@ -336,7 +336,7 @@ The `dialog.*` hooks customize surface, text, border, backdrop, radius, padding,
 
 `Callout` is persistent in-flow content for status, guidance, or next steps; it is not queued or automatically dismissed. `tone` accepts `info` (default), `success`, `warning`, `error`, or `neutral`. The visible title and body carry its meaning; an optional icon is decorative. The optional `action` slot accepts consumer-provided links or buttons.
 
-It renders a generic `div` with no implicit role or live-region behavior. When dynamically inserting content that needs announcing, set the native `role` prop to `status` or `alert` as appropriate. Callout actions retain their native behavior. The `callout.*` hooks customize its surface, text, border/accent, radius, padding, and spacing. Theme-aware semantic colors and nested theme boundaries are supported.
+All tones use the same outer border as the neutral callout; the leading accent remains tone-specific. It renders a generic `div` with no implicit role or live-region behavior. When dynamically inserting content that needs announcing, set the native `role` prop to `status` or `alert` as appropriate. Callout actions retain their native behavior. The `callout.*` hooks customize its surface, text, border/accent, radius, padding, and spacing. Theme-aware semantic colors and nested theme boundaries are supported.
 
 ## Toast
 

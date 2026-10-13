@@ -1,7 +1,7 @@
 .callout {
   --_callout-surface: var(--ds-color-accent-bg);
   --_callout-text: var(--ds-color-accent-fg);
-  --_callout-border: transparent;
+  --_callout-border: var(--ds-color-border-control);
   --_callout-accent: var(--ds-color-accent-fg);
 
   display: grid;
@@ -24,7 +24,6 @@
 .callout[data-tone="neutral"] {
   --_callout-surface: var(--ds-color-surface-primary);
   --_callout-text: var(--ds-color-text-primary);
-  --_callout-border: var(--ds-color-border-control);
   --_callout-accent: var(--ds-color-text-muted);
 }
 
