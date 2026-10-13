@@ -87,7 +87,7 @@ test("Tooltip follows ACME, Luna, and Orchid colors through nested theme boundar
     await expect(tooltip).toBeHidden();
   }
   expect(new Set(colors).size).toBe(3);
-  expect(radii).toEqual(["6px", "24px", "16px"]);
+  expect(radii).toEqual(["6px", "32px", "16px"]);
 });
 
 test("Tooltip escapes transformed and clipped panels", async ({ page }) => {

@@ -20,7 +20,7 @@ The compiler validates names, descriptions, types, units, references, cycles, re
 
 ## Theme contract
 
-Corner radii are semantic roles, not a theme-wide shape setting. General content surfaces use `radius.surface` (12px ACME, 24px Luna, 12px Orchid); action controls and single-line form controls retain separate tokens and remain pills in Luna. Specialized menu, tooltip, textarea, and form-group tokens retain their public compatibility values (24px in Luna). Explicit shape props and consumer hooks override defaults. See `docs/theming.md` and the **Foundations/Radius Policy** stories for the full policy.
+Corner radii are semantic roles, not a theme-wide shape setting. General content surfaces use `radius.surface` (12px ACME, 32px Luna, 12px Orchid); action controls and single-line form controls retain separate tokens and remain pills in Luna. Specialized menu, tooltip, textarea, and form-group tokens retain their public compatibility values (32px in Luna). Explicit shape props and consumer hooks override defaults. See `docs/theming.md` and the **Foundations/Radius Policy** stories for the full policy.
 
 ACME is the default unthemed document. Luna is a dark, Sailor Moon-inspired palette with midnight-indigo surfaces, moonlight and lavender text, rose-pink actions, crescent-gold accents, and softer shapes. Both built-in themes share the same type and spatial scales. Orchid demonstrates a distinct custom theme extending Luna.
 
@@ -106,7 +106,7 @@ An optional `icon` is decorative and appears on the left by default; set `iconPo
 
 `Tooltip` reveals brief supplementary help on pointer hover and keyboard focus, and can be opened or dismissed by touch. It preserves any existing `aria-describedby` IDs on the single trigger element and adds its own description ID. Escape closes the tooltip without moving focus; outside pointer activation dismisses it.
 
-Tooltip content is non-interactive and must not contain essential instructions by itself. The component keeps its fixed-position content in the trigger's DOM subtree, preserving semantic tokens and scoped hooks across ACME, Luna, Orchid, and nested theme boundaries. It flips placement when necessary and clamps to the viewport. `placement` accepts `top`, `right`, `bottom`, or `left`; `tooltip.*` hooks customize visual details. The default radius follows `radius.tooltip` (6px in ACME, 24px in Luna, 16px in Orchid), with the local `tooltip.radius` hook taking precedence.
+Tooltip content is non-interactive and must not contain essential instructions by itself. The component keeps its fixed-position content in the trigger's DOM subtree, preserving semantic tokens and scoped hooks across ACME, Luna, Orchid, and nested theme boundaries. It flips placement when necessary and clamps to the viewport. `placement` accepts `top`, `right`, `bottom`, or `left`; `tooltip.*` hooks customize visual details. The default radius follows `radius.tooltip` (6px in ACME, 32px in Luna, 16px in Orchid), with the local `tooltip.radius` hook taking precedence.
 
 ## Icon
 
@@ -615,7 +615,7 @@ Toast titles and optional descriptions are consumer-provided content. Variants a
 
 Keyboard users open the menu with Enter or Space on its trigger. The first enabled item receives focus; Up/Down, Home, and End move among items, while type-ahead moves to a matching label. Right Arrow opens a submenu, Left Arrow or Escape returns to its parent, and Escape at the root closes the menu and restores trigger focus. Tab closes the menu without preventing normal focus movement. Pointer activation outside also closes it. Selecting an action or link closes the menu by default; `closeOnSelect={false}` keeps it open, and an `onSelect` handler can call `preventDefault()` to keep it open for that activation.
 
-The menu uses semantic surface, text, border, focus, spacing, action, and `radius.menu` tokens. The dropdown panel radius is 6px in ACME, 24px in Luna, and 16px in Orchid. The `menu.*` component hooks customize its panel, item interaction colors, radius, disabled text, and focus outline; they reset at nested theme boundaries like other hooks.
+The menu uses semantic surface, text, border, focus, spacing, action, and `radius.menu` tokens. The dropdown panel radius is 6px in ACME, 32px in Luna, and 16px in Orchid. The `menu.*` component hooks customize its panel, item interaction colors, radius, disabled text, and focus outline; they reset at nested theme boundaries like other hooks.
 
 ## Core form controls
 
@@ -654,7 +654,7 @@ Every individual control requires a visible `label` and forwards native props, r
 
 Error copy and invalid borders use `color.text.error` and `color.border.error`. Their contrast is checked against canvas and surface colors in ACME, Luna, and Orchid. The native file-picker action uses the secondary action colors, and the active switch uses primary action background with the surface color as its thumb; both combinations have theme contrast checks. Form control styling uses semantic text, surface, border, focus, spacing, and radius tokens.
 
-Single-line text and select controls use `radius.form-control`; textareas and field groups use the independent `radius.textarea` and `radius.form-group` tokens. Luna keeps text inputs, selects, and buttons pill-shaped, with a 24px radius for both textareas and field groups.
+Single-line text and select controls use `radius.form-control`; textareas and field groups use the independent `radius.textarea` and `radius.form-group` tokens. Luna keeps text inputs, selects, and buttons pill-shaped, with a 32px radius for both textareas and field groups.
 
 ## Enforcement
 

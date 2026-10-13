@@ -2,7 +2,7 @@
 
 ## Radius roles for every component
 
-Content surfaces (panels, code blocks, cards, media, grouped content) default to `var(--ds-radius-surface)`. Use an existing specialized surface token only for its documented family. Luna's bounded surface default is 24px; do not copy the 9999px action-control radius onto a surface.
+Content surfaces (panels, code blocks, cards, media, grouped content) default to `var(--ds-radius-surface)`. Use an existing specialized surface token only for its documented family. Luna's bounded surface default is 32px; do not copy the 9999px action-control radius onto a surface.
 
 Buttons and reviewed action targets use `radius.control`; single-line form controls use `radius.form-control`. Explicit Button/Badge `rounded`, `square`, and `pill` choices retain their foundation values. Surface components' `rounded` shape follows the semantic surface role; their explicit `square` variant remains square. Circular avatars, dots, switch thumbs, and progress tracks use the full radius intentionally.
 
@@ -202,7 +202,7 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - Public API: `content` is supplementary `ReactNode`; `placement` accepts `top`, `right`, `bottom`, or `left` (default `top`). `children` is one trigger element. Native span props, `className`, refs, and typed `DesignSystemStyle` are forwarded to its anchor.
 - Semantics and interaction: the caller supplies a keyboard-focusable trigger as needed. Tooltip adds its generated ID to the trigger's existing `aria-describedby` value. Hover and focus open it; Escape dismisses without moving focus; touch activation toggles it and outside pointer activation dismisses it. Tooltip content is non-interactive; use a dialog or popover for controls and links.
 - Position and theme behavior: use a fixed-position tooltip in the anchor's DOM subtree so semantic tokens and scoped hooks inherit from ACME, Luna, Orchid, and nested boundaries. Prefer the requested side, flip when needed, and clamp to the visible viewport.
-- Customization: register `tooltip.*` hooks for surface, text, border, radius, padding, and maximum width; the default radius comes from `radius.tooltip` (24px in Luna), while a local `tooltip.radius` hook takes precedence. Retain semantic defaults and reduced-motion/forced-color support.
+- Customization: register `tooltip.*` hooks for surface, text, border, radius, padding, and maximum width; the default radius comes from `radius.tooltip` (32px in Luna), while a local `tooltip.radius` hook takes precedence. Retain semantic defaults and reduced-motion/forced-color support.
 - Validation: Storybook placement, theme, custom-hook, and viewport examples; browser checks for trigger relationships, hover, focus, Escape, touch dismissal, viewport fit, nested themes, and reduced motion; lint, typecheck, Storybook, package build, and package-consumer checks.
 
 ### Tabs

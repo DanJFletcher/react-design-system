@@ -8,9 +8,9 @@ test("surface and specialized defaults are bounded, while Luna action/form contr
   const result = await compileTokens(resolve(import.meta.dirname, "../../src/tokens"));
   for (const theme of ["acme", "luna", "orchid"]) {
     const values = result.themes.get(theme)!;
-    assert.equal(values["radius.surface"], theme === "luna" ? "24px" : "12px");
+    assert.equal(values["radius.surface"], theme === "luna" ? "32px" : "12px");
     for (const token of ["radius.tooltip", "radius.menu", "radius.textarea", "radius.form-group"]) {
-      assert.equal(values[token], theme === "luna" ? "24px" : theme === "acme" ? "6px" : "16px");
+      assert.equal(values[token], theme === "luna" ? "32px" : theme === "acme" ? "6px" : "16px");
     }
   }
   assert.equal(result.themes.get("luna")!["radius.control"], "9999px");

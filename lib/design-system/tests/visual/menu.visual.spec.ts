@@ -61,7 +61,7 @@ test("Menu follows theme tokens and accepts scoped component-hook overrides", as
   expect(lunaSurface).not.toBe(acmeSurface);
   await expect.poll(() => lunaMenu.evaluate((element) =>
     getComputedStyle(element).borderTopLeftRadius,
-  )).toBe("24px");
+  )).toBe("32px");
   await page.keyboard.press("Escape");
 
   await page.getByRole("button", { name: "orchid actions" }).click();

@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: "Choose corners by purpose: bounded surfaces, action controls, single-line inputs, explicit shapes, and intentional circles. Luna surfaces default to 24px while action and input controls remain pills.",
+        component: "Choose corners by purpose: bounded surfaces, action controls, single-line inputs, explicit shapes, and intentional circles. Luna surfaces default to 32px while action and input controls remain pills.",
       },
     },
   },

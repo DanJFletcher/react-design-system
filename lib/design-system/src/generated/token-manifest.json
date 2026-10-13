@@ -1312,13 +1312,13 @@
       "color.status.warning.fg": "#FFE08A",
       "color.status.error.bg": "#4A202C",
       "color.status.error.fg": "#FFADBE",
-      "radius.surface": "24px",
+      "radius.surface": "32px",
       "radius.control": "9999px",
-      "radius.tooltip": "24px",
+      "radius.tooltip": "32px",
       "radius.form-control": "9999px",
-      "radius.form-group": "24px",
-      "radius.textarea": "24px",
-      "radius.menu": "24px"
+      "radius.form-group": "32px",
+      "radius.textarea": "32px",
+      "radius.menu": "32px"
     },
     "orchid": {
       "color.canvas": "#FFF2FD",

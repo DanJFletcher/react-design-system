@@ -2,7 +2,7 @@
 
 ## Surface corners are separate from pill controls
 
-Content surfaces use a bounded semantic `radius.surface` rather than the action-control radius or a fixed shape foundation. Luna uses 24px surfaces and retains 9999px action/input controls. ACME and Orchid retain the existing 12px general-panel character; specialized family tokens remain independently overridable.
+Content surfaces use a bounded semantic `radius.surface` rather than the action-control radius or a fixed shape foundation. Luna uses 32px surfaces and retains 9999px action/input controls. ACME and Orchid retain the existing 12px general-panel character; specialized family tokens remain independently overridable.
 
 **Why:** Reusing the action radius made code blocks and other Luna surfaces circular. Fixing components individually did not prevent new implementations from repeating the mistake.
 
@@ -34,7 +34,7 @@ The core form controls preserve native input, select, checkbox, radio, and field
 
 ## Form-control radii are independently themed
 
-Single-line inputs, textareas, field groups, and action buttons each have separate radius tokens. This lets Luna keep its pill-shaped text/select controls while giving textareas and field groups a 24px rounded-rectangle shape.
+Single-line inputs, textareas, field groups, and action buttons each have separate radius tokens. This lets Luna keep its pill-shaped text/select controls while giving textareas and field groups a 32px rounded-rectangle shape.
 
 ## Header uses one responsive navigation and CTA slot
 

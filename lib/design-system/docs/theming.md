@@ -4,12 +4,12 @@
 
 | Role | ACME | Luna | Orchid |
 | --- | --- | --- | --- |
-| `radius.surface` (panels, cards, code blocks, media) | 12px | 24px | 12px |
+| `radius.surface` (panels, cards, code blocks, media) | 12px | 32px | 12px |
 | `radius.control` (actions and reviewed compact labels) | 6px | 9999px | 16px |
 | `radius.form-control` (single-line inputs/selects) | 6px | 9999px | 16px |
-| Existing `radius.menu`, `radius.tooltip`, `radius.textarea`, `radius.form-group` | 6px | 24px | 16px |
+| Existing `radius.menu`, `radius.tooltip`, `radius.textarea`, `radius.form-group` | 6px | 32px | 16px |
 
-The specialized tokens remain public and independently customizable for compatibility; Luna assigns them the same bounded 24px value. Every effective theme has its own complete semantic map, including `radius.surface`. Use concrete theme values: source token references are resolved at compilation, not runtime CSS aliases to a theme's overridden values.
+The specialized tokens remain public and independently customizable for compatibility; Luna assigns them the same bounded 32px value. Every effective theme has its own complete semantic map, including `radius.surface`. Use concrete theme values: source token references are resolved at compilation, not runtime CSS aliases to a theme's overridden values.
 
 General surfaces now follow the semantic surface value rather than a fixed 12px foundation or an action-control token. This preserves the existing 12px general-panel character in ACME and Orchid while normalizing article code and inline/focus surface corners to that role. Explicit Button/Badge rounded shapes stay 12px in every theme; explicit square/pill choices and intentional circles are unchanged.
 
@@ -62,7 +62,7 @@ The native `Dialog` uses `showModal()` and is painted in the browser's top layer
 
 `ToastProvider` keeps its viewport in the DOM subtree where it is mounted, so notifications inherit a surrounding `ThemeScope` and any local `toast.*` hook overrides. Mount the provider inside the intended theme boundary.
 
-`Tooltip` uses the browser's popover top layer to escape transformed and overflow-clipped ancestors. It remains in its original DOM subtree, so it continues to inherit the active theme and local `tooltip.*` hook overrides. Its default radius comes from the semantic `radius.tooltip` token (24px in Luna); a local `tooltip.radius` hook overrides that default. Mount it inside the intended theme boundary.
+`Tooltip` uses the browser's popover top layer to escape transformed and overflow-clipped ancestors. It remains in its original DOM subtree, so it continues to inherit the active theme and local `tooltip.*` hook overrides. Its default radius comes from the semantic `radius.tooltip` token (32px in Luna); a local `tooltip.radius` hook overrides that default. Mount it inside the intended theme boundary.
 
 `Text` and `Heading` use the active theme's shared font scale and semantic primary/muted text colors. Their markup stays identical across themes; visual heading `size` can vary independently from semantic `level`.
 
