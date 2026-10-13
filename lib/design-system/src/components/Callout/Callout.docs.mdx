@@ -1,0 +1,37 @@
+import { Canvas, Controls, Meta } from "@storybook/addon-docs/blocks";
+import * as CalloutStories from "./Callout.stories";
+
+<Meta of={CalloutStories} />
+
+# Callout
+
+Persistent, in-flow messages for status, guidance, and next steps.
+
+## Interactive playground
+
+<Canvas of={CalloutStories.Playground} />
+<Controls of={CalloutStories.Playground} />
+
+## Tones, icons, and actions
+
+<Canvas of={CalloutStories.ToneExamples} />
+<Canvas of={CalloutStories.IconAndAction} />
+<Canvas of={CalloutStories.IconSelector} />
+<Canvas of={CalloutStories.Action} />
+
+## Themes and scoped styling
+
+<Canvas of={CalloutStories.ThemeCoverage} />
+<Canvas of={CalloutStories.NestedThemeBoundary} />
+<Canvas of={CalloutStories.CustomHooks} />
+<Canvas of={CalloutStories.LongContent} />
+
+## Behavior
+
+- Callouts remain in page flow. They are not queued and do not auto-dismiss.
+- `tone` is `info` (default), `success`, `warning`, `error`, or `neutral`.
+- `title` is optional; `children` provides the message body. `icon` is optional and decorative. `action` accepts consumer-provided links or buttons.
+- The component renders a generic `div` without an implicit role or live-region behavior. Set a native `role` such as `status` or `alert` only when dynamically added content needs announcement.
+- Icons are hidden from assistive technology; the visible title and body provide meaning.
+- `callout.*` hooks customize surface, text, border/accent, radius, padding, and spacing. Forced-colors mode retains visible boundaries and text.
+- Theme colors and scoped overrides inherit through nested ACME, Luna, Orchid, and custom theme boundaries.

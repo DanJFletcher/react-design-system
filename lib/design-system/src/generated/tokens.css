@@ -82,6 +82,13 @@
   --ds-button-sm-min-block-size: initial;
   --ds-button-sm-padding-block: initial;
   --ds-button-sm-padding-inline: initial;
+  --ds-callout-accent: initial;
+  --ds-callout-border: initial;
+  --ds-callout-gap: initial;
+  --ds-callout-padding: initial;
+  --ds-callout-radius: initial;
+  --ds-callout-surface: initial;
+  --ds-callout-text: initial;
   --ds-card-background: initial;
   --ds-card-border: initial;
   --ds-card-gap: initial;

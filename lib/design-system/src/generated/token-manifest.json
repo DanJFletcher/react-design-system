@@ -656,6 +656,48 @@
       "cssVariable": "--ds-button-sm-padding-inline"
     },
     {
+      "name": "callout.accent",
+      "type": "color",
+      "description": "Callout leading accent and icon color.",
+      "cssVariable": "--ds-callout-accent"
+    },
+    {
+      "name": "callout.border",
+      "type": "color",
+      "description": "Callout outer border.",
+      "cssVariable": "--ds-callout-border"
+    },
+    {
+      "name": "callout.gap",
+      "type": "dimension",
+      "description": "Callout content and icon spacing.",
+      "cssVariable": "--ds-callout-gap"
+    },
+    {
+      "name": "callout.padding",
+      "type": "dimension",
+      "description": "Callout internal spacing.",
+      "cssVariable": "--ds-callout-padding"
+    },
+    {
+      "name": "callout.radius",
+      "type": "dimension",
+      "description": "Callout corner radius.",
+      "cssVariable": "--ds-callout-radius"
+    },
+    {
+      "name": "callout.surface",
+      "type": "color",
+      "description": "Callout message background.",
+      "cssVariable": "--ds-callout-surface"
+    },
+    {
+      "name": "callout.text",
+      "type": "color",
+      "description": "Callout message text.",
+      "cssVariable": "--ds-callout-text"
+    },
+    {
       "name": "card.background",
       "type": "color",
       "description": "Card background color.",

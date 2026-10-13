@@ -1,0 +1,102 @@
+.callout {
+  --_callout-surface: var(--ds-color-accent-bg);
+  --_callout-text: var(--ds-color-accent-fg);
+  --_callout-border: transparent;
+  --_callout-accent: var(--ds-color-accent-fg);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: var(--ds-callout-gap, var(--ds-space-3));
+  box-sizing: border-box;
+  max-inline-size: 100%;
+  padding: var(--ds-callout-padding, var(--ds-space-4));
+  border: var(--ds-border-width-default) solid var(--ds-callout-border, var(--_callout-border));
+  border-inline-start: var(--ds-space-1) solid var(--ds-callout-accent, var(--_callout-accent));
+  border-radius: var(--ds-callout-radius, var(--ds-radius-shape-rounded));
+  background-color: var(--ds-callout-surface, var(--_callout-surface));
+  color: var(--ds-callout-text, var(--_callout-text));
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-sm);
+  line-height: var(--ds-line-height-normal);
+}
+
+.callout[data-tone="neutral"] {
+  --_callout-surface: var(--ds-color-surface-primary);
+  --_callout-text: var(--ds-color-text-primary);
+  --_callout-border: var(--ds-color-border-control);
+  --_callout-accent: var(--ds-color-text-muted);
+}
+
+.callout[data-tone="success"] {
+  --_callout-surface: var(--ds-color-status-success-bg);
+  --_callout-text: var(--ds-color-status-success-fg);
+  --_callout-accent: var(--ds-color-status-success-fg);
+}
+
+.callout[data-tone="warning"] {
+  --_callout-surface: var(--ds-color-status-warning-bg);
+  --_callout-text: var(--ds-color-status-warning-fg);
+  --_callout-accent: var(--ds-color-status-warning-fg);
+}
+
+.callout[data-tone="error"] {
+  --_callout-surface: var(--ds-color-status-error-bg);
+  --_callout-text: var(--ds-color-status-error-fg);
+  --_callout-accent: var(--ds-color-status-error-fg);
+}
+
+.callout[data-has-icon="true"] {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--ds-space-5);
+  block-size: var(--ds-space-5);
+  margin-block-start: var(--ds-space-half);
+  color: var(--ds-callout-accent, var(--_callout-accent));
+}
+
+.icon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.content {
+  display: grid;
+  justify-items: start;
+  gap: var(--ds-space-1);
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.title {
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.body {
+  min-inline-size: 0;
+}
+
+.action {
+  justify-self: start;
+  padding-block-start: var(--ds-space-1);
+}
+
+@media (forced-colors: active) {
+  .callout {
+    border-color: CanvasText;
+    border-inline-start-color: Highlight;
+    background-color: Canvas;
+    color: CanvasText;
+  }
+
+  .icon {
+    color: Highlight;
+  }
+}

@@ -87,6 +87,16 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - Customization: use public tone, size, and shape props with semantic tokens and CSS Modules; do not add theme-specific rendering, undocumented hooks, or interaction semantics.
 - Validation: Storybook tone, size, shape, icon/dot, ACME/Luna/Orchid, and nested-theme examples; browser checks for contrast, static semantics, indicators, and dimensions; token contrast checks, lint, typecheck, Storybook, package build, and package-consumer checks.
 
+### Callout
+
+- Objective: persistent, in-flow content for important status, guidance, and next steps; unlike Toast, it is not queued or automatically dismissed.
+- Dependencies: existing React package, CSS Modules, the shared accent and success/warning/error semantic color pairs, and registered `callout.*` hooks; no new runtime dependency or semantic color token.
+- Public API: `children` provides the body; optional `title`, decorative `icon`, and consumer-supplied `action` provide common composition. `tone` accepts `info`, `success`, `warning`, `error`, or `neutral` (default `info`). Native `div` props, including an optional caller-selected `role`, refs, `className`, and typed `DesignSystemStyle` are forwarded.
+- Semantics and interaction: render a generic in-flow `div` with no implicit role or live-region behavior. The consumer chooses `role="status"` or `role="alert"` only when its update needs announcement. Icons are decorative and hidden from assistive technology; the visible title/body carries meaning. Actions use consumer-provided links or buttons and retain their native behavior.
+- State: stateless and persistent; there is no auto-dismissal or internal action state.
+- Customization: tones use existing semantic theme pairs. Register `callout.*` hooks for surface, text, border/accent, radius, padding, and spacing; preserve forced-colors support and nested theme boundaries.
+- Validation: Storybook playground, tone/action/icon, theme, nested, and custom-hook examples; browser checks for explicit roles, color contrast, action semantics, mobile wrapping, and scoped customization; lint, typecheck, token checks, Storybook, package build, and package-consumer checks.
+
 ### Tooltip
 
 - Objective: reveal short, non-essential explanations consistently on pointer hover, keyboard focus, and touch.
