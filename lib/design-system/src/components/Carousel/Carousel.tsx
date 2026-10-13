@@ -285,7 +285,7 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
     >
       <div
         className={styles.frame}
-        data-overlay-safe-area={usesOverlaySafeArea ? "true" : undefined}
+        data-controls-position={controlsPosition}
       >
         {slides.length === 0 ? (
           <div className={styles.empty} data-slot="empty">

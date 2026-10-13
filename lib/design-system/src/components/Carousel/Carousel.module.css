@@ -217,31 +217,31 @@
 }
 
 @container carousel-frame (max-width: 36rem) {
-  .frame[data-overlay-safe-area="true"] .viewport .slide {
+  .frame[data-controls-position="overlay"] .viewport[data-overlay-safe-area="true"] .slide {
     padding: 0;
   }
 
-  .frame[data-overlay-safe-area="true"] .controls[data-position="overlay"] {
+  .frame[data-controls-position="overlay"] .controls[data-position="overlay"] {
     position: static;
     inset: auto;
     margin-block-start: var(--ds-carousel-gap, var(--_carousel-gap));
     pointer-events: auto;
   }
 
-  .frame[data-overlay-safe-area="true"] .controls[data-position="overlay"] .indicators,
-  .frame[data-overlay-safe-area="true"] .controls[data-position="overlay"] .fraction {
+  .frame[data-controls-position="overlay"] .controls[data-position="overlay"] .indicators,
+  .frame[data-controls-position="overlay"] .controls[data-position="overlay"] .fraction {
     position: static;
     inset: auto;
     transform: none;
     background-color: transparent;
   }
 
-  .frame[data-overlay-safe-area="true"] .controls[data-position="overlay"] .indicators {
+  .frame[data-controls-position="overlay"] .controls[data-position="overlay"] .indicators {
     padding: 0;
     border-radius: 0;
   }
 
-  .frame[data-overlay-safe-area="true"] .controls[data-position="overlay"] .fraction {
+  .frame[data-controls-position="overlay"] .controls[data-position="overlay"] .fraction {
     padding: 0;
     border-radius: 0;
   }

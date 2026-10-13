@@ -88,14 +88,31 @@ test("Carousel overlay safe area keeps slide content clear at desktop and phone 
     }
 
     const fullBleed = page.getByRole("region", { name: "Full-bleed overlay controls example" });
-    await expect(fullBleed.locator('[data-slot="viewport"]')).not.toHaveAttribute(
-      "data-overlay-safe-area",
-      "true",
-    );
+    const fullBleedViewport = fullBleed.locator('[data-slot="viewport"]');
+    const fullBleedSlide = fullBleed.locator('[data-slot="slide"][data-active="true"]');
+    const fullBleedControls = fullBleed.locator('[data-slot="controls"]');
+    await expect(fullBleedViewport).not.toHaveAttribute("data-overlay-safe-area", "true");
     expect(
-      await fullBleed.locator('[data-slot="slide"][data-active="true"]')
-        .evaluate((element) => getComputedStyle(element).paddingInlineStart),
+      await fullBleedSlide.evaluate((element) => getComputedStyle(element).paddingInlineStart),
     ).toBe("0px");
+    if (width <= 576) {
+      expect(await fullBleedControls.evaluate((element) => getComputedStyle(element).position))
+        .toBe("static");
+      const viewportBox = await fullBleedViewport.boundingBox();
+      const controlsBox = await fullBleedControls.boundingBox();
+      const headingBox = await fullBleedSlide.getByRole("heading", { name: "Find your focus" }).boundingBox();
+      expect(viewportBox).not.toBeNull();
+      expect(controlsBox).not.toBeNull();
+      expect(headingBox).not.toBeNull();
+      expect(controlsBox!.y).toBeGreaterThanOrEqual(viewportBox!.y + viewportBox!.height);
+      expect(
+        headingBox!.y < controlsBox!.y + controlsBox!.height &&
+        headingBox!.y + headingBox!.height > controlsBox!.y,
+      ).toBe(false);
+    } else {
+      expect(await fullBleedControls.evaluate((element) => getComputedStyle(element).position))
+        .toBe("absolute");
+    }
 
     const below = page.getByRole("region", { name: "Below controls example" });
     const belowViewport = await below.locator('[data-slot="viewport"]').boundingBox();
