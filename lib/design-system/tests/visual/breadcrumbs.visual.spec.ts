@@ -17,7 +17,9 @@ test("breadcrumbs expose parent links and a non-link current page", async ({ pag
     "page",
   );
   await expect(navigation.getByRole("link", { name: "Repairs" })).toHaveCount(0);
-  await expect(navigation.locator("[aria-hidden='true']")).toHaveCount(2);
+  await expect(
+    navigation.locator("li:not(:has(button)) > [aria-hidden='true']"),
+  ).toHaveCount(2);
 });
 
 test("breadcrumb links retain native keyboard focus and activation behavior", async ({
@@ -81,4 +83,105 @@ test("long breadcrumb labels wrap at narrow widths without page overflow", async
     viewportWidth: document.documentElement.clientWidth,
   }));
   expect(dimensions.documentWidth).toBeLessThanOrEqual(dimensions.viewportWidth);
+});
+
+test("deep trails collapse intermediate levels on narrow screens and expand by keyboard", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 844 });
+  await page.goto(
+    "/iframe.html?id=components-breadcrumbs--narrow-screen&viewMode=story",
+  );
+
+  const navigation = page.getByRole("navigation", {
+    name: "Narrow-screen breadcrumb",
+  });
+  const home = navigation.getByRole("link", { name: "Home" });
+  const current = navigation.getByText(
+    "A detailed current page name with enough words to demonstrate readable wrapping",
+  );
+  const collapsed = navigation.getByRole("button", {
+    name: "Show 4 hidden breadcrumb levels",
+  });
+
+  await expect(home).toBeVisible();
+  await expect(current).toBeVisible();
+  await expect(navigation.locator('[data-intermediate="true"]')).toHaveCount(4);
+  await expect(
+    navigation.locator('[data-intermediate="true"]').first(),
+  ).toBeHidden();
+  await expect(collapsed).toHaveAttribute("aria-expanded", "false");
+
+  await collapsed.focus();
+  await page.keyboard.press("Enter");
+  const expanded = navigation.getByRole("button", {
+    name: "Hide intermediate breadcrumb levels",
+  });
+  await expect(expanded).toBeFocused();
+  await expect(
+    navigation.getByRole("link", { name: "Products" }),
+  ).toBeVisible();
+  await expect(
+    navigation.getByRole("link", { name: "Heating systems" }),
+  ).toBeVisible();
+  await expect(expanded).toHaveAttribute("aria-expanded", "true");
+
+  await expanded.click();
+  await expect(collapsed).toBeVisible();
+  await expect(collapsed).toBeFocused();
+  await expect(
+    navigation.getByRole("link", { name: "Products" }),
+  ).toBeHidden();
+});
+
+test("wide breadcrumb layouts retain every ancestor without a collapse control", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto(
+    "/iframe.html?id=components-breadcrumbs--narrow-screen&viewMode=story",
+  );
+
+  const navigation = page.getByRole("navigation", {
+    name: "Narrow-screen breadcrumb",
+  });
+  await expect(
+    navigation.getByRole("link", { name: "Home", exact: true }),
+  ).toBeVisible();
+  await expect(navigation.getByRole("link", { name: "Products" })).toBeVisible();
+  await expect(
+    navigation.getByRole("link", { name: "Home services" }),
+  ).toBeVisible();
+  await expect(
+    navigation.getByRole("link", { name: "Heating systems" }),
+  ).toBeVisible();
+  await expect(
+    navigation.getByRole("button", {
+      name: "Show 4 hidden breadcrumb levels",
+    }),
+  ).toBeHidden();
+});
+
+test("the narrow-screen breadcrumb control responds to touch", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({
+    hasTouch: true,
+    viewport: { width: 360, height: 844 },
+  });
+  const page = await context.newPage();
+  await page.goto(
+    "/iframe.html?id=components-breadcrumbs--narrow-screen&viewMode=story",
+  );
+
+  const navigation = page.getByRole("navigation", {
+    name: "Narrow-screen breadcrumb",
+  });
+  await navigation
+    .getByRole("button", { name: "Show 4 hidden breadcrumb levels" })
+    .tap();
+  await expect(
+    navigation.getByRole("link", { name: "Products" }),
+  ).toBeVisible();
+  await context.close();
 });

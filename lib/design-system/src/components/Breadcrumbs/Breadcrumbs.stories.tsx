@@ -111,10 +111,15 @@ export const NarrowScreen: Story = {
     "aria-label": "Narrow-screen breadcrumb",
     items: [
       { label: "Home", href: "/" },
+      { label: "Products", href: "/products" },
+      { label: "Home services", href: "/products/home-services" },
       {
-        label:
-          "A particularly long service category that should wrap naturally on narrow screens",
-        href: "/services/long-category",
+        label: "Heating and cooling",
+        href: "/products/home-services/heating-cooling",
+      },
+      {
+        label: "Heating systems",
+        href: "/products/home-services/heating-cooling/heating",
       },
       {
         label:

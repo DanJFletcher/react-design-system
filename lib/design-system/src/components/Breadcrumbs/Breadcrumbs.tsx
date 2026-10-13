@@ -1,7 +1,10 @@
 import {
+  Fragment,
   forwardRef,
   type ComponentPropsWithRef,
   type CSSProperties,
+  useId,
+  useState,
 } from "react";
 import type { DesignSystemStyle } from "../../generated/token-types";
 import styles from "./Breadcrumbs.module.css";
@@ -75,6 +78,10 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
     ref,
   ) {
     validateItems(items);
+    const [expanded, setExpanded] = useState(false);
+    const listId = useId();
+    const hiddenLevelCount = Math.max(items.length - 2, 0);
+    const hasIntermediateItems = hiddenLevelCount > 0;
 
     return (
       <nav
@@ -84,27 +91,61 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
         className={[styles.breadcrumbs, className].filter(Boolean).join(" ")}
         style={style as CSSProperties | undefined}
       >
-        <ol className={styles.list}>
+        <ol
+          className={[styles.list, expanded && styles.expanded]
+            .filter(Boolean)
+            .join(" ")}
+          id={listId}
+        >
           {items.map((item, index) => {
             const isCurrent = index === items.length - 1;
+            const isIntermediate = index > 0 && !isCurrent;
 
             return (
-              <li className={styles.item} key={`${item.label}-${index}`}>
-                {isCurrent ? (
-                  <span aria-current="page" className={styles.current}>
-                    {item.label}
-                  </span>
-                ) : (
-                  <a className={styles.link} href={item.href}>
-                    {item.label}
-                  </a>
+              <Fragment key={`${item.label}-${index}`}>
+                {isCurrent && hasIntermediateItems && (
+                  <li className={[styles.item, styles.collapseControl].join(" ")}>
+                    <button
+                      aria-controls={listId}
+                      aria-expanded={expanded}
+                      aria-label={
+                        expanded
+                          ? "Hide intermediate breadcrumb levels"
+                          : `Show ${hiddenLevelCount} hidden breadcrumb ${
+                              hiddenLevelCount === 1 ? "level" : "levels"
+                            }`
+                      }
+                      className={styles.collapseButton}
+                      onClick={() => setExpanded((isExpanded) => !isExpanded)}
+                      type="button"
+                    >
+                      …
+                    </button>
+                    <span aria-hidden="true" className={styles.separator}>
+                      /
+                    </span>
+                  </li>
                 )}
-                {!isCurrent && (
-                  <span aria-hidden="true" className={styles.separator}>
-                    /
-                  </span>
-                )}
-              </li>
+                <li
+                  className={styles.item}
+                  data-intermediate={isIntermediate || undefined}
+                >
+                  {isCurrent ? (
+                    <span aria-current="page" className={styles.current}>
+                      {item.label}
+                    </span>
+                  ) : (
+                    <a className={styles.link} href={item.href}>
+                      {item.label}
+                    </a>
+                  )}
+                  {!isCurrent && (
+                    <span aria-hidden="true" className={styles.separator}>
+                      /
+                    </span>
+                  )}
+                </li>
+              </Fragment>
             );
           })}
         </ol>
