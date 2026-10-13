@@ -110,6 +110,14 @@
   --ds-carousel-radius: initial;
   --ds-carousel-slide-radius: initial;
   --ds-carousel-text: initial;
+  --ds-contact-border: initial;
+  --ds-contact-gap: initial;
+  --ds-contact-link: initial;
+  --ds-contact-muted: initial;
+  --ds-contact-padding: initial;
+  --ds-contact-radius: initial;
+  --ds-contact-surface: initial;
+  --ds-contact-text: initial;
   --ds-dialog-backdrop: initial;
   --ds-dialog-border: initial;
   --ds-dialog-padding: initial;

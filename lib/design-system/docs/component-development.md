@@ -37,6 +37,16 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - Customization: use semantic tokens, CSS Modules, responsive layout, public variants and size props; do not add theme-specific branches or undocumented private hooks.
 - Validation: Storybook playground, layout variants and themes; visual mobile/desktop checks; lint, typecheck, Storybook and package-consumer checks.
 
+### ContactSection
+
+- Objective: help small-business customers call, visit, check hours, request a quote, or send a message from one responsive section.
+- Dependencies: existing React package, CSS Modules, semantic surface/text/border/action tokens, and registered `contact.*` styling hooks; no map SDK, form state, or scheduling dependency.
+- Public API: `heading` is a required visible string; `description`, `address` (`lines`, optional `directionsHref` and `directionsLabel`), `contactMethods` (stable `id`, visible `label` and `value`, `href`, optional decorative `icon` and native anchor props), `hours` (stable `id`, `day`, and `hours`), `action`, and `form` are optional. `headingLevel` defaults to `2`; detail headings use the next level. `variant` (`plain`, `surface`, `accent`) and `layout` (`split`, `stacked`) configure presentation. Native `section` props, refs, `className`, and typed `style` are forwarded; the section's accessible name is tied to its required heading.
+- Semantics and interaction: render a named native `section`; location uses `<address>`, contact details and hours use definition lists, and contact/directions destinations remain native anchors. The `action` and `form` slots retain consumer-owned semantics and behavior. No map is embedded, hours are displayed as supplied, and the component does not own form submission or booking state.
+- State: stateless; content, link destinations, form state, and any scheduling behavior belong to the consumer.
+- Customization: use semantic tokens, responsive CSS Modules, public `variant` and `layout` props, and registered `contact.*` hooks for surface/text/muted/border/link colors, radius, padding, and spacing. Support ACME, Luna, Orchid, custom themes, and nested boundaries.
+- Validation: Storybook playground and form/location examples; browser checks for landmarks, native links, hours, themes, nested overrides, responsive stacking, and custom hooks; lint, typecheck, token checks, Storybook, package build, and package-consumer checks.
+
 ### Dialog
 
 - Objective: accessible modal content for confirmations, forms, and focused tasks.

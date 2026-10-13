@@ -1,0 +1,35 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as ContactSectionStories from "./ContactSection.stories";
+
+<Meta of={ContactSectionStories} />
+
+<Title>Contact section</Title>
+
+<Subtitle>A responsive small-business section for location, contact methods, hours, calls to action, and an optional form.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={ContactSectionStories.Playground} />
+<Controls of={ContactSectionStories.Playground} />
+
+## Contact details and form slots
+
+<Canvas of={ContactSectionStories.WithContactForm} />
+<Canvas of={ContactSectionStories.StackedLayout} />
+<Canvas of={ContactSectionStories.LongContent} />
+<Canvas of={ContactSectionStories.HeadingLevels} />
+
+## Variants, themes, and custom hooks
+
+<Canvas of={ContactSectionStories.VariantComparison} />
+<Canvas of={ContactSectionStories.ThemeCoverage} />
+<Canvas of={ContactSectionStories.NestedThemeBoundary} />
+<Canvas of={ContactSectionStories.CustomHooks} />
+
+## Behavior and semantics
+
+- The required visible `heading` names the native section. `headingLevel` defaults to `2`; detail headings use the next level.
+- Address lines use `<address>`. Contact methods and hours use definition lists; link destinations are provided by the consumer.
+- `layout="split"` places the optional `form` slot beside business details on wide screens and stacks it on narrow screens. `layout="stacked"` keeps one column.
+- `action` and `form` are consumer-owned React content; the component does not submit forms, embed a map, compute opening status, or manage bookings.
+- `variant` accepts `plain`, `surface`, or `accent`. `contact.*` hooks control surface, text, muted text, border, link color, radius, padding, and spacing.

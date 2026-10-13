@@ -824,6 +824,54 @@
       "cssVariable": "--ds-carousel-text"
     },
     {
+      "name": "contact.border",
+      "type": "color",
+      "description": "Contact section surface border color.",
+      "cssVariable": "--ds-contact-border"
+    },
+    {
+      "name": "contact.gap",
+      "type": "dimension",
+      "description": "Contact section content and group spacing.",
+      "cssVariable": "--ds-contact-gap"
+    },
+    {
+      "name": "contact.link",
+      "type": "color",
+      "description": "Contact section link text color.",
+      "cssVariable": "--ds-contact-link"
+    },
+    {
+      "name": "contact.muted",
+      "type": "color",
+      "description": "Contact section supporting text color.",
+      "cssVariable": "--ds-contact-muted"
+    },
+    {
+      "name": "contact.padding",
+      "type": "dimension",
+      "description": "Contact section internal spacing.",
+      "cssVariable": "--ds-contact-padding"
+    },
+    {
+      "name": "contact.radius",
+      "type": "dimension",
+      "description": "Contact section corner radius.",
+      "cssVariable": "--ds-contact-radius"
+    },
+    {
+      "name": "contact.surface",
+      "type": "color",
+      "description": "Contact section background color.",
+      "cssVariable": "--ds-contact-surface"
+    },
+    {
+      "name": "contact.text",
+      "type": "color",
+      "description": "Contact section primary text color.",
+      "cssVariable": "--ds-contact-text"
+    },
+    {
       "name": "dialog.backdrop",
       "type": "color",
       "description": "Dialog modal backdrop base color.",

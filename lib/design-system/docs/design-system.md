@@ -279,6 +279,36 @@ Selection can be uncontrolled with `defaultValue` or controlled with `value` and
 
 Choose `variant="line"` or `variant="pills"`, `size="sm" | "md" | "lg"`, and `fullWidth` to control presentation. Styling uses semantic tokens, so tab states inherit ACME, Luna, Orchid, and custom theme colors without theme-specific rendering. Native `div` props, refs, `className`, and typed `style` are forwarded.
 
+## ContactSection
+
+```tsx
+<ContactSection
+  heading="Visit our studio"
+  address={{
+    lines: ["48 Queen Street West", "Toronto, ON M5H 2N2"],
+    directionsHref: "https://maps.example.test/directions",
+  }}
+  contactMethods={[
+    { id: "phone", label: "Phone", value: "(416) 555-0134", href: "tel:+14165550134" },
+    { id: "email", label: "Email", value: "hello@example.com", href: "mailto:hello@example.com" },
+  ]}
+  hours={[
+    { id: "monday", day: "Monday", hours: "9:00 AM – 5:00 PM" },
+    { id: "sunday", day: "Sunday", hours: "Closed" },
+  ]}
+  action={<Button>Request a quote</Button>}
+  form={<ContactForm />}
+  variant="surface"
+  layout="split"
+/>
+```
+
+`ContactSection` is a responsive small-business contact composition. Its visible `heading` is required and names the native section; the default heading level is `h2`, and `headingLevel` can be set from `1` to `6`. Detail headings use the next heading level. Address lines are rendered inside `<address>`; contact methods and weekly hours use definition lists. Contact methods accept native anchor attributes, while directions use a native link with a consumer-provided destination and optional label.
+
+`addressHeading`, `contactHeading`, and `hoursHeading` customize the detail headings; the directions label defaults to “Get directions.” Hours are displayed as supplied. `variant` accepts `plain` (default), `surface`, or `accent`. `layout="split"` places an optional form beside business details on wider screens and stacks it on mobile; `layout="stacked"` keeps one column at every size. `action` and `form` accept consumer-owned React content. This component does not embed a map, calculate open/closed state, submit forms, or manage booking state.
+
+The `contact.*` hooks customize its surface, text, muted text, border, link color, radius, padding, and spacing. Theme tokens, nested theme boundaries, and custom hooks are supported.
+
 ## Footer
 
 ```tsx

@@ -18,6 +18,16 @@ export { Callout } from "./components/Callout/Callout";
 export type { CalloutProps, CalloutTone } from "./components/Callout/Callout";
 export { Progress } from "./components/Progress/Progress";
 export type { ProgressProps } from "./components/Progress/Progress";
+export { ContactSection } from "./components/ContactSection/ContactSection";
+export type {
+  BusinessHour,
+  ContactAddress,
+  ContactMethod,
+  ContactSectionHeadingLevel,
+  ContactSectionLayout,
+  ContactSectionProps,
+  ContactSectionVariant,
+} from "./components/ContactSection/ContactSection";
 export { Tooltip } from "./components/Tooltip/Tooltip";
 export type { TooltipPlacement, TooltipProps } from "./components/Tooltip/Tooltip";
 export { Accordion } from "./components/Accordion/Accordion";
