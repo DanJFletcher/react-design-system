@@ -31,6 +31,7 @@
     "color.status.error.bg": { "type": "color", "value": "#FEE4E2", "description": "Error status surface." },
     "color.status.error.fg": { "type": "color", "value": "#B42318", "description": "Text on the error status surface." },
     "radius.control": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Default action button corner radius." },
+    "radius.tooltip": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Default corner radius for supplementary tooltip content." },
     "radius.form-control": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Corner radius for single-line text and select controls." },
     "radius.form-group": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Corner radius for grouped form fieldsets." },
     "radius.textarea": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Corner radius for multi-line text controls." },

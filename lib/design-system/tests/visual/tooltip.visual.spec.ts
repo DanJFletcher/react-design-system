@@ -75,16 +75,19 @@ test("Tooltip flips and stays within a narrow viewport, including with reduced m
 test("Tooltip follows ACME, Luna, and Orchid colors through nested theme boundaries", async ({ page }) => {
   await page.goto("/iframe.html?id=components-tooltip--theme-coverage&viewMode=story");
   const colors: string[] = [];
+  const radii: string[] = [];
   for (const theme of ["ACME", "Luna", "Orchid"]) {
     const trigger = page.getByRole("button", { name: `${theme} tooltip` });
     await trigger.hover();
     const tooltip = page.getByRole("tooltip");
     await expect(tooltip).toBeVisible();
     colors.push(await tooltip.evaluate((element) => getComputedStyle(element).backgroundColor));
+    radii.push(await tooltip.evaluate((element) => getComputedStyle(element).borderRadius));
     await page.mouse.move(0, 0);
     await expect(tooltip).toBeHidden();
   }
   expect(new Set(colors).size).toBe(3);
+  expect(radii).toEqual(["6px", "24px", "16px"]);
 });
 
 test("Tooltip escapes transformed and clipped panels", async ({ page }) => {

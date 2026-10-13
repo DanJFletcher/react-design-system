@@ -419,6 +419,11 @@
       "name": "radius.textarea",
       "type": "dimension",
       "description": "Corner radius for multi-line text controls."
+    },
+    {
+      "name": "radius.tooltip",
+      "type": "dimension",
+      "description": "Default corner radius for supplementary tooltip content."
     }
   ],
   "componentHooks": [
@@ -1133,6 +1138,7 @@
       "color.status.error.bg": "#FEE4E2",
       "color.status.error.fg": "#B42318",
       "radius.control": "6px",
+      "radius.tooltip": "6px",
       "radius.form-control": "6px",
       "radius.form-group": "6px",
       "radius.textarea": "6px",
@@ -1169,6 +1175,7 @@
       "color.status.error.bg": "#4A202C",
       "color.status.error.fg": "#FFADBE",
       "radius.control": "9999px",
+      "radius.tooltip": "24px",
       "radius.form-control": "9999px",
       "radius.form-group": "24px",
       "radius.textarea": "24px",
@@ -1205,6 +1212,7 @@
       "color.status.error.bg": "#FDE7EB",
       "color.status.error.fg": "#821F35",
       "radius.control": "16px",
+      "radius.tooltip": "16px",
       "radius.form-control": "16px",
       "radius.form-group": "16px",
       "radius.textarea": "16px",

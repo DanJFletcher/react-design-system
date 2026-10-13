@@ -33,6 +33,7 @@
     "color.status.error.bg": "#4A202C",
     "color.status.error.fg": "#FFADBE",
     "radius.control": { "amount": 9999, "unit": "px" },
+    "radius.tooltip": { "amount": 24, "unit": "px" },
     "radius.form-control": { "amount": 9999, "unit": "px" },
     "radius.form-group": { "amount": 24, "unit": "px" },
     "radius.textarea": { "amount": 24, "unit": "px" },

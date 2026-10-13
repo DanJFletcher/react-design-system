@@ -47,7 +47,7 @@ The native `Dialog` uses `showModal()` and is painted in the browser's top layer
 
 `ToastProvider` keeps its viewport in the DOM subtree where it is mounted, so notifications inherit a surrounding `ThemeScope` and any local `toast.*` hook overrides. Mount the provider inside the intended theme boundary.
 
-`Tooltip` uses the browser's popover top layer to escape transformed and overflow-clipped ancestors. It remains in its original DOM subtree, so it continues to inherit the active theme and local `tooltip.*` hook overrides. Mount it inside the intended theme boundary.
+`Tooltip` uses the browser's popover top layer to escape transformed and overflow-clipped ancestors. It remains in its original DOM subtree, so it continues to inherit the active theme and local `tooltip.*` hook overrides. Its default radius comes from the semantic `radius.tooltip` token (24px in Luna); a local `tooltip.radius` hook overrides that default. Mount it inside the intended theme boundary.
 
 `Text` and `Heading` use the active theme's shared font scale and semantic primary/muted text colors. Their markup stays identical across themes; visual heading `size` can vary independently from semantic `level`.
 
