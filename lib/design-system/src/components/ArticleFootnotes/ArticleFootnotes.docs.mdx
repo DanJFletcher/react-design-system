@@ -1,0 +1,53 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as ArticleFootnotesStories from "./ArticleFootnotes.stories";
+
+<Meta of={ArticleFootnotesStories} />
+
+<Title>Article footnotes</Title>
+
+<Subtitle>Link readers from an in-text reference to a note and back again.</Subtitle>
+
+## Connected example
+
+<Canvas of={ArticleFootnotesStories.Playground} />
+<Controls of={ArticleFootnotesStories.Playground} />
+
+Each marker is a native fragment link. A note may have more than one citation marker, and each backlink returns to its own marker.
+
+## Themes and narrow screens
+
+<Canvas of={ArticleFootnotesStories.ThemeCoverage} />
+<Canvas of={ArticleFootnotesStories.NarrowScreen} />
+
+## API and usage
+
+`ArticleFootnote` renders a superscript link; `ArticleFootnotes` renders a named section with an ordered list. Pair each marker's `id` with its note's `backlinks`, and set the marker's `noteId` to that note's `id`. Keep IDs unique in the document.
+
+```tsx
+<ArticleBody aria-label="A guide to preparing your studio">
+  <p>
+    A consistent opening routine helps the team prepare the space
+    <ArticleFootnote
+      id="citation-opening-hours"
+      noteId="note-opening-hours"
+      label="1"
+    />.
+  </p>
+  <ArticleFootnotes
+    heading="Sources and notes"
+    headingLevel={2}
+    items={[
+      {
+        id: "note-opening-hours",
+        label: "1",
+        content: <>See the <a href="/journal/opening-hours">opening-hours guide</a>.</>,
+        backlinks: [{ id: "citation-opening-hours" }],
+      },
+    ]}
+  />
+</ArticleBody>
+```
+
+Supply a localized `backlinkLabel` or a per-backlink `ariaLabel` when needed. Choose `headingLevel` to fit the surrounding article outline. Note content is React content supplied by the consumer; the component does not assign numbering, resolve sources, or sanitize HTML.
+
+The marker and return links are keyboard accessible, visibly focused, and theme-aware. The components inherit custom and nested themes and provide system colors in forced-colors mode.

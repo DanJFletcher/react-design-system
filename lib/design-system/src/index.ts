@@ -59,6 +59,17 @@ export type {
 } from "./components/ArticleCard/ArticleCard";
 export { ArticleBody } from "./components/ArticleBody/ArticleBody";
 export type { ArticleBodyProps } from "./components/ArticleBody/ArticleBody";
+export {
+  ArticleFootnote,
+  ArticleFootnotes,
+} from "./components/ArticleFootnotes/ArticleFootnotes";
+export type {
+  ArticleFootnoteBacklink,
+  ArticleFootnoteEntry,
+  ArticleFootnoteHeadingLevel,
+  ArticleFootnoteProps,
+  ArticleFootnotesProps,
+} from "./components/ArticleFootnotes/ArticleFootnotes";
 export type {
   CardAlignment,
   CardHeadingLevel,

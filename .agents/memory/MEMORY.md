@@ -3,3 +3,4 @@
 - [Native dialog tests](storybook-native-dialog-tests.md) — use browser keyboard events for native Escape behavior and open through a trigger when checking focus return.
 - [Storybook play isolation](storybook-play-test-isolation.md) — a story's play function also runs when its iframe route is opened directly, affecting browser-test state.
 - [Design-system verification](design-system-verification.md) — the combined check can exceed the shell time limit when browser tests follow builds; run the visual suite separately.
+- [Unique Storybook landmarks](storybook-landmark-uniqueness.md) — stacked theme stories need distinct names for repeated semantic regions to pass axe’s landmark-unique rule.

@@ -243,6 +243,33 @@ The optional author avatar is decorative by default because the author name is v
 
 The reading column is limited to 72 characters per line and fluidly fits narrow screens. Inline code uses a theme-aware monospace style, and preformatted blocks use a contrasting surface and scroll horizontally rather than forcing page overflow. Add `tabIndex={0}` to wide code blocks so keyboard users can focus and scroll them; focused blocks show the theme focus ring. Images scale down within the article; wide tables also scroll horizontally without forcing the page to overflow. Add `tabIndex={0}` to tables that need horizontal scrolling so keyboard users can operate them. Styling follows the active ACME, Luna, Orchid, or custom theme and includes keyboard focus and forced-colors treatment. Use headings in document order, informative image alternative text, scoped table headers, and sanitized content; the component does not parse or sanitize HTML.
 
+## Article footnotes
+
+```tsx
+<ArticleBody aria-label="A guide to preparing your studio">
+  <p>
+    A short opening checklist can make busy mornings easier
+    <ArticleFootnote id="citation-checklist" noteId="note-checklist" label="1" />.
+  </p>
+  <ArticleFootnotes
+    heading="Sources and notes"
+    headingLevel={2}
+    items={[
+      {
+        id: "note-checklist",
+        label: "1",
+        content: <>See the <a href="/journal/opening-checklist">full opening checklist</a>.</>,
+        backlinks: [{ id: "citation-checklist" }],
+      },
+    ]}
+  />
+</ArticleBody>
+```
+
+`ArticleFootnote` renders an in-text superscript anchor to a note. `ArticleFootnotes` renders a named section with an ordered list and return links to each citation marker. Supply a stable, unique marker `id`, the matching note `id` as `noteId`, and the same IDs in each note's `backlinks` list. A note can link back to multiple in-text citations. `label` controls the visible and accessible marker text; `headingLevel` keeps the notes heading in the article's semantic outline. Note content is consumer-provided React content, so external source links and formatting remain under caller control.
+
+The components use native fragment links without JavaScript navigation, inherit ACME, Luna, Orchid, custom, and nested theme tokens, and preserve visible focus indicators and forced-colors support. The component does not resolve sources, assign citation numbering, or fetch content.
+
 ## Pricing details
 
 ```tsx

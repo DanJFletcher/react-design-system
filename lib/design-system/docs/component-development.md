@@ -57,6 +57,16 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - Customization: compose the existing theme-aware Card and Badge; inherit their semantic colors and `card.*` hooks across ACME, Luna, Orchid, custom themes, and nested theme boundaries. Keep links visibly identifiable and preserve focus indicators and forced-color behavior.
 - Validation: Storybook playground, layouts, content variants, themes, and custom hooks; browser checks for article naming, title/category/author/read-more links, machine-readable dates, optional media, narrow-screen wrapping, and responsive horizontal layout; lint, typecheck, Storybook, package build, and package-consumer checks.
 
+### ArticleFootnotes
+
+- Objective: connect in-text footnote markers to an accessible notes list and return links, so readers can move between a citation and its explanation.
+- Dependencies: React, native fragment links, semantic theme tokens, and CSS Modules; no router, citation parser, or content-fetching dependency.
+- Public API: `ArticleFootnote` requires a unique marker `id`, destination `noteId`, and visible `label`; native anchor attributes, refs, `className`, and typed `style` are supported. `ArticleFootnotes` requires note `items` (`id`, `label`, React `content`, and one or more `backlinks`); it also accepts a visible `heading`, semantic `headingLevel` (2–6), localizable `backlinkLabel`, native section attributes, refs, `className`, and typed `style`.
+- Semantics and interaction: markers are native superscript links; the notes are a named section containing an ordered list, and each note has native links back to its marker or markers. All destinations use real, consumer-provided IDs and work without JavaScript. Keyboard focus remains visible in regular and forced-colors modes.
+- State: stateless; the consumer owns citation numbering, stable unique IDs, note content, source URLs, and localization. Duplicate or mismatched IDs are invalid consumer data.
+- Customization: use semantic text, action, border, spacing, and focus tokens; support ACME, Luna, Orchid, custom themes, nested scopes, long content, and narrow layouts. No component-specific hooks or new semantic tokens are required.
+- Validation: Storybook connected, theme, and narrow-layout examples; browser checks for native marker/backlink navigation, multiple citations per note, keyboard focus, theme boundaries, and no narrow-screen overflow; lint, typecheck, Storybook, package build, and package-consumer checks.
+
 ### Dialog
 
 - Objective: accessible modal content for confirmations, forms, and focused tasks.
