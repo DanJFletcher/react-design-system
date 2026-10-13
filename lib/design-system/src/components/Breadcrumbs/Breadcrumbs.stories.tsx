@@ -18,6 +18,10 @@ const meta = {
   },
   argTypes: {
     items: { control: false },
+    collapseAt: {
+      control: "text",
+      description: "Viewport width at or below which intermediate links collapse.",
+    },
     "aria-label": { control: "text", description: "Accessible name for this navigation landmark." },
     className: { control: false },
     style: { control: false },
@@ -130,6 +134,19 @@ export const NarrowScreen: Story = {
   },
   render: (args) => (
     <div style={{ inlineSize: "min(100%, 18rem)", marginInline: "auto" }}>
+      <Breadcrumbs {...args} />
+    </div>
+  ),
+};
+
+export const CustomCollapseBreakpoint: Story = {
+  args: {
+    ...NarrowScreen.args,
+    "aria-label": "Custom-breakpoint breadcrumb",
+    collapseAt: "56rem",
+  },
+  render: (args) => (
+    <div style={{ inlineSize: "min(100%, 36rem)", marginInline: "auto" }}>
       <Breadcrumbs {...args} />
     </div>
   ),

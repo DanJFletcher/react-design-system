@@ -91,13 +91,22 @@
 }
 
 @media (max-width: 40rem) {
-  .collapseControl {
+  .defaultCollapse .collapseControl {
     display: inline-flex;
   }
 
-  .list:not(.expanded) [data-intermediate="true"] {
+  .defaultCollapse:not(.expanded) [data-intermediate="true"] {
     display: none;
   }
+}
+
+.responsiveCollapse[data-collapse-active="true"] .collapseControl {
+  display: inline-flex;
+}
+
+.responsiveCollapse[data-collapse-active="true"]:not(.expanded)
+  [data-intermediate="true"] {
+    display: none;
 }
 
 @media (forced-colors: active) {

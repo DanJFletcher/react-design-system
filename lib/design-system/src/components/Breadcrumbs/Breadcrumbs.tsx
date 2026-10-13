@@ -3,8 +3,10 @@ import {
   forwardRef,
   type ComponentPropsWithRef,
   type CSSProperties,
+  useCallback,
   useId,
   useState,
+  useSyncExternalStore,
 } from "react";
 import type { DesignSystemStyle } from "../../generated/token-types";
 import styles from "./Breadcrumbs.module.css";
@@ -31,8 +33,32 @@ export type BreadcrumbsProps = Omit<
 > & {
   /** Ordered parent links followed by the current page. */
   items: readonly BreadcrumbsItem[];
+  /**
+   * Viewport width at or below which intermediate links collapse (for example,
+   * "40rem" or "640px"). Defaults to 40rem. Omit to use the default CSS breakpoint.
+   */
+  collapseAt?: string;
   style?: DesignSystemStyle;
 };
+
+function subscribeToBreakpoint(query: string, onChange: () => void) {
+  if (!query || typeof window === "undefined" || !window.matchMedia) {
+    return () => {};
+  }
+
+  const mediaQuery = window.matchMedia(query);
+  mediaQuery.addEventListener("change", onChange);
+  return () => mediaQuery.removeEventListener("change", onChange);
+}
+
+function getBreakpointSnapshot(query: string) {
+  return Boolean(
+    query &&
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia(query).matches,
+  );
+}
 
 function validateItems(items: readonly BreadcrumbsItem[]) {
   if (items.length === 0) {
@@ -70,6 +96,7 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
   function Breadcrumbs(
     {
       items,
+      collapseAt,
       className,
       style,
       "aria-label": ariaLabel = "Breadcrumb",
@@ -78,6 +105,20 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
     ref,
   ) {
     validateItems(items);
+    const breakpointQuery = collapseAt ? `(max-width: ${collapseAt})` : "";
+    const subscribe = useCallback(
+      (onChange: () => void) => subscribeToBreakpoint(breakpointQuery, onChange),
+      [breakpointQuery],
+    );
+    const getSnapshot = useCallback(
+      () => getBreakpointSnapshot(breakpointQuery),
+      [breakpointQuery],
+    );
+    const breakpointActive = useSyncExternalStore(
+      subscribe,
+      getSnapshot,
+      () => false,
+    );
     const [expanded, setExpanded] = useState(false);
     const listId = useId();
     const hiddenLevelCount = Math.max(items.length - 2, 0);
@@ -92,9 +133,14 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
         style={style as CSSProperties | undefined}
       >
         <ol
-          className={[styles.list, expanded && styles.expanded]
+          className={[
+            styles.list,
+            collapseAt ? styles.responsiveCollapse : styles.defaultCollapse,
+            expanded && styles.expanded,
+          ]
             .filter(Boolean)
             .join(" ")}
+          data-collapse-active={collapseAt ? breakpointActive : undefined}
           id={listId}
         >
           {items.map((item, index) => {
