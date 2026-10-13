@@ -70,6 +70,12 @@ export type {
   ArticleFootnoteProps,
   ArticleFootnotesProps,
 } from "./components/ArticleFootnotes/ArticleFootnotes";
+export { ArticleTableOfContents } from "./components/ArticleTableOfContents/ArticleTableOfContents";
+export type {
+  ArticleTableOfContentsHeadingLevel,
+  ArticleTableOfContentsItem,
+  ArticleTableOfContentsProps,
+} from "./components/ArticleTableOfContents/ArticleTableOfContents";
 export { Pagination } from "./components/Pagination/Pagination";
 export type {
   PaginationPageLabel,

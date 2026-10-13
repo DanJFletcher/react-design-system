@@ -1,0 +1,41 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as ArticleTableOfContentsStories from "./ArticleTableOfContents.stories";
+
+<Meta of={ArticleTableOfContentsStories} />
+
+<Title>Article table of contents</Title>
+
+<Subtitle>Give readers direct links to sections in a long article.</Subtitle>
+
+## Connected example
+
+<Canvas of={ArticleTableOfContentsStories.Playground} />
+<Controls of={ArticleTableOfContentsStories.Playground} />
+
+## Themes and narrow screens
+
+<Canvas of={ArticleTableOfContentsStories.ThemeCoverage} />
+<Canvas of={ArticleTableOfContentsStories.NarrowScreen} />
+
+## API and usage
+
+`ArticleTableOfContents` renders a named native navigation landmark containing a visible heading and a list of native fragment links. Pass the IDs and labels that correspond to headings in the article. Link order follows the order of `items`.
+
+```tsx
+<ArticleBody aria-label="A guide to preparing your studio">
+  <h1>A guide to preparing your studio</h1>
+  <ArticleTableOfContents
+    aria-label="Article table of contents"
+    heading="In this article"
+    headingLevel={2}
+    items={[
+      { id: "prepare-the-space", label: "Prepare the space" },
+      { id: "welcome-each-guest", label: "Welcome each guest" },
+    ]}
+  />
+  <h2 id="prepare-the-space">Prepare the space</h2>
+  <h2 id="welcome-each-guest">Welcome each guest</h2>
+</ArticleBody>
+```
+
+The component does not inspect article HTML, generate heading IDs, or own routing. Native anchors retain browser fragment navigation, keyboard activation, and visible focus. Styles inherit built-in, custom, and nested theme tokens and adapt to narrow widths.

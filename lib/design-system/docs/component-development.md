@@ -67,6 +67,16 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - Customization: use semantic text, action, border, spacing, and focus tokens; support ACME, Luna, Orchid, custom themes, nested scopes, long content, and narrow layouts. No component-specific hooks or new semantic tokens are required.
 - Validation: Storybook connected, theme, and narrow-layout examples; browser checks for native marker/backlink navigation, multiple citations per note, keyboard focus, theme boundaries, and no narrow-screen overflow; lint, typecheck, Storybook, package build, and package-consumer checks.
 
+### ArticleTableOfContents
+
+- Objective: help readers jump directly to relevant sections in long articles.
+- Dependencies: React, native fragment links, semantic theme tokens, and CSS Modules; no router, article parser, or new semantic token.
+- Public API: required ordered `items` each contain a consumer-provided heading `id` and visible `label`; `heading` defaults to “On this page”; `headingLevel` defaults to `2` and accepts `2`–`6`; native `nav` attributes including `aria-label`, refs, `className`, and typed `DesignSystemStyle` are supported.
+- Semantics and interaction: render a named native `<nav>` containing a visible heading, list, and native `<a href="#id">` links. Native keyboard activation and browser fragment navigation remain intact. IDs must match headings in the same document.
+- State: stateless; the consumer owns heading markup, IDs, labels, and all routing/content behavior. The component does not parse arbitrary article HTML or create IDs.
+- Customization: use semantic text, action, border, surface, radius, spacing, and focus tokens with responsive CSS Modules. Support ACME, Luna, Orchid, custom themes, and nested boundaries; preserve forced-colors focus and link visibility.
+- Validation: Storybook connected, theme/custom/nested, and narrow-screen examples; browser checks for landmark naming, correct fragment targets, keyboard activation/focus, theme inheritance, and no narrow-screen overflow; lint, typecheck, Storybook, package build, and package-consumer checks.
+
 ### Pagination
 
 - Objective: help readers move through long blog, service, or product listings while keeping the current page clear.

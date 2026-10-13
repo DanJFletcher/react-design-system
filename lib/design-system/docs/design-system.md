@@ -270,6 +270,28 @@ The reading column is limited to 72 characters per line and fluidly fits narrow 
 
 The components use native fragment links without JavaScript navigation, inherit ACME, Luna, Orchid, custom, and nested theme tokens, and preserve visible focus indicators and forced-colors support. The component does not resolve sources, assign citation numbering, or fetch content.
 
+## Article table of contents
+
+```tsx
+<ArticleBody aria-label="A guide to preparing your studio">
+  <h1>A guide to preparing your studio</h1>
+  <ArticleTableOfContents
+    aria-label="Article table of contents"
+    heading="In this article"
+    items={[
+      { id: "prepare-the-space", label: "Prepare the space" },
+      { id: "welcome-each-guest", label: "Welcome each guest" },
+    ]}
+  />
+  <h2 id="prepare-the-space">Prepare the space</h2>
+  <h2 id="welcome-each-guest">Welcome each guest</h2>
+</ArticleBody>
+```
+
+`ArticleTableOfContents` renders a named native `<nav>` landmark with a visible heading and an ordered-by-input list of native fragment links. Each item pairs a consumer-provided heading `id` with its visible `label`; the IDs must match headings in the same document. `heading` defaults to “On this page”, `headingLevel` defaults to `2`, and the navigation landmark is named “Table of contents” unless its native `aria-label` is customized.
+
+Links work with browser fragment navigation and keyboard activation without JavaScript. Styling inherits ACME, Luna, Orchid, custom, and nested theme tokens, wraps long labels on narrow screens, and retains visible focus and forced-colors support. The component does not parse article HTML, generate IDs, or own routing.
+
 ## Pagination
 
 ```tsx
