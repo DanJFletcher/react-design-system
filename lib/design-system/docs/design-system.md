@@ -311,6 +311,23 @@ Links work with browser fragment navigation and keyboard activation without Java
 
 The current page uses `aria-current="page"`; callback mode uses native buttons and link mode uses native anchors. Styling inherits action, border, focus, spacing, and radius tokens across built-in, nested, and custom themes.
 
+## Breadcrumbs
+
+```tsx
+<Breadcrumbs
+  aria-label="Service breadcrumb"
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services" },
+    { label: "Repairs", current: true },
+  ]}
+/>
+```
+
+`Breadcrumbs` renders an ordered trail in a named native navigation landmark. Supply a native-link destination for each parent page and mark the final item with `current: true`; it is announced with `aria-current="page"` and is not linked. The consumer owns all URLs and routing. The landmark name defaults to “Breadcrumb” and can be customized with `aria-label`.
+
+Long labels wrap at narrow widths. Link colors, spacing, corner radius, and visible keyboard focus inherit built-in, custom, and nested theme tokens.
+
 ## Pricing details
 
 ```tsx

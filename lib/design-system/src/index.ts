@@ -76,6 +76,13 @@ export type {
   ArticleTableOfContentsItem,
   ArticleTableOfContentsProps,
 } from "./components/ArticleTableOfContents/ArticleTableOfContents";
+export { Breadcrumbs } from "./components/Breadcrumbs/Breadcrumbs";
+export type {
+  BreadcrumbsCurrentItem,
+  BreadcrumbsItem,
+  BreadcrumbsLinkItem,
+  BreadcrumbsProps,
+} from "./components/Breadcrumbs/Breadcrumbs";
 export { Pagination } from "./components/Pagination/Pagination";
 export type {
   PaginationPageLabel,

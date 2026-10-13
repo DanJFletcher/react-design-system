@@ -1,0 +1,35 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as BreadcrumbsStories from "./Breadcrumbs.stories";
+
+<Meta of={BreadcrumbsStories} />
+
+<Title>Breadcrumbs</Title>
+
+<Subtitle>Show readers where the current page sits in a site hierarchy.</Subtitle>
+
+## Basic use
+
+<Canvas of={BreadcrumbsStories.Playground} />
+<Controls of={BreadcrumbsStories.Playground} />
+
+## Themes and narrow screens
+
+<Canvas of={BreadcrumbsStories.ThemeCoverage} />
+<Canvas of={BreadcrumbsStories.NarrowScreen} />
+
+## API and behavior
+
+```tsx
+<Breadcrumbs
+  aria-label="Service breadcrumb"
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services" },
+    { label: "Repairs", current: true },
+  ]}
+/>
+```
+
+`Breadcrumbs` renders a named native navigation landmark with an ordered list. Provide parent items with visible `label` text and native-link `href` destinations, then mark the final item with `current: true`. The current page is rendered as text with `aria-current="page"` rather than a link. The default landmark name is “Breadcrumb”; customize it with `aria-label` when a page has more than one navigation landmark.
+
+The component does not inspect the URL, generate destinations, or own routing. Native links retain browser navigation and keyboard behavior. Long labels wrap on narrow screens, and colors, spacing, corner radius, and focus styling inherit built-in, custom, and nested theme tokens.

@@ -87,6 +87,16 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - Customization: page windows and labels are public props; colors, borders, radius, focus, spacing, and type inherit semantic theme tokens. Support ACME, Luna, Orchid, custom themes, and nested boundaries without theme-specific rendering or component hooks.
 - Validation: Storybook callback/link, edge-page, page-window, theme, and narrow-layout examples; browser checks for link destinations, callback values, current-page semantics, keyboard operation, disabled boundaries, responsive summary, theme inheritance, and no horizontal overflow; lint, typecheck, Storybook, package build, and package-consumer checks.
 
+### Breadcrumbs
+
+- Objective: show readers their current location in a site hierarchy and provide links to parent pages.
+- Dependencies: React, native anchors, CSS Modules, and semantic theme tokens; no router or new token is required.
+- Public API: ordered `items` contain parent `{ label, href }` links followed by a `{ label, current: true }` current-page item. Native `nav` attributes including `aria-label`, refs, `className`, and typed `DesignSystemStyle` are supported. The accessible landmark name defaults to `"Breadcrumb"`.
+- Semantics and interaction: render a named native `<nav>` containing an ordered list; parent destinations are native anchors and the final page label is non-interactive text marked `aria-current="page"`. Separators are hidden from assistive technology. Keyboard navigation remains native.
+- State: stateless; the consumer owns labels, destinations, and routing. The final item must identify the current page, and every parent item must provide a destination.
+- Customization: use semantic text, action, spacing, radius, and focus tokens with responsive CSS Modules. Support ACME, Luna, Orchid, custom themes, and nested boundaries; long labels wrap without horizontal overflow and focus remains visible in forced-colors mode.
+- Validation: Storybook basic, theme/custom/nested, and narrow-screen examples; browser checks for landmark naming, links/current-page semantics, keyboard focus, token inheritance, and no narrow-screen overflow; lint, typecheck, Storybook, package build, and package-consumer checks.
+
 ### Dialog
 
 - Objective: accessible modal content for confirmations, forms, and focused tasks.
