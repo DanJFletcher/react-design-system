@@ -409,6 +409,25 @@ Provide an accessible `label` and unique slide `id` values. Use `getSlideLabel` 
 
 Each trigger is a native button inside a heading and connects to its panel with `aria-expanded`, `aria-controls`, and `aria-labelledby`. Panels use `role="region"` and remain mounted while closed. Native keyboard activation and Tab order are retained; there is no custom roving focus behavior. The component uses semantic theme tokens and accepts `className` and typed `style`.
 
+## FAQ section
+
+```tsx
+<FAQSection
+  heading="Frequently asked questions"
+  description="A few details to help you get started."
+  items={[
+    { id: "booking", question: "How do I book?", answer: <p>Contact us to find a time that works.</p> },
+    { id: "payment", question: "What payment methods do you accept?", answer: <p>We accept major credit cards.</p> },
+  ]}
+  variant="surface"
+  action={<Button variant="secondary">Contact us</Button>}
+/>
+```
+
+`FAQSection` composes the existing `Accordion` into a complete page section. It requires a visible heading and items with unique IDs, visible questions, and answers; an optional description and consumer-rendered `action` slot complete the section. The action's link or button behavior remains consumer-owned.
+
+The section is named by its visible heading by default, with native `aria-label` and `aria-labelledby` overrides. Question controls are native buttons inside headings one level below the section heading, and all existing Accordion state, keyboard behavior, variants, sizes, and shapes are retained. `multiple`, `defaultOpenItems`, `openItems`, and `onOpenItemsChange` configure single/multi-open and controlled state. Empty item lists render nothing; invalid IDs, blank headings/questions, missing answers, or heading levels outside 1–5 fail explicitly. The section follows ACME, Luna, Orchid, custom themes, and nested theme boundaries without additional tokens.
+
 ## Tabs
 
 ```tsx

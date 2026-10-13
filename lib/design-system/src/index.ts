@@ -39,6 +39,12 @@ export type {
   AccordionSize,
   AccordionVariant,
 } from "./components/Accordion/Accordion";
+export { FAQSection } from "./components/FAQSection/FAQSection";
+export type {
+  FAQSectionHeadingLevel,
+  FAQSectionItem,
+  FAQSectionProps,
+} from "./components/FAQSection/FAQSection";
 export { Tabs } from "./components/Tabs/Tabs";
 export type {
   TabsActivationMode,

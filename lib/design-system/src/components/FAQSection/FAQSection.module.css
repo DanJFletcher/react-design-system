@@ -1,0 +1,45 @@
+.root {
+  display: grid;
+  gap: var(--ds-space-6);
+  inline-size: 100%;
+  max-inline-size: 72ch;
+  margin-inline: auto;
+  color: var(--ds-color-text-primary);
+  font-family: var(--ds-font-family-sans);
+}
+
+.header {
+  display: grid;
+  gap: var(--ds-space-3);
+}
+
+.heading {
+  margin: 0;
+  color: var(--ds-color-text-primary);
+  font-size: var(--ds-font-size-3xl);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-tight);
+}
+
+.description {
+  color: var(--ds-color-text-muted);
+  font-size: var(--ds-font-size-lg);
+  line-height: var(--ds-line-height-normal);
+}
+
+.content {
+  display: grid;
+  gap: var(--ds-space-5);
+  min-inline-size: 0;
+}
+
+.accordion {
+  min-inline-size: 0;
+}
+
+.action {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-3);
+}

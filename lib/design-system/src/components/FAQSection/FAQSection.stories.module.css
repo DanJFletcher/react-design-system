@@ -1,0 +1,4 @@
+.scopedFaq {
+  border-inline-start: var(--ds-border-width-default) solid var(--ds-color-accent-bg);
+  padding-inline-start: var(--ds-space-4);
+}

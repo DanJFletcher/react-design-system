@@ -17,7 +17,7 @@ For a future component, use this planning template:
 
 ## Approved component scope
 
-The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, `Heading`, `Icon`, `ArticleFootnotes`, `Pagination`, and `Testimonials` as component additions. Their API and accessibility contracts are:
+The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, `Heading`, `Icon`, `ArticleFootnotes`, `Pagination`, `Testimonials`, and `FAQSection` as component additions. Their API and accessibility contracts are:
 
 ### Accordion
 
@@ -27,6 +27,16 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - State: single-open mode replaces the current open item when another is opened; multi-open mode toggles independently. Controlled state changes only through `onOpenItemsChange`.
 - Customization: use semantic tokens, CSS Modules, public variants and size/shape props; do not add theme-specific branches or undocumented private hooks.
 - Validation: Storybook playground, variants/themes and controlled interaction; visual mobile/desktop checks; lint, typecheck, Storybook and package-consumer checks.
+
+### FAQSection
+
+- Objective: give small-business and blog pages a ready-to-use, accessible FAQ section without duplicating accordion behavior.
+- Dependencies: the existing `Accordion`, React, semantic theme tokens, and CSS Modules; no structured-data claim, router, or new semantic token.
+- Public API: required `heading` and readonly `items` of `{ id, question, answer, disabled? }`; questions are visible strings and answers are consumer-owned React nodes. Optional `description`, `action`, `headingLevel` (1–5, default 2), `multiple`, `defaultOpenItems`, `openItems`, and `onOpenItemsChange` configure content and disclosure state. Accordion `variant` (`divided`, `outlined`, `surface`), `size` (`sm`, `md`, `lg`), and `shape` (`rounded`, `square`) configure appearance. Native `section` props, refs, `className`, and typed `DesignSystemStyle` are supported.
+- Semantics and interaction: render a named native `section` whose visible heading provides its default accessible name; `aria-label` and `aria-labelledby` remain consumer-overridable. The Accordion's question buttons use headings one level below the section heading and retain native Enter/Space and Tab behavior. An optional `action` slot is rendered after the disclosures and owns its own semantics and behavior.
+- State: uncontrolled by default, with `defaultOpenItems`; `openItems` and `onOpenItemsChange` provide controlled state. Empty item lists render nothing. IDs must be unique/non-empty, the heading and questions non-empty, and answers present; invalid content or heading levels throw.
+- Customization: compose the existing theme-aware `Accordion`; use its public variants and semantic tokens. Support ACME, Luna, Orchid, custom themes, scoped styling, and nested boundaries without theme-specific rendering or new token roles.
+- Validation: Storybook playground, single/multi-open, variants, themes/nested, scoped styling, and narrow-layout examples; browser checks for section and disclosure semantics, controlled state, keyboard behavior, theme inheritance, responsive layout, and no overflow; lint, typecheck, Storybook, package build, and package-consumer checks.
 
 ### Footer
 

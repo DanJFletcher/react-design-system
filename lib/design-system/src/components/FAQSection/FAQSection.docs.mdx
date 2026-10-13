@@ -1,0 +1,46 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as FAQSectionStories from "./FAQSection.stories";
+
+<Meta of={FAQSectionStories} />
+
+<Title>FAQ Section</Title>
+
+<Subtitle>A named FAQ section composed from the theme-aware Accordion, with an optional introduction and action.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={FAQSectionStories.Playground} />
+
+Use the controls to adjust the heading, description, question data, accordion variant, size, shape, and whether multiple answers can remain open. The optional action slot accepts consumer-owned links or buttons.
+
+## Multiple open answers and style variants
+
+<Canvas of={FAQSectionStories.MultipleOpen} />
+
+<Canvas of={FAQSectionStories.VariantExamples} />
+
+## Theme coverage and scoped styling
+
+<Canvas of={FAQSectionStories.ThemeCoverage} />
+
+<Canvas of={FAQSectionStories.NestedThemeBoundary} />
+
+<Canvas of={FAQSectionStories.ScopedStyling} />
+
+## State, disabled items, and responsive layout
+
+<Canvas of={FAQSectionStories.ControlledState} />
+
+<Canvas of={FAQSectionStories.DisabledQuestion} />
+
+<Canvas of={FAQSectionStories.NarrowLayout} />
+
+<Canvas of={FAQSectionStories.EmptyItems} />
+
+Questions render as native buttons inside headings one level below the section heading. Enter and Space use normal button behavior; Tab order is the Accordion's native order. `defaultOpenItems` initializes uncontrolled state; `openItems` and `onOpenItemsChange` provide controlled state. `multiple` allows more than one answer to stay open. Disabled questions cannot be opened. An empty `items` array renders nothing.
+
+The visible section heading names the section by default. Native `aria-label` and `aria-labelledby` can override that name. IDs must be unique and non-empty; the heading and each question must contain visible text, and every item must have an answer. Invalid data or heading levels outside 1–5 throw.
+
+The component reuses Accordion's semantic theme tokens and public appearance props. It needs no FAQ-specific tokens or theme branches and follows ACME, Luna, Orchid, custom themes, scoped styles, and nested theme boundaries.
+
+<Controls of={FAQSectionStories.Playground} />
