@@ -58,6 +58,7 @@
 .frame {
   position: relative;
   min-inline-size: 0;
+  container: carousel-frame / inline-size;
 }
 
 .viewport {
@@ -213,6 +214,37 @@
   color: var(--ds-color-text-muted);
   font-size: var(--ds-font-size-sm);
   font-variant-numeric: tabular-nums;
+}
+
+@container carousel-frame (max-width: 36rem) {
+  .frame[data-overlay-safe-area="true"] .viewport .slide {
+    padding: 0;
+  }
+
+  .frame[data-overlay-safe-area="true"] .controls[data-position="overlay"] {
+    position: static;
+    inset: auto;
+    margin-block-start: var(--ds-carousel-gap, var(--_carousel-gap));
+    pointer-events: auto;
+  }
+
+  .frame[data-overlay-safe-area="true"] .controls[data-position="overlay"] .indicators,
+  .frame[data-overlay-safe-area="true"] .controls[data-position="overlay"] .fraction {
+    position: static;
+    inset: auto;
+    transform: none;
+    background-color: transparent;
+  }
+
+  .frame[data-overlay-safe-area="true"] .controls[data-position="overlay"] .indicators {
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .frame[data-overlay-safe-area="true"] .controls[data-position="overlay"] .fraction {
+    padding: 0;
+    border-radius: 0;
+  }
 }
 
 .controls[data-position="overlay"] .fraction {

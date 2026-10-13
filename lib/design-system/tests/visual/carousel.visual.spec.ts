@@ -46,29 +46,46 @@ test("Carousel overlay safe area keeps slide content clear at desktop and phone 
 
     const safe = page.getByRole("region", { name: "Safe overlay controls example" });
     const safeSlide = safe.locator('[data-slot="slide"][data-active="true"]');
+    const safeControls = safe.locator('[data-slot="controls"]');
+    const safeViewport = safe.locator('[data-slot="viewport"]');
     await expect(safe.locator('[data-slot="viewport"]')).toHaveAttribute(
       "data-overlay-safe-area",
       "true",
     );
-    expect(
-      await safeSlide.evaluate((element) => Number.parseFloat(getComputedStyle(element).paddingInlineStart)),
-    ).toBeGreaterThan(0);
+    const controlPosition = await safeControls.evaluate((element) => getComputedStyle(element).position);
 
-    const heading = safeSlide.getByRole("heading", { name: "Find your focus" });
-    const headingBox = await heading.boundingBox();
-    const previousBox = await safe.getByRole("button", { name: "Previous slide" }).boundingBox();
-    const nextBox = await safe.getByRole("button", { name: "Next slide" }).boundingBox();
-    const indicatorBox = await safe.locator('[data-slot="indicators"]').boundingBox();
-    expect(headingBox).not.toBeNull();
-    expect(previousBox).not.toBeNull();
-    expect(nextBox).not.toBeNull();
-    expect(indicatorBox).not.toBeNull();
+    if (width <= 576) {
+      expect(controlPosition).toBe("static");
+      expect(
+        await safeSlide.evaluate((element) => getComputedStyle(element).paddingInlineStart),
+      ).toBe("0px");
+      const viewportBox = await safeViewport.boundingBox();
+      const controlsBox = await safeControls.boundingBox();
+      expect(viewportBox).not.toBeNull();
+      expect(controlsBox).not.toBeNull();
+      expect(controlsBox!.y).toBeGreaterThanOrEqual(viewportBox!.y + viewportBox!.height);
+    } else {
+      expect(controlPosition).toBe("absolute");
+      expect(
+        await safeSlide.evaluate((element) => Number.parseFloat(getComputedStyle(element).paddingInlineStart)),
+      ).toBeGreaterThan(0);
 
-    const intersects = (a: NonNullable<typeof headingBox>, b: NonNullable<typeof previousBox>) =>
-      a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
-    expect(intersects(headingBox!, previousBox!)).toBe(false);
-    expect(intersects(headingBox!, nextBox!)).toBe(false);
-    expect(intersects(headingBox!, indicatorBox!)).toBe(false);
+      const heading = safeSlide.getByRole("heading", { name: "Find your focus" });
+      const headingBox = await heading.boundingBox();
+      const previousBox = await safe.getByRole("button", { name: "Previous slide" }).boundingBox();
+      const nextBox = await safe.getByRole("button", { name: "Next slide" }).boundingBox();
+      const indicatorBox = await safe.locator('[data-slot="indicators"]').boundingBox();
+      expect(headingBox).not.toBeNull();
+      expect(previousBox).not.toBeNull();
+      expect(nextBox).not.toBeNull();
+      expect(indicatorBox).not.toBeNull();
+
+      const intersects = (a: NonNullable<typeof headingBox>, b: NonNullable<typeof previousBox>) =>
+        a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+      expect(intersects(headingBox!, previousBox!)).toBe(false);
+      expect(intersects(headingBox!, nextBox!)).toBe(false);
+      expect(intersects(headingBox!, indicatorBox!)).toBe(false);
+    }
 
     const fullBleed = page.getByRole("region", { name: "Full-bleed overlay controls example" });
     await expect(fullBleed.locator('[data-slot="viewport"]')).not.toHaveAttribute(
