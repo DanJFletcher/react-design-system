@@ -1,0 +1,43 @@
+import { Canvas, Controls, Meta } from "@storybook/addon-docs/blocks";
+import * as GalleryStories from "./Gallery.stories";
+
+<Meta of={GalleryStories} />
+
+# Gallery
+
+A responsive image grid for showing projects, products, spaces, or editorial images. Use `columns` to set the maximum desktop column count; three- and four-column grids collapse to two columns at tablet widths.
+
+<Canvas of={GalleryStories.Playground} />
+<Controls of={GalleryStories.Playground} />
+
+## Examples
+
+<Canvas of={GalleryStories.PortfolioWithLightbox} />
+<Canvas of={GalleryStories.SquareProductGrid} />
+<Canvas of={GalleryStories.NaturalImageSizes} />
+<Canvas of={GalleryStories.EmptyState} />
+<Canvas of={GalleryStories.ThemeCoverage} />
+<Canvas of={GalleryStories.CustomHooks} />
+
+## Behavior
+
+- Each item requires a stable `id`, image `src`, and descriptive `alt` text.
+- Captions are optional. With lightbox disabled, an item's `href` makes its image a link. With lightbox enabled, the image opens a dialog and the optional `href` appears as a separate caption link.
+- The lightbox uses the shared `Dialog` component, supports Escape to close, restores focus to its trigger, and provides previous/next controls when there is more than one image.
+- `fit` and `aspectRatio` control image cropping. Use `natural` to preserve each image's natural proportions.
+- Gallery image radius, spacing, frame, surface, and text colors can be customized with `gallery.*` style hooks.
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `label` | `string` | — | Accessible name for the gallery region. |
+| `items` | `GalleryItem[]` | — | Images and optional captions or links. |
+| `columns` | `1 \| 2 \| 3 \| 4` | `3` | Maximum number of columns on wide screens. |
+| `gap` | `"sm" \| "md" \| "lg"` | `"md"` | Spacing between images. |
+| `aspectRatio` | `"square" \| "landscape" \| "portrait" \| "natural"` | `"landscape"` | Image viewport shape. |
+| `fit` | `"cover" \| "contain"` | `"cover"` | How images fit their viewport. |
+| `variant` | `"plain" \| "framed"` | `"plain"` | Whether each item has a bordered surface. |
+| `lightbox` | `boolean` | `false` | Open images in an accessible dialog. |
+| `loop` | `boolean` | `false` | Wrap lightbox navigation at the first and last image. |
+| `emptyMessage` | `ReactNode` | `"No images to display."` | Content shown when `items` is empty. |

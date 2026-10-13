@@ -14,6 +14,7 @@
     { "file": "Button/Button.module.css", "selector": ".spinner", "role": "circle", "reason": "Circular loading indicator." },
     { "file": "ArticleCard/ArticleCard.module.css", "selector": ".avatar", "role": "circle", "reason": "Equal-sized author portrait." },
     { "file": "Carousel/Carousel.module.css", "selector": ".controlButton", "role": "action", "reason": "Previous/next and autoplay action controls." },
+    { "file": "Gallery/Gallery.module.css", "selector": ".controlButton", "role": "action", "reason": "Previous/next image navigation controls in the lightbox." },
     { "file": "Carousel/Carousel.module.css", "selector": ".indicator", "role": "action", "reason": "Slide-selection button." },
     { "file": "Carousel/Carousel.module.css", "selector": ".indicator::before", "role": "circle", "reason": "Decorative slide dot." },
     { "file": "Carousel/Carousel.module.css", "selector": ".indicator[aria-current=\"true\"]::before", "role": "circle", "reason": "Intentionally capsule-shaped selected slide marker." },

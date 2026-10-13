@@ -127,6 +127,12 @@
   --ds-dialog-width-lg: initial;
   --ds-dialog-width-md: initial;
   --ds-dialog-width-sm: initial;
+  --ds-gallery-border: initial;
+  --ds-gallery-caption: initial;
+  --ds-gallery-gap: initial;
+  --ds-gallery-muted: initial;
+  --ds-gallery-radius: initial;
+  --ds-gallery-surface: initial;
   --ds-hero-background: initial;
   --ds-hero-description: initial;
   --ds-hero-eyebrow: initial;

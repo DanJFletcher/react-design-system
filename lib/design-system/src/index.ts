@@ -63,6 +63,16 @@ export type {
   TabsVariant,
 } from "./components/Tabs/Tabs";
 export { Card } from "./components/Card/Card";
+export { Gallery } from "./components/Gallery/Gallery";
+export type {
+  GalleryAspectRatio,
+  GalleryColumns,
+  GalleryFit,
+  GalleryGap,
+  GalleryItem,
+  GalleryProps,
+  GalleryVariant,
+} from "./components/Gallery/Gallery";
 export { ArticleCard } from "./components/ArticleCard/ArticleCard";
 export type {
   ArticleCardAuthor,

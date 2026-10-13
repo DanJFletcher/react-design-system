@@ -936,6 +936,42 @@
       "cssVariable": "--ds-dialog-width-sm"
     },
     {
+      "name": "gallery.border",
+      "type": "color",
+      "description": "Gallery frame and empty-state border.",
+      "cssVariable": "--ds-gallery-border"
+    },
+    {
+      "name": "gallery.caption",
+      "type": "color",
+      "description": "Gallery caption text color.",
+      "cssVariable": "--ds-gallery-caption"
+    },
+    {
+      "name": "gallery.gap",
+      "type": "dimension",
+      "description": "Spacing between gallery images.",
+      "cssVariable": "--ds-gallery-gap"
+    },
+    {
+      "name": "gallery.muted",
+      "type": "color",
+      "description": "Gallery empty-state and counter text color.",
+      "cssVariable": "--ds-gallery-muted"
+    },
+    {
+      "name": "gallery.radius",
+      "type": "dimension",
+      "description": "Gallery image and frame corner radius.",
+      "cssVariable": "--ds-gallery-radius"
+    },
+    {
+      "name": "gallery.surface",
+      "type": "color",
+      "description": "Gallery frame and contained-image surface.",
+      "cssVariable": "--ds-gallery-surface"
+    },
+    {
       "name": "hero.background",
       "type": "color",
       "description": "Hero background color.",
