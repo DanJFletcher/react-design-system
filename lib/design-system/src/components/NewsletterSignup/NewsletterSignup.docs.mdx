@@ -1,0 +1,48 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as NewsletterSignupStories from "./NewsletterSignup.stories";
+
+<Meta of={NewsletterSignupStories} />
+
+<Title />
+
+<Subtitle>A responsive, theme-aware newsletter signup section for small-business sites and blogs.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={NewsletterSignupStories.Playground} />
+<Controls of={NewsletterSignupStories.Playground} />
+
+## Layouts, fields, and feedback
+
+<Canvas of={NewsletterSignupStories.InlineFooter} />
+<Canvas of={NewsletterSignupStories.WithNameAndConsent} />
+<Canvas of={NewsletterSignupStories.FailedSubmission} />
+<Canvas of={NewsletterSignupStories.NarrowInline} />
+
+## Variants, themes, and custom hooks
+
+<Canvas of={NewsletterSignupStories.VariantComparison} />
+<Canvas of={NewsletterSignupStories.ThemeCoverage} />
+<Canvas of={NewsletterSignupStories.CustomHooks} />
+
+## Submission and semantics
+
+`NewsletterSignup` requires an `onSubmit` callback. It validates the required email and any required consent using native form validation, then calls the callback with a normalized email, optional name, and consent value.
+
+```tsx
+<NewsletterSignup
+  heading="Get updates from our shop"
+  includeName
+  requiresConsent
+  onSubmit={async ({ name, email, consent }) => {
+    await subscribe({ name, email, consent });
+  }}
+/>
+```
+
+- `layout="inline"` arranges fields side by side when the available width permits; `layout="stacked"` keeps one column.
+- `includeName` adds an optional name field. `requiresConsent` adds a required checkbox and includes its value in the submission.
+- `privacyText` and `consentLabel` accept React content, so links and localized copy remain consumer-controlled.
+- A resolved callback clears the fields and displays `successMessage`. A rejected callback displays `errorMessage`; the thrown error itself is not exposed to visitors.
+- `variant` accepts `plain`, `surface`, or `accent`. The `newsletter.*` hooks customize the surface, text, muted text, border, radius, padding, and spacing.
+- The component does not store subscribers, send email, or connect to an email marketing provider. Consumers connect `onSubmit` to their chosen service.

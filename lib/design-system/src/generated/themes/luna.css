@@ -142,6 +142,13 @@
   --ds-menu-radius: initial;
   --ds-menu-surface: initial;
   --ds-menu-text: initial;
+  --ds-newsletter-border: initial;
+  --ds-newsletter-gap: initial;
+  --ds-newsletter-muted: initial;
+  --ds-newsletter-padding: initial;
+  --ds-newsletter-radius: initial;
+  --ds-newsletter-surface: initial;
+  --ds-newsletter-text: initial;
   --ds-pricing-background: initial;
   --ds-pricing-border: initial;
   --ds-pricing-detail-border: initial;

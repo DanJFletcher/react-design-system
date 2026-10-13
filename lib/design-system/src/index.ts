@@ -28,6 +28,14 @@ export type {
   ContactSectionProps,
   ContactSectionVariant,
 } from "./components/ContactSection/ContactSection";
+export { NewsletterSignup } from "./components/NewsletterSignup/NewsletterSignup";
+export type {
+  NewsletterSignupHeadingLevel,
+  NewsletterSignupLayout,
+  NewsletterSignupProps,
+  NewsletterSignupValues,
+  NewsletterSignupVariant,
+} from "./components/NewsletterSignup/NewsletterSignup";
 export { Tooltip } from "./components/Tooltip/Tooltip";
 export type { TooltipPlacement, TooltipProps } from "./components/Tooltip/Tooltip";
 export { Accordion } from "./components/Accordion/Accordion";

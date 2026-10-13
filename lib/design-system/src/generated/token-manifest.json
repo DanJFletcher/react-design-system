@@ -1021,6 +1021,48 @@
       "cssVariable": "--ds-menu-text"
     },
     {
+      "name": "newsletter.border",
+      "type": "color",
+      "description": "Newsletter signup section border.",
+      "cssVariable": "--ds-newsletter-border"
+    },
+    {
+      "name": "newsletter.gap",
+      "type": "dimension",
+      "description": "Newsletter signup content spacing.",
+      "cssVariable": "--ds-newsletter-gap"
+    },
+    {
+      "name": "newsletter.muted",
+      "type": "color",
+      "description": "Newsletter signup supporting text.",
+      "cssVariable": "--ds-newsletter-muted"
+    },
+    {
+      "name": "newsletter.padding",
+      "type": "dimension",
+      "description": "Newsletter signup section internal spacing.",
+      "cssVariable": "--ds-newsletter-padding"
+    },
+    {
+      "name": "newsletter.radius",
+      "type": "dimension",
+      "description": "Newsletter signup section corner radius.",
+      "cssVariable": "--ds-newsletter-radius"
+    },
+    {
+      "name": "newsletter.surface",
+      "type": "color",
+      "description": "Newsletter signup section background.",
+      "cssVariable": "--ds-newsletter-surface"
+    },
+    {
+      "name": "newsletter.text",
+      "type": "color",
+      "description": "Newsletter signup primary text.",
+      "cssVariable": "--ds-newsletter-text"
+    },
+    {
       "name": "pricing.background",
       "type": "color",
       "description": "Pricing details background color.",
