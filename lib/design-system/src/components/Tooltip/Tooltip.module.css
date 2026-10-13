@@ -24,7 +24,7 @@
   padding-block: var(--ds-tooltip-padding-block, var(--ds-space-2));
   padding-inline: var(--ds-tooltip-padding-inline, var(--ds-space-3));
   border: var(--ds-border-width-default) solid var(--_tooltip-border);
-  border-radius: var(--ds-tooltip-radius, var(--ds-radius-tooltip, var(--ds-radius-control)));
+  border-radius: var(--ds-tooltip-radius, var(--ds-radius-tooltip, var(--ds-radius-surface)));
   background-color: var(--_tooltip-surface);
   color: var(--_tooltip-text);
   font-family: var(--ds-font-family-sans);

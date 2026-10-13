@@ -20,6 +20,8 @@ The compiler validates names, descriptions, types, units, references, cycles, re
 
 ## Theme contract
 
+Corner radii are semantic roles, not a theme-wide shape setting. General content surfaces use `radius.surface` (12px ACME, 24px Luna, 12px Orchid); action controls and single-line form controls retain separate tokens and remain pills in Luna. Specialized menu, tooltip, textarea, and form-group tokens retain their public compatibility values (24px in Luna). Explicit shape props and consumer hooks override defaults. See `docs/theming.md` and the **Foundations/Radius Policy** stories for the full policy.
+
 ACME is the default unthemed document. Luna is a dark, Sailor Moon-inspired palette with midnight-indigo surfaces, moonlight and lavender text, rose-pink actions, crescent-gold accents, and softer shapes. Both built-in themes share the same type and spatial scales. Orchid demonstrates a distinct custom theme extending Luna.
 
 Use ordinary markup:

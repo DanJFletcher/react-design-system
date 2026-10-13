@@ -5,7 +5,7 @@
   --_card-border: var(--ds-color-border-control);
   --_card-padding: var(--ds-space-4);
   --_card-gap: var(--ds-space-3);
-  --_card-radius: var(--ds-radius-shape-rounded);
+  --_card-radius: var(--ds-radius-surface);
 
   box-sizing: border-box;
   display: grid;
@@ -172,7 +172,7 @@
   inline-size: 100%;
   min-inline-size: 0;
   overflow: hidden;
-  border-radius: var(--ds-card-media-radius, var(--ds-radius-shape-rounded));
+  border-radius: var(--ds-card-media-radius, var(--ds-radius-surface));
 }
 
 .media[data-aspect-ratio="square"] {

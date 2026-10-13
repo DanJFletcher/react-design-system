@@ -1,5 +1,13 @@
 # Component development
 
+## Radius roles for every component
+
+Content surfaces (panels, code blocks, cards, media, grouped content) default to `var(--ds-radius-surface)`. Use an existing specialized surface token only for its documented family. Luna's bounded surface default is 24px; do not copy the 9999px action-control radius onto a surface.
+
+Buttons and reviewed action targets use `radius.control`; single-line form controls use `radius.form-control`. Explicit Button/Badge `rounded`, `square`, and `pill` choices retain their foundation values. Surface components' `rounded` shape follows the semantic surface role; their explicit `square` variant remains square. Circular avatars, dots, switch thumbs, and progress tracks use the full radius intentionally.
+
+The style checker assumes a surface role for every radius declaration, including private variable chains and hook fallbacks. Non-surface declarations require a reviewed exact-selector entry with a reason in `scripts/radius-policy.json`; unknown tokens, inappropriate fallbacks, unresolved aliases, cycles, and stale exceptions fail. This governs authored defaults, not consumer CSS/hook overrides.
+
 The initial scope established Button. The approved core form-control set adds TextField, Textarea, native Select, Checkbox, and RadioGroup. Further additions require a written API and an approved roadmap entry before implementation.
 
 For a future component, use this planning template:

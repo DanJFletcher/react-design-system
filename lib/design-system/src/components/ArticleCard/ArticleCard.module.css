@@ -10,7 +10,7 @@
 .categoryLink {
   display: inline-flex;
   max-inline-size: 100%;
-  border-radius: var(--ds-radius-control);
+  border-radius: var(--ds-radius-surface);
   text-decoration: none;
 }
 
@@ -64,7 +64,7 @@
 .categoryLink:focus-visible,
 .inlineLink:focus-visible,
 .readMoreLink:focus-visible {
-  border-radius: var(--ds-radius-control);
+  border-radius: var(--ds-radius-surface);
   outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
   outline-offset: var(--ds-space-1);
 }

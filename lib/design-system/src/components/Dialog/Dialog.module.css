@@ -2,7 +2,7 @@
   --_dialog-surface: var(--ds-color-surface-primary);
   --_dialog-text: var(--ds-color-text-primary);
   --_dialog-border: var(--ds-color-border-control);
-  --_dialog-radius: var(--ds-radius-shape-rounded);
+  --_dialog-radius: var(--ds-radius-surface);
   --_dialog-padding: var(--ds-space-6);
   --_dialog-width: var(--ds-dialog-width-md, calc(var(--ds-space-32) + var(--ds-space-32) + var(--ds-space-32) + var(--ds-space-32)));
 

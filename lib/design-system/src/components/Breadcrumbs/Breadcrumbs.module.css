@@ -59,7 +59,7 @@
   min-inline-size: 0;
   max-inline-size: 100%;
   padding: var(--ds-space-1) var(--ds-space-2);
-  border-radius: var(--ds-radius-control);
+  border-radius: var(--ds-radius-surface);
   overflow-wrap: anywhere;
 }
 

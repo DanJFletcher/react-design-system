@@ -7,7 +7,7 @@
 
 .markerLink {
   padding-inline: var(--ds-space-1);
-  border-radius: var(--ds-radius-control);
+  border-radius: var(--ds-radius-surface);
   color: var(--ds-color-action-secondary-fg);
   text-decoration: underline;
   text-decoration-thickness: var(--ds-border-width-default);
@@ -91,7 +91,7 @@
   min-block-size: var(--ds-space-6);
   align-items: center;
   justify-content: center;
-  border-radius: var(--ds-radius-control);
+  border-radius: var(--ds-radius-surface);
   color: var(--ds-color-action-secondary-fg);
   text-decoration: underline;
   text-decoration-thickness: var(--ds-border-width-default);

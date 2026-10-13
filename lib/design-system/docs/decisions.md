@@ -1,5 +1,13 @@
 # Architecture decisions
 
+## Surface corners are separate from pill controls
+
+Content surfaces use a bounded semantic `radius.surface` rather than the action-control radius or a fixed shape foundation. Luna uses 24px surfaces and retains 9999px action/input controls. ACME and Orchid retain the existing 12px general-panel character; specialized family tokens remain independently overridable.
+
+**Why:** Reusing the action radius made code blocks and other Luna surfaces circular. Fixing components individually did not prevent new implementations from repeating the mistake.
+
+**Enforcement:** Style checks default new radius declarations to the surface role and recursively inspect hook fallbacks and private aliases. Exact-selector exceptions with reasons cover intentional controls, explicit shapes, circles, and inheritance. Consumer customization still takes precedence and is never clamped. Computed browser checks verify default corners, mobile layouts, explicit shapes, nested boundaries, and local overrides.
+
 ## One package inside the workspace
 
 The library is a single `lib/` package with directory-based boundaries and explicit exports, not a new monorepo or a separate deployable product.

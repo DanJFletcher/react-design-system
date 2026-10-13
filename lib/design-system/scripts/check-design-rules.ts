@@ -1,11 +1,11 @@
 import { readFile, readdir } from "node:fs/promises";
-import { resolve } from "node:path";
+import { relative, resolve } from "node:path";
 import postcss from "postcss";
 import { fileURLToPath } from "node:url";
+import { checkRadiusRules } from "./check-radius-rules";
 
 const packageRoot = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const componentRoot = resolve(packageRoot, "src/components");
-const dimensionPattern = /(?<![\w-])(?:-?\d*\.?\d+)(?:px|rem|em|ms|s)\b/i;
 const literalColorPattern = /#[\da-f]{3,8}\b|\b(?:rgb|rgba|hsl|hsla)\s*\(/i;
 const forbiddenColorWords = /\b(?:red|blue|green|black|white|purple|pink|orange|yellow|gray|grey|rebeccapurple)\b/i;
 
@@ -25,12 +25,14 @@ async function main(): Promise<void> {
   const errors: string[] = [];
   for (const file of files) {
     const source = await readFile(file, "utf8");
+    const fileName = relative(componentRoot, file);
+    errors.push(...checkRadiusRules(source, fileName));
     const root = postcss.parse(source, { from: file });
     root.walkDecls((declaration) => {
       const value = declaration.value.replace(/var\([^)]*\)/g, "var()");
       const dimensions = [...value.matchAll(/(?<![\w-])(-?\d*\.?\d+)(?:px|rem|em|ms|s)\b/gi)];
       if (dimensions.some((match) => Number(match[1]) !== 0)) {
-        errors.push(`${declaration.source?.start?.line ?? "?"}: raw dimensional literal "${declaration.value}"`);
+        errors.push(`${fileName}:${declaration.source?.start?.line ?? "?"}: raw dimensional literal "${declaration.value}"`);
       }
       if (literalColorPattern.test(value)) {
         errors.push(`${declaration.source?.start?.line ?? "?"}: raw color literal "${declaration.value}"`);

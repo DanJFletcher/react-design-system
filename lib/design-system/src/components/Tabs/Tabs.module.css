@@ -97,7 +97,7 @@
 .tabs[data-variant="pills"] .tabList {
   padding: var(--ds-space-1);
   border: 0;
-  border-radius: var(--ds-radius-control);
+  border-radius: var(--ds-radius-surface);
   background-color: var(--ds-color-action-ghost-hover);
 }
 

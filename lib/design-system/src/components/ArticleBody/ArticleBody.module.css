@@ -78,7 +78,7 @@
 }
 
 .articleBody :where(a:focus-visible) {
-  border-radius: var(--ds-radius-control);
+  border-radius: var(--ds-radius-surface);
   outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
   outline-offset: var(--ds-space-1);
 }
@@ -90,7 +90,7 @@
 
 .articleBody :where(code:not(pre code)) {
   padding: var(--ds-space-1) var(--ds-space-2);
-  border-radius: var(--ds-radius-control);
+  border-radius: var(--ds-radius-surface);
   background-color: var(--ds-color-surface-primary);
   color: var(--ds-color-text-primary);
   overflow-wrap: anywhere;
@@ -104,7 +104,7 @@
   padding: var(--ds-space-4);
   overflow-x: auto;
   border: var(--ds-border-width-default) solid var(--ds-color-border-control);
-  border-radius: var(--ds-radius-control);
+  border-radius: var(--ds-radius-surface);
   background-color: var(--ds-color-surface-primary);
   color: var(--ds-color-text-primary);
   line-height: var(--ds-line-height-normal);

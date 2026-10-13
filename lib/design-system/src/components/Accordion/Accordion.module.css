@@ -3,7 +3,7 @@
   --_accordion-background: transparent;
   --_accordion-text: var(--ds-color-text-primary);
   --_accordion-muted: var(--ds-color-text-muted);
-  --_accordion-radius: var(--ds-radius-shape-rounded);
+  --_accordion-radius: var(--ds-radius-surface);
 
   display: grid;
   min-inline-size: 0;

@@ -98,7 +98,7 @@
 
 .brandLink:focus-visible,
 .linkList a:focus-visible {
-  border-radius: var(--ds-radius-shape-rounded);
+  border-radius: var(--ds-radius-surface);
   outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
   outline-offset: var(--ds-space-1);
 }

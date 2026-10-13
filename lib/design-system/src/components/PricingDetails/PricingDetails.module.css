@@ -7,7 +7,7 @@
   --_pricing-featured-border: var(--ds-color-accent-bg);
   --_pricing-padding: var(--ds-space-6);
   --_pricing-gap: var(--ds-space-4);
-  --_pricing-radius: var(--ds-radius-shape-rounded);
+  --_pricing-radius: var(--ds-radius-surface);
   --_pricing-detail-border: var(--ds-color-border-control);
 
   box-sizing: border-box;
@@ -128,7 +128,7 @@
   align-items: center;
   min-block-size: var(--ds-space-6);
   padding-inline: var(--ds-space-2);
-  border-radius: var(--ds-radius-shape-rounded);
+  border-radius: var(--ds-radius-control);
   background-color: var(--ds-color-accent-bg);
   color: var(--ds-color-accent-fg);
   font-size: var(--ds-font-size-xs);

@@ -5,7 +5,7 @@
   min-inline-size: 0;
   padding: var(--ds-space-4);
   border: var(--ds-border-width-default) solid var(--ds-color-border-control);
-  border-radius: var(--ds-radius-shape-rounded);
+  border-radius: var(--ds-radius-surface);
   background-color: var(--ds-color-surface-primary);
   color: var(--ds-color-text-primary);
   font-family: var(--ds-font-family-sans);
@@ -43,7 +43,7 @@
   min-block-size: var(--ds-space-8);
   box-sizing: border-box;
   padding: var(--ds-space-2) var(--ds-space-2);
-  border-radius: var(--ds-radius-control);
+  border-radius: var(--ds-radius-surface);
   color: var(--ds-color-action-secondary-fg);
   text-decoration: underline;
   text-decoration-thickness: var(--ds-border-width-default);

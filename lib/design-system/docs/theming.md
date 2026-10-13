@@ -1,5 +1,20 @@
 # Theming and scoped customization
 
+## Corners follow purpose, not one global radius
+
+| Role | ACME | Luna | Orchid |
+| --- | --- | --- | --- |
+| `radius.surface` (panels, cards, code blocks, media) | 12px | 24px | 12px |
+| `radius.control` (actions and reviewed compact labels) | 6px | 9999px | 16px |
+| `radius.form-control` (single-line inputs/selects) | 6px | 9999px | 16px |
+| Existing `radius.menu`, `radius.tooltip`, `radius.textarea`, `radius.form-group` | 6px | 24px | 16px |
+
+The specialized tokens remain public and independently customizable for compatibility; Luna assigns them the same bounded 24px value. Every effective theme has its own complete semantic map, including `radius.surface`. Use concrete theme values: source token references are resolved at compilation, not runtime CSS aliases to a theme's overridden values.
+
+General surfaces now follow the semantic surface value rather than a fixed 12px foundation or an action-control token. This preserves the existing 12px general-panel character in ACME and Orchid while normalizing article code and inline/focus surface corners to that role. Explicit Button/Badge rounded shapes stay 12px in every theme; explicit square/pill choices and intentional circles are unchanged.
+
+Consumer hooks take precedence over defaults and surface shape props. For example, a `card.radius` hook can deliberately make a square Card have 40px corners. A local `--ds-radius-surface` override affects surfaces but not pill actions or single-line controls; hooks reset at nested theme boundaries. No global cap restricts deliberate customization. See **Foundations → Radius Policy** in Storybook for comparisons, shapes, and nested overrides.
+
 Load the package's public assets in this order:
 
 ```ts

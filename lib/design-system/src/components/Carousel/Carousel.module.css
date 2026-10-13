@@ -8,7 +8,7 @@
   --_carousel-indicator-active: var(--ds-color-action-primary-bg);
   --_carousel-padding: var(--ds-space-4);
   --_carousel-gap: var(--ds-space-3);
-  --_carousel-radius: var(--ds-radius-shape-rounded);
+  --_carousel-radius: var(--ds-radius-surface);
 
   box-sizing: border-box;
   min-inline-size: 0;
@@ -56,7 +56,7 @@
 .viewport {
   min-inline-size: 0;
   overflow: hidden;
-  border-radius: var(--ds-carousel-slide-radius, var(--ds-radius-shape-rounded));
+  border-radius: var(--ds-carousel-slide-radius, var(--ds-radius-surface));
   touch-action: pan-y;
 }
 
@@ -107,7 +107,7 @@
   min-block-size: var(--ds-control-min-block-size-md);
   padding: var(--ds-space-2);
   border: var(--ds-border-width-default) solid var(--ds-carousel-control-border, var(--_carousel-border));
-  border-radius: var(--ds-radius-shape-rounded);
+  border-radius: var(--ds-radius-control);
   background-color: var(--ds-carousel-control-bg, var(--_carousel-control-bg));
   color: var(--ds-carousel-control-fg, var(--_carousel-control-fg));
   cursor: pointer;
@@ -151,7 +151,7 @@
   inset-inline-start: 50%;
   transform: translateX(-50%);
   padding: var(--ds-space-2) var(--ds-space-3);
-  border-radius: var(--ds-radius-full);
+  border-radius: var(--ds-radius-surface);
   background-color: var(--ds-carousel-indicator-surface, var(--ds-color-surface-primary));
 }
 
@@ -165,7 +165,7 @@
   block-size: var(--ds-space-6);
   padding: 0;
   border: 0;
-  border-radius: var(--ds-radius-shape-rounded);
+  border-radius: var(--ds-radius-control);
   background-color: transparent;
   cursor: pointer;
 }
@@ -198,7 +198,7 @@
   inset-inline-start: 50%;
   transform: translateX(-50%);
   padding: var(--ds-space-1) var(--ds-space-3);
-  border-radius: var(--ds-radius-full);
+  border-radius: var(--ds-radius-surface);
   background-color: var(--ds-carousel-indicator-surface, var(--ds-color-surface-primary));
 }
 

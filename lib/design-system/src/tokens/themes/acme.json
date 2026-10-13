@@ -31,6 +31,7 @@
     "color.status.warning.fg": "#92400E",
     "color.status.error.bg": "#FEE4E2",
     "color.status.error.fg": "#B42318",
+    "radius.surface": { "amount": 12, "unit": "px" },
     "radius.control": { "amount": 6, "unit": "px" },
     "radius.tooltip": { "amount": 6, "unit": "px" },
     "radius.form-control": { "amount": 6, "unit": "px" },

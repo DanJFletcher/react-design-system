@@ -398,7 +398,7 @@
     {
       "name": "radius.control",
       "type": "dimension",
-      "description": "Default action button corner radius."
+      "description": "Default action button and intentionally pill-shaped action control radius, not a content surface radius."
     },
     {
       "name": "radius.form-control",
@@ -414,6 +414,11 @@
       "name": "radius.menu",
       "type": "dimension",
       "description": "Corner radius for dropdown menu panels."
+    },
+    {
+      "name": "radius.surface",
+      "type": "dimension",
+      "description": "Bounded corners for content panels, cards, code blocks, media, and other surfaces; never use action-control or full radii for these defaults."
     },
     {
       "name": "radius.textarea",
@@ -1269,6 +1274,7 @@
       "color.status.warning.fg": "#92400E",
       "color.status.error.bg": "#FEE4E2",
       "color.status.error.fg": "#B42318",
+      "radius.surface": "12px",
       "radius.control": "6px",
       "radius.tooltip": "6px",
       "radius.form-control": "6px",
@@ -1306,6 +1312,7 @@
       "color.status.warning.fg": "#FFE08A",
       "color.status.error.bg": "#4A202C",
       "color.status.error.fg": "#FFADBE",
+      "radius.surface": "24px",
       "radius.control": "9999px",
       "radius.tooltip": "24px",
       "radius.form-control": "9999px",
@@ -1343,6 +1350,7 @@
       "color.status.warning.fg": "#794A12",
       "color.status.error.bg": "#FDE7EB",
       "color.status.error.fg": "#821F35",
+      "radius.surface": "12px",
       "radius.control": "16px",
       "radius.tooltip": "16px",
       "radius.form-control": "16px",

@@ -11,7 +11,7 @@
   min-inline-size: 0;
   padding: var(--ds-contact-padding, var(--ds-space-6));
   border: var(--ds-border-width-default) solid var(--_contact-border);
-  border-radius: var(--ds-contact-radius, var(--ds-radius-shape-rounded));
+  border-radius: var(--ds-contact-radius, var(--ds-radius-surface));
   background-color: var(--ds-contact-surface, var(--_contact-surface));
   color: var(--_contact-text);
   font-family: var(--ds-font-family-sans);
@@ -150,7 +150,7 @@
 }
 
 .link:focus-visible {
-  border-radius: var(--ds-radius-shape-rounded);
+  border-radius: var(--ds-radius-surface);
   outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
   outline-offset: var(--ds-space-1);
 }

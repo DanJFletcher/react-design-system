@@ -47,7 +47,7 @@
   padding: var(--ds-toast-padding, var(--ds-space-4));
   border: var(--ds-border-width-default) solid var(--ds-toast-border, var(--_toast-border));
   border-inline-start: var(--ds-space-1) solid var(--_toast-accent);
-  border-radius: var(--ds-toast-radius, var(--ds-radius-shape-rounded));
+  border-radius: var(--ds-toast-radius, var(--ds-radius-surface));
   background-color: var(--ds-toast-surface, var(--_toast-surface));
   color: var(--ds-toast-text, var(--_toast-text));
   font-family: var(--ds-font-family-sans);
