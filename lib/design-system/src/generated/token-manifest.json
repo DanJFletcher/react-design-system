@@ -1028,6 +1028,48 @@
       "cssVariable": "--ds-pricing-text"
     },
     {
+      "name": "progress.gap",
+      "type": "dimension",
+      "description": "Spacing between the progress label, value, and track.",
+      "cssVariable": "--ds-progress-gap"
+    },
+    {
+      "name": "progress.height",
+      "type": "dimension",
+      "description": "Progress track thickness.",
+      "cssVariable": "--ds-progress-height"
+    },
+    {
+      "name": "progress.indicator",
+      "type": "color",
+      "description": "Progress fill color.",
+      "cssVariable": "--ds-progress-indicator"
+    },
+    {
+      "name": "progress.label",
+      "type": "color",
+      "description": "Progress label text color.",
+      "cssVariable": "--ds-progress-label"
+    },
+    {
+      "name": "progress.radius",
+      "type": "dimension",
+      "description": "Progress track and fill corner radius.",
+      "cssVariable": "--ds-progress-radius"
+    },
+    {
+      "name": "progress.track",
+      "type": "color",
+      "description": "Progress track background color.",
+      "cssVariable": "--ds-progress-track"
+    },
+    {
+      "name": "progress.value",
+      "type": "color",
+      "description": "Progress value text color.",
+      "cssVariable": "--ds-progress-value"
+    },
+    {
       "name": "toast.border",
       "type": "color",
       "description": "Toast notification border color.",

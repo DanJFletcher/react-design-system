@@ -144,6 +144,13 @@
   --ds-pricing-price: initial;
   --ds-pricing-radius: initial;
   --ds-pricing-text: initial;
+  --ds-progress-gap: initial;
+  --ds-progress-height: initial;
+  --ds-progress-indicator: initial;
+  --ds-progress-label: initial;
+  --ds-progress-radius: initial;
+  --ds-progress-track: initial;
+  --ds-progress-value: initial;
   --ds-toast-border: initial;
   --ds-toast-error-accent: initial;
   --ds-toast-gap: initial;

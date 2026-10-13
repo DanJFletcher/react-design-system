@@ -97,6 +97,16 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - Customization: tones use existing semantic theme pairs. Register `callout.*` hooks for surface, text, border/accent, radius, padding, and spacing; the outer border matches the tone accent by default, while `callout.border` remains an independent override. Preserve forced-colors support and nested theme boundaries.
 - Validation: Storybook playground, tone/action/icon, theme, nested, and custom-hook examples; browser checks for explicit roles, color contrast, action semantics, mobile wrapping, and scoped customization; lint, typecheck, token checks, Storybook, package build, and package-consumer checks.
 
+### Progress
+
+- Objective: communicate ongoing or completed work with a persistent, accessible linear progress indicator.
+- Dependencies: existing React package, CSS Modules, semantic accent/surface/text tokens, and registered `progress.*` styling hooks; no new runtime dependency or semantic token.
+- Public API: `label` is required and visible. Supplying `value` selects determinate progress; omitting it selects indeterminate progress. `max` defaults to `100`; values are clamped to `[0, max]`; invalid non-finite values or non-positive maxima throw. `valueText` overrides the visible and spoken value text; `showValue` hides only the visible value. Native `div` props, refs, `className`, `aria-describedby`, and typed `DesignSystemStyle` are forwarded, excluding ARIA progress semantics owned by the component.
+- Semantics and interaction: the track uses `role="progressbar"` and is named by the visible label. Determinate progress sets `aria-valuemin`, `aria-valuemax`, and clamped `aria-valuenow`; indeterminate progress omits `aria-valuenow`. Progress updates do not create a live region. Reduced-motion and forced-colors preferences remain supported.
+- State: stateless; the consumer owns and updates the numeric value.
+- Customization: use semantic theme tokens and registered `progress.*` hooks for track, indicator, label/value text, height, radius, and spacing. Support ACME, Luna, Orchid, custom themes, and nested boundaries.
+- Validation: Storybook determinate, indeterminate, custom-scale, theme, nested, and custom-hook examples; browser checks for ARIA values, clamping, status text, reduced motion, responsive labels, and custom themes; lint, typecheck, token checks, Storybook, package build, and package-consumer checks.
+
 ### Tooltip
 
 - Objective: reveal short, non-essential explanations consistently on pointer hover, keyboard focus, and touch.

@@ -16,6 +16,8 @@ export type {
 } from "./components/Badge/Badge";
 export { Callout } from "./components/Callout/Callout";
 export type { CalloutProps, CalloutTone } from "./components/Callout/Callout";
+export { Progress } from "./components/Progress/Progress";
+export type { ProgressProps } from "./components/Progress/Progress";
 export { Tooltip } from "./components/Tooltip/Tooltip";
 export type { TooltipPlacement, TooltipProps } from "./components/Tooltip/Tooltip";
 export { Accordion } from "./components/Accordion/Accordion";

@@ -338,6 +338,20 @@ The `dialog.*` hooks customize surface, text, border, backdrop, radius, padding,
 
 The outer border matches the tone-specific leading accent by default. The `callout.border` hook can override the outer border independently. It renders a generic `div` with no implicit role or live-region behavior. When dynamically inserting content that needs announcing, set the native `role` prop to `status` or `alert` as appropriate. Callout actions retain their native behavior. The `callout.*` hooks customize its surface, text, border/accent, radius, padding, and spacing. Theme-aware semantic colors and nested theme boundaries are supported.
 
+## Progress
+
+```tsx
+<Progress label="Uploading files" value={4} max={10} />
+
+<Progress label="Saving changes" valueText="Working…" />
+```
+
+`Progress` is a linear indicator for ongoing or completed work. Its visible `label` is required. Supply `value` for determinate progress; omit it for indeterminate progress. `max` defaults to `100`. Values are clamped between `0` and `max`; `max` must be greater than zero.
+
+Determinate progress exposes `aria-valuemin`, `aria-valuemax`, and `aria-valuenow`. Indeterminate progress omits `aria-valuenow`. A provided `valueText` replaces the default visible percentage and is exposed as `aria-valuetext`; `showValue={false}` hides the visible value without changing accessible progress semantics. The component does not create a live region, so progress updates are not automatically announced.
+
+The `progress.*` hooks customize track, indicator, label/value text, height, radius, and spacing. Theme tokens and scoped overrides inherit through nested ACME, Luna, Orchid, and custom themes. Reduced-motion and forced-colors preferences are supported.
+
 ## Toast
 
 ```tsx

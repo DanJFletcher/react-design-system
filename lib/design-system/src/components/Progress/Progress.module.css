@@ -1,0 +1,113 @@
+.progress {
+  --_progress-track: var(--ds-color-accent-bg);
+  --_progress-indicator: var(--ds-color-accent-fg);
+
+  display: grid;
+  gap: var(--ds-progress-gap, var(--ds-space-2));
+  color: var(--ds-color-text-primary);
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-sm);
+  line-height: var(--ds-line-height-normal);
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-progress-gap, var(--ds-space-2));
+}
+
+.label {
+  min-inline-size: 0;
+  color: var(--ds-progress-label, var(--ds-color-text-primary));
+  font-weight: var(--ds-font-weight-medium);
+  overflow-wrap: anywhere;
+}
+
+.value {
+  flex: 0 0 auto;
+  color: var(--ds-progress-value, var(--ds-color-text-muted));
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.track {
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  inline-size: 100%;
+  block-size: var(--ds-progress-height, var(--ds-space-2));
+  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  border-radius: var(--ds-progress-radius, var(--ds-radius-full));
+  background-color: var(--ds-progress-track, var(--_progress-track));
+}
+
+.indicator {
+  display: block;
+  inline-size: 0;
+  block-size: 100%;
+  border-radius: inherit;
+  background-color: var(--ds-progress-indicator, var(--_progress-indicator));
+  transition: inline-size var(--ds-motion-duration-fast) ease-out;
+}
+
+.progress[data-indeterminate="true"] .indicator {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 35%;
+  animation: progress-indeterminate var(--ds-motion-duration-spinner) ease-in-out infinite;
+}
+
+.progress:dir(rtl)[data-indeterminate="true"] .indicator {
+  animation-name: progress-indeterminate-rtl;
+}
+
+@keyframes progress-indeterminate {
+  from {
+    transform: translateX(-120%);
+  }
+
+  to {
+    transform: translateX(320%);
+  }
+}
+
+@keyframes progress-indeterminate-rtl {
+  from {
+    transform: translateX(320%);
+  }
+
+  to {
+    transform: translateX(-120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .indicator {
+    transition-duration: 0ms;
+  }
+
+  .progress[data-indeterminate="true"] .indicator {
+    inset-inline-start: 32.5%;
+    inline-size: 35%;
+    animation: none;
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .label,
+  .value {
+    color: CanvasText;
+  }
+
+  .track {
+    border-color: CanvasText;
+    background-color: Canvas;
+  }
+
+  .indicator {
+    background-color: Highlight;
+  }
+}

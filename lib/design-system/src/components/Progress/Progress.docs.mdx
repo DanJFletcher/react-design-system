@@ -1,0 +1,38 @@
+import { Canvas, Controls, Meta } from "@storybook/addon-docs/blocks";
+import * as ProgressStories from "./Progress.stories";
+
+<Meta of={ProgressStories} />
+
+# Progress
+
+An accessible linear indicator for ongoing or completed work.
+
+## Interactive playground
+
+<Canvas of={ProgressStories.Playground} />
+<Controls of={ProgressStories.Playground} />
+
+## Progress states and values
+
+<Canvas of={ProgressStories.Indeterminate} />
+<Canvas of={ProgressStories.CustomScale} />
+<Canvas of={ProgressStories.ClampedValues} />
+<Canvas of={ProgressStories.HiddenValue} />
+<Canvas of={ProgressStories.DescribedBy} />
+
+## Themes and scoped styling
+
+<Canvas of={ProgressStories.ThemeCoverage} />
+<Canvas of={ProgressStories.NestedThemeBoundary} />
+<Canvas of={ProgressStories.CustomHooks} />
+<Canvas of={ProgressStories.LongLabel} />
+
+## Behavior
+
+- `label` is required, visible, and names the progressbar.
+- Provide `value` for determinate progress; omit it for indeterminate progress. `max` defaults to `100` and must be greater than zero.
+- Values outside `[0, max]` are clamped; non-finite values and invalid maxima throw a `RangeError`.
+- Determinate progress exposes `aria-valuemin`, `aria-valuemax`, and `aria-valuenow`. Indeterminate progress omits `aria-valuenow`.
+- `valueText` overrides the displayed value and is exposed as `aria-valuetext`. `showValue={false}` hides the visual value but keeps the accessible numeric value.
+- `aria-describedby` is forwarded to the progressbar. Progress updates do not create a live region.
+- `progress.*` hooks customize the track, indicator, label/value text, height, radius, and spacing. The component supports nested themes, reduced motion, and forced colors.
