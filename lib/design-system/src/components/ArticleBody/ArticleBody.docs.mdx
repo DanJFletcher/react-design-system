@@ -1,0 +1,27 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as ArticleBodyStories from "./ArticleBody.stories";
+
+<Meta of={ArticleBodyStories} />
+
+<Title>Article body</Title>
+
+<Subtitle>A comfortable, theme-aware reading surface for complete articles made from semantic HTML.</Subtitle>
+
+## Long-form content
+
+<Canvas of={ArticleBodyStories.FullArticle} />
+
+`ArticleBody` renders an `<article>` and styles the native paragraphs, heading levels, lists, links, blockquotes, figures, captions, images, and tables inside it. Use real heading levels in document order, descriptive alternative text for informative images, and table header cells with appropriate `scope`. Give tables that need horizontal scrolling `tabIndex={0}` so keyboard users can scroll them.
+
+The reading column is capped at 72 characters per line and narrows fluidly on small screens. Images shrink to fit; tables remain semantic and can scroll horizontally when their columns need more room. The component does not parse markdown or sanitize HTML—render trusted, sanitized article content as React children.
+
+## Themes and narrow layouts
+
+<Canvas of={ArticleBodyStories.ThemeCoverage} />
+<Canvas of={ArticleBodyStories.NarrowScreen} />
+
+Typography and colors follow the active ACME, Luna, Orchid, or custom theme. Links have a visible keyboard focus outline, and forced-colors mode uses system colors.
+
+## Native article attributes
+
+`ArticleBody` forwards native article attributes, children, refs, `className`, and typed `DesignSystemStyle`. Give the article an accessible name when its content does not already identify it in context, for example with `aria-label` or `aria-labelledby`.

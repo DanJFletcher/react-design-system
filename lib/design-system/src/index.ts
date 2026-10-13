@@ -57,6 +57,8 @@ export type {
   ArticleCardProps,
   ArticleCardPublicationDate,
 } from "./components/ArticleCard/ArticleCard";
+export { ArticleBody } from "./components/ArticleBody/ArticleBody";
+export type { ArticleBodyProps } from "./components/ArticleBody/ArticleBody";
 export type {
   CardAlignment,
   CardHeadingLevel,

@@ -220,6 +220,29 @@ The `card.*` component hooks customize the surface, text, border, radius, paddin
 
 The optional author avatar is decorative by default because the author name is visible beside it. `showReadMore` defaults to `true` and adds a descriptive link to the same article destination. Card layout, size, shape, variant, heading level, theme tokens, and `card.*` hooks remain configurable. The component does not fetch articles, resolve routes, or manage publishing.
 
+## Article body
+
+```tsx
+<ArticleBody aria-labelledby="article-title">
+  <h2 id="article-title">A calmer morning routine for your studio</h2>
+  <p>
+    A welcoming studio starts before the first appointment. Read{" "}
+    <a href="/journal/studio-planning">our studio planning guide</a> for ideas.
+  </p>
+  <blockquote>
+    <p>The best routine makes the day easier for the people who use it.</p>
+  </blockquote>
+  <figure>
+    <img src="/images/studio.jpg" alt="A bright, plant-filled studio" />
+    <figcaption>A calm, prepared space makes room for good work.</figcaption>
+  </figure>
+</ArticleBody>
+```
+
+`ArticleBody` renders a semantic `<article>` around regular HTML and styles paragraphs, all heading levels, ordered and unordered lists, links, blockquotes, figures, captions, images, and tables. It forwards native article attributes, refs, `className`, children, and typed `DesignSystemStyle`.
+
+The reading column is limited to 72 characters per line and fluidly fits narrow screens. Images scale down within the article; wide tables scroll horizontally without forcing the page to overflow. Add `tabIndex={0}` to tables that need horizontal scrolling so keyboard users can operate them. Styling follows the active ACME, Luna, Orchid, or custom theme and includes keyboard focus and forced-colors treatment. Use headings in document order, informative image alternative text, scoped table headers, and sanitized content; the component does not parse or sanitize HTML.
+
 ## Pricing details
 
 ```tsx

@@ -1,0 +1,186 @@
+.articleBody {
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-inline-size: 72ch;
+  min-inline-size: 0;
+  margin-inline: auto;
+  color: var(--ds-color-text-primary);
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-lg);
+  line-height: var(--ds-line-height-relaxed, 1.7);
+  overflow-wrap: anywhere;
+}
+
+.articleBody > * {
+  max-inline-size: 100%;
+}
+
+.articleBody > :first-child {
+  margin-block-start: 0;
+}
+
+.articleBody > :last-child {
+  margin-block-end: 0;
+}
+
+.articleBody :where(p) {
+  margin-block: 0 var(--ds-space-5);
+}
+
+.articleBody :where(h1, h2, h3, h4, h5, h6) {
+  margin-block: var(--ds-space-8) var(--ds-space-3);
+  color: var(--ds-color-text-primary);
+  font-family: var(--ds-font-family-sans);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+.articleBody :where(h1) {
+  font-size: var(--ds-font-size-4xl);
+}
+
+.articleBody :where(h2) {
+  font-size: var(--ds-font-size-3xl);
+}
+
+.articleBody :where(h3) {
+  font-size: var(--ds-font-size-2xl);
+}
+
+.articleBody :where(h4) {
+  font-size: var(--ds-font-size-xl);
+}
+
+.articleBody :where(h5) {
+  font-size: var(--ds-font-size-lg);
+}
+
+.articleBody :where(h6) {
+  font-size: var(--ds-font-size-md);
+}
+
+.articleBody :where(ul, ol) {
+  margin-block: 0 var(--ds-space-5);
+  padding-inline-start: var(--ds-space-4);
+}
+
+.articleBody :where(li + li) {
+  margin-block-start: var(--ds-space-2);
+}
+
+.articleBody :where(a) {
+  color: var(--ds-color-action-secondary-fg);
+  text-decoration: underline;
+  text-decoration-thickness: var(--ds-border-width-default);
+  text-underline-offset: var(--ds-space-1);
+  overflow-wrap: anywhere;
+}
+
+.articleBody :where(a:focus-visible) {
+  border-radius: var(--ds-radius-control);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-space-1);
+}
+
+.articleBody :where(blockquote) {
+  margin: var(--ds-space-8) 0;
+  padding-inline-start: var(--ds-space-5);
+  border-inline-start: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  color: var(--ds-color-text-muted);
+  font-size: var(--ds-font-size-lg);
+}
+
+.articleBody :where(blockquote > :last-child) {
+  margin-block-end: 0;
+}
+
+.articleBody :where(figure) {
+  margin: var(--ds-space-8) 0;
+}
+
+.articleBody :where(figure img, > img) {
+  display: block;
+  inline-size: auto;
+  max-inline-size: 100%;
+  block-size: auto;
+  margin-inline: auto;
+}
+
+.articleBody :where(figcaption) {
+  margin-block-start: var(--ds-space-2);
+  color: var(--ds-color-text-muted);
+  font-size: var(--ds-font-size-sm);
+  line-height: var(--ds-line-height-normal);
+  text-align: center;
+}
+
+.articleBody :where(table) {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  margin-block: var(--ds-space-8);
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.articleBody :where(caption) {
+  padding-block: var(--ds-space-2);
+  color: var(--ds-color-text-muted);
+  font-size: var(--ds-font-size-sm);
+  text-align: start;
+}
+
+.articleBody :where(th, td) {
+  min-inline-size: var(--ds-space-20);
+  padding: var(--ds-space-3);
+  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  text-align: start;
+  vertical-align: top;
+}
+
+.articleBody :where(th) {
+  font-weight: var(--ds-font-weight-semibold);
+  background: var(--ds-color-surface-primary);
+}
+
+@media (max-width: 40rem) {
+  .articleBody {
+    font-size: var(--ds-font-size-md);
+  }
+
+  .articleBody :where(h1) {
+    font-size: var(--ds-font-size-3xl);
+  }
+
+  .articleBody :where(h2) {
+    font-size: var(--ds-font-size-2xl);
+  }
+}
+
+@media (forced-colors: active) {
+  .articleBody {
+    color: CanvasText;
+  }
+
+  .articleBody :where(h1, h2, h3, h4, h5, h6) {
+    color: CanvasText;
+  }
+
+  .articleBody :where(a) {
+    color: LinkText;
+  }
+
+  .articleBody :where(a:focus-visible) {
+    outline-color: Highlight;
+  }
+
+  .articleBody :where(blockquote) {
+    color: CanvasText;
+    border-inline-start-color: CanvasText;
+  }
+
+  .articleBody :where(th, td) {
+    border-color: CanvasText;
+  }
+}
