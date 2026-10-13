@@ -83,6 +83,15 @@ export type {
   BreadcrumbsLinkItem,
   BreadcrumbsProps,
 } from "./components/Breadcrumbs/Breadcrumbs";
+export { Testimonials } from "./components/Testimonials/Testimonials";
+export type {
+  TestimonialAuthor,
+  TestimonialAvatar,
+  TestimonialItem,
+  TestimonialsHeadingLevel,
+  TestimonialsLayout,
+  TestimonialsProps,
+} from "./components/Testimonials/Testimonials";
 export { Pagination } from "./components/Pagination/Pagination";
 export type {
   PaginationPageLabel,

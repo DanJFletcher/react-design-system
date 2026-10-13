@@ -1,0 +1,37 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as TestimonialsStories from "./Testimonials.stories";
+
+<Meta of={TestimonialsStories} />
+
+<Title />
+
+<Subtitle>
+  Theme-aware customer quotes for small-business sites, with responsive grids and featured layouts.
+</Subtitle>
+
+## Interactive playground
+
+<Canvas of={TestimonialsStories.Playground} />
+<Controls of={TestimonialsStories.Playground} />
+
+## Layouts and optional details
+
+Choose a responsive grid or feature one quote. Author roles, company names, avatars, and ratings are optional.
+
+<Canvas of={TestimonialsStories.LayoutVariants} />
+<Canvas of={TestimonialsStories.OptionalDetails} />
+
+## Themes and Card customization
+
+Testimonials compose the existing Card component, so Card variants and styling hooks remain available. The component inherits ACME, Luna, Orchid, custom themes, and nested theme boundaries.
+
+<Canvas of={TestimonialsStories.ThemeCoverage} />
+<Canvas of={TestimonialsStories.NestedThemeBoundary} />
+<Canvas of={TestimonialsStories.CustomCardHooks} />
+
+## Ratings and narrow layouts
+
+Ratings are announced with localized text and the star glyphs are decorative. The grid collapses to one column on narrow screens.
+
+<Canvas of={TestimonialsStories.LocalizedRating} />
+<Canvas of={TestimonialsStories.NarrowLayout} />

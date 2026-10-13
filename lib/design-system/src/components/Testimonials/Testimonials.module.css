@@ -1,0 +1,130 @@
+.root {
+  box-sizing: border-box;
+  display: grid;
+  gap: var(--ds-space-6);
+  min-inline-size: 0;
+}
+
+.header {
+  display: grid;
+  gap: var(--ds-space-2);
+  max-inline-size: 48ch;
+}
+
+.heading {
+  margin: 0;
+  color: var(--ds-color-text-primary);
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-3xl);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+.description {
+  color: var(--ds-color-text-muted);
+  font-size: var(--ds-font-size-md);
+  line-height: var(--ds-line-height-normal);
+  overflow-wrap: anywhere;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ds-space-4);
+  min-inline-size: 0;
+}
+
+.items[data-layout="featured"] {
+  inline-size: 100%;
+  max-inline-size: 72ch;
+  margin-inline: auto;
+}
+
+.card {
+  block-size: 100%;
+  min-inline-size: 0;
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+  block-size: 100%;
+  min-inline-size: 0;
+  margin: 0;
+}
+
+.rating {
+  color: inherit;
+  font-size: var(--ds-font-size-xl);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-tight);
+}
+
+.quote {
+  flex: 1 0 auto;
+  min-inline-size: 0;
+  margin: 0;
+  color: inherit;
+  font-size: var(--ds-font-size-lg);
+  line-height: var(--ds-line-height-normal);
+  overflow-wrap: anywhere;
+}
+
+.quote p {
+  margin: 0;
+}
+
+.attribution {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  min-inline-size: 0;
+  margin-block-start: auto;
+}
+
+.avatar {
+  display: block;
+  flex: 0 0 auto;
+  inline-size: var(--ds-space-12);
+  block-size: var(--ds-space-12);
+  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  border-radius: var(--ds-radius-full);
+  object-fit: cover;
+}
+
+.author {
+  display: grid;
+  gap: var(--ds-space-1);
+  min-inline-size: 0;
+}
+
+.authorName {
+  color: inherit;
+  font-style: normal;
+  font-weight: var(--ds-font-weight-semibold);
+  overflow-wrap: anywhere;
+}
+
+.authorDetails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-1);
+  color: inherit;
+  font-size: var(--ds-font-size-sm);
+  line-height: var(--ds-line-height-normal);
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 42rem) {
+  .items[data-layout="grid"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 72rem) {
+  .items[data-layout="grid"][data-columns="3"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

@@ -17,7 +17,7 @@ For a future component, use this planning template:
 
 ## Approved component scope
 
-The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, `Heading`, `Icon`, `ArticleFootnotes`, and `Pagination` as component additions. Their API and accessibility contracts are:
+The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, `Heading`, `Icon`, `ArticleFootnotes`, `Pagination`, and `Testimonials` as component additions. Their API and accessibility contracts are:
 
 ### Accordion
 
@@ -96,6 +96,16 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - State: stateless; the consumer owns labels, destinations, and routing. The final item must identify the current page, and every parent item must provide a destination.
 - Customization: use semantic text, action, spacing, radius, and focus tokens with responsive CSS Modules. Support ACME, Luna, Orchid, custom themes, and nested boundaries; long labels wrap without horizontal overflow and focus remains visible in forced-colors mode.
 - Validation: Storybook basic, theme/custom/nested, and narrow-screen examples; browser checks for landmark naming, links/current-page semantics, keyboard focus, token inheritance, and no narrow-screen overflow; lint, typecheck, Storybook, package build, and package-consumer checks.
+
+### Testimonials
+
+- Objective: present customer feedback as readable, trustworthy social proof for small-business sites and articles.
+- Dependencies: the existing `Card`, semantic theme tokens, CSS Modules, and inline rating text; no new token, icon library, review service, or image dependency.
+- Public API: required `items` are readonly records with unique `id`, non-empty `quote`, and `author.name`; author `role`, `company`, and `avatar` (`src`, optional `alt`) are optional. Each item may include an integer `rating` from 1 to 5. `heading`, `description`, `headingLevel` (2–6, default 2), `layout` (`grid` or `featured`, default `grid`), and `columns` (2 or 3, default 3) configure the collection; a non-empty featured layout requires exactly one item. `variant`, `size`, `shape`, and `alignment` configure the composed Cards. `getRatingLabel(rating)` customizes the accessible rating text. Native `section` attributes, refs, `className`, and typed `DesignSystemStyle` are supported.
+- Semantics and interaction: render a named native section with an optional heading and description, containing semantic Cards and figures. Quotes use `<blockquote>`, author attribution uses `<figcaption>` and `<cite>`, and ratings are exposed as one accessible image label while decorative star glyphs are hidden. Avatars default to decorative alternatives because the author name is visible. The component is non-interactive and owns no review links or verification claims.
+- State: stateless; consumers own testimonial content and rating provenance. An empty item list renders nothing; invalid IDs, blank author/quote text, out-of-range ratings, or multiple items in featured layout throw.
+- Customization: compose the existing theme-aware `Card`; use its public variants and `card.*` hooks plus semantic tokens. Support ACME, Luna, Orchid, custom themes, and nested boundaries without theme-specific rendering or new token roles.
+- Validation: Storybook playground, featured/grid, optional-content, rating, theme/nested, custom-hook, and narrow-layout examples; browser checks for landmark and quote semantics, rating announcements, validation, responsive columns, theme inheritance, and no horizontal overflow; lint, typecheck, Storybook, package build, and package-consumer checks.
 
 ### Dialog
 

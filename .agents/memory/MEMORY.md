@@ -5,3 +5,4 @@
 - [Design-system verification](design-system-verification.md) — the combined check can exceed the shell time limit when browser tests follow builds; run the visual suite separately.
 - [Unique Storybook landmarks](storybook-landmark-uniqueness.md) — stacked theme stories need distinct names for repeated semantic regions to pass axe’s landmark-unique rule.
 - [Pagination browser tests](pagination-browser-tests.md) — treat the current page separately from clickable page controls and use exact accessible-name matches for numbered pages.
+- [Repeated accessible values](storybook-repeated-values.md) — when repeated items share an accessible name, assert through a plural locator and expected count.

@@ -220,6 +220,27 @@ The `card.*` component hooks customize the surface, text, border, radius, paddin
 
 The optional author avatar is decorative by default because the author name is visible beside it. `showReadMore` defaults to `true` and adds a descriptive link to the same article destination. Card layout, size, shape, variant, heading level, theme tokens, and `card.*` hooks remain configurable. The component does not fetch articles, resolve routes, or manage publishing.
 
+## Testimonials
+
+```tsx
+<Testimonials
+  heading="What our customers say"
+  items={[
+    {
+      id: "maya-chen",
+      quote: "The team made a busy season feel much easier to manage.",
+      author: { name: "Maya Chen", role: "Owner", company: "Northstar Studio" },
+      rating: 5,
+    },
+  ]}
+  layout="featured"
+/>
+```
+
+`Testimonials` presents consumer-provided quotes in a responsive grid or as one featured quote. Each card uses the existing `Card` surface, size, and shape options. Author roles, businesses, portraits, and one-to-five-star ratings are optional. Ratings have a spoken label (`getRatingLabel` can localize it); the displayed star glyphs are decorative. The component does not verify reviews, fetch content, or link to review platforms.
+
+Quotes are rendered as native blockquotes with author attribution in a figure caption. The section is named by its optional heading, `aria-labelledby`, or `aria-label` (default “Testimonials”). An empty collection renders nothing. A non-empty featured layout accepts exactly one testimonial; invalid content or ratings fail explicitly.
+
 ## Article body
 
 ```tsx
