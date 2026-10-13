@@ -49,6 +49,14 @@ export type {
   TabsVariant,
 } from "./components/Tabs/Tabs";
 export { Card } from "./components/Card/Card";
+export { ArticleCard } from "./components/ArticleCard/ArticleCard";
+export type {
+  ArticleCardAuthor,
+  ArticleCardCategory,
+  ArticleCardImage,
+  ArticleCardProps,
+  ArticleCardPublicationDate,
+} from "./components/ArticleCard/ArticleCard";
 export type {
   CardAlignment,
   CardHeadingLevel,

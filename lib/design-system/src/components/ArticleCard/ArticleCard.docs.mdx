@@ -1,0 +1,34 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as ArticleCardStories from "./ArticleCard.stories";
+
+<Meta of={ArticleCardStories} />
+
+<Title>Article card</Title>
+
+<Subtitle>A semantic, theme-aware preview for blog indexes, featured posts, and related-article lists.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={ArticleCardStories.Playground} />
+<Controls of={ArticleCardStories.Playground} />
+
+Use the controls to change post content, metadata, layout, media crop, variant, size, shape, and heading level. The image is kept as a local demonstration asset; provide your own `image` object in application code.
+
+## Layout and content options
+
+<Canvas of={ArticleCardStories.LayoutVariants} />
+<Canvas of={ArticleCardStories.ContentVariants} />
+<Canvas of={ArticleCardStories.NarrowLayout} />
+
+## Themes and customization
+
+<Canvas of={ArticleCardStories.ThemeCoverage} />
+<Canvas of={ArticleCardStories.CustomHooks} />
+
+## Semantics and behavior
+
+- The card is a native `<article>` named by its heading. The heading and optional “Read article” action link to `href`; categories and author links remain independent.
+- `publishedAt` takes a machine-readable `dateTime` value and a visible localized label. The component does not format dates or calculate reading time.
+- `image` accepts native image attributes. Provide meaningful `alt` text for informative images and `alt=""` for decorative imagery. It defaults to lazy loading and async decoding.
+- `layout`, `mediaPosition`, `mediaAspectRatio`, and `mediaFit` follow the existing Card API. Links remain keyboard accessible, visibly identifiable, and visible in forced-colors mode.
+- The component presents supplied content; it does not fetch posts, resolve routes, or manage publishing.

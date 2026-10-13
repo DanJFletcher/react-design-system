@@ -196,6 +196,30 @@ The media slot accepts images, video, or composed React nodes. Informative image
 
 The `card.*` component hooks customize the surface, text, border, radius, padding, spacing, and media corners. Its colors use semantic theme tokens and its media slot accepts images, video, or composed React nodes.
 
+## ArticleCard
+
+```tsx
+<ArticleCard
+  category={{ label: "Small business", href: "/journal/topics/small-business" }}
+  title="A calmer morning routine for your studio"
+  href="/journal/calm-morning-routine"
+  excerpt="Small changes to the opening routine can make busy workdays feel more manageable."
+  image={{
+    src: "/images/calm-studio.jpg",
+    alt: "A quiet studio with plants beside a sunlit desk",
+    width: 1200,
+    height: 675,
+  }}
+  author={{ name: "Maya Chen", href: "/journal/authors/maya-chen" }}
+  publishedAt={{ dateTime: "2026-05-14", label: "May 14, 2026" }}
+  readingTime="6 min read"
+/>
+```
+
+`ArticleCard` composes the semantic `Card` with blog-specific content and link behavior. The required title links to `href`; `category`, `excerpt`, `author`, `publishedAt`, `readingTime`, and `image` are optional. Publication dates use a machine-readable `dateTime` value and a separate visible label. Image attributes are forwarded to a native `<img>`; supply meaningful `alt` text for informative images, or an empty string for decorative images. The image defaults to lazy loading and a wide crop.
+
+The optional author avatar is decorative by default because the author name is visible beside it. `showReadMore` defaults to `true` and adds a descriptive link to the same article destination. Card layout, size, shape, variant, heading level, theme tokens, and `card.*` hooks remain configurable. The component does not fetch articles, resolve routes, or manage publishing.
+
 ## Pricing details
 
 ```tsx

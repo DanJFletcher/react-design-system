@@ -47,6 +47,16 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - Customization: use semantic tokens, responsive CSS Modules, public `variant` and `layout` props, and registered `contact.*` hooks for surface/text/muted/border/link colors, radius, padding, and spacing. Support ACME, Luna, Orchid, custom themes, and nested boundaries.
 - Validation: Storybook playground and form/location examples; browser checks for landmarks, native links, hours, themes, nested overrides, responsive stacking, and custom hooks; lint, typecheck, token checks, Storybook, package build, and package-consumer checks.
 
+### ArticleCard
+
+- Objective: present a scannable blog post preview in indexes, featured content, and related-post lists while retaining the existing Card design system.
+- Dependencies: existing `Card`, `Badge`, semantic theme tokens, and `card.*` component hooks; no CMS, router, or image-hosting dependency.
+- Public API: required `title` and `href`; optional `excerpt`, `category` (`label`, optional `href`), `author` (`name`, optional `href` and avatar), `publishedAt` (`dateTime`, visible `label`), `readingTime`, and native image attributes through `image`. `readMoreLabel` and `showReadMore` configure the secondary title-qualified link. Card layout, variants, shape, size, media position/crop, heading level, native article props, `className`, ref, and typed `style` are forwarded.
+- Semantics and interaction: render a native article named by its heading; the heading and optional “read article” action are native links to the supplied article `href`. Categories and linked authors remain separate native links. Dates use `<time dateTime>`. Informative image alternative text is required; decorative media uses `alt=""`.
+- State: stateless; article data, route destinations, date localization, reading-time calculation, and publishing belong to the consumer.
+- Customization: compose the existing theme-aware Card and Badge; inherit their semantic colors and `card.*` hooks across ACME, Luna, Orchid, custom themes, and nested theme boundaries. Keep links visibly identifiable and preserve focus indicators and forced-color behavior.
+- Validation: Storybook playground, layouts, content variants, themes, and custom hooks; browser checks for article naming, title/category/author/read-more links, machine-readable dates, optional media, narrow-screen wrapping, and responsive horizontal layout; lint, typecheck, Storybook, package build, and package-consumer checks.
+
 ### Dialog
 
 - Objective: accessible modal content for confirmations, forms, and focused tasks.
