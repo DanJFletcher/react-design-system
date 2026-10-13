@@ -1,6 +1,6 @@
 # Deferred roadmap
 
-The core native form controls are part of the current foundation. `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, `Heading`, `Icon`, `Tabs`, `Badge`, `Tooltip`, `Callout`, `Progress`, `ContactSection`, `ArticleCard`, `ArticleBody`, and `ArticleFootnotes` are approved components; the remaining capabilities stay deferred.
+The core native form controls are part of the current foundation. `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, `Heading`, `Icon`, `Tabs`, `Badge`, `Tooltip`, `Callout`, `Progress`, `ContactSection`, `ArticleCard`, `ArticleBody`, `ArticleFootnotes`, and `Pagination` are approved components; the remaining capabilities stay deferred.
 
 | Phase | Capabilities | Required foundation |
 | --- | --- | --- |
@@ -15,6 +15,7 @@ The core native form controls are part of the current foundation. `Accordion`, `
 | Approved small-business section | ContactSection | Responsive contact methods, address/directions, weekly hours, CTA, and an optional consumer-owned form slot |
 | Approved blog content card | ArticleCard | Semantic post previews with category, linked title, excerpt, author/date/read-time metadata, and optional image |
 | Approved blog citations | ArticleFootnotes | In-text footnote links, accessible notes, and return links to one or more citations |
+| Approved blog navigation | Pagination | URL links or controlled callbacks, current-page semantics, and responsive page ranges |
 | Approved compound control | Tabs | Named tab list, controlled/uncontrolled selection, orientation-aware keyboard model, and accessible tab panels |
 | Layout primitives | Stack, Inline, Grid, Container | Pixel spacing and responsive layout rules |
 | Additional form atoms | Switch, date/time inputs, file input | Extend the existing labeling, validation-message, and focus conventions |

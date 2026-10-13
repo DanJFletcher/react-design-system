@@ -70,6 +70,12 @@ export type {
   ArticleFootnoteProps,
   ArticleFootnotesProps,
 } from "./components/ArticleFootnotes/ArticleFootnotes";
+export { Pagination } from "./components/Pagination/Pagination";
+export type {
+  PaginationPageLabel,
+  PaginationProps,
+  PaginationSummaryLabel,
+} from "./components/Pagination/Pagination";
 export type {
   CardAlignment,
   CardHeadingLevel,

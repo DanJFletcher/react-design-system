@@ -17,7 +17,7 @@ For a future component, use this planning template:
 
 ## Approved component scope
 
-The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, `Heading`, and `Icon` as component additions. Their API and accessibility contracts are:
+The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, `Heading`, `Icon`, `ArticleFootnotes`, and `Pagination` as component additions. Their API and accessibility contracts are:
 
 ### Accordion
 
@@ -66,6 +66,16 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - State: stateless; the consumer owns citation numbering, stable unique IDs, note content, source URLs, and localization. Duplicate or mismatched IDs are invalid consumer data.
 - Customization: use semantic text, action, border, spacing, and focus tokens; support ACME, Luna, Orchid, custom themes, nested scopes, long content, and narrow layouts. No component-specific hooks or new semantic tokens are required.
 - Validation: Storybook connected, theme, and narrow-layout examples; browser checks for native marker/backlink navigation, multiple citations per note, keyboard focus, theme boundaries, and no narrow-screen overflow; lint, typecheck, Storybook, package build, and package-consumer checks.
+
+### Pagination
+
+- Objective: help readers move through long blog, service, or product listings while keeping the current page clear.
+- Dependencies: existing React package, CSS Modules, semantic action/border/text/focus tokens, and the built-in Icon component; no router, data fetching, or new token is required.
+- Public API: `currentPage` and positive integer `totalPages` are required. `siblingCount` and `boundaryCount` default to `1` and accept non-negative integers. `previousLabel`, `nextLabel`, `pageLabel(page)`, and `pageSummaryLabel(currentPage, totalPages)` provide localized labels. Navigation behavior is a discriminated union: callback mode requires `onPageChange(page)`; link mode requires `getPageHref(page)`; the two are mutually exclusive. Native `nav` props, accessible `aria-label` (default `"Pagination"`), refs, `className`, and typed `DesignSystemStyle` are forwarded. A one-page result renders nothing; invalid page ranges or counts throw.
+- Semantics and interaction: render a named native `nav`, page numbers as a list, and the current item with `aria-current="page"`. Callback mode uses native buttons and native disabled states; link mode uses native anchors and non-interactive disabled boundary labels. Keyboard activation and focus stay native. On narrow screens, numbered controls are replaced by a localized current/total summary while previous/next remain available.
+- State: stateless and controlled; the consumer updates `currentPage` after callbacks or navigation. The component computes the visible range and ellipses, but does not fetch pages, change routes, or own list data.
+- Customization: page windows and labels are public props; colors, borders, radius, focus, spacing, and type inherit semantic theme tokens. Support ACME, Luna, Orchid, custom themes, and nested boundaries without theme-specific rendering or component hooks.
+- Validation: Storybook callback/link, edge-page, page-window, theme, and narrow-layout examples; browser checks for link destinations, callback values, current-page semantics, keyboard operation, disabled boundaries, responsive summary, theme inheritance, and no horizontal overflow; lint, typecheck, Storybook, package build, and package-consumer checks.
 
 ### Dialog
 

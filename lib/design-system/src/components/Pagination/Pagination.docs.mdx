@@ -1,0 +1,51 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as PaginationStories from "./Pagination.stories";
+
+<Meta of={PaginationStories} />
+
+<Title>Pagination</Title>
+
+<Subtitle>Navigate long lists while keeping the current page clear.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={PaginationStories.Playground} />
+<Controls of={PaginationStories.Playground} />
+
+## Link navigation
+
+<Canvas of={PaginationStories.LinkNavigation} />
+
+Page links use the supplied URL callback. The consumer remains responsible for changing routes and loading the page's data.
+
+## Controlled navigation
+
+<Canvas of={PaginationStories.Controlled} />
+
+The consumer owns `currentPage` and updates it in `onPageChange`. The component does not fetch or replace list content.
+
+## Themes and narrow screens
+
+<Canvas of={PaginationStories.ThemeCoverage} />
+<Canvas of={PaginationStories.NarrowScreen} />
+
+## API and usage
+
+Provide a one-based `currentPage` and a positive `totalPages`. Choose exactly one navigation mode: `onPageChange(page)` for callback-driven controls, or `getPageHref(page)` for native links. Both modes are stateless; update the current page in the consuming view or through the destination URL.
+
+```tsx
+<Pagination
+  aria-label="Journal pages"
+  currentPage={currentPage}
+  totalPages={totalPages}
+  siblingCount={1}
+  boundaryCount={1}
+  getPageHref={(page) => `/journal?page=${page}`}
+/>
+```
+
+The page window displays the configured number of siblings around the current page and boundary pages at each end, with ellipses for gaps. `siblingCount` and `boundaryCount` default to `1`. A single-page result renders no navigation; invalid page numbers or counts throw.
+
+`previousLabel`, `nextLabel`, `pageLabel`, and `pageSummaryLabel` support localization. The native `nav` landmark defaults to the accessible name “Pagination”; provide `aria-label` when a page has multiple navigation landmarks. At narrow widths, the page-number list becomes a current/total summary while previous and next controls stay available.
+
+Callback mode uses native buttons; link mode uses native anchors. The current page is marked with `aria-current="page"`, and out-of-range previous/next controls are non-interactive. The component inherits semantic colors, control radius, spacing, and focus styling from ACME, Luna, Orchid, and custom themes.

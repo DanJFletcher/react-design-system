@@ -270,6 +270,25 @@ The reading column is limited to 72 characters per line and fluidly fits narrow 
 
 The components use native fragment links without JavaScript navigation, inherit ACME, Luna, Orchid, custom, and nested theme tokens, and preserve visible focus indicators and forced-colors support. The component does not resolve sources, assign citation numbering, or fetch content.
 
+## Pagination
+
+```tsx
+<Pagination
+  aria-label="Journal pages"
+  currentPage={currentPage}
+  totalPages={totalPages}
+  siblingCount={1}
+  boundaryCount={1}
+  getPageHref={(page) => `/journal?page=${page}`}
+/>
+```
+
+`Pagination` renders a named navigation landmark with page numbers, previous/next controls, a current-page indicator, and ellipses when pages are omitted. Use either `getPageHref(page)` for native URL links or `onPageChange(page)` for controlled buttons. The consumer owns the current page, route, and list data.
+
+`siblingCount` controls how many page numbers appear around the current page; `boundaryCount` controls the visible page numbers at each end. Both default to `1`. The `previousLabel`, `nextLabel`, `pageLabel`, and `pageSummaryLabel` props allow localization. At narrow widths the number list is replaced by a current/total summary, while previous/next controls remain available. A one-page result renders no navigation, and invalid page values throw.
+
+The current page uses `aria-current="page"`; callback mode uses native buttons and link mode uses native anchors. Styling inherits action, border, focus, spacing, and radius tokens across built-in, nested, and custom themes.
+
 ## Pricing details
 
 ```tsx
