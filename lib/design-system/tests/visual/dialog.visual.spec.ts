@@ -47,6 +47,52 @@ test("Tooltip inside a dialog is topmost and consumes Escape before the dialog",
   await expect(openDialog).toBeFocused();
 });
 
+test("Tooltip stays aligned and visible when its dialog body scrolls", async ({ page }) => {
+  await page.goto("/iframe.html?id=components-dialog--tooltip-while-body-scrolls&viewMode=story");
+
+  await page.getByRole("button", { name: "Open dialog" }).click();
+  const dialog = page.getByRole("dialog", { name: "Confirm the changes?" });
+  const body = dialog.locator(":scope > div");
+  const trigger = page.getByRole("button", { name: "Dialog help" });
+  await body.evaluate((element) => {
+    element.scrollTop = 375;
+  });
+  expect(await body.evaluate((element) => element.scrollTop)).toBe(375);
+  await trigger.evaluate((element) => element.focus({ preventScroll: true }));
+
+  const tooltip = page.getByRole("tooltip");
+  await expect(tooltip).toBeVisible();
+  const bodyBounds = await body.boundingBox();
+  const beforeAnchor = await trigger.boundingBox();
+  const beforeTooltip = await tooltip.boundingBox();
+  expect(bodyBounds).not.toBeNull();
+  expect(beforeAnchor).not.toBeNull();
+  expect(beforeTooltip).not.toBeNull();
+
+  await body.evaluate((element) => {
+    element.scrollTop += 12;
+  });
+  await expect.poll(async () => (await trigger.boundingBox())?.y).toBe(beforeAnchor!.y - 12);
+  await expect.poll(async () => (await tooltip.boundingBox())?.y).toBe(beforeTooltip!.y - 12);
+
+  const afterAnchor = await trigger.boundingBox();
+  const afterTooltip = await tooltip.boundingBox();
+  expect(afterAnchor).not.toBeNull();
+  expect(afterTooltip).not.toBeNull();
+  expect(afterTooltip!.y - beforeTooltip!.y).toBe(afterAnchor!.y - beforeAnchor!.y);
+  expect(afterTooltip!.y).toBeLessThan(bodyBounds!.y);
+  expect(
+    await tooltip.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      const hit = element.ownerDocument.elementFromPoint(
+        bounds.left + bounds.width / 2,
+        bounds.top + bounds.height / 2,
+      );
+      return hit !== null && element.contains(hit);
+    }),
+  ).toBe(true);
+});
+
 test("Dialog blocks Escape when configured and remains closeable", async ({ page }) => {
   await page.goto("/iframe.html?id=components-dialog--escape-disabled&viewMode=story");
   await page.getByRole("button", { name: "Open dialog" }).click();

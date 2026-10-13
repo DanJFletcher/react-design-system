@@ -61,6 +61,20 @@ export const TooltipInsideDialog: Story = {
   ),
 };
 
+export const TooltipWhileBodyScrolls: Story = {
+  render: (args) => (
+    <DialogPlayground {...args}>
+      <div>
+        <div aria-hidden="true" style={{ blockSize: "24rem" }} />
+        <Tooltip content="Additional context for this dialog action.">
+          <Button variant="secondary">Dialog help</Button>
+        </Tooltip>
+        <div aria-hidden="true" style={{ blockSize: "48rem" }} />
+      </div>
+    </DialogPlayground>
+  ),
+};
+
 export const SmallSize: Story = {
   args: { size: "sm" },
 };
