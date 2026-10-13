@@ -26,6 +26,7 @@
     "color.focus.ring": "#6A2491",
     "color.accent.bg": "#F6CF67",
     "color.accent.fg": "#38143D",
+    "color.accent.border": "#8B5E88",
     "color.status.success.bg": "#E6F5E9",
     "color.status.success.fg": "#275A3B",
     "color.status.warning.bg": "#FFF2D0",

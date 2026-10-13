@@ -191,6 +191,7 @@
 :root[data-ds-theme="luna"],
 [data-ds-theme="luna"] {
   --ds-color-accent-bg: #F5D36D;
+  --ds-color-accent-border: #806D94;
   --ds-color-accent-fg: #2D2034;
   --ds-color-action-disabled-bg: #30283D;
   --ds-color-action-disabled-fg: #C1B5D0;

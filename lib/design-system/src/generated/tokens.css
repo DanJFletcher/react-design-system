@@ -190,6 +190,7 @@
 :root,
 [data-ds-theme="acme"] {
   --ds-color-accent-bg: #DBEAFE;
+  --ds-color-accent-border: #64748B;
   --ds-color-accent-fg: #1E3A8A;
   --ds-color-action-disabled-bg: #E2E8F0;
   --ds-color-action-disabled-fg: #475569;

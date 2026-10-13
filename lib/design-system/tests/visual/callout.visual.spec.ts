@@ -25,13 +25,21 @@ test("Callout tones maintain readable contrast and matching border colors in eve
         background: computed.backgroundColor,
         outerBorder: computed.borderTopColor,
         accentBorder: computed.borderInlineStartColor,
+        tone: element.getAttribute("data-tone"),
+        themeBackground: element.parentElement
+          ? getComputedStyle(element.parentElement).backgroundColor
+          : computed.backgroundColor,
       };
     }),
   );
 
-  for (const { color, background, outerBorder, accentBorder } of styles) {
+  for (const { color, background, outerBorder, accentBorder, tone, themeBackground } of styles) {
     expect(contrastRatio(color, background)).toBeGreaterThanOrEqual(4.5);
     expect(outerBorder).toBe(accentBorder);
+    if (tone === "info") {
+      expect(contrastRatio(outerBorder, background)).toBeGreaterThanOrEqual(3);
+      expect(contrastRatio(outerBorder, themeBackground)).toBeGreaterThanOrEqual(3);
+    }
   }
 });
 

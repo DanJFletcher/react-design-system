@@ -24,6 +24,7 @@
     "color.focus.ring": { "type": "color", "value": "#1D4ED8", "description": "Visible keyboard-focus ring." },
     "color.accent.bg": { "type": "color", "value": "#DBEAFE", "description": "Accent surface." },
     "color.accent.fg": { "type": "color", "value": "#1E3A8A", "description": "Text on the accent surface." },
+    "color.accent.border": { "type": "color", "value": "#64748B", "description": "Boundary color for accent callouts, contrasted against the accent surface and page canvas." },
     "color.status.success.bg": { "type": "color", "value": "#DCFCE7", "description": "Success status surface." },
     "color.status.success.fg": { "type": "color", "value": "#166534", "description": "Text on the success status surface." },
     "color.status.warning.bg": { "type": "color", "value": "#FEF3C7", "description": "Warning status surface." },

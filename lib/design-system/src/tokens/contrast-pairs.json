@@ -27,6 +27,8 @@
     { "name": "Focus ring on surface", "foreground": "color.focus.ring", "background": "color.surface.primary", "minimum": 3 },
     { "name": "Control boundary on canvas", "foreground": "color.border.control", "background": "color.canvas", "minimum": 3 },
     { "name": "Control boundary on surface", "foreground": "color.border.control", "background": "color.surface.primary", "minimum": 3 },
+    { "name": "Accent callout boundary on canvas", "foreground": "color.accent.border", "background": "color.canvas", "minimum": 3 },
+    { "name": "Accent callout boundary on accent surface", "foreground": "color.accent.border", "background": "color.accent.bg", "minimum": 3 },
     { "name": "Active switch track and thumb", "foreground": "color.surface.primary", "background": "color.action.primary.bg", "minimum": 3 },
     { "name": "Error boundary on canvas", "foreground": "color.border.error", "background": "color.canvas", "minimum": 3 },
     { "name": "Error boundary on surface", "foreground": "color.border.error", "background": "color.surface.primary", "minimum": 3 }

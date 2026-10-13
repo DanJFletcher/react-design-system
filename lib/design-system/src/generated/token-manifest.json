@@ -256,6 +256,11 @@
       "description": "Accent surface."
     },
     {
+      "name": "color.accent.border",
+      "type": "color",
+      "description": "Boundary color for accent callouts, contrasted against the accent surface and page canvas."
+    },
+    {
       "name": "color.accent.fg",
       "type": "color",
       "description": "Text on the accent surface."
@@ -1310,6 +1315,7 @@
       "color.focus.ring": "#1D4ED8",
       "color.accent.bg": "#DBEAFE",
       "color.accent.fg": "#1E3A8A",
+      "color.accent.border": "#64748B",
       "color.status.success.bg": "#DCFCE7",
       "color.status.success.fg": "#166534",
       "color.status.warning.bg": "#FEF3C7",
@@ -1348,6 +1354,7 @@
       "color.focus.ring": "#E6C4FF",
       "color.accent.bg": "#F5D36D",
       "color.accent.fg": "#2D2034",
+      "color.accent.border": "#806D94",
       "color.status.success.bg": "#173D31",
       "color.status.success.fg": "#A7F3D0",
       "color.status.warning.bg": "#47391B",
@@ -1386,6 +1393,7 @@
       "color.focus.ring": "#6A2491",
       "color.accent.bg": "#F6CF67",
       "color.accent.fg": "#38143D",
+      "color.accent.border": "#8B5E88",
       "color.status.success.bg": "#E6F5E9",
       "color.status.success.fg": "#275A3B",
       "color.status.warning.bg": "#FFF2D0",
@@ -1567,6 +1575,20 @@
       "theme": "acme",
       "name": "Control boundary on surface",
       "ratio": 4.759,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Accent callout boundary on canvas",
+      "ratio": 4.548,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Accent callout boundary on accent surface",
+      "ratio": 3.901,
       "minimum": 3,
       "kind": "indicator"
     },
@@ -1761,6 +1783,20 @@
     },
     {
       "theme": "luna",
+      "name": "Accent callout boundary on canvas",
+      "ratio": 4.095,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Accent callout boundary on accent surface",
+      "ratio": 3.181,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
       "name": "Active switch track and thumb",
       "ratio": 10.535,
       "minimum": 3,
@@ -1945,6 +1981,20 @@
       "theme": "orchid",
       "name": "Control boundary on surface",
       "ratio": 5.021,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Accent callout boundary on canvas",
+      "ratio": 4.778,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Accent callout boundary on accent surface",
+      "ratio": 3.463,
       "minimum": 3,
       "kind": "indicator"
     },

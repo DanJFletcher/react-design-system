@@ -26,6 +26,10 @@
   --_callout-accent: var(--ds-color-text-muted);
 }
 
+.callout[data-tone="info"] {
+  --_callout-accent: var(--ds-color-accent-border, var(--ds-color-accent-fg));
+}
+
 .callout[data-tone="success"] {
   --_callout-surface: var(--ds-color-status-success-bg);
   --_callout-text: var(--ds-color-status-success-fg);

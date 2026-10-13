@@ -191,6 +191,7 @@
 :root[data-ds-theme="orchid"],
 [data-ds-theme="orchid"] {
   --ds-color-accent-bg: #F6CF67;
+  --ds-color-accent-border: #8B5E88;
   --ds-color-accent-fg: #38143D;
   --ds-color-action-disabled-bg: #EBDCEB;
   --ds-color-action-disabled-fg: #67506E;
