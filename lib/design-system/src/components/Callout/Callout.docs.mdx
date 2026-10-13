@@ -31,8 +31,8 @@ Persistent, in-flow messages for status, guidance, and next steps.
 - Callouts remain in page flow. They are not queued and do not auto-dismiss.
 - `tone` is `info` (default), `success`, `warning`, `error`, or `neutral`.
 - `title` is optional; `children` provides the message body. `icon` is optional and decorative. `action` accepts consumer-provided links or buttons.
-- Every tone uses the same outer border as the neutral callout; the leading accent remains tone-specific.
+- The outer border matches the tone-specific leading accent by default. A scoped `callout.border` hook can override the outer border independently.
 - The component renders a generic `div` without an implicit role or live-region behavior. Set a native `role` such as `status` or `alert` only when dynamically added content needs announcement.
 - Icons are hidden from assistive technology; the visible title and body provide meaning.
-- `callout.*` hooks customize surface, text, border/accent, radius, padding, and spacing. Forced-colors mode retains visible boundaries and text.
+- `callout.*` hooks customize surface, text, border/accent, radius, padding, and spacing. `callout.accent` controls the leading stripe and default outer-border color; `callout.border` can override the outer border independently. Forced-colors mode retains visible boundaries and text.
 - Theme colors and scoped overrides inherit through nested ACME, Luna, Orchid, and custom theme boundaries.

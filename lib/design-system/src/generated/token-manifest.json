@@ -658,13 +658,13 @@
     {
       "name": "callout.accent",
       "type": "color",
-      "description": "Callout leading accent and icon color.",
+      "description": "Callout leading accent and icon color; also sets the outer border by default.",
       "cssVariable": "--ds-callout-accent"
     },
     {
       "name": "callout.border",
       "type": "color",
-      "description": "Callout outer border.",
+      "description": "Callout outer border color override.",
       "cssVariable": "--ds-callout-border"
     },
     {

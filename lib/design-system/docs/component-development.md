@@ -94,7 +94,7 @@ The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`,
 - Public API: `children` provides the body; optional `title`, decorative `icon`, and consumer-supplied `action` provide common composition. `tone` accepts `info`, `success`, `warning`, `error`, or `neutral` (default `info`). Native `div` props, including an optional caller-selected `role`, refs, `className`, and typed `DesignSystemStyle` are forwarded.
 - Semantics and interaction: render a generic in-flow `div` with no implicit role or live-region behavior. The consumer chooses `role="status"` or `role="alert"` only when its update needs announcement. Icons are decorative and hidden from assistive technology; the visible title/body carries meaning. Actions use consumer-provided links or buttons and retain their native behavior.
 - State: stateless and persistent; there is no auto-dismissal or internal action state.
-- Customization: tones use existing semantic theme pairs. Register `callout.*` hooks for surface, text, border/accent, radius, padding, and spacing; preserve forced-colors support and nested theme boundaries.
+- Customization: tones use existing semantic theme pairs. Register `callout.*` hooks for surface, text, border/accent, radius, padding, and spacing; the outer border matches the tone accent by default, while `callout.border` remains an independent override. Preserve forced-colors support and nested theme boundaries.
 - Validation: Storybook playground, tone/action/icon, theme, nested, and custom-hook examples; browser checks for explicit roles, color contrast, action semantics, mobile wrapping, and scoped customization; lint, typecheck, token checks, Storybook, package build, and package-consumer checks.
 
 ### Tooltip

@@ -1,7 +1,6 @@
 .callout {
   --_callout-surface: var(--ds-color-accent-bg);
   --_callout-text: var(--ds-color-accent-fg);
-  --_callout-border: var(--ds-color-border-control);
   --_callout-accent: var(--ds-color-accent-fg);
 
   display: grid;
@@ -11,7 +10,7 @@
   box-sizing: border-box;
   max-inline-size: 100%;
   padding: var(--ds-callout-padding, var(--ds-space-4));
-  border: var(--ds-border-width-default) solid var(--ds-callout-border, var(--_callout-border));
+  border: var(--ds-border-width-default) solid var(--ds-callout-border, var(--ds-callout-accent, var(--_callout-accent)));
   border-inline-start: var(--ds-space-1) solid var(--ds-callout-accent, var(--_callout-accent));
   border-radius: var(--ds-callout-radius, var(--ds-radius-shape-rounded));
   background-color: var(--ds-callout-surface, var(--_callout-surface));
