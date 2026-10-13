@@ -29,8 +29,12 @@ const meta = {
         Arrive early enough to open the windows, check the day&apos;s schedule,
         and make one thoughtful adjustment to the space. See{" "}
         <a href="/journal/studio-planning">our studio planning guide</a> for a
-        simple checklist.
+        simple checklist. Run <code>pnpm check</code> to validate changes.
       </p>
+      <pre tabIndex={0} aria-label="Example shell commands">
+        <code>{`pnpm install
+pnpm --filter @workspace/design-system test:visual`}</code>
+      </pre>
       <ul>
         <li>Set out the tools needed for the first appointment.</li>
         <li>Review any notes that will make a guest feel recognized.</li>
@@ -127,7 +131,13 @@ export const ThemeCoverage: Story = {
             <p>
               Readable article text uses semantic colors and spacing from the
               active theme, with a line length suited to long-form reading.
+              Inline commands such as <code>pnpm check</code> remain easy to
+              distinguish.
             </p>
+            <pre tabIndex={0} aria-label={`${theme.toUpperCase()} themed code example`}>
+              <code>{`const theme = "${theme}";
+console.log("Readable code in every theme");`}</code>
+            </pre>
             <p>
               <a href="/journal/reading">A themed article link</a>
             </p>
@@ -146,7 +156,12 @@ export const NarrowScreen: Story = {
         <p>
           This long-form paragraph stays readable at a phone width. Long words
           and links can wrap rather than forcing the page to scroll sideways.
+          An inline command such as <code>--long-unbroken-option-name</code>
+          also wraps with the text.
         </p>
+        <pre tabIndex={0} aria-label="A long command that can scroll horizontally">
+          <code>{`pnpm --filter @workspace/design-system test:visual --project=chromium --reporter=list --grep=article-body-responsive-code-example-that-continues-beyond-the-phone-viewport-width`}</code>
+        </pre>
         <table tabIndex={0}>
           <caption>Wide data remains available to scroll</caption>
           <thead>

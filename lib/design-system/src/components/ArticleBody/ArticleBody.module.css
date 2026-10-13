@@ -83,6 +83,48 @@
   outline-offset: var(--ds-space-1);
 }
 
+.articleBody :where(code, pre) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: var(--ds-font-size-sm);
+}
+
+.articleBody :where(code:not(pre code)) {
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-control);
+  background-color: var(--ds-color-surface-primary);
+  color: var(--ds-color-text-primary);
+  overflow-wrap: anywhere;
+}
+
+.articleBody :where(pre) {
+  box-sizing: border-box;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  margin-block: var(--ds-space-5);
+  padding: var(--ds-space-4);
+  overflow-x: auto;
+  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  border-radius: var(--ds-radius-control);
+  background-color: var(--ds-color-surface-primary);
+  color: var(--ds-color-text-primary);
+  line-height: var(--ds-line-height-normal);
+  tab-size: 2;
+  -webkit-overflow-scrolling: touch;
+}
+
+.articleBody :where(pre code) {
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  overflow-wrap: normal;
+}
+
+.articleBody :where(pre[tabindex]:focus-visible) {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-space-1);
+}
+
 .articleBody :where(blockquote) {
   margin: var(--ds-space-8) 0;
   padding-inline-start: var(--ds-space-5);
@@ -171,7 +213,19 @@
     color: LinkText;
   }
 
-  .articleBody :where(a:focus-visible) {
+  .articleBody :where(code:not(pre code)) {
+    color: CanvasText;
+    background-color: Canvas;
+    outline: var(--ds-border-width-default) solid CanvasText;
+  }
+
+  .articleBody :where(pre) {
+    color: CanvasText;
+    background-color: Canvas;
+    border-color: CanvasText;
+  }
+
+  .articleBody :where(a:focus-visible, pre[tabindex]:focus-visible) {
     outline-color: Highlight;
   }
 
