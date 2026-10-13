@@ -40,6 +40,7 @@ export type CarouselProps = Omit<
   showControls?: boolean;
   indicators?: CarouselIndicator;
   controlsPosition?: CarouselControlsPosition;
+  overlaySafeArea?: boolean;
   previousLabel?: string;
   nextLabel?: string;
   autoPlay?: boolean;
@@ -72,6 +73,7 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
     showControls = true,
     indicators = "dots",
     controlsPosition = "below",
+    overlaySafeArea = true,
     previousLabel = "Previous slide",
     nextLabel = "Next slide",
     autoPlay = false,
@@ -244,6 +246,8 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
   const shouldRenderControls = slides.length > 1 && (
     showControls || indicators !== "none" || autoPlay
   );
+  const usesOverlaySafeArea =
+    controlsPosition === "overlay" && overlaySafeArea && shouldRenderControls;
 
   return (
     <section
@@ -289,6 +293,10 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
             className={styles.viewport}
             id={carouselId}
             data-slot="viewport"
+            data-overlay-safe-area={usesOverlaySafeArea ? "true" : undefined}
+            data-controls-navigation={showControls ? "true" : undefined}
+            data-controls-indicators={indicators !== "none" ? "true" : undefined}
+            data-controls-auto-play={autoPlay ? "true" : undefined}
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
             onPointerCancel={() => {
@@ -374,7 +382,12 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
             )}
 
             {indicators === "dots" && (
-              <div className={styles.indicators} role="group" aria-label={`${label} slide indicators`}>
+              <div
+                className={styles.indicators}
+                data-slot="indicators"
+                role="group"
+                aria-label={`${label} slide indicators`}
+              >
                 {slides.map((slide, slideIndex) => (
                   <button
                     className={styles.indicator}

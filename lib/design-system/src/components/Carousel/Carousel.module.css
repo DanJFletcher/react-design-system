@@ -9,6 +9,13 @@
   --_carousel-padding: var(--ds-space-4);
   --_carousel-gap: var(--ds-space-3);
   --_carousel-radius: var(--ds-radius-surface);
+  --_carousel-overlay-side-inset: calc(var(--ds-control-min-block-size-md) + var(--ds-carousel-gap, var(--_carousel-gap)));
+  --_carousel-overlay-indicator-inset: calc(
+    var(--ds-control-min-block-size-md) +
+    var(--ds-carousel-gap, var(--_carousel-gap)) +
+    var(--ds-space-2) +
+    var(--ds-space-2)
+  );
 
   box-sizing: border-box;
   min-inline-size: 0;
@@ -70,6 +77,22 @@
   grid-area: 1 / 1;
   min-inline-size: 0;
   transition: transform var(--ds-motion-duration-fast) ease;
+}
+
+.viewport[data-overlay-safe-area="true"][data-controls-navigation="true"] .slide {
+  padding-inline: var(--_carousel-overlay-side-inset);
+}
+
+.viewport[data-overlay-safe-area="true"][data-controls-indicators="true"] .slide {
+  padding-block-end: var(--_carousel-overlay-indicator-inset);
+}
+
+.viewport[data-overlay-safe-area="true"][data-controls-navigation="true"][data-controls-auto-play="true"] .slide {
+  padding-inline-start: calc(
+    var(--_carousel-overlay-side-inset) +
+    var(--ds-control-min-block-size-md) +
+    var(--ds-carousel-gap, var(--_carousel-gap))
+  );
 }
 
 .empty {

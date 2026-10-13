@@ -39,6 +39,62 @@ test("Carousel disables navigation at non-looping boundaries", async ({ page }) 
   await expect(carousel.getByRole("button", { name: "Next slide" })).toBeEnabled();
 });
 
+test("Carousel overlay safe area keeps slide content clear at desktop and phone widths", async ({ page }) => {
+  for (const width of [1280, 390]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto("/iframe.html?id=components-carousel--controls-examples&viewMode=story");
+
+    const safe = page.getByRole("region", { name: "Safe overlay controls example" });
+    const safeSlide = safe.locator('[data-slot="slide"][data-active="true"]');
+    await expect(safe.locator('[data-slot="viewport"]')).toHaveAttribute(
+      "data-overlay-safe-area",
+      "true",
+    );
+    expect(
+      await safeSlide.evaluate((element) => Number.parseFloat(getComputedStyle(element).paddingInlineStart)),
+    ).toBeGreaterThan(0);
+
+    const heading = safeSlide.getByRole("heading", { name: "Find your focus" });
+    const headingBox = await heading.boundingBox();
+    const previousBox = await safe.getByRole("button", { name: "Previous slide" }).boundingBox();
+    const nextBox = await safe.getByRole("button", { name: "Next slide" }).boundingBox();
+    const indicatorBox = await safe.locator('[data-slot="indicators"]').boundingBox();
+    expect(headingBox).not.toBeNull();
+    expect(previousBox).not.toBeNull();
+    expect(nextBox).not.toBeNull();
+    expect(indicatorBox).not.toBeNull();
+
+    const intersects = (a: NonNullable<typeof headingBox>, b: NonNullable<typeof previousBox>) =>
+      a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+    expect(intersects(headingBox!, previousBox!)).toBe(false);
+    expect(intersects(headingBox!, nextBox!)).toBe(false);
+    expect(intersects(headingBox!, indicatorBox!)).toBe(false);
+
+    const fullBleed = page.getByRole("region", { name: "Full-bleed overlay controls example" });
+    await expect(fullBleed.locator('[data-slot="viewport"]')).not.toHaveAttribute(
+      "data-overlay-safe-area",
+      "true",
+    );
+    expect(
+      await fullBleed.locator('[data-slot="slide"][data-active="true"]')
+        .evaluate((element) => getComputedStyle(element).paddingInlineStart),
+    ).toBe("0px");
+
+    const below = page.getByRole("region", { name: "Below controls example" });
+    const belowViewport = await below.locator('[data-slot="viewport"]').boundingBox();
+    const belowControls = await below.locator('[data-slot="controls"]').boundingBox();
+    expect(belowViewport).not.toBeNull();
+    expect(belowControls).not.toBeNull();
+    expect(belowControls!.y).toBeGreaterThanOrEqual(belowViewport!.y + belowViewport!.height);
+
+    const dimensions = await page.evaluate(() => ({
+      bodyWidth: document.body.scrollWidth,
+      viewportWidth: window.innerWidth,
+    }));
+    expect(dimensions.bodyWidth).toBeLessThanOrEqual(dimensions.viewportWidth);
+  }
+});
+
 test("Carousel autoplay advances slides and its control pauses and resumes rotation", async ({ page }) => {
   await page.goto("/iframe.html?id=components-carousel--auto-play&viewMode=story");
 

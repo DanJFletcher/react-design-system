@@ -49,6 +49,7 @@ const meta = {
     showControls: true,
     indicators: "dots",
     controlsPosition: "below",
+    overlaySafeArea: true,
     variant: "surface",
     size: "md",
   },
@@ -71,6 +72,7 @@ const meta = {
     reducedMotionLabel: { control: "text" },
     indicators: { control: "inline-radio", options: ["dots", "fraction", "none"] },
     controlsPosition: { control: "inline-radio", options: ["overlay", "below"] },
+    overlaySafeArea: { control: "boolean" },
     previousLabel: { control: "text" },
     nextLabel: { control: "text" },
     emptyMessage: { control: "text" },
@@ -121,10 +123,19 @@ export const ControlsExamples: Story = {
   render: () => (
     <div style={{ display: "grid", gap: "var(--ds-space-6)" }}>
       <Carousel
-        label="Overlay control example"
+        label="Safe overlay controls example"
         slides={featuredSlides}
         loop
         controlsPosition="overlay"
+        indicators="dots"
+        variant="outlined"
+      />
+      <Carousel
+        label="Full-bleed overlay controls example"
+        slides={featuredSlides}
+        loop
+        controlsPosition="overlay"
+        overlaySafeArea={false}
         indicators="dots"
         variant="outlined"
       />
@@ -137,10 +148,10 @@ export const ControlsExamples: Story = {
         size="sm"
       />
       <Carousel
-        label="No indicators example"
+        label="Below controls example"
         slides={featuredSlides}
-        showControls
-        indicators="none"
+        controlsPosition="below"
+        indicators="dots"
         variant="subtle"
       />
     </div>
