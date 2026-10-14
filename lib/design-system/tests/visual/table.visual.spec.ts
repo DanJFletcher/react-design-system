@@ -6,6 +6,7 @@ test("Table exposes semantic headers, accessible naming, custom cells, and capti
   await page.goto("/iframe.html?id=components-table--with-caption&viewMode=story");
 
   const table = page.getByRole("table", { name: "Featured local providers" });
+  await expect(page.getByRole("searchbox")).toHaveCount(0);
   await expect(table.getByRole("columnheader", { name: /Business/i })).toBeVisible();
   await expect(table.getByRole("cell", { name: "4.9 / 5" })).toBeVisible();
   await expect(table.getByRole("cell", { name: "Open" }).first()).toBeVisible();
@@ -117,6 +118,51 @@ test("default table columns stay readable and scroll within the viewport on mobi
     viewportWidth: document.documentElement.clientWidth,
   }));
   expect(pageDimensions.documentWidth).toBeLessThanOrEqual(pageDimensions.viewportWidth);
+});
+
+test("optional search filters visible columns case-insensitively and clears results", async ({
+  page,
+}) => {
+  await page.goto("/iframe.html?id=components-table--searchable&viewMode=story");
+
+  const table = page.getByRole("table", { name: "Local businesses" });
+  const search = page.getByRole("searchbox", { name: "Search businesses" });
+  await expect(table.locator("tbody tr")).toHaveCount(4);
+
+  await search.fill("oAkV");
+  await expect(table.locator("tbody tr")).toHaveCount(1);
+  await expect(table.locator("tbody tr").first()).toContainText("Juniper Garden Studio");
+  await expect(page.getByRole("status")).toHaveText("1 result for “oAkV”");
+
+  await search.fill("Electrical");
+  await expect(table.getByText("No matching businesses.")).toBeVisible();
+  await expect(page.getByRole("status")).toHaveText("0 results for “Electrical”");
+
+  await page.getByRole("button", { name: "Clear search" }).click();
+  await expect(table.locator("tbody tr")).toHaveCount(4);
+});
+
+test("custom table search functions can match values beyond visible accessors", async ({
+  page,
+}) => {
+  await page.goto("/iframe.html?id=components-table--custom-search-function&viewMode=story");
+
+  const table = page.getByRole("table", { name: "Local businesses" });
+  await page.getByRole("searchbox", { name: "Search business services" }).fill("top rated");
+  await expect(table.locator("tbody tr")).toHaveCount(2);
+  await expect(table.getByText("Northstar Plumbing")).toBeVisible();
+  await expect(table.getByText("Harborlight Electric")).toBeVisible();
+});
+
+test("table search can be controlled by its consumer", async ({ page }) => {
+  await page.goto("/iframe.html?id=components-table--controlled-search&viewMode=story");
+
+  const table = page.getByRole("table", { name: "Search local businesses" });
+  const search = page.getByRole("searchbox", { name: "Search local businesses" });
+  await search.fill("Oakville");
+  await expect(page.getByText("Current query: Oakville")).toBeVisible();
+  await expect(table.locator("tbody tr")).toHaveCount(1);
+  await expect(table.locator("tbody tr").first()).toContainText("Juniper Garden Studio");
 });
 
 test("table themes keep distinct surfaces and custom hook overrides apply", async ({ page }) => {

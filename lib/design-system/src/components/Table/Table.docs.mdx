@@ -43,6 +43,14 @@ Sortable columns support ascending, descending, and unsorted states. Client mode
 
 Set `selectionMode` to `single` or `multiple` to enable row selection. Multiple selection includes a select-all checkbox for selectable visible rows. Supply `getRowKey` for stable row identity and `selectedRowKeys` with `onSelectionChange` to control selection.
 
+## Optional search
+
+Set `searchable` to show a search field above the table. By default, matching is case-insensitive and checks the accessor values of visible columns. Use `searchableColumns` to choose specific column IDs or `searchFunction` to provide custom row matching. The search filters locally as the query changes, and `noResultsState` customizes the no-match message.
+
+Use `defaultSearchValue` with `onSearchChange` for an uncontrolled query, or `searchValue` with `onSearchChange` to control it from the parent. The search field also announces the current result count.
+
+<Canvas of={Stories.Searchable} />
+
 ## Responsive and accessible behavior
 
 The table keeps native table semantics and can scroll horizontally when columns need more space. A caption or `aria-label` names the table. Use `captionHidden` to retain a caption for assistive technology without showing it visually. Loading status, empty content, density, sticky headers, and selection labels are configurable.

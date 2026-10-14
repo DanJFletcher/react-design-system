@@ -98,6 +98,26 @@ function ControlledSelectionExample() {
   );
 }
 
+function ControlledSearchExample() {
+  const [query, setQuery] = useState("");
+
+  return (
+    <div style={{ display: "grid", gap: "var(--ds-space-3)" }}>
+      <Table
+        aria-label="Search local businesses"
+        columns={businessColumns}
+        data={businesses}
+        getRowKey={(business) => business.id}
+        onSearchChange={setQuery}
+        searchable
+        searchLabel="Search local businesses"
+        searchValue={query}
+      />
+      <output aria-live="polite">Current query: {query || "none"}</output>
+    </div>
+  );
+}
+
 const meta = {
   title: "Components/Table",
   component: Table,
@@ -135,6 +155,16 @@ const meta = {
     emptyState: { control: "text" },
     loading: { control: "boolean" },
     loadingMessage: { control: "text" },
+    searchable: { control: "boolean" },
+    searchValue: { control: false },
+    defaultSearchValue: { control: "text" },
+    onSearchChange: { control: false },
+    searchLabel: { control: "text" },
+    searchPlaceholder: { control: "text" },
+    showSearchLabel: { control: "boolean" },
+    searchableColumns: { control: false },
+    searchFunction: { control: false },
+    noResultsState: { control: "text" },
     sort: { control: false },
     defaultSort: { control: false },
     sortMode: { control: "inline-radio", options: ["client", "manual"] },
@@ -150,6 +180,7 @@ const meta = {
     className: { control: false },
     tableClassName: { control: false },
     tableStyle: { control: false },
+    viewportClassName: { control: false },
     tableId: { control: false },
   },
 } satisfies Meta<TableProps<Business>>;
@@ -233,6 +264,35 @@ export const NarrowScreen: Story = {
   args: {
     minTableWidth: 720,
     selectionMode: "multiple",
+  },
+};
+
+export const Searchable: Story = {
+  args: {
+    searchable: true,
+    searchLabel: "Search businesses",
+    searchPlaceholder: "Search by business or location",
+    searchableColumns: ["name", "location"],
+    noResultsState: "No matching businesses.",
+  },
+};
+
+export const ControlledSearch: Story = {
+  render: () => <ControlledSearchExample />,
+};
+
+export const CustomSearchFunction: Story = {
+  args: {
+    searchable: true,
+    searchLabel: "Search business services",
+    searchPlaceholder: "Try a service or “top rated”",
+    searchFunction: (business: Business, query: string) => {
+      const normalizedQuery = query.toLocaleLowerCase();
+      return (
+        business.category.toLocaleLowerCase().includes(normalizedQuery) ||
+        (normalizedQuery === "top rated" && business.rating >= 4.8)
+      );
+    },
   },
 };
 

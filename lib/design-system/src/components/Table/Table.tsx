@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import type { DesignSystemStyle } from "../../generated/token-types";
+import { Search } from "../Search/Search";
 import styles from "./Table.module.css";
 
 export type TableRowKey = string | number;
@@ -78,8 +79,18 @@ export type TableProps<T extends object> = Omit<
     maxHeight?: CSSProperties["maxHeight"];
     captionSide?: "top" | "bottom";
     emptyState?: ReactNode;
+    noResultsState?: ReactNode;
     loading?: boolean;
     loadingMessage?: ReactNode;
+    searchable?: boolean;
+    searchValue?: string;
+    defaultSearchValue?: string;
+    onSearchChange?: (query: string) => void;
+    searchLabel?: string;
+    searchPlaceholder?: string;
+    showSearchLabel?: boolean;
+    searchableColumns?: readonly string[];
+    searchFunction?: (row: T, query: string) => boolean;
     sort?: TableSort | null;
     defaultSort?: TableSort;
     sortMode?: "client" | "manual";
@@ -97,6 +108,7 @@ export type TableProps<T extends object> = Omit<
     style?: DesignSystemStyle;
     tableClassName?: string;
     tableStyle?: CSSProperties;
+    viewportClassName?: string;
   };
 
 type RowRecord<T extends object> = {
@@ -132,6 +144,18 @@ function compareValues(left: unknown, right: unknown): number {
   });
 }
 
+function searchableText(value: unknown, seen = new WeakSet<object>()): string {
+  if (value == null) return "";
+  if (value instanceof Date) return value.toLocaleDateString();
+  if (typeof value !== "object") return String(value);
+  if (seen.has(value)) return "";
+  seen.add(value);
+  const values = Array.isArray(value)
+    ? value
+    : Object.values(value as Record<string, unknown>);
+  return values.map((item) => searchableText(item, seen)).join(" ");
+}
+
 function toCssLength(value: CSSProperties["maxHeight"]): CSSProperties["maxHeight"] {
   return typeof value === "number" ? `${value}px` : value;
 }
@@ -154,8 +178,18 @@ export function Table<T extends object>({
   captionHidden = false,
   captionSide = "top",
   emptyState = "No rows to display.",
+  noResultsState = "No matching rows found.",
   loading = false,
   loadingMessage = "Loading rows…",
+  searchable = false,
+  searchValue,
+  defaultSearchValue = "",
+  onSearchChange,
+  searchLabel = "Search table",
+  searchPlaceholder = "Search rows",
+  showSearchLabel = false,
+  searchableColumns,
+  searchFunction,
   sort,
   defaultSort,
   sortMode = "client",
@@ -172,6 +206,7 @@ export function Table<T extends object>({
   style,
   tableClassName,
   tableStyle,
+  viewportClassName,
   ...viewportProps
 }: TableProps<T>) {
   const generatedId = useId();
@@ -181,11 +216,16 @@ export function Table<T extends object>({
   const [uncontrolledSelectedKeys, setUncontrolledSelectedKeys] = useState<
     readonly TableRowKey[]
   >(defaultSelectedRowKeys);
+  const [uncontrolledSearchValue, setUncontrolledSearchValue] =
+    useState(defaultSearchValue);
   const selectAllRef = useRef<HTMLInputElement>(null);
   const controlledSort = sort !== undefined;
   const currentSort = controlledSort ? sort : uncontrolledSort;
   const controlledSelection = selectedRowKeys !== undefined;
   const currentSelectedKeys = selectedRowKeys ?? uncontrolledSelectedKeys;
+  const currentSearchValue = searchValue ?? uncontrolledSearchValue;
+  const trimmedSearchQuery = currentSearchValue.trim();
+  const normalizedSearchQuery = trimmedSearchQuery.toLocaleLowerCase();
   const selectedKeySet = new Set(currentSelectedKeys);
   const selectionName = `${generatedId}-selection`;
   const visibleColumns = columns.filter((column) => !column.hidden);
@@ -200,6 +240,17 @@ export function Table<T extends object>({
       throw new Error(`Table column ids must be unique (duplicate "${column.id}").`);
     }
     columnIds.add(column.id);
+  }
+  const searchableColumnIds = searchableColumns
+    ? new Set(searchableColumns)
+    : undefined;
+  const invalidSearchColumn = searchableColumns?.find(
+    (columnId) => !columnIds.has(columnId),
+  );
+  if (invalidSearchColumn) {
+    throw new Error(
+      `Table searchableColumns references an unknown column "${invalidSearchColumn}".`,
+    );
   }
   if (visibleColumns.length === 0) {
     throw new Error("Table requires at least one visible column.");
@@ -217,12 +268,27 @@ export function Table<T extends object>({
     }
     rowKeys.add(row.key);
   }
+  const searchColumns = searchableColumns
+    ? columns.filter((column) => searchableColumnIds?.has(column.id))
+    : visibleColumns;
+  const filteredRows =
+    searchable && normalizedSearchQuery
+      ? rows.filter(({ row }) =>
+          searchFunction
+            ? searchFunction(row, trimmedSearchQuery)
+            : searchColumns.some((column) =>
+                searchableText(getCellValue(row, column))
+                  .toLocaleLowerCase()
+                  .includes(normalizedSearchQuery),
+              ),
+        )
+      : rows;
   const activeSortColumn = visibleColumns.find(
     (column) => column.id === currentSort?.columnId && column.sortable,
   );
   const displayedRows =
     sortMode === "client" && currentSort && activeSortColumn
-      ? [...rows].sort((left, right) => {
+      ? [...filteredRows].sort((left, right) => {
           const direction = currentSort.direction === "asc" ? 1 : -1;
           let result: number;
           if (activeSortColumn.compare) {
@@ -244,7 +310,7 @@ export function Table<T extends object>({
           }
           return Math.sign(result) * direction;
         })
-      : rows;
+      : filteredRows;
 
   const selectableRows =
     selectionMode === "multiple"
@@ -288,7 +354,6 @@ export function Table<T extends object>({
   };
 
   const viewportStyle: CSSProperties = {
-    ...(style as CSSProperties | undefined),
     ...(maxHeight !== undefined ? { maxBlockSize: toCssLength(maxHeight) } : {}),
   };
   const rowSpan = visibleColumns.length + Number(selectionEnabled);
@@ -296,169 +361,246 @@ export function Table<T extends object>({
 
   return (
     <div
-      {...viewportProps}
-      className={[styles.viewport, className].filter(Boolean).join(" ")}
-      style={viewportStyle}
+      className={styles.container}
+      style={style as CSSProperties | undefined}
     >
-      {loading && (
-        <div className={styles.loadingMessage} role="status">
-          {loadingMessage}
+      {searchable && (
+        <div className={styles.searchRow}>
+          <Search
+            label={searchLabel}
+            onSubmit={(event) => event.preventDefault()}
+            onValueChange={(query) => {
+              if (searchValue === undefined) setUncontrolledSearchValue(query);
+              onSearchChange?.(query);
+            }}
+            placeholder={searchPlaceholder}
+            queryName="tableSearch"
+            showLabel={showSearchLabel}
+            showSubmitButton={false}
+            size="md"
+            value={currentSearchValue}
+          />
+          {normalizedSearchQuery && (
+            <div className={styles.searchStatus} role="status">
+              {displayedRows.length}{" "}
+              {displayedRows.length === 1 ? "result" : "results"} for “
+              {trimmedSearchQuery}”
+            </div>
+          )}
         </div>
       )}
-      <table
-        id={tableId}
-        aria-label={ariaLabel}
-        aria-busy={loading || undefined}
-        className={[styles.table, tableClassName].filter(Boolean).join(" ")}
-        data-bordered={bordered}
-        data-density={density}
-        data-hoverable={hoverable}
-        data-sticky-header={stickyHeader}
-        data-striped={striped}
-        data-table-layout={tableLayout}
-        style={{
-          ...tableStyle,
-          ...(minTableWidth !== undefined ? { minWidth: minTableWidth } : {}),
-        }}
+      <div
+        {...viewportProps}
+        className={[styles.viewport, className, viewportClassName]
+          .filter(Boolean)
+          .join(" ")}
+        style={viewportStyle}
       >
-        {caption != null && (
-          <caption
-            className={captionHidden ? styles.visuallyHidden : undefined}
-            data-side={captionSide}
-          >
-            {caption}
-          </caption>
+        {loading && (
+          <div className={styles.loadingMessage} role="status">
+            {loadingMessage}
+          </div>
         )}
-        <thead>
-          <tr>
-            {selectionEnabled && (
-              <th className={styles.selectionHeader} scope="col">
-                {selectionMode === "multiple" && (
-                  <input
-                    ref={selectAllRef}
-                    aria-label={selectAllLabel}
-                    checked={allSelectableRowsSelected}
-                    className={styles.selectionControl}
-                    disabled={selectableRows.length === 0}
-                    onChange={(event) => {
-                      const visibleKeys = selectableRows.map(({ key }) => key);
-                      if (event.currentTarget.checked) {
-                        updateSelection([
-                          ...currentSelectedKeys,
-                          ...visibleKeys.filter((key) => !selectedKeySet.has(key)),
-                        ]);
-                      } else {
-                        updateSelection(
-                          currentSelectedKeys.filter(
-                            (key) => !visibleKeys.includes(key),
-                          ),
-                        );
-                      }
-                    }}
-                    type="checkbox"
-                  />
-                )}
-              </th>
-            )}
-            {visibleColumns.map((column) => {
-              const isSorted = currentSort?.columnId === column.id;
-              const ariaSort = isSorted
-                ? currentSort.direction === "asc"
-                  ? "ascending"
-                  : "descending"
-                : undefined;
-              const headerStyle: CSSProperties = {
-                width: column.width,
-                minWidth: column.minWidth,
-                maxWidth: column.maxWidth,
-                textAlign:
-                  column.align === "start"
-                    ? "left"
-                    : column.align === "end"
-                      ? "right"
-                      : column.align,
-              };
-              return (
-                <th
-                  key={column.id}
-                  aria-sort={ariaSort}
-                  className={[styles.headerCell, column.headerClassName]
-                    .filter(Boolean)
-                    .join(" ")}
-                  scope="col"
-                  style={headerStyle}
-                >
-                  {column.sortable ? (
-                    <button
-                      aria-label={column.sortLabel}
-                      className={styles.sortButton}
-                      onClick={() => updateSort(column)}
-                      type="button"
-                    >
-                      <span>{column.header}</span>
-                      <span aria-hidden="true" className={styles.sortIndicator}>
-                        {isSorted
-                          ? currentSort.direction === "asc"
-                            ? "↑"
-                            : "↓"
-                          : "↕"}
-                      </span>
-                    </button>
-                  ) : (
-                    column.header
+        <table
+          id={tableId}
+          aria-label={ariaLabel}
+          aria-busy={loading || undefined}
+          className={[styles.table, tableClassName].filter(Boolean).join(" ")}
+          data-bordered={bordered}
+          data-density={density}
+          data-hoverable={hoverable}
+          data-sticky-header={stickyHeader}
+          data-striped={striped}
+          data-table-layout={tableLayout}
+          style={{
+            ...tableStyle,
+            ...(minTableWidth !== undefined ? { minWidth: minTableWidth } : {}),
+          }}
+        >
+          {caption != null && (
+            <caption
+              className={captionHidden ? styles.visuallyHidden : undefined}
+              data-side={captionSide}
+            >
+              {caption}
+            </caption>
+          )}
+          <thead>
+            <tr>
+              {selectionEnabled && (
+                <th className={styles.selectionHeader} scope="col">
+                  {selectionMode === "multiple" && (
+                    <input
+                      ref={selectAllRef}
+                      aria-label={selectAllLabel}
+                      checked={allSelectableRowsSelected}
+                      className={styles.selectionControl}
+                      disabled={selectableRows.length === 0}
+                      onChange={(event) => {
+                        const visibleKeys = selectableRows.map(({ key }) => key);
+                        if (event.currentTarget.checked) {
+                          updateSelection([
+                            ...currentSelectedKeys,
+                            ...visibleKeys.filter((key) => !selectedKeySet.has(key)),
+                          ]);
+                        } else {
+                          updateSelection(
+                            currentSelectedKeys.filter(
+                              (key) => !visibleKeys.includes(key),
+                            ),
+                          );
+                        }
+                      }}
+                      type="checkbox"
+                    />
                   )}
                 </th>
-              );
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {displayedRows.length === 0 ? (
-            <tr>
-              <td className={styles.emptyCell} colSpan={rowSpan}>
-                {loading ? loadingMessage : emptyState}
-              </td>
+              )}
+              {visibleColumns.map((column) => {
+                const isSorted = currentSort?.columnId === column.id;
+                const ariaSort = isSorted
+                  ? currentSort.direction === "asc"
+                    ? "ascending"
+                    : "descending"
+                  : undefined;
+                const headerStyle: CSSProperties = {
+                  width: column.width,
+                  minWidth: column.minWidth,
+                  maxWidth: column.maxWidth,
+                  textAlign:
+                    column.align === "start"
+                      ? "left"
+                      : column.align === "end"
+                        ? "right"
+                        : column.align,
+                };
+                return (
+                  <th
+                    key={column.id}
+                    aria-sort={ariaSort}
+                    className={[styles.headerCell, column.headerClassName]
+                      .filter(Boolean)
+                      .join(" ")}
+                    scope="col"
+                    style={headerStyle}
+                  >
+                    {column.sortable ? (
+                      <button
+                        aria-label={column.sortLabel}
+                        className={styles.sortButton}
+                        onClick={() => updateSort(column)}
+                        type="button"
+                      >
+                        <span>{column.header}</span>
+                        <span aria-hidden="true" className={styles.sortIndicator}>
+                          {isSorted
+                            ? currentSort.direction === "asc"
+                              ? "↑"
+                              : "↓"
+                            : "↕"}
+                        </span>
+                      </button>
+                    ) : (
+                      column.header
+                    )}
+                  </th>
+                );
+              })}
             </tr>
-          ) : (
-            displayedRows.map(({ row, rowIndex, key }) => {
-              const selected = selectedKeySet.has(key);
-              const selectable = isRowSelectable?.(row, rowIndex) ?? true;
-              return (
-                <tr
-                  key={key}
-                  aria-selected={selectionEnabled ? selected : undefined}
-                  className={rowClassName?.(row, rowIndex)}
-                  data-selected={selected || undefined}
-                >
-                  {selectionEnabled && (
-                    <td className={styles.selectionCell}>
-                      <input
-                        aria-label={
-                          selectRowLabel?.(row, rowIndex) ??
-                          `Select row ${rowIndex + 1}`
-                        }
-                        checked={selected}
-                        className={styles.selectionControl}
-                        disabled={!selectable}
-                        name={selectionMode === "single" ? selectionName : undefined}
-                        onChange={() => {
-                          if (selectionMode === "single") {
-                            updateSelection([key]);
-                          } else if (selected) {
-                            updateSelection(
-                              currentSelectedKeys.filter((selectedKey) => selectedKey !== key),
-                            );
-                          } else {
-                            updateSelection([...currentSelectedKeys, key]);
+          </thead>
+          <tbody>
+            {displayedRows.length === 0 ? (
+              <tr>
+                <td className={styles.emptyCell} colSpan={rowSpan}>
+                  {loading
+                    ? loadingMessage
+                    : searchable && normalizedSearchQuery
+                      ? noResultsState
+                      : emptyState}
+                </td>
+              </tr>
+            ) : (
+              displayedRows.map(({ row, rowIndex, key }) => {
+                const selected = selectedKeySet.has(key);
+                const selectable = isRowSelectable?.(row, rowIndex) ?? true;
+                return (
+                  <tr
+                    key={key}
+                    aria-selected={selectionEnabled ? selected : undefined}
+                    className={rowClassName?.(row, rowIndex)}
+                    data-selected={selected || undefined}
+                  >
+                    {selectionEnabled && (
+                      <td className={styles.selectionCell}>
+                        <input
+                          aria-label={
+                            selectRowLabel?.(row, rowIndex) ??
+                            `Select row ${rowIndex + 1}`
                           }
-                        }}
-                        type={selectionMode === "single" ? "radio" : "checkbox"}
-                      />
-                    </td>
-                  )}
-                  {visibleColumns.map((column) => {
-                    const value = getCellValue(row, column);
-                    const cellStyle: CSSProperties = {
+                          checked={selected}
+                          className={styles.selectionControl}
+                          disabled={!selectable}
+                          name={selectionMode === "single" ? selectionName : undefined}
+                          onChange={() => {
+                            if (selectionMode === "single") {
+                              updateSelection([key]);
+                            } else if (selected) {
+                              updateSelection(
+                                currentSelectedKeys.filter((selectedKey) => selectedKey !== key),
+                              );
+                            } else {
+                              updateSelection([...currentSelectedKeys, key]);
+                            }
+                          }}
+                          type={selectionMode === "single" ? "radio" : "checkbox"}
+                        />
+                      </td>
+                    )}
+                    {visibleColumns.map((column) => {
+                      const value = getCellValue(row, column);
+                      const cellStyle: CSSProperties = {
+                        width: column.width,
+                        minWidth: column.minWidth,
+                        maxWidth: column.maxWidth,
+                        textAlign:
+                          column.align === "start"
+                            ? "left"
+                            : column.align === "end"
+                              ? "right"
+                              : column.align,
+                      };
+                      return (
+                        <td
+                          key={column.id}
+                          className={[styles.bodyCell, column.cellClassName]
+                            .filter(Boolean)
+                            .join(" ")}
+                          style={cellStyle}
+                        >
+                          {column.cell
+                            ? column.cell({ row, rowIndex, column, value })
+                            : value == null
+                              ? null
+                              : String(value)}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })
+            )}
+          </tbody>
+          {hasFooter && (
+            <tfoot>
+              <tr>
+                {selectionEnabled && <td className={styles.selectionCell} />}
+                {visibleColumns.map((column) => (
+                  <td
+                    key={column.id}
+                    className={[styles.bodyCell, column.cellClassName]
+                      .filter(Boolean)
+                      .join(" ")}
+                    style={{
                       width: column.width,
                       minWidth: column.minWidth,
                       maxWidth: column.maxWidth,
@@ -468,59 +610,18 @@ export function Table<T extends object>({
                           : column.align === "end"
                             ? "right"
                             : column.align,
-                    };
-                    return (
-                      <td
-                        key={column.id}
-                        className={[styles.bodyCell, column.cellClassName]
-                          .filter(Boolean)
-                          .join(" ")}
-                        style={cellStyle}
-                      >
-                        {column.cell
-                          ? column.cell({ row, rowIndex, column, value })
-                          : value == null
-                            ? null
-                            : String(value)}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })
+                    }}
+                  >
+                    {typeof column.footer === "function"
+                      ? column.footer(displayedRows.map(({ row }) => row))
+                      : column.footer}
+                  </td>
+                ))}
+              </tr>
+            </tfoot>
           )}
-        </tbody>
-        {hasFooter && (
-          <tfoot>
-            <tr>
-              {selectionEnabled && <td className={styles.selectionCell} />}
-              {visibleColumns.map((column) => (
-                <td
-                  key={column.id}
-                  className={[styles.bodyCell, column.cellClassName]
-                    .filter(Boolean)
-                    .join(" ")}
-                  style={{
-                    width: column.width,
-                    minWidth: column.minWidth,
-                    maxWidth: column.maxWidth,
-                    textAlign:
-                      column.align === "start"
-                        ? "left"
-                        : column.align === "end"
-                          ? "right"
-                          : column.align,
-                  }}
-                >
-                  {typeof column.footer === "function"
-                    ? column.footer(displayedRows.map(({ row }) => row))
-                    : column.footer}
-                </td>
-              ))}
-            </tr>
-          </tfoot>
-        )}
-      </table>
+        </table>
+      </div>
     </div>
   );
 }

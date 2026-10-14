@@ -1,3 +1,23 @@
+.container {
+  display: grid;
+  inline-size: 100%;
+  min-inline-size: 0;
+  gap: var(--ds-space-3);
+}
+
+.searchRow {
+  display: grid;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  gap: var(--ds-space-2);
+}
+
+.searchStatus {
+  color: var(--ds-table-muted, var(--ds-color-text-muted));
+  font-size: var(--ds-font-size-sm);
+  line-height: var(--ds-line-height-normal);
+}
+
 .viewport {
   box-sizing: border-box;
   inline-size: 100%;
