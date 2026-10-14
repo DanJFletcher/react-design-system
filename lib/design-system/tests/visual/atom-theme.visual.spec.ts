@@ -104,6 +104,10 @@ test("Atom uses a dark palette, thick borders, and hard shadows", async ({
   expect(buttonStyles.boxShadow).toContain("3px 3px 0px");
   expect(buttonStyles.boxShadow).toContain("rgb(255, 61, 141)");
   expect(buttonStyles.backgroundImage).toContain("linear-gradient(135deg");
+  const darkStop = buttonStyles.backgroundImage.indexOf("rgba(0, 0, 0, 0.22)");
+  const lightStop = buttonStyles.backgroundImage.indexOf("rgba(255, 255, 255, 0.28)");
+  expect(darkStop).toBeGreaterThanOrEqual(0);
+  expect(lightStop).toBeGreaterThan(darkStop);
 
   const secondaryButton = page.getByTestId("atom-secondary-button");
   expect(await secondaryButton.evaluate((element) =>
