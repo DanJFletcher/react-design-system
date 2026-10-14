@@ -154,6 +154,12 @@ export type {
 } from "./components/Carousel/Carousel";
 export { TextField } from "./components/FormControls/TextField";
 export type { TextFieldProps } from "./components/FormControls/TextField";
+export { Search } from "./components/Search/Search";
+export type {
+  SearchProps,
+  SearchSize,
+  SearchVariant,
+} from "./components/Search/Search";
 export { Textarea } from "./components/FormControls/Textarea";
 export type { TextareaProps } from "./components/FormControls/Textarea";
 export { Select } from "./components/FormControls/Select";

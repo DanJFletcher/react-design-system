@@ -172,6 +172,13 @@
   --ds-progress-radius: initial;
   --ds-progress-track: initial;
   --ds-progress-value: initial;
+  --ds-search-border: initial;
+  --ds-search-gap: initial;
+  --ds-search-muted: initial;
+  --ds-search-padding: initial;
+  --ds-search-radius: initial;
+  --ds-search-surface: initial;
+  --ds-search-text: initial;
   --ds-services-border: initial;
   --ds-services-gap: initial;
   --ds-services-link: initial;

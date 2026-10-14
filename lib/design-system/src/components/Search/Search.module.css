@@ -1,0 +1,174 @@
+.search {
+  --_search-surface: var(--ds-search-surface, var(--ds-color-surface-primary));
+  --_search-text: var(--ds-search-text, var(--ds-color-text-primary));
+  --_search-muted: var(--ds-search-muted, var(--ds-color-text-muted));
+  --_search-border: var(--ds-search-border, var(--ds-color-border-control));
+
+  display: grid;
+  min-inline-size: 0;
+  gap: var(--ds-search-gap, var(--ds-space-2));
+  color: var(--_search-text);
+  font-family: var(--ds-font-family-sans);
+}
+
+.search[data-variant="soft"] {
+  --_search-surface: var(--ds-search-surface, var(--ds-color-canvas));
+}
+
+.label {
+  color: var(--_search-text);
+  font-size: var(--ds-font-size-sm);
+  font-weight: var(--ds-font-weight-medium);
+  line-height: var(--ds-line-height-normal);
+}
+
+.row {
+  display: flex;
+  min-inline-size: 0;
+  align-items: center;
+  gap: var(--ds-search-gap, var(--ds-space-2));
+}
+
+.control {
+  position: relative;
+  flex: 1 1 auto;
+  min-inline-size: 0;
+}
+
+.input {
+  box-sizing: border-box;
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: var(--ds-control-min-block-size-md);
+  padding-block: var(--ds-search-padding, var(--ds-space-3));
+  padding-inline: var(--ds-search-padding, var(--ds-space-3));
+  border: var(--ds-border-width-default) solid var(--_search-border);
+  border-radius: var(--ds-search-radius, var(--ds-radius-form-control));
+  appearance: none;
+  background-color: var(--_search-surface);
+  color: var(--_search-text);
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-md);
+  line-height: var(--ds-line-height-normal);
+}
+
+.input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.input::placeholder {
+  color: var(--_search-muted);
+  opacity: 1;
+}
+
+.input:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--ds-color-border-error);
+}
+
+.input:disabled,
+.input[readonly] {
+  border-color: var(--ds-color-action-disabled-bg);
+  background-color: var(--ds-color-action-disabled-bg);
+  color: var(--ds-color-action-disabled-fg);
+  cursor: not-allowed;
+}
+
+.inputWithLeadingIcon {
+  padding-inline-start: var(--ds-space-10);
+}
+
+.inputWithClearButton {
+  padding-inline-end: var(--ds-space-10);
+}
+
+.leadingIcon {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: var(--ds-space-3);
+  display: inline-flex;
+  inline-size: var(--ds-space-4);
+  block-size: var(--ds-space-4);
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  color: var(--_search-muted);
+  pointer-events: none;
+}
+
+.leadingIcon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.clearButton {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: var(--ds-space-1);
+  transform: translateY(-50%);
+}
+
+.submitButton {
+  flex: 0 0 auto;
+}
+
+.search[data-size="sm"] .input {
+  min-block-size: var(--ds-control-min-block-size-sm);
+  padding-block: var(--ds-search-padding, var(--ds-space-2));
+  font-size: var(--ds-font-size-sm);
+}
+
+.search[data-size="lg"] .input {
+  min-block-size: var(--ds-control-min-block-size-lg);
+  padding-block: var(--ds-search-padding, var(--ds-space-4));
+  font-size: var(--ds-font-size-lg);
+}
+
+@media (max-width: 32rem) {
+  .submitButton {
+    inline-size: var(--ds-control-min-block-size-md);
+    min-inline-size: var(--ds-control-min-block-size-md);
+    padding-inline: 0;
+  }
+
+  .submitButton > span:not([aria-hidden="true"]) {
+    display: none;
+  }
+
+  .search[data-size="sm"] .submitButton {
+    inline-size: var(--ds-control-min-block-size-sm);
+    min-inline-size: var(--ds-control-min-block-size-sm);
+  }
+
+  .search[data-size="lg"] .submitButton {
+    inline-size: var(--ds-control-min-block-size-lg);
+    min-inline-size: var(--ds-control-min-block-size-lg);
+  }
+}
+
+@media (forced-colors: active) {
+  .input {
+    border-color: CanvasText;
+    background-color: Field;
+    color: FieldText;
+  }
+
+  .input::placeholder,
+  .leadingIcon {
+    color: GrayText;
+  }
+
+  .input:focus-visible {
+    outline-color: Highlight;
+  }
+
+  .input[aria-invalid="true"] {
+    border-color: Mark;
+  }
+}

@@ -1206,6 +1206,48 @@
       "cssVariable": "--ds-progress-value"
     },
     {
+      "name": "search.border",
+      "type": "color",
+      "description": "Search input border color.",
+      "cssVariable": "--ds-search-border"
+    },
+    {
+      "name": "search.gap",
+      "type": "dimension",
+      "description": "Spacing between search elements.",
+      "cssVariable": "--ds-search-gap"
+    },
+    {
+      "name": "search.muted",
+      "type": "color",
+      "description": "Search placeholder and leading icon color.",
+      "cssVariable": "--ds-search-muted"
+    },
+    {
+      "name": "search.padding",
+      "type": "dimension",
+      "description": "Search input internal spacing.",
+      "cssVariable": "--ds-search-padding"
+    },
+    {
+      "name": "search.radius",
+      "type": "dimension",
+      "description": "Search input corner radius.",
+      "cssVariable": "--ds-search-radius"
+    },
+    {
+      "name": "search.surface",
+      "type": "color",
+      "description": "Search input background color.",
+      "cssVariable": "--ds-search-surface"
+    },
+    {
+      "name": "search.text",
+      "type": "color",
+      "description": "Search input text color.",
+      "cssVariable": "--ds-search-text"
+    },
+    {
       "name": "services.border",
       "type": "color",
       "description": "Services section surface border color.",

@@ -1,0 +1,36 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as SearchStories from "./Search.stories";
+
+<Meta of={SearchStories} />
+
+<Title>Search</Title>
+
+<Subtitle>An accessible, theme-aware search form with configurable icons, clear behavior, and native form submission.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={SearchStories.Playground} />
+<Controls of={SearchStories.Playground} />
+
+## Labels, sizes, and variants
+
+<Canvas of={SearchStories.VisibleLabel} />
+<Canvas of={SearchStories.SearchSizes} />
+<Canvas of={SearchStories.SoftVariant} />
+<Canvas of={SearchStories.Disabled} />
+
+## Search behavior and customization
+
+<Canvas of={SearchStories.NativeGetSearch} />
+<Canvas of={SearchStories.ControlledValue} />
+<Canvas of={SearchStories.ThemeCoverage} />
+<Canvas of={SearchStories.CustomHooks} />
+
+## Behavior and accessibility
+
+- `label` is required and names the search input. `showLabel` displays it; otherwise it remains available as the input's accessible name.
+- `value` with `onValueChange` supports controlled state; `defaultValue` supports uncontrolled state. The clear button updates uncontrolled values, calls `onValueChange("")`, and returns focus to the input.
+- `onSearch` receives the current query and submit event, and prevents native navigation. Without it, the form submits natively with `method="get"` and `queryName="q"` by default. Set `action` and `queryName` to match your site route.
+- `clearable`, `showSubmitButton`, and `showLeadingIcon` can be toggled. Icons are React content and can be selected in Storybook from the shared icon catalog.
+- `size` accepts `sm`, `md`, and `lg`; `variant` accepts `outlined` and `soft`. The `search.*` hooks customize input colors, radius, spacing, and padding.
+- The component does not provide search indexing, filtering, suggestions, or result rendering; connect `onSearch` or native form submission to the search behavior for your site.

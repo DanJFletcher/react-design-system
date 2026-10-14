@@ -84,7 +84,8 @@ export function checkRadiusRules(
         }
       } else if (radiusHooks.has(name)) {
         const hookRole = name === "--ds-button-radius" ? ["action", "shape"]
-          : name === "--ds-progress-radius" ? ["circle"] : ["surface"];
+          : name === "--ds-progress-radius" ? ["circle"]
+          : name === "--ds-search-radius" ? ["form"] : ["surface"];
         if (!hookRole.includes(role)) fail(declaration, `hook "${name}" does not belong to radius role "${role}".`);
         if (!fallback) fail(declaration, `radius hook "${name}" needs a role-correct default fallback.`);
       } else {
