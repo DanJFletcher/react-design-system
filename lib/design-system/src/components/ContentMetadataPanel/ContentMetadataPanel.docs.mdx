@@ -1,0 +1,52 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+import * as ContentMetadataPanelStories from "./ContentMetadataPanel.stories";
+
+<Meta of={ContentMetadataPanelStories} />
+
+# ContentMetadataPanel
+
+Prepare how a page appears in search results and social shares. The panel edits its slug, SEO title, meta description, and optional Open Graph image while showing both previews as the values change. It does not persist content or enforce publishing rules; those remain with the host CMS.
+
+<Canvas of={ContentMetadataPanelStories.Playground} />
+
+## Controlled and uncontrolled values
+
+Use `defaultValue` when the panel owns its editing state. For host-managed drafts, pass the current complete `value` and store every `onChange` result in the host. Controlled values are not changed internally; the host should immediately provide the updated value back to keep the fields and previews in sync.
+
+```tsx
+const [metadata, setMetadata] = useState<ContentMetadataValue>({
+  slug: "seasonal-services",
+  seoTitle: "Seasonal services | Cedar & Finch",
+  metaDescription: "Find practical help for every season, from a local team.",
+});
+
+<ContentMetadataPanel
+  value={metadata}
+  onChange={setMetadata}
+  siteUrl="https://cedarandfinch.example"
+  siteName="Cedar & Finch"
+  images={availableImages}
+/>;
+```
+
+`ContentMetadataValue` contains `slug`, `seoTitle`, `metaDescription`, and an optional `socialImageId`. The count limits affect editing affordances and default to 60 and 160 characters. Slug previews trim boundary slashes and collapse repeated separators. Validation, canonical routing, and persistence should be handled by the consuming application.
+
+## Adapting media records
+
+The panel only needs an image identifier, URL, display label, and optional alternative text. Map the CMS media record collection into this small presentation contract; keep upload, authorization, and asset management in the host application.
+
+```tsx
+const images = mediaAssets
+  .filter((asset) => asset.mimeType.startsWith("image/"))
+  .map((asset) => ({
+    id: asset.id,
+    url: asset.url,
+    label: asset.name,
+    altText: asset.altText,
+  }));
+```
+
+<Canvas of={ContentMetadataPanelStories.EmptyAndNoImage} />
+<Canvas of={ContentMetadataPanelStories.Disabled} />
+<Canvas of={ContentMetadataPanelStories.ControlledUpdates} />
+<Canvas of={ContentMetadataPanelStories.ThemeCoverage} />

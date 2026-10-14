@@ -102,6 +102,12 @@ export type {
   MediaLibrarySelectionMode,
   MediaTypeFilter,
 } from "./components/MediaLibrary/MediaLibrary";
+export { ContentMetadataPanel } from "./components/ContentMetadataPanel/ContentMetadataPanel";
+export type {
+  ContentMetadataImage,
+  ContentMetadataPanelProps,
+  ContentMetadataValue,
+} from "./components/ContentMetadataPanel/ContentMetadataPanel";
 export { ServicesSection } from "./components/ServicesSection/ServicesSection";
 export type {
   ServiceItem,
