@@ -98,27 +98,50 @@
 @scope ([data-ds-theme="atom"]) to ([data-ds-theme]:not([data-ds-theme="atom"])) {
   :scope [data-ds-callout] {
     position: relative;
+    isolation: isolate;
     padding-left: max(var(--ds-callout-padding, var(--ds-space-4)), var(--ds-space-4));
   }
 
-  :scope [data-ds-callout]::before {
+  :scope [data-ds-callout]::before,
+  :scope [data-ds-callout]::after {
     content: "";
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: var(--ds-space-2);
+    z-index: -1;
     color: var(--ds-callout-border, var(--ds-callout-accent, var(--_callout-accent)));
     background-color: transparent;
     background-image: radial-gradient(circle, currentColor 1px, transparent 1.25px);
     background-size: 4px 4px;
-    border-top-left-radius: max(0px, calc(var(--ds-callout-radius, var(--ds-radius-surface)) - var(--ds-space-1)));
-    border-bottom-left-radius: max(0px, calc(var(--ds-callout-radius, var(--ds-radius-surface)) - var(--ds-space-1)));
     pointer-events: none;
   }
 
+  :scope [data-ds-callout]::before {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--ds-space-2);
+    border-top-left-radius: max(0px, calc(var(--ds-callout-radius, var(--ds-radius-surface)) - var(--ds-space-1)));
+    border-bottom-left-radius: max(0px, calc(var(--ds-callout-radius, var(--ds-radius-surface)) - var(--ds-space-1)));
+  }
+
+  :scope [data-ds-callout]::after {
+    right: 0;
+    bottom: 0;
+    width: min(var(--ds-space-12), 100%);
+    height: min(var(--ds-space-12), 100%);
+    border-bottom-right-radius: max(0px, calc(var(--ds-callout-radius, var(--ds-radius-surface)) - var(--ds-border-width-default)));
+    /* A 135deg mask normal leaves a 45deg band with 12px thickness. */
+    mask-image: linear-gradient(
+      135deg,
+      transparent calc(50% - var(--ds-space-3) / 2),
+      #000 calc(50% - var(--ds-space-3) / 2),
+      #000 calc(50% + var(--ds-space-3) / 2),
+      transparent calc(50% + var(--ds-space-3) / 2)
+    );
+  }
+
   @media (forced-colors: active) {
-    :scope [data-ds-callout]::before {
+    :scope [data-ds-callout]::before,
+    :scope [data-ds-callout]::after {
       content: none;
     }
   }

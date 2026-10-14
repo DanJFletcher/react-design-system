@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("Atom callouts have a transparent 8px left halftone strip matching each border", async ({ page }) => {
+test("Atom callouts have border-matching left and diagonal corner halftone strips", async ({ page }) => {
   await page.goto("/iframe.html?id=components-callout--theme-coverage&viewMode=story");
   const callouts = page.locator('section[data-ds-theme="atom"] [data-ds-callout]');
   await expect(callouts).toHaveCount(5);
@@ -30,15 +30,46 @@ test("Atom callouts have a transparent 8px left halftone strip matching each bor
     expect(styles.image).toContain("radial-gradient");
     expect(styles.tile).toBe("4px 4px");
     expect(styles.pointerEvents).toBe("none");
+    const corner = await callout.evaluate((element) => {
+      const strip = getComputedStyle(element, "::after");
+      return {
+        color: strip.color,
+        width: strip.width,
+        height: strip.height,
+        right: strip.right,
+        bottom: strip.bottom,
+        background: strip.backgroundColor,
+        image: strip.backgroundImage,
+        tile: strip.backgroundSize,
+        mask: strip.maskImage,
+        pointerEvents: strip.pointerEvents,
+        layer: strip.zIndex,
+      };
+    });
+    expect(corner.color).toBe(styles.borderColor);
+    expect(corner.width).toBe("48px");
+    expect(corner.height).toBe("48px");
+    expect(corner.right).toBe("0px");
+    expect(corner.bottom).toBe("0px");
+    expect(corner.background).toBe("rgba(0, 0, 0, 0)");
+    expect(corner.image).toBe(styles.image);
+    expect(corner.tile).toBe(styles.tile);
+    expect(corner.mask).toContain("linear-gradient(135deg");
+    expect(corner.mask).toContain("calc(50% - 6px)");
+    expect(corner.mask).toContain("calc(50% + 6px)");
+    expect(corner.pointerEvents).toBe("none");
+    expect(corner.layer).toBe("-1");
   }
   // A nested non-Atom theme must not inherit the decoration.
   await page.locator('[data-ds-theme="atom"]').evaluate((element) =>
     element.parentElement?.setAttribute("data-ds-theme", "atom"),
   );
   for (const theme of ["acme", "luna", "orchid"]) {
-    expect(await page.locator(`[data-ds-theme="${theme}"] [data-ds-callout]`).first().evaluate((element) =>
-      getComputedStyle(element, "::before").content,
-    )).toBe("none");
+    for (const pseudo of ["::before", "::after"]) {
+      expect(await page.locator(`[data-ds-theme="${theme}"] [data-ds-callout]`).first().evaluate((element, selector) =>
+        getComputedStyle(element, selector).content,
+      pseudo)).toBe("none");
+    }
   }
   await callouts.first().evaluate((element) =>
     (element as HTMLElement).style.setProperty("--ds-callout-border", "#70E8FF"),
@@ -46,14 +77,19 @@ test("Atom callouts have a transparent 8px left halftone strip matching each bor
   expect(await callouts.first().evaluate((element) =>
     getComputedStyle(element, "::before").color,
   )).toBe("rgb(112, 232, 255)");
+  expect(await callouts.first().evaluate((element) =>
+    getComputedStyle(element, "::after").color,
+  )).toBe("rgb(112, 232, 255)");
   await page.setViewportSize({ width: 360, height: 800 });
   expect(await page.evaluate(() =>
     document.documentElement.scrollWidth <= window.innerWidth,
   )).toBe(true);
   await page.emulateMedia({ forcedColors: "active" });
-  expect(await callouts.first().evaluate((element) =>
-    getComputedStyle(element, "::before").content,
-  )).toBe("none");
+  for (const pseudo of ["::before", "::after"]) {
+    expect(await callouts.first().evaluate((element, selector) =>
+      getComputedStyle(element, selector).content,
+    pseudo)).toBe("none");
+  }
 });
 
 test("Atom H1 and H2 layer top-left yellow behind bottom-right cyan marker highlights", async ({ page }) => {
