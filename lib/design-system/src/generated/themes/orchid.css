@@ -172,6 +172,14 @@
   --ds-progress-radius: initial;
   --ds-progress-track: initial;
   --ds-progress-value: initial;
+  --ds-services-border: initial;
+  --ds-services-gap: initial;
+  --ds-services-link: initial;
+  --ds-services-muted: initial;
+  --ds-services-padding: initial;
+  --ds-services-radius: initial;
+  --ds-services-surface: initial;
+  --ds-services-text: initial;
   --ds-toast-border: initial;
   --ds-toast-error-accent: initial;
   --ds-toast-gap: initial;

@@ -73,6 +73,15 @@ export type {
   GalleryProps,
   GalleryVariant,
 } from "./components/Gallery/Gallery";
+export { ServicesSection } from "./components/ServicesSection/ServicesSection";
+export type {
+  ServiceItem,
+  ServicesSectionColumns,
+  ServicesSectionHeadingLevel,
+  ServicesSectionLink,
+  ServicesSectionProps,
+  ServicesSectionVariant,
+} from "./components/ServicesSection/ServicesSection";
 export { ArticleCard } from "./components/ArticleCard/ArticleCard";
 export type {
   ArticleCardAuthor,

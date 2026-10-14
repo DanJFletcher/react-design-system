@@ -1206,6 +1206,54 @@
       "cssVariable": "--ds-progress-value"
     },
     {
+      "name": "services.border",
+      "type": "color",
+      "description": "Services section surface border color.",
+      "cssVariable": "--ds-services-border"
+    },
+    {
+      "name": "services.gap",
+      "type": "dimension",
+      "description": "Services section and service-card spacing.",
+      "cssVariable": "--ds-services-gap"
+    },
+    {
+      "name": "services.link",
+      "type": "color",
+      "description": "Services section link text color.",
+      "cssVariable": "--ds-services-link"
+    },
+    {
+      "name": "services.muted",
+      "type": "color",
+      "description": "Services section supporting text color.",
+      "cssVariable": "--ds-services-muted"
+    },
+    {
+      "name": "services.padding",
+      "type": "dimension",
+      "description": "Services section internal spacing.",
+      "cssVariable": "--ds-services-padding"
+    },
+    {
+      "name": "services.radius",
+      "type": "dimension",
+      "description": "Services section corner radius.",
+      "cssVariable": "--ds-services-radius"
+    },
+    {
+      "name": "services.surface",
+      "type": "color",
+      "description": "Services section background color.",
+      "cssVariable": "--ds-services-surface"
+    },
+    {
+      "name": "services.text",
+      "type": "color",
+      "description": "Services section primary text color.",
+      "cssVariable": "--ds-services-text"
+    },
+    {
       "name": "toast.border",
       "type": "color",
       "description": "Toast notification border color.",

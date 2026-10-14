@@ -1,0 +1,34 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as ServicesSectionStories from "./ServicesSection.stories";
+
+<Meta of={ServicesSectionStories} />
+
+<Title>Services section</Title>
+
+<Subtitle>A responsive, themeable way to describe a business's services and guide visitors to the next step.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={ServicesSectionStories.Playground} />
+<Controls of={ServicesSectionStories.Playground} />
+
+## Service cards and responsive layouts
+
+<Canvas of={ServicesSectionStories.ImageLedServices} />
+<Canvas of={ServicesSectionStories.CompactFourColumnGrid} />
+<Canvas of={ServicesSectionStories.LongContent} />
+
+## Themes and customization
+
+<Canvas of={ServicesSectionStories.ThemeCoverage} />
+<Canvas of={ServicesSectionStories.CustomHooks} />
+<Canvas of={ServicesSectionStories.HeadinglessServices} />
+
+## Behavior and semantics
+
+- `heading` is optional. When provided, it labels the section and service card headings use the next heading level; without a heading, provide `aria-label` to name the section. If no label is provided, the component uses “Services”.
+- `items` is a list of service records with stable `id` values, titles, optional descriptions, decorative icons, or image content.
+- A service can provide a `link` with an optional custom label, or an `action` containing consumer-owned content such as a Button. The component does not handle bookings or submissions.
+- `columns` sets the desktop column count from 1–4. Three and four columns reduce to two at tablet widths, and all layouts stack on narrow screens.
+- `cardVariant`, `cardSize`, `cardShape`, `cardAlignment`, `mediaAspectRatio`, and `mediaFit` configure the cards using the shared Card component.
+- `variant` accepts `plain`, `surface`, or `accent`. The `services.*` hooks customize section surface, text, supporting text, border, links, radius, padding, and spacing.
