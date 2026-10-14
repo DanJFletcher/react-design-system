@@ -28,6 +28,7 @@ export const ArticleBody = forwardRef<HTMLElement, ArticleBodyProps>(function Ar
       {...nativeProps}
       ref={ref}
       className={[styles.articleBody, className].filter(Boolean).join(" ")}
+      data-ds-article-body="true"
       style={style as CSSProperties | undefined}
     >
       {children}

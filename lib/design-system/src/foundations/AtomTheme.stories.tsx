@@ -3,6 +3,7 @@ import { expect, within } from "storybook/test";
 import { Button } from "../components/Button/Button";
 import { Callout } from "../components/Callout/Callout";
 import { Card } from "../components/Card/Card";
+import { ArticleBody } from "../components/ArticleBody/ArticleBody";
 import { Footer } from "../components/Footer/Footer";
 import { Select } from "../components/FormControls/Select";
 import { Textarea } from "../components/FormControls/Textarea";
@@ -22,7 +23,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Atom is a dark comic-inspired theme with inked borders, vivid print-like accents, subtle halftone texture, hard offset shadows on surfaces and controls, and clipped marker highlights behind H1 and H2 headings: cyan down and right, with electric yellow layered behind it up and left. Page layout components remain flat.",
+          "Atom is a dark comic-inspired theme with inked borders, vivid print-like accents, subtle halftone texture, hard offset shadows on content surfaces and controls, and clipped marker highlights behind H1 and H2 headings: cyan down and right, with electric yellow layered behind it up and left. Page layout components and article bodies remain flat.",
       },
     },
   },
@@ -173,6 +174,13 @@ export const LayoutShadowScope: Story = {
             </Grid>
           </Stack>
         </Container>
+        <ArticleBody data-testid="atom-layout-article-body" aria-label="Sample article">
+          <h2>Article bodies stay flat.</h2>
+          <p>
+            Long-form reading content stays on the canvas; cards and controls
+            keep their comic-book shadows.
+          </p>
+        </ArticleBody>
       </main>
       <Footer
         data-testid="atom-layout-footer"
@@ -192,6 +200,7 @@ export const LayoutShadowScope: Story = {
       "stack",
       "grid",
       "inline",
+      "article-body",
     ]) {
       const element = canvas.getByTestId(`atom-layout-${component}`);
       expect(getComputedStyle(element).boxShadow).toBe("none");

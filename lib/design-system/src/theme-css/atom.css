@@ -187,7 +187,8 @@
 }
 
 @scope ([data-ds-theme="atom"]) to ([data-ds-theme]:not([data-ds-theme="atom"])) {
-  :scope [data-ds-layout-component] {
+  :scope [data-ds-layout-component],
+  :scope [data-ds-article-body] {
     box-shadow: none !important;
   }
 }
