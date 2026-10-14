@@ -30,7 +30,7 @@ test("Atom uses dark comic colors with hard, block-style elevation", async () =>
   assert.equal(atom["color.action.primary.bg"], "#FF3D8D");
   assert.equal(atom["color.focus.ring"], "#70E8FF");
   assert.equal(atom["border.width.default"], "3px");
-  assert.equal(atom["shadow.color"], "#07070D");
+  assert.equal(atom["shadow.color"], "#FF3D8D");
   assert.equal(atom["shadow.offset.surface"], "6px");
   assert.equal(atom["shadow.offset.control"], "3px");
 });

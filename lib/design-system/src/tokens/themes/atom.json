@@ -34,7 +34,7 @@
     "color.status.error.bg": "#4B1D30",
     "color.status.error.fg": "#FFB1C7",
     "border.width.default": { "amount": 3, "unit": "px" },
-    "shadow.color": "#07070D",
+    "shadow.color": "#FF3D8D",
     "shadow.offset.surface": { "amount": 6, "unit": "px" },
     "shadow.offset.control": { "amount": 3, "unit": "px" },
     "radius.surface": { "amount": 8, "unit": "px" },

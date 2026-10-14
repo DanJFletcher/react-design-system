@@ -26,6 +26,7 @@ test("Atom uses a dark palette, thick borders, and hard shadows", async ({
   });
   expect(cardStyles.borderWidth).toBe("3px");
   expect(cardStyles.boxShadow).toContain("6px 6px 0px");
+  expect(cardStyles.boxShadow).toContain("rgb(255, 61, 141)");
 
   const buttonStyles = await page.getByTestId("atom-primary-button").evaluate((element) => {
     const styles = getComputedStyle(element);
@@ -33,6 +34,7 @@ test("Atom uses a dark palette, thick borders, and hard shadows", async ({
   });
   expect(buttonStyles.borderWidth).toBe("3px");
   expect(buttonStyles.boxShadow).toContain("3px 3px 0px");
+  expect(buttonStyles.boxShadow).toContain("rgb(255, 61, 141)");
 
   const inputStyles = await page.getByTestId("atom-text-field").evaluate((element) => {
     const styles = getComputedStyle(element);
