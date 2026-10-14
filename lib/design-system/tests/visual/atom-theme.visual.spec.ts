@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("Atom callouts have a transparent 12px left halftone strip matching each border", async ({ page }) => {
+test("Atom callouts have a transparent 8px left halftone strip matching each border", async ({ page }) => {
   await page.goto("/iframe.html?id=components-callout--theme-coverage&viewMode=story");
   const callouts = page.locator('section[data-ds-theme="atom"] [data-ds-callout]');
   await expect(callouts).toHaveCount(5);
@@ -22,7 +22,7 @@ test("Atom callouts have a transparent 12px left halftone strip matching each bo
       };
     });
     expect(styles.color).toBe(styles.borderColor);
-    expect(styles.width).toBe("12px");
+    expect(styles.width).toBe("8px");
     expect(styles.left).toBe("0px");
     expect(styles.top).toBe("0px");
     expect(styles.bottom).toBe("0px");
