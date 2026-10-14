@@ -178,6 +178,13 @@
   --ds-progress-radius: initial;
   --ds-progress-track: initial;
   --ds-progress-value: initial;
+  --ds-request-form-border: initial;
+  --ds-request-form-gap: initial;
+  --ds-request-form-muted: initial;
+  --ds-request-form-padding: initial;
+  --ds-request-form-radius: initial;
+  --ds-request-form-surface: initial;
+  --ds-request-form-text: initial;
   --ds-search-border: initial;
   --ds-search-gap: initial;
   --ds-search-muted: initial;

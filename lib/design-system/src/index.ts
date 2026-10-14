@@ -36,6 +36,17 @@ export type {
   NewsletterSignupValues,
   NewsletterSignupVariant,
 } from "./components/NewsletterSignup/NewsletterSignup";
+export { RequestForm } from "./components/RequestForm/RequestForm";
+export type {
+  RequestFormDefaultValues,
+  RequestFormHeadingLevel,
+  RequestFormLayout,
+  RequestFormProps,
+  RequestFormServiceOption,
+  RequestFormType,
+  RequestFormValues,
+  RequestFormVariant,
+} from "./components/RequestForm/RequestForm";
 export { Tooltip } from "./components/Tooltip/Tooltip";
 export type { TooltipPlacement, TooltipProps } from "./components/Tooltip/Tooltip";
 export { Accordion } from "./components/Accordion/Accordion";

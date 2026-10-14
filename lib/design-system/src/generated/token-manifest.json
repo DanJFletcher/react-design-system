@@ -1242,6 +1242,48 @@
       "cssVariable": "--ds-progress-value"
     },
     {
+      "name": "request-form.border",
+      "type": "color",
+      "description": "Request form section border.",
+      "cssVariable": "--ds-request-form-border"
+    },
+    {
+      "name": "request-form.gap",
+      "type": "dimension",
+      "description": "Request form content spacing.",
+      "cssVariable": "--ds-request-form-gap"
+    },
+    {
+      "name": "request-form.muted",
+      "type": "color",
+      "description": "Request form supporting text.",
+      "cssVariable": "--ds-request-form-muted"
+    },
+    {
+      "name": "request-form.padding",
+      "type": "dimension",
+      "description": "Request form section internal spacing.",
+      "cssVariable": "--ds-request-form-padding"
+    },
+    {
+      "name": "request-form.radius",
+      "type": "dimension",
+      "description": "Request form section corner radius.",
+      "cssVariable": "--ds-request-form-radius"
+    },
+    {
+      "name": "request-form.surface",
+      "type": "color",
+      "description": "Request form section background.",
+      "cssVariable": "--ds-request-form-surface"
+    },
+    {
+      "name": "request-form.text",
+      "type": "color",
+      "description": "Request form primary text.",
+      "cssVariable": "--ds-request-form-text"
+    },
+    {
       "name": "search.border",
       "type": "color",
       "description": "Search input border color.",

@@ -1,0 +1,36 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as RequestFormStories from "./RequestForm.stories";
+
+<Meta of={RequestFormStories} />
+
+<Title>Request Form</Title>
+
+<Subtitle>A themeable request form for quotes, consultations, and preferred appointment times.</Subtitle>
+
+## Playground
+
+<Canvas of={RequestFormStories.Playground} />
+
+The default quote form collects a name, email, service, and message, with an optional phone field. Supplying `serviceOptions` renders a select; without options, the service field is free text.
+
+## Quote and appointment requests
+
+<Canvas of={RequestFormStories.QuoteSubmission} />
+
+<Canvas of={RequestFormStories.AppointmentRequest} />
+
+Appointment mode adds preferred date and time fields by default. These are preferences only: the component does not check availability or book a slot. The consumer's `onSubmit` callback receives the normalized `RequestFormValues` and the form's native `FormData`, so custom fields can be handled by the consuming application.
+
+## Consent, states, and themes
+
+<Canvas of={RequestFormStories.WithConsent} />
+
+<Canvas of={RequestFormStories.FailedSubmission} />
+
+<Canvas of={RequestFormStories.ThemeCoverage} />
+
+<Canvas of={RequestFormStories.CustomHooks} />
+
+`onSubmit` may be synchronous or asynchronous. While it is pending, controls are disabled and the submit button shows its loading state. Success and failure messages are announced to assistive technology; editing a field clears the prior message. Native required and email validation remain enabled. No request is sent or stored by the component itself.
+
+<Controls of={RequestFormStories.Playground} />
