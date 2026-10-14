@@ -20,6 +20,13 @@ Edit `triggerLabel`, `menuLabel`, `items`, `placement`, `size`, trigger variant 
 
 The trigger opens with Enter or Space and moves focus to the first enabled item. Arrow Up/Down move through the current menu; Home/End go to its first/last item. Typing a letter or number moves focus to the next item whose label starts with that text. Arrow Right opens a focused submenu and moves focus into it; Arrow Left or Escape returns to the parent item. Escape at the root closes the menu and restores focus to its trigger. Tab closes the menu without blocking the browser's normal focus movement.
 
+## Submenu motion
+
+<Canvas of={MenuStories.SubmenuMotion} />
+<Canvas of={MenuStories.ReducedMotion} />
+
+Set `submenuMotion="fade-slide"` to animate nested menus with the shared standard motion tokens. The default `none` opens them immediately. Closed animated submenus are hidden from assistive technology and keyboard focus; reduced-motion settings disable the transition.
+
 ## Sizes, placement, and themes
 
 <Canvas of={MenuStories.SizeAndPlacementExamples} />

@@ -318,6 +318,7 @@ export type {
   MenuPlacement,
   MenuProps,
   MenuSelectEvent,
+  MenuSubmenuMotion,
   MenuSubmenuItem,
 } from "./components/Menu/Menu";
 export { PricingDetails } from "./components/PricingDetails/PricingDetails";

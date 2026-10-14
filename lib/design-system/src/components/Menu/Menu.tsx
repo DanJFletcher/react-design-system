@@ -17,6 +17,7 @@ import type { DesignSystemStyle } from "../../generated/token-types";
 import styles from "./Menu.module.css";
 
 export type MenuPlacement = "bottom-start" | "bottom-end" | "top-start" | "top-end";
+export type MenuSubmenuMotion = "none" | "fade-slide";
 export type MenuSelectEvent = ReactMouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
 export type MenuLinkProps = Omit<
@@ -66,6 +67,7 @@ export type MenuProps = Omit<
   triggerShape?: ButtonShape;
   size?: ButtonSize;
   placement?: MenuPlacement;
+  submenuMotion?: MenuSubmenuMotion;
   menuLabel?: string;
   emptyMessage?: string;
   disabled?: boolean;
@@ -90,6 +92,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
     triggerShape,
     size = "md",
     placement = "bottom-start",
+    submenuMotion = "none",
     menuLabel = "Actions",
     emptyMessage = "No items",
     disabled = false,
@@ -188,6 +191,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
           label={menuLabel}
           size={size}
           level={0}
+          submenuMotion={submenuMotion}
           emptyMessage={emptyMessage}
           menuClassName={menuClassName}
           itemClassName={itemClassName}
@@ -208,6 +212,7 @@ type MenuListProps = {
   label: string;
   size: ButtonSize;
   level: number;
+  submenuMotion: MenuSubmenuMotion;
   emptyMessage: string;
   menuClassName?: string;
   itemClassName?: string;
@@ -223,6 +228,7 @@ function MenuList({
   label,
   size,
   level,
+  submenuMotion,
   emptyMessage,
   menuClassName,
   itemClassName,
@@ -325,7 +331,7 @@ function MenuList({
 
   const listClassName = [
     styles.menu,
-    level === 0 ? styles.panel : styles.submenu,
+    level === 0 ? styles.panel : styles.submenuList,
     menuClassName,
   ].filter(Boolean).join(" ");
 
@@ -359,6 +365,7 @@ function MenuList({
               open={openSubmenuId === item.id}
               size={size}
               level={level}
+              submenuMotion={submenuMotion}
               emptyMessage={emptyMessage}
               menuClassName={menuClassName}
               itemClassName={itemClassName}
@@ -419,6 +426,7 @@ type SubmenuEntryProps = {
   open: boolean;
   size: ButtonSize;
   level: number;
+  submenuMotion: MenuSubmenuMotion;
   emptyMessage: string;
   menuClassName?: string;
   itemClassName?: string;
@@ -434,6 +442,7 @@ function SubmenuEntry({
   open,
   size,
   level,
+  submenuMotion,
   emptyMessage,
   menuClassName,
   itemClassName,
@@ -471,24 +480,35 @@ function SubmenuEntry({
         <ItemContent label={item.label} icon={item.icon} />
         <Icon className={styles.submenuChevron} name="chevron-right" size="sm" />
       </button>
-      {open && (
-        <MenuList
-          id={submenuId}
-          items={item.items}
-          label={item.label}
-          size={size}
-          level={level + 1}
-          emptyMessage={emptyMessage}
-          menuClassName={menuClassName}
-          itemClassName={itemClassName}
-          focusFirstOnMount
-          onDismiss={onDismiss}
-          onBack={() => {
-            onBack();
-            triggerRef.current?.focus();
-          }}
-          onSelect={onSelect}
-        />
+      {(open || submenuMotion !== "none") && (
+        <div
+          aria-hidden={submenuMotion !== "none" && !open ? true : undefined}
+          className={[
+            styles.submenuLayer,
+            submenuMotion !== "none" ? styles.submenuAnimated : undefined,
+          ].filter(Boolean).join(" ")}
+          data-open={submenuMotion !== "none" ? open : undefined}
+          inert={submenuMotion !== "none" && !open ? true : undefined}
+        >
+          <MenuList
+            id={submenuId}
+            items={item.items}
+            label={item.label}
+            size={size}
+            level={level + 1}
+            submenuMotion={submenuMotion}
+            emptyMessage={emptyMessage}
+            menuClassName={menuClassName}
+            itemClassName={itemClassName}
+            focusFirstOnMount={submenuMotion === "none" || open}
+            onDismiss={onDismiss}
+            onBack={() => {
+              onBack();
+              triggerRef.current?.focus();
+            }}
+            onSelect={onSelect}
+          />
+        </div>
       )}
     </li>
   );

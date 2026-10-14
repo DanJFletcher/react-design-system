@@ -43,16 +43,49 @@
   inset-inline-end: 0;
 }
 
-.submenu {
+.submenuLayer {
   position: absolute;
   inset-block-start: 0;
   inset-inline-start: calc(100% + var(--ds-space-1));
   z-index: 1;
 }
 
-.root[data-placement$="end"] .submenu {
+.root[data-placement$="end"] .submenuLayer {
   inset-inline-start: auto;
   inset-inline-end: calc(100% + var(--ds-space-1));
+}
+
+.submenuList {
+  min-block-size: 0;
+}
+
+.submenuAnimated {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(calc(-1 * var(--ds-space-2)));
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    grid-template-rows var(--ds-motion-duration-standard) var(--ds-motion-easing-standard),
+    opacity var(--ds-motion-duration-standard) var(--ds-motion-easing-enter),
+    transform var(--ds-motion-duration-standard) var(--ds-motion-easing-enter),
+    visibility 0s linear;
+  transition-delay: 0s, 0s, 0s, var(--ds-motion-duration-standard);
+}
+
+.submenuAnimated[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.submenuAnimated > .submenuList {
+  min-block-size: 0;
 }
 
 .menu > li {
@@ -159,21 +192,31 @@
 }
 
 @media (max-width: 32rem) {
-  .submenu {
+  .submenuLayer {
     position: static;
     min-inline-size: 0;
     max-inline-size: 100%;
     margin-block-start: var(--ds-space-1);
     margin-inline-start: var(--ds-space-3);
+  }
+
+  .submenuList {
     border-block: 0;
     border-inline-end: 0;
     border-inline-start: var(--ds-border-width-default) solid var(--ds-menu-border, var(--ds-color-border-control));
     border-radius: 0;
   }
 
-  .root[data-placement$="end"] .submenu {
+  .root[data-placement$="end"] .submenuLayer {
     inset-inline-start: auto;
     inset-inline-end: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(html:not([data-ds-motion-preference="full"])) .submenuAnimated {
+    transition: none;
+    transition-delay: 0s;
   }
 }
 

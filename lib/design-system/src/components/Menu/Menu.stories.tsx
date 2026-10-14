@@ -50,6 +50,7 @@ const meta = {
     triggerVariant: "secondary",
     size: "md",
     placement: "bottom-start",
+    submenuMotion: "none",
     closeOnSelect: true,
     disabled: false,
     defaultOpen: false,
@@ -69,6 +70,7 @@ const meta = {
       control: "inline-radio",
       options: ["bottom-start", "bottom-end", "top-start", "top-end"],
     },
+    submenuMotion: { control: "inline-radio", options: ["none", "fade-slide"] },
     emptyMessage: { control: "text" },
     disabled: { control: "boolean" },
     closeOnSelect: { control: "boolean" },
@@ -159,6 +161,64 @@ export const SizeAndPlacementExamples: Story = {
 export const OpenPreview: Story = {
   args: {
     defaultOpen: true,
+  },
+};
+
+export const SubmenuMotion: Story = {
+  args: {
+    submenuMotion: "fade-slide",
+    defaultOpen: true,
+  },
+  globals: { motion: "full" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const submenuTrigger = canvas.getByRole("menuitem", { name: "View" });
+    const submenuId = submenuTrigger.getAttribute("aria-controls");
+    const submenu = submenuId
+      ? canvasElement.querySelector<HTMLElement>(`[id="${submenuId}"]`)
+      : null;
+    const submenuLayer = submenu?.parentElement;
+    if (!submenu || !submenuLayer) {
+      throw new Error("Expected the animated submenu to be rendered.");
+    }
+
+    await expect(submenuTrigger).toHaveAttribute("aria-expanded", "false");
+    await expect(submenuLayer).toHaveAttribute("aria-hidden", "true");
+    await expect(submenuLayer).toHaveAttribute("inert");
+    await userEvent.click(submenuTrigger);
+    await expect(submenuTrigger).toHaveAttribute("aria-expanded", "true");
+    await expect(submenuLayer).not.toHaveAttribute("aria-hidden", "true");
+    await expect(submenuLayer).not.toHaveAttribute("inert");
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
+    await expect(canvas.getByRole("menu", { name: "View" })).toBeVisible();
+    await expect(canvas.getByRole("menuitem", { name: "Grid view" })).toHaveFocus();
+
+    await userEvent.click(submenuTrigger);
+    await expect(submenuTrigger).toHaveAttribute("aria-expanded", "false");
+    await expect(submenuLayer).toHaveAttribute("aria-hidden", "true");
+    await expect(submenuLayer).toHaveAttribute("inert");
+  },
+};
+
+export const ReducedMotion: Story = {
+  args: {
+    submenuMotion: "fade-slide",
+    defaultOpen: true,
+  },
+  globals: { motion: "reduced" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const submenuTrigger = canvas.getByRole("menuitem", { name: "View" });
+    await userEvent.click(submenuTrigger);
+    const submenu = canvas.getByRole("menu", { name: "View" });
+    const submenuLayer = submenu.parentElement;
+    if (!submenuLayer) throw new Error("Expected the submenu animation wrapper.");
+    await expect(document.documentElement).toHaveAttribute("data-ds-motion-preference", "reduced");
+    const transitionDurations = getComputedStyle(submenuLayer).transitionDuration;
+    await expect(
+      transitionDurations.split(",").every((duration) => Number.parseFloat(duration) === 0),
+    ).toBe(true);
+    await expect(submenu).toBeVisible();
   },
 };
 
