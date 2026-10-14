@@ -1,0 +1,59 @@
+import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as SideNavigationStories from "./SideNavigation.stories";
+
+<Meta of={SideNavigationStories} />
+
+# SideNavigation
+
+An always-available destination tree for small-business sites and CMS workspaces. Links remain links, group triggers remain buttons, and actions are buttons; the host application owns route resolution and page content.
+
+<Canvas of={SideNavigationStories.Playground} />
+
+## Basic usage
+
+```tsx
+import { SideNavigation, Icon } from "@workspace/design-system";
+
+<SideNavigation
+  navigationLabel="Workspace navigation"
+  defaultActiveId="overview"
+  items={[
+    { type: "link", id: "overview", label: "Overview", href: "/overview", icon: <Icon name="grid" /> },
+    {
+      type: "group",
+      id: "content",
+      label: "Content",
+      items: [{ type: "link", id: "pages", label: "Pages", href: "/pages" }],
+    },
+    { type: "action", id: "sync", label: "Sync now", onClick: () => syncWorkspace() },
+  ]}
+/>
+```
+
+## Selection and expansion
+
+`activeId` and `expandedIds` make selection and open groups controlled; use `defaultActiveId` and `defaultExpandedIds` for internal state. `onActiveChange(id, item)`, `onExpandedIdsChange(ids)`, and `onCollapsedChange(collapsed)` report user changes. Active links receive `aria-current="page"`. In uncontrolled expansion, groups containing the active link are opened automatically. Supplying `expandedIds` gives the host complete control and disables that automatic behavior. Preventing a link's native navigation in `onClick` does not suppress the active-selection callback, which also supports client-side routing.
+
+Disabled links omit their `href`, do not navigate, are removed from sequential keyboard focus, and expose `aria-disabled`. Collapsed desktop mode visually hides text but retains accessible names; provide meaningful labels even when icons are present.
+
+## Layout and positioning
+
+`position="static"` is the default. `sticky` remains in normal flow and sticks within its scrolling ancestor. `fixed` pins the navigation to the viewport and removes it from flow. A fixed navigation can cover page content: the host layout must reserve an offset matching its width and positioning; the component intentionally does not guess the content layout. Sticky positioning can be constrained by overflow on ancestors.
+
+Below 48rem, navigation switches to an accessible inline disclosure. It opens above the page content and does not create an overlay or trap focus. Use the mobile state example to test this behavior at a narrow viewport.
+
+## Customization slots
+
+Use `header`, `footer`, and `action` to provide workspace identity, secondary information, and a high-value action. `side`, `size`, `className`, and token-based `style` customize placement and sizing without changing route behavior. The component supports the Acme, Luna, Orchid, Atom, and Sublime themes.
+
+<Controls of={SideNavigationStories.Playground} />
+
+## Examples
+
+<Canvas of={SideNavigationStories.NestedGroups} />
+<Canvas of={SideNavigationStories.CollapsedRail} />
+<Canvas of={SideNavigationStories.ControlledSelectionAndExpansion} />
+<Canvas of={SideNavigationStories.DisabledItems} />
+<Canvas of={SideNavigationStories.MobileResponsive} />
+<Canvas of={SideNavigationStories.KeyboardFocus} />
+<Canvas of={SideNavigationStories.ThemeCoverage} />

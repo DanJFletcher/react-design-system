@@ -238,6 +238,19 @@ export type {
   BottomMenuSelectEvent,
   BottomMenuSize,
 } from "./components/BottomMenu/BottomMenu";
+export { SideNavigation } from "./components/SideNavigation/SideNavigation";
+export type {
+  SideNavigationActionItem,
+  SideNavigationDividerItem,
+  SideNavigationEntry,
+  SideNavigationGroupItem,
+  SideNavigationLinkItem,
+  SideNavigationPosition,
+  SideNavigationProps,
+  SideNavigationSelectEvent,
+  SideNavigationSide,
+  SideNavigationSize,
+} from "./components/SideNavigation/SideNavigation";
 export { Footer } from "./components/Footer/Footer";
 export type {
   FooterHeadingLevel,

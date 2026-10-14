@@ -11,3 +11,4 @@
 - [Storybook theme CSS ordering](storybook-theme-css-order.md) — load custom theme overrides after all generated theme sheets in multi-theme previews.
 - [Atom layout shadows](atom-layout-shadows.md) — Keep page-structure components and layout helpers flat; use hard shadows for content surfaces and controls.
 - [Atom table borders](atom-table-borders.md) — Use the theme’s cyan accent for table borders in Atom.
+- [Storybook fragment-link tests](storybook-fragment-link-tests.md) — Prevent placeholder hash navigation in browser-story fixtures to avoid Vitest connection closures.
