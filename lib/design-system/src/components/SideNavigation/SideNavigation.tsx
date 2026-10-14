@@ -16,6 +16,7 @@ import styles from "./SideNavigation.module.css";
 export type SideNavigationSize = "sm" | "md" | "lg";
 export type SideNavigationSide = "left" | "right";
 export type SideNavigationPosition = "static" | "sticky" | "fixed";
+export type SideNavigationGroupMotion = "none" | "expand";
 export type SideNavigationSelectEvent = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
 type EntryBase = {
@@ -71,6 +72,7 @@ export type SideNavigationProps = Omit<
   expandedIds?: readonly string[];
   defaultExpandedIds?: readonly string[];
   onExpandedIdsChange?: (expandedIds: readonly string[]) => void;
+  groupMotion?: SideNavigationGroupMotion;
   navigationLabel?: string;
   collapseLabel?: string;
   expandLabel?: string;
@@ -107,6 +109,7 @@ export const SideNavigation = forwardRef<HTMLElement, SideNavigationProps>(funct
     expandedIds,
     defaultExpandedIds = [],
     onExpandedIdsChange,
+    groupMotion = "expand",
     navigationLabel = "Side navigation",
     collapseLabel = "Collapse navigation",
     expandLabel = "Expand navigation",
@@ -194,8 +197,19 @@ export const SideNavigation = forwardRef<HTMLElement, SideNavigationProps>(funct
                 <EntryContent item={item} />
                 <Icon className={styles.chevron} name={open ? "chevron-down" : "chevron-right"} size="sm" />
               </button>
-              <div id={`${id}-${item.id}`} className={styles.groupChildren} hidden={!open}>
-                {renderItems(item.items, depth + 1)}
+              <div
+                id={`${id}-${item.id}`}
+                aria-hidden={groupMotion === "expand" && !open ? true : undefined}
+                className={groupMotion === "expand" ? styles.groupChildrenAnimated : styles.groupChildren}
+                data-open={groupMotion === "expand" ? open : undefined}
+                hidden={groupMotion === "none" ? !open : undefined}
+                inert={groupMotion === "expand" && !open ? true : undefined}
+              >
+                {groupMotion === "expand" ? (
+                  <div className={styles.groupChildrenInner}>
+                    {renderItems(item.items, depth + 1)}
+                  </div>
+                ) : renderItems(item.items, depth + 1)}
               </div>
             </li>
           );

@@ -251,6 +251,7 @@ export type {
   SideNavigationActionItem,
   SideNavigationDividerItem,
   SideNavigationEntry,
+  SideNavigationGroupMotion,
   SideNavigationGroupItem,
   SideNavigationLinkItem,
   SideNavigationPosition,

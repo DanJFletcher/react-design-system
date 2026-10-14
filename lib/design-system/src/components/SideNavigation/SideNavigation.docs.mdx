@@ -34,6 +34,8 @@ import { SideNavigation, Icon } from "@workspace/design-system";
 
 `activeId` and `expandedIds` make selection and open groups controlled; use `defaultActiveId` and `defaultExpandedIds` for internal state. `onActiveChange(id, item)`, `onExpandedIdsChange(ids)`, and `onCollapsedChange(collapsed)` report user changes. Active links receive `aria-current="page"`. In uncontrolled expansion, groups containing the active link are opened automatically. Supplying `expandedIds` gives the host complete control and disables that automatic behavior. Preventing a link's native navigation in `onClick` does not suppress the active-selection callback, which also supports client-side routing.
 
+Group contents expand and collapse with shared motion tokens by default. Set `groupMotion="none"` for immediate changes; reduced-motion preferences also make the change immediate. Closed groups are hidden from keyboard and screen-reader navigation.
+
 Disabled links omit their `href`, do not navigate, are removed from sequential keyboard focus, and expose `aria-disabled`. Collapsed desktop mode visually hides text but retains accessible names; provide meaningful labels even when icons are present.
 
 ## Layout and positioning
@@ -50,6 +52,8 @@ Use `header`, `footer`, and `action` to provide workspace identity, secondary in
 
 ## Examples
 
+<Canvas of={SideNavigationStories.DefaultGroupMotion} />
+<Canvas of={SideNavigationStories.ReducedMotion} />
 <Canvas of={SideNavigationStories.NestedGroups} />
 <Canvas of={SideNavigationStories.CollapsedRail} />
 <Canvas of={SideNavigationStories.ControlledSelectionAndExpansion} />

@@ -48,6 +48,7 @@ const meta = {
     defaultActiveId: "overview",
     navigationLabel: "Business workspace",
     size: "md",
+    groupMotion: "expand",
     side: "left",
     position: "static",
     onActiveChange: fn(),
@@ -58,6 +59,7 @@ const meta = {
     defaultActiveId: { control: "text" },
     expandedIds: { control: false },
     defaultExpandedIds: { control: false },
+    groupMotion: { control: "inline-radio", options: ["expand", "none"] },
     header: { control: false },
     footer: { control: false },
     action: { control: false },
@@ -95,6 +97,56 @@ export const NestedGroups: Story = {
     await expect(canvas.getByRole("button", { name: /Content/ })).toHaveAttribute("aria-expanded", "true");
     await expect(canvas.getByRole("button", { name: /Library/ })).toHaveAttribute("aria-expanded", "true");
     await expect(canvas.getByRole("link", { name: "Media library" })).toHaveAttribute("aria-current", "page");
+  },
+};
+
+export const DefaultGroupMotion: Story = {
+  render: () => <SideNavigation items={sampleItems} />,
+  globals: { motion: "full" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { name: /Content/ });
+    const panelId = trigger.getAttribute("aria-controls");
+    const panel = panelId
+      ? canvasElement.querySelector<HTMLElement>(`[id="${panelId}"]`)
+      : null;
+    if (!panel) throw new Error("Expected the collapsed group contents.");
+
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await expect(panel).toHaveAttribute("aria-hidden", "true");
+    await expect(panel).toHaveAttribute("inert");
+    await userEvent.click(trigger);
+    await expect(trigger).toHaveAttribute("aria-expanded", "true");
+    await expect(panel).toHaveAttribute("data-open", "true");
+    await expect(panel).not.toHaveAttribute("aria-hidden", "true");
+    await expect(panel).not.toHaveAttribute("inert");
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
+    await expect(canvas.getByRole("link", { name: "Pages" })).toBeVisible();
+
+    await userEvent.click(trigger);
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await expect(panel).toHaveAttribute("aria-hidden", "true");
+    await expect(panel).toHaveAttribute("inert");
+  },
+};
+
+export const ReducedMotion: Story = {
+  render: () => <SideNavigation items={sampleItems} />,
+  globals: { motion: "reduced" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { name: /Content/ });
+    const panelId = trigger.getAttribute("aria-controls");
+    const panel = panelId
+      ? canvasElement.querySelector<HTMLElement>(`[id="${panelId}"]`)
+      : null;
+    if (!panel) throw new Error("Expected the group contents.");
+
+    await userEvent.click(trigger);
+    await expect(document.documentElement).toHaveAttribute("data-ds-motion-preference", "reduced");
+    const durations = getComputedStyle(panel).transitionDuration;
+    await expect(durations.split(",").every((duration) => Number.parseFloat(duration) === 0)).toBe(true);
+    await expect(canvas.getByRole("link", { name: "Pages" })).toBeVisible();
   },
 };
 
