@@ -60,6 +60,32 @@ export const IconAndAction: Story = {
   ),
 };
 
+export const AtomHalftone: Story = {
+  render: () => (
+    <section
+      data-ds-theme="atom"
+      aria-label="Atom halftone callouts"
+      style={{
+        display: "grid",
+        gap: "var(--ds-space-4)",
+        padding: "var(--ds-space-6)",
+        backgroundColor: "var(--ds-color-canvas)",
+      }}
+    >
+      {tones.map((tone) => (
+        <Callout
+          key={tone}
+          tone={tone}
+          title={`${tone[0].toUpperCase()}${tone.slice(1)} message`}
+          icon={<Icon name="sparkle" />}
+        >
+          A transparent halftone strip echoes this callout's border color.
+        </Callout>
+      ))}
+    </section>
+  ),
+};
+
 export const IconSelector: StoryObj<IconSelectorArgs> = {
   args: {
     title: "Workspace updated",

@@ -37,6 +37,7 @@ export const Callout = forwardRef<HTMLDivElement, CalloutProps>(function Callout
       {...divProps}
       ref={ref}
       className={classes}
+      data-ds-callout=""
       data-tone={tone}
       data-has-icon={hasIcon}
       style={style as CSSProperties | undefined}

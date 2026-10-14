@@ -1,5 +1,61 @@
 import { expect, test } from "@playwright/test";
 
+test("Atom callouts have a transparent 12px left halftone strip matching each border", async ({ page }) => {
+  await page.goto("/iframe.html?id=components-callout--theme-coverage&viewMode=story");
+  const callouts = page.locator('section[data-ds-theme="atom"] [data-ds-callout]');
+  await expect(callouts).toHaveCount(5);
+  for (const callout of await callouts.all()) {
+    const styles = await callout.evaluate((element) => {
+      const root = getComputedStyle(element);
+      const strip = getComputedStyle(element, "::before");
+      return {
+        borderColor: root.borderTopColor,
+        color: strip.color,
+        width: strip.width,
+        left: strip.left,
+        top: strip.top,
+        bottom: strip.bottom,
+        background: strip.backgroundColor,
+        image: strip.backgroundImage,
+        tile: strip.backgroundSize,
+        pointerEvents: strip.pointerEvents,
+      };
+    });
+    expect(styles.color).toBe(styles.borderColor);
+    expect(styles.width).toBe("12px");
+    expect(styles.left).toBe("0px");
+    expect(styles.top).toBe("0px");
+    expect(styles.bottom).toBe("0px");
+    expect(styles.background).toBe("rgba(0, 0, 0, 0)");
+    expect(styles.image).toContain("radial-gradient");
+    expect(styles.tile).toBe("4px 4px");
+    expect(styles.pointerEvents).toBe("none");
+  }
+  // A nested non-Atom theme must not inherit the decoration.
+  await page.locator('[data-ds-theme="atom"]').evaluate((element) =>
+    element.parentElement?.setAttribute("data-ds-theme", "atom"),
+  );
+  for (const theme of ["acme", "luna", "orchid"]) {
+    expect(await page.locator(`[data-ds-theme="${theme}"] [data-ds-callout]`).first().evaluate((element) =>
+      getComputedStyle(element, "::before").content,
+    )).toBe("none");
+  }
+  await callouts.first().evaluate((element) =>
+    (element as HTMLElement).style.setProperty("--ds-callout-border", "#70E8FF"),
+  );
+  expect(await callouts.first().evaluate((element) =>
+    getComputedStyle(element, "::before").color,
+  )).toBe("rgb(112, 232, 255)");
+  await page.setViewportSize({ width: 360, height: 800 });
+  expect(await page.evaluate(() =>
+    document.documentElement.scrollWidth <= window.innerWidth,
+  )).toBe(true);
+  await page.emulateMedia({ forcedColors: "active" });
+  expect(await callouts.first().evaluate((element) =>
+    getComputedStyle(element, "::before").content,
+  )).toBe("none");
+});
+
 test("Atom H1 and H2 layer top-left yellow behind bottom-right cyan marker highlights", async ({ page }) => {
   await page.goto("/iframe.html?id=foundations-atom-theme--heading-highlights&viewMode=story");
   for (const id of ["atom-marker-h1", "atom-marker-h2", "atom-marker-component"]) {
