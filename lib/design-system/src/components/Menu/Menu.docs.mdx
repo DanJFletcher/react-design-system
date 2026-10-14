@@ -27,6 +27,13 @@ The trigger opens with Enter or Space and moves focus to the first enabled item.
 
 Set `submenuMotion="fade-slide"` to animate nested menus with the shared standard motion tokens. The default `none` opens them immediately. Closed animated submenus are hidden from assistive technology and keyboard focus; reduced-motion settings disable the transition.
 
+## Top-level menu motion
+
+<Canvas of={MenuStories.TopLevelMenuMotion} />
+<Canvas of={MenuStories.ReducedTopLevelMotion} />
+
+Set `menuMotion="fade-slide"` to animate the main menu panel as it opens and closes. It uses the same shared motion tokens and reduced-motion behavior; the default `none` keeps the panel immediate.
+
 ## Sizes, placement, and themes
 
 <Canvas of={MenuStories.SizeAndPlacementExamples} />

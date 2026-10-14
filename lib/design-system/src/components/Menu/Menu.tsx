@@ -18,6 +18,7 @@ import styles from "./Menu.module.css";
 
 export type MenuPlacement = "bottom-start" | "bottom-end" | "top-start" | "top-end";
 export type MenuSubmenuMotion = "none" | "fade-slide";
+export type MenuPanelMotion = MenuSubmenuMotion;
 export type MenuSelectEvent = ReactMouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
 export type MenuLinkProps = Omit<
@@ -67,6 +68,7 @@ export type MenuProps = Omit<
   triggerShape?: ButtonShape;
   size?: ButtonSize;
   placement?: MenuPlacement;
+  menuMotion?: MenuPanelMotion;
   submenuMotion?: MenuSubmenuMotion;
   menuLabel?: string;
   emptyMessage?: string;
@@ -92,6 +94,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
     triggerShape,
     size = "md",
     placement = "bottom-start",
+    menuMotion = "none",
     submenuMotion = "none",
     menuLabel = "Actions",
     emptyMessage = "No items",
@@ -184,18 +187,20 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
         {trigger ?? triggerLabel}
       </Button>
 
-      {isOpen && (
+      {(isOpen || menuMotion !== "none") && (
         <MenuList
           id={menuId}
           items={items}
           label={menuLabel}
           size={size}
           level={0}
+          panelMotion={menuMotion}
+          panelOpen={isOpen}
           submenuMotion={submenuMotion}
           emptyMessage={emptyMessage}
           menuClassName={menuClassName}
           itemClassName={itemClassName}
-          focusFirstOnMount
+          focusFirstOnMount={menuMotion === "none" || isOpen}
           onDismiss={closeFromEscape}
           onSelect={handleSelect}
         />
@@ -212,6 +217,8 @@ type MenuListProps = {
   label: string;
   size: ButtonSize;
   level: number;
+  panelMotion?: MenuPanelMotion;
+  panelOpen?: boolean;
   submenuMotion: MenuSubmenuMotion;
   emptyMessage: string;
   menuClassName?: string;
@@ -228,6 +235,8 @@ function MenuList({
   label,
   size,
   level,
+  panelMotion = "none",
+  panelOpen = false,
   submenuMotion,
   emptyMessage,
   menuClassName,
@@ -332,17 +341,22 @@ function MenuList({
   const listClassName = [
     styles.menu,
     level === 0 ? styles.panel : styles.submenuList,
+    level === 0 && panelMotion !== "none" ? styles.panelAnimated : undefined,
     menuClassName,
   ].filter(Boolean).join(" ");
+  const isAnimatedPanel = level === 0 && panelMotion !== "none";
 
   return (
     <ul
       ref={listRef}
       id={id}
       className={listClassName}
+      aria-hidden={isAnimatedPanel && !panelOpen ? true : undefined}
+      inert={isAnimatedPanel && !panelOpen ? true : undefined}
       role="menu"
       aria-label={label}
       aria-orientation="vertical"
+      data-open={isAnimatedPanel ? panelOpen : undefined}
       data-size={size}
       onKeyDown={handleKeyDown}
     >

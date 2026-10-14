@@ -315,6 +315,7 @@ export type {
   MenuDividerItem,
   MenuEntry,
   MenuLinkProps,
+  MenuPanelMotion,
   MenuPlacement,
   MenuProps,
   MenuSelectEvent,

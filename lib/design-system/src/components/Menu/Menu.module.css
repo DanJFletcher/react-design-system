@@ -33,9 +33,37 @@
   inset-inline-start: 0;
 }
 
+.panelAnimated {
+  opacity: 0;
+  transform: translateY(calc(-1 * var(--ds-space-2)));
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--ds-motion-duration-standard) var(--ds-motion-easing-enter),
+    transform var(--ds-motion-duration-standard) var(--ds-motion-easing-enter),
+    visibility 0s linear;
+  transition-delay: 0s, 0s, var(--ds-motion-duration-standard);
+}
+
+.panelAnimated[data-open="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
 .root[data-placement^="top"] > .panel {
   inset-block-start: auto;
   inset-block-end: calc(100% + var(--ds-space-1));
+}
+
+.root[data-placement^="top"] > .panelAnimated {
+  transform: translateY(var(--ds-space-2));
+}
+
+.root[data-placement^="top"] > .panelAnimated[data-open="true"] {
+  transform: translateY(0);
 }
 
 .root[data-placement$="end"] > .panel {
@@ -214,7 +242,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :global(html:not([data-ds-motion-preference="full"])) .submenuAnimated {
+  :global(html:not([data-ds-motion-preference="full"])) .submenuAnimated,
+  :global(html:not([data-ds-motion-preference="full"])) .panelAnimated {
     transition: none;
     transition-delay: 0s;
   }

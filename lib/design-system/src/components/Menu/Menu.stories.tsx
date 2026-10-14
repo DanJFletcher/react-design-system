@@ -50,6 +50,7 @@ const meta = {
     triggerVariant: "secondary",
     size: "md",
     placement: "bottom-start",
+    menuMotion: "none",
     submenuMotion: "none",
     closeOnSelect: true,
     disabled: false,
@@ -70,6 +71,7 @@ const meta = {
       control: "inline-radio",
       options: ["bottom-start", "bottom-end", "top-start", "top-end"],
     },
+    menuMotion: { control: "inline-radio", options: ["none", "fade-slide"] },
     submenuMotion: { control: "inline-radio", options: ["none", "fade-slide"] },
     emptyMessage: { control: "text" },
     disabled: { control: "boolean" },
@@ -161,6 +163,58 @@ export const SizeAndPlacementExamples: Story = {
 export const OpenPreview: Story = {
   args: {
     defaultOpen: true,
+  },
+};
+
+export const TopLevelMenuMotion: Story = {
+  args: {
+    menuMotion: "fade-slide",
+  },
+  globals: { motion: "full" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { name: "Workspace" });
+    const menuId = trigger.getAttribute("aria-controls");
+    const panel = menuId
+      ? canvasElement.querySelector<HTMLElement>(`[id="${menuId}"]`)
+      : null;
+    if (!panel) throw new Error("Expected the top-level menu panel to be rendered.");
+
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await expect(panel).toHaveAttribute("aria-hidden", "true");
+    await expect(panel).toHaveAttribute("inert");
+    await userEvent.click(trigger);
+    await expect(trigger).toHaveAttribute("aria-expanded", "true");
+    await expect(panel).not.toHaveAttribute("aria-hidden", "true");
+    await expect(panel).not.toHaveAttribute("inert");
+    await expect(canvas.getByRole("menuitem", { name: "New project" })).toHaveFocus();
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
+    await expect(canvas.getByRole("menu", { name: "Workspace actions" })).toBeVisible();
+
+    await userEvent.click(trigger);
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await expect(panel).toHaveAttribute("aria-hidden", "true");
+    await expect(panel).toHaveAttribute("inert");
+    await expect(trigger).toHaveFocus();
+  },
+};
+
+export const ReducedTopLevelMotion: Story = {
+  args: {
+    menuMotion: "fade-slide",
+  },
+  globals: { motion: "reduced" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { name: "Workspace" });
+    await userEvent.click(trigger);
+    const panel = canvas.getByRole("menu", { name: "Workspace actions" });
+    await expect(document.documentElement).toHaveAttribute("data-ds-motion-preference", "reduced");
+    const transitionDurations = getComputedStyle(panel).transitionDuration;
+    await expect(
+      transitionDurations.split(",").every((duration) => Number.parseFloat(duration) === 0),
+    ).toBe(true);
+    await expect(panel).toBeVisible();
   },
 };
 
