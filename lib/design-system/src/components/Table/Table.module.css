@@ -1,0 +1,214 @@
+.viewport {
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  overflow: auto;
+  border: var(--ds-border-width-default) solid
+    var(--ds-table-border, var(--ds-color-border-control));
+  border-radius: var(--ds-table-radius, var(--ds-radius-surface));
+  background: var(--ds-table-surface, var(--ds-color-surface-primary));
+  color: var(--ds-table-text, var(--ds-color-text-primary));
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  inline-size: 100%;
+  border-spacing: 0;
+  border-collapse: separate;
+  color: var(--ds-table-text, var(--ds-color-text-primary));
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-md);
+  line-height: var(--ds-line-height-normal);
+  text-align: start;
+}
+
+.table[data-table-layout="fixed"] {
+  table-layout: fixed;
+}
+
+.table[data-table-layout="auto"] {
+  table-layout: auto;
+}
+
+.table th,
+.table td {
+  padding: var(--ds-table-padding, var(--ds-space-3));
+  overflow-wrap: anywhere;
+  vertical-align: top;
+}
+
+.table[data-density="compact"] th,
+.table[data-density="compact"] td {
+  padding-block: var(--ds-table-compact-padding, var(--ds-space-2));
+}
+
+.headerCell {
+  border-block-end: var(--ds-border-width-default) solid
+    var(--ds-table-border, var(--ds-color-border-control));
+  background: var(--ds-table-header-surface, var(--ds-color-surface-primary));
+  color: var(--ds-table-header-text, var(--ds-color-text-primary));
+  font-weight: var(--ds-font-weight-semibold);
+  text-align: start;
+}
+
+.table[data-sticky-header="true"] .headerCell {
+  position: sticky;
+  z-index: 1;
+  inset-block-start: 0;
+}
+
+.bodyCell {
+  border-block-end: var(--ds-border-width-default) solid
+    var(--ds-table-border, var(--ds-color-border-control));
+}
+
+.table[data-striped="true"] tbody tr:nth-child(even) {
+  background: var(--ds-table-striped-surface, var(--ds-color-canvas));
+}
+
+.table[data-hoverable="true"] tbody tr:hover:not([data-selected="true"]) {
+  background: var(--ds-table-row-hover, var(--ds-color-action-ghost-hover));
+}
+
+.table tbody tr[data-selected="true"] {
+  background: var(--ds-table-row-selected, var(--ds-color-action-secondary-bg));
+}
+
+.table[data-bordered="true"] th,
+.table[data-bordered="true"] td {
+  border-inline-end: var(--ds-border-width-default) solid
+    var(--ds-table-border, var(--ds-color-border-control));
+  border-block-end: var(--ds-border-width-default) solid
+    var(--ds-table-border, var(--ds-color-border-control));
+}
+
+.table[data-bordered="true"] th:last-child,
+.table[data-bordered="true"] td:last-child {
+  border-inline-end: 0;
+}
+
+.table tbody tr:last-child .bodyCell,
+.table tbody tr:last-child .selectionCell {
+  border-block-end: 0;
+}
+
+.sortButton {
+  display: inline-flex;
+  min-block-size: var(--ds-control-min-block-size-sm);
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  gap: var(--ds-table-gap, var(--ds-space-2));
+  text-align: inherit;
+}
+
+.sortButton:focus-visible,
+.selectionControl:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-focus-color, var(--ds-color-focus-ring));
+  outline-offset: var(--ds-focus-offset);
+}
+
+.sortIndicator {
+  color: var(--ds-table-muted, var(--ds-color-text-muted));
+  font-size: var(--ds-font-size-sm);
+}
+
+.selectionHeader,
+.selectionCell {
+  inline-size: 1%;
+  padding-inline: var(--ds-space-3);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.selectionHeader {
+  border-block-end: var(--ds-border-width-default) solid
+    var(--ds-table-border, var(--ds-color-border-control));
+  background: var(--ds-table-header-surface, var(--ds-color-surface-primary));
+}
+
+.selectionControl {
+  inline-size: var(--ds-space-5);
+  block-size: var(--ds-space-5);
+  margin: 0;
+  accent-color: var(--ds-color-action-primary-bg);
+  cursor: pointer;
+}
+
+.selectionControl:disabled {
+  cursor: not-allowed;
+}
+
+.table .emptyCell {
+  padding: var(--ds-table-padding, var(--ds-space-5));
+  color: var(--ds-table-muted, var(--ds-color-text-muted));
+  text-align: center;
+}
+
+.loadingMessage {
+  padding: var(--ds-space-2) var(--ds-table-padding, var(--ds-space-3));
+  border-block-end: var(--ds-border-width-default) solid
+    var(--ds-table-border, var(--ds-color-border-control));
+  background: var(--ds-table-header-surface, var(--ds-color-surface-primary));
+  color: var(--ds-table-muted, var(--ds-color-text-muted));
+  font-size: var(--ds-font-size-sm);
+}
+
+.visuallyHidden {
+  position: absolute;
+  inline-size: var(--ds-border-width-default);
+  block-size: var(--ds-border-width-default);
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.table tfoot td {
+  border-block-start: var(--ds-border-width-default) solid
+    var(--ds-table-border, var(--ds-color-border-control));
+  border-block-end: 0;
+  background: var(--ds-table-header-surface, var(--ds-color-surface-primary));
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.table caption[data-side="bottom"] {
+  caption-side: bottom;
+}
+
+@media (forced-colors: active) {
+  .viewport {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .table,
+  .headerCell,
+  .bodyCell,
+  .selectionHeader,
+  .loadingMessage,
+  .table tfoot td {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .sortButton {
+    color: ButtonText;
+  }
+
+  .sortButton:focus-visible,
+  .selectionControl:focus-visible {
+    outline-color: Highlight;
+  }
+
+  .selectionControl {
+    accent-color: Highlight;
+  }
+}

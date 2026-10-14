@@ -1296,6 +1296,84 @@
       "cssVariable": "--ds-services-text"
     },
     {
+      "name": "table.border",
+      "type": "color",
+      "description": "Table border and divider color.",
+      "cssVariable": "--ds-table-border"
+    },
+    {
+      "name": "table.compact-padding",
+      "type": "dimension",
+      "description": "Compact table cell block spacing.",
+      "cssVariable": "--ds-table-compact-padding"
+    },
+    {
+      "name": "table.gap",
+      "type": "dimension",
+      "description": "Spacing between table sort label and indicator.",
+      "cssVariable": "--ds-table-gap"
+    },
+    {
+      "name": "table.header-surface",
+      "type": "color",
+      "description": "Table header and footer background color.",
+      "cssVariable": "--ds-table-header-surface"
+    },
+    {
+      "name": "table.header-text",
+      "type": "color",
+      "description": "Table column heading text color.",
+      "cssVariable": "--ds-table-header-text"
+    },
+    {
+      "name": "table.muted",
+      "type": "color",
+      "description": "Table secondary and supporting text color.",
+      "cssVariable": "--ds-table-muted"
+    },
+    {
+      "name": "table.padding",
+      "type": "dimension",
+      "description": "Table cell internal spacing.",
+      "cssVariable": "--ds-table-padding"
+    },
+    {
+      "name": "table.radius",
+      "type": "dimension",
+      "description": "Table surface corner radius.",
+      "cssVariable": "--ds-table-radius"
+    },
+    {
+      "name": "table.row-hover",
+      "type": "color",
+      "description": "Table row hover background color.",
+      "cssVariable": "--ds-table-row-hover"
+    },
+    {
+      "name": "table.row-selected",
+      "type": "color",
+      "description": "Selected table row background color.",
+      "cssVariable": "--ds-table-row-selected"
+    },
+    {
+      "name": "table.striped-surface",
+      "type": "color",
+      "description": "Alternating table row background color.",
+      "cssVariable": "--ds-table-striped-surface"
+    },
+    {
+      "name": "table.surface",
+      "type": "color",
+      "description": "Table surface background color.",
+      "cssVariable": "--ds-table-surface"
+    },
+    {
+      "name": "table.text",
+      "type": "color",
+      "description": "Table primary text color.",
+      "cssVariable": "--ds-table-text"
+    },
+    {
       "name": "toast.border",
       "type": "color",
       "description": "Toast notification border color.",

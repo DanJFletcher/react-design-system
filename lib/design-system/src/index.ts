@@ -160,6 +160,17 @@ export type {
   SearchSize,
   SearchVariant,
 } from "./components/Search/Search";
+export { Table } from "./components/Table/Table";
+export type {
+  TableCellContext,
+  TableColumn,
+  TableDensity,
+  TableProps,
+  TableRowKey,
+  TableSelectionMode,
+  TableSort,
+  TableSortDirection,
+} from "./components/Table/Table";
 export { Textarea } from "./components/FormControls/Textarea";
 export type { TextareaProps } from "./components/FormControls/Textarea";
 export { Select } from "./components/FormControls/Select";
