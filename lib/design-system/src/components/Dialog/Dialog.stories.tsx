@@ -19,7 +19,7 @@ const meta = {
     closeLabel: "Close dialog",
     closeOnEscape: true,
     closeOnBackdropClick: false,
-    motion: "none",
+    motion: "fade",
   },
   argTypes: {
     open: { control: false },
@@ -48,6 +48,24 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {};
+
+export const DefaultMotion: Story = {
+  render: (args) => {
+    const props = { ...args };
+    delete props.motion;
+    return <DialogPlayground {...props} />;
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Open dialog" }));
+    const dialog = canvas.getByRole("dialog", { name: "Confirm the changes?" });
+    await expect(dialog).toHaveAttribute("data-motion", "fade");
+    await userEvent.click(canvas.getByRole("button", { name: "Close dialog" }));
+    await expect(dialog).toHaveAttribute("data-motion-state", "exiting");
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
+    await expect(canvas.queryByRole("dialog")).not.toBeInTheDocument();
+  },
+};
 
 export const FadeMotion: Story = {
   args: { motion: "fade" },
@@ -127,6 +145,8 @@ export const EscapeDisabled: Story = {
     const closeButton = canvas.getByRole("button", { name: "Close dialog" });
     await expect(closeButton.querySelector('[data-icon="close"]')).toBeInTheDocument();
     await userEvent.click(closeButton);
+    await expect(canvas.getByRole("dialog")).toHaveAttribute("data-motion-state", "exiting");
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
     await expect(canvas.queryByRole("dialog")).not.toBeInTheDocument();
   },
 };

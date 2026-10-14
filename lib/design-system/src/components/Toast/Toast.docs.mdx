@@ -27,11 +27,13 @@ import * as ToastStories from "./Toast.stories";
 
 ## Motion
 
+<Canvas of={ToastStories.DefaultMotion} />
+
 <Canvas of={ToastStories.FadeMotion} />
 
 <Canvas of={ToastStories.SlideMotion} />
 
-Set `motion` on a toast to `fade` or `slide`; `none` is the default. `ToastProvider` also accepts `defaultMotion` to set the treatment for notifications that do not specify one. Entrance and exit transitions use the shared standard duration and easing tokens. Reduced motion skips the transitions and removes dismissed notifications immediately.
+Toasts fade by default. Set `motion="slide"` for a vertical entrance, or `motion="none"` for immediate changes. `ToastProvider` also accepts `defaultMotion`, which defaults to `fade` for notifications that do not specify their own motion. Entrance and exit transitions use shared motion tokens. Reduced motion skips transitions and removes dismissed notifications immediately.
 
 ## Theme and scoped styling
 

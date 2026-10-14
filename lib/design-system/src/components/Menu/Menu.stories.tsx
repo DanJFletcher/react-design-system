@@ -50,8 +50,8 @@ const meta = {
     triggerVariant: "secondary",
     size: "md",
     placement: "bottom-start",
-    menuMotion: "none",
-    submenuMotion: "none",
+    menuMotion: "fade-slide",
+    submenuMotion: "fade-slide",
     closeOnSelect: true,
     disabled: false,
     defaultOpen: false,
@@ -98,6 +98,7 @@ export const Playground: Story = {
     await userEvent.click(trigger);
 
     const menu = canvas.getByRole("menu", { name: "Workspace actions" });
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
     await expect(menu).toBeVisible();
     await expect(within(menu).getAllByRole("separator")).toHaveLength(2);
     await expect(within(menu).getByRole("menuitem", { name: "Archived projects" })).toBeDisabled();
@@ -106,6 +107,7 @@ export const Playground: Story = {
 
     await userEvent.click(within(menu).getByRole("menuitem", { name: "View" }));
     const submenu = canvas.getByRole("menu", { name: "View" });
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
     await expect(submenu).toBeVisible();
     await expect(within(menu).getByRole("menuitem", { name: "View" })
       .querySelector('[data-icon="chevron-right"]')).toBeInTheDocument();
@@ -163,6 +165,43 @@ export const SizeAndPlacementExamples: Story = {
 export const OpenPreview: Story = {
   args: {
     defaultOpen: true,
+  },
+};
+
+export const DefaultMotion: Story = {
+  render: () => (
+    <Menu
+      triggerLabel="Workspace"
+      menuLabel="Workspace actions"
+      items={resolveItems(menuItems)}
+    />
+  ),
+  globals: { motion: "full" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { name: "Workspace" });
+    const menuId = trigger.getAttribute("aria-controls");
+    const panel = menuId
+      ? canvasElement.querySelector<HTMLElement>(`[id="${menuId}"]`)
+      : null;
+    if (!panel) throw new Error("Expected the default animated menu panel.");
+
+    await expect(panel).toHaveAttribute("aria-hidden", "true");
+    await userEvent.click(trigger);
+    await expect(panel).toHaveAttribute("data-open", "true");
+    await expect(canvas.getByRole("menuitem", { name: "New project" })).toHaveFocus();
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
+
+    const submenuTrigger = canvas.getByRole("menuitem", { name: "View" });
+    await userEvent.click(submenuTrigger);
+    const submenu = canvas.getByRole("menu", { name: "View" });
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
+    await expect(submenu).toBeVisible();
+    await expect(submenu.parentElement).toHaveAttribute("data-open", "true");
+
+    await userEvent.click(trigger);
+    await expect(panel).toHaveAttribute("aria-hidden", "true");
+    await expect(panel).toHaveAttribute("inert");
   },
 };
 

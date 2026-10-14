@@ -52,7 +52,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(function Toast(
     icon,
     action,
     duration = 5000,
-    motion = "none",
+    motion = "fade",
     closeLabel = "Dismiss notification",
     onDismiss,
     className,
@@ -259,7 +259,7 @@ export function ToastProvider({
   label = "Notifications",
   maxVisible = 5,
   defaultDuration = 5000,
-  defaultMotion = "none",
+  defaultMotion = "fade",
   className,
   style,
 }: ToastProviderProps) {

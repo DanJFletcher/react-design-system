@@ -18,7 +18,7 @@ const meta = {
     description: "Your profile is up to date.",
     variant: "info",
     duration: 5000,
-    motion: "none",
+    motion: "fade",
     closeLabel: "Dismiss notification",
     onDismiss: () => undefined,
   },
@@ -55,6 +55,8 @@ export const Playground: Story = {
     const closeButton = canvas.getByRole("button", { name: "Dismiss notification" });
     await expect(closeButton.querySelector('[data-icon="close"]')).toBeInTheDocument();
     await userEvent.click(closeButton);
+    await expect(toast).toHaveAttribute("data-motion-state", "exiting");
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
     await expect(canvas.queryByRole("status")).not.toBeInTheDocument();
   },
 };
@@ -98,6 +100,19 @@ export const ReducedMotion: Story = {
   },
 };
 
+export const DefaultMotion: Story = {
+  render: () => (
+    <ToastProvider>
+      <DefaultMotionPlayground />
+    </ToastProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Show default toast" }));
+    await expect(canvas.getByRole("status")).toHaveAttribute("data-motion", "fade");
+  },
+};
+
 export const Variants: Story = {
   render: () => (
     <ToastProvider>
@@ -117,6 +132,8 @@ export const Action: Story = {
     await userEvent.click(canvas.getByRole("button", { name: "Show actionable toast" }));
     await expect(canvas.getByRole("status")).toHaveTextContent("File uploaded");
     await userEvent.click(canvas.getByRole("button", { name: "Undo" }));
+    await expect(canvas.getByRole("status")).toHaveAttribute("data-motion-state", "exiting");
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
     await expect(canvas.queryByRole("status")).not.toBeInTheDocument();
     await expect(canvas.getByText("Undo complete")).toBeVisible();
   },
@@ -185,6 +202,15 @@ function ToastPlayground(args: ToastProps) {
       })}
     >
       Show toast
+    </Button>
+  );
+}
+
+function DefaultMotionPlayground() {
+  const { showToast } = useToast();
+  return (
+    <Button onClick={() => showToast({ title: "Default toast motion", duration: 0 })}>
+      Show default toast
     </Button>
   );
 }

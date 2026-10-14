@@ -58,7 +58,7 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
     closeLabel = "Close dialog",
     closeOnEscape = true,
     closeOnBackdropClick = false,
-    motion = "none",
+    motion = "fade",
     className,
     style,
     onClose,

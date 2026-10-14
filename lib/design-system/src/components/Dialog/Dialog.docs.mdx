@@ -29,11 +29,13 @@ The default size is `md`; `sm` and `lg` change the maximum width while the dialo
 
 ## Motion
 
+<Canvas of={DialogStories.DefaultMotion} />
+
 <Canvas of={DialogStories.FadeMotion} />
 
 <Canvas of={DialogStories.SlideMotion} />
 
-Set `motion` to `fade` or `slide` to animate controlled openings and close requests. The default is `none`, which preserves immediate open and close behavior. Transitions use the shared standard duration and easing tokens; reduced motion opens and closes immediately. During an animated close, the native modal remains open until the exit transition completes, preserving modal focus behavior. A native `form method="dialog"` or an imperative `dialog.close()` closes immediately.
+Dialogs fade by default. Set `motion="slide"` for a vertical entrance, or `motion="none"` for immediate open and close behavior. Transitions use shared motion tokens; reduced motion opens and closes immediately. During an animated close, the native modal remains open until the exit transition completes, preserving modal focus behavior. A native `form method="dialog"` or an imperative `dialog.close()` closes immediately.
 
 ## Theme and scoped styling
 
