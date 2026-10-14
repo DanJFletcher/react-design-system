@@ -49,6 +49,8 @@
     { "file": "Progress/Progress.module.css", "selector": ".indicator", "role": "inherited", "reason": "Progress fill follows its track corners." },
     { "file": "Tabs/Tabs.module.css", "selector": ".tab", "role": "action", "reason": "Tab-selection button, not its surrounding list." },
     { "file": "Testimonials/Testimonials.module.css", "selector": ".avatar", "role": "circle", "reason": "Equal-sized testimonial portrait." },
-    { "file": "Toast/Toast.module.css", "selector": ".action, .closeButton", "role": "action", "reason": "Notification actions and dismissal buttons." }
+    { "file": "Toast/Toast.module.css", "selector": ".action, .closeButton", "role": "action", "reason": "Notification actions and dismissal buttons." },
+    { "file": "AnnouncementBar/AnnouncementBar.module.css", "selector": ".bar", "role": "shape", "reason": "The shallow full-width announcement bar uses the bounded rounded-shape token so it stays a rectangle instead of a capsule." },
+    { "file": "AnnouncementBar/AnnouncementBar.module.css", "selector": ".dismiss", "role": "action", "reason": "The announcement dismissal button follows the theme's control corner shape." }
   ]
 }

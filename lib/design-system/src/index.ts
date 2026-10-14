@@ -16,6 +16,13 @@ export type {
 } from "./components/Badge/Badge";
 export { Callout } from "./components/Callout/Callout";
 export type { CalloutProps, CalloutTone } from "./components/Callout/Callout";
+export { AnnouncementBar } from "./components/AnnouncementBar/AnnouncementBar";
+export type {
+  AnnouncementBarAlignment,
+  AnnouncementBarProps,
+  AnnouncementBarSize,
+  AnnouncementBarTone,
+} from "./components/AnnouncementBar/AnnouncementBar";
 export { Progress } from "./components/Progress/Progress";
 export type { ProgressProps } from "./components/Progress/Progress";
 export { ContactSection } from "./components/ContactSection/ContactSection";

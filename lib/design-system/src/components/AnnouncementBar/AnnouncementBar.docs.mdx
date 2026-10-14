@@ -1,0 +1,33 @@
+import { Canvas, Controls, Meta } from "@storybook/addon-docs/blocks";
+import * as AnnouncementBarStories from "./AnnouncementBar.stories";
+
+<Meta of={AnnouncementBarStories} />
+
+# AnnouncementBar
+
+A compact, site-wide notice for promotions, seasonal hours, and service updates.
+
+## Playground
+
+<Canvas of={AnnouncementBarStories.Playground} />
+<Controls of={AnnouncementBarStories.Playground} />
+
+## Appearance and behavior
+
+<Canvas of={AnnouncementBarStories.Tones} />
+<Canvas of={AnnouncementBarStories.Sizes} />
+<Canvas of={AnnouncementBarStories.Sticky} />
+<Canvas of={AnnouncementBarStories.DismissibleUncontrolled} />
+<Canvas of={AnnouncementBarStories.ControlledVisibility} />
+<Canvas of={AnnouncementBarStories.LongMobileCopyAndAction} />
+<Canvas of={AnnouncementBarStories.ThemeCoverage} />
+
+## Placement and persistence
+
+- Place the announcement before the site `Header` in DOM order so visitors encounter the notice before navigating the site.
+- `sticky` uses `position: sticky` at the top of its containing scroll context. It remains in normal document flow and is not portaled or fixed to the viewport.
+- Visibility is uncontrolled by default and starts visible. Use `visible` with `onVisibleChange` for controlled state, or `defaultVisible` for an initially hidden uncontrolled bar.
+- Dismissal calls `onVisibleChange(false)`. The component does not persist dismissal; the host application owns any persistence policy.
+- `children` is required visible message text. `title`, `icon`, and `action` are optional slots; provide a text label for icon-only actions supplied by the host.
+- The region and dismiss button have configurable accessible names through `announcementLabel` and `dismissLabel`. The icon slot is decorative for assistive technology.
+- Tones follow Callout: `info`, `success`, `warning`, `error`, and `neutral`. The component uses design tokens and supports forced-colors mode.
