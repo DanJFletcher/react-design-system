@@ -7,6 +7,9 @@ const config: StorybookConfig = {
     "../stories/**/*.mdx",
   ],
   addons: ["@storybook/addon-docs", "@storybook/addon-a11y", "@storybook/addon-vitest"],
+  core: {
+    allowedHosts: true,
+  },
   framework: {
     name: "@storybook/react-vite",
     options: {},

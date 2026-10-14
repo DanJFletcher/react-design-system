@@ -1764,6 +1764,49 @@
       "radius.form-group": "16px",
       "radius.textarea": "16px",
       "radius.menu": "16px"
+    },
+    "sublime": {
+      "color.canvas": "#1F242C",
+      "color.surface.primary": "#282E37",
+      "color.text.primary": "#EDF0F3",
+      "color.text.muted": "#B1BAC5",
+      "color.text.error": "#FF8091",
+      "color.border.control": "#77879A",
+      "color.border.error": "#FF8091",
+      "color.action.primary.bg": "#66D9EF",
+      "color.action.primary.hover": "#8BE4F3",
+      "color.action.primary.pressed": "#43BED4",
+      "color.action.primary.fg": "#1F242C",
+      "color.action.secondary.bg": "#343B46",
+      "color.action.secondary.fg": "#EDF0F3",
+      "color.action.secondary.hover": "#424B57",
+      "color.action.secondary.pressed": "#2B3039",
+      "color.action.ghost.fg": "#A6E22E",
+      "color.action.ghost.hover": "#2A3C31",
+      "color.action.ghost.pressed": "#304938",
+      "color.action.disabled.bg": "#3A414C",
+      "color.action.disabled.fg": "#BBC2CC",
+      "color.focus.ring": "#66D9EF",
+      "color.accent.bg": "#E6DB74",
+      "color.accent.fg": "#252A30",
+      "color.accent.border": "#7E722D",
+      "color.status.success.bg": "#233A31",
+      "color.status.success.fg": "#AFE8BD",
+      "color.status.warning.bg": "#45371F",
+      "color.status.warning.fg": "#FFD176",
+      "color.status.error.bg": "#47252D",
+      "color.status.error.fg": "#FF9AA7",
+      "border.width.default": "1px",
+      "shadow.color": "#11161E",
+      "shadow.offset.surface": "0px",
+      "shadow.offset.control": "0px",
+      "radius.surface": "4px",
+      "radius.control": "4px",
+      "radius.tooltip": "4px",
+      "radius.form-control": "4px",
+      "radius.form-group": "4px",
+      "radius.textarea": "4px",
+      "radius.menu": "4px"
     }
   },
   "contrast": [
@@ -2576,6 +2619,209 @@
       "theme": "orchid",
       "name": "Error boundary on surface",
       "ratio": 7.152,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Primary action",
+      "ratio": 9.456,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Primary hover",
+      "ratio": 10.757,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Primary pressed",
+      "ratio": 7.093,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Secondary action",
+      "ratio": 9.87,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Secondary hover",
+      "ratio": 7.728,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Secondary pressed",
+      "ratio": 11.586,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Ghost action",
+      "ratio": 10.052,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Ghost hover",
+      "ratio": 7.568,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Ghost pressed",
+      "ratio": 6.339,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Disabled action",
+      "ratio": 5.735,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Primary text",
+      "ratio": 13.63,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Muted text",
+      "ratio": 7.943,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Error text on canvas",
+      "ratio": 6.495,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Error text on surface",
+      "ratio": 5.695,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Accent",
+      "ratio": 10.154,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Success status",
+      "ratio": 8.774,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Warning status",
+      "ratio": 8.044,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Error status",
+      "ratio": 6.643,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "File action",
+      "ratio": 9.87,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Disabled file action",
+      "ratio": 5.735,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Focus ring on canvas",
+      "ratio": 9.456,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Focus ring on surface",
+      "ratio": 8.291,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Control boundary on canvas",
+      "ratio": 4.244,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Control boundary on surface",
+      "ratio": 3.721,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Accent callout boundary on canvas",
+      "ratio": 3.216,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Accent callout boundary on accent surface",
+      "ratio": 3.405,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Active switch track and thumb",
+      "ratio": 8.291,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Error boundary on canvas",
+      "ratio": 6.495,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Error boundary on surface",
+      "ratio": 5.695,
       "minimum": 3,
       "kind": "indicator"
     }

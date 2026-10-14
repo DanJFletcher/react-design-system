@@ -43,7 +43,7 @@ test("Testimonials inherits themes and existing Card styling hooks", async ({ pa
   await page.goto("/iframe.html?id=components-testimonials--theme-coverage&viewMode=story");
 
   const themedCards = page.locator("[data-ds-theme] article");
-  await expect(themedCards).toHaveCount(8);
+  await expect(themedCards).toHaveCount(10);
   const backgrounds = await themedCards.evaluateAll((elements) =>
     elements.map((element) => getComputedStyle(element).backgroundColor),
   );

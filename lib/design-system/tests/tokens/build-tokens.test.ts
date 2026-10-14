@@ -11,13 +11,16 @@ test("generation is deterministic and produces complete themes", async () => {
   const first = await compileTokens(source);
   const second = await compileTokens(source);
   assert.deepEqual([...first.files], [...second.files]);
-  assert.deepEqual([...first.themes.keys()].sort(), ["acme", "atom", "luna", "orchid"]);
+  assert.deepEqual([...first.themes.keys()].sort(), ["acme", "atom", "luna", "orchid", "sublime"]);
   assert.equal(Object.keys(first.themes.get("acme")!).length, Object.keys(first.themes.get("luna")!).length);
   assert.equal(first.themes.get("orchid")!["color.canvas"], "#FFF2FD");
   assert.equal(first.themes.get("atom")!["color.canvas"], "#11111D");
   assert.equal(first.themes.get("atom")!["border.width.default"], "3px");
   assert.equal(first.themes.get("atom")!["shadow.offset.surface"], "6px");
   assert.equal(first.themes.get("atom")!["shadow.offset.control"], "3px");
+  assert.equal(first.themes.get("sublime")!["color.canvas"], "#1F242C");
+  assert.equal(first.themes.get("sublime")!["color.action.primary.bg"], "#66D9EF");
+  assert.equal(first.themes.get("sublime")!["radius.surface"], "4px");
   assert.ok(first.contrastResults.length >= 45);
   assert.ok(first.contrastResults.every((result) => result.ratio >= result.minimum));
 });

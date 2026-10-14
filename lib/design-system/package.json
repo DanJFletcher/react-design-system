@@ -24,7 +24,8 @@
     "./themes/acme.css": "./dist/themes/acme.css",
     "./themes/luna.css": "./dist/themes/luna.css",
     "./themes/orchid.css": "./dist/themes/orchid.css",
-    "./themes/atom.css": "./dist/themes/atom.css"
+    "./themes/atom.css": "./dist/themes/atom.css",
+    "./themes/sublime.css": "./dist/themes/sublime.css"
   },
   "peerDependencies": {
     "react": ">=18"

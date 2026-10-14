@@ -4,13 +4,15 @@ import "../src/components/Button/Button.module.css";
 import "../src/generated/themes/acme.css";
 import "../src/generated/themes/luna.css";
 import "../src/generated/themes/orchid.css";
-import "../src/theme-css/atom";
+import "../src/generated/themes/atom.css";
+import "../src/theme-css/sublime";
+import "../src/theme-css/atom.css";
 import "./preview.css";
 
 const withTheme: Decorator = (Story, context) => {
   const activeTheme = context.globals.theme;
   const theme =
-    activeTheme === "luna" || activeTheme === "orchid" || activeTheme === "atom"
+    activeTheme === "luna" || activeTheme === "orchid" || activeTheme === "atom" || activeTheme === "sublime"
       ? activeTheme
       : "acme";
   return (
@@ -33,6 +35,7 @@ const preview: Preview = {
           { value: "luna", title: "Luna" },
           { value: "orchid", title: "Orchid" },
           { value: "atom", title: "Atom" },
+          { value: "sublime", title: "Sublime" },
         ],
         dynamicTitle: true,
       },

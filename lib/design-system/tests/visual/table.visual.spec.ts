@@ -168,11 +168,11 @@ test("table search can be controlled by its consumer", async ({ page }) => {
 test("table themes keep distinct surfaces and custom hook overrides apply", async ({ page }) => {
   await page.goto("/iframe.html?id=components-table--theme-coverage&viewMode=story");
   const tables = page.locator("table[aria-label$='business table']");
-  await expect(tables).toHaveCount(4);
+  await expect(tables).toHaveCount(5);
   const backgrounds = await tables.evaluateAll((elements) =>
     elements.map((element) => getComputedStyle(element).color),
   );
-  expect(new Set(backgrounds).size).toBe(4);
+  expect(new Set(backgrounds).size).toBe(5);
   const lunaViewport = page
     .locator("section[aria-label='luna theme'] table")
     .locator("xpath=parent::div");

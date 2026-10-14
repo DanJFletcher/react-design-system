@@ -64,7 +64,7 @@ test("Gallery theme coverage preserves surface radii and scoped hooks", async ({
   await page.goto("/iframe.html?id=components-gallery--theme-coverage&viewMode=story");
 
   const galleries = page.locator('[data-ds-theme] [aria-label$="project gallery"]');
-  await expect(galleries).toHaveCount(4);
+  await expect(galleries).toHaveCount(5);
   const luna = galleries.nth(1);
   const lunaFrame = luna.locator('[data-variant="framed"]').first();
   await expect(lunaFrame).toBeVisible();

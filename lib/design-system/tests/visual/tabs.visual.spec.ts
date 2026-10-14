@@ -116,7 +116,7 @@ test("Tabs inherit action colors from each theme and nested theme boundary", asy
   await page.goto("/iframe.html?id=components-tabs--theme-coverage&viewMode=story");
 
   const themeBackgrounds = [];
-  for (const theme of ["acme", "atom", "luna", "orchid"]) {
+  for (const theme of ["acme", "atom", "luna", "orchid", "sublime"]) {
     const selectedTab = page.locator(
       `[data-ds-theme="${theme}"] > div > [role="tablist"] > [role="tab"][aria-selected="true"]`,
     );
@@ -124,7 +124,7 @@ test("Tabs inherit action colors from each theme and nested theme boundary", asy
       await selectedTab.evaluate((element) => getComputedStyle(element).backgroundColor),
     );
   }
-  expect(new Set(themeBackgrounds).size).toBe(4);
+  expect(new Set(themeBackgrounds).size).toBe(5);
 
   await page.goto("/iframe.html?id=components-tabs--nested-theme-boundary&viewMode=story");
   const outerTab = page.getByRole("tab", { name: "Overview" }).first();

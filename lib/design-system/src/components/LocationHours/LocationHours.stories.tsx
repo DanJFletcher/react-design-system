@@ -279,7 +279,7 @@ export const StackedLayout: Story = {
 export const ThemeCoverage: Story = {
   render: () => (
     <div style={{ display: "grid", gap: "var(--ds-space-5)" }}>
-      {(["acme", "luna", "orchid", "atom"] as const).map((theme) => (
+      {(["acme", "luna", "orchid", "atom", "sublime"] as const).map((theme) => (
         <section
           key={theme}
           aria-label={`${theme} theme`}

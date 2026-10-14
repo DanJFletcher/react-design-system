@@ -3,7 +3,7 @@ name: Storybook theme coverage ordering
 description: How to expand existing theme comparison stories without breaking positional visual checks.
 ---
 
-Append new built-in themes after the existing ACME, Luna, and Orchid entries in comparison arrays.
+Append each new built-in theme after the existing entries in comparison arrays. The current order is ACME, Luna, Orchid, Atom, then Sublime.
 
 **Why:** Some visual tests and examples address themes by their position in the rendered list; inserting a theme earlier can make a test inspect the wrong theme without changing its locator.
 

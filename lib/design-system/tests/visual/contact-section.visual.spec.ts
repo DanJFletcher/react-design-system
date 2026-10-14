@@ -58,7 +58,7 @@ test("Split contact layout stacks on mobile while preserving the desktop form co
 test("ContactSection inherits theme boundaries and scoped component hooks", async ({ page }) => {
   await page.goto("/iframe.html?id=components-contact-section--theme-coverage&viewMode=story");
   const sections = page.locator("[data-ds-theme] section[aria-labelledby]");
-  await expect(sections).toHaveCount(4);
+  await expect(sections).toHaveCount(5);
   const backgrounds = await sections.evaluateAll((elements) =>
     elements.map((element) => getComputedStyle(element).backgroundColor),
   );

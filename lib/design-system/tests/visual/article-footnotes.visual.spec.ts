@@ -40,11 +40,11 @@ test("footnotes inherit theme boundaries", async ({ page }) => {
   await page.goto("/iframe.html?id=components-article-footnotes--theme-coverage&viewMode=story");
 
   const themedFootnotes = page.locator("[data-ds-theme] section[aria-labelledby]");
-  await expect(themedFootnotes).toHaveCount(4);
+  await expect(themedFootnotes).toHaveCount(5);
   const borderColors = await themedFootnotes.evaluateAll((elements) =>
     elements.map((element) => getComputedStyle(element).borderBlockStartColor),
   );
-  expect(new Set(borderColors).size).toBe(4);
+  expect(new Set(borderColors).size).toBe(5);
 });
 
 test("footnote content fits a narrow viewport without horizontal page overflow", async ({ page }) => {

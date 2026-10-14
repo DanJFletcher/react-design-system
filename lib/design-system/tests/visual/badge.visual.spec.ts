@@ -19,7 +19,7 @@ test("Every Badge tone maintains readable text contrast across built-in themes",
   await page.goto("/iframe.html?id=components-badge--theme-coverage&viewMode=story");
 
   const themeBadges = page.locator('section[data-ds-theme] span[data-tone]');
-  await expect(themeBadges).toHaveCount(20);
+  await expect(themeBadges).toHaveCount(25);
   const ratios = await themeBadges.evaluateAll((elements) => {
     const parseColor = (value: string): [number, number, number] => {
       const channels = value.match(/\d+(?:\.\d+)?/g)!.map(Number);
@@ -46,7 +46,7 @@ test("Every Badge tone maintains readable text contrast across built-in themes",
     });
   });
 
-  expect(ratios).toHaveLength(20);
+  expect(ratios).toHaveLength(25);
   expect(ratios.every((ratio) => ratio >= 4.5)).toBe(true);
 });
 

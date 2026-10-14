@@ -39,7 +39,7 @@ test("table of contents inherits built-in, custom, and nested theme tokens", asy
   );
 
   const navigation = page.locator("nav[aria-label$='article table of contents']");
-  await expect(navigation).toHaveCount(6);
+  await expect(navigation).toHaveCount(7);
   const borderColors = await navigation.evaluateAll((elements) =>
     elements.map((element) => getComputedStyle(element).borderTopColor),
   );

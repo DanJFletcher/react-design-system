@@ -60,7 +60,7 @@ test("Progress forwards descriptions and uses the active theme colors", async ({
 
   await page.goto("/iframe.html?id=components-progress--theme-coverage&viewMode=story");
   const progressBars = page.locator("[data-ds-theme] [role='progressbar']");
-  await expect(progressBars).toHaveCount(4);
+  await expect(progressBars).toHaveCount(5);
   const indicatorColors = await progressBars.evaluateAll((elements) =>
     elements.map((element) => getComputedStyle(element.firstElementChild!).backgroundColor),
   );

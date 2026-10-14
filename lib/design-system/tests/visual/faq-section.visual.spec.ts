@@ -67,7 +67,7 @@ test("FAQSection inherits themes, nested boundaries, and scoped styles", async (
   await page.goto("/iframe.html?id=components-faq-section--theme-coverage&viewMode=story");
 
   const themedSections = page.locator("[data-ds-theme] section");
-  await expect(themedSections).toHaveCount(4);
+  await expect(themedSections).toHaveCount(5);
   const themeColors = await themedSections.evaluateAll((elements) =>
     elements.map((element) => getComputedStyle(element).color),
   );

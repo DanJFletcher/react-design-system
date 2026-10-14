@@ -52,7 +52,7 @@ test("Search exposes a visible label and supports disabled state", async ({ page
 test("Search keeps the form control radius and custom hooks scoped across themes", async ({ page }) => {
   await page.goto("/iframe.html?id=components-search--theme-coverage&viewMode=story");
   const fields = page.locator("[data-ds-theme] input[type='search']");
-  await expect(fields).toHaveCount(4);
+  await expect(fields).toHaveCount(5);
   const luna = page.locator("[data-ds-theme='luna'] input[type='search']");
   await expect(luna).toHaveCSS("border-radius", "9999px");
 

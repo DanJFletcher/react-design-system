@@ -179,7 +179,7 @@ export const VariantExamples: Story = {
 export const ThemeCoverage: Story = {
   render: () => (
     <div style={{ display: "grid", gap: "var(--ds-space-4)" }}>
-      {(["acme", "luna", "orchid", "atom"] as const).map((theme) => (
+      {(["acme", "luna", "orchid", "atom", "sublime"] as const).map((theme) => (
         <div key={theme} data-ds-theme={theme}>
           <Carousel
             label={`${theme.toUpperCase()} featured content`}

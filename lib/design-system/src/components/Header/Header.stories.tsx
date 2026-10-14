@@ -75,7 +75,7 @@ export const StickyWithoutBorder: Story = {
 export const ThemeCoverage: Story = {
   render: () => (
     <div style={{ display: "grid", gap: "var(--ds-space-6)" }}>
-      {(["acme", "luna", "orchid", "atom"] as const).map((theme) => (
+      {(["acme", "luna", "orchid", "atom", "sublime"] as const).map((theme) => (
         <section key={theme} data-ds-theme={theme}>
           <h2>{theme.toUpperCase()}</h2>
           <Header

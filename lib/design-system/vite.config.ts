@@ -22,6 +22,7 @@ export default defineConfig({
         "themes/luna": resolve(packageRoot, "src/theme-css/luna.ts"),
         "themes/orchid": resolve(packageRoot, "src/theme-css/orchid.ts"),
         "themes/atom": resolve(packageRoot, "src/theme-css/atom.ts"),
+        "themes/sublime": resolve(packageRoot, "src/theme-css/sublime.ts"),
       },
       formats: ["es"],
     },
@@ -33,7 +34,7 @@ export default defineConfig({
         assetFileNames: (asset) => {
           if (!asset.name?.endsWith(".css")) return "assets/[name]-[hash][extname]";
           if (asset.name === "index.css") return "styles.css";
-          if (["acme", "luna", "orchid", "atom"].some((theme) => asset.name?.includes(theme))) {
+          if (["acme", "luna", "orchid", "atom", "sublime"].some((theme) => asset.name?.includes(theme))) {
             return "themes/[name][extname]";
           }
           return "[name][extname]";

@@ -116,7 +116,7 @@ export const FullArticle: Story = {
 export const ThemeCoverage: Story = {
   render: (args) => (
     <div className="theme-story-stack">
-      {(["acme", "luna", "orchid", "atom"] as const).map((theme) => (
+      {(["acme", "luna", "orchid", "atom", "sublime"] as const).map((theme) => (
         <section
           key={theme}
           data-ds-theme={theme}

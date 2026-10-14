@@ -96,7 +96,7 @@ export const Playground: Story = {};
 export const ThemeCoverage: Story = {
   render: (args) => (
     <div style={{ display: "grid", gap: "var(--ds-space-6)" }}>
-      {(["acme", "luna", "orchid", "atom"] as const).map((theme) => (
+      {(["acme", "luna", "orchid", "atom", "sublime"] as const).map((theme) => (
         <div
           key={theme}
           data-ds-theme={theme}

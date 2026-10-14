@@ -79,7 +79,7 @@ export const LunaSurfaces: Story = {
 export const ThemeComparison: Story = {
   render: () => (
     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 18rem), 1fr))", gap: "var(--ds-space-6)" }}>
-      {["acme", "luna", "orchid", "atom"].map((theme) => (
+      {["acme", "luna", "orchid", "atom", "sublime"].map((theme) => (
         <div key={theme} data-ds-theme={theme} style={{ background: "var(--ds-color-canvas)", color: "var(--ds-color-text-primary)", padding: "var(--ds-space-4)", minWidth: 0 }}>
           <Examples name={theme} />
         </div>

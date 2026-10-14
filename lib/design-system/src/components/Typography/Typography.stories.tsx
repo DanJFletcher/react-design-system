@@ -108,7 +108,7 @@ export const WeightsAndTones: Story = {
 export const ThemeCoverage: Story = {
   render: () => (
     <div className="theme-story-stack">
-      {(["acme", "luna", "orchid", "atom"] as const).map((theme) => (
+      {(["acme", "luna", "orchid", "atom", "sublime"] as const).map((theme) => (
         <section
           key={theme}
           className="theme-story-stack"
