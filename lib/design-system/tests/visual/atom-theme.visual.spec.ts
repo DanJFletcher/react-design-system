@@ -115,9 +115,21 @@ test("Atom uses a dark palette, thick borders, and hard shadows", async ({
   )).toContain("linear-gradient(135deg");
 
   const ghostButton = page.getByTestId("atom-ghost-button");
-  expect(await ghostButton.evaluate((element) =>
-    getComputedStyle(element).backgroundImage,
-  )).toBe("none");
+  const ghostStyles = await ghostButton.evaluate((element) => {
+    const styles = getComputedStyle(element);
+    return {
+      backgroundImage: styles.backgroundImage,
+      borderColor: styles.borderTopColor,
+      borderStyle: styles.borderTopStyle,
+      borderWidth: styles.borderTopWidth,
+      boxShadow: styles.boxShadow,
+    };
+  });
+  expect(ghostStyles.backgroundImage).toBe("none");
+  expect(ghostStyles.borderWidth).toBe("1px");
+  expect(ghostStyles.borderStyle).toBe("solid");
+  expect(ghostStyles.borderColor).toBe("rgb(255, 61, 141)");
+  expect(ghostStyles.boxShadow).toContain("rgb(255, 61, 141)");
   await ghostButton.hover();
   expect(await ghostButton.evaluate((element) =>
     getComputedStyle(element).backgroundImage,
@@ -126,6 +138,9 @@ test("Atom uses a dark palette, thick borders, and hard shadows", async ({
   expect(await secondaryButton.evaluate((element) =>
     getComputedStyle(element).backgroundImage,
   )).toBe("none");
+  expect(await ghostButton.evaluate((element) =>
+    getComputedStyle(element).borderColor,
+  )).not.toBe("rgb(255, 61, 141)");
   await page.emulateMedia({ forcedColors: "none" });
 
   const inputStyles = await page.getByTestId("atom-text-field").evaluate((element) => {

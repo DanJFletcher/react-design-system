@@ -80,9 +80,17 @@
     );
   }
 
+  :scope button[data-ds-button-variant="ghost"] {
+    border: 1px solid var(--ds-shadow-color);
+  }
+
   @media (forced-colors: active) {
     :scope button[data-ds-button-variant] {
       background-image: none;
+    }
+
+    :scope button[data-ds-button-variant="ghost"] {
+      border-color: ButtonText;
     }
   }
 }
