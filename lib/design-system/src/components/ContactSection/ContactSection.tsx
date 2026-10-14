@@ -49,6 +49,18 @@ export type BusinessHour = {
   intervals?: readonly BusinessHourInterval[];
 };
 
+export type BusinessHoursException = {
+  id: string;
+  /** Local calendar date at the business location, in YYYY-MM-DD format. */
+  date: string;
+  /** Optional holiday or event name, such as "Thanksgiving". */
+  label?: string;
+  /** Human-readable hours shown in the schedule. */
+  hours: string;
+  /** Replaces the regular hours on this date. An empty list means closed. */
+  intervals: readonly BusinessHourInterval[];
+};
+
 type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 export type ContactSectionProps = Omit<
@@ -61,6 +73,7 @@ export type ContactSectionProps = Omit<
   contactMethods?: readonly ContactMethod[];
   hours?: readonly BusinessHour[];
   hoursStatus?: ReactNode;
+  hoursSupplement?: ReactNode;
   action?: ReactNode;
   form?: ReactNode;
   addressHeading?: string;
@@ -80,6 +93,7 @@ export const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(funct
     contactMethods = [],
     hours = [],
     hoursStatus,
+    hoursSupplement,
     action,
     form,
     addressHeading = "Visit us",
@@ -102,7 +116,10 @@ export const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(funct
     && (address.lines.length > 0 || address.directionsHref != null);
   const hasAction = action != null && action !== false;
   const hasForm = form != null && form !== false;
-  const hasDetails = hasAddress || contactMethods.length > 0 || hours.length > 0 || hasAction;
+  const hasHoursStatus = hoursStatus != null && hoursStatus !== false;
+  const hasHoursSupplement = hoursSupplement != null && hoursSupplement !== false;
+  const hasDetails = hasAddress || contactMethods.length > 0 || hours.length > 0
+    || hasHoursStatus || hasHoursSupplement || hasAction;
 
   return (
     <section
@@ -181,18 +198,21 @@ export const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(funct
               </div>
             )}
 
-            {hours.length > 0 && (
+            {(hours.length > 0 || hasHoursStatus || hasHoursSupplement) && (
               <div className={styles.group}>
                 <DetailHeading className={styles.groupHeading}>{hoursHeading}</DetailHeading>
-                {hoursStatus}
-                <dl className={styles.list}>
-                  {hours.map(({ id, day, hours: dailyHours }) => (
-                    <div className={styles.row} key={id}>
-                      <dt className={styles.term}>{day}</dt>
-                      <dd className={styles.definition}>{dailyHours}</dd>
-                    </div>
-                  ))}
-                </dl>
+                {hasHoursStatus && hoursStatus}
+                {hours.length > 0 && (
+                  <dl className={styles.list}>
+                    {hours.map(({ id, day, hours: dailyHours }) => (
+                      <div className={styles.row} key={id}>
+                        <dt className={styles.term}>{day}</dt>
+                        <dd className={styles.definition}>{dailyHours}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
+                {hasHoursSupplement && hoursSupplement}
               </div>
             )}
 

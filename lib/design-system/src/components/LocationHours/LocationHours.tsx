@@ -10,12 +10,18 @@ import type { DesignSystemStyle } from "../../generated/token-types";
 import {
   ContactSection,
   type BusinessHour,
+  type BusinessHoursException,
   type ContactAddress,
   type ContactMethod,
   type ContactSectionHeadingLevel,
   type ContactSectionVariant,
 } from "../ContactSection/ContactSection";
-import { getLocationHoursStatus } from "./locationHoursStatus";
+import {
+  formatBusinessDate,
+  getBusinessDateKey,
+  getLocationHoursStatus,
+  validateBusinessHoursExceptions,
+} from "./locationHoursStatus";
 import styles from "./LocationHours.module.css";
 
 export type LocationHoursLayout = "split" | "stacked";
@@ -26,6 +32,8 @@ export type LocationHoursOpenStatusOptions = {
   /** Locale used to format times and relative days. Defaults to the browser locale. */
   locale?: string;
 };
+
+type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 export type LocationHoursPhone = {
   value: string;
@@ -43,7 +51,10 @@ export type LocationHoursProps = Omit<
   description?: ReactNode;
   phone?: LocationHoursPhone;
   map?: ReactNode;
+  /** IANA timezone used for special-hours dates; openStatus.timeZone takes precedence. */
+  timeZone?: string;
   openStatus?: LocationHoursOpenStatusOptions;
+  specialHours?: readonly BusinessHoursException[];
   mapLabel?: string;
   addressHeading?: string;
   contactHeading?: string;
@@ -64,7 +75,9 @@ export const LocationHours = forwardRef<HTMLDivElement, LocationHoursProps>(
       description,
       phone,
       map,
+      timeZone,
       openStatus,
+      specialHours = [],
       mapLabel = "Map showing the location",
       addressHeading = "Visit us",
       contactHeading = "Contact",
@@ -80,17 +93,51 @@ export const LocationHours = forwardRef<HTMLDivElement, LocationHoursProps>(
     ref,
   ) {
     const [currentTime, setCurrentTime] = useState(() => new Date());
-    const isOpenStatusEnabled = openStatus != null;
+    const hasTimeSensitiveHours = openStatus != null || specialHours.length > 0;
 
     useEffect(() => {
-      if (!isOpenStatusEnabled) return;
+      if (!hasTimeSensitiveHours) return;
       const intervalId = globalThis.setInterval(() => setCurrentTime(new Date()), 60_000);
       return () => globalThis.clearInterval(intervalId);
-    }, [isOpenStatusEnabled]);
+    }, [hasTimeSensitiveHours]);
 
+    const businessTimeZone = openStatus?.timeZone
+      ?? timeZone
+      ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const specialHoursByDate = validateBusinessHoursExceptions(specialHours);
+    const today = specialHours.length > 0
+      ? getBusinessDateKey(currentTime, businessTimeZone)
+      : "";
+    const upcomingSpecialHours = [...specialHoursByDate.values()]
+      .filter((exception) => exception.date >= today)
+      .sort((left, right) => left.date.localeCompare(right.date));
     const status = openStatus
-      ? getLocationHoursStatus(hours, openStatus, currentTime)
+      ? getLocationHoursStatus(hours, openStatus, currentTime, specialHours)
       : null;
+    const SpecialHoursHeading =
+      `h${Math.min(headingLevel + 2, 6)}` as HeadingTag;
+    const specialHoursContent = upcomingSpecialHours.length > 0 && (
+      <div className={styles.specialHours}>
+        <SpecialHoursHeading className={styles.specialHoursHeading}>
+          Special hours
+        </SpecialHoursHeading>
+        <dl className={styles.specialHoursList}>
+          {upcomingSpecialHours.map((exception) => (
+            <div className={styles.specialHoursRow} key={exception.id}>
+              <dt className={styles.specialHoursTerm}>
+                {exception.label && (
+                  <span className={styles.specialHoursLabel}>{exception.label}</span>
+                )}
+                <time dateTime={exception.date}>
+                  {formatBusinessDate(exception.date, openStatus?.locale)}
+                </time>
+              </dt>
+              <dd className={styles.specialHoursDefinition}>{exception.hours}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    );
     const contactMethods: readonly ContactMethod[] = phone
       ? [{
           id: "phone",
@@ -122,6 +169,7 @@ export const LocationHours = forwardRef<HTMLDivElement, LocationHoursProps>(
           headingLevel={headingLevel}
           hours={hours}
           hoursHeading={hoursHeading}
+          hoursSupplement={specialHoursContent}
           hoursStatus={status && (
             <span
               aria-live="polite"

@@ -4,7 +4,10 @@ import {
   LocationHours,
   type LocationHoursProps,
 } from "./LocationHours";
-import type { BusinessHour } from "../ContactSection/ContactSection";
+import type {
+  BusinessHour,
+  BusinessHoursException,
+} from "../ContactSection/ContactSection";
 import { getLocationHoursStatus } from "./locationHoursStatus";
 
 const address = {
@@ -21,6 +24,33 @@ const hours = [
   { id: "saturday", day: "Saturday", dayOfWeek: 6, hours: "10:00 AM – 3:00 PM", intervals: [{ opensAt: "10:00", closesAt: "15:00" }] },
   { id: "sunday", day: "Sunday", dayOfWeek: 0, hours: "Closed", intervals: [] },
 ] satisfies readonly BusinessHour[];
+
+function dateAfter(days: number): string {
+  const date = new Date();
+  date.setDate(date.getDate() + days);
+  return [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0"),
+  ].join("-");
+}
+
+const specialHours = [
+  {
+    id: "holiday-closure",
+    date: dateAfter(31),
+    label: "Holiday closure",
+    hours: "Closed",
+    intervals: [],
+  },
+  {
+    id: "early-close",
+    date: dateAfter(30),
+    label: "Early close",
+    hours: "9:00 AM – 1:00 PM",
+    intervals: [{ opensAt: "09:00", closesAt: "13:00" }],
+  },
+] satisfies readonly BusinessHoursException[];
 
 function MapPreview() {
   return (
@@ -69,6 +99,8 @@ const meta = {
     },
     hours,
     openStatus: { timeZone: "America/Toronto" },
+    timeZone: "America/Toronto",
+    specialHours,
     variant: "surface",
     layout: "split",
     mapPosition: "end",
@@ -81,6 +113,8 @@ const meta = {
     phone: { control: "object" },
     hours: { control: "object" },
     openStatus: { control: "object" },
+    timeZone: { control: "text" },
+    specialHours: { control: "object" },
     map: { control: false },
     mapLabel: { control: "text" },
     addressHeading: { control: "text" },
@@ -162,6 +196,67 @@ export const OpenStatus: Story = {
       state: "open",
       message: "Open now · Closes at 2:00 AM",
     });
+
+    const sameDayClosure = getLocationHoursStatus(
+      hours,
+      { timeZone: "America/Toronto" },
+      new Date("2026-10-14T15:00:00.000Z"),
+      [{
+        id: "staff-training",
+        date: "2026-10-14",
+        label: "Staff training",
+        hours: "Closed",
+        intervals: [],
+      }],
+    );
+    await expect(sameDayClosure).toEqual({
+      state: "closed",
+      message: "Closed · Opens tomorrow at 9:00 AM",
+    });
+
+    const sameDayScheduleChange = getLocationHoursStatus(
+      hours,
+      { timeZone: "America/Toronto" },
+      new Date("2026-10-14T15:00:00.000Z"),
+      [{
+        id: "early-closing",
+        date: "2026-10-14",
+        label: "Early closing",
+        hours: "9:00 AM – 1:00 PM",
+        intervals: [{ opensAt: "09:00", closesAt: "13:00" }],
+      }],
+    );
+    await expect(sameDayScheduleChange).toEqual({
+      state: "open",
+      message: "Open now · Closes at 1:00 PM",
+    });
+
+    const allClosedHours = hours.map((entry) => ({ ...entry, intervals: [] }));
+    const opensForEvent = getLocationHoursStatus(
+      allClosedHours,
+      { timeZone: "America/Toronto" },
+      new Date("2026-10-14T15:00:00.000Z"),
+      [{
+        id: "community-market",
+        date: "2026-10-16",
+        label: "Community market",
+        hours: "10:00 AM – 2:00 PM",
+        intervals: [{ opensAt: "10:00", closesAt: "14:00" }],
+      }],
+    );
+    await expect(opensForEvent).toEqual({
+      state: "closed",
+      message: "Closed · Opens in 2 days at 10:00 AM",
+    });
+  },
+};
+
+export const SpecialHours: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("heading", { name: "Special hours" })).toBeVisible();
+    await expect(canvas.getByText("Early close")).toBeVisible();
+    await expect(canvas.getByText("Holiday closure")).toBeVisible();
   },
 };
 

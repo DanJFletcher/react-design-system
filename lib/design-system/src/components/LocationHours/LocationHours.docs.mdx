@@ -15,6 +15,8 @@ import * as LocationHoursStories from "./LocationHours.stories";
 
 Set `openStatus` to display a live open/closed message with the next closing or opening time. Provide the location's IANA `timeZone` (for example, `America/Toronto`) and add `dayOfWeek` (`0` = Sunday through `6` = Saturday) plus structured `intervals` (`opensAt` / `closesAt` in 24-hour `HH:mm`) to each of the seven `hours` entries. Use an empty `intervals` array for a closed day. The displayed text in `hours` remains customizable. Status updates every minute and handles overnight hours.
 
+Pass `specialHours` for one-off holiday schedules, early closings, or temporary closures. Each entry needs a unique `id`, a local calendar `date` in `YYYY-MM-DD`, display text in `hours`, and structured `intervals`; an empty interval list means closed. An exception replaces the weekly schedule on its date, is shown in a separate “Special hours” list, and is included when calculating the live status. Past exceptions are hidden automatically. Set `timeZone` to the business location's IANA timezone so dated exceptions are filtered against the local calendar date; `openStatus.timeZone` is used automatically when live status is enabled.
+
 <Controls of={LocationHoursStories.Playground} />
 
 ## Variations
@@ -26,6 +28,8 @@ Set `openStatus` to display a live open/closed message with the next closing or 
 <Canvas of={LocationHoursStories.StackedLayout} />
 
 <Canvas of={LocationHoursStories.OpenStatus} />
+
+<Canvas of={LocationHoursStories.SpecialHours} />
 
 <Canvas of={LocationHoursStories.ThemeCoverage} />
 

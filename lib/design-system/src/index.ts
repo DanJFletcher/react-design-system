@@ -23,6 +23,7 @@ export type {
   BusinessDayOfWeek,
   BusinessHour,
   BusinessHourInterval,
+  BusinessHoursException,
   ContactAddress,
   ContactMethod,
   ContactSectionHeadingLevel,
