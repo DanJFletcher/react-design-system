@@ -1,0 +1,46 @@
+import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as BottomMenuStories from "./BottomMenu.stories";
+
+<Meta of={BottomMenuStories} />
+
+# BottomMenu
+
+A fixed viewport-level bar for the destinations and high-value actions a visitor needs close at hand. Items can be links or button actions, with optional icons, badges, and disabled states.
+
+<Canvas of={BottomMenuStories.Playground} />
+
+## Content offset is the consumer's responsibility
+
+`BottomMenu` is fixed to the viewport by default and is not positioned relative to its parent. A fixed element is removed from normal document flow, so it can cover the bottom of a page. Reserve space in the page layout for the menu (including its height and any safe-area inset), for example:
+
+```css
+main {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+}
+```
+
+Adjust the offset to match your chosen `size`, presentation, and action slot. The full-width presentation handles horizontal and bottom safe-area insets for the menu itself. `presentation="floating"` adds an inset from the viewport edge.
+
+## Selection, links, and actions
+
+Use `activeId` to control the selected item, or `defaultActiveId` for internal selection state. `onActiveChange(id, item)` fires when an enabled item is selected. Active links expose `aria-current="page"`; active button actions expose `aria-pressed`.
+
+Link items use `href`, and may also provide `target`, `rel`, and `onClick`. Button items use `onClick`. Both item types support `onSelect`, which runs after `onClick`. Preventing the event's default action also prevents the active selection update. Disabled links omit their `href`, prevent navigation, and expose `aria-disabled="true"`.
+
+`iconOnly` visually hides the text labels while keeping them available to assistive technology. Provide meaningful text labels even when icons are present. Use the optional `action` slot for a complementary call to action; it is rendered beside the destination list.
+
+<Controls of={BottomMenuStories.Playground} />
+
+## Examples
+
+<Canvas of={BottomMenuStories.Controlled} />
+
+<Canvas of={BottomMenuStories.IconOnly} />
+
+<Canvas of={BottomMenuStories.DisabledItems} />
+
+<Canvas of={BottomMenuStories.LinkNavigation} />
+
+<Canvas of={BottomMenuStories.NarrowViewport} />
+
+<Canvas of={BottomMenuStories.ThemeCoverage} />

@@ -227,6 +227,17 @@ export { Switch } from "./components/FormControls/Switch";
 export type { SwitchProps } from "./components/FormControls/Switch";
 export { Header } from "./components/Header/Header";
 export type { HeaderNavItem, HeaderProps, HeaderSize } from "./components/Header/Header";
+export { BottomMenu } from "./components/BottomMenu/BottomMenu";
+export type {
+  BottomMenuActionItem,
+  BottomMenuAlignment,
+  BottomMenuItem,
+  BottomMenuLinkItem,
+  BottomMenuPresentation,
+  BottomMenuProps,
+  BottomMenuSelectEvent,
+  BottomMenuSize,
+} from "./components/BottomMenu/BottomMenu";
 export { Footer } from "./components/Footer/Footer";
 export type {
   FooterHeadingLevel,
