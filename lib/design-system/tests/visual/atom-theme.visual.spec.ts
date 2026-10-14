@@ -55,8 +55,8 @@ test("Atom callouts have border-matching left and diagonal corner halftone strip
     expect(corner.image).toBe(styles.image);
     expect(corner.tile).toBe(styles.tile);
     expect(corner.mask).toContain("linear-gradient(135deg");
-    expect(corner.mask).toContain("calc(50% - 6px)");
-    expect(corner.mask).toContain("calc(50% + 6px)");
+    expect(corner.mask).toContain("calc(100% - 12px)");
+    expect(corner.mask.endsWith("rgb(0, 0, 0) 100%)")).toBe(true);
     expect(corner.pointerEvents).toBe("none");
     expect(corner.layer).toBe("-1");
   }
