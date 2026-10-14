@@ -75,6 +75,9 @@ export const Playground: Story = {
           <Button data-testid="atom-secondary-button" variant="secondary">
             Read the issue
           </Button>
+          <Button data-testid="atom-ghost-button" variant="ghost">
+            More details
+          </Button>
         </div>
       </header>
 

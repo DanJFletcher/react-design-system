@@ -66,6 +66,27 @@
   }
 }
 
+@scope ([data-ds-theme="atom"]) to ([data-ds-theme]:not([data-ds-theme="atom"])) {
+  :scope button:is(
+    [data-ds-button-variant="primary"],
+    [data-ds-button-variant="secondary"]
+  ),
+  :scope button[data-ds-button-variant="ghost"]:is(:hover, :active),
+  :scope button[data-ds-button-variant]:disabled {
+    background-image: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 18%) 0%,
+      rgb(0 0 0 / 10%) 100%
+    );
+  }
+
+  @media (forced-colors: active) {
+    :scope button[data-ds-button-variant] {
+      background-image: none;
+    }
+  }
+}
+
 :where([data-ds-theme="atom"]) :where(
   [data-ds-surface],
   [data-variant="surface"],

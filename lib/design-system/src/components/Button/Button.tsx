@@ -79,6 +79,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       disabled={disabled}
       aria-busy={loading || undefined}
       aria-disabled={loading || undefined}
+      data-ds-button-variant={variant}
       onClick={(event) => {
         if (loading) {
           event.preventDefault();

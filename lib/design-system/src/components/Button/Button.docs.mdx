@@ -55,6 +55,8 @@ The default `type` is `button`; opt into form submission with `type="submit"`. N
 
 Semantic variables are direct values, so overriding a resting action color does not alter its hover or pressed states. Register no new hook without documenting its purpose and adding it to `src/tokens/component-hooks.json`; every hook resets at nested theme boundaries.
 
+Atom uses a light-to-dark diagonal background gradient on filled buttons. Ghost buttons stay transparent until hovered or pressed, then use the same treatment. In forced-colors mode, the decorative gradient is removed.
+
 ## API limits
 
 `Button` forwards native button props, refs, accessible naming attributes, `className`, and form attributes. The component deliberately does not provide `href`, `asChild`, toggle semantics, or groups.
