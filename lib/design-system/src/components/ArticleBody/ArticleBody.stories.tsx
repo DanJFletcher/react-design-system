@@ -138,6 +138,21 @@ export const ThemeCoverage: Story = {
               <code>{`const theme = "${theme}";
 console.log("Readable code in every theme");`}</code>
             </pre>
+            <table tabIndex={0}>
+              <caption>{theme.toUpperCase()} article table</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Pattern</th>
+                  <th scope="col">Shared choice</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Action color</td>
+                  <td>Primary token</td>
+                </tr>
+              </tbody>
+            </table>
             <p>
               <a href="/journal/reading">A themed article link</a>
             </p>
@@ -146,6 +161,19 @@ console.log("Readable code in every theme");`}</code>
       ))}
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const atomArticle = canvas.getByRole("article", { name: "ATOM sample article" });
+    const atomTable = within(atomArticle).getByRole("table", { name: "ATOM article table" });
+    const atomHeader = within(atomTable).getByRole("columnheader", { name: "Pattern" });
+    const atomBorder = getComputedStyle(atomHeader).borderTopColor;
+    expect(atomBorder).toBe("rgb(112, 232, 255)");
+
+    const acmeArticle = canvas.getByRole("article", { name: "ACME sample article" });
+    const acmeTable = within(acmeArticle).getByRole("table", { name: "ACME article table" });
+    const acmeHeader = within(acmeTable).getByRole("columnheader", { name: "Pattern" });
+    expect(getComputedStyle(acmeHeader).borderTopColor).not.toBe(atomBorder);
+  },
 };
 
 export const NarrowScreen: Story = {

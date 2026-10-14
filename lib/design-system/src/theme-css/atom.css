@@ -1,5 +1,6 @@
 :where([data-ds-theme="atom"]) {
   color-scheme: dark;
+  --ds-table-border: var(--ds-color-focus-ring);
   background-image: radial-gradient(
     circle,
     color-mix(in srgb, var(--ds-color-text-primary) 8%, transparent) 1px,

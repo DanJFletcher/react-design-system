@@ -23,7 +23,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Atom is a dark comic-inspired theme with inked borders, vivid print-like accents, subtle halftone texture, hard offset shadows on content surfaces and controls, and clipped marker highlights behind H1 and H2 headings: cyan down and right, with electric yellow layered behind it up and left. Page layout components and article bodies remain flat.",
+          "Atom is a dark comic-inspired theme with inked borders, cyan table borders, vivid print-like accents, subtle halftone texture, hard offset shadows on content surfaces and controls, and clipped marker highlights behind H1 and H2 headings: cyan down and right, with electric yellow layered behind it up and left. Page layout components and article bodies remain flat.",
       },
     },
   },

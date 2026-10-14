@@ -324,6 +324,18 @@ export const ThemeCoverage: Story = {
       ))}
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const atomTable = canvas.getByRole("table", { name: "atom business table" });
+    const atomFrame = atomTable.parentElement;
+    expect(atomFrame).not.toBeNull();
+    const atomBorder = getComputedStyle(atomFrame!).borderTopColor;
+    expect(atomBorder).toBe("rgb(112, 232, 255)");
+
+    const acmeTable = canvas.getByRole("table", { name: "acme business table" });
+    const acmeBorder = getComputedStyle(acmeTable.parentElement!).borderTopColor;
+    expect(acmeBorder).not.toBe(atomBorder);
+  },
 };
 
 export const CustomHooks: Story = {

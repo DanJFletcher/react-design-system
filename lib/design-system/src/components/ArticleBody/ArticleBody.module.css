@@ -176,7 +176,8 @@
 .articleBody :where(th, td) {
   min-inline-size: var(--ds-space-20);
   padding: var(--ds-space-3);
-  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  border: var(--ds-border-width-default) solid
+    var(--ds-table-border, var(--ds-color-border-control));
   text-align: start;
   vertical-align: top;
 }
