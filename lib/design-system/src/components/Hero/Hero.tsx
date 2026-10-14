@@ -94,6 +94,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
       {...sectionProps}
       ref={ref}
       className={heroClassName}
+      data-ds-layout-component="hero"
       data-layout={layout}
       data-alignment={alignment}
       data-media-position={mediaPosition}

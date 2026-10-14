@@ -185,3 +185,9 @@
     var(--ds-shadow-offset-control) var(--ds-shadow-offset-control) 0
     var(--ds-shadow-color);
 }
+
+@scope ([data-ds-theme="atom"]) to ([data-ds-theme]:not([data-ds-theme="atom"])) {
+  :scope [data-ds-layout-component] {
+    box-shadow: none !important;
+  }
+}

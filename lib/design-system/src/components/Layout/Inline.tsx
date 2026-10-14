@@ -31,6 +31,7 @@ export function Inline<T extends LayoutElement = "div">({
   return renderLayoutElement(as, "div", {
     ...elementProps,
     className: [styles.inline, className].filter(Boolean).join(" "),
+    "data-ds-layout-component": "inline",
     "data-align": align,
     "data-gap": gap,
     "data-justify": justify,

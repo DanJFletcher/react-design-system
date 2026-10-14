@@ -1,10 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, within } from "storybook/test";
 import { Button } from "../components/Button/Button";
 import { Callout } from "../components/Callout/Callout";
 import { Card } from "../components/Card/Card";
+import { Footer } from "../components/Footer/Footer";
 import { Select } from "../components/FormControls/Select";
 import { Textarea } from "../components/FormControls/Textarea";
 import { TextField } from "../components/FormControls/TextField";
+import { Grid } from "../components/Layout/Grid";
+import { Inline } from "../components/Layout/Inline";
+import { Container } from "../components/Layout/Container";
+import { Stack } from "../components/Layout/Stack";
+import { Header } from "../components/Header/Header";
+import { Hero } from "../components/Hero/Hero";
 import { Heading } from "../components/Typography/Typography";
 
 const meta = {
@@ -14,7 +22,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Atom is a dark comic-inspired theme with inked borders, vivid print-like accents, subtle halftone texture, hard offset shadows, and clipped marker highlights behind H1 and H2 headings: cyan down and right, with electric yellow layered behind it up and left.",
+          "Atom is a dark comic-inspired theme with inked borders, vivid print-like accents, subtle halftone texture, hard offset shadows on surfaces and controls, and clipped marker highlights behind H1 and H2 headings: cyan down and right, with electric yellow layered behind it up and left. Page layout components remain flat.",
       },
     },
   },
@@ -88,8 +96,8 @@ export const Playground: Story = {
         title="Built for impact"
       >
         <p style={{ margin: 0 }}>
-          Surfaces use a thick outline and a crisp, unblurred shadow. Controls get
-          a smaller offset so their shape stays easy to read.
+          Content surfaces use a thick outline and a crisp, unblurred shadow.
+          Page layout components stay flat; controls get a smaller offset.
         </p>
       </Card>
 
@@ -121,10 +129,76 @@ export const Playground: Story = {
 
       <Callout tone="info">
         Halftone canvas, high-contrast type, thick inked edges, and hard block
-        shadows are all driven by the Atom theme.
+        shadows on content surfaces and controls are all driven by the Atom theme.
       </Callout>
     </main>
   ),
+};
+
+export const LayoutShadowScope: Story = {
+  render: () => (
+    <div data-ds-theme="atom">
+      <Header
+        data-testid="atom-layout-header"
+        logo="Atom"
+        logoHref="#"
+        logoLabel="Atom home"
+      />
+      <main
+        style={{
+          display: "grid",
+          gap: "var(--ds-space-6)",
+          padding: "var(--ds-space-6)",
+        }}
+      >
+        <Hero
+          data-testid="atom-layout-hero"
+          background="surface"
+          size="sm"
+          title="Keep the frame flat."
+          description="Page structure stays clean while content surfaces keep their inked shadow."
+        />
+        <Container data-testid="atom-layout-container" maxWidth="content">
+          <Stack data-testid="atom-layout-stack" gap="md">
+            <Inline data-testid="atom-layout-inline">
+              <Button data-testid="atom-layout-button">A control</Button>
+              <span>Shared page content</span>
+            </Inline>
+            <Grid data-testid="atom-layout-grid" minItemWidth="sm">
+              <Card
+                data-testid="atom-content-card"
+                title="Content keeps its shadow"
+                description="The Atom surface treatment remains on cards."
+              />
+            </Grid>
+          </Stack>
+        </Container>
+      </main>
+      <Footer
+        data-testid="atom-layout-footer"
+        brand="Atom"
+        variant="surface"
+        copyright="Page layout stays flat."
+      />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    for (const component of [
+      "header",
+      "hero",
+      "footer",
+      "container",
+      "stack",
+      "grid",
+      "inline",
+    ]) {
+      const element = canvas.getByTestId(`atom-layout-${component}`);
+      expect(getComputedStyle(element).boxShadow).toBe("none");
+    }
+    expect(getComputedStyle(canvas.getByTestId("atom-content-card")).boxShadow).not.toBe("none");
+    expect(getComputedStyle(canvas.getByTestId("atom-layout-button")).boxShadow).not.toBe("none");
+  },
 };
 
 export const HeadingHighlights: Story = {

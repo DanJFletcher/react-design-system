@@ -29,6 +29,7 @@ export function Stack<T extends LayoutElement = "div">({
   return renderLayoutElement(as, "div", {
     ...elementProps,
     className: [styles.stack, className].filter(Boolean).join(" "),
+    "data-ds-layout-component": "stack",
     "data-align": align,
     "data-gap": gap,
     "data-justify": justify,

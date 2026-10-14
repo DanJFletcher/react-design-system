@@ -85,6 +85,7 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(function Header(
       {...headerProps}
       ref={ref}
       className={headerClassName}
+      data-ds-layout-component="header"
       data-size={size}
       onKeyDown={handleKeyDown}
       style={style as CSSProperties | undefined}

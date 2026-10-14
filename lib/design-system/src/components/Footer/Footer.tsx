@@ -124,6 +124,7 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(function Footer(
       {...footerProps}
       ref={ref}
       className={[styles.footer, className].filter(Boolean).join(" ")}
+      data-ds-layout-component="footer"
       data-variant={variant}
       data-size={size}
       style={style as CSSProperties | undefined}

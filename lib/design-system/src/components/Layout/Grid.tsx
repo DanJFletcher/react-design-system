@@ -23,6 +23,7 @@ export function Grid<T extends LayoutElement = "div">({
   return renderLayoutElement(as, "div", {
     ...elementProps,
     className: [styles.grid, className].filter(Boolean).join(" "),
+    "data-ds-layout-component": "grid",
     "data-gap": gap,
     "data-min-item-width": minItemWidth,
   });

@@ -23,6 +23,7 @@ export function Container<T extends LayoutElement = "div">({
   return renderLayoutElement(as, "div", {
     ...elementProps,
     className: [styles.container, className].filter(Boolean).join(" "),
+    "data-ds-layout-component": "container",
     "data-gutter": gutter,
     "data-max-width": maxWidth,
   });

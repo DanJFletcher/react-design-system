@@ -8,3 +8,4 @@
 - [Repeated accessible values](storybook-repeated-values.md) — when repeated items share an accessible name, assert through a plural locator and expected count.
 - [Luna radius intent](luna-radius-intent.md) — default surfaces should have 24px corners; retain intentional pill/circular controls.
 - [Theme coverage ordering](theme-coverage-order.md) — append new themes to comparison lists and assert by theme name where possible.
+- [Atom layout shadows](atom-layout-shadows.md) — Keep page-structure components and layout helpers flat; use hard shadows for content surfaces and controls.
