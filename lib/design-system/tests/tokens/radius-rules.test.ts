@@ -4,13 +4,25 @@ import { checkRadiusRules, type RadiusException } from "../../scripts/check-radi
 import { compileTokens } from "../../scripts/build-tokens";
 import { resolve } from "node:path";
 
-test("surface and specialized defaults are bounded, while Luna action/form controls remain pills", async () => {
+test("surface and specialized defaults stay themeable across all built-in themes", async () => {
   const result = await compileTokens(resolve(import.meta.dirname, "../../src/tokens"));
-  for (const theme of ["acme", "luna", "orchid"]) {
+  for (const theme of ["acme", "atom", "luna", "orchid"]) {
     const values = result.themes.get(theme)!;
-    assert.equal(values["radius.surface"], theme === "luna" ? "32px" : "12px");
+    assert.equal(
+      values["radius.surface"],
+      theme === "luna" ? "32px" : theme === "atom" ? "8px" : "12px",
+    );
     for (const token of ["radius.tooltip", "radius.menu", "radius.textarea", "radius.form-group"]) {
-      assert.equal(values[token], theme === "luna" ? "32px" : theme === "acme" ? "6px" : "16px");
+      assert.equal(
+        values[token],
+        theme === "luna"
+          ? "32px"
+          : theme === "atom"
+            ? "8px"
+            : theme === "acme"
+              ? "6px"
+              : "16px",
+      );
     }
   }
   assert.equal(result.themes.get("luna")!["radius.control"], "9999px");

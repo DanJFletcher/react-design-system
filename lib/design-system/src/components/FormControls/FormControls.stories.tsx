@@ -394,7 +394,7 @@ export const FieldGroupingAndLayout: Story = {
 export const ThemeCoverage: Story = {
   render: () => (
     <div style={{ display: "grid", gap: "var(--ds-space-6)", gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))" }}>
-      {(["acme", "luna", "orchid"] as const).map((theme) => (
+      {(["acme", "luna", "orchid", "atom"] as const).map((theme) => (
         <section
           key={theme}
           data-ds-theme={theme}
@@ -407,7 +407,13 @@ export const ThemeCoverage: Story = {
           }}
         >
           <h2 style={{ color: "var(--ds-color-text-primary)" }}>
-            {theme === "acme" ? "ACME" : theme === "luna" ? "Luna" : "Orchid custom theme"}
+            {theme === "acme"
+              ? "ACME"
+              : theme === "atom"
+                ? "Atom comic dark theme"
+                : theme === "luna"
+                  ? "Luna"
+                  : "Orchid custom theme"}
           </h2>
           <TextField label="Workspace name" defaultValue="Moonlight" />
           <Textarea label="Description" rows={2} defaultValue="A shared project space." />
@@ -438,7 +444,7 @@ export const ThemeCoverage: Story = {
   ),
   play: async ({ canvasElement }) => {
     const selects = within(canvasElement).getAllByRole("combobox");
-    await expect(selects).toHaveLength(3);
+    await expect(selects).toHaveLength(4);
     for (const select of selects) {
       const indicator = select.nextElementSibling;
       if (!(indicator instanceof SVGElement)) {

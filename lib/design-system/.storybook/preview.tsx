@@ -4,11 +4,15 @@ import "../src/components/Button/Button.module.css";
 import "../src/generated/themes/acme.css";
 import "../src/generated/themes/luna.css";
 import "../src/generated/themes/orchid.css";
+import "../src/theme-css/atom";
 import "./preview.css";
 
 const withTheme: Decorator = (Story, context) => {
   const activeTheme = context.globals.theme;
-  const theme = activeTheme === "luna" || activeTheme === "orchid" ? activeTheme : "acme";
+  const theme =
+    activeTheme === "luna" || activeTheme === "orchid" || activeTheme === "atom"
+      ? activeTheme
+      : "acme";
   return (
     <div className="storybook-canvas" data-ds-theme={theme}>
       <Story />
@@ -28,6 +32,7 @@ const preview: Preview = {
           { value: "acme", title: "ACME" },
           { value: "luna", title: "Luna" },
           { value: "orchid", title: "Orchid" },
+          { value: "atom", title: "Atom" },
         ],
         dynamicTitle: true,
       },

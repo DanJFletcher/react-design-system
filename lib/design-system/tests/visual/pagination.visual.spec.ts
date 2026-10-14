@@ -88,11 +88,11 @@ test("pagination inherits theme colors across all built-in themes", async ({ pag
   await page.goto("/iframe.html?id=components-pagination--theme-coverage&viewMode=story");
 
   const navs = page.locator("nav[aria-label$='article pagination']");
-  await expect(navs).toHaveCount(3);
+  await expect(navs).toHaveCount(4);
   const colors = await navs.locator("[aria-current='page']").evaluateAll((elements) =>
     elements.map((element) => getComputedStyle(element).backgroundColor),
   );
-  expect(new Set(colors).size).toBe(3);
+  expect(new Set(colors).size).toBe(4);
 });
 
 test("mobile pagination shows a page summary and fits without horizontal overflow", async ({

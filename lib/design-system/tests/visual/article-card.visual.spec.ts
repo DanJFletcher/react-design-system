@@ -57,11 +57,11 @@ test("ArticleCard follows theme boundaries and existing Card hooks", async ({ pa
   await page.goto("/iframe.html?id=components-article-card--theme-coverage&viewMode=story");
 
   const themedArticles = page.locator("[data-ds-theme] article");
-  await expect(themedArticles).toHaveCount(3);
+  await expect(themedArticles).toHaveCount(4);
   const backgrounds = await themedArticles.evaluateAll((elements) =>
     elements.map((element) => getComputedStyle(element).backgroundColor),
   );
-  expect(new Set(backgrounds).size).toBe(3);
+  expect(new Set(backgrounds).size).toBe(4);
 
   await page.goto("/iframe.html?id=components-article-card--custom-hooks&viewMode=story");
   const customArticle = page.getByRole("article", { name: "A calmer morning routine for your studio" });

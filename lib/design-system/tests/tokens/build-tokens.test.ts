@@ -11,11 +11,28 @@ test("generation is deterministic and produces complete themes", async () => {
   const first = await compileTokens(source);
   const second = await compileTokens(source);
   assert.deepEqual([...first.files], [...second.files]);
-  assert.deepEqual([...first.themes.keys()].sort(), ["acme", "luna", "orchid"]);
+  assert.deepEqual([...first.themes.keys()].sort(), ["acme", "atom", "luna", "orchid"]);
   assert.equal(Object.keys(first.themes.get("acme")!).length, Object.keys(first.themes.get("luna")!).length);
   assert.equal(first.themes.get("orchid")!["color.canvas"], "#FFF2FD");
+  assert.equal(first.themes.get("atom")!["color.canvas"], "#11111D");
+  assert.equal(first.themes.get("atom")!["border.width.default"], "3px");
+  assert.equal(first.themes.get("atom")!["shadow.offset.surface"], "6px");
+  assert.equal(first.themes.get("atom")!["shadow.offset.control"], "3px");
   assert.ok(first.contrastResults.length >= 45);
   assert.ok(first.contrastResults.every((result) => result.ratio >= result.minimum));
+});
+
+test("Atom uses dark comic colors with hard, block-style elevation", async () => {
+  const result = await compileTokens(source);
+  const atom = result.themes.get("atom")!;
+
+  assert.equal(atom["color.surface.primary"], "#202033");
+  assert.equal(atom["color.action.primary.bg"], "#FF3D8D");
+  assert.equal(atom["color.focus.ring"], "#70E8FF");
+  assert.equal(atom["border.width.default"], "3px");
+  assert.equal(atom["shadow.color"], "#07070D");
+  assert.equal(atom["shadow.offset.surface"], "6px");
+  assert.equal(atom["shadow.offset.control"], "3px");
 });
 
 test("contrast ratio matches the WCAG reference examples", () => {

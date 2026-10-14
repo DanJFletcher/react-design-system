@@ -1,0 +1,49 @@
+:where([data-ds-theme="atom"]) {
+  color-scheme: dark;
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--ds-color-text-primary) 8%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: var(--ds-space-5) var(--ds-space-5);
+}
+
+:where([data-ds-theme="atom"]) :where(
+  [data-ds-surface],
+  [data-variant="surface"],
+  [data-variant="accent"],
+  [data-variant="outlined"],
+  [data-variant="subtle"],
+  [data-variant="soft"],
+  [data-variant="solid"],
+  [data-tone],
+  [role="dialog"],
+  [role="menu"],
+  [role="tooltip"],
+  [role="alert"],
+  [role="status"],
+  dialog,
+  article,
+  pre,
+  table,
+  [role="progressbar"]
+) {
+  box-shadow:
+    var(--ds-shadow-offset-surface) var(--ds-shadow-offset-surface) 0
+    var(--ds-shadow-color);
+}
+
+:where([data-ds-theme="atom"]) :where(
+  button,
+  input,
+  select,
+  textarea,
+  [role="button"],
+  [role="tab"],
+  [role="switch"],
+  [role="menuitem"]
+) {
+  box-shadow:
+    var(--ds-shadow-offset-control) var(--ds-shadow-offset-control) 0
+    var(--ds-shadow-color);
+}

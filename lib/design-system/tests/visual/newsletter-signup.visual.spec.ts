@@ -83,7 +83,7 @@ test("NewsletterSignup inherits themes and supports scoped custom hooks", async 
   await page.goto("/iframe.html?id=components-newsletter-signup--theme-coverage&viewMode=story");
 
   const sections = page.locator("[data-ds-theme] section[aria-labelledby]");
-  await expect(sections).toHaveCount(3);
+  await expect(sections).toHaveCount(4);
   const backgrounds = await sections.evaluateAll((elements) =>
     elements.map((element) => getComputedStyle(element).backgroundColor),
   );

@@ -46,11 +46,11 @@ test("ArticleBody exposes native reading structure, helpful alternatives, and ke
   await expect(link).toHaveCSS("outline-style", "solid");
 });
 
-test("ArticleBody follows ACME, Luna, and Orchid theme boundaries", async ({ page }) => {
+test("ArticleBody follows all built-in theme boundaries", async ({ page }) => {
   await page.goto("/iframe.html?id=components-article-body--theme-coverage&viewMode=story");
 
   const articles = page.locator("[data-ds-theme] article");
-  await expect(articles).toHaveCount(3);
+  await expect(articles).toHaveCount(4);
   const colors = await articles.evaluateAll((elements) =>
     elements.map((element) => {
       const inlineCode = getComputedStyle(element.querySelector("p code") as HTMLElement);
@@ -70,8 +70,8 @@ test("ArticleBody follows ACME, Luna, and Orchid theme boundaries", async ({ pag
       };
     }),
   );
-  expect(new Set(colors.map(({ text }) => text)).size).toBe(3);
-  expect(new Set(colors.map(({ link }) => link)).size).toBe(3);
+  expect(new Set(colors.map(({ text }) => text)).size).toBe(4);
+  expect(new Set(colors.map(({ link }) => link)).size).toBe(4);
   for (const { inlineCode, pre } of colors) {
     expect(contrastRatio(inlineCode.color, inlineCode.background)).toBeGreaterThanOrEqual(4.5);
     expect(contrastRatio(pre.color, pre.background)).toBeGreaterThanOrEqual(4.5);

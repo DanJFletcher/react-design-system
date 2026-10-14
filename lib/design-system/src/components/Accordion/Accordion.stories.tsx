@@ -92,7 +92,7 @@ export const VariantExamples: Story = {
 export const ThemeCoverage: Story = {
   render: () => (
     <div style={{ display: "grid", gap: "var(--ds-space-5)" }}>
-      {(["acme", "luna", "orchid"] as const).map((theme) => (
+      {(["acme", "luna", "orchid", "atom"] as const).map((theme) => (
         <section data-ds-theme={theme} key={theme} aria-label={`${theme} theme`}>
           <h2>{theme.toUpperCase()}</h2>
           <Accordion items={faqItems.slice(0, 2)} label={`${theme} questions`} variant="surface" />

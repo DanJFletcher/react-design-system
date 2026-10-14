@@ -29,6 +29,9 @@
   border-radius: var(--ds-radius-form-control);
   background-color: var(--ds-color-surface-primary);
   color: var(--ds-color-text-primary);
+  box-shadow:
+    var(--ds-shadow-offset-control) var(--ds-shadow-offset-control) 0
+    var(--ds-shadow-color);
   font-family: var(--ds-font-family-sans);
   font-size: var(--ds-font-size-md);
   font-weight: var(--ds-font-weight-regular);
@@ -253,6 +256,9 @@
   border-radius: var(--ds-radius-form-group);
   background-color: var(--ds-color-surface-primary);
   color: var(--ds-color-text-primary);
+  box-shadow:
+    var(--ds-shadow-offset-surface) var(--ds-shadow-offset-surface) 0
+    var(--ds-shadow-color);
   gap: var(--ds-space-3);
 }
 

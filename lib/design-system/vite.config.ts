@@ -21,6 +21,7 @@ export default defineConfig({
         "themes/acme": resolve(packageRoot, "src/theme-css/acme.ts"),
         "themes/luna": resolve(packageRoot, "src/theme-css/luna.ts"),
         "themes/orchid": resolve(packageRoot, "src/theme-css/orchid.ts"),
+        "themes/atom": resolve(packageRoot, "src/theme-css/atom.ts"),
       },
       formats: ["es"],
     },
@@ -32,7 +33,7 @@ export default defineConfig({
         assetFileNames: (asset) => {
           if (!asset.name?.endsWith(".css")) return "assets/[name]-[hash][extname]";
           if (asset.name === "index.css") return "styles.css";
-          if (["acme", "luna", "orchid"].some((theme) => asset.name?.includes(theme))) {
+          if (["acme", "luna", "orchid", "atom"].some((theme) => asset.name?.includes(theme))) {
             return "themes/[name][extname]";
           }
           return "[name][extname]";

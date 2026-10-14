@@ -3,12 +3,6 @@
   "generatedBy": "scripts/build-tokens.ts",
   "foundations": [
     {
-      "name": "border.width.default",
-      "type": "dimension",
-      "value": "1px",
-      "description": "Standard border width."
-    },
-    {
       "name": "control.min-block-size.lg",
       "type": "dimension",
       "value": "56px",
@@ -287,6 +281,11 @@
   ],
   "semantic": [
     {
+      "name": "border.width.default",
+      "type": "dimension",
+      "description": "Default border thickness for themeable controls and surfaces."
+    },
+    {
       "name": "color.accent.bg",
       "type": "color",
       "description": "Accent surface."
@@ -470,6 +469,21 @@
       "name": "radius.tooltip",
       "type": "dimension",
       "description": "Default corner radius for supplementary tooltip content."
+    },
+    {
+      "name": "shadow.color",
+      "type": "color",
+      "description": "Solid shadow color for block-style component shadows."
+    },
+    {
+      "name": "shadow.offset.control",
+      "type": "dimension",
+      "description": "Hard offset used by interactive controls."
+    },
+    {
+      "name": "shadow.offset.surface",
+      "type": "dimension",
+      "description": "Hard offset used by raised component surfaces."
     }
   ],
   "componentHooks": [
@@ -1604,6 +1618,10 @@
       "color.status.warning.fg": "#92400E",
       "color.status.error.bg": "#FEE4E2",
       "color.status.error.fg": "#B42318",
+      "border.width.default": "1px",
+      "shadow.color": "#000000",
+      "shadow.offset.surface": "0px",
+      "shadow.offset.control": "0px",
       "radius.surface": "12px",
       "radius.control": "6px",
       "radius.tooltip": "6px",
@@ -1611,6 +1629,49 @@
       "radius.form-group": "6px",
       "radius.textarea": "6px",
       "radius.menu": "6px"
+    },
+    "atom": {
+      "color.canvas": "#11111D",
+      "color.surface.primary": "#202033",
+      "color.text.primary": "#FBF8FF",
+      "color.text.muted": "#D7CCDF",
+      "color.text.error": "#FF9FB7",
+      "color.border.control": "#E8E3FF",
+      "color.border.error": "#FF9FB7",
+      "color.action.primary.bg": "#FF3D8D",
+      "color.action.primary.hover": "#FF66A5",
+      "color.action.primary.pressed": "#E62D7C",
+      "color.action.primary.fg": "#160E1D",
+      "color.action.secondary.bg": "#28283B",
+      "color.action.secondary.fg": "#FBF8FF",
+      "color.action.secondary.hover": "#38384F",
+      "color.action.secondary.pressed": "#20202F",
+      "color.action.ghost.fg": "#78E8FF",
+      "color.action.ghost.hover": "#22263B",
+      "color.action.ghost.pressed": "#2B2C46",
+      "color.action.disabled.bg": "#393949",
+      "color.action.disabled.fg": "#D5CEDA",
+      "color.focus.ring": "#70E8FF",
+      "color.accent.bg": "#FFE05A",
+      "color.accent.fg": "#161018",
+      "color.accent.border": "#963F9D",
+      "color.status.success.bg": "#133B35",
+      "color.status.success.fg": "#A4F3D1",
+      "color.status.warning.bg": "#473A15",
+      "color.status.warning.fg": "#FFE282",
+      "color.status.error.bg": "#4B1D30",
+      "color.status.error.fg": "#FFB1C7",
+      "border.width.default": "3px",
+      "shadow.color": "#07070D",
+      "shadow.offset.surface": "6px",
+      "shadow.offset.control": "3px",
+      "radius.surface": "8px",
+      "radius.control": "4px",
+      "radius.tooltip": "8px",
+      "radius.form-control": "4px",
+      "radius.form-group": "8px",
+      "radius.textarea": "8px",
+      "radius.menu": "8px"
     },
     "luna": {
       "color.canvas": "#100E21",
@@ -1643,6 +1704,10 @@
       "color.status.warning.fg": "#FFE08A",
       "color.status.error.bg": "#4A202C",
       "color.status.error.fg": "#FFADBE",
+      "border.width.default": "1px",
+      "shadow.color": "#000000",
+      "shadow.offset.surface": "0px",
+      "shadow.offset.control": "0px",
       "radius.surface": "32px",
       "radius.control": "9999px",
       "radius.tooltip": "32px",
@@ -1682,6 +1747,10 @@
       "color.status.warning.fg": "#794A12",
       "color.status.error.bg": "#FDE7EB",
       "color.status.error.fg": "#821F35",
+      "border.width.default": "1px",
+      "shadow.color": "#000000",
+      "shadow.offset.surface": "0px",
+      "shadow.offset.control": "0px",
       "radius.surface": "12px",
       "radius.control": "16px",
       "radius.tooltip": "16px",
@@ -1892,6 +1961,209 @@
       "theme": "acme",
       "name": "Error boundary on surface",
       "ratio": 6.574,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Primary action",
+      "ratio": 5.656,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Primary hover",
+      "ratio": 6.904,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Primary pressed",
+      "ratio": 4.513,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Secondary action",
+      "ratio": 13.709,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Secondary hover",
+      "ratio": 10.815,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Secondary pressed",
+      "ratio": 15.257,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Ghost action",
+      "ratio": 13.18,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Ghost hover",
+      "ratio": 10.498,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Ghost pressed",
+      "ratio": 9.53,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Disabled action",
+      "ratio": 7.368,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Primary text",
+      "ratio": 17.805,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Muted text",
+      "ratio": 12.117,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Error text on canvas",
+      "ratio": 9.712,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Error text on surface",
+      "ratio": 8.28,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Accent",
+      "ratio": 14.323,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Success status",
+      "ratio": 9.573,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Warning status",
+      "ratio": 8.733,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Error status",
+      "ratio": 8.148,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "File action",
+      "ratio": 13.709,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Disabled file action",
+      "ratio": 7.368,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Focus ring on canvas",
+      "ratio": 13.083,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Focus ring on surface",
+      "ratio": 11.153,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Control boundary on canvas",
+      "ratio": 15.033,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Control boundary on surface",
+      "ratio": 12.815,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Accent callout boundary on canvas",
+      "ratio": 3.115,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Accent callout boundary on accent surface",
+      "ratio": 4.596,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Active switch track and thumb",
+      "ratio": 4.791,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Error boundary on canvas",
+      "ratio": 9.712,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Error boundary on surface",
+      "ratio": 8.28,
       "minimum": 3,
       "kind": "indicator"
     },

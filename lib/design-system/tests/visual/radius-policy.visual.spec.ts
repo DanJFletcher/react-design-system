@@ -9,11 +9,12 @@ async function expectCorners(locator: Locator, value: string) {
 
 test("surfaces and controls use distinct computed corners in every theme", async ({ page }) => {
   await page.goto("/iframe.html?id=foundations-radius-policy--theme-comparison&viewMode=story");
-  for (const theme of ["acme", "luna", "orchid"]) {
+  for (const theme of ["acme", "atom", "luna", "orchid"]) {
     const scope = page.locator(`[data-ds-theme="${theme}"]`).filter({ has: page.getByTestId(`${theme}-card`) }).last();
-    const surface = theme === "luna" ? "32px" : "12px";
-    const specialized = theme === "luna" ? "32px" : theme === "acme" ? "6px" : "16px";
-    const control = theme === "luna" ? "9999px" : specialized;
+    const surface = theme === "luna" ? "32px" : theme === "atom" ? "8px" : "12px";
+    const specialized =
+      theme === "luna" ? "32px" : theme === "atom" ? "8px" : theme === "acme" ? "6px" : "16px";
+    const control = theme === "luna" ? "9999px" : theme === "atom" ? "4px" : specialized;
     for (const name of ["card", "code", "callout", "carousel", "pricing", "contact"]) {
       await expectCorners(page.getByTestId(`${theme}-${name}`), surface);
     }

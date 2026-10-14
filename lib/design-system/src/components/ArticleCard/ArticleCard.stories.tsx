@@ -146,7 +146,7 @@ export const ContentVariants: Story = {
 export const ThemeCoverage: Story = {
   render: () => (
     <div style={{ display: "grid", gap: "var(--ds-space-4)" }}>
-      {(["acme", "luna", "orchid"] as const).map((theme) => (
+      {(["acme", "luna", "orchid", "atom"] as const).map((theme) => (
         <div
           key={theme}
           data-ds-theme={theme}

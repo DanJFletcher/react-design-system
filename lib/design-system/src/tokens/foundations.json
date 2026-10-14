@@ -43,7 +43,6 @@
     "radius.shape.rounded": { "type": "dimension", "value": { "amount": 12, "unit": "px" }, "description": "Rounded shape for explicit button shape choices." },
     "radius.shape.square": { "type": "dimension", "value": { "amount": 0, "unit": "px" }, "description": "Square shape for explicit button shape choices." },
     "radius.full": { "type": "dimension", "value": { "amount": 9999, "unit": "px" }, "description": "Fully rounded component corner." },
-    "border.width.default": { "type": "dimension", "value": { "amount": 1, "unit": "px" }, "description": "Standard border width." },
     "focus.width": { "type": "dimension", "value": { "amount": 3, "unit": "px" }, "description": "Keyboard-focus outline width." },
     "focus.offset": { "type": "dimension", "value": { "amount": 2, "unit": "px" }, "description": "Keyboard-focus outline offset." },
     "motion.duration.fast": { "type": "duration", "value": { "amount": 120, "unit": "ms" }, "description": "Fast state transition duration." },

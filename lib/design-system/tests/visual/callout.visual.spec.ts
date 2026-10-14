@@ -15,7 +15,7 @@ test("Callout tones maintain readable contrast and matching border colors in eve
   await page.goto("/iframe.html?id=components-callout--theme-coverage&viewMode=story");
 
   const callouts = page.locator("[data-ds-theme] [data-tone]");
-  await expect(callouts).toHaveCount(15);
+  await expect(callouts).toHaveCount(20);
 
   const styles = await callouts.evaluateAll((elements) =>
     elements.map((element) => {

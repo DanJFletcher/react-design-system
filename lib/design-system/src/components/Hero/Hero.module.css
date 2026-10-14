@@ -14,12 +14,18 @@
 
 .hero[data-background="surface"] {
   --_hero-background: var(--ds-color-surface-primary);
+  box-shadow:
+    var(--ds-shadow-offset-surface) var(--ds-shadow-offset-surface) 0
+    var(--ds-shadow-color);
 }
 
 .hero[data-background="accent"] {
   --_hero-background: var(--ds-color-accent-bg);
   --_hero-text: var(--ds-color-accent-fg);
   --_hero-description: var(--ds-color-accent-fg);
+  box-shadow:
+    var(--ds-shadow-offset-surface) var(--ds-shadow-offset-surface) 0
+    var(--ds-shadow-color);
 }
 
 .hero[data-size="sm"] {

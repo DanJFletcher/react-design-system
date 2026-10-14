@@ -56,7 +56,7 @@ test("ServicesSection links are keyboard reachable and a headingless section can
 test("ServicesSection respects theme boundaries and scoped section hooks", async ({ page }) => {
   await page.goto("/iframe.html?id=components-services-section--theme-coverage&viewMode=story");
   const sections = page.locator("[data-ds-theme] [data-services-section]");
-  await expect(sections).toHaveCount(3);
+  await expect(sections).toHaveCount(4);
   const backgrounds = await sections.evaluateAll((elements) =>
     elements.map((element) => getComputedStyle(element).backgroundColor),
   );

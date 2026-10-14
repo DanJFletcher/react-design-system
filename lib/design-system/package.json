@@ -23,7 +23,8 @@
     "./styles.css": "./dist/styles.css",
     "./themes/acme.css": "./dist/themes/acme.css",
     "./themes/luna.css": "./dist/themes/luna.css",
-    "./themes/orchid.css": "./dist/themes/orchid.css"
+    "./themes/orchid.css": "./dist/themes/orchid.css",
+    "./themes/atom.css": "./dist/themes/atom.css"
   },
   "peerDependencies": {
     "react": ">=18"

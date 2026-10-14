@@ -45,10 +45,11 @@ try {
     'import "@workspace/design-system/themes/acme.css";',
     'import "@workspace/design-system/themes/luna.css";',
     'import "@workspace/design-system/themes/orchid.css";',
+    'import "@workspace/design-system/themes/atom.css";',
     'const shape: ButtonShape = "pill";',
     'const iconPosition: ButtonIconPosition = "right";',
     'const sections: ArticleTableOfContentsItem[] = [{ id: "overview", label: "Overview" }];',
-    'export const example = <ThemeScope theme="luna" style={{ "--ds-button-radius": "12px" }}><ArticleTableOfContents items={sections} /><Button variant="secondary" shape={shape} icon={<span>★</span>} iconPosition={iconPosition}>Continue</Button><Button iconOnly icon={<span>×</span>} aria-label="Close dialog" /><TextField label="Email" type="email" required /><Textarea label="Notes" rows={4} /><Select label="Region" defaultValue="ca"><option value="ca">Canada</option></Select><Checkbox label="Subscribe" name="subscribe" value="yes" /><RadioGroup label="Contact method" name="contact" options={[{ value: "email", label: "Email" }]} /></ThemeScope>;',
+    'export const example = <ThemeScope theme="atom" style={{ "--ds-button-radius": "12px" }}><ArticleTableOfContents items={sections} /><Button variant="secondary" shape={shape} icon={<span>★</span>} iconPosition={iconPosition}>Continue</Button><Button iconOnly icon={<span>×</span>} aria-label="Close dialog" /><TextField label="Email" type="email" required /><Textarea label="Notes" rows={4} /><Select label="Region" defaultValue="ca"><option value="ca">Canada</option></Select><Checkbox label="Subscribe" name="subscribe" value="yes" /><RadioGroup label="Contact method" name="contact" options={[{ value: "email", label: "Email" }]} /></ThemeScope>;',
     "",
   ].join("\n"));
   execFileSync("pnpm", ["install", "--ignore-workspace"], { cwd: temporary, stdio: "inherit" });
@@ -65,7 +66,7 @@ try {
     'assert.equal(typeof Textarea, "object");',
     'assert.equal(typeof ThemeScope, "function");',
   ].join("")], { cwd: temporary, stdio: "inherit" });
-  for (const file of ["tokens.css", "styles.css", "themes/acme.css", "themes/luna.css", "themes/orchid.css"]) {
+  for (const file of ["tokens.css", "styles.css", "themes/acme.css", "themes/luna.css", "themes/orchid.css", "themes/atom.css"]) {
     await readFile(join(temporary, "node_modules/@workspace/design-system/dist", file));
   }
   process.stdout.write("Package tarball installed in a clean consumer; ESM, declarations, and CSS entrypoints work.\n");

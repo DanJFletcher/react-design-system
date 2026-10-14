@@ -149,7 +149,7 @@ export const VariantComparison: Story = {
 export const ThemeCoverage: Story = {
   render: () => (
     <div style={{ display: "grid", gap: "var(--ds-space-4)" }}>
-      {(["acme", "luna", "orchid"] as const).map((theme) => (
+      {(["acme", "luna", "orchid", "atom"] as const).map((theme) => (
         <section
           key={theme}
           data-ds-theme={theme}

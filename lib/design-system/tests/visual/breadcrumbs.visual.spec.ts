@@ -44,7 +44,7 @@ test("breadcrumb colors, spacing, and radius inherit built-in and scoped themes"
   );
 
   const links = page.locator("nav[aria-label$='breadcrumb'] a");
-  await expect(links).toHaveCount(10);
+  await expect(links).toHaveCount(12);
   const styles = await links.evaluateAll((elements) =>
     elements.map((element) => {
       const computed = getComputedStyle(element);
