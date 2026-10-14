@@ -1,0 +1,24 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as GridStories from "./Grid.stories";
+
+<Meta of={GridStories} />
+
+<Title>Grid</Title>
+
+<Subtitle>A responsive grid that automatically fits columns based on a minimum item width.</Subtitle>
+
+## Playground
+
+<Canvas of={GridStories.Playground} />
+
+Grid uses CSS auto-fit columns. Select `minItemWidth` to set the smallest useful column width, then choose a token-based `gap`. Columns collapse naturally as the available width shrinks.
+
+## Responsive behavior
+
+<Canvas of={GridStories.ResponsiveExample} />
+
+<Canvas of={GridStories.MinimumWidthExamples} />
+
+Use `as` to render a semantic section or list when appropriate. Grid leaves child appearance and content unchanged.
+
+<Controls of={GridStories.Playground} />

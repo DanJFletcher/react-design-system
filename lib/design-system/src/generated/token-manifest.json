@@ -117,6 +117,42 @@
       "description": "Semibold font weight."
     },
     {
+      "name": "layout.container.content",
+      "type": "dimension",
+      "value": "64rem",
+      "description": "Standard readable content container width."
+    },
+    {
+      "name": "layout.container.narrow",
+      "type": "dimension",
+      "value": "42rem",
+      "description": "Narrow content container width."
+    },
+    {
+      "name": "layout.container.wide",
+      "type": "dimension",
+      "value": "80rem",
+      "description": "Wide page container width."
+    },
+    {
+      "name": "layout.grid-item.lg",
+      "type": "dimension",
+      "value": "24rem",
+      "description": "Minimum large responsive grid item width."
+    },
+    {
+      "name": "layout.grid-item.md",
+      "type": "dimension",
+      "value": "18rem",
+      "description": "Minimum medium responsive grid item width."
+    },
+    {
+      "name": "layout.grid-item.sm",
+      "type": "dimension",
+      "value": "14rem",
+      "description": "Minimum small responsive grid item width."
+    },
+    {
       "name": "line.height.normal",
       "type": "lineHeight",
       "value": 1.5,

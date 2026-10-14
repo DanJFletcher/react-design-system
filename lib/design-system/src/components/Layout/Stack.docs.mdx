@@ -1,0 +1,22 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as StackStories from "./Stack.stories";
+
+<Meta of={StackStories} />
+
+<Title>Stack</Title>
+
+<Subtitle>A vertical flow layout with consistent spacing, alignment, and distribution.</Subtitle>
+
+## Playground
+
+<Canvas of={StackStories.Playground} />
+
+`gap` uses spacing tokens. `align` controls cross-axis alignment, while `justify` controls how children are distributed along the vertical axis. The default element is `div`; use `as` when a semantic list, section, or form is needed.
+
+## Semantic list
+
+<Canvas of={StackStories.ListExample} />
+
+Stack does not add visual surface styling or change the semantics of its children.
+
+<Controls of={StackStories.Playground} />

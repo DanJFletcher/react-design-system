@@ -1,0 +1,223 @@
+.container {
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  margin-inline: auto;
+}
+
+.container[data-max-width="narrow"] {
+  max-inline-size: var(--ds-layout-container-narrow);
+}
+
+.container[data-max-width="content"] {
+  max-inline-size: var(--ds-layout-container-content);
+}
+
+.container[data-max-width="wide"] {
+  max-inline-size: var(--ds-layout-container-wide);
+}
+
+.container[data-max-width="full"] {
+  max-inline-size: none;
+}
+
+.container[data-gutter="none"] {
+  padding-inline: var(--ds-space-0);
+}
+
+.container[data-gutter="xs"] {
+  padding-inline: var(--ds-space-1);
+}
+
+.container[data-gutter="sm"] {
+  padding-inline: var(--ds-space-2);
+}
+
+.container[data-gutter="md"] {
+  padding-inline: var(--ds-space-4);
+}
+
+.container[data-gutter="lg"] {
+  padding-inline: var(--ds-space-6);
+}
+
+.container[data-gutter="xl"] {
+  padding-inline: var(--ds-space-8);
+}
+
+.container[data-gutter="2xl"] {
+  padding-inline: var(--ds-space-12);
+}
+
+.stack,
+.inline,
+.grid {
+  min-inline-size: 0;
+}
+
+.stack,
+.inline,
+.grid {
+  gap: var(--ds-space-4);
+}
+
+.stack[data-gap="none"],
+.inline[data-gap="none"],
+.grid[data-gap="none"] {
+  gap: var(--ds-space-0);
+}
+
+.stack[data-gap="xs"],
+.inline[data-gap="xs"],
+.grid[data-gap="xs"] {
+  gap: var(--ds-space-1);
+}
+
+.stack[data-gap="sm"],
+.inline[data-gap="sm"],
+.grid[data-gap="sm"] {
+  gap: var(--ds-space-2);
+}
+
+.stack[data-gap="md"],
+.inline[data-gap="md"],
+.grid[data-gap="md"] {
+  gap: var(--ds-space-4);
+}
+
+.stack[data-gap="lg"],
+.inline[data-gap="lg"],
+.grid[data-gap="lg"] {
+  gap: var(--ds-space-6);
+}
+
+.stack[data-gap="xl"],
+.inline[data-gap="xl"],
+.grid[data-gap="xl"] {
+  gap: var(--ds-space-8);
+}
+
+.stack[data-gap="2xl"],
+.inline[data-gap="2xl"],
+.grid[data-gap="2xl"] {
+  gap: var(--ds-space-12);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack[data-align="start"],
+.inline[data-align="start"] {
+  align-items: flex-start;
+}
+
+.stack[data-align="center"],
+.inline[data-align="center"] {
+  align-items: center;
+}
+
+.stack[data-align="end"],
+.inline[data-align="end"] {
+  align-items: flex-end;
+}
+
+.stack[data-align="stretch"],
+.inline[data-align="stretch"] {
+  align-items: stretch;
+}
+
+.stack[data-align="baseline"],
+.inline[data-align="baseline"] {
+  align-items: baseline;
+}
+
+.stack[data-justify="start"],
+.inline[data-justify="start"] {
+  justify-content: flex-start;
+}
+
+.stack[data-justify="center"],
+.inline[data-justify="center"] {
+  justify-content: center;
+}
+
+.stack[data-justify="end"],
+.inline[data-justify="end"] {
+  justify-content: flex-end;
+}
+
+.stack[data-justify="between"],
+.inline[data-justify="between"] {
+  justify-content: space-between;
+}
+
+.stack[data-justify="around"],
+.inline[data-justify="around"] {
+  justify-content: space-around;
+}
+
+.stack[data-justify="evenly"],
+.inline[data-justify="evenly"] {
+  justify-content: space-evenly;
+}
+
+.inline {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.inline[data-wrap="false"] {
+  flex-wrap: nowrap;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid[data-min-item-width="sm"] {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--ds-layout-grid-item-sm)), 1fr)
+  );
+}
+
+.grid[data-min-item-width="md"] {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--ds-layout-grid-item-md)), 1fr)
+  );
+}
+
+.grid[data-min-item-width="lg"] {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--ds-layout-grid-item-lg)), 1fr)
+  );
+}
+
+.visuallyHidden {
+  position: absolute;
+  inline-size: var(--ds-space-half);
+  block-size: var(--ds-space-half);
+  margin: calc(var(--ds-space-half) * -1);
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.visuallyHidden[data-focusable="true"]:focus,
+.visuallyHidden[data-focusable="true"]:focus-within {
+  position: static;
+  inline-size: auto;
+  block-size: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
+}

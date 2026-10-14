@@ -1,0 +1,24 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as VisuallyHiddenStories from "./VisuallyHidden.stories";
+
+<Meta of={VisuallyHiddenStories} />
+
+<Title>Visually Hidden</Title>
+
+<Subtitle>Content that remains in the accessibility tree without taking up visible space.</Subtitle>
+
+## Playground
+
+<Canvas of={VisuallyHiddenStories.Playground} />
+
+Use this helper for supplementary text, accessible descriptions, and labels that should not be visibly displayed. It preserves normal reading and focus order.
+
+## Accessible descriptions and skip links
+
+<Canvas of={VisuallyHiddenStories.AccessibleDescription} />
+
+<Canvas of={VisuallyHiddenStories.FocusableSkipLink} />
+
+Set `focusable` for a link or control that should become visible when keyboard focus reaches it, such as a skip link. The default element is `span`; use `as` to choose another native element.
+
+<Controls of={VisuallyHiddenStories.Playground} />

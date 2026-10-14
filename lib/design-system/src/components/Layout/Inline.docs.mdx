@@ -1,0 +1,22 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as InlineStories from "./Inline.stories";
+
+<Meta of={InlineStories} />
+
+<Title>Inline</Title>
+
+<Subtitle>A horizontal flow layout with token-based gaps and optional wrapping.</Subtitle>
+
+## Playground
+
+<Canvas of={InlineStories.Playground} />
+
+Inline defaults to wrapping children and centering them on the cross axis. Set `wrap` to `false` only when the content can fit or has its own overflow behavior. `justify` controls horizontal distribution.
+
+## Wrapping example
+
+<Canvas of={InlineStories.WrappingExample} />
+
+Choose a semantic element with `as` when the children form a navigation region or list. Inline does not add visual surface styling.
+
+<Controls of={InlineStories.Playground} />

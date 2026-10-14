@@ -1,0 +1,24 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as ContainerStories from "./Container.stories";
+
+<Meta of={ContainerStories} />
+
+<Title>Container</Title>
+
+<Subtitle>A centered, responsive content boundary with token-based widths and gutters.</Subtitle>
+
+## Playground
+
+<Canvas of={ContainerStories.Playground} />
+
+`maxWidth` selects a narrow, standard content, wide, or full-width container. `gutter` sets the inline padding using design-system spacing tokens. The component defaults to a wide container with medium gutters.
+
+## Width examples and semantic elements
+
+<Canvas of={ContainerStories.WidthExamples} />
+
+<Canvas of={ContainerStories.SemanticSection} />
+
+Use `as` to choose a semantic HTML element; the default is `div`. The component adds no surface, color, border, or typography styling.
+
+<Controls of={ContainerStories.Playground} />

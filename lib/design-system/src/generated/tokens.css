@@ -19,6 +19,12 @@
   --ds-font-weight-medium: 500;
   --ds-font-weight-regular: 400;
   --ds-font-weight-semibold: 600;
+  --ds-layout-container-content: 64rem;
+  --ds-layout-container-narrow: 42rem;
+  --ds-layout-container-wide: 80rem;
+  --ds-layout-grid-item-lg: 24rem;
+  --ds-layout-grid-item-md: 18rem;
+  --ds-layout-grid-item-sm: 14rem;
   --ds-line-height-normal: 1.5;
   --ds-line-height-tight: 1.2;
   --ds-motion-duration-fast: 120ms;

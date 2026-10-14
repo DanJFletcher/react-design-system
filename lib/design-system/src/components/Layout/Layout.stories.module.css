@@ -1,0 +1,28 @@
+.examples {
+  display: grid;
+  gap: var(--ds-space-6);
+}
+
+.demoItem {
+  min-inline-size: 0;
+  padding: var(--ds-space-3);
+  border: var(--ds-border-width-default) dashed var(--ds-color-border-control);
+  background-color: var(--ds-color-surface-primary);
+  color: var(--ds-color-text-primary);
+}
+
+.demoChip {
+  padding-block: var(--ds-space-2);
+  padding-inline: var(--ds-space-3);
+  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  background-color: var(--ds-color-surface-primary);
+  color: var(--ds-color-text-primary);
+}
+
+.demoText {
+  margin: 0;
+}
+
+.focusHelp {
+  margin-block: var(--ds-space-3);
+}
