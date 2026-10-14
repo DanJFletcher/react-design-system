@@ -71,6 +71,7 @@ export const ThemeCoverage: Story = {
           </h2>
           <Breadcrumbs
             aria-label={`${theme} breadcrumb`}
+            collapseAt={theme === "atom" ? "2000px" : undefined}
             items={items}
           />
         </section>
@@ -108,6 +109,14 @@ export const ThemeCoverage: Story = {
       </section>
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const atomTheme = within(
+      canvas.getByRole("region", { name: "atom theme" }),
+    );
+    const collapseButton = atomTheme.getByRole("button");
+    expect(window.getComputedStyle(collapseButton).boxShadow).toBe("none");
+  },
 };
 
 export const NarrowScreen: Story = {

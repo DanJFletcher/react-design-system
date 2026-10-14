@@ -44,6 +44,10 @@
   cursor: pointer;
 }
 
+:global([data-ds-theme="atom"]) .collapseButton {
+  box-shadow: none;
+}
+
 .collapseButton:hover {
   color: var(--ds-color-action-primary-bg);
 }
