@@ -25,6 +25,14 @@ import * as ToastStories from "./Toast.stories";
 
 `info`, `success`, and `warning` notifications use `role="status"` and a polite announcement. `error` uses `role="alert"` for an assertive announcement. The close control is a named button; an optional action runs its callback and dismisses the toast. The default duration is 5000ms; set `duration={0}` for persistent messages. Timers pause while a toast is hovered or focused.
 
+## Motion
+
+<Canvas of={ToastStories.FadeMotion} />
+
+<Canvas of={ToastStories.SlideMotion} />
+
+Set `motion` on a toast to `fade` or `slide`; `none` is the default. `ToastProvider` also accepts `defaultMotion` to set the treatment for notifications that do not specify one. Entrance and exit transitions use the shared standard duration and easing tokens. Reduced motion skips the transitions and removes dismissed notifications immediately.
+
 ## Theme and scoped styling
 
 <Canvas of={ToastStories.ThemeCoverage} />

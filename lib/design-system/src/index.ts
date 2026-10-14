@@ -358,4 +358,5 @@ export type {
 export { ThemeScope } from "./theme/ThemeScope";
 export type { ThemeScopeProps } from "./theme/ThemeScope";
 export { usePrefersReducedMotion } from "./motion/usePrefersReducedMotion";
+export type { MotionEffect } from "./motion/types";
 export type { DesignSystemStyle, DesignSystemThemeName, DesignSystemTokenName } from "./generated/token-types";

@@ -28,6 +28,32 @@
   display: none;
 }
 
+.dialog[data-motion="fade"],
+.dialog[data-motion="slide"] {
+  transition:
+    opacity var(--ds-motion-duration-standard) var(--ds-motion-easing-standard),
+    transform var(--ds-motion-duration-standard) var(--ds-motion-easing-standard);
+}
+
+.dialog[data-motion="fade"][data-motion-state="entering"],
+.dialog[data-motion="fade"][data-motion-state="exiting"],
+.dialog[data-motion="slide"][data-motion-state="entering"],
+.dialog[data-motion="slide"][data-motion-state="exiting"] {
+  opacity: 0;
+}
+
+.dialog[data-motion="slide"][data-motion-state="entering"] {
+  transform: translateY(var(--ds-space-3)) scale(0.98);
+}
+
+.dialog[data-motion="slide"][data-motion-state="exiting"] {
+  transform: translateY(var(--ds-space-2)) scale(0.98);
+}
+
+.dialog[data-motion-state="exiting"] {
+  pointer-events: none;
+}
+
 .dialog[data-size="sm"] {
   --_dialog-width: var(--ds-dialog-width-sm, calc(var(--ds-space-32) + var(--ds-space-32) + var(--ds-space-32)));
 }
@@ -46,6 +72,19 @@
     var(--ds-dialog-backdrop, var(--ds-color-text-primary)) 56%,
     transparent
   );
+}
+
+.dialog[data-motion="fade"]::backdrop,
+.dialog[data-motion="slide"]::backdrop {
+  opacity: 1;
+  transition: opacity var(--ds-motion-duration-standard) var(--ds-motion-easing-standard);
+}
+
+.dialog[data-motion="fade"][data-motion-state="entering"]::backdrop,
+.dialog[data-motion="fade"][data-motion-state="exiting"]::backdrop,
+.dialog[data-motion="slide"][data-motion-state="entering"]::backdrop,
+.dialog[data-motion="slide"][data-motion-state="exiting"]::backdrop {
+  opacity: 0;
 }
 
 .header {
@@ -152,5 +191,17 @@
 
   .closeButton:focus-visible {
     outline-color: Highlight;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(html:not([data-ds-motion-preference="full"])) .dialog[data-motion="fade"],
+  :global(html:not([data-ds-motion-preference="full"])) .dialog[data-motion="slide"] {
+    transition: none;
+  }
+
+  :global(html:not([data-ds-motion-preference="full"])) .dialog[data-motion="fade"]::backdrop,
+  :global(html:not([data-ds-motion-preference="full"])) .dialog[data-motion="slide"]::backdrop {
+    transition: none;
   }
 }

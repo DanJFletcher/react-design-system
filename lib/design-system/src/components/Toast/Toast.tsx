@@ -14,10 +14,14 @@ import {
 } from "react";
 import { Icon, type IconName } from "../Icon/Icon";
 import type { DesignSystemStyle } from "../../generated/token-types";
+import { getStandardMotionDurationMs } from "../../motion/getStandardMotionDurationMs";
+import type { MotionEffect } from "../../motion/types";
+import { usePrefersReducedMotion } from "../../motion/usePrefersReducedMotion";
 import styles from "./Toast.module.css";
 
 export type ToastVariant = "info" | "success" | "warning" | "error";
 export type ToastPosition = "top-start" | "top-end" | "bottom-start" | "bottom-end";
+type ToastMotionState = "entering" | "open" | "exiting";
 
 export type ToastAction = {
   label: string;
@@ -34,6 +38,7 @@ export type ToastProps = Omit<
   icon?: ReactNode;
   action?: ToastAction;
   duration?: number;
+  motion?: MotionEffect;
   closeLabel?: string;
   onDismiss: () => void;
   style?: DesignSystemStyle;
@@ -47,6 +52,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(function Toast(
     icon,
     action,
     duration = 5000,
+    motion = "none",
     closeLabel = "Dismiss notification",
     onDismiss,
     className,
@@ -60,18 +66,88 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(function Toast(
   ref,
 ) {
   const [paused, setPaused] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [motionState, setMotionState] = useState<ToastMotionState>(
+    motion === "none" || prefersReducedMotion ? "open" : "entering",
+  );
+  const dismissalTimerRef = useRef<number | null>(null);
+  const entranceFrameRef = useRef<number | null>(null);
+  const dismissalStartedRef = useRef(false);
+
+  const requestDismiss = useCallback(() => {
+    if (dismissalStartedRef.current) return;
+    dismissalStartedRef.current = true;
+
+    if (motion === "none" || prefersReducedMotion) {
+      onDismiss();
+      return;
+    }
+
+    setMotionState("exiting");
+    dismissalTimerRef.current = window.setTimeout(() => {
+      dismissalTimerRef.current = null;
+      onDismiss();
+    }, getStandardMotionDurationMs());
+  }, [motion, onDismiss, prefersReducedMotion]);
 
   useEffect(() => {
-    if (paused || duration <= 0) return;
-    const timeout = window.setTimeout(onDismiss, duration);
+    if (motionState === "entering") {
+      if (motion === "none" || prefersReducedMotion) {
+        setMotionState("open");
+        return;
+      }
+
+      let secondFrame: number | null = null;
+      entranceFrameRef.current = window.requestAnimationFrame(() => {
+        secondFrame = window.requestAnimationFrame(() => {
+          entranceFrameRef.current = null;
+          setMotionState("open");
+        });
+        entranceFrameRef.current = secondFrame;
+      });
+
+      return () => {
+        if (entranceFrameRef.current !== null) {
+          window.cancelAnimationFrame(entranceFrameRef.current);
+          entranceFrameRef.current = null;
+        }
+      };
+    }
+
+    if (motionState === "exiting" && (motion === "none" || prefersReducedMotion)) {
+      if (dismissalTimerRef.current !== null) {
+        window.clearTimeout(dismissalTimerRef.current);
+        dismissalTimerRef.current = null;
+      }
+      onDismiss();
+    }
+
+    return undefined;
+  }, [motion, motionState, onDismiss, prefersReducedMotion]);
+
+  useEffect(() => {
+    if (paused || duration <= 0 || motionState === "exiting") return;
+    const timeout = window.setTimeout(requestDismiss, duration);
     return () => window.clearTimeout(timeout);
-  }, [duration, onDismiss, paused]);
+  }, [duration, motionState, paused, requestDismiss]);
+
+  useEffect(
+    () => () => {
+      if (dismissalTimerRef.current !== null) {
+        window.clearTimeout(dismissalTimerRef.current);
+      }
+      if (entranceFrameRef.current !== null) {
+        window.cancelAnimationFrame(entranceFrameRef.current);
+      }
+    },
+    [],
+  );
 
   const handleAction = () => {
     try {
       action?.onClick();
     } finally {
-      onDismiss();
+      requestDismiss();
     }
   };
 
@@ -80,6 +156,8 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(function Toast(
       {...divProps}
       aria-atomic="true"
       className={[styles.toast, className].filter(Boolean).join(" ")}
+      data-motion={motion}
+      data-motion-state={motionState}
       data-variant={variant}
       onBlurCapture={(event) => {
         onBlurCapture?.(event);
@@ -118,7 +196,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(function Toast(
       <button
         aria-label={closeLabel}
         className={styles.closeButton}
-        onClick={onDismiss}
+        onClick={requestDismiss}
         type="button"
       >
         <Icon name="close" />
@@ -137,6 +215,7 @@ export type ToastOptions = Pick<
   | "description"
   | "duration"
   | "icon"
+  | "motion"
   | "style"
   | "title"
   | "variant"
@@ -148,6 +227,7 @@ export type ToastProviderProps = {
   label?: string;
   maxVisible?: number;
   defaultDuration?: number;
+  defaultMotion?: MotionEffect;
   className?: string;
   style?: DesignSystemStyle;
 };
@@ -179,6 +259,7 @@ export function ToastProvider({
   label = "Notifications",
   maxVisible = 5,
   defaultDuration = 5000,
+  defaultMotion = "none",
   className,
   style,
 }: ToastProviderProps) {
@@ -193,10 +274,15 @@ export function ToastProvider({
     const id = `${idPrefix}-toast-${++nextId.current}`;
     setToasts((current) => [
       ...current,
-      { ...options, id, duration: options.duration ?? defaultDuration },
+      {
+        ...options,
+        id,
+        duration: options.duration ?? defaultDuration,
+        motion: options.motion ?? defaultMotion,
+      },
     ]);
     return id;
-  }, [defaultDuration, idPrefix]);
+  }, [defaultDuration, defaultMotion, idPrefix]);
 
   const dismissToast = useCallback((id: string) => {
     setToasts((current) => current.filter((toast) => toast.id !== id));

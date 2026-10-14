@@ -56,6 +56,32 @@
   pointer-events: auto;
 }
 
+.toast[data-motion="fade"],
+.toast[data-motion="slide"] {
+  transition:
+    opacity var(--ds-motion-duration-standard) var(--ds-motion-easing-standard),
+    transform var(--ds-motion-duration-standard) var(--ds-motion-easing-standard);
+}
+
+.toast[data-motion="fade"][data-motion-state="entering"],
+.toast[data-motion="fade"][data-motion-state="exiting"],
+.toast[data-motion="slide"][data-motion-state="entering"],
+.toast[data-motion="slide"][data-motion-state="exiting"] {
+  opacity: 0;
+}
+
+.toast[data-motion="slide"][data-motion-state="entering"] {
+  transform: translateY(var(--ds-space-2));
+}
+
+.toast[data-motion="slide"][data-motion-state="exiting"] {
+  transform: translateY(calc(-1 * var(--ds-space-2)));
+}
+
+.toast[data-motion-state="exiting"] {
+  pointer-events: none;
+}
+
 .toast[data-variant="info"] {
   --_toast-accent: var(--ds-toast-info-accent, var(--ds-color-accent-fg));
 }
@@ -165,5 +191,12 @@
   .action:focus-visible,
   .closeButton:focus-visible {
     outline-color: Highlight;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(html:not([data-ds-motion-preference="full"])) .toast[data-motion="fade"],
+  :global(html:not([data-ds-motion-preference="full"])) .toast[data-motion="slide"] {
+    transition: none;
   }
 }

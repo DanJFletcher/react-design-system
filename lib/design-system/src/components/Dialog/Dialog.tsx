@@ -4,6 +4,7 @@ import {
   useId,
   useImperativeHandle,
   useRef,
+  useState,
   type ComponentPropsWithRef,
   type ComponentPropsWithoutRef,
   type CSSProperties,
@@ -11,10 +12,14 @@ import {
 } from "react";
 import { Icon } from "../Icon/Icon";
 import type { DesignSystemStyle } from "../../generated/token-types";
+import { getStandardMotionDurationMs } from "../../motion/getStandardMotionDurationMs";
+import type { MotionEffect } from "../../motion/types";
+import { usePrefersReducedMotion } from "../../motion/usePrefersReducedMotion";
 import styles from "./Dialog.module.css";
 
 export type DialogSize = "sm" | "md" | "lg";
 export type DialogHeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+type DialogMotionState = "closed" | "entering" | "open" | "exiting";
 
 export type DialogProps = Omit<
   ComponentPropsWithRef<"dialog">,
@@ -32,6 +37,7 @@ export type DialogProps = Omit<
   closeLabel?: string;
   closeOnEscape?: boolean;
   closeOnBackdropClick?: boolean;
+  motion?: MotionEffect;
   onClose?: ComponentPropsWithoutRef<"dialog">["onClose"];
   onCancel?: ComponentPropsWithoutRef<"dialog">["onCancel"];
   onClick?: ComponentPropsWithoutRef<"dialog">["onClick"];
@@ -52,6 +58,7 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
     closeLabel = "Close dialog",
     closeOnEscape = true,
     closeOnBackdropClick = false,
+    motion = "none",
     className,
     style,
     onClose,
@@ -64,6 +71,10 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
   ref,
 ) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const closeTimerRef = useRef<number | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
+  const [motionState, setMotionState] = useState<DialogMotionState>("closed");
+  const prefersReducedMotion = usePrefersReducedMotion();
   const generatedId = useId();
   const headingId = `${generatedId}-heading`;
   const descriptionId = `${generatedId}-description`;
@@ -81,14 +92,66 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
     const dialog = dialogRef.current;
     if (!dialog) return;
 
-    if (open && !dialog.open) {
-      dialog.showModal();
-    } else if (!open && dialog.open) {
-      dialog.close();
+    if (animationFrameRef.current !== null) {
+      window.cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
     }
-  }, [open]);
+    if (closeTimerRef.current !== null) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+
+    if (open) {
+      if (!dialog.open) {
+        dialog.showModal();
+        if (motion === "none" || prefersReducedMotion) {
+          setMotionState("open");
+        } else {
+          setMotionState("entering");
+          animationFrameRef.current = window.requestAnimationFrame(() => {
+            animationFrameRef.current = window.requestAnimationFrame(() => {
+              animationFrameRef.current = null;
+              setMotionState("open");
+            });
+          });
+        }
+      } else {
+        setMotionState("open");
+      }
+    } else if (dialog.open) {
+      if (motion === "none" || prefersReducedMotion) {
+        setMotionState("closed");
+        dialog.close();
+      } else {
+        setMotionState("exiting");
+        closeTimerRef.current = window.setTimeout(() => {
+          if (dialog.open) dialog.close();
+          closeTimerRef.current = null;
+          setMotionState("closed");
+        }, getStandardMotionDurationMs());
+      }
+    } else {
+      setMotionState("closed");
+    }
+
+    return () => {
+      if (animationFrameRef.current !== null) {
+        window.cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
+      if (closeTimerRef.current !== null) {
+        window.clearTimeout(closeTimerRef.current);
+        closeTimerRef.current = null;
+      }
+    };
+  }, [open, motion, prefersReducedMotion]);
 
   const handleClose: NonNullable<DialogProps["onClose"]> = (event) => {
+    if (closeTimerRef.current !== null) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+    setMotionState("closed");
     if (open) onOpenChange(false);
     onClose?.(event);
   };
@@ -116,6 +179,8 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
       aria-describedby={ariaDescribedBy ?? (description != null ? descriptionId : undefined)}
       ref={dialogRef}
       className={[styles.dialog, className].filter(Boolean).join(" ")}
+      data-motion={motion}
+      data-motion-state={motionState}
       data-size={size}
       onCancel={handleCancel}
       onClose={handleClose}

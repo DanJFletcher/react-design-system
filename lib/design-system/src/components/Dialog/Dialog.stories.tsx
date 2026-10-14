@@ -19,6 +19,7 @@ const meta = {
     closeLabel: "Close dialog",
     closeOnEscape: true,
     closeOnBackdropClick: false,
+    motion: "none",
   },
   argTypes: {
     open: { control: false },
@@ -33,6 +34,7 @@ const meta = {
     closeLabel: { control: "text" },
     closeOnEscape: { control: "boolean" },
     closeOnBackdropClick: { control: "boolean" },
+    motion: { control: "inline-radio", options: ["none", "fade", "slide"] },
     onClose: { control: false },
     onCancel: { control: false },
     onClick: { control: false },
@@ -46,6 +48,39 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {};
+
+export const FadeMotion: Story = {
+  args: { motion: "fade" },
+  globals: { motion: "full" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Open dialog" }));
+    const dialog = canvas.getByRole("dialog", { name: "Confirm the changes?" });
+    await expect(dialog).toHaveAttribute("data-motion", "fade");
+    await userEvent.click(canvas.getByRole("button", { name: "Close dialog" }));
+    await expect(dialog).toHaveAttribute("data-motion-state", "exiting");
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
+    await expect(canvas.queryByRole("dialog")).not.toBeInTheDocument();
+  },
+};
+
+export const SlideMotion: Story = {
+  args: { motion: "slide" },
+  globals: { motion: "full" },
+};
+
+export const ReducedMotion: Story = {
+  args: { motion: "fade" },
+  globals: { motion: "reduced" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Open dialog" }));
+    const dialog = canvas.getByRole("dialog", { name: "Confirm the changes?" });
+    await expect(dialog).toHaveAttribute("data-motion-state", "open");
+    await userEvent.click(canvas.getByRole("button", { name: "Close dialog" }));
+    await expect(canvas.queryByRole("dialog")).not.toBeInTheDocument();
+  },
+};
 
 export const InitiallyOpen: Story = {
   render: (args) => <DialogPlayground {...args} initiallyOpen />,

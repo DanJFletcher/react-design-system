@@ -18,6 +18,7 @@ const meta = {
     description: "Your profile is up to date.",
     variant: "info",
     duration: 5000,
+    motion: "none",
     closeLabel: "Dismiss notification",
     onDismiss: () => undefined,
   },
@@ -26,6 +27,7 @@ const meta = {
     description: { control: "text" },
     variant: { control: "inline-radio", options: ["info", "success", "warning", "error"] },
     duration: { control: "number", description: "Milliseconds; 0 keeps the toast open." },
+    motion: { control: "inline-radio", options: ["none", "fade", "slide"] },
     icon: { control: false },
     action: { control: false },
     closeLabel: { control: "text" },
@@ -59,6 +61,41 @@ export const Playground: Story = {
 
 export const AutoDismiss: Story = {
   args: { duration: 1500 },
+};
+
+export const FadeMotion: Story = {
+  args: { duration: 0, motion: "fade" },
+  globals: { motion: "full" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Show toast" }));
+    const toast = canvas.getByRole("status");
+    await expect(toast).toHaveAttribute("data-motion", "fade");
+    await new Promise((resolve) => window.setTimeout(resolve, 80));
+    await expect(toast).toHaveAttribute("data-motion-state", "open");
+    await userEvent.click(canvas.getByRole("button", { name: "Dismiss notification" }));
+    await expect(toast).toHaveAttribute("data-motion-state", "exiting");
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
+    await expect(canvas.queryByRole("status")).not.toBeInTheDocument();
+  },
+};
+
+export const SlideMotion: Story = {
+  args: { duration: 0, motion: "slide" },
+  globals: { motion: "full" },
+};
+
+export const ReducedMotion: Story = {
+  args: { duration: 0, motion: "fade" },
+  globals: { motion: "reduced" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Show toast" }));
+    const toast = canvas.getByRole("status");
+    await expect(toast).toHaveAttribute("data-motion-state", "open");
+    await userEvent.click(canvas.getByRole("button", { name: "Dismiss notification" }));
+    await expect(canvas.queryByRole("status")).not.toBeInTheDocument();
+  },
 };
 
 export const Variants: Story = {
@@ -130,7 +167,7 @@ export const CustomHooks: Story = {
 
 function ToastPlayground(args: ToastProps) {
   const { showToast } = useToast();
-  const { title, description, variant, icon, action, duration, closeLabel, className, style } = args;
+  const { title, description, variant, icon, action, duration, motion, closeLabel, className, style } = args;
 
   return (
     <Button
@@ -141,6 +178,7 @@ function ToastPlayground(args: ToastProps) {
         icon,
         action,
         duration,
+        motion,
         closeLabel,
         className,
         style,

@@ -27,6 +27,14 @@ The consumer owns the open state. Use the trigger outside the dialog to set `ope
 
 The default size is `md`; `sm` and `lg` change the maximum width while the dialog remains within the viewport. Escape closes by default. Backdrop clicks do not close by default; enable `closeOnBackdropClick` when that behavior is appropriate. `showCloseButton` defaults to `true`, and `closeLabel` configures its accessible name.
 
+## Motion
+
+<Canvas of={DialogStories.FadeMotion} />
+
+<Canvas of={DialogStories.SlideMotion} />
+
+Set `motion` to `fade` or `slide` to animate controlled openings and close requests. The default is `none`, which preserves immediate open and close behavior. Transitions use the shared standard duration and easing tokens; reduced motion opens and closes immediately. During an animated close, the native modal remains open until the exit transition completes, preserving modal focus behavior. A native `form method="dialog"` or an imperative `dialog.close()` closes immediately.
+
 ## Theme and scoped styling
 
 <Canvas of={DialogStories.ThemeCoverage} />
