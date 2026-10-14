@@ -1,0 +1,28 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as LocationHoursStories from "./LocationHours.stories";
+
+<Meta of={LocationHoursStories} />
+
+<Title>Location &amp; Hours</Title>
+
+<Subtitle>A responsive business location section for addresses, weekly hours, phone links, directions, and optional map embeds.</Subtitle>
+
+## Playground
+
+<Canvas of={LocationHoursStories.Playground} />
+
+`LocationHours` reuses the library's contact details and accepts optional map content from the consumer. Provide an embed or another map view as `map`; the component does not require a map provider or API key. `layout` selects a split or stacked arrangement, and `mapPosition` places the map before or after the details.
+
+<Controls of={LocationHoursStories.Playground} />
+
+## Variations
+
+<Canvas of={LocationHoursStories.DetailsOnly} />
+
+<Canvas of={LocationHoursStories.MapOnTheLeft} />
+
+<Canvas of={LocationHoursStories.StackedLayout} />
+
+<Canvas of={LocationHoursStories.ThemeCoverage} />
+
+<Canvas of={LocationHoursStories.LongLocationDetails} />

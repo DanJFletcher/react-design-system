@@ -1,0 +1,62 @@
+.locationHours {
+  --_location-hours-gap: var(--ds-location-hours-gap, var(--ds-space-6));
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: var(--_location-hours-gap);
+  min-inline-size: 0;
+}
+
+.locationHours[data-layout="stacked"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.details {
+  min-inline-size: 0;
+  order: 0;
+}
+
+.map {
+  box-sizing: border-box;
+  display: flex;
+  min-inline-size: 0;
+  aspect-ratio: var(--ds-location-hours-map-aspect-ratio, 4 / 3);
+  overflow: hidden;
+  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  border-radius: var(--ds-location-hours-map-radius, var(--ds-radius-surface));
+  background: var(--ds-color-surface-primary);
+  order: 1;
+}
+
+.map > * {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.map :global(iframe),
+.map :global(img),
+.map :global(video) {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  border: 0;
+  object-fit: cover;
+}
+
+.locationHours[data-map-position="start"] .map {
+  order: -1;
+}
+
+@media (max-width: 48rem) {
+  .locationHours {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (forced-colors: active) {
+  .map {
+    border-color: CanvasText;
+    background: Canvas;
+  }
+}

@@ -28,6 +28,13 @@ export type {
   ContactSectionProps,
   ContactSectionVariant,
 } from "./components/ContactSection/ContactSection";
+export { LocationHours } from "./components/LocationHours/LocationHours";
+export type {
+  LocationHoursLayout,
+  LocationHoursMapPosition,
+  LocationHoursPhone,
+  LocationHoursProps,
+} from "./components/LocationHours/LocationHours";
 export { NewsletterSignup } from "./components/NewsletterSignup/NewsletterSignup";
 export type {
   NewsletterSignupHeadingLevel,
