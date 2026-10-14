@@ -24,13 +24,11 @@
     overflow-wrap: anywhere;
   }
 
-  :scope :is(h1, h2)::before {
+  :scope :is(h1, h2)::before,
+  :scope :is(h1, h2)::after {
     content: "";
     position: absolute;
-    z-index: -1;
     inset: 0;
-    background-color: var(--ds-color-focus-ring);
-    transform: translate(0.12em, 0.1em);
     clip-path: polygon(
       0.02em 0.08em, 12% 0.03em, 29% 0.06em, 47% 0.01em,
       66% 0.05em, 86% 0, calc(100% - 0.02em) 0.06em,
@@ -43,13 +41,26 @@
     pointer-events: none;
   }
 
+  :scope :is(h1, h2)::before {
+    z-index: -1;
+    background-color: var(--ds-color-focus-ring);
+    transform: translate(0.12em, 0.1em);
+  }
+
+  :scope :is(h1, h2)::after {
+    z-index: -2;
+    background-color: var(--ds-color-accent-bg);
+    transform: translate(-0.12em, -0.1em);
+  }
+
   @media (forced-colors: active) {
     :scope :is(h1, h2),
     :scope :is(h1, h2)[data-tone] {
       color: CanvasText;
     }
 
-    :scope :is(h1, h2)::before {
+    :scope :is(h1, h2)::before,
+    :scope :is(h1, h2)::after {
       content: none;
     }
   }

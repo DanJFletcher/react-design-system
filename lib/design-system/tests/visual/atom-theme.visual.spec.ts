@@ -1,18 +1,30 @@
 import { expect, test } from "@playwright/test";
 
-test("Atom H1 and H2 have offset cyan marker highlights without changing other headings", async ({ page }) => {
+test("Atom H1 and H2 layer top-left yellow behind bottom-right cyan marker highlights", async ({ page }) => {
   await page.goto("/iframe.html?id=foundations-atom-theme--heading-highlights&viewMode=story");
   for (const id of ["atom-marker-h1", "atom-marker-h2", "atom-marker-component"]) {
     const heading = page.getByTestId(id);
     await expect(heading).toBeVisible();
     const styles = await heading.evaluate((element) => {
       const marker = getComputedStyle(element, "::before");
+      const yellow = getComputedStyle(element, "::after");
+      const cyanOffset = new DOMMatrixReadOnly(marker.transform);
+      const yellowOffset = new DOMMatrixReadOnly(yellow.transform);
       return {
         background: marker.backgroundColor,
         clip: marker.clipPath,
         transform: marker.transform,
         content: marker.content,
         color: getComputedStyle(element).color,
+        cyanX: cyanOffset.m41,
+        cyanY: cyanOffset.m42,
+        cyanLayer: Number(marker.zIndex),
+        yellowBackground: yellow.backgroundColor,
+        yellowClip: yellow.clipPath,
+        yellowContent: yellow.content,
+        yellowX: yellowOffset.m41,
+        yellowY: yellowOffset.m42,
+        yellowLayer: Number(yellow.zIndex),
       };
     });
     expect(styles.background).toBe("rgb(112, 232, 255)");
@@ -20,11 +32,21 @@ test("Atom H1 and H2 have offset cyan marker highlights without changing other h
     expect(styles.transform).not.toBe("none");
     expect(styles.content).toBe('""');
     expect(styles.color).toBe("rgb(17, 17, 29)");
+    expect(styles.cyanX).toBeGreaterThan(0);
+    expect(styles.cyanY).toBeGreaterThan(0);
+    expect(styles.yellowBackground).toBe("rgb(255, 224, 90)");
+    expect(styles.yellowClip).toBe(styles.clip);
+    expect(styles.yellowContent).toBe('""');
+    expect(styles.yellowX).toBeLessThan(0);
+    expect(styles.yellowY).toBeLessThan(0);
+    expect(styles.yellowLayer).toBeLessThan(styles.cyanLayer);
   }
   for (const id of ["atom-marker-h3", "luna-unmarked-heading"]) {
-    expect(await page.getByTestId(id).evaluate((element) =>
-      getComputedStyle(element, "::before").content,
-    )).toBe("none");
+    for (const pseudo of ["::before", "::after"]) {
+      expect(await page.getByTestId(id).evaluate((element, selector) =>
+        getComputedStyle(element, selector).content,
+      pseudo)).toBe("none");
+    }
   }
   await page.setViewportSize({ width: 360, height: 800 });
   const wrapped = page.getByTestId("atom-marker-h2");
@@ -35,9 +57,11 @@ test("Atom H1 and H2 have offset cyan marker highlights without changing other h
     document.documentElement.scrollWidth <= window.innerWidth,
   )).toBe(true);
   await page.emulateMedia({ forcedColors: "active" });
-  expect(await wrapped.evaluate((element) =>
-    getComputedStyle(element, "::before").content,
-  )).toBe("none");
+  for (const pseudo of ["::before", "::after"]) {
+    expect(await wrapped.evaluate((element, selector) =>
+      getComputedStyle(element, selector).content,
+    pseudo)).toBe("none");
+  }
 });
 
 test("Atom uses a dark palette, thick borders, and hard shadows", async ({
