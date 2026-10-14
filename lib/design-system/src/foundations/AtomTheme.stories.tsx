@@ -5,6 +5,7 @@ import { Card } from "../components/Card/Card";
 import { Select } from "../components/FormControls/Select";
 import { Textarea } from "../components/FormControls/Textarea";
 import { TextField } from "../components/FormControls/TextField";
+import { Heading } from "../components/Typography/Typography";
 
 const meta = {
   title: "Foundations/Atom theme",
@@ -13,7 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Atom is a dark comic-inspired theme with inked borders, vivid print-like accents, subtle halftone texture, and hard offset shadows.",
+          "Atom is a dark comic-inspired theme with inked borders, vivid print-like accents, subtle halftone texture, hard offset shadows, and clipped cyan marker highlights behind H1 and H2 headings.",
       },
     },
   },
@@ -120,5 +121,40 @@ export const Playground: Story = {
         shadows are all driven by the Atom theme.
       </Callout>
     </main>
+  ),
+};
+
+export const HeadingHighlights: Story = {
+  render: () => (
+    <section
+      data-ds-theme="atom"
+      aria-label="Atom heading highlights"
+      style={{
+        display: "grid",
+        gap: "var(--ds-space-6)",
+        padding: "var(--ds-space-6)",
+        backgroundColor: "var(--ds-color-canvas)",
+        color: "var(--ds-color-text-primary)",
+        fontFamily: "var(--ds-font-family-sans)",
+      }}
+    >
+      <h1 data-testid="atom-marker-h1" style={{ margin: 0, fontSize: "var(--ds-font-size-4xl)" }}>
+        Make some noise.
+      </h1>
+      <h2 data-testid="atom-marker-h2" style={{ margin: 0, fontSize: "var(--ds-font-size-3xl)" }}>
+        Big ideas deserve a bold beginning.
+      </h2>
+      <Heading level={2} tone="muted" data-testid="atom-marker-component">
+        A heading from the component library
+      </Heading>
+      <h3 data-testid="atom-marker-h3" style={{ margin: 0 }}>
+        Smaller headings keep their original styling.
+      </h3>
+      <div data-ds-theme="luna">
+        <Heading level={2} data-testid="luna-unmarked-heading">
+          Nested themes keep their own typography.
+        </Heading>
+      </div>
+    </section>
   ),
 };

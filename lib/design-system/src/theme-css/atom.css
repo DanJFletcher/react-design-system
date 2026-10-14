@@ -8,6 +8,53 @@
   background-size: var(--ds-space-5) var(--ds-space-5);
 }
 
+/* Limit the marker treatment to the nearest Atom theme boundary. */
+@scope ([data-ds-theme="atom"]) to ([data-ds-theme]:not([data-ds-theme="atom"])) {
+  :scope :is(h1, h2),
+  :scope :is(h1, h2)[data-tone] {
+    position: relative;
+    isolation: isolate;
+    display: inline-block;
+    box-sizing: border-box;
+    inline-size: fit-content;
+    max-inline-size: calc(100% - 0.12em);
+    padding: 0.1em 0.25em;
+    color: var(--ds-typography-color, var(--ds-color-canvas));
+    box-shadow: none;
+    overflow-wrap: anywhere;
+  }
+
+  :scope :is(h1, h2)::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-color: var(--ds-color-focus-ring);
+    transform: translate(0.12em, 0.1em);
+    clip-path: polygon(
+      0.02em 0.08em, 12% 0.03em, 29% 0.06em, 47% 0.01em,
+      66% 0.05em, 86% 0, calc(100% - 0.02em) 0.06em,
+      calc(100% - 0.05em) 36%, 100% 65%,
+      calc(100% - 0.03em) calc(100% - 0.06em),
+      83% calc(100% - 0.02em), 63% calc(100% - 0.05em),
+      42% 100%, 24% calc(100% - 0.04em), 0.02em calc(100% - 0.01em),
+      0.05em 65%, 0 35%
+    );
+    pointer-events: none;
+  }
+
+  @media (forced-colors: active) {
+    :scope :is(h1, h2),
+    :scope :is(h1, h2)[data-tone] {
+      color: CanvasText;
+    }
+
+    :scope :is(h1, h2)::before {
+      content: none;
+    }
+  }
+}
+
 :where([data-ds-theme="atom"]) :where(
   [data-ds-surface],
   [data-variant="surface"],
