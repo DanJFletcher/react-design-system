@@ -24,6 +24,27 @@ body {
     padding: 0;
   }
 
+  .sbdocs-wrapper {
+    padding-inline: var(--ds-space-4) !important;
+  }
+
+  .sbdocs-preview {
+    box-sizing: border-box !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-inline: calc(50% - 50vw) !important;
+    padding-inline: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .docs-story {
+    padding-inline: 0 !important;
+  }
+
+  .sbdocs-preview .docs-story .innerZoomElementWrapper > * {
+    border-inline-width: 0 !important;
+  }
+
   .storybook-canvas {
     padding-block: var(--ds-space-4);
     padding-inline: 0;
