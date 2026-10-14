@@ -23,6 +23,12 @@ Use the controls to choose a variant, size, shape, heading level, and whether mu
 
 `items` requires a unique `id` per item and accepts `title`, `content`, and optional `disabled`. The default `multiple={false}` closes another open panel when a new one opens. Use `multiple` to let each panel toggle independently.
 
+## Expand and collapse motion
+
+<Canvas of={AccordionStories.ExpandCollapseMotion} />
+
+Set `panelMotion="expand"` to animate panel size and opacity with the shared standard duration and easing tokens. The default `none` keeps panel content opening and closing immediately; the chevron retains its existing rotation transition. System or Storybook reduced-motion settings make the panel change instantly.
+
 ## Theme coverage
 
 <Canvas of={AccordionStories.ThemeCoverage} />

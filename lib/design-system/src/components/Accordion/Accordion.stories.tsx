@@ -30,6 +30,7 @@ const meta = {
     variant: "divided",
     size: "md",
     shape: "rounded",
+    panelMotion: "none",
     headingLevel: 3,
   },
   argTypes: {
@@ -42,6 +43,7 @@ const meta = {
     variant: { control: "inline-radio", options: ["divided", "outlined", "surface"] },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     shape: { control: "inline-radio", options: ["rounded", "square"] },
+    panelMotion: { control: "inline-radio", options: ["none", "expand"] },
     headingLevel: { control: "select", options: [1, 2, 3, 4, 5, 6] },
     className: { control: false },
     style: { control: false },
@@ -66,6 +68,47 @@ export const Playground: Story = {
     await expect(canvas.getByRole("region", { name: "Can we start small?" })).toBeVisible();
     await userEvent.keyboard("{TAB}");
     await expect(canvas.getByRole("button", { name: "Will Orbit replace every tool we use?" })).toHaveFocus();
+  },
+};
+
+export const ExpandCollapseMotion: Story = {
+  args: { panelMotion: "expand" },
+  globals: { motion: "full" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { name: "Can we start small?" });
+    const panelId = trigger.getAttribute("aria-controls");
+    const panel = panelId
+      ? canvasElement.querySelector<HTMLElement>(`[id="${panelId}"]`)
+      : null;
+    if (!panel) throw new Error("Expected the Accordion panel to be rendered.");
+
+    await expect(panel).toHaveAttribute("aria-hidden", "true");
+    await expect(panel).toHaveAttribute("inert");
+    await userEvent.click(trigger);
+    await expect(trigger).toHaveAttribute("aria-expanded", "true");
+    await expect(panel).not.toHaveAttribute("aria-hidden", "true");
+    await expect(panel).not.toHaveAttribute("inert");
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
+    await expect(canvas.getByRole("region", { name: "Can we start small?" })).toBeVisible();
+
+    await userEvent.click(trigger);
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await expect(panel).toHaveAttribute("aria-hidden", "true");
+    await expect(panel).toHaveAttribute("inert");
+  },
+};
+
+export const ReducedMotion: Story = {
+  args: { panelMotion: "expand" },
+  globals: { motion: "reduced" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Can we start small?" }));
+    const panel = canvas.getByRole("region", { name: "Can we start small?" });
+    await expect(document.documentElement).toHaveAttribute("data-ds-motion-preference", "reduced");
+    await expect(getComputedStyle(panel).transitionDuration).toBe("0s");
+    await expect(panel).toBeVisible();
   },
 };
 

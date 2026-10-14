@@ -14,6 +14,7 @@ export type AccordionVariant = "divided" | "outlined" | "surface";
 export type AccordionSize = "sm" | "md" | "lg";
 export type AccordionShape = "rounded" | "square";
 export type AccordionHeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+export type AccordionPanelMotion = "none" | "expand";
 
 export type AccordionItem = {
   id: string;
@@ -35,6 +36,7 @@ export type AccordionProps = Omit<
   variant?: AccordionVariant;
   size?: AccordionSize;
   shape?: AccordionShape;
+  panelMotion?: AccordionPanelMotion;
   headingLevel?: AccordionHeadingLevel;
   style?: DesignSystemStyle;
 };
@@ -59,6 +61,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
     variant = "divided",
     size = "md",
     shape = "rounded",
+    panelMotion = "none",
     headingLevel = 3,
     className,
     style,
@@ -145,13 +148,18 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
               </button>
             </Heading>
             <div
+              aria-hidden={panelMotion === "expand" && !isOpen ? true : undefined}
               aria-labelledby={triggerId}
-              className={styles.panel}
-              hidden={!isOpen}
+              className={panelMotion === "expand" ? styles.panelMotion : styles.panel}
+              data-open={panelMotion === "expand" ? isOpen : undefined}
+              hidden={panelMotion === "none" ? !isOpen : undefined}
               id={panelId}
+              inert={panelMotion === "expand" && !isOpen ? true : undefined}
               role="region"
             >
-              {item.content}
+              {panelMotion === "expand" ? (
+                <div className={styles.panel}>{item.content}</div>
+              ) : item.content}
             </div>
           </div>
         );

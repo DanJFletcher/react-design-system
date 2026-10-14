@@ -101,6 +101,26 @@
   line-height: var(--ds-line-height-relaxed);
 }
 
+.panelMotion {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--ds-motion-duration-standard) var(--ds-motion-easing-standard),
+    opacity var(--ds-motion-duration-standard) var(--ds-motion-easing-enter);
+}
+
+.panelMotion[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.panelMotion > .panel {
+  min-block-size: 0;
+  overflow: hidden;
+}
+
 .panel[hidden] {
   display: none;
 }
@@ -127,6 +147,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   :global(html:not([data-ds-motion-preference="full"])) .chevron {
+    transition: none;
+  }
+
+  :global(html:not([data-ds-motion-preference="full"])) .panelMotion {
     transition: none;
   }
 }

@@ -71,6 +71,7 @@ export { Accordion } from "./components/Accordion/Accordion";
 export type {
   AccordionHeadingLevel,
   AccordionItem,
+  AccordionPanelMotion,
   AccordionProps,
   AccordionShape,
   AccordionSize,
