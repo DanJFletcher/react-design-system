@@ -97,6 +97,28 @@ test("wide tables scroll inside their viewport on mobile without widening the pa
   expect(pageDimensions.documentWidth).toBeLessThanOrEqual(pageDimensions.viewportWidth);
 });
 
+test("default table columns stay readable and scroll within the viewport on mobile", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/iframe.html?id=components-table--with-caption&viewMode=story");
+
+  const table = page.getByRole("table", { name: "Featured local providers" });
+  const viewport = table.locator("xpath=parent::div");
+  await expect(table).toHaveCSS("min-inline-size", "max-content");
+  const dimensions = await viewport.evaluate((element) => ({
+    clientWidth: element.clientWidth,
+    scrollWidth: element.scrollWidth,
+  }));
+  expect(dimensions.scrollWidth).toBeGreaterThan(dimensions.clientWidth);
+
+  const pageDimensions = await page.evaluate(() => ({
+    documentWidth: document.documentElement.scrollWidth,
+    viewportWidth: document.documentElement.clientWidth,
+  }));
+  expect(pageDimensions.documentWidth).toBeLessThanOrEqual(pageDimensions.viewportWidth);
+});
+
 test("table themes keep distinct surfaces and custom hook overrides apply", async ({ page }) => {
   await page.goto("/iframe.html?id=components-table--theme-coverage&viewMode=story");
   const tables = page.locator("table[aria-label$='business table']");
