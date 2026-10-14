@@ -25,6 +25,8 @@
     { "file": "FormControls/FormControls.module.css", "selector": ".switch", "role": "circle", "reason": "Intentional capsule switch track." },
     { "file": "FormControls/FormControls.module.css", "selector": ".switch::before", "role": "circle", "reason": "Circular switch thumb." },
     { "file": "Header/Header.module.css", "selector": ".navLink", "role": "action", "reason": "Navigation action target." },
+    { "file": "LocationHours/LocationHours.module.css", "selector": ".hoursStatus", "role": "action", "reason": "Compact opening-status badge follows the theme's control corner shape." },
+    { "file": "LocationHours/LocationHours.module.css", "selector": ".hoursStatus::before", "role": "circle", "reason": "Decorative circular status indicator." },
     { "file": "Pagination/Pagination.module.css", "selector": ".control", "role": "action", "reason": "Page-selection action target." },
     { "file": "PricingDetails/PricingDetails.module.css", "selector": ".badge", "role": "action", "reason": "Compact promotional label, not the pricing panel." },
     { "file": "Progress/Progress.module.css", "selector": ".track", "role": "circle", "reason": "Intentional capsule progress track, with a consumer hook." },

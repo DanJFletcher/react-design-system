@@ -1064,6 +1064,12 @@
       "cssVariable": "--ds-hero-text"
     },
     {
+      "name": "location-hours.map-radius",
+      "type": "dimension",
+      "description": "Location & Hours map frame corner radius.",
+      "cssVariable": "--ds-location-hours-map-radius"
+    },
+    {
       "name": "menu.border",
       "type": "color",
       "description": "Menu panel and divider border color.",

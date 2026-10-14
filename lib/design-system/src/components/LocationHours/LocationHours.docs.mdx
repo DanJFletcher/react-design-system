@@ -13,6 +13,8 @@ import * as LocationHoursStories from "./LocationHours.stories";
 
 `LocationHours` reuses the library's contact details and accepts optional map content from the consumer. Provide an embed or another map view as `map`; the component does not require a map provider or API key. `layout` selects a split or stacked arrangement, and `mapPosition` places the map before or after the details.
 
+Set `openStatus` to display a live open/closed message with the next closing or opening time. Provide the location's IANA `timeZone` (for example, `America/Toronto`) and add `dayOfWeek` (`0` = Sunday through `6` = Saturday) plus structured `intervals` (`opensAt` / `closesAt` in 24-hour `HH:mm`) to each of the seven `hours` entries. Use an empty `intervals` array for a closed day. The displayed text in `hours` remains customizable. Status updates every minute and handles overnight hours.
+
 <Controls of={LocationHoursStories.Playground} />
 
 ## Variations
@@ -22,6 +24,8 @@ import * as LocationHoursStories from "./LocationHours.stories";
 <Canvas of={LocationHoursStories.MapOnTheLeft} />
 
 <Canvas of={LocationHoursStories.StackedLayout} />
+
+<Canvas of={LocationHoursStories.OpenStatus} />
 
 <Canvas of={LocationHoursStories.ThemeCoverage} />
 

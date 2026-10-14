@@ -20,7 +20,9 @@ export { Progress } from "./components/Progress/Progress";
 export type { ProgressProps } from "./components/Progress/Progress";
 export { ContactSection } from "./components/ContactSection/ContactSection";
 export type {
+  BusinessDayOfWeek,
   BusinessHour,
+  BusinessHourInterval,
   ContactAddress,
   ContactMethod,
   ContactSectionHeadingLevel,
@@ -32,6 +34,7 @@ export { LocationHours } from "./components/LocationHours/LocationHours";
 export type {
   LocationHoursLayout,
   LocationHoursMapPosition,
+  LocationHoursOpenStatusOptions,
   LocationHoursPhone,
   LocationHoursProps,
 } from "./components/LocationHours/LocationHours";

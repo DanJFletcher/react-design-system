@@ -133,6 +133,7 @@
     "contact.border": { "type": "color", "description": "Contact section surface border color." },
     "contact.link": { "type": "color", "description": "Contact section link text color." },
     "contact.radius": { "type": "dimension", "description": "Contact section corner radius." },
+    "location-hours.map-radius": { "type": "dimension", "description": "Location & Hours map frame corner radius." },
     "contact.padding": { "type": "dimension", "description": "Contact section internal spacing." },
     "contact.gap": { "type": "dimension", "description": "Contact section content and group spacing." },
     "services.surface": { "type": "color", "description": "Services section background color." },

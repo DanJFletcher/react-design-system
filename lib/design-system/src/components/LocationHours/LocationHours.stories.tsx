@@ -4,6 +4,8 @@ import {
   LocationHours,
   type LocationHoursProps,
 } from "./LocationHours";
+import type { BusinessHour } from "../ContactSection/ContactSection";
+import { getLocationHoursStatus } from "./locationHoursStatus";
 
 const address = {
   lines: ["214 Queen Street West", "Toronto, ON M5V 1Z4"],
@@ -11,14 +13,14 @@ const address = {
 };
 
 const hours = [
-  { id: "monday", day: "Monday", hours: "9:00 AM – 5:00 PM" },
-  { id: "tuesday", day: "Tuesday", hours: "9:00 AM – 5:00 PM" },
-  { id: "wednesday", day: "Wednesday", hours: "9:00 AM – 5:00 PM" },
-  { id: "thursday", day: "Thursday", hours: "9:00 AM – 7:00 PM" },
-  { id: "friday", day: "Friday", hours: "9:00 AM – 5:00 PM" },
-  { id: "saturday", day: "Saturday", hours: "10:00 AM – 3:00 PM" },
-  { id: "sunday", day: "Sunday", hours: "Closed" },
-];
+  { id: "monday", day: "Monday", dayOfWeek: 1, hours: "9:00 AM – 5:00 PM", intervals: [{ opensAt: "09:00", closesAt: "17:00" }] },
+  { id: "tuesday", day: "Tuesday", dayOfWeek: 2, hours: "9:00 AM – 5:00 PM", intervals: [{ opensAt: "09:00", closesAt: "17:00" }] },
+  { id: "wednesday", day: "Wednesday", dayOfWeek: 3, hours: "9:00 AM – 5:00 PM", intervals: [{ opensAt: "09:00", closesAt: "17:00" }] },
+  { id: "thursday", day: "Thursday", dayOfWeek: 4, hours: "9:00 AM – 7:00 PM", intervals: [{ opensAt: "09:00", closesAt: "19:00" }] },
+  { id: "friday", day: "Friday", dayOfWeek: 5, hours: "9:00 AM – 5:00 PM", intervals: [{ opensAt: "09:00", closesAt: "17:00" }] },
+  { id: "saturday", day: "Saturday", dayOfWeek: 6, hours: "10:00 AM – 3:00 PM", intervals: [{ opensAt: "10:00", closesAt: "15:00" }] },
+  { id: "sunday", day: "Sunday", dayOfWeek: 0, hours: "Closed", intervals: [] },
+] satisfies readonly BusinessHour[];
 
 function MapPreview() {
   return (
@@ -66,6 +68,7 @@ const meta = {
       href: "tel:+14165550148",
     },
     hours,
+    openStatus: { timeZone: "America/Toronto" },
     variant: "surface",
     layout: "split",
     mapPosition: "end",
@@ -77,6 +80,7 @@ const meta = {
     address: { control: "object" },
     phone: { control: "object" },
     hours: { control: "object" },
+    openStatus: { control: "object" },
     map: { control: false },
     mapLabel: { control: "text" },
     addressHeading: { control: "text" },
@@ -113,6 +117,51 @@ export const Playground: Story = {
         name: "Map showing the location",
       }),
     ).toBeVisible();
+    await expect(canvas.getByRole("status")).toBeVisible();
+  },
+};
+
+export const OpenStatus: Story = {
+  render: (args) => <LocationHours {...args} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const status = canvas.getByRole("status");
+    await expect(status).toBeVisible();
+
+    const openAtMidday = getLocationHoursStatus(
+      hours,
+      { timeZone: "America/Toronto" },
+      new Date("2026-10-14T15:00:00.000Z"),
+    );
+    await expect(openAtMidday).toEqual({
+      state: "open",
+      message: "Open now · Closes at 5:00 PM",
+    });
+
+    const closedAfterHours = getLocationHoursStatus(
+      hours,
+      { timeZone: "America/Toronto" },
+      new Date("2026-10-14T22:00:00.000Z"),
+    );
+    await expect(closedAfterHours).toEqual({
+      state: "closed",
+      message: "Closed · Opens tomorrow at 9:00 AM",
+    });
+
+    const overnightHours = hours.map((entry) =>
+      entry.dayOfWeek === 1
+        ? { ...entry, intervals: [{ opensAt: "22:00", closesAt: "02:00" }] }
+        : { ...entry, intervals: [] },
+    );
+    const openAfterMidnight = getLocationHoursStatus(
+      overnightHours,
+      { timeZone: "America/Toronto" },
+      new Date("2026-10-13T05:00:00.000Z"),
+    );
+    await expect(openAfterMidnight).toEqual({
+      state: "open",
+      message: "Open now · Closes at 2:00 AM",
+    });
   },
 };
 

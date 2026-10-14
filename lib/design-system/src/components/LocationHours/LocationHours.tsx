@@ -1,5 +1,7 @@
 import {
   forwardRef,
+  useEffect,
+  useState,
   type ComponentPropsWithRef,
   type CSSProperties,
   type ReactNode,
@@ -13,10 +15,17 @@ import {
   type ContactSectionHeadingLevel,
   type ContactSectionVariant,
 } from "../ContactSection/ContactSection";
+import { getLocationHoursStatus } from "./locationHoursStatus";
 import styles from "./LocationHours.module.css";
 
 export type LocationHoursLayout = "split" | "stacked";
 export type LocationHoursMapPosition = "start" | "end";
+export type LocationHoursOpenStatusOptions = {
+  /** IANA timezone for the business location, such as "America/Toronto". */
+  timeZone: string;
+  /** Locale used to format times and relative days. Defaults to the browser locale. */
+  locale?: string;
+};
 
 export type LocationHoursPhone = {
   value: string;
@@ -34,6 +43,7 @@ export type LocationHoursProps = Omit<
   description?: ReactNode;
   phone?: LocationHoursPhone;
   map?: ReactNode;
+  openStatus?: LocationHoursOpenStatusOptions;
   mapLabel?: string;
   addressHeading?: string;
   contactHeading?: string;
@@ -54,6 +64,7 @@ export const LocationHours = forwardRef<HTMLDivElement, LocationHoursProps>(
       description,
       phone,
       map,
+      openStatus,
       mapLabel = "Map showing the location",
       addressHeading = "Visit us",
       contactHeading = "Contact",
@@ -68,6 +79,18 @@ export const LocationHours = forwardRef<HTMLDivElement, LocationHoursProps>(
     },
     ref,
   ) {
+    const [currentTime, setCurrentTime] = useState(() => new Date());
+    const isOpenStatusEnabled = openStatus != null;
+
+    useEffect(() => {
+      if (!isOpenStatusEnabled) return;
+      const intervalId = globalThis.setInterval(() => setCurrentTime(new Date()), 60_000);
+      return () => globalThis.clearInterval(intervalId);
+    }, [isOpenStatusEnabled]);
+
+    const status = openStatus
+      ? getLocationHoursStatus(hours, openStatus, currentTime)
+      : null;
     const contactMethods: readonly ContactMethod[] = phone
       ? [{
           id: "phone",
@@ -99,6 +122,16 @@ export const LocationHours = forwardRef<HTMLDivElement, LocationHoursProps>(
           headingLevel={headingLevel}
           hours={hours}
           hoursHeading={hoursHeading}
+          hoursStatus={status && (
+            <span
+              aria-live="polite"
+              className={styles.hoursStatus}
+              data-state={status.state}
+              role="status"
+            >
+              {status.message}
+            </span>
+          )}
           variant={variant}
         />
         {hasMap && (

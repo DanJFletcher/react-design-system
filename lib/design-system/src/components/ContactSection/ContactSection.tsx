@@ -30,10 +30,23 @@ export type ContactMethod = Omit<
   icon?: ReactNode;
 };
 
+export type BusinessDayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+
+export type BusinessHourInterval = {
+  /** Local opening time in 24-hour HH:mm format. */
+  opensAt: string;
+  /** Local closing time in 24-hour HH:mm format. Use 00:00 for midnight. */
+  closesAt: string;
+};
+
 export type BusinessHour = {
   id: string;
   day: string;
   hours: string;
+  /** Sunday is 0 and Saturday is 6. Required for LocationHours open status. */
+  dayOfWeek?: BusinessDayOfWeek;
+  /** Structured schedule for open-status calculations. An empty list means closed. */
+  intervals?: readonly BusinessHourInterval[];
 };
 
 type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
@@ -47,6 +60,7 @@ export type ContactSectionProps = Omit<
   address?: ContactAddress;
   contactMethods?: readonly ContactMethod[];
   hours?: readonly BusinessHour[];
+  hoursStatus?: ReactNode;
   action?: ReactNode;
   form?: ReactNode;
   addressHeading?: string;
@@ -65,6 +79,7 @@ export const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(funct
     address,
     contactMethods = [],
     hours = [],
+    hoursStatus,
     action,
     form,
     addressHeading = "Visit us",
@@ -169,6 +184,7 @@ export const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(funct
             {hours.length > 0 && (
               <div className={styles.group}>
                 <DetailHeading className={styles.groupHeading}>{hoursHeading}</DetailHeading>
+                {hoursStatus}
                 <dl className={styles.list}>
                   {hours.map(({ id, day, hours: dailyHours }) => (
                     <div className={styles.row} key={id}>
