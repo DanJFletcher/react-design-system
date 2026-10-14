@@ -1,0 +1,26 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+import * as MediaLibraryStories from "./MediaLibrary.stories";
+
+<Meta of={MediaLibraryStories} />
+
+# MediaLibrary
+
+A reusable CMS asset browser for finding, inspecting, and selecting media. Supply the current asset collection; the component handles local search, MIME-based type filtering, selection, preview metadata, and the optional use-selection action.
+
+<Canvas of={MediaLibraryStories.Playground} />
+
+## Asset and selection contract
+
+Each `MediaAsset` has an `id`, `name`, `url`, and `mimeType`. Alternative text, pixel dimensions, file size in bytes, and an updated date are optional. `selectionMode` can be `single`, `multiple`, or `none`; `none` makes the library browse-only. Selection can be uncontrolled with `defaultSelectedIds`, or controlled by `selectedIds` and `onSelectionChange`.
+
+Pass `onConfirmSelection` to show an explicit action. The callback receives the selected asset records in the order supplied by the collection. Without it, selection is immediate and no confirmation button is shown.
+
+## Upload ownership
+
+The file chooser only calls `onFilesSelected` with the selected `File[]`. It does not upload, create object URLs, or persist files. Upload transport, validation, persistence, and updating the `assets` collection belong to the consuming application. Use `uploading` and `uploadError` to reflect the caller's upload state.
+
+<Canvas of={MediaLibraryStories.SelectionAndUpload} />
+<Canvas of={MediaLibraryStories.EmptyLibrary} />
+<Canvas of={MediaLibraryStories.NoResults} />
+<Canvas of={MediaLibraryStories.UploadStates} />
+<Canvas of={MediaLibraryStories.ThemeCoverage} />

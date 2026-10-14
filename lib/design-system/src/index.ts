@@ -95,6 +95,13 @@ export type {
   GalleryProps,
   GalleryVariant,
 } from "./components/Gallery/Gallery";
+export { MediaLibrary } from "./components/MediaLibrary/MediaLibrary";
+export type {
+  MediaAsset,
+  MediaLibraryProps,
+  MediaLibrarySelectionMode,
+  MediaTypeFilter,
+} from "./components/MediaLibrary/MediaLibrary";
 export { ServicesSection } from "./components/ServicesSection/ServicesSection";
 export type {
   ServiceItem,

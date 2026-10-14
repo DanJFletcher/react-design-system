@@ -14,9 +14,10 @@
     "src/index.ts",
     "src/theme/**/*.ts",
     "src/theme/**/*.tsx",
-    "src/components/Button/Button.tsx",
+    "src/components/**/*.ts",
+    "src/components/**/*.tsx",
     "src/generated/token-types.ts",
     "src/styles.d.ts"
   ],
-  "exclude": ["dist", "node_modules"]
+  "exclude": ["dist", "node_modules", "src/**/*.stories.tsx"]
 }
