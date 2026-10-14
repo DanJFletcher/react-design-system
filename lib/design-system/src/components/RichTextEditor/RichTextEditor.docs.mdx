@@ -1,0 +1,42 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+import * as RichTextEditorStories from "./RichTextEditor.stories";
+
+<Meta of={RichTextEditorStories} />
+
+# RichTextEditor
+
+An accessible authoring surface for structured CMS content. The editor owns editing interactions only; the consuming application owns document storage, validation beyond the editor, and publishing.
+
+<Canvas of={RichTextEditorStories.Playground} />
+
+## JSON value contract
+
+`value`, `defaultValue`, and `onChange` use Tiptap's serializable `JSONContent` document shape, exported as `RichTextEditorDocument`. Read the latest value from `onChange` and persist it in the host application. For a controlled editor, pass the saved document back through `value`. External document changes are applied without echoing a redundant update.
+
+```tsx
+const [document, setDocument] = useState<RichTextEditorDocument>(initialDocument);
+
+<RichTextEditor
+  label="Article body"
+  value={document}
+  onChange={setDocument}
+/>;
+```
+
+The initial document is a ProseMirror document with a `doc` root and paragraph content. Keep the JSON as the source of truth; HTML is a rendered representation and is not emitted by this component.
+
+## Links and images
+
+Link and image forms accept only absolute `http:` and `https:` URLs. Images are inserted as URL-based image nodes with required alternative text. There is intentionally no upload, file picker, asset library, or storage behavior: resolve and persist image URLs in your application before supplying content.
+
+## States
+
+`readOnly` preserves selection and content viewing while disabling authoring actions. `disabled` communicates an unavailable field and prevents editor changes. A `description` is associated with the multiline textbox for assistive technology.
+
+## Stories
+
+<Canvas of={RichTextEditorStories.FormattingAndSerialization} />
+<Canvas of={RichTextEditorStories.InsertLink} />
+<Canvas of={RichTextEditorStories.InsertImage} />
+<Canvas of={RichTextEditorStories.ReadOnly} />
+<Canvas of={RichTextEditorStories.Disabled} />

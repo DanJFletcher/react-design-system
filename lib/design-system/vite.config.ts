@@ -27,7 +27,7 @@ export default defineConfig({
     },
     cssCodeSplit: true,
     rollupOptions: {
-      external: ["react", "react/jsx-runtime"],
+      external: ["react", "react/jsx-runtime", /^@tiptap\//],
       output: {
         entryFileNames: "[name].js",
         assetFileNames: (asset) => {

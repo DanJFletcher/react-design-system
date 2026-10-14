@@ -131,6 +131,11 @@ export type {
   ArticleTableOfContentsItem,
   ArticleTableOfContentsProps,
 } from "./components/ArticleTableOfContents/ArticleTableOfContents";
+export { RichTextEditor } from "./components/RichTextEditor/RichTextEditor";
+export type {
+  RichTextEditorDocument,
+  RichTextEditorProps,
+} from "./components/RichTextEditor/RichTextEditor";
 export { Breadcrumbs } from "./components/Breadcrumbs/Breadcrumbs";
 export type {
   BreadcrumbsCurrentItem,
