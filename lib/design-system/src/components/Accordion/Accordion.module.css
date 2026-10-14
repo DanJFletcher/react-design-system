@@ -87,7 +87,7 @@
   flex: 0 0 auto;
   inline-size: var(--ds-space-5);
   block-size: var(--ds-space-5);
-  transition: transform var(--ds-motion-duration-fast) ease-in-out;
+  transition: transform var(--ds-motion-duration-fast) var(--ds-motion-easing-standard);
 }
 
 .item[data-open="true"] .chevron {
@@ -126,7 +126,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .chevron {
+  :global(html:not([data-ds-motion-preference="full"])) .chevron {
     transition: none;
   }
 }

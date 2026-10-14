@@ -165,10 +165,40 @@
       "description": "Fast state transition duration."
     },
     {
+      "name": "motion.duration.slow",
+      "type": "duration",
+      "value": "320ms",
+      "description": "Slow, deliberate interface transition duration."
+    },
+    {
       "name": "motion.duration.spinner",
       "type": "duration",
       "value": "750ms",
       "description": "Button loading indicator rotation duration."
+    },
+    {
+      "name": "motion.duration.standard",
+      "type": "duration",
+      "value": "200ms",
+      "description": "Standard interface transition duration."
+    },
+    {
+      "name": "motion.easing.enter",
+      "type": "easing",
+      "value": "cubic-bezier(0, 0, 0.2, 1)",
+      "description": "Motion curve for entering elements."
+    },
+    {
+      "name": "motion.easing.exit",
+      "type": "easing",
+      "value": "cubic-bezier(0.4, 0, 1, 1)",
+      "description": "Motion curve for exiting elements."
+    },
+    {
+      "name": "motion.easing.standard",
+      "type": "easing",
+      "value": "cubic-bezier(0.2, 0, 0, 1)",
+      "description": "Standard interface motion curve."
     },
     {
       "name": "radius.full",

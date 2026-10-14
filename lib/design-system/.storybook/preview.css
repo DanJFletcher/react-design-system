@@ -11,6 +11,16 @@ body {
   background: var(--ds-color-canvas);
 }
 
+:root[data-ds-motion-preference="reduced"] .storybook-canvas,
+:root[data-ds-motion-preference="reduced"] .storybook-canvas *,
+:root[data-ds-motion-preference="reduced"] .storybook-canvas *::before,
+:root[data-ds-motion-preference="reduced"] .storybook-canvas *::after {
+  animation: none !important;
+  scroll-behavior: auto !important;
+  transition-delay: 0ms !important;
+  transition-duration: 0ms !important;
+}
+
 .storybook-canvas {
   box-sizing: border-box;
   min-block-size: 100vh;

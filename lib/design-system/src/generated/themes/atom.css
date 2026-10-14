@@ -27,7 +27,12 @@
   --ds-line-height-normal: 1.5;
   --ds-line-height-tight: 1.2;
   --ds-motion-duration-fast: 120ms;
+  --ds-motion-duration-slow: 320ms;
   --ds-motion-duration-spinner: 750ms;
+  --ds-motion-duration-standard: 200ms;
+  --ds-motion-easing-enter: cubic-bezier(0, 0, 0.2, 1);
+  --ds-motion-easing-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ds-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
   --ds-radius-full: 9999px;
   --ds-radius-shape-rounded: 12px;
   --ds-radius-shape-square: 0px;

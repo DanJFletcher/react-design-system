@@ -1,0 +1,23 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Motion" />
+
+<Title>Motion</Title>
+
+Use the **Motion** toolbar control to preview three settings:
+
+- **System preference** follows the browser's `prefers-reduced-motion` setting.
+- **Reduced motion** disables CSS animation and transitions and disables JavaScript-driven automatic movement in components that use `usePrefersReducedMotion`.
+- **Full motion** previews the regular animations even when the browser requests reduced motion. This is a Storybook-only inspection mode; consumer applications should respect the visitor's preference.
+
+## Shared tokens
+
+- `--ds-motion-duration-fast` (`120ms`): small state changes such as hover and focus.
+- `--ds-motion-duration-standard` (`200ms`): typical component transitions.
+- `--ds-motion-duration-slow` (`320ms`): deliberate, larger transitions.
+- `--ds-motion-duration-spinner` (`750ms`): loading indicator rotation.
+- `--ds-motion-easing-standard` (`cubic-bezier(0.2, 0, 0, 1)`): general interface movement.
+- `--ds-motion-easing-enter` (`cubic-bezier(0, 0, 0.2, 1)`): elements entering the view.
+- `--ds-motion-easing-exit` (`cubic-bezier(0.4, 0, 1, 1)`): elements leaving the view.
+
+JavaScript-driven motion should use the `usePrefersReducedMotion()` hook. CSS transitions should use shared motion tokens and include a `prefers-reduced-motion` rule when the animation needs a component-specific alternative. Keep essential state and content available without motion.

@@ -134,7 +134,7 @@
 }
 
 .imageTrigger img {
-  transition: transform var(--ds-motion-duration-fast) ease;
+  transition: transform var(--ds-motion-duration-fast) var(--ds-motion-easing-standard);
 }
 
 .imageTrigger:hover img {
@@ -242,7 +242,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .imageTrigger img {
+  :global(html:not([data-ds-motion-preference="full"])) .imageTrigger img {
     transition-duration: 0ms;
   }
 }

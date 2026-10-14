@@ -34,9 +34,9 @@
   overflow-wrap: anywhere;
   cursor: pointer;
   transition:
-    background-color var(--ds-button-motion-duration, var(--ds-motion-duration-fast)),
-    border-color var(--ds-button-motion-duration, var(--ds-motion-duration-fast)),
-    color var(--ds-button-motion-duration, var(--ds-motion-duration-fast));
+    background-color var(--ds-button-motion-duration, var(--ds-motion-duration-fast)) var(--ds-motion-easing-standard),
+    border-color var(--ds-button-motion-duration, var(--ds-motion-duration-fast)) var(--ds-motion-easing-standard),
+    color var(--ds-button-motion-duration, var(--ds-motion-duration-fast)) var(--ds-motion-easing-standard);
 }
 
 .button:focus-visible {
@@ -186,11 +186,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .button {
+  :global(html:not([data-ds-motion-preference="full"])) .button {
     transition-duration: 0ms;
   }
 
-  .spinner {
+  :global(html:not([data-ds-motion-preference="full"])) .spinner {
     animation: none;
   }
 }

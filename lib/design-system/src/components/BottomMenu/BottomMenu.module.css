@@ -110,9 +110,9 @@
   white-space: nowrap;
   cursor: pointer;
   transition:
-    color var(--ds-motion-duration-fast) ease,
-    background-color var(--ds-motion-duration-fast) ease,
-    transform var(--ds-motion-duration-fast) ease;
+    color var(--ds-motion-duration-fast) var(--ds-motion-easing-standard),
+    background-color var(--ds-motion-duration-fast) var(--ds-motion-easing-standard),
+    transform var(--ds-motion-duration-fast) var(--ds-motion-easing-standard);
 }
 
 .item:hover:not(.disabled) {
@@ -230,7 +230,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .item {
+  :global(html:not([data-ds-motion-preference="full"])) .item {
     transition: none;
   }
 }

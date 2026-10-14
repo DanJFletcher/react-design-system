@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-type TokenType = "color" | "dimension" | "duration" | "fontFamily" | "fontWeight" | "lineHeight" | "number";
+type TokenType = "color" | "dimension" | "duration" | "easing" | "fontFamily" | "fontWeight" | "lineHeight" | "number";
 type Dimension = { amount: number; unit: string };
 type Reference = { ref: string };
 type TokenValue = string | number | Dimension | Reference;
@@ -16,6 +16,8 @@ const defaultTokenDir = resolve(here, "../src/tokens");
 const defaultOutputDir = resolve(here, "../src/generated");
 const namePattern = /^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$/;
 const hexPattern = /^#[\da-f]{6}$/i;
+const timingFunctionPattern =
+  /^(?:linear|ease(?:-in|-out|-in-out)?|cubic-bezier\(\s*-?\d*\.?\d+\s*,\s*-?\d*\.?\d+\s*,\s*-?\d*\.?\d+\s*,\s*-?\d*\.?\d+\s*\))$/;
 
 function fail(message: string): never {
   throw new Error(`Token compiler: ${message}`);
@@ -110,6 +112,14 @@ function resolveValue(
     cache.set(name, token.value);
     return token.value;
   }
+  if (token.type === "easing") {
+    if (typeof token.value !== "string" || !timingFunctionPattern.test(token.value.trim())) {
+      fail(`Easing token "${name}" must use a CSS timing keyword or cubic-bezier() function.`);
+    }
+    const resolved = token.value.trim();
+    cache.set(name, resolved);
+    return resolved;
+  }
   if (typeof token.value !== "number" || !Number.isFinite(token.value)) {
     fail(`Token "${name}" must have a finite numeric value.`);
   }
@@ -178,7 +188,7 @@ export async function compileTokens(tokenDir = defaultTokenDir): Promise<Compila
   if (!Array.isArray(allowedUnits) || !allowedUnits.every((unit) => typeof unit === "string")) {
     fail("schema.units must be an array of unit names.");
   }
-  if (!["color", "dimension", "duration", "fontFamily", "fontWeight", "lineHeight", "number"].every((type) => allowedTypes.has(type))) {
+  if (!["color", "dimension", "duration", "easing", "fontFamily", "fontWeight", "lineHeight", "number"].every((type) => allowedTypes.has(type))) {
     fail("schema.types must declare every supported token type.");
   }
 

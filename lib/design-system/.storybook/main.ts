@@ -10,6 +10,13 @@ const config: StorybookConfig = {
   core: {
     allowedHosts: true,
   },
+  viteFinal: async (config) => ({
+    ...config,
+    server: {
+      ...config.server,
+      allowedHosts: true,
+    },
+  }),
   framework: {
     name: "@storybook/react-vite",
     options: {},

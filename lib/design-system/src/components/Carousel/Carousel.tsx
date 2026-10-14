@@ -12,6 +12,7 @@ import {
 } from "react";
 import { Icon } from "../Icon/Icon";
 import type { DesignSystemStyle } from "../../generated/token-types";
+import { usePrefersReducedMotion } from "../../motion/usePrefersReducedMotion";
 import styles from "./Carousel.module.css";
 
 export type CarouselSlide = {
@@ -99,11 +100,7 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
   const carouselId = useId();
   const isControlled = index !== undefined;
   const [internalIndex, setInternalIndex] = useState(defaultIndex);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() =>
-    typeof window !== "undefined" &&
-    typeof window.matchMedia === "function" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [rotationEnabled, setRotationEnabled] = useState(
     autoPlay && !prefersReducedMotion
   );
@@ -119,17 +116,8 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
   const pointerStart = useRef<PointerStart | null>(null);
 
   useEffect(() => {
-    if (typeof window.matchMedia !== "function") return;
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const syncPreference = () => setPrefersReducedMotion(mediaQuery.matches);
-    syncPreference();
-    mediaQuery.addEventListener("change", syncPreference);
-    return () => mediaQuery.removeEventListener("change", syncPreference);
-  }, []);
-
-  useEffect(() => {
     setRotationEnabled(autoPlay && !prefersReducedMotion);
-  }, [autoPlay]);
+  }, [autoPlay, prefersReducedMotion]);
 
   useEffect(() => {
     if (prefersReducedMotion) setRotationEnabled(false);

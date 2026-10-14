@@ -33,7 +33,7 @@
   overflow-wrap: anywhere;
   pointer-events: auto;
   opacity: 0;
-  transition: opacity var(--ds-motion-duration-fast) ease;
+  transition: opacity var(--ds-motion-duration-fast) var(--ds-motion-easing-standard);
 }
 
 .tooltip[data-open="true"] {
@@ -65,7 +65,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tooltip {
+  :global(html:not([data-ds-motion-preference="full"])) .tooltip {
     transition: none;
   }
 }

@@ -77,7 +77,7 @@
 .slide {
   grid-area: 1 / 1;
   min-inline-size: 0;
-  transition: transform var(--ds-motion-duration-fast) ease;
+  transition: transform var(--ds-motion-duration-standard) var(--ds-motion-easing-standard);
 }
 
 .viewport[data-overlay-safe-area="true"][data-controls-navigation="true"] .slide {
@@ -263,7 +263,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .slide {
+  :global(html:not([data-ds-motion-preference="full"])) .slide {
     transition-duration: 0ms;
   }
 }

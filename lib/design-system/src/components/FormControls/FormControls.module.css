@@ -160,8 +160,8 @@
   background-color: var(--ds-color-surface-primary);
   cursor: pointer;
   transition:
-    background-color var(--ds-motion-duration-fast),
-    border-color var(--ds-motion-duration-fast);
+    background-color var(--ds-motion-duration-fast) var(--ds-motion-easing-standard),
+    border-color var(--ds-motion-duration-fast) var(--ds-motion-easing-standard);
 }
 
 .switch::before {
@@ -174,8 +174,8 @@
   background-color: var(--ds-color-border-control);
   content: "";
   transition:
-    background-color var(--ds-motion-duration-fast),
-    transform var(--ds-motion-duration-fast);
+    background-color var(--ds-motion-duration-fast) var(--ds-motion-easing-standard),
+    transform var(--ds-motion-duration-fast) var(--ds-motion-easing-standard);
 }
 
 .switch:checked {
@@ -308,8 +308,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .switch,
-  .switch::before {
+  :global(html:not([data-ds-motion-preference="full"])) .switch,
+  :global(html:not([data-ds-motion-preference="full"])) .switch::before {
     transition: none;
   }
 }

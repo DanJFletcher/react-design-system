@@ -65,12 +65,26 @@
   font-size: var(--ds-font-size-sm);
   font-weight: 650;
   cursor: pointer;
-  transition: transform var(--ds-motion-duration-fast) ease, opacity var(--ds-motion-duration-fast) ease;
+  transition:
+    transform var(--ds-motion-duration-fast) var(--ds-motion-easing-standard),
+    opacity var(--ds-motion-duration-fast) var(--ds-motion-easing-standard);
 }
 
 .uploadButton:hover,
 .confirmButton:hover:not(:disabled) {
   transform: translateY(calc(var(--ds-space-half) * -1));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(html:not([data-ds-motion-preference="full"])) .uploadButton,
+  :global(html:not([data-ds-motion-preference="full"])) .confirmButton {
+    transition: none;
+  }
+
+  :global(html:not([data-ds-motion-preference="full"])) .uploadButton:hover,
+  :global(html:not([data-ds-motion-preference="full"])) .confirmButton:hover:not(:disabled) {
+    transform: none;
+  }
 }
 
 .fileInput:focus-visible + .uploadButton,

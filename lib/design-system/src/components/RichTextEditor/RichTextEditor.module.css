@@ -168,4 +168,4 @@
   .toolButton:focus-visible, .blockSelect:focus-visible, .formField input:focus-visible { outline-color: Highlight; }
   .submitButton { border-color: ButtonText; background: ButtonFace; color: ButtonText; }
 }
-@media (prefers-reduced-motion: reduce) { .toolButton { transition: none; } }
+@media (prefers-reduced-motion: reduce) { :global(html:not([data-ds-motion-preference="full"])) .toolButton { transition: none; } }

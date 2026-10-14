@@ -128,7 +128,9 @@
   text-align: start;
   text-decoration: none;
   cursor: pointer;
-  transition: color var(--ds-motion-duration-fast) ease, background-color var(--ds-motion-duration-fast) ease;
+  transition:
+    color var(--ds-motion-duration-fast) var(--ds-motion-easing-standard),
+    background-color var(--ds-motion-duration-fast) var(--ds-motion-easing-standard);
 }
 .entry:hover:not(:disabled):not([aria-disabled="true"]) {
   background: var(--ds-color-action-ghost-hover);
@@ -228,7 +230,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .entry { transition: none; }
+  :global(html:not([data-ds-motion-preference="full"])) .entry { transition: none; }
 }
 @media (forced-colors: active) {
   .root { border-color: CanvasText; }

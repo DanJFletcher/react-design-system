@@ -48,7 +48,7 @@
   block-size: 100%;
   border-radius: inherit;
   background-color: var(--ds-progress-indicator, var(--_progress-indicator));
-  transition: inline-size var(--ds-motion-duration-fast) ease-out;
+  transition: inline-size var(--ds-motion-duration-fast) var(--ds-motion-easing-enter);
 }
 
 .progress[data-indeterminate="true"] .indicator {
@@ -56,7 +56,7 @@
   inset-block: 0;
   inset-inline-start: 0;
   inline-size: 35%;
-  animation: progress-indeterminate var(--ds-motion-duration-spinner) ease-in-out infinite;
+  animation: progress-indeterminate var(--ds-motion-duration-spinner) var(--ds-motion-easing-standard) infinite;
 }
 
 .progress:dir(rtl)[data-indeterminate="true"] .indicator {
@@ -84,11 +84,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .indicator {
+  :global(html:not([data-ds-motion-preference="full"])) .indicator {
     transition-duration: 0ms;
   }
 
-  .progress[data-indeterminate="true"] .indicator {
+  :global(html:not([data-ds-motion-preference="full"])) .progress[data-indeterminate="true"] .indicator {
     inset-inline-start: 32.5%;
     inline-size: 35%;
     animation: none;

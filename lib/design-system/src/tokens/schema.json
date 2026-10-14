@@ -5,6 +5,7 @@
     "color": ["hex", "reference"],
     "dimension": ["px", "rem", "em", "%", "reference"],
     "duration": ["ms", "reference"],
+    "easing": ["string", "reference"],
     "fontFamily": ["string", "reference"],
     "fontWeight": ["number", "reference"],
     "lineHeight": ["number", "reference"],
