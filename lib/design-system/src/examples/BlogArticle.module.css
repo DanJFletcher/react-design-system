@@ -46,7 +46,7 @@
   box-sizing: border-box;
   inline-size: min(100% - 2.5rem, 76rem);
   margin-inline: auto;
-  padding-block: var(--ds-space-7) var(--ds-space-12);
+  padding-block: var(--ds-space-7) 0;
 }
 
 .breadcrumbs {

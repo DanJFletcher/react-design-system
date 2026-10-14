@@ -1,0 +1,16 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as BlogLayoutStories from "./BlogLayout.stories";
+
+<Meta of={BlogLayoutStories} />
+
+<Title>Blog layout</Title>
+
+<Subtitle>A page shell for blog and editorial pages, with configurable spacing before the footer.</Subtitle>
+
+## Playground
+
+<Canvas of={BlogLayoutStories.Playground} />
+
+Provide the page header and footer as slots and place the page content between them. `footerGap` controls the space above the footer using the shared spacing scale; it defaults to `2xl`.
+
+<Controls of={BlogLayoutStories.Playground} />

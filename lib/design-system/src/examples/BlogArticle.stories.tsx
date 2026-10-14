@@ -4,6 +4,7 @@ import {
   ArticleBody,
   ArticleTableOfContents,
   Badge,
+  BlogLayout,
   Breadcrumbs,
   Button,
   Callout,
@@ -60,26 +61,44 @@ type Story = StoryObj<typeof meta>;
 
 export const FiveMinuteRead: Story = {
   render: () => (
-    <div className={styles.site} id="top">
-      <Header
-        className={styles.header}
-        logo={<span className={styles.brand}>Fieldnotes<span aria-hidden="true">.</span></span>}
-        logoHref="#top"
-        logoLabel="Fieldnotes home"
-        navItems={[
-          { label: "Journal", href: "#top", current: true },
-          { label: "Design systems", href: "#why-systems" },
-          { label: "Practical guide", href: "#start-small" },
-        ]}
-        cta={
-          <a className={styles.headerCta} href="#start-small">
-            Start small
-          </a>
-        }
-        size="md"
-        borderBottom
-      />
-
+    <BlogLayout
+      className={styles.site}
+      id="top"
+      footerGap="2xl"
+      header={
+        <Header
+          className={styles.header}
+          logo={<span className={styles.brand}>Fieldnotes<span aria-hidden="true">.</span></span>}
+          logoHref="#top"
+          logoLabel="Fieldnotes home"
+          navItems={[
+            { label: "Journal", href: "#top", current: true },
+            { label: "Design systems", href: "#why-systems" },
+            { label: "Practical guide", href: "#start-small" },
+          ]}
+          cta={
+            <a className={styles.headerCta} href="#start-small">
+              Start small
+            </a>
+          }
+          size="md"
+          borderBottom
+        />
+      }
+      footer={
+        <Footer
+          className={styles.footer}
+          brand="Fieldnotes"
+          description="Thoughtful notes on building clear, consistent digital products."
+          logoHref="#top"
+          logoLabel="Fieldnotes home"
+          linkGroups={footerGroups}
+          copyright="© 2026 Fieldnotes Journal"
+          size="sm"
+          variant="surface"
+        />
+      }
+    >
       <main className={styles.main}>
         <Breadcrumbs
           className={styles.breadcrumbs}
@@ -413,19 +432,7 @@ export const FiveMinuteRead: Story = {
           </Button>
         </section>
       </main>
-
-      <Footer
-        className={styles.footer}
-        brand="Fieldnotes"
-        description="Thoughtful notes on building clear, consistent digital products."
-        logoHref="#top"
-        logoLabel="Fieldnotes home"
-        linkGroups={footerGroups}
-        copyright="© 2026 Fieldnotes Journal"
-        size="sm"
-        variant="surface"
-      />
-    </div>
+    </BlogLayout>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -446,5 +453,12 @@ export const FiveMinuteRead: Story = {
       expect(href).toBeTruthy();
       expect(canvasElement.querySelector(href!)).not.toBeNull();
     }
+    const nextRead = canvas.getByRole("region", {
+      name: "Make the next decision easier.",
+    });
+    const footer = canvas.getByRole("contentinfo");
+    expect(
+      footer.getBoundingClientRect().top - nextRead.getBoundingClientRect().bottom,
+    ).toBeGreaterThanOrEqual(48);
   },
 };

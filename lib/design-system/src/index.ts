@@ -282,6 +282,11 @@ export { Inline } from "./components/Layout/Inline";
 export type { InlineProps } from "./components/Layout/Inline";
 export { Grid } from "./components/Layout/Grid";
 export type { GridMinItemWidth, GridProps } from "./components/Layout/Grid";
+export { BlogLayout } from "./components/Layout/BlogLayout";
+export type {
+  BlogLayoutFooterGap,
+  BlogLayoutProps,
+} from "./components/Layout/BlogLayout";
 export { VisuallyHidden } from "./components/Layout/VisuallyHidden";
 export type { VisuallyHiddenProps } from "./components/Layout/VisuallyHidden";
 export type {
