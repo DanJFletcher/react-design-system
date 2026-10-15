@@ -36,6 +36,7 @@ export const FieldGroup = forwardRef<HTMLFieldSetElement, FieldGroupProps>(funct
       aria-describedby={field.describedBy}
       aria-invalid={field.invalid || undefined}
       className={groupClassName}
+      data-ds-field-group=""
     >
       <FieldLegend label={label} />
       {children}

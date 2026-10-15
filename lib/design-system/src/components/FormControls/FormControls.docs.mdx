@@ -68,4 +68,6 @@ Each individual control requires a visible `label`. `description` and `error` ar
 <Canvas of={FormControlsStories.ThemeCoverage} />
 <Canvas of={FormControlsStories.NestedThemeBoundaries} />
 
+In Atom, `FieldGroup` has no drop shadow; its contained form controls retain their normal theme styling.
+
 Controls use the active theme's semantic text, surface, border, focus, spacing, and radius tokens. ACME, Atom, Luna, and Orchid theme coverage includes date, file, and switch examples. Control boundaries, file-picker action text, disabled actions, and active switch tracks have documented contrast checks. Luna keeps single-line text and select controls pill-shaped and uses a 32px radius for both textareas and field groups. Atom uses compact, squared control corners, 8px field-group corners, thick outlines, and hard offset shadows. Error text and invalid borders use dedicated semantic roles with contrast checked across all themes.

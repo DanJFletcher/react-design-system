@@ -216,6 +216,28 @@ test("Atom Heading and Text components do not receive surface shadows", async ({
   }
 });
 
+test("Atom button and field groups stay flat while preserving standalone controls", async ({ page }) => {
+  await page.goto("/iframe.html?id=components-button-group--theme-coverage&viewMode=story");
+  const buttonGroupTheme = page.locator('[data-ds-theme="atom"]');
+  const buttonGroups = buttonGroupTheme.locator("[data-ds-button-group]");
+  await expect(buttonGroups).toHaveCount(2);
+  for (const group of await buttonGroups.all()) {
+    expect(await group.evaluate((element) => getComputedStyle(element).boxShadow)).toBe("none");
+    for (const button of await group.locator(":scope > button").all()) {
+      expect(await button.evaluate((element) => getComputedStyle(element).boxShadow)).toBe("none");
+    }
+  }
+
+  await page.goto("/iframe.html?id=components-form-controls--theme-coverage&viewMode=story");
+  const formTheme = page.locator('[data-ds-theme="atom"]');
+  const fieldGroup = formTheme.locator("[data-ds-field-group]");
+  await expect(fieldGroup).toBeVisible();
+  expect(await fieldGroup.evaluate((element) => getComputedStyle(element).boxShadow)).toBe("none");
+  expect(await formTheme.getByRole("textbox", { name: "Workspace name" }).evaluate(
+    (element) => getComputedStyle(element).boxShadow,
+  )).not.toBe("none");
+});
+
 test("Atom accordion H3 markers stay on title spans with full-width click targets", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/iframe.html?id=components-accordion--theme-coverage&viewMode=story");
