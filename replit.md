@@ -1,6 +1,6 @@
 # Themed React UI Foundation
 
-One forkable React/TypeScript package for semantic design tokens, scoped themes, Storybook documentation, and an accessible Button foundation.
+One forkable React/TypeScript component library for semantic design tokens, five scoped themes, and Storybook documentation.
 
 ## Run & Operate
 
@@ -10,7 +10,7 @@ One forkable React/TypeScript package for semantic design tokens, scoped themes,
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 - Required env: `DATABASE_URL` — Postgres connection string
-- `pnpm --filter @workspace/design-system run storybook` — run the token and Button documentation
+- `pnpm --filter @workspace/design-system run storybook` — run the design-system component documentation and examples
 
 ## Stack
 
@@ -20,16 +20,16 @@ One forkable React/TypeScript package for semantic design tokens, scoped themes,
 - Validation: Zod (`zod/v4`), `drizzle-zod`
 - API codegen: Orval (from OpenAPI spec)
 - Build: esbuild (CJS bundle)
-- Design system: `lib/design-system`, React 19 peer-compatible ESM, TypeScript, CSS Modules, Storybook 10, Vite 7, pnpm
-- Design-system source of truth: `lib/design-system/docs/design-system.md` and `lib/design-system/src/tokens/`
+- Design system: `lib/design-system`, React >=18 peer dependency, ESM, TypeScript, CSS Modules, Storybook 10, Vite 7, pnpm
+- Design-system source of truth: `lib/design-system/CONTRIBUTING.md`, `lib/design-system/docs/design-system.md`, and `lib/design-system/src/tokens/`
 - Design-system full gate: `pnpm check`
 
 ## Where things live
 
-- `lib/design-system/src/tokens/` — typed token source, ACME/Luna themes, hook registry, and contrast pairs
+- `lib/design-system/src/tokens/` — typed token source, five built-in themes, hook registry, and contrast pairs
 - `lib/design-system/src/generated/` — deterministic checked-in CSS, type names, and documentation manifest
-- `lib/design-system/src/components/Button/` — public Button and its Storybook specification
-- `lib/design-system/docs/` — design-system spec, theming, contribution, roadmap, and fork guidance
+- `lib/design-system/src/components/` — public component implementations, Storybook stories, and component docs
+- `lib/design-system/docs/` — design-system spec, theming, component development, roadmap, and fork guidance
 
 ## Architecture decisions
 
@@ -37,9 +37,13 @@ One forkable React/TypeScript package for semantic design tokens, scoped themes,
 - Palette references are resolved by the compiler and are not runtime CSS variables.
 - Component hooks reset at theme boundaries to prevent an outer override from leaking into an inner theme.
 
+## Agent work rule
+
+- Before proposing an approach, planning a task, or starting any work that may affect `lib/design-system/`, read `lib/design-system/CONTRIBUTING.md` first. Then follow `lib/design-system/AGENTS.md` and the relevant component documentation.
+
 ## Product
 
-- Provides one reusable Button across ACME, Luna, and a custom example theme, with generated tokens and living Storybook documentation.
+- Provides reusable website, form, editorial, CMS, and layout components across ACME, Luna, Orchid, Atom, and Sublime themes, with generated tokens and living Storybook documentation.
 
 ## User preferences
 
