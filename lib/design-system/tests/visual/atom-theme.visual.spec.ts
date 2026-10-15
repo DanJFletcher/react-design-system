@@ -200,6 +200,22 @@ test("Atom H1–H6 use their layered marker colors with clipped highlights", asy
   }
 });
 
+test("Atom Heading and Text components do not receive surface shadows", async ({ page }) => {
+  await page.goto("/iframe.html?id=components-typography--theme-coverage&viewMode=story");
+  const atom = page.locator('[data-ds-theme="atom"]');
+  const typography = [
+    atom.getByRole("heading", { name: "ATOM heading" }),
+    atom.getByText("Themeable label role"),
+    atom.getByText("Primary text follows the active theme."),
+    atom.getByText("Muted text follows the active theme."),
+  ];
+
+  for (const element of typography) {
+    await expect(element).toBeVisible();
+    expect(await element.evaluate((node) => getComputedStyle(node).boxShadow)).toBe("none");
+  }
+});
+
 test("Atom accordion H3 markers stay on title spans with full-width click targets", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/iframe.html?id=components-accordion--theme-coverage&viewMode=story");

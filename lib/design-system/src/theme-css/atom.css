@@ -203,24 +203,26 @@
 }
 
 :where([data-ds-theme="atom"]) :where(
-  [data-ds-surface],
-  [data-variant="surface"],
-  [data-variant="accent"],
-  [data-variant="outlined"],
-  [data-variant="subtle"],
-  [data-variant="soft"],
-  [data-variant="solid"],
-  [data-tone],
-  [role="dialog"],
-  [role="menu"],
-  [role="tooltip"],
-  [role="alert"],
-  [role="status"],
-  dialog,
-  article,
-  pre,
-  table,
-  [role="progressbar"]
+  :not([data-ds-typography]):is(
+    [data-ds-surface],
+    [data-variant="surface"],
+    [data-variant="accent"],
+    [data-variant="outlined"],
+    [data-variant="subtle"],
+    [data-variant="soft"],
+    [data-variant="solid"],
+    [data-tone],
+    [role="dialog"],
+    [role="menu"],
+    [role="tooltip"],
+    [role="alert"],
+    [role="status"],
+    dialog,
+    article,
+    pre,
+    table,
+    [role="progressbar"]
+  )
 ) {
   box-shadow: var(--ds-shadow-elevation-surface);
 }
