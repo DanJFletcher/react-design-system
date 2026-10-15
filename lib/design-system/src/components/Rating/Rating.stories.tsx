@@ -23,6 +23,7 @@ const meta = {
     max: { control: "inline-radio", options: [3, 5, 10] },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     step: { control: "inline-radio", options: [1, 0.5] },
+    symbol: { control: "inline-radio", options: ["star", "heart", "thumbs"] },
     showValue: { control: "boolean" },
     getRatingLabel: { control: false },
     formatValue: { control: false },
@@ -207,6 +208,58 @@ export const ThemeCoverage: Story = {
       ))}
     </div>
   ),
+};
+
+export const SymbolVariants: Story = {
+  render: () => (
+    <div style={{ display: "grid", gap: "var(--ds-space-4)" }}>
+      {(["acme", "luna", "orchid", "atom", "sublime"] as const).map((theme) => (
+        <div
+          data-ds-theme={theme}
+          key={theme}
+          style={{
+            display: "grid",
+            gap: "var(--ds-space-2)",
+            padding: "var(--ds-space-4)",
+            background: "var(--ds-color-canvas)",
+            color: "var(--ds-color-text-primary)",
+          }}
+        >
+          <strong>{theme}</strong>
+          <Rating
+            mode="display"
+            label={`${theme} star rating`}
+            value={4.5}
+            symbol="star"
+          />
+          <Rating
+            mode="display"
+            label={`${theme} heart rating`}
+            value={4.5}
+            symbol="heart"
+          />
+          <Rating
+            mode="input"
+            label={`${theme} thumbs rating`}
+            name={`${theme}-thumbs-rating`}
+            defaultValue={3.5}
+            step={0.5}
+            symbol="thumbs"
+          />
+        </div>
+      ))}
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getAllByRole("img", { name: "4.5 out of 5 stars" })).toHaveLength(5);
+    await expect(canvas.getAllByRole("img", { name: "4.5 out of 5 hearts" })).toHaveLength(5);
+
+    const sublimeGroup = canvas.getByRole("group", { name: "sublime thumbs rating" });
+    await expect(
+      within(sublimeGroup).getByRole("radio", { name: "3.5 out of 5 thumbs up" }),
+    ).toBeChecked();
+  },
 };
 
 export const NarrowHalfStarScale: Story = {

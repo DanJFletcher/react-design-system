@@ -15,9 +15,9 @@ Use `mode="display"` (the default) with a numeric `value`. Display mode accepts 
 
 ## Selectable form input
 
-Use `mode="input"` with a visible `label`. It renders a native radio group. By default there is one option for each whole-star value; set `step={0.5}` to offer half-star choices. Arrow keys move between options, Tab enters or leaves the group, and the selected value is submitted using `name`.
+Use `mode="input"` with a visible `label`. It renders a native radio group. By default there is one option for each whole-step value; set `step={0.5}` to offer half-step choices. Arrow keys move between options, Tab enters or leaves the group, and the selected value is submitted using `name`.
 
-`value` with `onValueChange` provides controlled state; `defaultValue` initializes uncontrolled state. Use `required`, `disabled`, `description`, `error`, and `invalid` for form states. `getRatingLabel` localizes each radio's accessible name; `formatValue` customizes the optional visible numeric value.
+Choose `symbol="star"`, `"heart"`, or `"thumbs"`; stars are the default. Accessible names describe the score and symbol (for example, “3.5 out of 5 hearts”). `getRatingLabel` customizes or localizes that wording. `value` with `onValueChange` provides controlled state; `defaultValue` initializes uncontrolled state. Use `required`, `disabled`, `description`, `error`, and `invalid` for form states. `formatValue` customizes the optional visible numeric value.
 
 ```tsx
 <Rating
@@ -26,6 +26,7 @@ Use `mode="input"` with a visible `label`. It renders a native radio group. By d
   name="serviceRating"
   max={5}
   step={0.5}
+  symbol="heart"
   defaultValue={3.5}
   required
   onValueChange={(value) => setRating(value)}
@@ -44,4 +45,5 @@ Use `mode="input"` with a visible `label`. It renders a native radio group. By d
 
 <Canvas of={RatingStories.CustomScaleAndSize} />
 <Canvas of={RatingStories.ThemeCoverage} />
+<Canvas of={RatingStories.SymbolVariants} />
 <Canvas of={RatingStories.NarrowHalfStarScale} />

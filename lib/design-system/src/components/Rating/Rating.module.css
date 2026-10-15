@@ -15,37 +15,63 @@
   line-height: var(--ds-line-height-normal);
 }
 
-.accessibleStars {
+.accessibleSymbols {
   display: inline-flex;
   min-inline-size: 0;
 }
 
-.stars {
+.symbols {
   display: inline-flex;
   align-items: center;
   gap: var(--ds-space-1);
 }
 
-.star {
+.symbol {
   position: relative;
   display: inline-block;
+  flex: 0 0 auto;
+  inline-size: var(--rating-symbol-size);
+  block-size: var(--rating-symbol-size);
   color: var(--ds-color-border-control);
-  font-size: var(--rating-star-size);
-  line-height: 1;
 }
 
-.starGlyph {
+.symbolOutline,
+.symbolSolid {
   display: block;
+  inline-size: 100%;
+  block-size: 100%;
 }
 
-.starFill {
+.symbolOutline {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+}
+
+.symbolOutline path {
+  fill: none;
+  stroke: currentColor;
+}
+
+.symbolFill {
   position: absolute;
   inset-block: 0;
   inset-inline-start: 0;
   inline-size: var(--rating-fill);
   overflow: hidden;
   color: var(--ds-color-action-primary-bg);
-  white-space: nowrap;
+}
+
+.symbolSolid {
+  fill: currentColor;
+}
+
+.symbolSolid path {
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 0.5;
 }
 
 .inputRoot {
@@ -142,13 +168,13 @@
   cursor: not-allowed;
 }
 
-.option[data-disabled="true"] .star,
-.halfStarCell[data-disabled="true"] .star {
+.option[data-disabled="true"] .symbol,
+.halfStarCell[data-disabled="true"] .symbol {
   color: var(--ds-color-action-disabled-fg);
 }
 
-.option[data-disabled="true"] .starFill,
-.halfStarCell[data-disabled="true"] .starFill {
+.option[data-disabled="true"] .symbolFill,
+.halfStarCell[data-disabled="true"] .symbolFill {
   color: var(--ds-color-action-disabled-fg);
 }
 
@@ -186,31 +212,31 @@
 
 .displayRoot[data-size="sm"],
 .inputRoot[data-size="sm"] {
-  --rating-star-size: var(--ds-font-size-lg);
+  --rating-symbol-size: var(--ds-font-size-lg);
   --rating-hit-size: var(--ds-space-8);
   --rating-half-target-size: var(--ds-space-6);
 }
 
 .displayRoot[data-size="md"],
 .inputRoot[data-size="md"] {
-  --rating-star-size: var(--ds-font-size-xl);
+  --rating-symbol-size: var(--ds-font-size-xl);
   --rating-hit-size: var(--ds-space-10);
   --rating-half-target-size: var(--ds-space-6);
 }
 
 .displayRoot[data-size="lg"],
 .inputRoot[data-size="lg"] {
-  --rating-star-size: var(--ds-font-size-2xl);
+  --rating-symbol-size: var(--ds-font-size-2xl);
   --rating-hit-size: var(--ds-space-10);
   --rating-half-target-size: var(--ds-space-6);
 }
 
 @media (forced-colors: active) {
-  .star {
+  .symbol {
     color: GrayText;
   }
 
-  .starFill {
+  .symbolFill {
     color: Highlight;
   }
 
@@ -219,13 +245,13 @@
     outline-color: Highlight;
   }
 
-  .option[data-disabled="true"] .star,
-  .halfStarCell[data-disabled="true"] .star {
+  .option[data-disabled="true"] .symbol,
+  .halfStarCell[data-disabled="true"] .symbol {
     color: GrayText;
   }
 
-  .option[data-disabled="true"] .starFill,
-  .halfStarCell[data-disabled="true"] .starFill {
+  .option[data-disabled="true"] .symbolFill,
+  .halfStarCell[data-disabled="true"] .symbolFill {
     color: GrayText;
   }
 }

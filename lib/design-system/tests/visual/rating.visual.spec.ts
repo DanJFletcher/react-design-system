@@ -33,4 +33,10 @@ test("Rating follows theme colors and fits a narrow viewport", async ({ page }) 
     viewportWidth: document.documentElement.clientWidth,
   }));
   expect(narrowScaleDimensions.documentWidth).toBeLessThanOrEqual(narrowScaleDimensions.viewportWidth);
+
+  await page.goto("/iframe.html?id=components-rating--symbol-variants&viewMode=story");
+  await expect(page.getByRole("img", { name: "4.5 out of 5 hearts" })).toHaveCount(5);
+  for (const symbol of ["star", "heart", "thumbs"]) {
+    await expect(page.locator(`[data-ds-theme] [data-rating-symbol="${symbol}"]`).first()).toBeVisible();
+  }
 });

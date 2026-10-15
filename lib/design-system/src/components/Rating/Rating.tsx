@@ -6,14 +6,22 @@ import styles from "./Rating.module.css";
 
 export type RatingSize = "sm" | "md" | "lg";
 export type RatingStep = 0.5 | 1;
+export type RatingSymbol = "star" | "heart" | "thumbs";
+
+const ratingSymbolPaths: Record<RatingSymbol, string> = {
+  star: "M12 2.75 14.72 8.27 20.82 9.16 16.41 13.46 17.45 19.53 12 16.66 6.55 19.53 7.59 13.46 3.18 9.16 9.28 8.27 12 2.75Z",
+  heart: "M20.1 8.7c0 5.1-8.1 10.6-8.1 10.6S3.9 13.8 3.9 8.7a4.15 4.15 0 0 1 7.2-2.8 4.15 4.15 0 0 1 7.2 2.8Z",
+  thumbs: "M7.5 10.5 12 4.8a1.9 1.9 0 0 1 3.2 1.6l-.8 4.1h4.1a2 2 0 0 1 1.9 2.5l-1.5 6a2 2 0 0 1-1.9 1.5H7.5m0-10h-3A1.5 1.5 0 0 0 3 12v7a1.5 1.5 0 0 0 1.5 1.5h3m0-10v10",
+};
 
 type RatingBaseProps = {
   id?: string;
   max?: number;
   size?: RatingSize;
   showValue?: boolean;
-  getRatingLabel?: (rating: number, max: number) => string;
+  getRatingLabel?: (rating: number, max: number, symbol: RatingSymbol) => string;
   formatValue?: (rating: number, max: number) => ReactNode;
+  symbol?: RatingSymbol;
   className?: string;
   style?: DesignSystemStyle;
 };
@@ -76,9 +84,15 @@ function validateInputValue(value: number | null, max: number, step: RatingStep)
 function getAccessibleRatingLabel(
   rating: number,
   max: number,
-  getRatingLabel?: (rating: number, max: number) => string,
+  symbol: RatingSymbol,
+  getRatingLabel?: (rating: number, max: number, symbol: RatingSymbol) => string,
 ) {
-  const label = getRatingLabel?.(rating, max) ?? `${rating} out of ${max} stars`;
+  const unit = symbol === "star"
+    ? "stars"
+    : symbol === "heart"
+      ? "hearts"
+      : "thumbs up";
+  const label = getRatingLabel?.(rating, max, symbol) ?? `${rating} out of ${max} ${unit}`;
   if (typeof label !== "string" || !label.trim()) {
     throw new Error("Rating getRatingLabel must return non-empty text.");
   }
@@ -93,28 +107,58 @@ function formatRatingValue(
   return formatValue ? formatValue(value, max) : `${value}/${max}`;
 }
 
-function RatingStar({ value, index }: { value: number; index: number }) {
+function RatingSymbolIcon({
+  value,
+  index,
+  symbol,
+}: {
+  value: number;
+  index: number;
+  symbol: RatingSymbol;
+}) {
   const fill = Math.min(1, Math.max(0, value - index)) * 100;
 
   return (
-    <span className={styles.star}>
-      <span className={styles.starGlyph}>☆</span>
+    <span className={styles.symbol} data-rating-symbol={symbol}>
+      <svg
+        aria-hidden="true"
+        className={styles.symbolOutline}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path d={ratingSymbolPaths[symbol]} />
+      </svg>
       <span
-        className={styles.starFill}
+        className={styles.symbolFill}
         data-rating-star-fill=""
         style={{ "--rating-fill": `${fill}%` } as CSSProperties}
       >
-        ★
+        <svg
+          aria-hidden="true"
+          className={styles.symbolSolid}
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path d={ratingSymbolPaths[symbol]} />
+        </svg>
       </span>
     </span>
   );
 }
 
-function RatingStars({ value, max }: { value: number; max: number }) {
+function RatingSymbols({
+  value,
+  max,
+  symbol,
+}: {
+  value: number;
+  max: number;
+  symbol: RatingSymbol;
+}) {
   return (
-    <span className={styles.stars} aria-hidden="true">
+    <span className={styles.symbols} aria-hidden="true">
       {Array.from({ length: max }, (_, index) => (
-        <RatingStar key={index} value={value} index={index} />
+        <RatingSymbolIcon key={index} value={value} index={index} symbol={symbol} />
       ))}
     </span>
   );
@@ -127,6 +171,7 @@ function DisplayRating(props: RatingDisplayProps) {
     value,
     max = 5,
     size = "md",
+    symbol = "star",
     showValue = false,
     getRatingLabel,
     formatValue,
@@ -136,7 +181,7 @@ function DisplayRating(props: RatingDisplayProps) {
 
   validateMax(max);
   validateDisplayValue(value, max);
-  const accessibleLabel = getAccessibleRatingLabel(value, max, getRatingLabel);
+  const accessibleLabel = getAccessibleRatingLabel(value, max, symbol, getRatingLabel);
 
   return (
     <div
@@ -146,8 +191,8 @@ function DisplayRating(props: RatingDisplayProps) {
       style={style as CSSProperties | undefined}
     >
       {label != null && <span className={styles.displayLabel}>{label}</span>}
-      <span className={styles.accessibleStars} role="img" aria-label={accessibleLabel}>
-        <RatingStars value={value} max={max} />
+      <span className={styles.accessibleSymbols} role="img" aria-label={accessibleLabel}>
+        <RatingSymbols value={value} max={max} symbol={symbol} />
       </span>
       {showValue && (
         <output className={styles.value} aria-hidden="true">
@@ -167,6 +212,7 @@ function InputRating(props: RatingInputProps) {
     max = 5,
     size = "md",
     step = 1,
+    symbol = "star",
     showValue = false,
     getRatingLabel,
     formatValue,
@@ -232,7 +278,7 @@ function InputRating(props: RatingInputProps) {
                     key={wholeStar}
                   >
                     <span className={styles.halfStarVisual} aria-hidden="true">
-                      <RatingStar value={activeValue} index={index} />
+                      <RatingSymbolIcon value={activeValue} index={index} symbol={symbol} />
                     </span>
                     <span className={styles.halfTargets}>
                       {choices.map((rating) => (
@@ -259,7 +305,7 @@ function InputRating(props: RatingInputProps) {
                           />
                           <span className={styles.focusIndicator} aria-hidden="true" />
                           <span className={styles.visuallyHidden}>
-                            {getAccessibleRatingLabel(rating, max, getRatingLabel)}
+                            {getAccessibleRatingLabel(rating, max, symbol, getRatingLabel)}
                           </span>
                         </label>
                       ))}
@@ -296,10 +342,10 @@ function InputRating(props: RatingInputProps) {
                       data-rating-option={rating}
                       aria-hidden="true"
                     >
-                      <RatingStar value={activeValue} index={index} />
+                      <RatingSymbolIcon value={activeValue} index={index} symbol={symbol} />
                     </span>
                     <span className={styles.visuallyHidden}>
-                      {getAccessibleRatingLabel(rating, max, getRatingLabel)}
+                      {getAccessibleRatingLabel(rating, max, symbol, getRatingLabel)}
                     </span>
                   </label>
                 );

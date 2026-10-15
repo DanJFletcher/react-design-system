@@ -327,9 +327,9 @@ Quotes are rendered as native blockquotes with author attribution in a figure ca
 
 ## Rating
 
-`Rating` supports a read-only display mode and a selectable form-input mode. Display mode accepts a numeric `value` from `0` through `max`, including fractional values, and announces the score as a named image. `max` defaults to `5` and must be an integer from `1` to `10`; `size` accepts `sm`, `md`, or `lg`. `showValue`, `formatValue`, and `getRatingLabel` customize the visible score and accessible wording.
+`Rating` supports a read-only display mode and a selectable form-input mode. Display mode accepts a numeric `value` from `0` through `max`, including fractional values, and announces the score as a named image. `max` defaults to `5` and must be an integer from `1` to `10`; `size` accepts `sm`, `md`, or `lg`. `symbol` selects `star` (default), `heart`, or `thumbs`. The default accessible text names the score and symbol; `getRatingLabel` can customize or localize it. `showValue` and `formatValue` customize the visible score.
 
-Input mode uses `mode="input"` and a required visible `label`. It renders a native fieldset and radio inputs for each whole-star value by default; `step={0.5}` enables half-star choices. Native Tab and arrow-key navigation and `name` form submission are preserved. `value` with `onValueChange` provides controlled state; `defaultValue` initializes uncontrolled state. `required`, `disabled`, `description`, `error`, and `invalid` follow the shared form-field contract. `getRatingLabel` names each radio choice and can localize the wording.
+Input mode uses `mode="input"` and a required visible `label`. It renders a native fieldset and radio inputs for each whole-step value by default; `step={0.5}` enables half-step choices. Native Tab and arrow-key navigation and `name` form submission are preserved. `value` with `onValueChange` provides controlled state; `defaultValue` initializes uncontrolled state. `required`, `disabled`, `description`, `error`, and `invalid` follow the shared form-field contract. `symbol` applies to both input and display modes, and `getRatingLabel` names each radio choice.
 
 ```tsx
 <Rating
@@ -338,6 +338,7 @@ Input mode uses `mode="input"` and a required visible `label`. It renders a nati
   name="serviceRating"
   max={5}
   step={0.5}
+  symbol="heart"
   defaultValue={3.5}
   required
 />
