@@ -5,6 +5,7 @@ import fieldStyles from "../FormControls/FormControls.module.css";
 import styles from "./Rating.module.css";
 
 export type RatingSize = "sm" | "md" | "lg";
+export type RatingStep = 0.5 | 1;
 
 type RatingBaseProps = {
   id?: string;
@@ -26,6 +27,7 @@ export type RatingDisplayProps = RatingBaseProps & {
 export type RatingInputProps = RatingBaseProps & {
   mode: "input";
   label: ReactNode;
+  step?: RatingStep;
   value?: number | null;
   defaultValue?: number | null;
   name?: string;
@@ -53,9 +55,21 @@ function validateDisplayValue(value: number, max: number) {
   }
 }
 
-function validateInputValue(value: number | null, max: number) {
-  if (value !== null && (!Number.isSafeInteger(value) || value < 0 || value > max)) {
-    throw new RangeError(`Rating input value must be 0 or an integer from 1 to ${max}.`);
+function validateInputStep(step: number): asserts step is RatingStep {
+  if (step !== 0.5 && step !== 1) {
+    throw new RangeError("Rating input step must be 1 or 0.5.");
+  }
+}
+
+function validateInputValue(value: number | null, max: number, step: RatingStep) {
+  if (value === null || value === 0) return;
+  if (
+    !Number.isFinite(value)
+    || value < step
+    || value > max
+    || !Number.isSafeInteger(value / step)
+  ) {
+    throw new RangeError(`Rating input value must be 0 or a multiple of ${step} up to ${max}.`);
   }
 }
 
@@ -79,24 +93,29 @@ function formatRatingValue(
   return formatValue ? formatValue(value, max) : `${value}/${max}`;
 }
 
+function RatingStar({ value, index }: { value: number; index: number }) {
+  const fill = Math.min(1, Math.max(0, value - index)) * 100;
+
+  return (
+    <span className={styles.star}>
+      <span className={styles.starGlyph}>☆</span>
+      <span
+        className={styles.starFill}
+        data-rating-star-fill=""
+        style={{ "--rating-fill": `${fill}%` } as CSSProperties}
+      >
+        ★
+      </span>
+    </span>
+  );
+}
+
 function RatingStars({ value, max }: { value: number; max: number }) {
   return (
     <span className={styles.stars} aria-hidden="true">
-      {Array.from({ length: max }, (_, index) => {
-        const fill = Math.min(1, Math.max(0, value - index)) * 100;
-        return (
-          <span className={styles.star} key={index}>
-            <span className={styles.starGlyph}>☆</span>
-            <span
-              className={styles.starFill}
-              data-rating-star-fill=""
-              style={{ "--rating-fill": `${fill}%` } as CSSProperties}
-            >
-              ★
-            </span>
-          </span>
-        );
-      })}
+      {Array.from({ length: max }, (_, index) => (
+        <RatingStar key={index} value={value} index={index} />
+      ))}
     </span>
   );
 }
@@ -147,6 +166,7 @@ function InputRating(props: RatingInputProps) {
     defaultValue = null,
     max = 5,
     size = "md",
+    step = 1,
     showValue = false,
     getRatingLabel,
     formatValue,
@@ -164,14 +184,15 @@ function InputRating(props: RatingInputProps) {
   } = props;
 
   validateMax(max);
-  validateInputValue(defaultValue, max);
-  if (value !== undefined) validateInputValue(value, max);
+  validateInputStep(step);
+  validateInputValue(defaultValue, max, step);
+  if (value !== undefined) validateInputValue(value, max, step);
 
   const field = useFormField({ id, description, error, invalid, "aria-describedby": externalDescribedBy });
   const [uncontrolledValue, setUncontrolledValue] = useState<number | null>(defaultValue);
   const isControlled = value !== undefined;
   const selectedValue = isControlled ? value ?? null : uncontrolledValue;
-  validateInputValue(selectedValue, max);
+  validateInputValue(selectedValue, max, step);
   const [previewValue, setPreviewValue] = useState<number | null>(null);
   const activeValue = previewValue ?? selectedValue ?? 0;
   const groupName = name ?? field.id;
@@ -195,47 +216,94 @@ function InputRating(props: RatingInputProps) {
     >
       <FieldLegend label={label} required={required} />
       <div className={styles.inputRow}>
-        <div className={styles.options} onMouseLeave={() => setPreviewValue(null)}>
-          {Array.from({ length: max }, (_, index) => {
-            const rating = index + 1;
-            return (
-              <label
-                className={styles.option}
-                data-disabled={disabled || undefined}
-                key={rating}
-                onMouseEnter={() => {
-                  if (!disabled) setPreviewValue(rating);
-                }}
-              >
-                <input
-                  aria-describedby={field.describedBy}
-                  aria-invalid={field.invalid || undefined}
-                  checked={selectedValue === rating}
-                  className={styles.radio}
-                  disabled={disabled}
-                  name={groupName}
-                  onChange={handleChange}
-                  required={required}
-                  type="radio"
-                  value={rating}
-                />
-                <span
-                  className={styles.optionStar}
-                  data-filled={rating <= activeValue}
-                  data-rating-option={rating}
-                  aria-hidden="true"
-                >
-                  <span className={styles.optionStarGlyph}>☆</span>
-                  {rating <= activeValue && (
-                    <span className={styles.optionStarFill}>★</span>
-                  )}
-                </span>
-                <span className={styles.visuallyHidden}>
-                  {getAccessibleRatingLabel(rating, max, getRatingLabel)}
-                </span>
-              </label>
-            );
-          })}
+        <div
+          className={styles.options}
+          data-step={step}
+          onMouseLeave={() => setPreviewValue(null)}
+        >
+          {step === 0.5
+            ? Array.from({ length: max }, (_, index) => {
+                const wholeStar = index + 1;
+                const choices = [wholeStar - 0.5, wholeStar];
+                return (
+                  <span
+                    className={styles.halfStarCell}
+                    data-disabled={disabled || undefined}
+                    key={wholeStar}
+                  >
+                    <span className={styles.halfStarVisual} aria-hidden="true">
+                      <RatingStar value={activeValue} index={index} />
+                    </span>
+                    <span className={styles.halfTargets}>
+                      {choices.map((rating) => (
+                        <label
+                          className={styles.halfOption}
+                          data-disabled={disabled || undefined}
+                          key={rating}
+                          onMouseEnter={() => {
+                            if (!disabled) setPreviewValue(rating);
+                          }}
+                        >
+                          <input
+                            aria-describedby={field.describedBy}
+                            aria-invalid={field.invalid || undefined}
+                            checked={selectedValue === rating}
+                            className={styles.radio}
+                            data-rating-option={rating}
+                            disabled={disabled}
+                            name={groupName}
+                            onChange={handleChange}
+                            required={required}
+                            type="radio"
+                            value={rating}
+                          />
+                          <span className={styles.focusIndicator} aria-hidden="true" />
+                          <span className={styles.visuallyHidden}>
+                            {getAccessibleRatingLabel(rating, max, getRatingLabel)}
+                          </span>
+                        </label>
+                      ))}
+                    </span>
+                  </span>
+                );
+              })
+            : Array.from({ length: max }, (_, index) => {
+                const rating = index + 1;
+                return (
+                  <label
+                    className={styles.option}
+                    data-disabled={disabled || undefined}
+                    key={rating}
+                    onMouseEnter={() => {
+                      if (!disabled) setPreviewValue(rating);
+                    }}
+                  >
+                    <input
+                      aria-describedby={field.describedBy}
+                      aria-invalid={field.invalid || undefined}
+                      checked={selectedValue === rating}
+                      className={styles.radio}
+                      disabled={disabled}
+                      name={groupName}
+                      onChange={handleChange}
+                      required={required}
+                      type="radio"
+                      value={rating}
+                    />
+                    <span
+                      className={styles.optionStar}
+                      data-filled={rating <= activeValue}
+                      data-rating-option={rating}
+                      aria-hidden="true"
+                    >
+                      <RatingStar value={activeValue} index={index} />
+                    </span>
+                    <span className={styles.visuallyHidden}>
+                      {getAccessibleRatingLabel(rating, max, getRatingLabel)}
+                    </span>
+                  </label>
+                );
+              })}
         </div>
         {showValue && (
           <output className={styles.value} aria-hidden="true">

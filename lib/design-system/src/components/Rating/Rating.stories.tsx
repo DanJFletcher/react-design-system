@@ -22,6 +22,7 @@ const meta = {
     defaultValue: { control: "number" },
     max: { control: "inline-radio", options: [3, 5, 10] },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
+    step: { control: "inline-radio", options: [1, 0.5] },
     showValue: { control: "boolean" },
     getRatingLabel: { control: false },
     formatValue: { control: false },
@@ -75,6 +76,37 @@ export const SelectableInput: Story = {
     await expect(four).toBeChecked();
     await expect((args as RatingInputProps).onValueChange).toHaveBeenCalledWith(4);
     await expect(canvas.getByText("4/5", { exact: true })).toBeVisible();
+  },
+};
+
+export const HalfStarInput: Story = {
+  args: {
+    mode: "input",
+    label: "Customer satisfaction",
+    name: "customer-satisfaction",
+    max: 5,
+    step: 0.5,
+    defaultValue: 3.5,
+    value: undefined,
+    showValue: true,
+    onValueChange: fn(),
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+    const threeAndHalf = canvas.getByRole("radio", { name: "3.5 out of 5 stars" });
+    const four = canvas.getByRole("radio", { name: "4 out of 5 stars" });
+    const fourAndHalf = canvas.getByRole("radio", { name: "4.5 out of 5 stars" });
+    const onValueChange = (args as RatingInputProps).onValueChange;
+
+    await expect(threeAndHalf).toBeChecked();
+    threeAndHalf.focus();
+    await userEvent.keyboard("{ArrowRight}");
+    await expect(four).toBeChecked();
+    await expect(onValueChange).toHaveBeenNthCalledWith(1, 4);
+    await userEvent.click(fourAndHalf);
+    await expect(fourAndHalf).toBeChecked();
+    await expect(onValueChange).toHaveBeenNthCalledWith(2, 4.5);
+    await expect(canvas.getByText("4.5/5", { exact: true })).toBeVisible();
   },
 };
 
@@ -167,11 +199,28 @@ export const ThemeCoverage: Story = {
           <Rating
             mode="input"
             label={`${theme} service rating`}
-            defaultValue={4}
+            defaultValue={3.5}
             max={5}
+            step={0.5}
           />
         </div>
       ))}
+    </div>
+  ),
+};
+
+export const NarrowHalfStarScale: Story = {
+  render: () => (
+    <div style={{ maxWidth: "18rem" }}>
+      <Rating
+        mode="input"
+        label="Detailed service rating"
+        name="detailed-service-rating"
+        max={10}
+        step={0.5}
+        defaultValue={6.5}
+        showValue
+      />
     </div>
   ),
 };

@@ -58,6 +58,7 @@
 
 .inputRow {
   display: flex;
+  flex-wrap: wrap;
   min-inline-size: 0;
   align-items: center;
   gap: var(--ds-space-2);
@@ -65,7 +66,9 @@
 
 .options {
   display: flex;
+  max-inline-size: 100%;
   min-inline-size: 0;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--ds-space-1);
 }
@@ -91,38 +94,70 @@
 }
 
 .optionStar {
-  position: relative;
-  display: inline-block;
-  color: var(--ds-color-border-control);
-  font-family: var(--ds-font-family-sans);
-  font-size: var(--rating-star-size);
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
 }
 
-.optionStarGlyph {
-  display: block;
+.halfStarCell {
+  position: relative;
+  display: grid;
+  flex: 0 0 auto;
+  inline-size: calc(var(--rating-half-target-size) + var(--rating-half-target-size));
+  block-size: var(--rating-hit-size);
+  place-items: center;
 }
 
-.optionStarFill {
+.halfStarVisual {
+  display: inline-flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.halfTargets {
   position: absolute;
   inset: 0;
-  color: var(--ds-color-action-primary-bg);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.halfOption {
+  position: relative;
+  min-inline-size: 0;
+  cursor: pointer;
+}
+
+.halfOption[data-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.focusIndicator {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 .option[data-disabled="true"] {
   cursor: not-allowed;
 }
 
-.option[data-disabled="true"] .optionStar {
+.option[data-disabled="true"] .star,
+.halfStarCell[data-disabled="true"] .star {
   color: var(--ds-color-action-disabled-fg);
 }
 
-.option[data-disabled="true"] .optionStarFill {
+.option[data-disabled="true"] .starFill,
+.halfStarCell[data-disabled="true"] .starFill {
   color: var(--ds-color-action-disabled-fg);
 }
 
 .radio:focus-visible + .optionStar {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.radio:focus-visible + .focusIndicator {
   outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
   outline-offset: var(--ds-focus-offset);
 }
@@ -153,40 +188,44 @@
 .inputRoot[data-size="sm"] {
   --rating-star-size: var(--ds-font-size-lg);
   --rating-hit-size: var(--ds-space-8);
+  --rating-half-target-size: var(--ds-space-6);
 }
 
 .displayRoot[data-size="md"],
 .inputRoot[data-size="md"] {
   --rating-star-size: var(--ds-font-size-xl);
   --rating-hit-size: var(--ds-space-10);
+  --rating-half-target-size: var(--ds-space-6);
 }
 
 .displayRoot[data-size="lg"],
 .inputRoot[data-size="lg"] {
   --rating-star-size: var(--ds-font-size-2xl);
   --rating-hit-size: var(--ds-space-10);
+  --rating-half-target-size: var(--ds-space-6);
 }
 
 @media (forced-colors: active) {
-  .star,
-  .optionStar {
+  .star {
     color: GrayText;
   }
 
-  .starFill,
-  .optionStarFill {
+  .starFill {
     color: Highlight;
   }
 
-  .radio:focus-visible + .optionStar {
+  .radio:focus-visible + .optionStar,
+  .radio:focus-visible + .focusIndicator {
     outline-color: Highlight;
   }
 
-  .option[data-disabled="true"] .optionStar {
+  .option[data-disabled="true"] .star,
+  .halfStarCell[data-disabled="true"] .star {
     color: GrayText;
   }
 
-  .option[data-disabled="true"] .optionStarFill {
+  .option[data-disabled="true"] .starFill,
+  .halfStarCell[data-disabled="true"] .starFill {
     color: GrayText;
   }
 }

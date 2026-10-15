@@ -250,6 +250,7 @@ export type {
   RatingInputProps,
   RatingProps,
   RatingSize,
+  RatingStep,
 } from "./components/Rating/Rating";
 export { Pagination } from "./components/Pagination/Pagination";
 export type {

@@ -39,7 +39,7 @@ try {
     include: ["consumer.tsx"],
   }, null, 2));
   await writeFile(join(temporary, "consumer.tsx"), [
-    'import { ArticleTableOfContents, Button, Checkbox, RadioGroup, RangeField, Rating, Select, TextField, Textarea, ThemeScope, ToggleGroup, type ArticleTableOfContentsItem, type ButtonIconPosition, type ButtonShape, type DesignSystemThemeName, type RangeFieldProps, type RatingProps, type ToggleGroupProps, type ToggleGroupSelectionMode } from "@workspace/design-system";',
+    'import { ArticleTableOfContents, Button, Checkbox, RadioGroup, RangeField, Rating, Select, TextField, Textarea, ThemeScope, ToggleGroup, type ArticleTableOfContentsItem, type ButtonIconPosition, type ButtonShape, type DesignSystemThemeName, type RangeFieldProps, type RatingInputProps, type RatingProps, type RatingStep, type ToggleGroupProps, type ToggleGroupSelectionMode } from "@workspace/design-system";',
     'import { BREAKPOINT_MEDIA_ALIASES, breakpointMediaPlugin, breakpointMediaVitePlugin } from "@workspace/design-system/breakpoint-media";',
     'import "@workspace/design-system/tokens.css";',
     'import "@workspace/design-system/styles.css";',
@@ -57,8 +57,10 @@ try {
     'const toggleGroupProps: ToggleGroupProps = { "aria-label": "View mode", items: [{ value: "grid", label: "Grid" }], selectionMode: "single", defaultValue: "grid" };',
     'const rangeFieldProps: RangeFieldProps = { label: "Moving budget", min: 0, max: 1000, step: 50, defaultValue: 250 };',
     'const ratingProps: RatingProps = { mode: "display", value: 4.5, max: 5 };',
+    'const halfStarStep: RatingStep = 0.5;',
+    'const halfStarRatingProps: RatingInputProps = { mode: "input", label: "Customer satisfaction", max: 5, step: halfStarStep, defaultValue: 3.5 };',
     'const sections: ArticleTableOfContentsItem[] = [{ id: "overview", label: "Overview" }];',
-    'export const example = <ThemeScope theme={selectedTheme} style={{ "--ds-button-radius": "12px" }}><ArticleTableOfContents items={sections} /><ToggleGroup {...toggleGroupProps} /><RangeField {...rangeFieldProps} /><Rating {...ratingProps} /><Button variant="secondary" shape={shape} icon={<span>★</span>} iconPosition={iconPosition}>Continue</Button><Button iconOnly icon={<span>×</span>} aria-label="Close dialog" /><TextField label="Email" type="email" required /><Textarea label="Notes" rows={4} /><Select label="Region" defaultValue="ca"><option value="ca">Canada</option></Select><Checkbox label="Subscribe" name="subscribe" value="yes" /><RadioGroup label="Contact method" name="contact" options={[{ value: "email", label: "Email" }]} /></ThemeScope>;',
+    'export const example = <ThemeScope theme={selectedTheme} style={{ "--ds-button-radius": "12px" }}><ArticleTableOfContents items={sections} /><ToggleGroup {...toggleGroupProps} /><RangeField {...rangeFieldProps} /><Rating {...ratingProps} /><Rating {...halfStarRatingProps} /><Button variant="secondary" shape={shape} icon={<span>★</span>} iconPosition={iconPosition}>Continue</Button><Button iconOnly icon={<span>×</span>} aria-label="Close dialog" /><TextField label="Email" type="email" required /><Textarea label="Notes" rows={4} /><Select label="Region" defaultValue="ca"><option value="ca">Canada</option></Select><Checkbox label="Subscribe" name="subscribe" value="yes" /><RadioGroup label="Contact method" name="contact" options={[{ value: "email", label: "Email" }]} /></ThemeScope>;',
     "",
   ].join("\n"));
   execFileSync("pnpm", ["install", "--ignore-workspace"], { cwd: temporary, stdio: "inherit" });
