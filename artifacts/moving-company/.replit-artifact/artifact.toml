@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/moving-company/"
+title = "Northstar Moving Co."
+description = "A responsive marketing website for a hypothetical local moving company, with scroll-triggered motion, service information, and a clear path to request an estimate."
+version = "1.0.0"
+id = "artifacts/moving-company"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/moving-company/" ]
+localPort = 21398
+
+[services.development]
+run = "pnpm --filter @workspace/moving-company run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/moving-company", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/moving-company/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21398"
+BASE_PATH = "/moving-company/"
