@@ -4,7 +4,9 @@
 
 This is one forkable React/TypeScript package. React owns rendering and interaction; CSS Modules own component styling; CSS custom properties are the public styling API. Storybook is the living documentation and development environment. Token compilation is TypeScript-only and has no React dependency.
 
-The package exposes ESM, TypeScript declarations, `tokens.css`, `styles.css`, and separate ACME, Luna, and example Orchid theme stylesheets. React stays external to the bundle. CSS files are preserved by the package `sideEffects` declaration.
+For application installation, global stylesheet setup, and consumer examples, see the package [developer quick start](../README.md).
+
+The package exposes ESM, TypeScript declarations, `tokens.css`, `styles.css`, and separate ACME, Luna, Orchid, Atom, and Sublime theme stylesheets. React stays external to the bundle. CSS files are preserved by the package `sideEffects` declaration.
 
 ## Token contract
 
@@ -63,7 +65,7 @@ For a PostCSS config, add `breakpointMediaPlugin()` to its `plugins` array inste
 
 Corner radii are semantic roles, not a theme-wide shape setting. General content surfaces use `radius.surface` (12px ACME, 32px Luna, 12px Orchid); action controls and single-line form controls retain separate tokens and remain pills in Luna. Specialized menu, tooltip, textarea, and form-group tokens retain their public compatibility values (32px in Luna). Explicit shape props and consumer hooks override defaults. See `docs/theming.md` and the **Foundations/Radius Policy** stories for the full policy.
 
-ACME is the default unthemed document. Luna is a dark, Sailor Moon-inspired palette with midnight-indigo surfaces, moonlight and lavender text, rose-pink actions, crescent-gold accents, and softer shapes. Both built-in themes share the same type and spatial scales. Orchid demonstrates a distinct custom theme extending Luna.
+ACME is the default unthemed document. Luna is a dark, Sailor Moon-inspired palette with midnight-indigo surfaces, moonlight and lavender text, rose-pink actions, crescent-gold accents, and softer shapes. Atom is a dark comic-book theme with vivid inks and hard-offset shadows; Sublime draws on the Sublime code editor. Orchid demonstrates a custom theme extending Luna. All themes share the same type and spatial scales.
 
 Use ordinary markup:
 

@@ -79,7 +79,9 @@ try {
   for (const file of ["tokens.css", "styles.css", "themes/acme.css", "themes/luna.css", "themes/orchid.css", "themes/atom.css", "themes/sublime.css", "plugins/breakpoint-media.js", "plugins/breakpoint-media.d.ts"]) {
     await readFile(join(temporary, "node_modules/@workspace/design-system/dist", file));
   }
-  process.stdout.write("Package tarball installed in a clean consumer; ESM, declarations, and CSS entrypoints work.\n");
+  await readFile(join(temporary, "node_modules/@workspace/design-system/README.md"));
+  await readFile(join(temporary, "node_modules/@workspace/design-system/docs/theming.md"));
+  process.stdout.write("Package tarball installed in a clean consumer; ESM, declarations, CSS entrypoints, and developer docs work.\n");
 } finally {
   await rm(temporary, { recursive: true, force: true });
 }

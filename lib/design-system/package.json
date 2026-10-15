@@ -5,7 +5,9 @@
   "type": "module",
   "license": "MIT",
   "files": [
-    "dist"
+    "dist",
+    "docs",
+    "README.md"
   ],
   "sideEffects": [
     "**/*.css"
