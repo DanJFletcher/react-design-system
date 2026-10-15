@@ -23,7 +23,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Atom is a dark comic-inspired theme with inked borders, cyan table borders, vivid print-like accents, subtle halftone texture, hard offset shadows on content surfaces and controls, and clipped marker highlights behind H1 and H2 headings: cyan down and right, with electric yellow layered behind it up and left. Page layout components and article bodies remain flat.",
+          "Atom is a dark comic-inspired theme with inked borders, cyan table borders, vivid print-like accents, subtle halftone texture, hard offset shadows on content surfaces and controls, and clipped marker highlights. H1 and H2 use cyan over electric yellow; H3 uses purple over electric pink. Page layout components and article bodies remain flat.",
       },
     },
   },
@@ -234,8 +234,11 @@ export const HeadingHighlights: Story = {
         A heading from the component library
       </Heading>
       <h3 data-testid="atom-marker-h3" style={{ margin: 0 }}>
-        Smaller headings keep their original styling.
+        Section headings use purple over pink.
       </h3>
+      <Heading level={3} data-testid="atom-marker-h3-component">
+        Component H3 headings follow the same marker style.
+      </Heading>
       <div data-ds-theme="luna">
         <Heading level={2} data-testid="luna-unmarked-heading">
           Nested themes keep their own typography.

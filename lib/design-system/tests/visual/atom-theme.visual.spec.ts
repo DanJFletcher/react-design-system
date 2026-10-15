@@ -92,7 +92,7 @@ test("Atom callouts have border-matching left and diagonal corner halftone strip
   }
 });
 
-test("Atom H1 and H2 layer top-left yellow behind bottom-right cyan marker highlights", async ({ page }) => {
+test("Atom H1–H2 and H3 use their layered marker colors with clipped highlights", async ({ page }) => {
   await page.goto("/iframe.html?id=foundations-atom-theme--heading-highlights&viewMode=story");
   for (const id of ["atom-marker-h1", "atom-marker-h2", "atom-marker-component"]) {
     const heading = page.getByTestId(id);
@@ -133,7 +133,40 @@ test("Atom H1 and H2 layer top-left yellow behind bottom-right cyan marker highl
     expect(styles.yellowY).toBeLessThan(0);
     expect(styles.yellowLayer).toBeLessThan(styles.cyanLayer);
   }
-  for (const id of ["atom-marker-h3", "luna-unmarked-heading"]) {
+  for (const id of ["atom-marker-h3", "atom-marker-h3-component"]) {
+    const heading = page.getByTestId(id);
+    await expect(heading).toBeVisible();
+    const styles = await heading.evaluate((element) => {
+      const purple = getComputedStyle(element, "::before");
+      const pink = getComputedStyle(element, "::after");
+      const purpleOffset = new DOMMatrixReadOnly(purple.transform);
+      const pinkOffset = new DOMMatrixReadOnly(pink.transform);
+      return {
+        purple: purple.backgroundColor,
+        pink: pink.backgroundColor,
+        clip: purple.clipPath,
+        pinkClip: pink.clipPath,
+        color: getComputedStyle(element).color,
+        purpleX: purpleOffset.m41,
+        purpleY: purpleOffset.m42,
+        purpleLayer: Number(purple.zIndex),
+        pinkX: pinkOffset.m41,
+        pinkY: pinkOffset.m42,
+        pinkLayer: Number(pink.zIndex),
+      };
+    });
+    expect(styles.purple).toBe("rgb(150, 63, 157)");
+    expect(styles.pink).toBe("rgb(255, 61, 141)");
+    expect(styles.clip).toContain("polygon(");
+    expect(styles.pinkClip).toBe(styles.clip);
+    expect(styles.color).toBe("rgb(251, 248, 255)");
+    expect(styles.purpleX).toBeGreaterThan(0);
+    expect(styles.purpleY).toBeGreaterThan(0);
+    expect(styles.pinkX).toBeLessThan(0);
+    expect(styles.pinkY).toBeLessThan(0);
+    expect(styles.pinkLayer).toBeLessThan(styles.purpleLayer);
+  }
+  for (const id of ["luna-unmarked-heading"]) {
     for (const pseudo of ["::before", "::after"]) {
       expect(await page.getByTestId(id).evaluate((element, selector) =>
         getComputedStyle(element, selector).content,
@@ -149,10 +182,12 @@ test("Atom H1 and H2 layer top-left yellow behind bottom-right cyan marker highl
     document.documentElement.scrollWidth <= window.innerWidth,
   )).toBe(true);
   await page.emulateMedia({ forcedColors: "active" });
-  for (const pseudo of ["::before", "::after"]) {
-    expect(await wrapped.evaluate((element, selector) =>
-      getComputedStyle(element, selector).content,
-    pseudo)).toBe("none");
+  for (const id of ["atom-marker-h2", "atom-marker-h3"]) {
+    for (const pseudo of ["::before", "::after"]) {
+      expect(await page.getByTestId(id).evaluate((element, selector) =>
+        getComputedStyle(element, selector).content,
+      pseudo)).toBe("none");
+    }
   }
 });
 
