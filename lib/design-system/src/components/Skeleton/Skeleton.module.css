@@ -1,0 +1,85 @@
+.skeleton {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  overflow: hidden;
+  inline-size: 100%;
+  border-radius: var(--ds-radius-surface);
+  background: color-mix(in srgb, var(--ds-color-text-muted) 18%, var(--ds-color-canvas));
+  isolation: isolate;
+}
+
+.skeleton[data-shape="text"] {
+  block-size: var(--ds-space-3);
+}
+
+.skeleton[data-shape="rectangular"] {
+  block-size: var(--ds-space-24);
+}
+
+.skeleton[data-shape="circle"] {
+  inline-size: var(--ds-space-12);
+  block-size: var(--ds-space-12);
+  border-radius: var(--ds-radius-full);
+}
+
+.skeleton[data-animation="shimmer"]::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--ds-color-text-primary) 12%, transparent),
+    transparent
+  );
+  content: "";
+  transform: translateX(-100%);
+  animation: skeleton-shimmer calc(2 * var(--ds-motion-duration-spinner))
+    var(--ds-motion-easing-standard) infinite;
+}
+
+.skeleton[data-animation="pulse"] {
+  animation: skeleton-pulse calc(2 * var(--ds-motion-duration-spinner))
+    var(--ds-motion-easing-standard) infinite alternate;
+}
+
+@keyframes skeleton-shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes skeleton-pulse {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.48;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(html:not([data-ds-motion-preference="full"])) .skeleton[data-animation="shimmer"]::after,
+  :global(html:not([data-ds-motion-preference="full"])) .skeleton[data-animation="pulse"] {
+    animation: none;
+  }
+}
+
+:global(html[data-ds-motion-preference="reduced"])
+  .skeleton[data-animation="shimmer"]::after,
+:global(html[data-ds-motion-preference="reduced"])
+  .skeleton[data-animation="pulse"] {
+  animation: none;
+}
+
+@media (forced-colors: active) {
+  .skeleton {
+    border: var(--ds-border-width-default) solid CanvasText;
+    background: Canvas;
+  }
+
+  .skeleton[data-animation="shimmer"]::after {
+    display: none;
+  }
+}

@@ -13,6 +13,12 @@ export type {
   ButtonGroupProps,
   ButtonGroupSpacing,
 } from "./components/ButtonGroup/ButtonGroup";
+export { Skeleton } from "./components/Skeleton/Skeleton";
+export type {
+  SkeletonAnimation,
+  SkeletonProps,
+  SkeletonShape,
+} from "./components/Skeleton/Skeleton";
 export { Badge } from "./components/Badge/Badge";
 export type {
   BadgeIconPosition,

@@ -1,0 +1,32 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+import * as SkeletonStories from "./Skeleton.stories";
+
+<Meta of={SkeletonStories} />
+
+# Skeleton
+
+Render theme-aware placeholders while content loads. Skeletons are hidden from assistive technology; mark the surrounding loading region as busy and give that region an accessible status or label.
+
+<Canvas of={SkeletonStories.Playground} />
+
+## Shapes and dimensions
+
+Use `text` for a line, `circle` for a profile image, or `rectangular` for media and card blocks. `width` and `height` accept CSS length values, including design tokens.
+
+<Canvas of={SkeletonStories.CommonShapes} />
+<Canvas of={SkeletonStories.ProfileLoading} />
+
+## Motion
+
+Choose `shimmer`, `pulse`, or `none`. Motion defaults to shimmer and automatically turns off when the user or Storybook has selected reduced motion.
+
+<Canvas of={SkeletonStories.AnimationOptions} />
+<Canvas of={SkeletonStories.ReducedMotion} />
+<Canvas of={SkeletonStories.ThemeCoverage} />
+
+```tsx
+<div role="status" aria-label="Loading profile" aria-busy="true">
+  <Skeleton shape="circle" width="var(--ds-space-16)" height="var(--ds-space-16)" />
+  <Skeleton shape="text" width="70%" />
+</div>
+```

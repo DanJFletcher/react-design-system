@@ -13,6 +13,8 @@
     { "file": "AvatarGroup/AvatarGroup.module.css", "selector": ".overflowCount[data-shape=\"rounded\"]", "role": "surface", "reason": "The bounded overflow avatar follows the theme surface radius." },
     { "file": "AvatarGroup/AvatarGroup.module.css", "selector": ".overflowCount[data-shape=\"square\"]", "role": "shape", "reason": "Explicit square overflow-count shape." },
     { "file": "AvatarGroup/AvatarGroup.module.css", "selector": ".hiddenMembers", "role": "surface", "reason": "The expanded member list uses the theme surface corner shape." },
+    { "file": "Skeleton/Skeleton.module.css", "selector": ".skeleton", "role": "surface", "reason": "Skeleton blocks follow the bounded surface shape." },
+    { "file": "Skeleton/Skeleton.module.css", "selector": ".skeleton[data-shape=\"circle\"]", "role": "circle", "reason": "Circular profile-image loading placeholder." },
     { "file": "Breadcrumbs/Breadcrumbs.module.css", "selector": ".collapseButton", "role": "action", "reason": "An action button, not the breadcrumb content surface." },
     { "file": "Button/Button.module.css", "selector": ".button", "role": "action", "reason": "Default action button shape." },
     { "file": "Button/Button.module.css", "selector": ".rounded", "role": "shape", "reason": "Explicit rounded button shape." },
