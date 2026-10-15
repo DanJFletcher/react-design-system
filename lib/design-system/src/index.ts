@@ -19,6 +19,14 @@ export type {
   SkeletonProps,
   SkeletonShape,
 } from "./components/Skeleton/Skeleton";
+export { Separator } from "./components/Separator/Separator";
+export type {
+  SeparatorLength,
+  SeparatorOrientation,
+  SeparatorProps,
+  SeparatorSpacing,
+  SeparatorVariant,
+} from "./components/Separator/Separator";
 export { Badge } from "./components/Badge/Badge";
 export type {
   BadgeIconPosition,

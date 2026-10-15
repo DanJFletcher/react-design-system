@@ -1,0 +1,24 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+import * as SeparatorStories from "./Separator.stories";
+
+<Meta of={SeparatorStories} />
+
+# Separator
+
+Separate related content without adding a surface or interaction. The default is a decorative horizontal rule; use `decorative={false}` when the separator conveys a meaningful boundary to assistive technology.
+
+<Canvas of={SeparatorStories.Playground} />
+
+## Orientation, length, and spacing
+
+Choose a horizontal or vertical line, set its length to `full`, `inset`, or `short`, and adjust surrounding spacing. Vertical separators stretch to the available block size, so place them in a container with a height or aligned siblings.
+
+<Canvas of={SeparatorStories.SemanticSeparator} />
+<Canvas of={SeparatorStories.VerticalSeparator} />
+
+## Line styles and themes
+
+Solid, dashed, and dotted variants use the theme’s control-border color and switch to the system text color in forced-colors mode.
+
+<Canvas of={SeparatorStories.LengthAndStyleOptions} />
+<Canvas of={SeparatorStories.ThemeCoverage} />
