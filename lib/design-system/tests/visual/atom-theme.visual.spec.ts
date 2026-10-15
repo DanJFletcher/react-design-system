@@ -216,15 +216,14 @@ test("Atom Heading and Text components do not receive surface shadows", async ({
   }
 });
 
-test("Atom button and field groups stay flat while preserving standalone controls", async ({ page }) => {
+test("Atom button groups keep button shadows while field groups stay flat", async ({ page }) => {
   await page.goto("/iframe.html?id=components-button-group--theme-coverage&viewMode=story");
   const buttonGroupTheme = page.locator('[data-ds-theme="atom"]');
-  const buttonGroups = buttonGroupTheme.locator("[data-ds-button-group]");
+  const buttonGroups = buttonGroupTheme.getByRole("group");
   await expect(buttonGroups).toHaveCount(2);
   for (const group of await buttonGroups.all()) {
-    expect(await group.evaluate((element) => getComputedStyle(element).boxShadow)).toBe("none");
     for (const button of await group.locator(":scope > button").all()) {
-      expect(await button.evaluate((element) => getComputedStyle(element).boxShadow)).toBe("none");
+      expect(await button.evaluate((element) => getComputedStyle(element).boxShadow)).toContain("3px 3px 0px");
     }
   }
 

@@ -256,9 +256,7 @@
 }
 
 @scope ([data-ds-theme="atom"]) to ([data-ds-theme]:not([data-ds-theme="atom"])) {
-  :scope [data-ds-button-group],
-  :scope [data-ds-field-group],
-  :scope [data-ds-button-group] > :is(button, [role="button"]) {
+  :scope [data-ds-field-group] {
     box-shadow: none !important;
   }
 }

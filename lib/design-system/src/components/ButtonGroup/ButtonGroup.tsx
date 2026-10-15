@@ -96,7 +96,6 @@ export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(function
     <div
       {...groupProps}
       className={classes}
-      data-ds-button-group=""
       data-alignment={alignment}
       data-appearance={appearance}
       data-equal-width={String(equalWidth)}
