@@ -244,6 +244,13 @@ export type {
   TestimonialsLayout,
   TestimonialsProps,
 } from "./components/Testimonials/Testimonials";
+export { Rating } from "./components/Rating/Rating";
+export type {
+  RatingDisplayProps,
+  RatingInputProps,
+  RatingProps,
+  RatingSize,
+} from "./components/Rating/Rating";
 export { Pagination } from "./components/Pagination/Pagination";
 export type {
   PaginationPageLabel,

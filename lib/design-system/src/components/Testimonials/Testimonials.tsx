@@ -15,6 +15,7 @@ import {
   type CardSize,
   type CardVariant,
 } from "../Card/Card";
+import { Rating } from "../Rating/Rating";
 import styles from "./Testimonials.module.css";
 
 export type TestimonialAvatar = {
@@ -178,9 +179,6 @@ export const Testimonials = forwardRef<HTMLElement, TestimonialsProps>(
           data-layout={layout}
         >
           {items.map((item) => {
-            const ratingLabel = item.rating === undefined
-              ? undefined
-              : getAccessibleRatingLabel(item.rating, getRatingLabel);
             const authorDetails = [item.author.role, item.author.company]
               .filter((detail): detail is string => Boolean(detail?.trim()));
 
@@ -195,16 +193,15 @@ export const Testimonials = forwardRef<HTMLElement, TestimonialsProps>(
               >
                 <figure className={styles.figure}>
                   {item.rating !== undefined && (
-                    <span
-                      aria-label={ratingLabel}
-                      className={styles.rating}
-                      role="img"
-                    >
-                      <span aria-hidden="true">
-                        {"★".repeat(item.rating)}
-                        {"☆".repeat(5 - item.rating)}
-                      </span>
-                    </span>
+                    <Rating
+                      mode="display"
+                      value={item.rating}
+                      max={5}
+                      size="md"
+                      getRatingLabel={(rating, max) =>
+                        getAccessibleRatingLabel(rating, getRatingLabel, max)
+                      }
+                    />
                   )}
 
                   <blockquote className={styles.quote}>
@@ -254,10 +251,11 @@ Testimonials.displayName = "Testimonials";
 function getAccessibleRatingLabel(
   rating: number,
   getRatingLabel?: (rating: number) => string,
+  max = 5,
 ) {
   const label = getRatingLabel
     ? getRatingLabel(rating)
-    : `${rating} out of 5 stars`;
+    : `${rating} out of ${max} stars`;
 
   if (typeof label !== "string" || !label.trim()) {
     throw new Error("Testimonials getRatingLabel must return non-empty text.");

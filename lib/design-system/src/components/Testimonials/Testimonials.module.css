@@ -55,13 +55,6 @@
   margin: 0;
 }
 
-.rating {
-  color: inherit;
-  font-size: var(--ds-font-size-xl);
-  font-weight: var(--ds-font-weight-semibold);
-  line-height: var(--ds-line-height-tight);
-}
-
 .quote {
   flex: 1 0 auto;
   min-inline-size: 0;

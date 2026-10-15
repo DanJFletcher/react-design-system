@@ -321,9 +321,26 @@ The optional author avatar is decorative by default because the author name is v
 />
 ```
 
-`Testimonials` presents consumer-provided quotes in a responsive grid or as one featured quote. Each card uses the existing `Card` surface, size, and shape options. Author roles, businesses, portraits, and one-to-five-star ratings are optional. Ratings have a spoken label (`getRatingLabel` can localize it); the displayed star glyphs are decorative. The component does not verify reviews, fetch content, or link to review platforms.
+`Testimonials` presents consumer-provided quotes in a responsive grid or as one featured quote. Each card uses the existing `Card` surface, size, and shape options. Author roles, businesses, portraits, and one-to-five-star ratings are optional. Ratings use the shared `Rating` display mode and have a spoken label (`getRatingLabel` can localize it); the displayed star glyphs are decorative. The component does not verify reviews, fetch content, or link to review platforms.
 
 Quotes are rendered as native blockquotes with author attribution in a figure caption. The section is named by its optional heading, `aria-labelledby`, or `aria-label` (default “Testimonials”). An empty collection renders nothing. A non-empty featured layout accepts exactly one testimonial; invalid content or ratings fail explicitly.
+
+## Rating
+
+`Rating` supports a read-only display mode and a selectable form-input mode. Display mode accepts a numeric `value` from `0` through `max`, including fractional values, and announces the score as a named image. `max` defaults to `5` and must be an integer from `1` to `10`; `size` accepts `sm`, `md`, or `lg`. `showValue`, `formatValue`, and `getRatingLabel` customize the visible score and accessible wording.
+
+Input mode uses `mode="input"` and a required visible `label`. It renders a native fieldset and radio inputs for each whole-star value, preserving Tab and arrow-key navigation and native `name` form submission. `value` with `onValueChange` provides controlled state; `defaultValue` initializes uncontrolled state. `required`, `disabled`, `description`, `error`, and `invalid` follow the shared form-field contract. `getRatingLabel` names each radio choice and can localize the wording.
+
+```tsx
+<Rating
+  mode="input"
+  label="Service rating"
+  name="serviceRating"
+  max={5}
+  defaultValue={3}
+  required
+/>
+```
 
 ## Article body
 

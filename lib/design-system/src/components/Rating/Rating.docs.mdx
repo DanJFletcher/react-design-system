@@ -1,0 +1,44 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as RatingStories from "./Rating.stories";
+
+<Meta of={RatingStories} />
+
+<Title />
+
+<Subtitle>Show a customer score or collect an accessible star rating in a form.</Subtitle>
+
+## Read-only display
+
+Use `mode="display"` (the default) with a numeric `value`. Display mode accepts fractional ratings for review summaries, uses a named image for assistive technology, and can optionally show the numeric score.
+
+<Canvas of={RatingStories.ReadOnlyDisplay} />
+
+## Selectable form input
+
+Use `mode="input"` with a visible `label`. It renders a native radio group with one option for each whole-star value. Arrow keys move between options, Tab enters or leaves the group, and the selected value is submitted using `name`.
+
+`value` with `onValueChange` provides controlled state; `defaultValue` initializes uncontrolled state. Use `required`, `disabled`, `description`, `error`, and `invalid` for form states. `getRatingLabel` localizes each radio's accessible name; `formatValue` customizes the optional visible numeric value.
+
+```tsx
+<Rating
+  mode="input"
+  label="Service rating"
+  name="serviceRating"
+  max={5}
+  defaultValue={3}
+  required
+  onValueChange={(value) => setRating(value)}
+/>
+```
+
+<Canvas of={RatingStories.SelectableInput} />
+<Canvas of={RatingStories.ControlledInput} />
+<Canvas of={RatingStories.RequiredAndDisabled} />
+<Canvas of={RatingStories.LocalizedLabels} />
+
+## Scale, size, and themes
+
+`max` must be an integer from 1 to 10 and defaults to `5`. Input mode selects whole-star values. Read-only mode supports fractional values and fills the final star proportionally. `size` accepts `sm`, `md`, or `lg`.
+
+<Canvas of={RatingStories.CustomScaleAndSize} />
+<Canvas of={RatingStories.ThemeCoverage} />
