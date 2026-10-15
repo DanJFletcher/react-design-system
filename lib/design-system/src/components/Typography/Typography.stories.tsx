@@ -1,8 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "storybook/test";
-import { Heading, Text, type TypographySize } from "./Typography";
+import {
+  Heading,
+  Text,
+  type TextVariant,
+  type TypographyMeasure,
+  type TypographySize,
+} from "./Typography";
 
 const sizes: TypographySize[] = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl"];
+const variants: TextVariant[] = ["display", "body", "body-small", "lead", "label", "caption", "eyebrow"];
+const measures: TypographyMeasure[] = ["none", "narrow", "content", "wide"];
 
 const meta = {
   title: "Components/Typography",
@@ -10,15 +18,17 @@ const meta = {
   args: {
     children: "Readable type keeps content clear and consistent.",
     as: "p",
-    size: "md",
-    weight: "regular",
+    variant: "body",
     tone: "primary",
+    measure: "none",
   },
   argTypes: {
     as: { control: "inline-radio", options: ["p", "span", "div"] },
     size: { control: "select", options: sizes },
+    variant: { control: "select", options: variants },
     weight: { control: "inline-radio", options: ["regular", "medium", "semibold"] },
     tone: { control: "inline-radio", options: ["primary", "muted"] },
+    measure: { control: "inline-radio", options: measures },
     children: { control: "text" },
     style: { control: false },
   },
@@ -31,8 +41,9 @@ export const Playground: Story = {
   play: async ({ canvasElement }) => {
     const text = within(canvasElement).getByText("Readable type keeps content clear and consistent.");
     await expect(text.tagName.toLowerCase()).toBe("p");
-    await expect(text).toHaveAttribute("data-size", "md");
+    await expect(text).toHaveAttribute("data-variant", "body");
     await expect(text).toHaveAttribute("data-tone", "primary");
+    await expect(text).toHaveAttribute("data-measure", "none");
   },
 };
 
@@ -77,6 +88,41 @@ export const HeadingLevels: Story = {
   },
 };
 
+export const SemanticRolesAndMeasure: Story = {
+  render: () => (
+    <div className="theme-story-stack">
+      <Heading level={1} variant="display">A display heading</Heading>
+      <Heading level={2}>A semantic level-two heading</Heading>
+      <Text variant="eyebrow">FIELD NOTES</Text>
+      <Text variant="lead" measure="content">
+        Lead text introduces an article with a comfortable reading measure.
+      </Text>
+      <Text>Body text uses the shared default reading style.</Text>
+      <Text variant="body-small">Smaller supporting copy keeps its own line height.</Text>
+      <Text variant="label">Form and metadata label</Text>
+      <Text variant="caption">Caption text for additional context.</Text>
+      <Text data-testid="narrow-measure-example" measure="narrow">
+        Narrow measure keeps long copy from spanning an overly wide reading column.
+      </Text>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const display = canvas.getByRole("heading", { name: "A display heading", level: 1 });
+    const lead = canvas.getByText("Lead text introduces an article with a comfortable reading measure.");
+    const narrow = canvas.getByTestId("narrow-measure-example");
+
+    await expect(display).toHaveAttribute("data-variant", "display");
+    await expect(getComputedStyle(display).fontSize).toBe("56px");
+    await expect(getComputedStyle(display).letterSpacing).not.toBe("normal");
+    await expect(lead).toHaveAttribute("data-variant", "lead");
+    await expect(getComputedStyle(lead).maxInlineSize).not.toBe("none");
+    await expect(getComputedStyle(lead).getPropertyValue("--ds-typography-measure-content").trim()).toBe("65ch");
+    await expect(getComputedStyle(narrow).maxInlineSize).not.toBe("none");
+    await expect(getComputedStyle(narrow).getPropertyValue("--ds-typography-measure-narrow").trim()).toBe("45ch");
+  },
+};
+
 export const TextElements: Story = {
   render: () => (
     <div className="theme-story-stack">
@@ -116,6 +162,7 @@ export const ThemeCoverage: Story = {
           style={{ backgroundColor: "var(--ds-color-canvas)", padding: "var(--ds-space-4)" }}
         >
           <Heading level={3}>{theme.toUpperCase()} heading</Heading>
+          <Text variant="label">Themeable label role</Text>
           <Text>Primary text follows the active theme.</Text>
           <Text tone="muted">Muted text follows the active theme.</Text>
         </section>

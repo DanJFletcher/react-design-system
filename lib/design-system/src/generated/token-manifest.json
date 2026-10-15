@@ -33,18 +33,6 @@
       "description": "Keyboard-focus outline width."
     },
     {
-      "name": "font.family.mono",
-      "type": "fontFamily",
-      "value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
-      "description": "System monospace stack for inline code, code blocks, and editor code."
-    },
-    {
-      "name": "font.family.sans",
-      "type": "fontFamily",
-      "value": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
-      "description": "System sans-serif stack; browser root-font preferences remain effective."
-    },
-    {
       "name": "font.size.2xl",
       "type": "dimension",
       "value": "1.5rem",
@@ -579,6 +567,16 @@
       "description": "Primary readable text."
     },
     {
+      "name": "font.family.mono",
+      "type": "fontFamily",
+      "description": "Themeable monospace family for code and editor content."
+    },
+    {
+      "name": "font.family.sans",
+      "type": "fontFamily",
+      "description": "Themeable sans-serif family for interface and reading text."
+    },
+    {
       "name": "radius.control",
       "type": "dimension",
       "description": "Default action button and intentionally pill-shaped action control radius, not a content surface radius."
@@ -642,6 +640,281 @@
       "name": "shadow.offset.surface",
       "type": "dimension",
       "description": "Hard offset used by raised component surfaces."
+    },
+    {
+      "name": "typography.body-small.letter-spacing",
+      "type": "letterSpacing",
+      "description": "Letter spacing for secondary and compact body text."
+    },
+    {
+      "name": "typography.body-small.line-height",
+      "type": "lineHeight",
+      "description": "Line height for secondary and compact body text."
+    },
+    {
+      "name": "typography.body-small.size",
+      "type": "dimension",
+      "description": "Font size for secondary and compact body text."
+    },
+    {
+      "name": "typography.body-small.weight",
+      "type": "fontWeight",
+      "description": "Font weight for secondary and compact body text."
+    },
+    {
+      "name": "typography.body.letter-spacing",
+      "type": "letterSpacing",
+      "description": "Default letter spacing for body text."
+    },
+    {
+      "name": "typography.body.line-height",
+      "type": "lineHeight",
+      "description": "Default line height for body text."
+    },
+    {
+      "name": "typography.body.size",
+      "type": "dimension",
+      "description": "Default font size for body text."
+    },
+    {
+      "name": "typography.body.weight",
+      "type": "fontWeight",
+      "description": "Default font weight for body text."
+    },
+    {
+      "name": "typography.caption.letter-spacing",
+      "type": "letterSpacing",
+      "description": "Letter spacing for captions and supplementary details."
+    },
+    {
+      "name": "typography.caption.line-height",
+      "type": "lineHeight",
+      "description": "Line height for captions and supplementary details."
+    },
+    {
+      "name": "typography.caption.size",
+      "type": "dimension",
+      "description": "Font size for captions and supplementary details."
+    },
+    {
+      "name": "typography.caption.weight",
+      "type": "fontWeight",
+      "description": "Font weight for captions and supplementary details."
+    },
+    {
+      "name": "typography.display.letter-spacing",
+      "type": "letterSpacing",
+      "description": "Letter spacing for prominent display text."
+    },
+    {
+      "name": "typography.display.line-height",
+      "type": "lineHeight",
+      "description": "Line height for prominent display text."
+    },
+    {
+      "name": "typography.display.size",
+      "type": "dimension",
+      "description": "Font size for prominent display text."
+    },
+    {
+      "name": "typography.display.weight",
+      "type": "fontWeight",
+      "description": "Font weight for prominent display text."
+    },
+    {
+      "name": "typography.eyebrow.letter-spacing",
+      "type": "letterSpacing",
+      "description": "Letter spacing for short section eyebrows."
+    },
+    {
+      "name": "typography.eyebrow.line-height",
+      "type": "lineHeight",
+      "description": "Line height for short section eyebrows."
+    },
+    {
+      "name": "typography.eyebrow.size",
+      "type": "dimension",
+      "description": "Font size for short section eyebrows."
+    },
+    {
+      "name": "typography.eyebrow.weight",
+      "type": "fontWeight",
+      "description": "Font weight for short section eyebrows."
+    },
+    {
+      "name": "typography.heading.1.letter-spacing",
+      "type": "letterSpacing",
+      "description": "Default letter spacing for semantic heading level one."
+    },
+    {
+      "name": "typography.heading.1.line-height",
+      "type": "lineHeight",
+      "description": "Default line height for semantic heading level one."
+    },
+    {
+      "name": "typography.heading.1.size",
+      "type": "dimension",
+      "description": "Default font size for semantic heading level one."
+    },
+    {
+      "name": "typography.heading.1.weight",
+      "type": "fontWeight",
+      "description": "Default font weight for semantic heading level one."
+    },
+    {
+      "name": "typography.heading.2.letter-spacing",
+      "type": "letterSpacing",
+      "description": "Default letter spacing for semantic heading level two."
+    },
+    {
+      "name": "typography.heading.2.line-height",
+      "type": "lineHeight",
+      "description": "Default line height for semantic heading level two."
+    },
+    {
+      "name": "typography.heading.2.size",
+      "type": "dimension",
+      "description": "Default font size for semantic heading level two."
+    },
+    {
+      "name": "typography.heading.2.weight",
+      "type": "fontWeight",
+      "description": "Default font weight for semantic heading level two."
+    },
+    {
+      "name": "typography.heading.3.letter-spacing",
+      "type": "letterSpacing",
+      "description": "Default letter spacing for semantic heading level three."
+    },
+    {
+      "name": "typography.heading.3.line-height",
+      "type": "lineHeight",
+      "description": "Default line height for semantic heading level three."
+    },
+    {
+      "name": "typography.heading.3.size",
+      "type": "dimension",
+      "description": "Default font size for semantic heading level three."
+    },
+    {
+      "name": "typography.heading.3.weight",
+      "type": "fontWeight",
+      "description": "Default font weight for semantic heading level three."
+    },
+    {
+      "name": "typography.heading.4.letter-spacing",
+      "type": "letterSpacing",
+      "description": "Default letter spacing for semantic heading level four."
+    },
+    {
+      "name": "typography.heading.4.line-height",
+      "type": "lineHeight",
+      "description": "Default line height for semantic heading level four."
+    },
+    {
+      "name": "typography.heading.4.size",
+      "type": "dimension",
+      "description": "Default font size for semantic heading level four."
+    },
+    {
+      "name": "typography.heading.4.weight",
+      "type": "fontWeight",
+      "description": "Default font weight for semantic heading level four."
+    },
+    {
+      "name": "typography.heading.5.letter-spacing",
+      "type": "letterSpacing",
+      "description": "Default letter spacing for semantic heading level five."
+    },
+    {
+      "name": "typography.heading.5.line-height",
+      "type": "lineHeight",
+      "description": "Default line height for semantic heading level five."
+    },
+    {
+      "name": "typography.heading.5.size",
+      "type": "dimension",
+      "description": "Default font size for semantic heading level five."
+    },
+    {
+      "name": "typography.heading.5.weight",
+      "type": "fontWeight",
+      "description": "Default font weight for semantic heading level five."
+    },
+    {
+      "name": "typography.heading.6.letter-spacing",
+      "type": "letterSpacing",
+      "description": "Default letter spacing for semantic heading level six."
+    },
+    {
+      "name": "typography.heading.6.line-height",
+      "type": "lineHeight",
+      "description": "Default line height for semantic heading level six."
+    },
+    {
+      "name": "typography.heading.6.size",
+      "type": "dimension",
+      "description": "Default font size for semantic heading level six."
+    },
+    {
+      "name": "typography.heading.6.weight",
+      "type": "fontWeight",
+      "description": "Default font weight for semantic heading level six."
+    },
+    {
+      "name": "typography.label.letter-spacing",
+      "type": "letterSpacing",
+      "description": "Letter spacing for labels and control descriptions."
+    },
+    {
+      "name": "typography.label.line-height",
+      "type": "lineHeight",
+      "description": "Line height for labels and control descriptions."
+    },
+    {
+      "name": "typography.label.size",
+      "type": "dimension",
+      "description": "Font size for labels and control descriptions."
+    },
+    {
+      "name": "typography.label.weight",
+      "type": "fontWeight",
+      "description": "Font weight for labels and control descriptions."
+    },
+    {
+      "name": "typography.lead.letter-spacing",
+      "type": "letterSpacing",
+      "description": "Letter spacing for introductory lead text."
+    },
+    {
+      "name": "typography.lead.line-height",
+      "type": "lineHeight",
+      "description": "Line height for introductory lead text."
+    },
+    {
+      "name": "typography.lead.size",
+      "type": "dimension",
+      "description": "Font size for introductory lead text."
+    },
+    {
+      "name": "typography.lead.weight",
+      "type": "fontWeight",
+      "description": "Font weight for introductory lead text."
+    },
+    {
+      "name": "typography.measure.content",
+      "type": "dimension",
+      "description": "Maximum readable text measure for standard reading content."
+    },
+    {
+      "name": "typography.measure.narrow",
+      "type": "dimension",
+      "description": "Maximum readable text measure for narrow content."
+    },
+    {
+      "name": "typography.measure.wide",
+      "type": "dimension",
+      "description": "Maximum readable text measure for wide content."
     }
   ],
   "componentHooks": [
@@ -1808,7 +2081,64 @@
       "radius.form-control": "6px",
       "radius.form-group": "6px",
       "radius.textarea": "6px",
-      "radius.menu": "6px"
+      "radius.menu": "6px",
+      "font.family.sans": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "font.family.mono": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+      "typography.display.size": "3.5rem",
+      "typography.display.weight": 700,
+      "typography.display.line-height": 1.05,
+      "typography.display.letter-spacing": "-0.04em",
+      "typography.heading.1.size": "3rem",
+      "typography.heading.1.weight": 600,
+      "typography.heading.1.line-height": 1.2,
+      "typography.heading.1.letter-spacing": "-0.03em",
+      "typography.heading.2.size": "2.25rem",
+      "typography.heading.2.weight": 600,
+      "typography.heading.2.line-height": 1.2,
+      "typography.heading.2.letter-spacing": "-0.02em",
+      "typography.heading.3.size": "1.875rem",
+      "typography.heading.3.weight": 600,
+      "typography.heading.3.line-height": 1.2,
+      "typography.heading.3.letter-spacing": "-0.015em",
+      "typography.heading.4.size": "1.5rem",
+      "typography.heading.4.weight": 600,
+      "typography.heading.4.line-height": 1.25,
+      "typography.heading.4.letter-spacing": "-0.01em",
+      "typography.heading.5.size": "1.25rem",
+      "typography.heading.5.weight": 600,
+      "typography.heading.5.line-height": 1.3,
+      "typography.heading.5.letter-spacing": "0em",
+      "typography.heading.6.size": "1.125rem",
+      "typography.heading.6.weight": 600,
+      "typography.heading.6.line-height": 1.35,
+      "typography.heading.6.letter-spacing": "0em",
+      "typography.body.size": "1rem",
+      "typography.body.weight": 400,
+      "typography.body.line-height": 1.5,
+      "typography.body.letter-spacing": "0em",
+      "typography.body-small.size": "0.875rem",
+      "typography.body-small.weight": 400,
+      "typography.body-small.line-height": 1.5,
+      "typography.body-small.letter-spacing": "0em",
+      "typography.lead.size": "1.125rem",
+      "typography.lead.weight": 400,
+      "typography.lead.line-height": 1.6,
+      "typography.lead.letter-spacing": "0em",
+      "typography.label.size": "0.875rem",
+      "typography.label.weight": 600,
+      "typography.label.line-height": 1.35,
+      "typography.label.letter-spacing": "0em",
+      "typography.caption.size": "0.75rem",
+      "typography.caption.weight": 400,
+      "typography.caption.line-height": 1.4,
+      "typography.caption.letter-spacing": "0.01em",
+      "typography.eyebrow.size": "0.75rem",
+      "typography.eyebrow.weight": 600,
+      "typography.eyebrow.line-height": 1.2,
+      "typography.eyebrow.letter-spacing": "0.08em",
+      "typography.measure.narrow": "45ch",
+      "typography.measure.content": "65ch",
+      "typography.measure.wide": "80ch"
     },
     "atom": {
       "color.canvas": "#11111D",
@@ -1867,7 +2197,64 @@
       "radius.form-control": "4px",
       "radius.form-group": "8px",
       "radius.textarea": "8px",
-      "radius.menu": "8px"
+      "radius.menu": "8px",
+      "font.family.sans": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "font.family.mono": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+      "typography.display.size": "3.5rem",
+      "typography.display.weight": 700,
+      "typography.display.line-height": 1.05,
+      "typography.display.letter-spacing": "-0.04em",
+      "typography.heading.1.size": "3rem",
+      "typography.heading.1.weight": 600,
+      "typography.heading.1.line-height": 1.2,
+      "typography.heading.1.letter-spacing": "-0.03em",
+      "typography.heading.2.size": "2.25rem",
+      "typography.heading.2.weight": 600,
+      "typography.heading.2.line-height": 1.2,
+      "typography.heading.2.letter-spacing": "-0.02em",
+      "typography.heading.3.size": "1.875rem",
+      "typography.heading.3.weight": 600,
+      "typography.heading.3.line-height": 1.2,
+      "typography.heading.3.letter-spacing": "-0.015em",
+      "typography.heading.4.size": "1.5rem",
+      "typography.heading.4.weight": 600,
+      "typography.heading.4.line-height": 1.25,
+      "typography.heading.4.letter-spacing": "-0.01em",
+      "typography.heading.5.size": "1.25rem",
+      "typography.heading.5.weight": 600,
+      "typography.heading.5.line-height": 1.3,
+      "typography.heading.5.letter-spacing": "0em",
+      "typography.heading.6.size": "1.125rem",
+      "typography.heading.6.weight": 600,
+      "typography.heading.6.line-height": 1.35,
+      "typography.heading.6.letter-spacing": "0em",
+      "typography.body.size": "1rem",
+      "typography.body.weight": 400,
+      "typography.body.line-height": 1.5,
+      "typography.body.letter-spacing": "0em",
+      "typography.body-small.size": "0.875rem",
+      "typography.body-small.weight": 400,
+      "typography.body-small.line-height": 1.5,
+      "typography.body-small.letter-spacing": "0em",
+      "typography.lead.size": "1.125rem",
+      "typography.lead.weight": 400,
+      "typography.lead.line-height": 1.6,
+      "typography.lead.letter-spacing": "0em",
+      "typography.label.size": "0.875rem",
+      "typography.label.weight": 600,
+      "typography.label.line-height": 1.35,
+      "typography.label.letter-spacing": "0em",
+      "typography.caption.size": "0.75rem",
+      "typography.caption.weight": 400,
+      "typography.caption.line-height": 1.4,
+      "typography.caption.letter-spacing": "0.01em",
+      "typography.eyebrow.size": "0.75rem",
+      "typography.eyebrow.weight": 600,
+      "typography.eyebrow.line-height": 1.2,
+      "typography.eyebrow.letter-spacing": "0.08em",
+      "typography.measure.narrow": "45ch",
+      "typography.measure.content": "65ch",
+      "typography.measure.wide": "80ch"
     },
     "luna": {
       "color.canvas": "#100E21",
@@ -1926,7 +2313,64 @@
       "radius.form-control": "9999px",
       "radius.form-group": "32px",
       "radius.textarea": "32px",
-      "radius.menu": "32px"
+      "radius.menu": "32px",
+      "font.family.sans": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "font.family.mono": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+      "typography.display.size": "3.5rem",
+      "typography.display.weight": 700,
+      "typography.display.line-height": 1.05,
+      "typography.display.letter-spacing": "-0.04em",
+      "typography.heading.1.size": "3rem",
+      "typography.heading.1.weight": 600,
+      "typography.heading.1.line-height": 1.2,
+      "typography.heading.1.letter-spacing": "-0.03em",
+      "typography.heading.2.size": "2.25rem",
+      "typography.heading.2.weight": 600,
+      "typography.heading.2.line-height": 1.2,
+      "typography.heading.2.letter-spacing": "-0.02em",
+      "typography.heading.3.size": "1.875rem",
+      "typography.heading.3.weight": 600,
+      "typography.heading.3.line-height": 1.2,
+      "typography.heading.3.letter-spacing": "-0.015em",
+      "typography.heading.4.size": "1.5rem",
+      "typography.heading.4.weight": 600,
+      "typography.heading.4.line-height": 1.25,
+      "typography.heading.4.letter-spacing": "-0.01em",
+      "typography.heading.5.size": "1.25rem",
+      "typography.heading.5.weight": 600,
+      "typography.heading.5.line-height": 1.3,
+      "typography.heading.5.letter-spacing": "0em",
+      "typography.heading.6.size": "1.125rem",
+      "typography.heading.6.weight": 600,
+      "typography.heading.6.line-height": 1.35,
+      "typography.heading.6.letter-spacing": "0em",
+      "typography.body.size": "1rem",
+      "typography.body.weight": 400,
+      "typography.body.line-height": 1.5,
+      "typography.body.letter-spacing": "0em",
+      "typography.body-small.size": "0.875rem",
+      "typography.body-small.weight": 400,
+      "typography.body-small.line-height": 1.5,
+      "typography.body-small.letter-spacing": "0em",
+      "typography.lead.size": "1.125rem",
+      "typography.lead.weight": 400,
+      "typography.lead.line-height": 1.6,
+      "typography.lead.letter-spacing": "0em",
+      "typography.label.size": "0.875rem",
+      "typography.label.weight": 600,
+      "typography.label.line-height": 1.35,
+      "typography.label.letter-spacing": "0em",
+      "typography.caption.size": "0.75rem",
+      "typography.caption.weight": 400,
+      "typography.caption.line-height": 1.4,
+      "typography.caption.letter-spacing": "0.01em",
+      "typography.eyebrow.size": "0.75rem",
+      "typography.eyebrow.weight": 600,
+      "typography.eyebrow.line-height": 1.2,
+      "typography.eyebrow.letter-spacing": "0.08em",
+      "typography.measure.narrow": "45ch",
+      "typography.measure.content": "65ch",
+      "typography.measure.wide": "80ch"
     },
     "orchid": {
       "color.canvas": "#FFF2FD",
@@ -1985,7 +2429,64 @@
       "radius.form-control": "16px",
       "radius.form-group": "16px",
       "radius.textarea": "16px",
-      "radius.menu": "16px"
+      "radius.menu": "16px",
+      "font.family.sans": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "font.family.mono": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+      "typography.display.size": "3.5rem",
+      "typography.display.weight": 700,
+      "typography.display.line-height": 1.05,
+      "typography.display.letter-spacing": "-0.04em",
+      "typography.heading.1.size": "3rem",
+      "typography.heading.1.weight": 600,
+      "typography.heading.1.line-height": 1.2,
+      "typography.heading.1.letter-spacing": "-0.03em",
+      "typography.heading.2.size": "2.25rem",
+      "typography.heading.2.weight": 600,
+      "typography.heading.2.line-height": 1.2,
+      "typography.heading.2.letter-spacing": "-0.02em",
+      "typography.heading.3.size": "1.875rem",
+      "typography.heading.3.weight": 600,
+      "typography.heading.3.line-height": 1.2,
+      "typography.heading.3.letter-spacing": "-0.015em",
+      "typography.heading.4.size": "1.5rem",
+      "typography.heading.4.weight": 600,
+      "typography.heading.4.line-height": 1.25,
+      "typography.heading.4.letter-spacing": "-0.01em",
+      "typography.heading.5.size": "1.25rem",
+      "typography.heading.5.weight": 600,
+      "typography.heading.5.line-height": 1.3,
+      "typography.heading.5.letter-spacing": "0em",
+      "typography.heading.6.size": "1.125rem",
+      "typography.heading.6.weight": 600,
+      "typography.heading.6.line-height": 1.35,
+      "typography.heading.6.letter-spacing": "0em",
+      "typography.body.size": "1rem",
+      "typography.body.weight": 400,
+      "typography.body.line-height": 1.5,
+      "typography.body.letter-spacing": "0em",
+      "typography.body-small.size": "0.875rem",
+      "typography.body-small.weight": 400,
+      "typography.body-small.line-height": 1.5,
+      "typography.body-small.letter-spacing": "0em",
+      "typography.lead.size": "1.125rem",
+      "typography.lead.weight": 400,
+      "typography.lead.line-height": 1.6,
+      "typography.lead.letter-spacing": "0em",
+      "typography.label.size": "0.875rem",
+      "typography.label.weight": 600,
+      "typography.label.line-height": 1.35,
+      "typography.label.letter-spacing": "0em",
+      "typography.caption.size": "0.75rem",
+      "typography.caption.weight": 400,
+      "typography.caption.line-height": 1.4,
+      "typography.caption.letter-spacing": "0.01em",
+      "typography.eyebrow.size": "0.75rem",
+      "typography.eyebrow.weight": 600,
+      "typography.eyebrow.line-height": 1.2,
+      "typography.eyebrow.letter-spacing": "0.08em",
+      "typography.measure.narrow": "45ch",
+      "typography.measure.content": "65ch",
+      "typography.measure.wide": "80ch"
     },
     "sublime": {
       "color.canvas": "#1F242C",
@@ -2044,7 +2545,64 @@
       "radius.form-control": "4px",
       "radius.form-group": "4px",
       "radius.textarea": "4px",
-      "radius.menu": "4px"
+      "radius.menu": "4px",
+      "font.family.sans": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "font.family.mono": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+      "typography.display.size": "3.5rem",
+      "typography.display.weight": 700,
+      "typography.display.line-height": 1.05,
+      "typography.display.letter-spacing": "-0.04em",
+      "typography.heading.1.size": "3rem",
+      "typography.heading.1.weight": 600,
+      "typography.heading.1.line-height": 1.2,
+      "typography.heading.1.letter-spacing": "-0.03em",
+      "typography.heading.2.size": "2.25rem",
+      "typography.heading.2.weight": 600,
+      "typography.heading.2.line-height": 1.2,
+      "typography.heading.2.letter-spacing": "-0.02em",
+      "typography.heading.3.size": "1.875rem",
+      "typography.heading.3.weight": 600,
+      "typography.heading.3.line-height": 1.2,
+      "typography.heading.3.letter-spacing": "-0.015em",
+      "typography.heading.4.size": "1.5rem",
+      "typography.heading.4.weight": 600,
+      "typography.heading.4.line-height": 1.25,
+      "typography.heading.4.letter-spacing": "-0.01em",
+      "typography.heading.5.size": "1.25rem",
+      "typography.heading.5.weight": 600,
+      "typography.heading.5.line-height": 1.3,
+      "typography.heading.5.letter-spacing": "0em",
+      "typography.heading.6.size": "1.125rem",
+      "typography.heading.6.weight": 600,
+      "typography.heading.6.line-height": 1.35,
+      "typography.heading.6.letter-spacing": "0em",
+      "typography.body.size": "1rem",
+      "typography.body.weight": 400,
+      "typography.body.line-height": 1.5,
+      "typography.body.letter-spacing": "0em",
+      "typography.body-small.size": "0.875rem",
+      "typography.body-small.weight": 400,
+      "typography.body-small.line-height": 1.5,
+      "typography.body-small.letter-spacing": "0em",
+      "typography.lead.size": "1.125rem",
+      "typography.lead.weight": 400,
+      "typography.lead.line-height": 1.6,
+      "typography.lead.letter-spacing": "0em",
+      "typography.label.size": "0.875rem",
+      "typography.label.weight": 600,
+      "typography.label.line-height": 1.35,
+      "typography.label.letter-spacing": "0em",
+      "typography.caption.size": "0.75rem",
+      "typography.caption.weight": 400,
+      "typography.caption.line-height": 1.4,
+      "typography.caption.letter-spacing": "0.01em",
+      "typography.eyebrow.size": "0.75rem",
+      "typography.eyebrow.weight": 600,
+      "typography.eyebrow.line-height": 1.2,
+      "typography.eyebrow.letter-spacing": "0.08em",
+      "typography.measure.narrow": "45ch",
+      "typography.measure.content": "65ch",
+      "typography.measure.wide": "80ch"
     }
   },
   "contrast": [

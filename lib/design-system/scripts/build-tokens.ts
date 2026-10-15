@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-type TokenType = "boxShadow" | "color" | "dimension" | "duration" | "easing" | "fontFamily" | "fontWeight" | "lineHeight" | "number";
+type TokenType = "boxShadow" | "color" | "dimension" | "duration" | "easing" | "fontFamily" | "fontWeight" | "letterSpacing" | "lineHeight" | "number";
 type Dimension = { amount: number; unit: string };
 type Reference = { ref: string };
 type TokenValue = string | number | Dimension | Reference;
@@ -84,20 +84,31 @@ function resolveValue(
     cache.set(name, resolved);
     return resolved;
   }
-  if (token.type === "dimension" || token.type === "duration") {
+  if (token.type === "dimension" || token.type === "duration" || token.type === "letterSpacing") {
     const value = token.value as Dimension;
     if (!value || typeof value !== "object" || !Number.isFinite(value.amount) || typeof value.unit !== "string") {
       fail(`Token "${name}" must use an amount and unit.`);
     }
     if (!allowedUnits.includes(value.unit)) fail(`Token "${name}" uses unit "${value.unit}" which is not declared in schema.json.`);
-    const allowed = token.type === "duration" ? ["ms"] : ["px", "rem", "em", "%"];
+    const allowed =
+      token.type === "duration"
+        ? ["ms"]
+        : token.type === "letterSpacing"
+          ? ["em", "px"]
+          : ["px", "rem", "em", "%", "ch"];
     if (!allowed.includes(value.unit)) fail(`Token "${name}" uses unsupported unit "${value.unit}".`);
-    if (value.amount < 0) fail(`Token "${name}" cannot have a negative amount.`);
+    if (value.amount < 0 && token.type !== "letterSpacing") fail(`Token "${name}" cannot have a negative amount.`);
     if (token.type === "duration" && name.startsWith("motion.") && value.unit !== "ms") {
       fail(`Motion token "${name}" must use milliseconds.`);
     }
     if (name.startsWith("font.size.") && value.unit !== "rem") {
       fail(`Font-size token "${name}" must use rem.`);
+    }
+    if (name.startsWith("typography.") && name.endsWith(".size") && value.unit !== "rem") {
+      fail(`Typography size token "${name}" must use rem.`);
+    }
+    if (name.startsWith("typography.measure.") && value.unit !== "ch") {
+      fail(`Typography measure token "${name}" must use ch.`);
     }
     if ((name.startsWith("space.") || name.startsWith("radius.") || name.startsWith("border.") ||
       name.startsWith("focus.") || name.startsWith("control.")) && value.unit !== "px") {
@@ -196,7 +207,7 @@ export async function compileTokens(tokenDir = defaultTokenDir): Promise<Compila
   if (!Array.isArray(allowedUnits) || !allowedUnits.every((unit) => typeof unit === "string")) {
     fail("schema.units must be an array of unit names.");
   }
-  if (!["boxShadow", "color", "dimension", "duration", "easing", "fontFamily", "fontWeight", "lineHeight", "number"].every((type) => allowedTypes.has(type))) {
+  if (!["boxShadow", "color", "dimension", "duration", "easing", "fontFamily", "fontWeight", "letterSpacing", "lineHeight", "number"].every((type) => allowedTypes.has(type))) {
     fail("schema.types must declare every supported token type.");
   }
 

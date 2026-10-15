@@ -4,14 +4,15 @@
   "types": {
     "color": ["hex", "reference"],
     "boxShadow": ["string", "reference"],
-    "dimension": ["px", "rem", "em", "%", "reference"],
+    "dimension": ["px", "rem", "em", "%", "ch", "reference"],
     "duration": ["ms", "reference"],
     "easing": ["string", "reference"],
     "fontFamily": ["string", "reference"],
     "fontWeight": ["number", "reference"],
+    "letterSpacing": ["dimension", "reference"],
     "lineHeight": ["number", "reference"],
     "number": ["number", "reference"]
   },
-  "units": ["px", "rem", "em", "%", "ms"],
+  "units": ["px", "rem", "em", "%", "ch", "ms"],
   "requiredFields": ["type", "value", "description"]
 }

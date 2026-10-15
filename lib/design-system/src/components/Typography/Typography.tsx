@@ -11,6 +11,9 @@ import styles from "./Typography.module.css";
 export type TypographySize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl";
 export type TypographyWeight = "regular" | "medium" | "semibold";
 export type TypographyTone = "primary" | "muted";
+export type TextVariant = "display" | "body" | "body-small" | "lead" | "label" | "caption" | "eyebrow";
+export type HeadingVariant = "heading" | "display";
+export type TypographyMeasure = "none" | "narrow" | "content" | "wide";
 export type TextElement = "p" | "span" | "div";
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -19,22 +22,26 @@ type TextBaseProps = Omit<
   "children" | "color" | "style"
 > & {
   children?: ReactNode;
-  size?: TypographySize;
   weight?: TypographyWeight;
   tone?: TypographyTone;
+  measure?: TypographyMeasure;
   style?: DesignSystemStyle;
 };
 
 export type TextProps = TextBaseProps & {
   as?: TextElement;
+  size?: TypographySize;
+  variant?: TextVariant;
 };
 
 export const Text = forwardRef<HTMLElement, TextProps>(function Text(
   {
     as = "p",
-    size = "md",
-    weight = "regular",
+    size,
+    variant = "body",
+    weight,
     tone = "primary",
+    measure = "none",
     children,
     className,
     style,
@@ -49,8 +56,10 @@ export const Text = forwardRef<HTMLElement, TextProps>(function Text(
       ref,
       className: [styles.text, className].filter(Boolean).join(" "),
       "data-size": size,
+      "data-variant": variant,
       "data-weight": weight,
       "data-tone": tone,
+      "data-measure": measure,
       style: style as CSSProperties | undefined,
     },
     children,
@@ -59,26 +68,20 @@ export const Text = forwardRef<HTMLElement, TextProps>(function Text(
 
 Text.displayName = "Text";
 
-export type HeadingProps = Omit<TextBaseProps, "size"> & {
+export type HeadingProps = TextBaseProps & {
   level?: HeadingLevel;
   size?: TypographySize;
-};
-
-const defaultHeadingSize: Record<HeadingLevel, TypographySize> = {
-  1: "5xl",
-  2: "4xl",
-  3: "3xl",
-  4: "2xl",
-  5: "xl",
-  6: "lg",
+  variant?: HeadingVariant;
 };
 
 export const Heading = forwardRef<HTMLElement, HeadingProps>(function Heading(
   {
     level = 2,
+    variant = "heading",
     size,
-    weight = "semibold",
+    weight,
     tone = "primary",
+    measure = "none",
     children,
     className,
     style,
@@ -94,9 +97,11 @@ export const Heading = forwardRef<HTMLElement, HeadingProps>(function Heading(
       ref,
       className: [styles.heading, className].filter(Boolean).join(" "),
       "data-level": level,
-      "data-size": size ?? defaultHeadingSize[level],
+      "data-size": size,
+      "data-variant": variant,
       "data-weight": weight,
       "data-tone": tone,
+      "data-measure": measure,
       style: style as CSSProperties | undefined,
     },
     children,

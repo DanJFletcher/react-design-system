@@ -5,7 +5,7 @@ import * as TypographyStories from "./Typography.stories";
 
 <Title>Typography</Title>
 
-<Subtitle>Theme-aware text and heading primitives built on the shared font scale.</Subtitle>
+<Subtitle>Theme-aware text and heading primitives built on semantic typography roles.</Subtitle>
 
 ## Text
 
@@ -13,13 +13,16 @@ import * as TypographyStories from "./Typography.stories";
 <Canvas of={TypographyStories.TextScale} />
 <Canvas of={TypographyStories.TextElements} />
 
-`Text` renders a paragraph by default; use `as="span"` or `as="div"` when the surrounding content requires different HTML semantics. `size` accepts the shared `xs` through `5xl` scale, `weight` accepts `regular`, `medium`, or `semibold`, and `tone` accepts `primary` or `muted`.
+`Text` renders a paragraph by default; use `as="span"` or `as="div"` when the surrounding content requires different HTML semantics. Its `variant` selects a semantic role: `body` (default), `body-small`, `lead`, `label`, `caption`, `eyebrow`, or `display`. The existing `size` and `weight` props remain available as explicit overrides. `tone` accepts `primary` or `muted`.
+
+Set `measure` to `narrow`, `content`, or `wide` to limit a block of text to a themeable reading width; `none` leaves the width to its parent.
 
 ## Heading
 
 <Canvas of={TypographyStories.HeadingLevels} />
+<Canvas of={TypographyStories.SemanticRolesAndMeasure} />
 
-`Heading` renders the native `h1` through `h6` selected by `level`. Visual `size` is independent of the semantic heading level; it defaults to a descending scale from `5xl` for `h1` to `lg` for `h6`. Use the level that matches the document outline, even when choosing a different visual size.
+`Heading` renders the native `h1` through `h6` selected by `level`; each level uses its own themeable size, weight, line-height, and letter-spacing tokens. `variant="display"` opts into the display role. Visual `size` remains independent of the semantic heading level, and `weight` can override a role's default. Use the level that matches the document outline.
 
 ## Weight, tone, and themes
 
@@ -28,7 +31,7 @@ import * as TypographyStories from "./Typography.stories";
 <Canvas of={TypographyStories.NestedThemeBoundary} />
 <Canvas of={TypographyStories.ResponsiveWrapping} />
 
-Both components use the active theme's font-family, font-size, font-weight, line-height, and semantic text-color tokens. They work in ACME, Atom, Luna, Orchid, and custom themes without theme-specific rendering. Native HTML attributes, children, refs, `className`, and typed `DesignSystemStyle` are forwarded.
+Both components use the active theme's font families, semantic font roles, letter spacing, reading measures, and text-color tokens. The `xs` through `5xl` primitive size scale remains available for one-off overrides. They work in ACME, Atom, Luna, Orchid, Sublime, and custom themes without theme-specific rendering. Native HTML attributes, children, refs, `className`, and typed `DesignSystemStyle` are forwarded.
 
 In Atom, semantic H1 and H2 headings have two solid marker highlights with matching uneven clipped edges. Cyan is offset down and to the right; electric yellow sits behind the cyan, offset up and to the left. Dark ink sits above both layers to keep the text readable. This follows the heading's HTML level, not its visual `size`, and also applies to native `h1`/`h2` elements. H3–H6 and headings within another nested theme keep their usual appearance. High-contrast mode removes both decorative highlights.
 

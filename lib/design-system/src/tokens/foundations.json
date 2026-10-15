@@ -41,8 +41,6 @@
     "font.size.3xl": { "type": "dimension", "value": { "amount": 1.875, "unit": "rem" }, "description": "3x-large type size." },
     "font.size.4xl": { "type": "dimension", "value": { "amount": 2.25, "unit": "rem" }, "description": "4x-large type size." },
     "font.size.5xl": { "type": "dimension", "value": { "amount": 3, "unit": "rem" }, "description": "5x-large type size." },
-    "font.family.sans": { "type": "fontFamily", "value": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif", "description": "System sans-serif stack; browser root-font preferences remain effective." },
-    "font.family.mono": { "type": "fontFamily", "value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace", "description": "System monospace stack for inline code, code blocks, and editor code." },
     "font.weight.regular": { "type": "fontWeight", "value": 400, "description": "Regular font weight." },
     "font.weight.medium": { "type": "fontWeight", "value": 500, "description": "Medium font weight." },
     "font.weight.semibold": { "type": "fontWeight", "value": 600, "description": "Semibold font weight." },

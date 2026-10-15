@@ -33,6 +33,12 @@ test("generation is deterministic and produces complete themes", async () => {
   assert.match(first.files.get("tokens.css")!, /--ds-layer-scrim: 40;/);
   assert.match(first.files.get("tokens.css")!, /--ds-layer-notification: 60;/);
   assert.match(first.files.get("tokens.css")!, /--ds-font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,/);
+  assert.match(first.files.get("tokens.css")!, /--ds-font-family-sans: system-ui, -apple-system/);
+  assert.equal(first.themes.get("acme")!["typography.heading.1.size"], "3rem");
+  assert.equal(first.themes.get("acme")!["typography.display.letter-spacing"], "-0.04em");
+  assert.equal(first.themes.get("acme")!["typography.measure.content"], "65ch");
+  assert.match(first.files.get("tokens.css")!, /--ds-typography-heading-1-size: 3rem;/);
+  assert.match(first.files.get("tokens.css")!, /--ds-typography-measure-content: 65ch;/);
   assert.equal(first.themes.get("luna")!["color.surface.overlay"], "#2B2545");
   assert.equal(first.themes.get("atom")!["color.status.info.fg"], "#97E9FF");
   assert.equal(first.themes.get("orchid")!["color.status.neutral.bg"], "#EEE4EF");
@@ -43,6 +49,17 @@ test("generation is deterministic and produces complete themes", async () => {
   assert.ok(first.contrastResults.some((result) => result.name === "Primary text on overlay surface"));
   assert.ok(first.contrastResults.some((result) => result.name === "Strong boundary on overlay surface"));
   assert.ok(first.contrastResults.every((result) => result.ratio >= result.minimum));
+});
+
+test("semantic typography tokens support negative tracking and readable measures", async () => {
+  const result = await compileTokens(source);
+  const acme = result.themes.get("acme")!;
+
+  assert.equal(acme["typography.display.letter-spacing"], "-0.04em");
+  assert.equal(acme["typography.heading.1.letter-spacing"], "-0.03em");
+  assert.equal(acme["typography.measure.narrow"], "45ch");
+  assert.equal(acme["typography.measure.content"], "65ch");
+  assert.equal(acme["typography.measure.wide"], "80ch");
 });
 
 test("Atom uses dark comic colors with hard, block-style elevation", async () => {
