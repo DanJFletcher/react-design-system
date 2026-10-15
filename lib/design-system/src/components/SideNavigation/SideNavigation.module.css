@@ -33,7 +33,7 @@
 
 .wrapper[data-position="fixed"] .root {
   position: fixed;
-  z-index: 20;
+  z-index: var(--ds-layer-navigation);
   inset-block: 0;
   max-block-size: 100dvh;
   overflow-y: auto;
@@ -225,13 +225,13 @@
   .wrapper { inline-size: 100%; }
   .wrapper .mobileToggle {
     position: relative;
-    z-index: 32;
+    z-index: calc(var(--ds-layer-scrim) + 2);
     display: inline-flex;
     margin-block-end: var(--ds-space-2);
   }
   .wrapper[data-mobile-open="true"] .mobileToggle {
     position: relative;
-    z-index: 32;
+    z-index: calc(var(--ds-layer-scrim) + 2);
     border: var(--ds-border-width-default) solid var(--ds-color-border-control);
     background: var(--ds-color-surface-primary);
     color: var(--ds-color-text-primary);
@@ -241,7 +241,7 @@
   }
   .wrapper .mobileScrim {
     position: fixed;
-    z-index: 30;
+    z-index: var(--ds-layer-scrim);
     inset: 0;
     display: block;
     inline-size: 100%;
@@ -264,7 +264,7 @@
   }
   .wrapper .mobilePanel {
     position: fixed;
-    z-index: 31;
+    z-index: calc(var(--ds-layer-scrim) + 1);
     inset-block: 0;
     inset-inline-start: 0;
     inline-size: min(var(--_nav-width), calc(100vw - var(--ds-space-16)));

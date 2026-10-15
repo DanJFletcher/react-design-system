@@ -21,6 +21,10 @@ test("generation is deterministic and produces complete themes", async () => {
   assert.equal(first.themes.get("sublime")!["color.canvas"], "#1F242C");
   assert.equal(first.themes.get("sublime")!["color.action.primary.bg"], "#66D9EF");
   assert.equal(first.themes.get("sublime")!["radius.surface"], "4px");
+  assert.match(first.files.get("tokens.css")!, /--ds-layer-base: 0;/);
+  assert.match(first.files.get("tokens.css")!, /--ds-layer-dropdown: 30;/);
+  assert.match(first.files.get("tokens.css")!, /--ds-layer-scrim: 40;/);
+  assert.match(first.files.get("tokens.css")!, /--ds-layer-notification: 60;/);
   assert.equal(first.themes.get("luna")!["color.surface.overlay"], "#2B2545");
   assert.equal(first.themes.get("atom")!["color.status.info.fg"], "#97E9FF");
   assert.equal(first.themes.get("orchid")!["color.status.neutral.bg"], "#EEE4EF");

@@ -26,6 +26,10 @@ Use `color.text.disabled` for inactive content and `color.text.inverse` for fore
 
 New theme roles are checked against their documented text and indicator contrast pairs. Add contrast pairs whenever a role is intended to be readable or visible on a specific surface.
 
+### Layer scale
+
+The shared `layer.*` foundation tokens establish a consistent stacking order: base content, sticky bars, fixed navigation, dropdowns and popovers, scrims, tooltips, then notifications. A navigation scrim covers page dropdowns; its panel and toggle sit just above the scrim. Use these levels for overlays shared between components. Small `z-index` values used only to order items inside one component (for example, a focused tab above its siblings) may remain local. Native modal dialogs use the browser top layer and are not ordered by this scale.
+
 ## Theme contract
 
 Corner radii are semantic roles, not a theme-wide shape setting. General content surfaces use `radius.surface` (12px ACME, 32px Luna, 12px Orchid); action controls and single-line form controls retain separate tokens and remain pills in Luna. Specialized menu, tooltip, textarea, and form-group tokens retain their public compatibility values (32px in Luna). Explicit shape props and consumer hooks override defaults. See `docs/theming.md` and the **Foundations/Radius Policy** stories for the full policy.

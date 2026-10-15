@@ -54,7 +54,7 @@
 
 .header {
   position: sticky;
-  z-index: 10;
+  z-index: var(--ds-layer-sticky);
   inset-block-start: 0;
   display: flex;
   align-items: center;

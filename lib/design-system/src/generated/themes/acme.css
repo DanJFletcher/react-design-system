@@ -18,6 +18,13 @@
   --ds-font-weight-medium: 500;
   --ds-font-weight-regular: 400;
   --ds-font-weight-semibold: 600;
+  --ds-layer-base: 0;
+  --ds-layer-dropdown: 30;
+  --ds-layer-navigation: 20;
+  --ds-layer-notification: 60;
+  --ds-layer-scrim: 40;
+  --ds-layer-sticky: 10;
+  --ds-layer-tooltip: 50;
   --ds-layout-container-content: 64rem;
   --ds-layout-container-narrow: 42rem;
   --ds-layout-container-wide: 80rem;

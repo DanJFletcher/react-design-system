@@ -38,7 +38,7 @@
 .bar[data-alignment="start"] { justify-content: flex-start; }
 .bar[data-sticky="true"] {
   position: sticky;
-  z-index: 30;
+  z-index: var(--ds-layer-sticky);
   inset-block-start: 0;
 }
 

@@ -7,7 +7,7 @@
 }
 
 .header {
-  z-index: 10;
+  z-index: var(--ds-layer-sticky);
   background: color-mix(in srgb, var(--ds-color-canvas) 88%, transparent);
   backdrop-filter: blur(16px);
 }

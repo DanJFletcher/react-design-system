@@ -12,7 +12,7 @@
   position: fixed;
   inset: auto;
   margin: 0;
-  z-index: 1000;
+  z-index: var(--ds-layer-tooltip);
   box-sizing: border-box;
   inline-size: max-content;
   max-inline-size: min(

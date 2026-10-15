@@ -12,7 +12,7 @@
 
 .menu {
   box-sizing: border-box;
-  z-index: 30;
+  z-index: var(--ds-layer-dropdown);
   min-inline-size: var(--ds-space-32);
   max-inline-size: calc(100vw - var(--ds-space-8));
   max-block-size: 70vh;

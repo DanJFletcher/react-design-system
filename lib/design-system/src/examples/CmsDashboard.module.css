@@ -1158,7 +1158,6 @@
   position: fixed;
   inset-block-end: 16px;
   inset-inline-end: 16px;
-  z-index: 20;
   max-inline-size: min(90vw, 360px);
   padding: 0;
   border: 1px solid transparent;

@@ -3,7 +3,7 @@
   --_menu-padding-block: var(--ds-space-2);
 
   position: fixed;
-  z-index: 30;
+  z-index: var(--ds-layer-navigation);
   inset-inline: 0;
   inset-block-end: 0;
   box-sizing: border-box;

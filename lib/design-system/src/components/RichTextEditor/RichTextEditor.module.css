@@ -116,7 +116,7 @@
 .surface[data-readonly="true"] .toolbar { opacity: 0.72; }
 .insertForm {
   position: absolute;
-  z-index: 2;
+  z-index: var(--ds-layer-dropdown);
   inset-block-start: calc(100% + var(--ds-space-2));
   inset-inline-start: var(--ds-space-3);
   display: grid;
