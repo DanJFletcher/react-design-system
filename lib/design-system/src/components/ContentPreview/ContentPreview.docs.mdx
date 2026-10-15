@@ -1,0 +1,30 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+import * as ContentPreviewStories from "./ContentPreview.stories";
+
+<Meta of={ContentPreviewStories} />
+
+# Content preview
+
+Preview an editor-provided page in an isolated iframe, then switch between common or custom viewport widths. The host CMS remains responsible for producing the preview URL or document and for all content persistence.
+
+<Canvas of={ContentPreviewStories.CMSReview} />
+
+## Provide the preview source
+
+Pass either `src` for a preview route or `srcDoc` for a complete HTML document. These are mutually exclusive. The iframe is sandboxed by default with scripts, forms, popups, and top-level navigation disabled. If your trusted preview requires additional browser capabilities, provide the minimum required tokens through `sandbox`.
+
+```tsx
+<ContentPreview
+  heading="Review the page"
+  frameTitle="Willow & Pine Studio preview"
+  src="/cms/preview/garden-design"
+  onViewportChange={(viewportId) => setViewport(viewportId)}
+/>;
+```
+
+The default viewport options are desktop (1280px), tablet (768px), and mobile (390px). Provide `viewports` to match your own breakpoints. Set a viewport width to `"full"` to fit the available preview area. Narrow canvases keep fixed-width previews scrollable instead of silently shrinking them.
+
+<Canvas of={ContentPreviewStories.ResponsivePage} />
+<Canvas of={ContentPreviewStories.ViewportControls} />
+<Canvas of={ContentPreviewStories.CustomViewportWidths} />
+<Canvas of={ContentPreviewStories.ThemeCoverage} />

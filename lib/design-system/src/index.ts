@@ -124,6 +124,14 @@ export type {
   PublishingWorkflowProps,
   PublishingWorkflowStatus,
 } from "./components/PublishingWorkflow/PublishingWorkflow";
+export {
+  ContentPreview,
+  DEFAULT_CONTENT_PREVIEW_VIEWPORTS,
+} from "./components/ContentPreview/ContentPreview";
+export type {
+  ContentPreviewProps,
+  ContentPreviewViewport,
+} from "./components/ContentPreview/ContentPreview";
 export { ServicesSection } from "./components/ServicesSection/ServicesSection";
 export type {
   ServiceItem,
