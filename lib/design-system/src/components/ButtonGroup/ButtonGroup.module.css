@@ -56,3 +56,66 @@
 .group[data-wrap="true"][data-orientation="horizontal"] {
   flex-wrap: wrap;
 }
+
+.group[data-appearance="joined"] {
+  gap: 0;
+}
+
+.group[data-appearance="joined"][data-orientation="horizontal"] > * + * {
+  margin-inline-start: calc(0px - var(--ds-border-width-default));
+}
+
+.group[data-appearance="joined"][data-orientation="vertical"] > * + * {
+  margin-block-start: calc(0px - var(--ds-border-width-default));
+}
+
+.group[data-appearance="joined"][data-orientation="horizontal"] > :first-child:not(:only-child) {
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.group[data-appearance="joined"][data-orientation="horizontal"] > :not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.group[data-appearance="joined"][data-orientation="horizontal"] > :last-child:not(:only-child) {
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+
+.group[data-appearance="joined"][data-orientation="vertical"] > :first-child:not(:only-child) {
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.group[data-appearance="joined"][data-orientation="vertical"] > :not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.group[data-appearance="joined"][data-orientation="vertical"] > :last-child:not(:only-child) {
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+}
+
+.group[data-appearance="joined"][data-orientation="horizontal"] > * + * {
+  border-inline-start-color: var(--ds-color-border-control);
+}
+
+.group[data-appearance="joined"][data-orientation="vertical"] > * + * {
+  border-block-start-color: var(--ds-color-border-control);
+}
+
+.group[data-appearance="joined"] > :focus-visible {
+  position: relative;
+  z-index: 1;
+}
+
+@media (forced-colors: active) {
+  .group[data-appearance="joined"][data-orientation="horizontal"] > * + * {
+    border-inline-start-color: ButtonText;
+  }
+
+  .group[data-appearance="joined"][data-orientation="vertical"] > * + * {
+    border-block-start-color: ButtonText;
+  }
+}

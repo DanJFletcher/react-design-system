@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "storybook/test";
 import { Button } from "../Button/Button";
+import { ToggleButton } from "../ToggleButton/ToggleButton";
 import { ButtonGroup } from "./ButtonGroup";
 
 const meta = {
@@ -14,12 +15,18 @@ const meta = {
     fullWidth: false,
     equalWidth: false,
     wrap: false,
+    appearance: "separated",
+    disabled: false,
   },
   argTypes: {
     children: { control: false },
     orientation: { control: "inline-radio", options: ["horizontal", "vertical"] },
     spacing: { control: "inline-radio", options: ["none", "sm", "md", "lg"] },
     alignment: { control: "inline-radio", options: ["start", "center", "end"] },
+    appearance: { control: "inline-radio", options: ["separated", "joined"] },
+    variant: { control: "inline-radio", options: ["primary", "secondary", "ghost"] },
+    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
+    disabled: { control: "boolean" },
     fullWidth: { control: "boolean" },
     equalWidth: { control: "boolean" },
     wrap: { control: "boolean" },
@@ -99,6 +106,120 @@ export const CenteredAndWrapped: Story = {
   },
 };
 
+export const JoinedActions: Story = {
+  args: {
+    appearance: "joined",
+    variant: "secondary",
+    size: "md",
+    spacing: "lg",
+  },
+  render: (args) => (
+    <div style={{ width: "32rem", maxWidth: "100%" }}>
+      <ButtonGroup {...args}>
+        <Button>Copy</Button>
+        <Button>Save</Button>
+        <Button>Export</Button>
+      </ButtonGroup>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const group = canvas.getByRole("group", { name: "Page actions" });
+    const buttons = canvas.getAllByRole("button");
+    await expect(group).toHaveAttribute("data-appearance", "joined");
+    await expect(getComputedStyle(group).gap).toBe("0px");
+    await expect(buttons[0]).toHaveAttribute("data-ds-button-variant", "secondary");
+    await expect(buttons[1]).toHaveAttribute("data-ds-button-variant", "secondary");
+    await expect(buttons[2]).toHaveAttribute("data-ds-button-variant", "secondary");
+    await expect(getComputedStyle(buttons[0]).borderTopRightRadius).toBe("0px");
+    await expect(getComputedStyle(buttons[2]).borderTopLeftRadius).toBe("0px");
+  },
+};
+
+export const GroupDefaults: Story = {
+  render: () => (
+    <div style={{ display: "grid", gap: "var(--ds-space-4)" }}>
+      <ButtonGroup
+        aria-label="Small actions"
+        appearance="joined"
+        size="sm"
+        variant="secondary"
+      >
+        <Button>Small</Button>
+        <Button>Small</Button>
+        <Button>Small</Button>
+      </ButtonGroup>
+      <ButtonGroup
+        aria-label="Large actions"
+        appearance="joined"
+        size="lg"
+        variant="secondary"
+      >
+        <Button>Large</Button>
+        <Button>Large</Button>
+        <Button>Large</Button>
+      </ButtonGroup>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const smallGroup = within(canvas.getByRole("group", { name: "Small actions" }));
+    const largeGroup = within(canvas.getByRole("group", { name: "Large actions" }));
+    const smallButtons = smallGroup.getAllByRole("button");
+    const largeButtons = largeGroup.getAllByRole("button");
+    await expect(smallButtons).toHaveLength(3);
+    await expect(largeButtons).toHaveLength(3);
+    await expect(smallButtons[0]!.getBoundingClientRect().height)
+      .toBeLessThan(largeButtons[0]!.getBoundingClientRect().height);
+  },
+};
+
+export const JoinedVerticalActions: Story = {
+  args: {
+    orientation: "vertical",
+    appearance: "joined",
+    variant: "secondary",
+    size: "sm",
+  },
+  render: (args) => (
+    <ButtonGroup {...args}>
+      <Button>Save draft</Button>
+      <Button>Preview</Button>
+      <Button>Publish</Button>
+    </ButtonGroup>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const group = canvas.getByRole("group", { name: "Page actions" });
+    const buttons = canvas.getAllByRole("button");
+    await expect(getComputedStyle(group).flexDirection).toBe("column");
+    await expect(getComputedStyle(group).gap).toBe("0px");
+    await expect(getComputedStyle(buttons[0]).borderBottomLeftRadius).toBe("0px");
+    await expect(getComputedStyle(buttons[2]).borderTopLeftRadius).toBe("0px");
+  },
+};
+
+export const DisabledJoinedActions: Story = {
+  render: () => (
+    <ButtonGroup
+      aria-label="Disabled actions"
+      appearance="joined"
+      disabled
+      size="sm"
+      variant="secondary"
+    >
+      <Button>Copy</Button>
+      <ToggleButton disabled={false}>Pin</ToggleButton>
+      <Button>Export</Button>
+    </ButtonGroup>
+  ),
+  play: async ({ canvasElement }) => {
+    const buttons = within(canvasElement).getAllByRole("button");
+    await expect(buttons).toHaveLength(3);
+    for (const button of buttons) await expect(button).toBeDisabled();
+  },
+};
+
 export const LabelledBy: Story = {
   render: () => (
     <div>
@@ -132,6 +253,16 @@ export const ThemeCoverage: Story = {
             <Button>Save draft</Button>
             <Button variant="secondary">Preview</Button>
             <Button variant="ghost">Publish</Button>
+          </ButtonGroup>
+          <ButtonGroup
+            aria-label={`${theme} grouped actions`}
+            appearance="joined"
+            spacing="none"
+            variant="secondary"
+          >
+            <Button>Copy</Button>
+            <Button>Save</Button>
+            <Button>Export</Button>
           </ButtonGroup>
         </div>
       ))}

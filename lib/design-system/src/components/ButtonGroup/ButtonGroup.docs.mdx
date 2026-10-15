@@ -5,27 +5,32 @@ import * as ButtonGroupStories from "./ButtonGroup.stories";
 
 # Button group
 
-Arrange related Button components under one accessible group name. ButtonGroup controls layout only; each Button retains its own variant, size, shape, state, and click behavior.
+Arrange related Button or ToggleButton components under one accessible group name. The default `separated` appearance keeps the group’s spacing; use `joined` for a connected control with shared borders and outer corners.
 
 <Canvas of={ButtonGroupStories.Playground} />
 
 ## Layout options
 
-Choose horizontal or vertical orientation, one of four spacing levels, and start, center, or end alignment. `fullWidth` makes the group fill its container; `equalWidth` gives direct children equal widths in a horizontal group or stretches them to the same width in a vertical group. `wrap` allows horizontal groups to continue on another line when space is limited.
+Choose horizontal or vertical orientation, one of four spacing levels, and start, center, or end alignment. `fullWidth` makes the group fill its container; `equalWidth` gives direct children equal widths in a horizontal group or stretches them to the same width in a vertical group. `wrap` allows horizontal separated groups to continue on another line when space is limited.
+
+`size` and `variant` set defaults for direct Button and ToggleButton children. A child’s explicit `size` or `variant` wins. `disabled` disables every direct Button and ToggleButton child in the group.
 
 <Canvas of={ButtonGroupStories.VerticalActions} />
 <Canvas of={ButtonGroupStories.EqualWidthActions} />
 <Canvas of={ButtonGroupStories.CenteredAndWrapped} />
+<Canvas of={ButtonGroupStories.JoinedActions} />
+<Canvas of={ButtonGroupStories.GroupDefaults} />
+<Canvas of={ButtonGroupStories.DisabledJoinedActions} />
 
 ## Accessible name
 
-Provide either `aria-label` or `aria-labelledby`. The group does not change Button keyboard behavior or add toggle/selection semantics.
+Provide either `aria-label` or `aria-labelledby`. Each button remains a normal Tab stop; the group does not add arrow-key navigation or selection behavior. Use ToggleButton for independent on/off actions. ButtonGroup does not turn those actions into a mutually exclusive selection.
 
 ```tsx
-<ButtonGroup aria-label="Page actions" orientation="horizontal" spacing="sm">
+<ButtonGroup aria-label="Page actions" orientation="horizontal" spacing="sm" appearance="joined" variant="secondary">
   <Button>Save draft</Button>
-  <Button variant="secondary">Preview</Button>
-  <Button variant="ghost">Publish</Button>
+  <Button>Preview</Button>
+  <Button>Publish</Button>
 </ButtonGroup>
 ```
 

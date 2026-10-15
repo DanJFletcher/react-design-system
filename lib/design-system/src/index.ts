@@ -9,6 +9,7 @@ export type {
 export { ButtonGroup } from "./components/ButtonGroup/ButtonGroup";
 export type {
   ButtonGroupAlignment,
+  ButtonGroupAppearance,
   ButtonGroupOrientation,
   ButtonGroupProps,
   ButtonGroupSpacing,
