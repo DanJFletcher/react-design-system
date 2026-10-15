@@ -19,6 +19,8 @@ export type SideNavigationPosition = "static" | "sticky" | "fixed";
 export type SideNavigationGroupMotion = "none" | "expand";
 export type SideNavigationSelectEvent = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
+const MOBILE_NAV_MEDIA_QUERY = "(max-width: 48rem)";
+
 type EntryBase = {
   id: string;
   label: string;
@@ -137,7 +139,16 @@ export const SideNavigation = forwardRef<HTMLElement, SideNavigationProps>(funct
   const activeAncestors = useMemo(() => findActiveAncestors(items, selectedId), [items, selectedId]);
   const expanded = controlledExpanded ? expandedIds : internalExpanded;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const id = useId();
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(MOBILE_NAV_MEDIA_QUERY);
+    const syncMobileViewport = () => setIsMobileViewport(mediaQuery.matches);
+    syncMobileViewport();
+    mediaQuery.addEventListener("change", syncMobileViewport);
+    return () => mediaQuery.removeEventListener("change", syncMobileViewport);
+  }, []);
 
   useEffect(() => {
     if (!controlledExpanded && activeAncestors.length) {
@@ -261,7 +272,7 @@ export const SideNavigation = forwardRef<HTMLElement, SideNavigationProps>(funct
       style={style as CSSProperties | undefined}
     >
       <button
-        aria-controls={`${id}-navigation`}
+        aria-controls={`${id}-mobile-panel`}
         aria-expanded={mobileOpen}
         className={styles.mobileToggle}
         data-testid="side-navigation-mobile-toggle"
@@ -271,32 +282,42 @@ export const SideNavigation = forwardRef<HTMLElement, SideNavigationProps>(funct
         <Icon name={mobileOpen ? "close" : "menu"} size="sm" />
         <span>{mobileToggleLabel}</span>
       </button>
-      <nav
-        {...navProps}
-        ref={ref}
-        id={`${id}-navigation`}
-        aria-label={navigationLabel}
-        className={styles.root}
-        data-ds-layout-component="side-navigation"
+      <div
+        id={`${id}-mobile-panel`}
+        aria-hidden={isMobileViewport && !mobileOpen ? true : undefined}
+        className={styles.mobilePanel}
+        data-open={mobileOpen}
+        inert={isMobileViewport && !mobileOpen ? true : undefined}
       >
-        {header != null && <div className={styles.header}>{header}</div>}
-        <div className={styles.utilityRow}>
-          {action != null && <div className={styles.actionSlot}>{action}</div>}
-          <button
-            aria-label={isCollapsed ? expandLabel : collapseLabel}
-            aria-expanded={!isCollapsed}
-            className={styles.collapseButton}
-            data-testid="side-navigation-collapse-toggle"
-            type="button"
-            onClick={() => setCollapsed(!isCollapsed)}
+        <div className={styles.mobilePanelInner}>
+          <nav
+            {...navProps}
+            ref={ref}
+            id={`${id}-navigation`}
+            aria-label={navigationLabel}
+            className={styles.root}
+            data-ds-layout-component="side-navigation"
           >
-            <Icon name={isCollapsed ? (side === "left" ? "chevron-right" : "chevron-left") : (side === "left" ? "chevron-left" : "chevron-right")} size="sm" />
-            <span className={styles.visuallyHidden}>{isCollapsed ? expandLabel : collapseLabel}</span>
-          </button>
+            {header != null && <div className={styles.header}>{header}</div>}
+            <div className={styles.utilityRow}>
+              {action != null && <div className={styles.actionSlot}>{action}</div>}
+              <button
+                aria-label={isCollapsed ? expandLabel : collapseLabel}
+                aria-expanded={!isCollapsed}
+                className={styles.collapseButton}
+                data-testid="side-navigation-collapse-toggle"
+                type="button"
+                onClick={() => setCollapsed(!isCollapsed)}
+              >
+                <Icon name={isCollapsed ? (side === "left" ? "chevron-right" : "chevron-left") : (side === "left" ? "chevron-left" : "chevron-right")} size="sm" />
+                <span className={styles.visuallyHidden}>{isCollapsed ? expandLabel : collapseLabel}</span>
+              </button>
+            </div>
+            {renderItems(items)}
+            {footer != null && <div className={styles.footer}>{footer}</div>}
+          </nav>
         </div>
-        {renderItems(items)}
-        {footer != null && <div className={styles.footer}>{footer}</div>}
-      </nav>
+      </div>
     </div>
   );
 });

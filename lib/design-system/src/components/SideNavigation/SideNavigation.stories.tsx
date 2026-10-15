@@ -193,6 +193,7 @@ export const DisabledItems: Story = {
 
 export const MobileResponsive: Story = {
   args: { defaultCollapsed: true },
+  globals: { motion: "full", viewport: "mobile1" },
   render: (args) => (
     <div style={{ inlineSize: "min(100%, 24rem)", minBlockSize: "35rem", marginInline: "auto", padding: "var(--ds-space-3)" }}>
       <p style={{ color: "var(--ds-color-text-muted)" }}>Navigation expands in the page flow, above this content.</p>
@@ -204,11 +205,58 @@ export const MobileResponsive: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const toggle = canvas.getByTestId("side-navigation-mobile-toggle");
+    await new Promise((resolve) => window.setTimeout(resolve, 50));
+    const panelId = toggle.getAttribute("aria-controls");
+    const panel = panelId
+      ? canvasElement.querySelector<HTMLElement>(`[id="${panelId}"]`)
+      : null;
+    if (!panel) throw new Error("Expected the mobile navigation panel.");
+
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await expect(panel).toHaveAttribute("aria-hidden", "true");
+    await expect(panel).toHaveAttribute("inert");
+    await userEvent.click(toggle);
+    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+    await expect(panel).toHaveAttribute("data-open", "true");
+    await expect(panel).not.toHaveAttribute("aria-hidden", "true");
+    await expect(panel).not.toHaveAttribute("inert");
+    await expect(getComputedStyle(panel).transitionDuration.split(",").some((duration) => Number.parseFloat(duration) > 0)).toBe(true);
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
+    await expect(canvas.getByRole("link", { name: "Overview" })).toBeVisible();
+    await expect(getComputedStyle(canvas.getByTestId("side-navigation-collapse-toggle")).display).toBe("none");
+    await userEvent.click(toggle);
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await expect(panel).toHaveAttribute("aria-hidden", "true");
+    await expect(panel).toHaveAttribute("inert");
+  },
+};
+
+export const MobileResponsiveReducedMotion: Story = {
+  args: { defaultCollapsed: true },
+  globals: { motion: "reduced", viewport: "mobile1" },
+  render: (args) => (
+    <div style={{ inlineSize: "min(100%, 24rem)", minBlockSize: "35rem", marginInline: "auto", padding: "var(--ds-space-3)" }}>
+      <SideNavigation {...args} />
+    </div>
+  ),
+  parameters: { viewport: { defaultViewport: "mobile1" } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const toggle = canvas.getByTestId("side-navigation-mobile-toggle");
+    await new Promise((resolve) => window.setTimeout(resolve, 50));
+    const panelId = toggle.getAttribute("aria-controls");
+    const panel = panelId
+      ? canvasElement.querySelector<HTMLElement>(`[id="${panelId}"]`)
+      : null;
+    if (!panel) throw new Error("Expected the mobile navigation panel.");
+
+    await expect(panel).toHaveAttribute("inert");
+    await expect(document.documentElement).toHaveAttribute("data-ds-motion-preference", "reduced");
+    const durations = getComputedStyle(panel).transitionDuration;
+    await expect(durations.split(",").every((duration) => Number.parseFloat(duration) === 0)).toBe(true);
     await userEvent.click(toggle);
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
     await expect(canvas.getByRole("link", { name: "Overview" })).toBeVisible();
-    await expect(getComputedStyle(canvas.getByTestId("side-navigation-collapse-toggle")).display).toBe("none");
   },
 };
 

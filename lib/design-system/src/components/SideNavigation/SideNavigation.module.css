@@ -56,6 +56,8 @@
 
 .wrapper[data-side="right"] .root { margin-inline-start: auto; }
 .wrapper[data-collapsed="true"] .root { inline-size: var(--_nav-rail); }
+.mobilePanel { min-inline-size: 0; }
+.mobilePanelInner { min-block-size: 0; }
 .header, .footer { padding: var(--ds-space-2); }
 .header { border-block-end: var(--ds-border-width-default) solid var(--ds-color-border-control); }
 .footer { margin-block-start: auto; border-block-start: var(--ds-border-width-default) solid var(--ds-color-border-control); }
@@ -220,6 +222,20 @@
 @media (max-width: 48rem) {
   .wrapper { inline-size: 100%; }
   .wrapper .mobileToggle { display: inline-flex; margin-block-end: var(--ds-space-2); }
+  .wrapper .mobilePanel {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      grid-template-rows var(--ds-motion-duration-standard) var(--ds-motion-easing-standard),
+      opacity var(--ds-motion-duration-standard) var(--ds-motion-easing-enter);
+  }
+  .wrapper .mobilePanel[data-open="true"] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  .wrapper .mobilePanelInner { min-block-size: 0; overflow: hidden; }
   .wrapper .root {
     position: static;
     inline-size: 100%;
@@ -229,7 +245,6 @@
     border-radius: var(--ds-radius-surface);
   }
   .wrapper .collapseButton { display: none; }
-  .wrapper:not([data-mobile-open="true"]) .root { display: none; }
   .wrapper[data-collapsed="true"] .root { inline-size: 100%; }
   .wrapper[data-collapsed="true"] .entry { justify-content: flex-start; gap: var(--ds-space-3); padding-inline: var(--ds-space-3); }
   .wrapper[data-collapsed="true"] .entry .label {
@@ -245,7 +260,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   :global(html:not([data-ds-motion-preference="full"])) .entry,
-  :global(html:not([data-ds-motion-preference="full"])) .groupChildrenAnimated {
+  :global(html:not([data-ds-motion-preference="full"])) .groupChildrenAnimated,
+  :global(html:not([data-ds-motion-preference="full"])) .mobilePanel {
     transition: none;
   }
 }

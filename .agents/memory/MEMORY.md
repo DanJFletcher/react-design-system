@@ -14,3 +14,4 @@
 - [Atom layout shadows](atom-layout-shadows.md) — Keep page-structure components and layout helpers flat; use hard shadows for content surfaces and controls.
 - [Atom table borders](atom-table-borders.md) — Use the theme’s cyan accent for table borders in Atom.
 - [Storybook fragment-link tests](storybook-fragment-link-tests.md) — Prevent placeholder hash navigation in browser-story fixtures to avoid Vitest connection closures.
+- [Storybook viewport tests](storybook-viewport-vitest.md) — Vitest mobile stories may need a story-level viewport preset to update the iframe's actual media-query width.
