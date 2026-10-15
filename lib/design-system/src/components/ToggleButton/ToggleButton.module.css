@@ -1,4 +1,7 @@
 .toggleButton[aria-pressed="true"] {
-  --_button-bg: var(--_button-pressed-bg);
-  --_button-hover-bg: var(--_button-pressed-bg);
+  --_button-bg: var(--ds-toggle-selected-bg, var(--ds-color-action-selected-bg));
+  --_button-fg: var(--ds-toggle-selected-fg, var(--ds-color-action-selected-fg));
+  --_button-border-color: var(--ds-toggle-selected-border, var(--ds-color-action-selected-border));
+  --_button-hover-bg: var(--ds-toggle-selected-hover-bg, var(--ds-color-action-selected-hover));
+  --_button-pressed-bg: var(--ds-toggle-selected-pressed-bg, var(--ds-color-action-selected-pressed));
 }

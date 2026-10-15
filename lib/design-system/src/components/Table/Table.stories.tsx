@@ -221,6 +221,15 @@ export const CompactStriped: Story = {
 
 export const MultipleSelection: Story = {
   render: () => <ControlledSelectionExample />,
+  play: async ({ canvasElement }) => {
+    const selectedRow = canvasElement.querySelector<HTMLElement>('tbody tr[data-selected="true"]');
+    const selectedControl = selectedRow?.querySelector<HTMLInputElement>('input:checked');
+    await expect(selectedRow).not.toBeNull();
+    await expect(selectedControl).not.toBeNull();
+    await expect(getComputedStyle(selectedRow!).backgroundColor).not.toBe("rgba(0, 0, 0, 0)");
+    await expect(getComputedStyle(selectedRow!).color).not.toBe("rgba(0, 0, 0, 0)");
+    await expect(getComputedStyle(selectedControl!).accentColor).not.toBe("rgba(0, 0, 0, 0)");
+  },
 };
 
 export const ControlledSorting: Story = {

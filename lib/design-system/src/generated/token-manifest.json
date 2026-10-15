@@ -377,6 +377,31 @@
       "description": "Text on the accent surface."
     },
     {
+      "name": "color.action.destructive.bg",
+      "type": "color",
+      "description": "Destructive action background."
+    },
+    {
+      "name": "color.action.destructive.border",
+      "type": "color",
+      "description": "Destructive action boundary."
+    },
+    {
+      "name": "color.action.destructive.fg",
+      "type": "color",
+      "description": "Destructive action foreground."
+    },
+    {
+      "name": "color.action.destructive.hover",
+      "type": "color",
+      "description": "Destructive action hover background."
+    },
+    {
+      "name": "color.action.destructive.pressed",
+      "type": "color",
+      "description": "Destructive action pressed background."
+    },
+    {
       "name": "color.action.disabled.bg",
       "type": "color",
       "description": "Disabled action background."
@@ -440,6 +465,31 @@
       "name": "color.action.secondary.pressed",
       "type": "color",
       "description": "Secondary action pressed background."
+    },
+    {
+      "name": "color.action.selected.bg",
+      "type": "color",
+      "description": "Selected control background."
+    },
+    {
+      "name": "color.action.selected.border",
+      "type": "color",
+      "description": "Selected control boundary."
+    },
+    {
+      "name": "color.action.selected.fg",
+      "type": "color",
+      "description": "Selected control foreground."
+    },
+    {
+      "name": "color.action.selected.hover",
+      "type": "color",
+      "description": "Selected control hover background."
+    },
+    {
+      "name": "color.action.selected.pressed",
+      "type": "color",
+      "description": "Selected control pressed background."
     },
     {
       "name": "color.border.control",
@@ -923,6 +973,36 @@
       "type": "dimension",
       "description": "Button border width.",
       "cssVariable": "--ds-button-border-width"
+    },
+    {
+      "name": "button.destructive.bg",
+      "type": "color",
+      "description": "Destructive button resting background.",
+      "cssVariable": "--ds-button-destructive-bg"
+    },
+    {
+      "name": "button.destructive.border",
+      "type": "color",
+      "description": "Destructive button border.",
+      "cssVariable": "--ds-button-destructive-border"
+    },
+    {
+      "name": "button.destructive.fg",
+      "type": "color",
+      "description": "Destructive button foreground.",
+      "cssVariable": "--ds-button-destructive-fg"
+    },
+    {
+      "name": "button.destructive.hover-bg",
+      "type": "color",
+      "description": "Destructive button hover background.",
+      "cssVariable": "--ds-button-destructive-hover-bg"
+    },
+    {
+      "name": "button.destructive.pressed-bg",
+      "type": "color",
+      "description": "Destructive button pressed background.",
+      "cssVariable": "--ds-button-destructive-pressed-bg"
     },
     {
       "name": "button.disabled.bg",
@@ -1885,6 +1965,18 @@
       "cssVariable": "--ds-table-row-selected"
     },
     {
+      "name": "table.row-selected-border",
+      "type": "color",
+      "description": "Selected table row selection-control accent color.",
+      "cssVariable": "--ds-table-row-selected-border"
+    },
+    {
+      "name": "table.row-selected-fg",
+      "type": "color",
+      "description": "Selected table row foreground color.",
+      "cssVariable": "--ds-table-row-selected-fg"
+    },
+    {
       "name": "table.striped-surface",
       "type": "color",
       "description": "Alternating table row background color.",
@@ -1981,6 +2073,36 @@
       "cssVariable": "--ds-toast-width"
     },
     {
+      "name": "toggle.selected.bg",
+      "type": "color",
+      "description": "Selected toggle button background.",
+      "cssVariable": "--ds-toggle-selected-bg"
+    },
+    {
+      "name": "toggle.selected.border",
+      "type": "color",
+      "description": "Selected toggle button border.",
+      "cssVariable": "--ds-toggle-selected-border"
+    },
+    {
+      "name": "toggle.selected.fg",
+      "type": "color",
+      "description": "Selected toggle button foreground.",
+      "cssVariable": "--ds-toggle-selected-fg"
+    },
+    {
+      "name": "toggle.selected.hover-bg",
+      "type": "color",
+      "description": "Selected toggle button hover background.",
+      "cssVariable": "--ds-toggle-selected-hover-bg"
+    },
+    {
+      "name": "toggle.selected.pressed-bg",
+      "type": "color",
+      "description": "Selected toggle button pressed background.",
+      "cssVariable": "--ds-toggle-selected-pressed-bg"
+    },
+    {
       "name": "tooltip.border",
       "type": "color",
       "description": "Tooltip outline color.",
@@ -2050,6 +2172,16 @@
       "color.action.ghost.fg": "#1E40AF",
       "color.action.ghost.hover": "#EFF6FF",
       "color.action.ghost.pressed": "#DBEAFE",
+      "color.action.destructive.bg": "#B42318",
+      "color.action.destructive.hover": "#912018",
+      "color.action.destructive.pressed": "#7A271A",
+      "color.action.destructive.fg": "#FFFFFF",
+      "color.action.destructive.border": "#B42318",
+      "color.action.selected.bg": "#DBEAFE",
+      "color.action.selected.hover": "#BFDBFE",
+      "color.action.selected.pressed": "#93C5FD",
+      "color.action.selected.fg": "#1E3A8A",
+      "color.action.selected.border": "#1D4ED8",
       "color.action.disabled.bg": "#E2E8F0",
       "color.action.disabled.fg": "#475569",
       "color.focus.ring": "#1D4ED8",
@@ -2166,6 +2298,16 @@
       "color.action.ghost.fg": "#78E8FF",
       "color.action.ghost.hover": "#22263B",
       "color.action.ghost.pressed": "#2B2C46",
+      "color.action.destructive.bg": "#FF6B87",
+      "color.action.destructive.hover": "#FF8AA0",
+      "color.action.destructive.pressed": "#E95070",
+      "color.action.destructive.fg": "#160E1D",
+      "color.action.destructive.border": "#FF6B87",
+      "color.action.selected.bg": "#153E50",
+      "color.action.selected.hover": "#1C4F63",
+      "color.action.selected.pressed": "#103243",
+      "color.action.selected.fg": "#C2F5FF",
+      "color.action.selected.border": "#78E8FF",
       "color.action.disabled.bg": "#393949",
       "color.action.disabled.fg": "#D5CEDA",
       "color.focus.ring": "#70E8FF",
@@ -2282,6 +2424,16 @@
       "color.action.ghost.fg": "#FFD8F2",
       "color.action.ghost.hover": "#261A35",
       "color.action.ghost.pressed": "#38244A",
+      "color.action.destructive.bg": "#FF8BA8",
+      "color.action.destructive.hover": "#FFAAC0",
+      "color.action.destructive.pressed": "#F06E92",
+      "color.action.destructive.fg": "#2B1937",
+      "color.action.destructive.border": "#FF8BA8",
+      "color.action.selected.bg": "#48304F",
+      "color.action.selected.hover": "#5A3B63",
+      "color.action.selected.pressed": "#3B2847",
+      "color.action.selected.fg": "#FFE5F6",
+      "color.action.selected.border": "#F6B8D8",
       "color.action.disabled.bg": "#30283D",
       "color.action.disabled.fg": "#C1B5D0",
       "color.focus.ring": "#E6C4FF",
@@ -2398,6 +2550,16 @@
       "color.action.ghost.fg": "#6A2491",
       "color.action.ghost.hover": "#F5E8FC",
       "color.action.ghost.pressed": "#EAD2F5",
+      "color.action.destructive.bg": "#A02E47",
+      "color.action.destructive.hover": "#85243B",
+      "color.action.destructive.pressed": "#6F1B30",
+      "color.action.destructive.fg": "#FFFFFF",
+      "color.action.destructive.border": "#821F35",
+      "color.action.selected.bg": "#EFE4F5",
+      "color.action.selected.hover": "#E4D2EB",
+      "color.action.selected.pressed": "#D6C0E2",
+      "color.action.selected.fg": "#54208B",
+      "color.action.selected.border": "#703B91",
       "color.action.disabled.bg": "#EBDCEB",
       "color.action.disabled.fg": "#67506E",
       "color.focus.ring": "#6A2491",
@@ -2514,6 +2676,16 @@
       "color.action.ghost.fg": "#A6E22E",
       "color.action.ghost.hover": "#2A3C31",
       "color.action.ghost.pressed": "#304938",
+      "color.action.destructive.bg": "#F7768E",
+      "color.action.destructive.hover": "#FA91A2",
+      "color.action.destructive.pressed": "#E8607C",
+      "color.action.destructive.fg": "#1F242C",
+      "color.action.destructive.border": "#F7768E",
+      "color.action.selected.bg": "#344C53",
+      "color.action.selected.hover": "#3D5B63",
+      "color.action.selected.pressed": "#293B42",
+      "color.action.selected.fg": "#8BE4F3",
+      "color.action.selected.border": "#66D9EF",
       "color.action.disabled.bg": "#3A414C",
       "color.action.disabled.fg": "#BBC2CC",
       "color.focus.ring": "#66D9EF",
@@ -2666,6 +2838,48 @@
       "theme": "acme",
       "name": "Ghost pressed",
       "ratio": 7.149,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Destructive action",
+      "ratio": 6.574,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Destructive hover",
+      "ratio": 8.664,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Destructive pressed",
+      "ratio": 9.847,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Selected control",
+      "ratio": 8.49,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Selected control hover",
+      "ratio": 7.29,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Selected control pressed",
+      "ratio": 5.744,
       "minimum": 4.5,
       "kind": "text"
     },
@@ -2957,6 +3171,20 @@
       "kind": "indicator"
     },
     {
+      "theme": "acme",
+      "name": "Destructive action boundary on canvas",
+      "ratio": 6.284,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Selected control boundary on surface",
+      "ratio": 6.702,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
       "theme": "atom",
       "name": "Primary action",
       "ratio": 5.656,
@@ -3016,6 +3244,48 @@
       "theme": "atom",
       "name": "Ghost pressed",
       "ratio": 9.53,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Destructive action",
+      "ratio": 6.912,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Destructive hover",
+      "ratio": 8.428,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Destructive pressed",
+      "ratio": 5.245,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Selected control",
+      "ratio": 9.69,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Selected control hover",
+      "ratio": 7.581,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Selected control pressed",
+      "ratio": 11.414,
       "minimum": 4.5,
       "kind": "text"
     },
@@ -3307,6 +3577,20 @@
       "kind": "indicator"
     },
     {
+      "theme": "atom",
+      "name": "Destructive action boundary on canvas",
+      "ratio": 6.869,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Selected control boundary on surface",
+      "ratio": 11.237,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
       "theme": "luna",
       "name": "Primary action",
       "ratio": 9.843,
@@ -3366,6 +3650,48 @@
       "theme": "luna",
       "name": "Ghost pressed",
       "ratio": 10.765,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Destructive action",
+      "ratio": 7.333,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Destructive hover",
+      "ratio": 9.07,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Destructive pressed",
+      "ratio": 5.668,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Selected control",
+      "ratio": 9.822,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Selected control hover",
+      "ratio": 7.94,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Selected control pressed",
+      "ratio": 11.256,
       "minimum": 4.5,
       "kind": "text"
     },
@@ -3657,6 +3983,20 @@
       "kind": "indicator"
     },
     {
+      "theme": "luna",
+      "name": "Destructive action boundary on canvas",
+      "ratio": 8.593,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Selected control boundary on surface",
+      "ratio": 10.535,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
       "theme": "orchid",
       "name": "Primary action",
       "ratio": 7.711,
@@ -3716,6 +4056,48 @@
       "theme": "orchid",
       "name": "Ghost pressed",
       "ratio": 6.612,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Destructive action",
+      "ratio": 7.055,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Destructive hover",
+      "ratio": 9.08,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Destructive pressed",
+      "ratio": 11.198,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Selected control",
+      "ratio": 8.733,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Selected control hover",
+      "ratio": 7.523,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Selected control pressed",
+      "ratio": 6.388,
       "minimum": 4.5,
       "kind": "text"
     },
@@ -4007,6 +4389,20 @@
       "kind": "indicator"
     },
     {
+      "theme": "orchid",
+      "name": "Destructive action boundary on canvas",
+      "ratio": 8.819,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Selected control boundary on surface",
+      "ratio": 7.475,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
       "theme": "sublime",
       "name": "Primary action",
       "ratio": 9.456,
@@ -4066,6 +4462,48 @@
       "theme": "sublime",
       "name": "Ghost pressed",
       "ratio": 6.339,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Destructive action",
+      "ratio": 5.892,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Destructive hover",
+      "ratio": 7.154,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Destructive pressed",
+      "ratio": 4.748,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Selected control",
+      "ratio": 6.287,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Selected control hover",
+      "ratio": 5.04,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Selected control pressed",
+      "ratio": 8.056,
       "minimum": 4.5,
       "kind": "text"
     },
@@ -4353,6 +4791,20 @@
       "theme": "sublime",
       "name": "Error boundary on surface",
       "ratio": 5.695,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Destructive action boundary on canvas",
+      "ratio": 5.892,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Selected control boundary on surface",
+      "ratio": 8.291,
       "minimum": 3,
       "kind": "indicator"
     }

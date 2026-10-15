@@ -10,6 +10,12 @@
     { "name": "Ghost action", "foreground": "color.action.ghost.fg", "background": "color.canvas", "minimum": 4.5 },
     { "name": "Ghost hover", "foreground": "color.action.ghost.fg", "background": "color.action.ghost.hover", "minimum": 4.5 },
     { "name": "Ghost pressed", "foreground": "color.action.ghost.fg", "background": "color.action.ghost.pressed", "minimum": 4.5 },
+    { "name": "Destructive action", "foreground": "color.action.destructive.fg", "background": "color.action.destructive.bg", "minimum": 4.5 },
+    { "name": "Destructive hover", "foreground": "color.action.destructive.fg", "background": "color.action.destructive.hover", "minimum": 4.5 },
+    { "name": "Destructive pressed", "foreground": "color.action.destructive.fg", "background": "color.action.destructive.pressed", "minimum": 4.5 },
+    { "name": "Selected control", "foreground": "color.action.selected.fg", "background": "color.action.selected.bg", "minimum": 4.5 },
+    { "name": "Selected control hover", "foreground": "color.action.selected.fg", "background": "color.action.selected.hover", "minimum": 4.5 },
+    { "name": "Selected control pressed", "foreground": "color.action.selected.fg", "background": "color.action.selected.pressed", "minimum": 4.5 },
     { "name": "Disabled action", "foreground": "color.action.disabled.fg", "background": "color.action.disabled.bg", "minimum": 4.5 },
     { "name": "Primary text", "foreground": "color.text.primary", "background": "color.canvas", "minimum": 4.5 },
     { "name": "Muted text", "foreground": "color.text.muted", "background": "color.canvas", "minimum": 4.5 },
@@ -52,6 +58,8 @@
     { "name": "Accent callout boundary on accent surface", "foreground": "color.accent.border", "background": "color.accent.bg", "minimum": 3 },
     { "name": "Active switch track and thumb", "foreground": "color.surface.primary", "background": "color.action.primary.bg", "minimum": 3 },
     { "name": "Error boundary on canvas", "foreground": "color.border.error", "background": "color.canvas", "minimum": 3 },
-    { "name": "Error boundary on surface", "foreground": "color.border.error", "background": "color.surface.primary", "minimum": 3 }
+    { "name": "Error boundary on surface", "foreground": "color.border.error", "background": "color.surface.primary", "minimum": 3 },
+    { "name": "Destructive action boundary on canvas", "foreground": "color.action.destructive.border", "background": "color.canvas", "minimum": 3 },
+    { "name": "Selected control boundary on surface", "foreground": "color.action.selected.border", "background": "color.surface.primary", "minimum": 3 }
   ]
 }

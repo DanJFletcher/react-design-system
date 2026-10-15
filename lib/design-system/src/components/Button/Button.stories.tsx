@@ -12,7 +12,7 @@ const meta = {
     children: "Save changes",
   },
   argTypes: {
-    variant: { control: "inline-radio", options: ["primary", "secondary", "ghost"] },
+    variant: { control: "inline-radio", options: ["primary", "secondary", "ghost", "destructive"] },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     shape: { control: "inline-radio", options: ["rounded", "square", "pill"] },
     fullWidth: { control: "boolean" },
@@ -32,11 +32,19 @@ const iconChoices = Object.fromEntries(
 export const Primary: Story = {};
 export const Secondary: Story = { args: { variant: "secondary" } };
 export const Ghost: Story = { args: { variant: "ghost" } };
+export const Destructive: Story = {
+  args: { variant: "destructive", children: "Delete project" },
+  play: async ({ canvasElement }) => {
+    const button = within(canvasElement).getByRole("button", { name: "Delete project" });
+    await expect(button).toHaveAttribute("data-ds-button-variant", "destructive");
+    await expect(getComputedStyle(button).backgroundColor).not.toBe("rgba(0, 0, 0, 0)");
+  },
+};
 
 export const AllVariantsAndSizes: Story = {
   render: () => (
     <div className="button-story-grid">
-      {(["primary", "secondary", "ghost"] as const).map((variant) => (
+      {(["primary", "secondary", "ghost", "destructive"] as const).map((variant) => (
         <div key={variant} className="button-story-row">
           <strong>{variant}</strong>
           {(["sm", "md", "lg"] as const).map((size) => (

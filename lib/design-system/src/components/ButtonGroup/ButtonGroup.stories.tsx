@@ -24,7 +24,7 @@ const meta = {
     spacing: { control: "inline-radio", options: ["none", "sm", "md", "lg"] },
     alignment: { control: "inline-radio", options: ["start", "center", "end"] },
     appearance: { control: "inline-radio", options: ["separated", "joined"] },
-    variant: { control: "inline-radio", options: ["primary", "secondary", "ghost"] },
+    variant: { control: "inline-radio", options: ["primary", "secondary", "ghost", "destructive"] },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     disabled: { control: "boolean" },
     fullWidth: { control: "boolean" },

@@ -5,7 +5,7 @@ import * as ToggleButtonStories from "./ToggleButton.stories";
 
 # ToggleButton
 
-Use a toggle button for an action with a persistent on/off state, such as saving a bookmark or enabling a text-formatting option. It builds on the standard Button variants and styles its pressed state with the theme's existing button tokens.
+Use a toggle button for an action with a persistent on/off state, such as saving a bookmark or enabling a text-formatting option. It builds on the standard Button variants and uses shared selected-state background, foreground, and boundary tokens while pressed.
 
 <Canvas of={ToggleButtonStories.Playground} />
 
@@ -18,6 +18,8 @@ Set `defaultPressed` to let the button manage its own state, or provide `pressed
 ## Toolbars and themes
 
 Independent toggle buttons can be arranged with `ButtonGroup`. The group provides layout and an accessible name; each ToggleButton manages its own pressed state.
+
+Selected styling comes from `color.action.selected.*` and can be overridden per control with `toggle.selected.*` style hooks. Disabled toggles continue to use the shared disabled action tokens.
 
 <Canvas of={ToggleButtonStories.ToolbarGroup} />
 <Canvas of={ToggleButtonStories.ThemeCoverage} />

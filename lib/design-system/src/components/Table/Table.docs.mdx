@@ -43,6 +43,8 @@ Sortable columns support ascending, descending, and unsorted states. Client mode
 
 Set `selectionMode` to `single` or `multiple` to enable row selection. Multiple selection includes a select-all checkbox for selectable visible rows. Supply `getRowKey` for stable row identity and `selectedRowKeys` with `onSelectionChange` to control selection.
 
+Selected rows use the shared `color.action.selected.bg` and `color.action.selected.fg` tokens, with the matching boundary token for checked row controls. Override a table’s selected-row background, foreground, or control accent with the `table.row-selected`, `table.row-selected-fg`, and `table.row-selected-border` style hooks.
+
 ## Optional search
 
 Set `searchable` to show a search field above the table. By default, matching is case-insensitive and checks the accessor values of visible columns. Use `searchableColumns` to choose specific column IDs or `searchFunction` to provide custom row matching. The search filters locally as the query changes, and `noResultsState` customizes the no-match message.

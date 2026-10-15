@@ -92,7 +92,8 @@
 }
 
 .table tbody tr[data-selected="true"] {
-  background: var(--ds-table-row-selected, var(--ds-color-action-secondary-bg));
+  background: var(--ds-table-row-selected, var(--ds-color-action-selected-bg));
+  color: var(--ds-table-row-selected-fg, var(--ds-color-action-selected-fg));
 }
 
 .table[data-bordered="true"] th,
@@ -158,6 +159,10 @@
   margin: 0;
   accent-color: var(--ds-color-action-primary-bg);
   cursor: pointer;
+}
+
+.selectionControl:checked {
+  accent-color: var(--ds-table-row-selected-border, var(--ds-color-action-selected-border));
 }
 
 .selectionControl:disabled {
@@ -229,7 +234,8 @@
     outline-color: Highlight;
   }
 
-  .selectionControl {
+  .selectionControl,
+  .selectionControl:checked {
     accent-color: Highlight;
   }
 }

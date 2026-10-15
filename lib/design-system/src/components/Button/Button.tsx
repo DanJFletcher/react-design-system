@@ -2,7 +2,7 @@ import { forwardRef, type ComponentPropsWithRef, type CSSProperties, type ReactN
 import type { DesignSystemStyle } from "../../generated/token-types";
 import styles from "./Button.module.css";
 
-export type ButtonVariant = "primary" | "secondary" | "ghost";
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "destructive";
 export type ButtonSize = "sm" | "md" | "lg";
 export type ButtonShape = "rounded" | "square" | "pill";
 export type ButtonIconPosition = "left" | "right";

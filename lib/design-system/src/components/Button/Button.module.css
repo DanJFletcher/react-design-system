@@ -87,6 +87,14 @@
   --_button-pressed-bg: var(--ds-button-ghost-pressed-bg, var(--ds-color-action-ghost-pressed));
 }
 
+.destructive {
+  --_button-bg: var(--ds-button-destructive-bg, var(--ds-color-action-destructive-bg));
+  --_button-fg: var(--ds-button-destructive-fg, var(--ds-color-action-destructive-fg));
+  --_button-border-color: var(--ds-button-destructive-border, var(--ds-color-action-destructive-border));
+  --_button-hover-bg: var(--ds-button-destructive-hover-bg, var(--ds-color-action-destructive-hover));
+  --_button-pressed-bg: var(--ds-button-destructive-pressed-bg, var(--ds-color-action-destructive-pressed));
+}
+
 .sm {
   --_button-min-block-size: var(--ds-button-sm-min-block-size, var(--ds-control-min-block-size-sm));
   --_button-font-size: var(--ds-button-sm-font-size, var(--ds-font-size-sm));

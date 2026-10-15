@@ -15,7 +15,7 @@ const meta = {
   argTypes: {
     pressed: { control: "boolean" },
     defaultPressed: { control: "boolean" },
-    variant: { control: "inline-radio", options: ["primary", "secondary", "ghost"] },
+    variant: { control: "inline-radio", options: ["primary", "secondary", "ghost", "destructive"] },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     shape: { control: "inline-radio", options: ["rounded", "square", "pill"] },
     fullWidth: { control: "boolean" },
@@ -123,4 +123,12 @@ export const ThemeCoverage: Story = {
       ))}
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const selected = within(canvasElement).getAllByRole("button", { name: "Selected" });
+    await expect(selected).toHaveLength(5);
+    for (const button of selected) {
+      await expect(button).toHaveAttribute("aria-pressed", "true");
+      await expect(getComputedStyle(button).borderColor).not.toBe("rgba(0, 0, 0, 0)");
+    }
+  },
 };
