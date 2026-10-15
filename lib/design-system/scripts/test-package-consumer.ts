@@ -80,6 +80,7 @@ try {
     await readFile(join(temporary, "node_modules/@workspace/design-system/dist", file));
   }
   await readFile(join(temporary, "node_modules/@workspace/design-system/README.md"));
+  await readFile(join(temporary, "node_modules/@workspace/design-system/CONTRIBUTING.md"));
   await readFile(join(temporary, "node_modules/@workspace/design-system/docs/theming.md"));
   process.stdout.write("Package tarball installed in a clean consumer; ESM, declarations, CSS entrypoints, and developer docs work.\n");
 } finally {

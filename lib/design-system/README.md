@@ -119,3 +119,5 @@ pnpm --filter @workspace/design-system run check
 
 Storybook contains component documentation, interactive controls, themes, and examples. For component authoring conventions, see [`docs/component-development.md`](docs/component-development.md).
 For a categorized list of all components with links to their documentation, open **Foundations → Component catalog** in Storybook.
+
+For repository setup, development standards, and the contribution checklist, see [`CONTRIBUTING.md`](CONTRIBUTING.md).

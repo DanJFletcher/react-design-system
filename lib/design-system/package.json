@@ -7,7 +7,8 @@
   "files": [
     "dist",
     "docs",
-    "README.md"
+    "README.md",
+    "CONTRIBUTING.md"
   ],
   "sideEffects": [
     "**/*.css"
