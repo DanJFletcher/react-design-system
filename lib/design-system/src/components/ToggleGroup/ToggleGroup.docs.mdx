@@ -1,0 +1,46 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as ToggleGroupStories from "./ToggleGroup.stories";
+
+<Meta of={ToggleGroupStories} />
+
+<Title>Toggle group</Title>
+
+<Subtitle>Coordinate single or multiple selections while reusing the design system’s toggle buttons and button-group layouts.</Subtitle>
+
+<Canvas of={ToggleGroupStories.Playground} />
+
+## Single selection
+
+`selectionMode="single"` is the default. Use `value` with `onValueChange` for controlled state, or `defaultValue` for uncontrolled state. A selected item can be cleared by clicking it; set `allowEmpty={false}` when one option must remain selected.
+
+```tsx
+<ToggleGroup
+  aria-label="View mode"
+  items={[
+    { value: "grid", label: "Grid" },
+    { value: "list", label: "List" },
+  ]}
+  defaultValue="grid"
+  onValueChange={(value) => setView(value)}
+/>
+```
+
+<Canvas of={ToggleGroupStories.ControlledSingleSelection} />
+<Canvas of={ToggleGroupStories.RequiredSingleSelection} />
+
+## Multiple selection
+
+Set `selectionMode="multiple"` to allow any number of items to be selected. `value` and `defaultValue` are readonly string arrays in this mode; `onValueChange` receives the next array. `allowEmpty` applies only to single selection.
+
+<Canvas of={ToggleGroupStories.MultipleSelection} />
+
+## Layout, disabled options, and themes
+
+ToggleGroup forwards ButtonGroup’s layout props, including orientation, spacing, alignment, full width, equal width, wrapping, appearance, size, and variant. Set `disabled` to disable the entire group or `disabled` on an item to disable just that option.
+
+Give the group an accessible name with `aria-label` or `aria-labelledby`. Each choice is a native button with `aria-pressed`; each remains a normal Tab stop and uses standard button keyboard behavior. The component does not implement arrow-key or roving-focus navigation. Give icon-only or otherwise non-text labels an `ariaLabel`.
+
+<Canvas of={ToggleGroupStories.DisabledOption} />
+<Canvas of={ToggleGroupStories.DisabledGroup} />
+<Canvas of={ToggleGroupStories.LabelledBy} />
+<Canvas of={ToggleGroupStories.ThemeCoverage} />

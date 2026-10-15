@@ -22,6 +22,14 @@ export type {
 } from "./components/ButtonGroup/ButtonGroup";
 export { ToggleButton } from "./components/ToggleButton/ToggleButton";
 export type { ToggleButtonProps } from "./components/ToggleButton/ToggleButton";
+export { ToggleGroup } from "./components/ToggleGroup/ToggleGroup";
+export type {
+  ToggleGroupItem,
+  ToggleGroupMultipleProps,
+  ToggleGroupProps,
+  ToggleGroupSelectionMode,
+  ToggleGroupSingleProps,
+} from "./components/ToggleGroup/ToggleGroup";
 export { Skeleton } from "./components/Skeleton/Skeleton";
 export type {
   SkeletonAnimation,

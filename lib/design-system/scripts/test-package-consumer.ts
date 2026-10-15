@@ -39,7 +39,7 @@ try {
     include: ["consumer.tsx"],
   }, null, 2));
   await writeFile(join(temporary, "consumer.tsx"), [
-    'import { ArticleTableOfContents, Button, Checkbox, RadioGroup, Select, TextField, Textarea, ThemeScope, type ArticleTableOfContentsItem, type ButtonIconPosition, type ButtonShape, type DesignSystemThemeName } from "@workspace/design-system";',
+    'import { ArticleTableOfContents, Button, Checkbox, RadioGroup, Select, TextField, Textarea, ThemeScope, ToggleGroup, type ArticleTableOfContentsItem, type ButtonIconPosition, type ButtonShape, type DesignSystemThemeName, type ToggleGroupProps, type ToggleGroupSelectionMode } from "@workspace/design-system";',
     'import { BREAKPOINT_MEDIA_ALIASES, breakpointMediaPlugin, breakpointMediaVitePlugin } from "@workspace/design-system/breakpoint-media";',
     'import "@workspace/design-system/tokens.css";',
     'import "@workspace/design-system/styles.css";',
@@ -51,17 +51,19 @@ try {
     'const shape: ButtonShape = "pill";',
     'const iconPosition: ButtonIconPosition = "right";',
     'const selectedTheme: DesignSystemThemeName = "sublime";',
+    'const selectionMode: ToggleGroupSelectionMode = "multiple";',
     'const narrowMediaQuery: string = BREAKPOINT_MEDIA_ALIASES["--ds-viewport-narrow"];',
-    'void narrowMediaQuery; void breakpointMediaPlugin; void breakpointMediaVitePlugin;',
+    'void narrowMediaQuery; void breakpointMediaPlugin; void breakpointMediaVitePlugin; void selectionMode;',
+    'const toggleGroupProps: ToggleGroupProps = { "aria-label": "View mode", items: [{ value: "grid", label: "Grid" }], selectionMode: "single", defaultValue: "grid" };',
     'const sections: ArticleTableOfContentsItem[] = [{ id: "overview", label: "Overview" }];',
-    'export const example = <ThemeScope theme={selectedTheme} style={{ "--ds-button-radius": "12px" }}><ArticleTableOfContents items={sections} /><Button variant="secondary" shape={shape} icon={<span>★</span>} iconPosition={iconPosition}>Continue</Button><Button iconOnly icon={<span>×</span>} aria-label="Close dialog" /><TextField label="Email" type="email" required /><Textarea label="Notes" rows={4} /><Select label="Region" defaultValue="ca"><option value="ca">Canada</option></Select><Checkbox label="Subscribe" name="subscribe" value="yes" /><RadioGroup label="Contact method" name="contact" options={[{ value: "email", label: "Email" }]} /></ThemeScope>;',
+    'export const example = <ThemeScope theme={selectedTheme} style={{ "--ds-button-radius": "12px" }}><ArticleTableOfContents items={sections} /><ToggleGroup {...toggleGroupProps} /><Button variant="secondary" shape={shape} icon={<span>★</span>} iconPosition={iconPosition}>Continue</Button><Button iconOnly icon={<span>×</span>} aria-label="Close dialog" /><TextField label="Email" type="email" required /><Textarea label="Notes" rows={4} /><Select label="Region" defaultValue="ca"><option value="ca">Canada</option></Select><Checkbox label="Subscribe" name="subscribe" value="yes" /><RadioGroup label="Contact method" name="contact" options={[{ value: "email", label: "Email" }]} /></ThemeScope>;',
     "",
   ].join("\n"));
   execFileSync("pnpm", ["install", "--ignore-workspace"], { cwd: temporary, stdio: "inherit" });
   execFileSync("pnpm", ["exec", "tsc", "-p", "tsconfig.json"], { cwd: temporary, stdio: "inherit" });
   execFileSync("pnpm", ["exec", "node", "--input-type=module", "-e", [
     'import assert from "node:assert/strict";',
-    'import { ArticleTableOfContents, Button, Checkbox, RadioGroup, Select, TextField, Textarea, ThemeScope } from "@workspace/design-system";',
+    'import { ArticleTableOfContents, Button, Checkbox, RadioGroup, Select, TextField, Textarea, ThemeScope, ToggleGroup } from "@workspace/design-system";',
     'import { BREAKPOINT_MEDIA_ALIASES, breakpointMediaVitePlugin } from "@workspace/design-system/breakpoint-media";',
     'assert.equal(typeof Button, "object");',
     'assert.equal(typeof ArticleTableOfContents, "object");',
@@ -71,6 +73,7 @@ try {
     'assert.equal(typeof TextField, "object");',
     'assert.equal(typeof Textarea, "object");',
     'assert.equal(typeof ThemeScope, "function");',
+    'assert.equal(typeof ToggleGroup, "object");',
     'assert.equal(BREAKPOINT_MEDIA_ALIASES["--ds-viewport-narrow"], "(max-width: 32rem)");',
     'const breakpointPlugin = breakpointMediaVitePlugin();',
     'const responsiveCss = await breakpointPlugin.transform("@media (--ds-viewport-compact) { .consumer { display: grid; } }", "/consumer.css");',

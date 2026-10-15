@@ -113,7 +113,27 @@ The optional `icon` slot renders a decorative icon on the left by default or on 
 
 Native disabled uses the native `disabled` attribute. Loading preserves focus with `aria-disabled` and `aria-busy`, suppresses the forwarded click callback and the click's default submit/reset activation, and retains the accessible name. The label stays in layout with zero opacity while an `aria-hidden` spinner is centered over it. Hover and pressed states do not apply while disabled or loading. Reduced-motion and forced-colors preferences receive explicit treatment. Keyboard focus uses a visible tokenized outline.
 
-The owning form manages longer asynchronous submission state. Children may contain decorative icons, which should be hidden from assistive technology. `href`, `asChild`, toggle semantics, groups, and an icon-only convenience API are out of scope.
+The owning form manages longer asynchronous submission state. Children may contain decorative icons, which should be hidden from assistive technology. `href`, `asChild`, toggle semantics, and group behavior are out of scope for Button itself; use ToggleButton or ToggleGroup for selection state.
+
+## ToggleGroup
+
+`ToggleGroup` coordinates selection state for toggle buttons while reusing `ButtonGroup` layout behavior. Its group requires an accessible name through `aria-label` or `aria-labelledby`; every item has a unique non-empty `value`, a visible `label`, and an optional `ariaLabel` for icon-only content.
+
+`selectionMode` defaults to `single`. In single mode, `value` is a string or `null`, and `onValueChange` receives the newly selected value or `null` when cleared. `allowEmpty` defaults to `true`; set it to `false` to prevent clearing the current choice. In `multiple` mode, `value` and `defaultValue` are string arrays and `onValueChange` receives the updated array. Selection can be controlled with `value` or initialized with `defaultValue`.
+
+Items render as native toggle buttons with `aria-pressed`. Each button remains in the normal Tab order; the component does not implement arrow-key or roving-focus navigation. Use `disabled` on the group or an item to disable selection. Orientation, spacing, alignment, full width, equal width, wrapping, appearance, size, and variant are forwarded from `ButtonGroup`.
+
+```tsx
+<ToggleGroup
+  aria-label="View mode"
+  items={[
+    { value: "grid", label: "Grid" },
+    { value: "list", label: "List" },
+  ]}
+  defaultValue="grid"
+  onValueChange={(value) => setView(value)}
+/>
+```
 
 ## Badge
 
