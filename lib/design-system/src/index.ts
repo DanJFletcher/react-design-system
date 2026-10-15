@@ -116,6 +116,14 @@ export type {
   ContentMetadataPanelProps,
   ContentMetadataValue,
 } from "./components/ContentMetadataPanel/ContentMetadataPanel";
+export { PublishingWorkflow } from "./components/PublishingWorkflow/PublishingWorkflow";
+export type {
+  PublishingReviewStep,
+  PublishingReviewStepStatus,
+  PublishingWorkflowActionId,
+  PublishingWorkflowProps,
+  PublishingWorkflowStatus,
+} from "./components/PublishingWorkflow/PublishingWorkflow";
 export { ServicesSection } from "./components/ServicesSection/ServicesSection";
 export type {
   ServiceItem,

@@ -43,6 +43,8 @@
     { "file": "ContentMetadataPanel/ContentMetadataPanel.module.css", "selector": ".socialPreview", "role": "surface", "reason": "The social preview crop follows the theme's surface corners." },
     { "file": "ContentMetadataPanel/ContentMetadataPanel.module.css", "selector": ".control, .textarea, .imageSelect", "role": "form", "reason": "Metadata inputs and the image selector follow the theme's form-control corner shape." },
     { "file": "ContentMetadataPanel/ContentMetadataPanel.module.css", "selector": ".imageMark", "role": "shape", "reason": "The square empty-image marker uses the theme's bounded rounded shape, not the pill-shaped form-control radius." },
+    { "file": "PublishingWorkflow/PublishingWorkflow.module.css", "selector": ".stepMarker", "role": "circle", "reason": "Equal-sized decorative review-state marker." },
+    { "file": "PublishingWorkflow/PublishingWorkflow.module.css", "selector": ".scheduleInput", "role": "form", "reason": "Native scheduling date-and-time input follows the theme's form-control shape." },
     { "file": "Pagination/Pagination.module.css", "selector": ".control", "role": "action", "reason": "Page-selection action target." },
     { "file": "PricingDetails/PricingDetails.module.css", "selector": ".badge", "role": "action", "reason": "Compact promotional label, not the pricing panel." },
     { "file": "Progress/Progress.module.css", "selector": ".track", "role": "circle", "reason": "Intentional capsule progress track, with a consumer hook." },

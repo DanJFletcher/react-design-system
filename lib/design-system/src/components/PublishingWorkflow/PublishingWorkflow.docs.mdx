@@ -1,0 +1,40 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+import * as PublishingWorkflowStories from "./PublishingWorkflow.stories";
+
+<Meta of={PublishingWorkflowStories} />
+
+# Publishing workflow
+
+Show a content item's publishing status, review progress, schedule controls, and the actions available for its current state. The host application owns the status, permissions, validation, persistence, and API calls; the component only displays state and invokes the callbacks it receives.
+
+<Canvas of={PublishingWorkflowStories.InteractiveWorkflow} />
+
+## Controlled status and review steps
+
+Pass the current status and review steps from the host CMS. Update them in response to successful workflow actions so the panel reflects the saved state. A publish action is disabled while provided review steps are pending or have requested changes.
+
+```tsx
+const [status, setStatus] = useState<PublishingWorkflowStatus>("draft");
+
+<PublishingWorkflow
+  status={status}
+  reviewSteps={reviewSteps}
+  onSubmitForReview={() => submitForReview(contentId)}
+  onApprove={() => approveReview(contentId)}
+  onRequestChanges={() => requestChanges(contentId)}
+  onPublish={() => publishContent(contentId)}
+/>;
+```
+
+Only pass callbacks for actions the current user is allowed to perform. Actions without callbacks are not rendered.
+
+## Scheduling
+
+`scheduleAt` uses the value format expected by a native `datetime-local` input (`YYYY-MM-DDTHH:mm`). Keep it controlled with `onScheduleAtChange`; `onSchedule` receives the current string when the scheduling action is selected. The host CMS must validate the selected time in its configured time zone and persist it.
+
+<Canvas of={PublishingWorkflowStories.SchedulePublishing} />
+
+<Canvas of={PublishingWorkflowStories.Published} />
+<Canvas of={PublishingWorkflowStories.Archived} />
+<Canvas of={PublishingWorkflowStories.Disabled} />
+<Canvas of={PublishingWorkflowStories.ThemeCoverage} />
