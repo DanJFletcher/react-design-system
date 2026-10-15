@@ -72,7 +72,7 @@
     [data-ds-button-variant="primary"],
     [data-ds-button-variant="secondary"]
   ),
-  :scope button[data-ds-button-variant="ghost"]:is(:hover, :active),
+  :scope button[data-ds-button-variant="ghost"]:is(:hover, :active, [aria-pressed="true"]),
   :scope button[data-ds-button-variant]:disabled {
     background-image: linear-gradient(
       135deg,

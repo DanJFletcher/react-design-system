@@ -1,0 +1,4 @@
+.toggleButton[aria-pressed="true"] {
+  --_button-bg: var(--_button-pressed-bg);
+  --_button-hover-bg: var(--_button-pressed-bg);
+}

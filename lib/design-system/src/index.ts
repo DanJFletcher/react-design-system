@@ -13,6 +13,8 @@ export type {
   ButtonGroupProps,
   ButtonGroupSpacing,
 } from "./components/ButtonGroup/ButtonGroup";
+export { ToggleButton } from "./components/ToggleButton/ToggleButton";
+export type { ToggleButtonProps } from "./components/ToggleButton/ToggleButton";
 export { Skeleton } from "./components/Skeleton/Skeleton";
 export type {
   SkeletonAnimation,

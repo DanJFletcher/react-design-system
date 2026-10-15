@@ -1,0 +1,34 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+import * as ToggleButtonStories from "./ToggleButton.stories";
+
+<Meta of={ToggleButtonStories} />
+
+# ToggleButton
+
+Use a toggle button for an action with a persistent on/off state, such as saving a bookmark or enabling a text-formatting option. It builds on the standard Button variants and styles its pressed state with the theme's existing button tokens.
+
+<Canvas of={ToggleButtonStories.Playground} />
+
+## Controlled and uncontrolled state
+
+Set `defaultPressed` to let the button manage its own state, or provide `pressed` with `onPressedChange` to control it from a parent. The component exposes its state with `aria-pressed`.
+
+<Canvas of={ToggleButtonStories.Controlled} />
+
+## Toolbars and themes
+
+Independent toggle buttons can be arranged with `ButtonGroup`. The group provides layout and an accessible name; each ToggleButton manages its own pressed state.
+
+<Canvas of={ToggleButtonStories.ToolbarGroup} />
+<Canvas of={ToggleButtonStories.ThemeCoverage} />
+
+```tsx
+<ToggleButton
+  pressed={isSaved}
+  onPressedChange={setIsSaved}
+  aria-label="Save bookmark"
+  icon={<Icon name="star" />}
+  iconOnly
+  variant="ghost"
+/>
+```
