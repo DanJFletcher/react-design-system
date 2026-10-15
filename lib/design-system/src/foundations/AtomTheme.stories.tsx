@@ -23,7 +23,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Atom is a dark comic-inspired theme with inked borders, cyan table borders, vivid print-like accents, subtle halftone texture, hard offset shadows on content surfaces and controls, and clipped marker highlights. H1 and H2 use cyan over electric yellow; H3 uses purple over electric pink; H4 and H5 use black over hot pink. Page layout components and article bodies remain flat.",
+          "Atom is a dark comic-inspired theme with inked borders, cyan table borders, vivid print-like accents, subtle halftone texture, hard offset shadows on content surfaces and controls, and clipped marker highlights. H1 and H2 use cyan over electric yellow; H3 uses hot pink over cyan; H4 and H5 use black over hot pink; H6 uses purple over black. Page layout components and article bodies remain flat.",
       },
     },
   },
@@ -234,7 +234,7 @@ export const HeadingHighlights: Story = {
         A heading from the component library
       </Heading>
       <h3 data-testid="atom-marker-h3" style={{ margin: 0 }}>
-        Section headings use purple over pink.
+        Section headings use hot pink over cyan.
       </h3>
       <Heading level={3} data-testid="atom-marker-h3-component">
         Component H3 headings follow the same marker style.
@@ -251,13 +251,19 @@ export const HeadingHighlights: Story = {
       <Heading level={5} tone="muted" data-testid="atom-marker-h5-component">
         Component H5 headings use the same marker style.
       </Heading>
-      <h6 data-testid="atom-unmarked-h6">H6 keeps its usual appearance.</h6>
+      <h6 data-testid="atom-marker-h6" style={{ margin: 0 }}>
+        Sixth-level headings use purple over black.
+      </h6>
+      <Heading level={6} tone="muted" data-testid="atom-marker-h6-component">
+        Component H6 headings follow the same marker style.
+      </Heading>
       <div data-ds-theme="luna">
         <Heading level={2} data-testid="luna-unmarked-heading">
           Nested themes keep their own typography.
         </Heading>
         <h4 data-testid="luna-unmarked-h4">Luna H4 stays unmarked.</h4>
         <h5 data-testid="luna-unmarked-h5">Luna H5 stays unmarked.</h5>
+        <h6 data-testid="luna-unmarked-h6">Luna H6 stays unmarked.</h6>
       </div>
     </section>
   ),
