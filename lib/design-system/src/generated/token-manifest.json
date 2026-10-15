@@ -406,6 +406,16 @@
       "description": "Control boundary indicating a validation error."
     },
     {
+      "name": "color.border.strong",
+      "type": "color",
+      "description": "High-emphasis outlines and boundaries for content surfaces."
+    },
+    {
+      "name": "color.border.subtle",
+      "type": "color",
+      "description": "Low-emphasis decorative dividers; do not rely on this as the only boundary for an interactive control."
+    },
+    {
       "name": "color.canvas",
       "type": "color",
       "description": "Default page canvas."
@@ -424,6 +434,26 @@
       "name": "color.status.error.fg",
       "type": "color",
       "description": "Text on the error status surface."
+    },
+    {
+      "name": "color.status.info.bg",
+      "type": "color",
+      "description": "Informational status surface."
+    },
+    {
+      "name": "color.status.info.fg",
+      "type": "color",
+      "description": "Text on the informational status surface."
+    },
+    {
+      "name": "color.status.neutral.bg",
+      "type": "color",
+      "description": "Neutral status surface."
+    },
+    {
+      "name": "color.status.neutral.fg",
+      "type": "color",
+      "description": "Text on the neutral status surface."
     },
     {
       "name": "color.status.success.bg",
@@ -446,14 +476,39 @@
       "description": "Text on the warning status surface."
     },
     {
+      "name": "color.surface.overlay",
+      "type": "color",
+      "description": "Surface for floating panels layered above page content."
+    },
+    {
       "name": "color.surface.primary",
       "type": "color",
       "description": "Primary content surface."
     },
     {
+      "name": "color.surface.raised",
+      "type": "color",
+      "description": "Surface for content visually elevated above the primary surface."
+    },
+    {
+      "name": "color.surface.secondary",
+      "type": "color",
+      "description": "Lower-emphasis surface for grouped content and alternate rows."
+    },
+    {
+      "name": "color.text.disabled",
+      "type": "color",
+      "description": "Text for disabled or inactive content."
+    },
+    {
       "name": "color.text.error",
       "type": "color",
       "description": "Text that explains a form validation error."
+    },
+    {
+      "name": "color.text.inverse",
+      "type": "color",
+      "description": "Foreground text paired with high-emphasis primary action surfaces."
     },
     {
       "name": "color.text.muted",
@@ -1626,10 +1681,17 @@
     "acme": {
       "color.canvas": "#F8FAFC",
       "color.surface.primary": "#FFFFFF",
+      "color.surface.secondary": "#F1F5F9",
+      "color.surface.raised": "#FFFFFF",
+      "color.surface.overlay": "#FFFFFF",
       "color.text.primary": "#0F172A",
       "color.text.muted": "#475569",
+      "color.text.disabled": "#475569",
+      "color.text.inverse": "#FFFFFF",
       "color.text.error": "#B42318",
       "color.border.control": "#64748B",
+      "color.border.subtle": "#CBD5E1",
+      "color.border.strong": "#334155",
       "color.border.error": "#B42318",
       "color.action.primary.bg": "#1D4ED8",
       "color.action.primary.hover": "#1E40AF",
@@ -1650,6 +1712,10 @@
       "color.accent.border": "#64748B",
       "color.status.success.bg": "#DCFCE7",
       "color.status.success.fg": "#166534",
+      "color.status.info.bg": "#DBEAFE",
+      "color.status.info.fg": "#1E3A8A",
+      "color.status.neutral.bg": "#E2E8F0",
+      "color.status.neutral.fg": "#334155",
       "color.status.warning.bg": "#FEF3C7",
       "color.status.warning.fg": "#92400E",
       "color.status.error.bg": "#FEE4E2",
@@ -1669,10 +1735,17 @@
     "atom": {
       "color.canvas": "#11111D",
       "color.surface.primary": "#202033",
+      "color.surface.secondary": "#29293F",
+      "color.surface.raised": "#2C2D45",
+      "color.surface.overlay": "#34354E",
       "color.text.primary": "#FBF8FF",
       "color.text.muted": "#D7CCDF",
+      "color.text.disabled": "#B8AEC4",
+      "color.text.inverse": "#160E1D",
       "color.text.error": "#FF9FB7",
       "color.border.control": "#E8E3FF",
+      "color.border.subtle": "#55516F",
+      "color.border.strong": "#E8E3FF",
       "color.border.error": "#FF9FB7",
       "color.action.primary.bg": "#FF3D8D",
       "color.action.primary.hover": "#FF66A5",
@@ -1693,6 +1766,10 @@
       "color.accent.border": "#963F9D",
       "color.status.success.bg": "#133B35",
       "color.status.success.fg": "#A4F3D1",
+      "color.status.info.bg": "#19374A",
+      "color.status.info.fg": "#97E9FF",
+      "color.status.neutral.bg": "#333144",
+      "color.status.neutral.fg": "#EAE3F4",
       "color.status.warning.bg": "#473A15",
       "color.status.warning.fg": "#FFE282",
       "color.status.error.bg": "#4B1D30",
@@ -1712,10 +1789,17 @@
     "luna": {
       "color.canvas": "#100E21",
       "color.surface.primary": "#1B1730",
+      "color.surface.secondary": "#221D39",
+      "color.surface.raised": "#241F3D",
+      "color.surface.overlay": "#2B2545",
       "color.text.primary": "#FBF5FF",
       "color.text.muted": "#CDBFE1",
+      "color.text.disabled": "#B7A9C5",
+      "color.text.inverse": "#2B1937",
       "color.text.error": "#FF91A4",
       "color.border.control": "#B7A4CE",
+      "color.border.subtle": "#493F60",
+      "color.border.strong": "#B7A4CE",
       "color.border.error": "#FF91A4",
       "color.action.primary.bg": "#F6B8D8",
       "color.action.primary.hover": "#F08AC4",
@@ -1736,6 +1820,10 @@
       "color.accent.border": "#806D94",
       "color.status.success.bg": "#173D31",
       "color.status.success.fg": "#A7F3D0",
+      "color.status.info.bg": "#1D3557",
+      "color.status.info.fg": "#B8D7FF",
+      "color.status.neutral.bg": "#302A40",
+      "color.status.neutral.fg": "#E1D8EA",
       "color.status.warning.bg": "#47391B",
       "color.status.warning.fg": "#FFE08A",
       "color.status.error.bg": "#4A202C",
@@ -1755,10 +1843,17 @@
     "orchid": {
       "color.canvas": "#FFF2FD",
       "color.surface.primary": "#FFFAFE",
+      "color.surface.secondary": "#F4E8F3",
+      "color.surface.raised": "#FFFAFE",
+      "color.surface.overlay": "#FFFFFF",
       "color.text.primary": "#38143D",
       "color.text.muted": "#693B6F",
+      "color.text.disabled": "#7A5A7A",
+      "color.text.inverse": "#FFFFFF",
       "color.text.error": "#A61E2E",
       "color.border.control": "#8B5E88",
+      "color.border.subtle": "#E6D7E6",
+      "color.border.strong": "#8B5E88",
       "color.border.error": "#A61E2E",
       "color.action.primary.bg": "#703B91",
       "color.action.primary.hover": "#5D2B78",
@@ -1779,6 +1874,10 @@
       "color.accent.border": "#8B5E88",
       "color.status.success.bg": "#E6F5E9",
       "color.status.success.fg": "#275A3B",
+      "color.status.info.bg": "#E5F2FF",
+      "color.status.info.fg": "#1D4B73",
+      "color.status.neutral.bg": "#EEE4EF",
+      "color.status.neutral.fg": "#46364A",
       "color.status.warning.bg": "#FFF2D0",
       "color.status.warning.fg": "#794A12",
       "color.status.error.bg": "#FDE7EB",
@@ -1798,10 +1897,17 @@
     "sublime": {
       "color.canvas": "#1F242C",
       "color.surface.primary": "#282E37",
+      "color.surface.secondary": "#303741",
+      "color.surface.raised": "#343C47",
+      "color.surface.overlay": "#3A434F",
       "color.text.primary": "#EDF0F3",
       "color.text.muted": "#B1BAC5",
+      "color.text.disabled": "#A8B2BE",
+      "color.text.inverse": "#1F242C",
       "color.text.error": "#FF8091",
       "color.border.control": "#77879A",
+      "color.border.subtle": "#46505D",
+      "color.border.strong": "#9AA7B5",
       "color.border.error": "#FF8091",
       "color.action.primary.bg": "#66D9EF",
       "color.action.primary.hover": "#8BE4F3",
@@ -1822,6 +1928,10 @@
       "color.accent.border": "#7E722D",
       "color.status.success.bg": "#233A31",
       "color.status.success.fg": "#AFE8BD",
+      "color.status.info.bg": "#203E4A",
+      "color.status.info.fg": "#91E7F6",
+      "color.status.neutral.bg": "#343B46",
+      "color.status.neutral.fg": "#E5E9EF",
       "color.status.warning.bg": "#45371F",
       "color.status.warning.fg": "#FFD176",
       "color.status.error.bg": "#47252D",
@@ -1926,6 +2036,104 @@
     },
     {
       "theme": "acme",
+      "name": "Primary text on primary surface",
+      "ratio": 17.853,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Primary text on secondary surface",
+      "ratio": 16.296,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Primary text on raised surface",
+      "ratio": 17.853,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Primary text on overlay surface",
+      "ratio": 17.853,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Muted text on primary surface",
+      "ratio": 7.578,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Muted text on secondary surface",
+      "ratio": 6.917,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Muted text on raised surface",
+      "ratio": 7.578,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Muted text on overlay surface",
+      "ratio": 7.578,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Disabled text on canvas",
+      "ratio": 7.243,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Disabled text on primary surface",
+      "ratio": 7.578,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Disabled text on secondary surface",
+      "ratio": 6.917,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Disabled text on raised surface",
+      "ratio": 7.578,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Disabled text on overlay surface",
+      "ratio": 7.578,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Inverse text on primary action",
+      "ratio": 6.702,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
       "name": "Error text on canvas",
       "ratio": 6.284,
       "minimum": 4.5,
@@ -1949,6 +2157,20 @@
       "theme": "acme",
       "name": "Success status",
       "ratio": 6.492,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Info status",
+      "ratio": 8.49,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "acme",
+      "name": "Neutral status",
+      "ratio": 8.399,
       "minimum": 4.5,
       "kind": "text"
     },
@@ -2005,6 +2227,41 @@
       "theme": "acme",
       "name": "Control boundary on surface",
       "ratio": 4.759,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Strong boundary on canvas",
+      "ratio": 9.897,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Strong boundary on primary surface",
+      "ratio": 10.355,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Strong boundary on secondary surface",
+      "ratio": 9.452,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Strong boundary on raised surface",
+      "ratio": 10.355,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "acme",
+      "name": "Strong boundary on overlay surface",
+      "ratio": 10.355,
       "minimum": 3,
       "kind": "indicator"
     },
@@ -2129,6 +2386,104 @@
     },
     {
       "theme": "atom",
+      "name": "Primary text on primary surface",
+      "ratio": 15.179,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Primary text on secondary surface",
+      "ratio": 13.466,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Primary text on raised surface",
+      "ratio": 12.735,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Primary text on overlay surface",
+      "ratio": 11.314,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Muted text on primary surface",
+      "ratio": 10.33,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Muted text on secondary surface",
+      "ratio": 9.164,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Muted text on raised surface",
+      "ratio": 8.666,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Muted text on overlay surface",
+      "ratio": 7.7,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Disabled text on canvas",
+      "ratio": 8.816,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Disabled text on primary surface",
+      "ratio": 7.516,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Disabled text on secondary surface",
+      "ratio": 6.668,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Disabled text on raised surface",
+      "ratio": 6.306,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Disabled text on overlay surface",
+      "ratio": 5.602,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Inverse text on primary action",
+      "ratio": 5.656,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
       "name": "Error text on canvas",
       "ratio": 9.712,
       "minimum": 4.5,
@@ -2152,6 +2507,20 @@
       "theme": "atom",
       "name": "Success status",
       "ratio": 9.573,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Info status",
+      "ratio": 9.139,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "atom",
+      "name": "Neutral status",
+      "ratio": 10.094,
       "minimum": 4.5,
       "kind": "text"
     },
@@ -2208,6 +2577,41 @@
       "theme": "atom",
       "name": "Control boundary on surface",
       "ratio": 12.815,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Strong boundary on canvas",
+      "ratio": 15.033,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Strong boundary on primary surface",
+      "ratio": 12.815,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Strong boundary on secondary surface",
+      "ratio": 11.369,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Strong boundary on raised surface",
+      "ratio": 10.752,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "atom",
+      "name": "Strong boundary on overlay surface",
+      "ratio": 9.553,
       "minimum": 3,
       "kind": "indicator"
     },
@@ -2332,6 +2736,104 @@
     },
     {
       "theme": "luna",
+      "name": "Primary text on primary surface",
+      "ratio": 16.179,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Primary text on secondary surface",
+      "ratio": 15.049,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Primary text on raised surface",
+      "ratio": 14.65,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Primary text on overlay surface",
+      "ratio": 13.491,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Muted text on primary surface",
+      "ratio": 10.014,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Muted text on secondary surface",
+      "ratio": 9.315,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Muted text on raised surface",
+      "ratio": 9.067,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Muted text on overlay surface",
+      "ratio": 8.35,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Disabled text on canvas",
+      "ratio": 8.579,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Disabled text on primary surface",
+      "ratio": 7.835,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Disabled text on secondary surface",
+      "ratio": 7.288,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Disabled text on raised surface",
+      "ratio": 7.094,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Disabled text on overlay surface",
+      "ratio": 6.533,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Inverse text on primary action",
+      "ratio": 9.843,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
       "name": "Error text on canvas",
       "ratio": 8.889,
       "minimum": 4.5,
@@ -2355,6 +2857,20 @@
       "theme": "luna",
       "name": "Success status",
       "ratio": 9.366,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Info status",
+      "ratio": 8.359,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "luna",
+      "name": "Neutral status",
+      "ratio": 9.937,
       "minimum": 4.5,
       "kind": "text"
     },
@@ -2411,6 +2927,41 @@
       "theme": "luna",
       "name": "Control boundary on surface",
       "ratio": 7.604,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Strong boundary on canvas",
+      "ratio": 8.326,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Strong boundary on primary surface",
+      "ratio": 7.604,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Strong boundary on secondary surface",
+      "ratio": 7.073,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Strong boundary on raised surface",
+      "ratio": 6.885,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "luna",
+      "name": "Strong boundary on overlay surface",
+      "ratio": 6.341,
       "minimum": 3,
       "kind": "indicator"
     },
@@ -2535,6 +3086,104 @@
     },
     {
       "theme": "orchid",
+      "name": "Primary text on primary surface",
+      "ratio": 15.242,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Primary text on secondary surface",
+      "ratio": 13.24,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Primary text on raised surface",
+      "ratio": 15.242,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Primary text on overlay surface",
+      "ratio": 15.723,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Muted text on primary surface",
+      "ratio": 8.29,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Muted text on secondary surface",
+      "ratio": 7.201,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Muted text on raised surface",
+      "ratio": 8.29,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Muted text on overlay surface",
+      "ratio": 8.551,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Disabled text on canvas",
+      "ratio": 5.425,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Disabled text on primary surface",
+      "ratio": 5.701,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Disabled text on secondary surface",
+      "ratio": 4.952,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Disabled text on raised surface",
+      "ratio": 5.701,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Disabled text on overlay surface",
+      "ratio": 5.881,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Inverse text on primary action",
+      "ratio": 7.711,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
       "name": "Error text on canvas",
       "ratio": 6.805,
       "minimum": 4.5,
@@ -2558,6 +3207,20 @@
       "theme": "orchid",
       "name": "Success status",
       "ratio": 7.122,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Info status",
+      "ratio": 8.012,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "orchid",
+      "name": "Neutral status",
+      "ratio": 8.998,
       "minimum": 4.5,
       "kind": "text"
     },
@@ -2614,6 +3277,41 @@
       "theme": "orchid",
       "name": "Control boundary on surface",
       "ratio": 5.021,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Strong boundary on canvas",
+      "ratio": 4.778,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Strong boundary on primary surface",
+      "ratio": 5.021,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Strong boundary on secondary surface",
+      "ratio": 4.362,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Strong boundary on raised surface",
+      "ratio": 5.021,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "orchid",
+      "name": "Strong boundary on overlay surface",
+      "ratio": 5.18,
       "minimum": 3,
       "kind": "indicator"
     },
@@ -2738,6 +3436,104 @@
     },
     {
       "theme": "sublime",
+      "name": "Primary text on primary surface",
+      "ratio": 11.951,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Primary text on secondary surface",
+      "ratio": 10.5,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Primary text on raised surface",
+      "ratio": 9.748,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Primary text on overlay surface",
+      "ratio": 8.761,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Muted text on primary surface",
+      "ratio": 6.965,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Muted text on secondary surface",
+      "ratio": 6.119,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Muted text on raised surface",
+      "ratio": 5.681,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Muted text on overlay surface",
+      "ratio": 5.105,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Disabled text on canvas",
+      "ratio": 7.258,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Disabled text on primary surface",
+      "ratio": 6.364,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Disabled text on secondary surface",
+      "ratio": 5.592,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Disabled text on raised surface",
+      "ratio": 5.191,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Disabled text on overlay surface",
+      "ratio": 4.665,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Inverse text on primary action",
+      "ratio": 9.456,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
       "name": "Error text on canvas",
       "ratio": 6.495,
       "minimum": 4.5,
@@ -2761,6 +3557,20 @@
       "theme": "sublime",
       "name": "Success status",
       "ratio": 8.774,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Info status",
+      "ratio": 8.092,
+      "minimum": 4.5,
+      "kind": "text"
+    },
+    {
+      "theme": "sublime",
+      "name": "Neutral status",
+      "ratio": 9.265,
       "minimum": 4.5,
       "kind": "text"
     },
@@ -2817,6 +3627,41 @@
       "theme": "sublime",
       "name": "Control boundary on surface",
       "ratio": 3.721,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Strong boundary on canvas",
+      "ratio": 6.361,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Strong boundary on primary surface",
+      "ratio": 5.578,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Strong boundary on secondary surface",
+      "ratio": 4.901,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Strong boundary on raised surface",
+      "ratio": 4.55,
+      "minimum": 3,
+      "kind": "indicator"
+    },
+    {
+      "theme": "sublime",
+      "name": "Strong boundary on overlay surface",
+      "ratio": 4.089,
       "minimum": 3,
       "kind": "indicator"
     },

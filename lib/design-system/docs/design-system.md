@@ -18,6 +18,14 @@ Every token has a stable dotted name, a supported type, a value, and a descripti
 
 The compiler validates names, descriptions, types, units, references, cycles, reference type compatibility, theme completeness, and generated CSS-variable collisions. It resolves references to concrete values, generates deterministic CSS, TypeScript names and a manifest, and exits with an error if checked-in output is stale. Add or edit source files only; never hand-edit `src/generated/`.
 
+### Semantic color roles
+
+Shared surfaces use `color.canvas`, `color.surface.primary`, `color.surface.secondary`, `color.surface.raised`, and `color.surface.overlay`. Themes may give adjacent roles the same value when that best fits their visual hierarchy; the role names still let components communicate intent consistently. Pair text with the surface role it appears on.
+
+Use `color.text.disabled` for inactive content and `color.text.inverse` for foreground text on high-emphasis primary actions. Use `color.border.subtle` for decorative dividers only; interactive controls and required boundaries need a contrast-checked role such as `color.border.control` or `color.border.strong`. Status colors provide paired foreground and background roles for success, info, warning, error, and neutral messages.
+
+New theme roles are checked against their documented text and indicator contrast pairs. Add contrast pairs whenever a role is intended to be readable or visible on a specific surface.
+
 ## Theme contract
 
 Corner radii are semantic roles, not a theme-wide shape setting. General content surfaces use `radius.surface` (12px ACME, 32px Luna, 12px Orchid); action controls and single-line form controls retain separate tokens and remain pills in Luna. Specialized menu, tooltip, textarea, and form-group tokens retain their public compatibility values (32px in Luna). Explicit shape props and consumer hooks override defaults. See `docs/theming.md` and the **Foundations/Radius Policy** stories for the full policy.
