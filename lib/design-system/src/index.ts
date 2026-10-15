@@ -132,6 +132,12 @@ export type {
   ContentPreviewProps,
   ContentPreviewViewport,
 } from "./components/ContentPreview/ContentPreview";
+export { RevisionHistory } from "./components/RevisionHistory/RevisionHistory";
+export type {
+  ContentRevision,
+  RevisionHistoryAction,
+  RevisionHistoryProps,
+} from "./components/RevisionHistory/RevisionHistory";
 export { ServicesSection } from "./components/ServicesSection/ServicesSection";
 export type {
   ServiceItem,

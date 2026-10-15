@@ -1,0 +1,32 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+import * as RevisionHistoryStories from "./RevisionHistory.stories";
+
+<Meta of={RevisionHistoryStories} />
+
+# Revision history
+
+Show saved content versions with the editor, time, and summary for each change. The host CMS supplies revision data and decides which actions the current user can take.
+
+<Canvas of={RevisionHistoryStories.CompareAndRestore} />
+
+## Provide revisions and actions
+
+Pass revisions in the order you want them displayed, usually newest first. Format `dateText` for the current locale and time zone; provide `dateTime` when an unambiguous machine-readable date is available. The current version is marked and does not offer compare or restore actions.
+
+Compare and restore buttons only appear when their callbacks are provided. The host CMS must perform authorization, persist the result, update the revision list, and confirm before applying a restore. A callback is only an action request; this component does not change content or history by itself.
+
+```tsx
+<RevisionHistory
+  currentRevisionId={currentRevision.id}
+  revisions={revisions}
+  onCompare={(revision) => openComparison(revision.id)}
+  onRestore={(revision) => confirmRestore(revision.id)}
+/>;
+```
+
+<Canvas of={RevisionHistoryStories.RecentVersions} />
+<Canvas of={RevisionHistoryStories.Empty} />
+<Canvas of={RevisionHistoryStories.Loading} />
+<Canvas of={RevisionHistoryStories.Disabled} />
+<Canvas of={RevisionHistoryStories.RestoringVersion} />
+<Canvas of={RevisionHistoryStories.ThemeCoverage} />
