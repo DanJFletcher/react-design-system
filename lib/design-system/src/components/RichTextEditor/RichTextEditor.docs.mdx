@@ -25,6 +25,8 @@ const [document, setDocument] = useState<RichTextEditorDocument>(initialDocument
 
 The initial document is a ProseMirror document with a `doc` root and paragraph content. Keep the JSON as the source of truth; HTML is a rendered representation and is not emitted by this component.
 
+Inline code and code blocks use the shared `font.family.mono` foundation token, consistent with article content.
+
 ## Links and images
 
 Link and image forms accept only absolute `http:` and `https:` URLs. Images are inserted as URL-based image nodes with required alternative text. There is intentionally no upload, file picker, asset library, or storage behavior: resolve and persist image URLs in your application before supplying content.

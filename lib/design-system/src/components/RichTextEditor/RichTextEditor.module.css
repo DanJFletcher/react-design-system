@@ -88,6 +88,9 @@
 .editorContent :global(.tiptap:focus-visible) { outline: none; }
 .editorContent :global(.tiptap p) { margin: 0 0 var(--ds-space-3); }
 .editorContent :global(.tiptap p:last-child) { margin-block-end: 0; }
+.editorContent :global(.tiptap code), .editorContent :global(.tiptap pre) {
+  font-family: var(--ds-font-family-mono);
+}
 .editorContent :global(.tiptap h1), .editorContent :global(.tiptap h2), .editorContent :global(.tiptap h3) {
   margin: 0 0 var(--ds-space-3);
   color: var(--_rte-text);

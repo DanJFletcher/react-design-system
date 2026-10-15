@@ -33,6 +33,12 @@
       "description": "Keyboard-focus outline width."
     },
     {
+      "name": "font.family.mono",
+      "type": "fontFamily",
+      "value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+      "description": "System monospace stack for inline code, code blocks, and editor code."
+    },
+    {
       "name": "font.family.sans",
       "type": "fontFamily",
       "value": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
