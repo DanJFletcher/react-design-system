@@ -289,7 +289,7 @@
   line-height: var(--ds-line-height-normal);
 }
 
-@media (min-width: 48rem) {
+@media (--ds-viewport-medium-up) {
   .pricing[data-layout="split"] {
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
     align-items: start;
@@ -301,7 +301,7 @@
   }
 }
 
-@media (max-width: 47.999rem) {
+@media (--ds-viewport-below-medium) {
   .pricing[data-layout="split"] .details {
     padding-block-start: var(--ds-pricing-gap, var(--_pricing-gap));
     border-block-start: var(--ds-border-width-subtle) solid var(--ds-pricing-detail-border, var(--_pricing-detail-border));

@@ -2,6 +2,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { relative, resolve } from "node:path";
 import postcss from "postcss";
 import { fileURLToPath } from "node:url";
+import { checkBreakpointRules } from "./check-breakpoint-rules";
 import { checkBorderElevationRules } from "./check-border-elevation-rules";
 import { checkRadiusRules } from "./check-radius-rules";
 
@@ -29,6 +30,7 @@ async function main(): Promise<void> {
     const fileName = relative(componentRoot, file);
     errors.push(...checkRadiusRules(source, fileName));
     const root = postcss.parse(source, { from: file });
+    errors.push(...checkBreakpointRules(root, fileName));
     errors.push(...checkBorderElevationRules(root, fileName));
     root.walkDecls((declaration) => {
       const value = declaration.value.replace(/var\([^)]*\)/g, "var()");

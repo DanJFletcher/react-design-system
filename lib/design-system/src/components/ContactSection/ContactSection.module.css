@@ -181,7 +181,7 @@
   min-inline-size: 0;
 }
 
-@media (min-width: 48rem) {
+@media (--ds-viewport-medium-up) {
   .contact[data-layout="split"][data-has-form="true"] .layout {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: start;

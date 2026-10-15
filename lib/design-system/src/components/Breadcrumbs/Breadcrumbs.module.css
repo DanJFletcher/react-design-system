@@ -94,7 +94,7 @@
   user-select: none;
 }
 
-@media (max-width: 40rem) {
+@media (--ds-viewport-compact) {
   .defaultCollapse .collapseControl {
     display: inline-flex;
   }

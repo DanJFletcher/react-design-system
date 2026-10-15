@@ -129,7 +129,7 @@
   padding-block-end: 0;
 }
 
-@media (min-width: 48rem) {
+@media (--ds-viewport-medium-up) {
   .inner {
     grid-template-columns: auto minmax(0, 1fr) auto;
   }

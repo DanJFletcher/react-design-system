@@ -42,6 +42,10 @@ Use `shadow.elevation.surface`, `shadow.elevation.control`, and `shadow.elevatio
 
 The shared `layer.*` foundation tokens establish a consistent stacking order: base content, sticky bars, fixed navigation, dropdowns and popovers, scrims, tooltips, then notifications. A navigation scrim covers page dropdowns; its panel and toggle sit just above the scrim. Use these levels for overlays shared between components. Small `z-index` values used only to order items inside one component (for example, a focused tab above its siblings) may remain local. Native modal dialogs use the browser top layer and are not ordered by this scale.
 
+### Responsive breakpoints
+
+The shared `breakpoint.*` foundation scale is `narrow` (32rem), `compact` (40rem), `medium` (48rem), and `wide` (72rem). Component CSS uses named `@media` aliases such as `@media (--ds-viewport-compact)` and `@media (--ds-viewport-medium-up)`. The build expands these aliases to standard media queries, keeping source breakpoints consistent without relying on CSS custom properties inside `@media`, where they are not supported. Use the narrow and compact aliases for small-screen adjustments, the below-medium and medium-up aliases for the tablet/desktop transition, and wide-up for expanded desktop layouts.
+
 ## Theme contract
 
 Corner radii are semantic roles, not a theme-wide shape setting. General content surfaces use `radius.surface` (12px ACME, 32px Luna, 12px Orchid); action controls and single-line form controls retain separate tokens and remain pills in Luna. Specialized menu, tooltip, textarea, and form-group tokens retain their public compatibility values (32px in Luna). Explicit shape props and consumer hooks override defaults. See `docs/theming.md` and the **Foundations/Radius Policy** stories for the full policy.

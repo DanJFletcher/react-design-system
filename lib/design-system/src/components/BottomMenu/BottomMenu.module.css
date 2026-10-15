@@ -213,7 +213,7 @@
   min-inline-size: var(--ds-control-min-block-size-sm);
 }
 
-@media (max-width: 30rem) {
+@media (--ds-viewport-narrow) {
   .inner {
     gap: var(--ds-space-1);
     padding-inline: max(var(--ds-space-2), env(safe-area-inset-left, 0px))

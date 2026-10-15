@@ -118,7 +118,7 @@
 }
 .dismiss svg { inline-size: var(--ds-space-4); block-size: var(--ds-space-4); }
 
-@media (max-width: 40rem) {
+@media (--ds-viewport-compact) {
   .bar {
     flex-wrap: wrap;
     justify-content: flex-start;

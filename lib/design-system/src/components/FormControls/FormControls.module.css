@@ -272,7 +272,7 @@
   gap: var(--ds-space-6);
 }
 
-@media (min-width: 48rem) {
+@media (--ds-viewport-medium-up) {
   .formLayout[data-columns="2"] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

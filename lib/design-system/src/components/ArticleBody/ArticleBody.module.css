@@ -187,7 +187,7 @@
   background: var(--ds-color-surface-primary);
 }
 
-@media (max-width: 40rem) {
+@media (--ds-viewport-compact) {
   .articleBody {
     font-size: var(--ds-font-size-md);
   }

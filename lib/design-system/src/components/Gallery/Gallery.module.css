@@ -234,7 +234,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-@media (max-width: 48rem) {
+@media (--ds-viewport-below-medium) {
   .grid[data-columns="3"],
   .grid[data-columns="4"] {
     grid-template-columns: repeat(2, minmax(0, 1fr));

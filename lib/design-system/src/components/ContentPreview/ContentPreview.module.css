@@ -121,7 +121,7 @@
   background: var(--ds-color-surface-primary);
 }
 
-@media (max-width: 48rem) {
+@media (--ds-viewport-below-medium) {
   .header {
     flex-direction: column;
     align-items: stretch;

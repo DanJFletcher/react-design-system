@@ -1,11 +1,12 @@
 import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import { breakpointMediaVitePlugin } from "./scripts/breakpoint-media";
 
 const packageRoot = import.meta.dirname;
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [breakpointMediaVitePlugin(), react()],
   resolve: {
     alias: {
       "@": resolve(packageRoot, "src"),

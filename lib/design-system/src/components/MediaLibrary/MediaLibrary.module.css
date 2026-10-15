@@ -427,7 +427,7 @@
   font-size: var(--ds-font-size-sm);
 }
 
-@media (max-width: 760px) {
+@media (--ds-viewport-below-medium) {
   .library {
     padding: var(--ds-space-3);
   }
@@ -482,7 +482,7 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (--ds-viewport-narrow) {
   .toolbar {
     grid-template-columns: minmax(0, 1fr);
   }

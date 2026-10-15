@@ -125,14 +125,14 @@
   outline-offset: var(--ds-space-1);
 }
 
-@media (max-width: 52rem) {
+@media (--ds-viewport-below-medium) {
   .services[data-columns="3"] .grid,
   .services[data-columns="4"] .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 36rem) {
+@media (--ds-viewport-compact) {
   .grid,
   .services[data-columns="2"] .grid,
   .services[data-columns="3"] .grid,

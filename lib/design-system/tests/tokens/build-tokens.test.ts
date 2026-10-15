@@ -55,6 +55,9 @@ test("generation is deterministic and produces complete themes", async () => {
   assert.equal(first.themes.get("sublime")!["motion.distance.standard"], "6px");
   assert.match(first.files.get("themes/luna.css")!, /--ds-motion-duration-standard: 240ms;/);
   assert.match(first.files.get("themes/atom.css")!, /--ds-motion-easing-enter: cubic-bezier\(0\.2, 1, 0\.3, 1\);/);
+  assert.match(first.files.get("tokens.css")!, /--ds-breakpoint-narrow: 32rem;/);
+  assert.match(first.files.get("tokens.css")!, /--ds-breakpoint-medium: 48rem;/);
+  assert.match(first.files.get("token-types.ts")!, /"breakpoint\.wide"/);
   assert.ok(first.contrastResults.length >= 120);
   assert.ok(first.contrastResults.some((result) => result.name === "Primary text on overlay surface"));
   assert.ok(first.contrastResults.some((result) => result.name === "Strong boundary on overlay surface"));
@@ -132,6 +135,22 @@ test("theme motion distances must use pixels", async () => {
     json.values["motion.distance.standard"] = { amount: 0.5, unit: "rem" };
     await writeFile(file, JSON.stringify(json));
     await assert.rejects(() => compileTokens(temporary), /motion-distance.*must use px/);
+  } finally {
+    await rm(temporary, { recursive: true, force: true });
+  }
+});
+
+test("breakpoint foundations must use rem units", async () => {
+  const temporary = await mkdtemp(join(tmpdir(), "design-system-breakpoints-"));
+  try {
+    await cp(source, temporary, { recursive: true });
+    const file = join(temporary, "foundations.json");
+    const json = JSON.parse(await readFile(file, "utf8")) as {
+      tokens: Record<string, { type: string; value: { amount: number; unit: string }; description: string }>;
+    };
+    json.tokens["breakpoint.medium"]!.value.unit = "px";
+    await writeFile(file, JSON.stringify(json));
+    await assert.rejects(() => compileTokens(temporary), /Breakpoint token "breakpoint\.medium" must use rem/);
   } finally {
     await rm(temporary, { recursive: true, force: true });
   }

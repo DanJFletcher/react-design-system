@@ -221,7 +221,7 @@
   border: 0;
 }
 
-@media (max-width: 48rem) {
+@media (--ds-viewport-below-medium) {
   .wrapper { inline-size: 100%; }
   .wrapper .mobileToggle {
     position: relative;

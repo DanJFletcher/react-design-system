@@ -161,7 +161,7 @@
 .formError { color: var(--ds-color-text-error); font-size: var(--ds-font-size-sm); }
 .visuallyHidden, .srOnly { position: absolute; inline-size: var(--ds-space-1); block-size: var(--ds-space-1); padding: 0; margin: calc(0px - var(--ds-space-1)); overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
-@media (max-width: 40rem) {
+@media (--ds-viewport-compact) {
   .toolbar { align-items: flex-start; gap: var(--ds-space-1); }
   .toolbarSpacer { display: none; }
   .editorFrame { padding: var(--ds-space-3); }

@@ -105,7 +105,7 @@
   outline-offset: var(--ds-space-1);
 }
 
-@media (max-width: 40rem) {
+@media (--ds-viewport-compact) {
   .note {
     grid-template-columns: max-content minmax(0, 1fr);
   }

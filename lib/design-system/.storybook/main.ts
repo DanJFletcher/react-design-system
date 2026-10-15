@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite";
+import { breakpointMediaVitePlugin } from "../scripts/breakpoint-media.js";
 
 const config: StorybookConfig = {
   stories: [
@@ -12,6 +13,7 @@ const config: StorybookConfig = {
   },
   viteFinal: async (config) => ({
     ...config,
+    plugins: [...(config.plugins ?? []), breakpointMediaVitePlugin()],
     server: {
       ...config.server,
       allowedHosts: true,

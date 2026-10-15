@@ -144,7 +144,7 @@
   line-height: var(--ds-line-height-relaxed);
 }
 
-@media (max-width: 40rem) {
+@media (--ds-viewport-compact) {
   .panel {
     padding: var(--ds-space-4);
   }

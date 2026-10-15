@@ -136,7 +136,7 @@
   order: -1;
 }
 
-@media (max-width: 48rem) {
+@media (--ds-viewport-below-medium) {
   .locationHours {
     grid-template-columns: minmax(0, 1fr);
   }

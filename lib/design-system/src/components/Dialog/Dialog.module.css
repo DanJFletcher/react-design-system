@@ -167,7 +167,7 @@
   border-block-start: var(--ds-border-width-subtle) solid var(--ds-dialog-border, var(--_dialog-border));
 }
 
-@media (max-width: 32rem) {
+@media (--ds-viewport-narrow) {
   .dialog {
     max-block-size: calc(100vh - var(--ds-space-6));
   }

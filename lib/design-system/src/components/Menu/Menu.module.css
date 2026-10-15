@@ -219,7 +219,7 @@
   font-size: var(--ds-font-size-lg);
 }
 
-@media (max-width: 32rem) {
+@media (--ds-viewport-narrow) {
   .submenuLayer {
     position: static;
     min-inline-size: 0;

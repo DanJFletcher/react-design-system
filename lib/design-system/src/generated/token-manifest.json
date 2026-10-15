@@ -3,6 +3,30 @@
   "generatedBy": "scripts/build-tokens.ts",
   "foundations": [
     {
+      "name": "breakpoint.compact",
+      "type": "dimension",
+      "value": "40rem",
+      "description": "Compact viewport threshold for mobile-first component layouts."
+    },
+    {
+      "name": "breakpoint.medium",
+      "type": "dimension",
+      "value": "48rem",
+      "description": "Medium viewport threshold for desktop and tablet layouts."
+    },
+    {
+      "name": "breakpoint.narrow",
+      "type": "dimension",
+      "value": "32rem",
+      "description": "Narrow viewport threshold for compact component layouts."
+    },
+    {
+      "name": "breakpoint.wide",
+      "type": "dimension",
+      "value": "72rem",
+      "description": "Wide viewport threshold for expanded desktop layouts."
+    },
+    {
       "name": "control.min-block-size.lg",
       "type": "dimension",
       "value": "56px",

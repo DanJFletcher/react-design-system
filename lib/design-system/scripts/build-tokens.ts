@@ -110,6 +110,9 @@ function resolveValue(
     if (name.startsWith("typography.measure.") && value.unit !== "ch") {
       fail(`Typography measure token "${name}" must use ch.`);
     }
+    if (name.startsWith("breakpoint.") && value.unit !== "rem") {
+      fail(`Breakpoint token "${name}" must use rem.`);
+    }
     const isMotionDistance = name.startsWith("motion.distance.") ||
       /^@theme:[^:]+:motion\.distance\./.test(name);
     if ((name.startsWith("space.") || name.startsWith("radius.") || name.startsWith("border.") ||

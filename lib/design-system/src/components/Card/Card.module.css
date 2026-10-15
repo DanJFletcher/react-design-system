@@ -215,7 +215,7 @@
   object-fit: contain;
 }
 
-@media (min-width: 48rem) {
+@media (--ds-viewport-medium-up) {
   .card[data-layout="horizontal"] {
     grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
     align-items: center;
@@ -226,7 +226,7 @@
   }
 }
 
-@media (max-width: 32rem) {
+@media (--ds-viewport-narrow) {
   .footer {
     align-items: flex-start;
   }

@@ -117,13 +117,13 @@
   overflow-wrap: anywhere;
 }
 
-@media (min-width: 42rem) {
+@media (--ds-viewport-medium-up) {
   .items[data-layout="grid"] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (min-width: 72rem) {
+@media (--ds-viewport-wide-up) {
   .items[data-layout="grid"][data-columns="3"] {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

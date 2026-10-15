@@ -130,7 +130,7 @@
   font-size: var(--ds-font-size-lg);
 }
 
-@media (max-width: 32rem) {
+@media (--ds-viewport-narrow) {
   .submitButton {
     inline-size: var(--ds-control-min-block-size-md);
     min-inline-size: var(--ds-control-min-block-size-md);
