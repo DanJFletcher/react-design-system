@@ -42,7 +42,7 @@ Disabled links omit their `href`, do not navigate, are removed from sequential k
 
 `position="static"` is the default. `sticky` remains in normal flow and sticks within its scrolling ancestor. `fixed` pins the navigation to the viewport and removes it from flow. A fixed navigation can cover page content: the host layout must reserve an offset matching its width and positioning; the component intentionally does not guess the content layout. Sticky positioning can be constrained by overflow on ancestors.
 
-Below 48rem, navigation switches to an accessible inline disclosure. It opens above the page content with a height-and-opacity transition and does not create an overlay or trap focus. Closed navigation is removed from keyboard and screen-reader navigation. The transition respects reduced-motion preferences.
+Below 48rem, navigation switches to an accessible inline disclosure. It slides in from off-screen left as it expands above the page content, without creating an overlay or trapping focus. Closed navigation is removed from keyboard and screen-reader navigation. The transition respects reduced-motion preferences.
 
 ## Customization slots
 

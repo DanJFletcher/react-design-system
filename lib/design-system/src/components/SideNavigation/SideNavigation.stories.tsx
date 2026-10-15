@@ -215,6 +215,7 @@ export const MobileResponsive: Story = {
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
     await expect(panel).toHaveAttribute("aria-hidden", "true");
     await expect(panel).toHaveAttribute("inert");
+    await expect(new DOMMatrixReadOnly(getComputedStyle(panel).transform).m41).toBeLessThan(0);
     await userEvent.click(toggle);
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
     await expect(panel).toHaveAttribute("data-open", "true");
@@ -222,12 +223,15 @@ export const MobileResponsive: Story = {
     await expect(panel).not.toHaveAttribute("inert");
     await expect(getComputedStyle(panel).transitionDuration.split(",").some((duration) => Number.parseFloat(duration) > 0)).toBe(true);
     await new Promise((resolve) => window.setTimeout(resolve, 250));
+    await expect(new DOMMatrixReadOnly(getComputedStyle(panel).transform).m41).toBeCloseTo(0);
     await expect(canvas.getByRole("link", { name: "Overview" })).toBeVisible();
     await expect(getComputedStyle(canvas.getByTestId("side-navigation-collapse-toggle")).display).toBe("none");
     await userEvent.click(toggle);
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
     await expect(panel).toHaveAttribute("aria-hidden", "true");
     await expect(panel).toHaveAttribute("inert");
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
+    await expect(new DOMMatrixReadOnly(getComputedStyle(panel).transform).m41).toBeLessThan(0);
   },
 };
 
@@ -254,9 +258,11 @@ export const MobileResponsiveReducedMotion: Story = {
     await expect(document.documentElement).toHaveAttribute("data-ds-motion-preference", "reduced");
     const durations = getComputedStyle(panel).transitionDuration;
     await expect(durations.split(",").every((duration) => Number.parseFloat(duration) === 0)).toBe(true);
+    await expect(new DOMMatrixReadOnly(getComputedStyle(panel).transform).m41).toBeLessThan(0);
     await userEvent.click(toggle);
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
     await expect(canvas.getByRole("link", { name: "Overview" })).toBeVisible();
+    await expect(new DOMMatrixReadOnly(getComputedStyle(panel).transform).m41).toBeCloseTo(0);
   },
 };
 

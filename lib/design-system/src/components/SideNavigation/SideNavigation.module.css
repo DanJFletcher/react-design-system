@@ -227,13 +227,16 @@
     grid-template-rows: 0fr;
     overflow: hidden;
     opacity: 0;
+    transform: translateX(-100%);
     transition:
       grid-template-rows var(--ds-motion-duration-standard) var(--ds-motion-easing-standard),
-      opacity var(--ds-motion-duration-standard) var(--ds-motion-easing-enter);
+      opacity var(--ds-motion-duration-standard) var(--ds-motion-easing-enter),
+      transform var(--ds-motion-duration-standard) var(--ds-motion-easing-enter);
   }
   .wrapper .mobilePanel[data-open="true"] {
     grid-template-rows: 1fr;
     opacity: 1;
+    transform: translateX(0);
   }
   .wrapper .mobilePanelInner { min-block-size: 0; overflow: hidden; }
   .wrapper .root {
