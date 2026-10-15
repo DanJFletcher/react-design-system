@@ -2,6 +2,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { relative, resolve } from "node:path";
 import postcss from "postcss";
 import { fileURLToPath } from "node:url";
+import { checkBorderElevationRules } from "./check-border-elevation-rules";
 import { checkRadiusRules } from "./check-radius-rules";
 
 const packageRoot = resolve(fileURLToPath(new URL("..", import.meta.url)));
@@ -28,6 +29,7 @@ async function main(): Promise<void> {
     const fileName = relative(componentRoot, file);
     errors.push(...checkRadiusRules(source, fileName));
     const root = postcss.parse(source, { from: file });
+    errors.push(...checkBorderElevationRules(root, fileName));
     root.walkDecls((declaration) => {
       const value = declaration.value.replace(/var\([^)]*\)/g, "var()");
       const dimensions = [...value.matchAll(/(?<![\w-])(-?\d*\.?\d+)(?:px|rem|em|ms|s)\b/gi)];

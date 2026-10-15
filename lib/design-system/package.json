@@ -35,6 +35,7 @@
     "tokens:check": "tsx scripts/build-tokens.ts --check",
     "lint": "tsx scripts/check-design-rules.ts",
     "typecheck": "tsc -p tsconfig.check.json --noEmit",
+    "test:design-rules": "tsx --test tests/design-rules/*.test.ts",
     "test:tokens": "tsx --test tests/tokens/*.test.ts",
     "test:storybook": "vitest run --project=storybook",
     "build": "pnpm tokens:build && vite build && tsc -p tsconfig.build.json",
@@ -43,7 +44,7 @@
     "test:visual": "playwright test",
     "test:visual:update": "playwright test --update-snapshots",
     "test:package": "tsx scripts/test-package-consumer.ts",
-    "check": "pnpm tokens:build && pnpm tokens:check && pnpm lint && pnpm typecheck && pnpm test:tokens && pnpm test:storybook && pnpm build && pnpm build-storybook && pnpm test:visual && pnpm test:package"
+    "check": "pnpm tokens:build && pnpm tokens:check && pnpm lint && pnpm typecheck && pnpm test:design-rules && pnpm test:tokens && pnpm test:storybook && pnpm build && pnpm build-storybook && pnpm test:visual && pnpm test:package"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",
