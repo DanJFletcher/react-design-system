@@ -57,6 +57,7 @@ test("generation is deterministic and produces complete themes", async () => {
   assert.match(first.files.get("themes/atom.css")!, /--ds-motion-easing-enter: cubic-bezier\(0\.2, 1, 0\.3, 1\);/);
   assert.match(first.files.get("tokens.css")!, /--ds-breakpoint-narrow: 32rem;/);
   assert.match(first.files.get("tokens.css")!, /--ds-breakpoint-medium: 48rem;/);
+  assert.match(first.files.get("breakpoint-media.ts")!, /"--ds-viewport-medium-up": "\(min-width: 48rem\)"/);
   assert.match(first.files.get("token-types.ts")!, /"breakpoint\.wide"/);
   assert.ok(first.contrastResults.length >= 120);
   assert.ok(first.contrastResults.some((result) => result.name === "Primary text on overlay surface"));

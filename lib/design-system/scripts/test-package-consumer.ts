@@ -40,6 +40,7 @@ try {
   }, null, 2));
   await writeFile(join(temporary, "consumer.tsx"), [
     'import { ArticleTableOfContents, Button, Checkbox, RadioGroup, Select, TextField, Textarea, ThemeScope, type ArticleTableOfContentsItem, type ButtonIconPosition, type ButtonShape, type DesignSystemThemeName } from "@workspace/design-system";',
+    'import { BREAKPOINT_MEDIA_ALIASES, breakpointMediaPlugin, breakpointMediaVitePlugin } from "@workspace/design-system/breakpoint-media";',
     'import "@workspace/design-system/tokens.css";',
     'import "@workspace/design-system/styles.css";',
     'import "@workspace/design-system/themes/acme.css";',
@@ -50,6 +51,8 @@ try {
     'const shape: ButtonShape = "pill";',
     'const iconPosition: ButtonIconPosition = "right";',
     'const selectedTheme: DesignSystemThemeName = "sublime";',
+    'const narrowMediaQuery: string = BREAKPOINT_MEDIA_ALIASES["--ds-viewport-narrow"];',
+    'void narrowMediaQuery; void breakpointMediaPlugin; void breakpointMediaVitePlugin;',
     'const sections: ArticleTableOfContentsItem[] = [{ id: "overview", label: "Overview" }];',
     'export const example = <ThemeScope theme={selectedTheme} style={{ "--ds-button-radius": "12px" }}><ArticleTableOfContents items={sections} /><Button variant="secondary" shape={shape} icon={<span>★</span>} iconPosition={iconPosition}>Continue</Button><Button iconOnly icon={<span>×</span>} aria-label="Close dialog" /><TextField label="Email" type="email" required /><Textarea label="Notes" rows={4} /><Select label="Region" defaultValue="ca"><option value="ca">Canada</option></Select><Checkbox label="Subscribe" name="subscribe" value="yes" /><RadioGroup label="Contact method" name="contact" options={[{ value: "email", label: "Email" }]} /></ThemeScope>;',
     "",
@@ -59,6 +62,7 @@ try {
   execFileSync("pnpm", ["exec", "node", "--input-type=module", "-e", [
     'import assert from "node:assert/strict";',
     'import { ArticleTableOfContents, Button, Checkbox, RadioGroup, Select, TextField, Textarea, ThemeScope } from "@workspace/design-system";',
+    'import { BREAKPOINT_MEDIA_ALIASES, breakpointMediaVitePlugin } from "@workspace/design-system/breakpoint-media";',
     'assert.equal(typeof Button, "object");',
     'assert.equal(typeof ArticleTableOfContents, "object");',
     'assert.equal(typeof Checkbox, "object");',
@@ -67,8 +71,12 @@ try {
     'assert.equal(typeof TextField, "object");',
     'assert.equal(typeof Textarea, "object");',
     'assert.equal(typeof ThemeScope, "function");',
+    'assert.equal(BREAKPOINT_MEDIA_ALIASES["--ds-viewport-narrow"], "(max-width: 32rem)");',
+    'const breakpointPlugin = breakpointMediaVitePlugin();',
+    'const responsiveCss = await breakpointPlugin.transform("@media (--ds-viewport-compact) { .consumer { display: grid; } }", "/consumer.css");',
+    'assert.match(responsiveCss?.code ?? "", /@media \\(max-width: 40rem\\)/);',
   ].join("")], { cwd: temporary, stdio: "inherit" });
-  for (const file of ["tokens.css", "styles.css", "themes/acme.css", "themes/luna.css", "themes/orchid.css", "themes/atom.css", "themes/sublime.css"]) {
+  for (const file of ["tokens.css", "styles.css", "themes/acme.css", "themes/luna.css", "themes/orchid.css", "themes/atom.css", "themes/sublime.css", "plugins/breakpoint-media.js", "plugins/breakpoint-media.d.ts"]) {
     await readFile(join(temporary, "node_modules/@workspace/design-system/dist", file));
   }
   process.stdout.write("Package tarball installed in a clean consumer; ESM, declarations, and CSS entrypoints work.\n");

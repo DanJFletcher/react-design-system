@@ -46,6 +46,19 @@ The shared `layer.*` foundation tokens establish a consistent stacking order: ba
 
 The shared `breakpoint.*` foundation scale is `narrow` (32rem), `compact` (40rem), `medium` (48rem), and `wide` (72rem). Component CSS uses named `@media` aliases such as `@media (--ds-viewport-compact)` and `@media (--ds-viewport-medium-up)`. The build expands these aliases to standard media queries, keeping source breakpoints consistent without relying on CSS custom properties inside `@media`, where they are not supported. Use the narrow and compact aliases for small-screen adjustments, the below-medium and medium-up aliases for the tablet/desktop transition, and wide-up for expanded desktop layouts.
 
+Applications consuming the package can use the same aliases through the public `@workspace/design-system/breakpoint-media` entry. With Vite, add the plugin to the app's existing plugin list:
+
+```ts
+import { defineConfig } from "vite";
+import { breakpointMediaVitePlugin } from "@workspace/design-system/breakpoint-media";
+
+export default defineConfig({
+  plugins: [breakpointMediaVitePlugin()],
+});
+```
+
+For a PostCSS config, add `breakpointMediaPlugin()` to its `plugins` array instead. Either plugin expands aliases in the application's CSS at build time and reports unknown viewport aliases as errors.
+
 ## Theme contract
 
 Corner radii are semantic roles, not a theme-wide shape setting. General content surfaces use `radius.surface` (12px ACME, 32px Luna, 12px Orchid); action controls and single-line form controls retain separate tokens and remain pills in Luna. Specialized menu, tooltip, textarea, and form-group tokens retain their public compatibility values (32px in Luna). Explicit shape props and consumer hooks override defaults. See `docs/theming.md` and the **Foundations/Radius Policy** stories for the full policy.

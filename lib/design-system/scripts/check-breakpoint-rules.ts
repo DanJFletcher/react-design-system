@@ -1,5 +1,5 @@
 import type { Root } from "postcss";
-import { BREAKPOINT_MEDIA_ALIASES } from "./breakpoint-media";
+import { BREAKPOINT_MEDIA_ALIASES } from "../src/generated/breakpoint-media.js";
 
 const widthQueryPattern = /\b(?:min|max)-width\b|\bwidth\s*[<>]=?/i;
 const aliasPattern = /--ds-viewport-[a-z-]+/g;

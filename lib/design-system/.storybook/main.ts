@@ -1,5 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite";
-import { breakpointMediaVitePlugin } from "../scripts/breakpoint-media.js";
+import { breakpointMediaVitePlugin } from "../src/plugins/breakpoint-media.js";
 
 const config: StorybookConfig = {
   stories: [

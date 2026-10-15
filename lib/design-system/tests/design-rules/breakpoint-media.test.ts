@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import postcss from "postcss";
 import test from "node:test";
-import { breakpointMediaPlugin } from "../../scripts/breakpoint-media";
+import {
+  BREAKPOINT_MEDIA_ALIASES,
+  breakpointMediaPlugin,
+  breakpointMediaVitePlugin,
+} from "../../src/plugins/breakpoint-media";
 import { checkBreakpointRules } from "../../scripts/check-breakpoint-rules";
 
 test("responsive aliases compile from breakpoint tokens", async () => {
@@ -34,4 +38,16 @@ test("unknown responsive aliases fail CSS compilation", async () => {
     ),
     /Unknown responsive breakpoint alias/,
   );
+});
+
+test("Vite adapter expands shared aliases in application CSS", async () => {
+  const plugin = breakpointMediaVitePlugin();
+  const transformed = await plugin.transform(
+    "@media (--ds-viewport-narrow) { .app-layout { display: grid; } }",
+    "/consumer/src/app.css",
+  );
+
+  assert.equal(BREAKPOINT_MEDIA_ALIASES["--ds-viewport-narrow"], "(max-width: 32rem)");
+  assert.match(transformed?.code ?? "", /@media \(max-width: 32rem\)/);
+  assert.equal(await plugin.transform("export const app = true;", "/consumer/src/app.ts"), null);
 });

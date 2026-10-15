@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import { breakpointMediaVitePlugin } from "./scripts/breakpoint-media";
+import { breakpointMediaVitePlugin } from "./src/plugins/breakpoint-media";
 
 const packageRoot = import.meta.dirname;
 
@@ -19,6 +19,7 @@ export default defineConfig({
         theme: resolve(packageRoot, "src/theme/index.ts"),
         styles: resolve(packageRoot, "src/styles.ts"),
         tokens: resolve(packageRoot, "src/tokens-entry.ts"),
+        "plugins/breakpoint-media": resolve(packageRoot, "src/plugins/breakpoint-media.ts"),
         "themes/acme": resolve(packageRoot, "src/theme-css/acme.ts"),
         "themes/luna": resolve(packageRoot, "src/theme-css/luna.ts"),
         "themes/orchid": resolve(packageRoot, "src/theme-css/orchid.ts"),
@@ -29,7 +30,7 @@ export default defineConfig({
     },
     cssCodeSplit: true,
     rollupOptions: {
-      external: ["react", "react/jsx-runtime", /^@tiptap\//],
+      external: ["react", "react/jsx-runtime", "postcss", /^@tiptap\//],
       output: {
         entryFileNames: "[name].js",
         assetFileNames: (asset) => {

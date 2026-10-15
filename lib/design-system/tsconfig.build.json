@@ -16,7 +16,9 @@
     "src/theme/**/*.ts",
     "src/theme/**/*.tsx",
     "src/components/Button/Button.tsx",
+    "src/plugins/breakpoint-media.ts",
     "src/generated/token-types.ts",
+    "src/generated/breakpoint-media.ts",
     "src/styles.d.ts"
   ]
 }
