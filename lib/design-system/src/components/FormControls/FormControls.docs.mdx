@@ -6,7 +6,7 @@ import * as RangeFieldStories from "./RangeField.stories";
 
 <Title>Form controls</Title>
 
-These native, theme-aware controls share accessible labels, descriptions, required states, and validation messaging. They do not manage form state or validation rules for you.
+These theme-aware controls share accessible labels, descriptions, required states, and validation messaging. They do not manage form state or validation rules for you.
 
 ## TextField
 
@@ -31,6 +31,8 @@ Use `RangeField` to adjust a numeric value with a native slider. It supports min
 <Canvas of={FormControlsStories.SelectInteraction} />
 
 `Select` renders a native `<select>` and accepts native `<option>` or `<optgroup>` children. This keeps platform keyboard navigation and form submission behavior. Its decorative chevron is positioned with the same inset as the text padding across all themes.
+
+For long option lists where users benefit from searching, use the separate <a href="iframe.html?id=components-combobox--docs&amp;viewMode=docs">Combobox</a>. It provides a searchable, keyboard-accessible single selection while retaining the selected option's value for form submission.
 
 ## Checkbox and RadioGroup
 

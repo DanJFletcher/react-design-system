@@ -52,13 +52,14 @@ export function useFormField({
 
 interface LabelProps {
   id: string;
+  labelId?: string;
   label: ReactNode;
   required?: boolean;
 }
 
-export function FieldLabel({ id, label, required = false }: LabelProps) {
+export function FieldLabel({ id, labelId, label, required = false }: LabelProps) {
   return (
-    <label className={styles.label} htmlFor={id}>
+    <label className={styles.label} htmlFor={id} id={labelId}>
       {label}
       {required && <span className={styles.requiredMark} aria-hidden="true"> *</span>}
     </label>

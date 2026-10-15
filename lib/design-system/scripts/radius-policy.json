@@ -29,6 +29,8 @@
     { "file": "Carousel/Carousel.module.css", "selector": ".indicator[aria-current=\"true\"]::before", "role": "circle", "reason": "Intentionally capsule-shaped selected slide marker." },
     { "file": "Dialog/Dialog.module.css", "selector": ".closeButton", "role": "action", "reason": "Dialog dismissal control, not its panel." },
     { "file": "FormControls/FormControls.module.css", "selector": ".control", "role": "form", "reason": "Single-line text, date, file and select controls." },
+    { "file": "Combobox/Combobox.module.css", "selector": ".control", "role": "form", "reason": "The searchable text input follows the theme's form-control corner shape." },
+    { "file": "Combobox/Combobox.module.css", "selector": ".clearButton", "role": "action", "reason": "The inline clear action follows the theme's button corner shape." },
     { "file": "Search/Search.module.css", "selector": ".input", "role": "form", "reason": "Search query input follows the theme's form-control shape." },
     { "file": "SideNavigation/SideNavigation.module.css", "selector": ".root", "role": "surface", "reason": "The navigation panel follows the theme surface corner shape." },
     { "file": "SideNavigation/SideNavigation.module.css", "selector": ".entry", "role": "action", "reason": "Navigation destinations and group triggers follow the theme action corner shape." },

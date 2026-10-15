@@ -154,6 +154,27 @@ Items render as native toggle buttons with `aria-pressed`. Each button remains i
 />
 ```
 
+## Combobox
+
+`Combobox` is a searchable single-select form control. `options` is a readonly list of unique `{ value, label, disabled? }` entries. Matching is case-insensitive against the option label by default; `filterOptions(options, query)` can supply custom filtering. Editing the query clears any previous selection, and free-form query text is not submitted as an option.
+
+The text input exposes the ARIA combobox/listbox pattern. Focus opens the list; Arrow keys, Home, and End move the active option while skipping disabled entries; Enter selects; Escape closes and restores the selected label; Tab leaves the field. Pointer selection keeps focus on the input. `value` with `onValueChange` provides controlled state; `defaultValue` initializes uncontrolled state. A hidden named input submits the selected option's value. `required`, `disabled`, `description`, `error`, and `invalid` follow the shared form-field contract; required validation only passes after an option is selected.
+
+`loading` and `loadingMessage` announce asynchronous loading states; `noResultsMessage` customizes the empty result message. `allowClear` defaults to `true`, and `clearLabel` localizes its accessible name. Invalid or duplicate options and a non-loading selected value that does not match an option fail explicitly. The control uses semantic form/menu tokens and supports all built-in and nested themes.
+
+```tsx
+<Combobox
+  label="Service region"
+  name="region"
+  options={[
+    { value: "ca", label: "Canada" },
+    { value: "us", label: "United States" },
+  ]}
+  placeholder="Search regions"
+  required
+/>
+```
+
 ## Badge
 
 ```tsx

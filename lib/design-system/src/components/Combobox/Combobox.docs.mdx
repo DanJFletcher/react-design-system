@@ -1,0 +1,47 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as ComboboxStories from "./Combobox.stories";
+
+<Meta of={ComboboxStories} />
+
+<Title />
+
+<Subtitle>Search and select one option from an accessible, theme-aware list.</Subtitle>
+
+## Search and submit
+
+The Combobox filters options as the user types and submits the selected option's value through its `name`. Query text by itself is never submitted. Arrow keys move through matches, Enter selects, Escape closes, and Tab leaves the control.
+
+<Canvas of={ComboboxStories.SearchAndFormSubmission} />
+
+```tsx
+<Combobox
+  label="Service region"
+  name="region"
+  options={[
+    { value: "ca", label: "Canada" },
+    { value: "us", label: "United States" },
+  ]}
+  placeholder="Search regions"
+  required
+/>
+```
+
+`value` with `onValueChange` provides controlled state; `defaultValue` initializes uncontrolled state. `filterOptions` customizes matching. The default filter searches case-insensitively in labels. Editing the query clears the old selection. Options have unique, non-empty values and visible labels; invalid option data or a value that does not match an option throws.
+
+## Keyboard, clearing, and form states
+
+The text input follows the ARIA combobox/listbox pattern. Focus opens the options; Arrow keys, Home, and End navigate enabled results, Enter selects, Escape closes and restores the selected label, and Tab closes the list without trapping focus. Pointer selection keeps focus on the input.
+
+`allowClear` defaults to `true`; `clearLabel` customizes its button's accessible name. `required`, `disabled`, `description`, `error`, and `invalid` follow the shared form-field behavior. A required field is valid only after the user selects an option.
+
+<Canvas of={ComboboxStories.ClearSelection} />
+<Canvas of={ComboboxStories.KeyboardAndDisabledOptions} />
+<Canvas of={ComboboxStories.ValidationAndDisabled} />
+
+## Loading, themes, and narrow screens
+
+Set `loading` while supplying new options to announce `loadingMessage`; customize `noResultsMessage` when filtering has no matches. Popup and controls use semantic menu and form-control tokens.
+
+<Canvas of={ComboboxStories.LoadingAndNoResults} />
+<Canvas of={ComboboxStories.ThemeCoverage} />
+<Canvas of={ComboboxStories.NarrowLongOptions} />

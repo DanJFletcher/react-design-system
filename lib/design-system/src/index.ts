@@ -305,6 +305,8 @@ export { Textarea } from "./components/FormControls/Textarea";
 export type { TextareaProps } from "./components/FormControls/Textarea";
 export { Select } from "./components/FormControls/Select";
 export type { SelectProps } from "./components/FormControls/Select";
+export { Combobox } from "./components/Combobox/Combobox";
+export type { ComboboxOption, ComboboxProps } from "./components/Combobox/Combobox";
 export { Checkbox } from "./components/FormControls/Checkbox";
 export type { CheckboxProps } from "./components/FormControls/Checkbox";
 export { RadioGroup } from "./components/FormControls/RadioGroup";
