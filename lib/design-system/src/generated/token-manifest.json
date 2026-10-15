@@ -195,66 +195,6 @@
       "description": "Compact unitless line height."
     },
     {
-      "name": "motion.distance.prominent",
-      "type": "dimension",
-      "value": "12px",
-      "description": "More noticeable movement distance for dialogs and prominent overlays."
-    },
-    {
-      "name": "motion.distance.standard",
-      "type": "dimension",
-      "value": "8px",
-      "description": "Standard movement distance for menus, toasts, and small overlays."
-    },
-    {
-      "name": "motion.distance.subtle",
-      "type": "dimension",
-      "value": "2px",
-      "description": "Small movement for subtle hover and feedback transitions."
-    },
-    {
-      "name": "motion.duration.fast",
-      "type": "duration",
-      "value": "120ms",
-      "description": "Fast state transition duration."
-    },
-    {
-      "name": "motion.duration.slow",
-      "type": "duration",
-      "value": "320ms",
-      "description": "Slow, deliberate interface transition duration."
-    },
-    {
-      "name": "motion.duration.spinner",
-      "type": "duration",
-      "value": "750ms",
-      "description": "Button loading indicator rotation duration."
-    },
-    {
-      "name": "motion.duration.standard",
-      "type": "duration",
-      "value": "200ms",
-      "description": "Standard interface transition duration."
-    },
-    {
-      "name": "motion.easing.enter",
-      "type": "easing",
-      "value": "cubic-bezier(0, 0, 0.2, 1)",
-      "description": "Motion curve for entering elements."
-    },
-    {
-      "name": "motion.easing.exit",
-      "type": "easing",
-      "value": "cubic-bezier(0.4, 0, 1, 1)",
-      "description": "Motion curve for exiting elements."
-    },
-    {
-      "name": "motion.easing.standard",
-      "type": "easing",
-      "value": "cubic-bezier(0.2, 0, 0, 1)",
-      "description": "Standard interface motion curve."
-    },
-    {
       "name": "radius.full",
       "type": "dimension",
       "value": "9999px",
@@ -643,6 +583,56 @@
       "name": "font.family.sans",
       "type": "fontFamily",
       "description": "Themeable sans-serif family for interface and reading text."
+    },
+    {
+      "name": "motion.distance.prominent",
+      "type": "dimension",
+      "description": "More noticeable movement distance for dialogs and prominent overlays."
+    },
+    {
+      "name": "motion.distance.standard",
+      "type": "dimension",
+      "description": "Standard movement distance for menus, toasts, and small overlays."
+    },
+    {
+      "name": "motion.distance.subtle",
+      "type": "dimension",
+      "description": "Small movement for subtle hover and feedback transitions."
+    },
+    {
+      "name": "motion.duration.fast",
+      "type": "duration",
+      "description": "Fast state transition duration."
+    },
+    {
+      "name": "motion.duration.slow",
+      "type": "duration",
+      "description": "Slow, deliberate interface transition duration."
+    },
+    {
+      "name": "motion.duration.spinner",
+      "type": "duration",
+      "description": "Loading indicator rotation duration."
+    },
+    {
+      "name": "motion.duration.standard",
+      "type": "duration",
+      "description": "Standard interface transition duration."
+    },
+    {
+      "name": "motion.easing.enter",
+      "type": "easing",
+      "description": "Motion curve for entering elements."
+    },
+    {
+      "name": "motion.easing.exit",
+      "type": "easing",
+      "description": "Motion curve for exiting elements."
+    },
+    {
+      "name": "motion.easing.standard",
+      "type": "easing",
+      "description": "Standard interface motion curve."
     },
     {
       "name": "radius.control",
@@ -2225,6 +2215,16 @@
       "shadow.elevation.surface": "none",
       "shadow.elevation.control": "none",
       "shadow.elevation.overlay": "0px 8px 24px color-mix(in srgb, var(--ds-shadow-color) 18%, transparent)",
+      "motion.duration.fast": "120ms",
+      "motion.duration.standard": "200ms",
+      "motion.duration.slow": "320ms",
+      "motion.duration.spinner": "750ms",
+      "motion.easing.standard": "cubic-bezier(0.2, 0, 0, 1)",
+      "motion.easing.enter": "cubic-bezier(0, 0, 0.2, 1)",
+      "motion.easing.exit": "cubic-bezier(0.4, 0, 1, 1)",
+      "motion.distance.subtle": "2px",
+      "motion.distance.standard": "8px",
+      "motion.distance.prominent": "12px",
       "radius.surface": "12px",
       "radius.control": "6px",
       "radius.tooltip": "6px",
@@ -2351,6 +2351,16 @@
       "shadow.elevation.surface": "0px 6px 0px 0px #FF3D8D",
       "shadow.elevation.control": "0px 3px 0px 0px #FF3D8D",
       "shadow.elevation.overlay": "0px 8px 24px color-mix(in srgb, var(--ds-shadow-color) 18%, transparent)",
+      "motion.duration.fast": "100ms",
+      "motion.duration.standard": "160ms",
+      "motion.duration.slow": "240ms",
+      "motion.duration.spinner": "640ms",
+      "motion.easing.standard": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+      "motion.easing.enter": "cubic-bezier(0.2, 1, 0.3, 1)",
+      "motion.easing.exit": "cubic-bezier(0.5, 0, 0.9, 0.3)",
+      "motion.distance.subtle": "2px",
+      "motion.distance.standard": "10px",
+      "motion.distance.prominent": "14px",
       "radius.surface": "8px",
       "radius.control": "4px",
       "radius.tooltip": "8px",
@@ -2477,6 +2487,16 @@
       "shadow.elevation.surface": "none",
       "shadow.elevation.control": "none",
       "shadow.elevation.overlay": "0px 8px 24px color-mix(in srgb, var(--ds-shadow-color) 18%, transparent)",
+      "motion.duration.fast": "140ms",
+      "motion.duration.standard": "240ms",
+      "motion.duration.slow": "400ms",
+      "motion.duration.spinner": "900ms",
+      "motion.easing.standard": "cubic-bezier(0.22, 1, 0.36, 1)",
+      "motion.easing.enter": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "motion.easing.exit": "cubic-bezier(0.7, 0, 0.84, 0)",
+      "motion.distance.subtle": "2px",
+      "motion.distance.standard": "10px",
+      "motion.distance.prominent": "14px",
       "radius.surface": "32px",
       "radius.control": "9999px",
       "radius.tooltip": "32px",
@@ -2603,6 +2623,16 @@
       "shadow.elevation.surface": "none",
       "shadow.elevation.control": "none",
       "shadow.elevation.overlay": "0px 8px 24px color-mix(in srgb, var(--ds-shadow-color) 18%, transparent)",
+      "motion.duration.fast": "130ms",
+      "motion.duration.standard": "220ms",
+      "motion.duration.slow": "360ms",
+      "motion.duration.spinner": "800ms",
+      "motion.easing.standard": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+      "motion.easing.enter": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "motion.easing.exit": "cubic-bezier(0.4, 0, 0.8, 0.2)",
+      "motion.distance.subtle": "3px",
+      "motion.distance.standard": "9px",
+      "motion.distance.prominent": "13px",
       "radius.surface": "12px",
       "radius.control": "16px",
       "radius.tooltip": "16px",
@@ -2729,6 +2759,16 @@
       "shadow.elevation.surface": "none",
       "shadow.elevation.control": "none",
       "shadow.elevation.overlay": "0px 8px 24px color-mix(in srgb, var(--ds-shadow-color) 18%, transparent)",
+      "motion.duration.fast": "100ms",
+      "motion.duration.standard": "160ms",
+      "motion.duration.slow": "240ms",
+      "motion.duration.spinner": "700ms",
+      "motion.easing.standard": "cubic-bezier(0.2, 0, 0, 1)",
+      "motion.easing.enter": "cubic-bezier(0, 0, 0.2, 1)",
+      "motion.easing.exit": "cubic-bezier(0.4, 0, 1, 1)",
+      "motion.distance.subtle": "2px",
+      "motion.distance.standard": "6px",
+      "motion.distance.prominent": "10px",
       "radius.surface": "4px",
       "radius.control": "4px",
       "radius.tooltip": "4px",

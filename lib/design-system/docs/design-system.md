@@ -18,7 +18,7 @@ Every token has a stable dotted name, a supported type, a value, and a descripti
 
 ### Motion
 
-Use `motion.duration.*` for transition timing, `motion.easing.*` for the standard, enter, and exit curves, and `motion.distance.*` for movement offsets. Distance tokens describe animation movement, not layout spacing: use `subtle` for small feedback, `standard` for menus and toasts, and `prominent` for dialogs and other high-emphasis overlays. Keep large structural movements such as an off-canvas drawer proportional to its own size.
+Use `motion.duration.*` for transition timing, `motion.easing.*` for the standard, enter, and exit curves, and `motion.distance.*` for movement offsets. These semantic roles are theme-overridable; component CSS should use the same `--ds-motion-*` variable names in every theme. Distance tokens describe animation movement, not layout spacing: use `subtle` for small feedback, `standard` for menus and toasts, and `prominent` for dialogs and other high-emphasis overlays. Keep large structural movements such as an off-canvas drawer proportional to its own size.
 
 Reduced motion is a user preference, not a theme token. Components must respect `prefers-reduced-motion`, removing nonessential movement and stopping motion-driven behavior such as carousel autoplay. Do not rely on zeroing token values alone: disable transitions and transforms where needed, and preserve immediate state changes and functionality.
 

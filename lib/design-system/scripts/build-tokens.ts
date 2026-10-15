@@ -110,9 +110,12 @@ function resolveValue(
     if (name.startsWith("typography.measure.") && value.unit !== "ch") {
       fail(`Typography measure token "${name}" must use ch.`);
     }
+    const isMotionDistance = name.startsWith("motion.distance.") ||
+      /^@theme:[^:]+:motion\.distance\./.test(name);
     if ((name.startsWith("space.") || name.startsWith("radius.") || name.startsWith("border.") ||
+      isMotionDistance ||
       name.startsWith("focus.") || name.startsWith("control.")) && value.unit !== "px") {
-      fail(`Spatial and control token "${name}" must use px.`);
+      fail(`Spatial, motion-distance, and control token "${name}" must use px.`);
     }
     const resolved = `${value.amount}${value.unit}`;
     cache.set(name, resolved);

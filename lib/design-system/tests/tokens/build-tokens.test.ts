@@ -42,18 +42,19 @@ test("generation is deterministic and produces complete themes", async () => {
   assert.equal(first.themes.get("luna")!["color.surface.overlay"], "#2B2545");
   assert.equal(first.themes.get("atom")!["color.status.info.fg"], "#97E9FF");
   assert.equal(first.themes.get("orchid")!["color.status.neutral.bg"], "#EEE4EF");
-  assert.match(first.files.get("tokens.css")!, /--ds-motion-duration-standard: 200ms;/);
-  assert.match(first.files.get("tokens.css")!, /--ds-motion-easing-standard: cubic-bezier\(0\.2, 0, 0, 1\);/);
-  assert.match(first.files.get("tokens.css")!, /--ds-motion-distance-subtle: 2px;/);
-  assert.match(first.files.get("tokens.css")!, /--ds-motion-distance-standard: 8px;/);
-  assert.match(first.files.get("tokens.css")!, /--ds-motion-distance-prominent: 12px;/);
+  assert.match(first.files.get("themes/acme.css")!, /--ds-motion-duration-standard: 200ms;/);
+  assert.match(first.files.get("themes/acme.css")!, /--ds-motion-easing-standard: cubic-bezier\(0\.2, 0, 0, 1\);/);
+  assert.match(first.files.get("themes/acme.css")!, /--ds-motion-distance-subtle: 2px;/);
+  assert.match(first.files.get("themes/acme.css")!, /--ds-motion-distance-standard: 8px;/);
+  assert.match(first.files.get("themes/acme.css")!, /--ds-motion-distance-prominent: 12px;/);
   assert.match(first.files.get("token-types.ts")!, /"motion\.easing\.standard"/);
   assert.match(first.files.get("token-types.ts")!, /"motion\.distance\.standard"/);
-  for (const themeName of ["acme", "luna", "orchid", "atom", "sublime"]) {
-    const themeCss = first.files.get(`themes/${themeName}.css`)!;
-    assert.match(themeCss, /--ds-motion-distance-standard: 8px;/);
-    assert.match(themeCss, /--ds-motion-distance-prominent: 12px;/);
-  }
+  assert.equal(first.themes.get("luna")!["motion.duration.standard"], "240ms");
+  assert.equal(first.themes.get("orchid")!["motion.duration.standard"], "220ms");
+  assert.equal(first.themes.get("atom")!["motion.duration.standard"], "160ms");
+  assert.equal(first.themes.get("sublime")!["motion.distance.standard"], "6px");
+  assert.match(first.files.get("themes/luna.css")!, /--ds-motion-duration-standard: 240ms;/);
+  assert.match(first.files.get("themes/atom.css")!, /--ds-motion-easing-enter: cubic-bezier\(0\.2, 1, 0\.3, 1\);/);
   assert.ok(first.contrastResults.length >= 120);
   assert.ok(first.contrastResults.some((result) => result.name === "Primary text on overlay surface"));
   assert.ok(first.contrastResults.some((result) => result.name === "Strong boundary on overlay surface"));
@@ -117,6 +118,20 @@ test("incompatible token references fail validation", async () => {
     json.tokens["color.canvas"]!.value = { ref: "space.4" };
     await writeFile(file, JSON.stringify(json));
     await assert.rejects(() => compileTokens(temporary), /incompatible type/);
+  } finally {
+    await rm(temporary, { recursive: true, force: true });
+  }
+});
+
+test("theme motion distances must use pixels", async () => {
+  const temporary = await mkdtemp(join(tmpdir(), "design-system-motion-distance-"));
+  try {
+    await cp(source, temporary, { recursive: true });
+    const file = join(temporary, "themes/acme.json");
+    const json = JSON.parse(await readFile(file, "utf8")) as { values: Record<string, unknown> };
+    json.values["motion.distance.standard"] = { amount: 0.5, unit: "rem" };
+    await writeFile(file, JSON.stringify(json));
+    await assert.rejects(() => compileTokens(temporary), /motion-distance.*must use px/);
   } finally {
     await rm(temporary, { recursive: true, force: true });
   }
