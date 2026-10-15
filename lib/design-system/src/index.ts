@@ -359,6 +359,12 @@ export type {
   DialogProps,
   DialogSize,
 } from "./components/Dialog/Dialog";
+export { Popover } from "./components/Popover/Popover";
+export type {
+  PopoverAlignment,
+  PopoverPlacement,
+  PopoverProps,
+} from "./components/Popover/Popover";
 export { Toast, ToastProvider, useToast } from "./components/Toast/Toast";
 export type {
   ToastAction,

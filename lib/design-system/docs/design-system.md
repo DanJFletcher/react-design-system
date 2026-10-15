@@ -211,6 +211,30 @@ An optional `icon` is decorative and appears on the left by default; set `iconPo
 
 Tooltip content is non-interactive and must not contain essential instructions by itself. The component keeps its fixed-position content in the trigger's DOM subtree, preserving semantic tokens and scoped hooks across ACME, Luna, Orchid, and nested theme boundaries. It flips placement when necessary and clamps to the viewport. `placement` accepts `top`, `right`, `bottom`, or `left`; `tooltip.*` hooks customize visual details. The default radius follows `radius.tooltip` (6px in ACME, 32px in Luna, 16px in Orchid), with the local `tooltip.radius` hook taking precedence.
 
+## Popover
+
+```tsx
+<Popover
+  triggerLabel="Profile settings"
+  trigger="Profile settings"
+  heading="Profile settings"
+  description="Update preferences for your account."
+  placement="bottom"
+  align="end"
+  showCloseButton
+>
+  <ProfileSettings />
+</Popover>
+```
+
+`Popover` presents interactive or supplementary content next to a button trigger. It is non-modal: it does not block the page, trap focus, or add a backdrop. The trigger has a required accessible `triggerLabel`; `trigger` customizes its visible content. `heading`, `description`, and `showCloseButton` optionally add a named panel header.
+
+`open` with `onOpenChange` provides controlled state; `defaultOpen` initializes uncontrolled state. Escape, outside pointer activation, and focus leaving the component close it by default; each dismissal behavior can be configured. `autoFocus` focuses the first enabled control when opened. Escape or closing from inside returns focus to the trigger by default, while clicking elsewhere leaves focus with the outside target. Normal Tab order is not trapped.
+
+Choose `placement` (`top`, `right`, `bottom`, or `left`) and `align` (`start`, `center`, or `end`); the panel flips to the opposite side when space is insufficient and clamps to the viewport. `offset` and `collisionPadding` accept non-negative pixel values, otherwise the component uses active spacing tokens. `matchTriggerWidth` aligns the panel's minimum width to its trigger; `panelMaxWidth` limits its width. Trigger variant, size, shape, and icon are configurable. `panelClassName` and typed CSS `panelStyle` customize the content surface.
+
+The component uses the browser's top layer while remaining in its DOM subtree, so themes and scoped tokens continue to inherit across nested theme boundaries. The panel uses the surface radius role (32px in Luna), semantic surface, text, border, shadow, and motion tokens, and respects reduced-motion and forced-colors settings. Use `Menu` for keyboard-navigable action lists and `Dialog` for modal decisions.
+
 ## Icon
 
 ```tsx

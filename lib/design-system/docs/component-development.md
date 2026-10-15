@@ -205,6 +205,15 @@ The contracts below capture decisions for selected components; this list is not 
 - Customization: register `tooltip.*` hooks for surface, text, border, radius, padding, and maximum width; the default radius comes from `radius.tooltip` (32px in Luna), while a local `tooltip.radius` hook takes precedence. Retain semantic defaults and reduced-motion/forced-color support.
 - Validation: Storybook placement, theme, custom-hook, and viewport examples; browser checks for trigger relationships, hover, focus, Escape, touch dismissal, viewport fit, nested themes, and reduced motion; lint, typecheck, Storybook, package build, and package-consumer checks.
 
+### Popover
+
+- Objective: expose contextual interactive content beside its trigger without taking over the page or creating a modal workflow.
+- Dependencies: existing React, the Button, Icon, CSS Modules, native HTML Popover API, semantic surface/text/border/shadow/motion/radius tokens, and the existing reduced-motion helper; no portal, positioning library, or new semantic token.
+- Public API: required `triggerLabel`, optional visible `trigger`, `children`, `heading`, `description`, `panelLabel`, and `headingLevel`; controlled `open`/`onOpenChange` or uncontrolled `defaultOpen`; `placement` (`top`, `right`, `bottom`, `left`) and `align` (`start`, `center`, `end`); non-negative `offset` and `collisionPadding`; `matchTriggerWidth` and `panelMaxWidth`; trigger variant/size/shape/icon; `autoFocus`, `showCloseButton`, and configurable Escape/outside-pointer/focus-outside dismissal. Native div props, root ref, `className`, `panelClassName`, typed root `DesignSystemStyle`, and typed panel `CSSProperties` are supported.
+- Semantics and interaction: the trigger is a named native button; the non-modal top-layer panel is a named `role="dialog"` but has no backdrop, inert background, or focus trap. Escape and focus leaving the root close by default; outside pointer activation dismisses while leaving focus with the outside target. Escape or an inside close returns focus to the trigger. Tab follows ordinary document order; `autoFocus` is opt-in.
+- Position and theme behavior: position the panel in its trigger's DOM subtree so nested theme tokens continue to inherit while the browser paints it in the top layer. Flip when the chosen side cannot fit, clamp to the viewport, update on resize and scroll, and measure the panel through `ResizeObserver`. Use `radius.surface`, not the menu/control radius. Respect reduced motion and forced colors.
+- Validation: Storybook for all side/alignment combinations, edge flipping, controlled state, keyboard/focus/outside dismissal, themes, and nested styles; browser checks for viewport bounds, focus return, and no mobile overflow; lint, typecheck, Storybook, package build, and package-consumer checks.
+
 ### Tabs
 
 - Objective: switch between related panels such as settings sections, feature details, or documentation categories without navigating away.

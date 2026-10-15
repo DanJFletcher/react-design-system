@@ -1,0 +1,42 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as PopoverStories from "./Popover.stories";
+
+<Meta of={PopoverStories} />
+
+<Title />
+
+<Subtitle>Anchored, non-modal content that flips to fit the viewport.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={PopoverStories.Playground} />
+
+The trigger is a design-system `Button`; set `triggerLabel` for its accessible name and `trigger` for custom visible content. Add optional `heading`, `description`, and a close button for content that benefits from a panel header.
+
+## Placement and responsive positioning
+
+<Canvas of={PopoverStories.AllPlacements} />
+<Canvas of={PopoverStories.PositioningAtViewportEdge} />
+
+Choose one of four sides and align it to the start, center, or end of the trigger. The popover automatically flips to the opposite side when needed and clamps to viewport edges. `matchTriggerWidth`, `panelMaxWidth`, `offset`, and `collisionPadding` adjust sizing and spacing.
+
+## Keyboard, focus, and state
+
+<Canvas of={PopoverStories.KeyboardDismissal} />
+<Canvas of={PopoverStories.FocusAndCloseButton} />
+<Canvas of={PopoverStories.AutofocusContent} />
+<Canvas of={PopoverStories.OutsideDismissal} />
+<Canvas of={PopoverStories.FocusOutsideDismissal} />
+<Canvas of={PopoverStories.ControlledOpenState} />
+
+The popover is non-modal and never traps focus. Tab follows the normal page order. Escape, outside pointer activation, and focus leaving the component close it by default. When focus is inside the panel, dismissal returns focus to the trigger; outside pointer activation leaves focus on the outside target. `autoFocus` optionally moves focus to the first enabled control when opening.
+
+`open` and `onOpenChange` provide controlled state; `defaultOpen` initializes uncontrolled state. Set `closeOnEscape`, `closeOnOutsideClick`, or `closeOnFocusOutside` to `false` when a flow needs different dismissal behavior.
+
+## Themes and customization
+
+<Canvas of={PopoverStories.ThemeCoverage} />
+<Canvas of={PopoverStories.NestedThemeBoundary} />
+<Canvas of={PopoverStories.ScopedPanelStyle} />
+
+Popover uses semantic surface, text, border, shadow, motion, and radius tokens and works across ACME, Luna, Orchid, Atom, Sublime, nested themes, and custom themes. `panelClassName` and typed CSS `panelStyle` customize the surface; `triggerVariant`, `triggerSize`, `triggerShape`, `triggerIcon`, and `triggerIconPosition` configure the trigger. Reduced-motion preferences disable animation, and forced-colors mode retains visible boundaries and focus.

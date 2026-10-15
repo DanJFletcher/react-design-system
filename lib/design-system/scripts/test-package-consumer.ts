@@ -39,7 +39,7 @@ try {
     include: ["consumer.tsx"],
   }, null, 2));
   await writeFile(join(temporary, "consumer.tsx"), [
-    'import { ArticleTableOfContents, Button, Checkbox, Combobox, RadioGroup, RangeField, Rating, Select, TextField, Textarea, ThemeScope, ToggleGroup, type ArticleTableOfContentsItem, type ButtonIconPosition, type ButtonShape, type ComboboxOption, type ComboboxProps, type DesignSystemThemeName, type RangeFieldProps, type RatingInputProps, type RatingProps, type RatingStep, type RatingSymbol, type ToggleGroupProps, type ToggleGroupSelectionMode } from "@workspace/design-system";',
+    'import { ArticleTableOfContents, Button, Checkbox, Combobox, Popover, RadioGroup, RangeField, Rating, Select, TextField, Textarea, ThemeScope, ToggleGroup, type ArticleTableOfContentsItem, type ButtonIconPosition, type ButtonShape, type ComboboxOption, type ComboboxProps, type DesignSystemThemeName, type PopoverAlignment, type PopoverPlacement, type PopoverProps, type RangeFieldProps, type RatingInputProps, type RatingProps, type RatingStep, type RatingSymbol, type ToggleGroupProps, type ToggleGroupSelectionMode } from "@workspace/design-system";',
     'import { BREAKPOINT_MEDIA_ALIASES, breakpointMediaPlugin, breakpointMediaVitePlugin } from "@workspace/design-system/breakpoint-media";',
     'import "@workspace/design-system/tokens.css";',
     'import "@workspace/design-system/styles.css";',
@@ -58,20 +58,23 @@ try {
     'const rangeFieldProps: RangeFieldProps = { label: "Moving budget", min: 0, max: 1000, step: 50, defaultValue: 250 };',
     'const comboboxOptions: readonly ComboboxOption[] = [{ value: "ca", label: "Canada" }];',
     'const comboboxProps: ComboboxProps = { label: "Region", options: comboboxOptions, defaultValue: "ca", name: "region" };',
+    'const popoverPlacement: PopoverPlacement = "bottom";',
+    'const popoverAlignment: PopoverAlignment = "end";',
+    'const popoverProps: PopoverProps = { triggerLabel: "Preferences", trigger: "Preferences", heading: "Preferences", placement: popoverPlacement, align: popoverAlignment, children: "Team preferences" };',
     'const ratingProps: RatingProps = { mode: "display", value: 4.5, max: 5 };',
     'const halfStarStep: RatingStep = 0.5;',
     'const ratingSymbol: RatingSymbol = "heart";',
     'const halfStarRatingProps: RatingInputProps = { mode: "input", label: "Customer satisfaction", max: 5, step: halfStarStep, defaultValue: 3.5 };',
     'const heartRatingProps: RatingProps = { mode: "display", value: 4.5, max: 5, symbol: ratingSymbol };',
     'const sections: ArticleTableOfContentsItem[] = [{ id: "overview", label: "Overview" }];',
-    'export const example = <ThemeScope theme={selectedTheme} style={{ "--ds-button-radius": "12px" }}><ArticleTableOfContents items={sections} /><ToggleGroup {...toggleGroupProps} /><RangeField {...rangeFieldProps} /><Rating {...ratingProps} /><Rating {...halfStarRatingProps} /><Rating {...heartRatingProps} /><Combobox {...comboboxProps} /><Button variant="secondary" shape={shape} icon={<span>★</span>} iconPosition={iconPosition}>Continue</Button><Button iconOnly icon={<span>×</span>} aria-label="Close dialog" /><TextField label="Email" type="email" required /><Textarea label="Notes" rows={4} /><Select label="Region" defaultValue="ca"><option value="ca">Canada</option></Select><Checkbox label="Subscribe" name="subscribe" value="yes" /><RadioGroup label="Contact method" name="contact" options={[{ value: "email", label: "Email" }]} /></ThemeScope>;',
+    'export const example = <ThemeScope theme={selectedTheme} style={{ "--ds-button-radius": "12px" }}><ArticleTableOfContents items={sections} /><ToggleGroup {...toggleGroupProps} /><RangeField {...rangeFieldProps} /><Rating {...ratingProps} /><Rating {...halfStarRatingProps} /><Rating {...heartRatingProps} /><Combobox {...comboboxProps} /><Popover {...popoverProps} /><Button variant="secondary" shape={shape} icon={<span>★</span>} iconPosition={iconPosition}>Continue</Button><Button iconOnly icon={<span>×</span>} aria-label="Close dialog" /><TextField label="Email" type="email" required /><Textarea label="Notes" rows={4} /><Select label="Region" defaultValue="ca"><option value="ca">Canada</option></Select><Checkbox label="Subscribe" name="subscribe" value="yes" /><RadioGroup label="Contact method" name="contact" options={[{ value: "email", label: "Email" }]} /></ThemeScope>;',
     "",
   ].join("\n"));
   execFileSync("pnpm", ["install", "--ignore-workspace"], { cwd: temporary, stdio: "inherit" });
   execFileSync("pnpm", ["exec", "tsc", "-p", "tsconfig.json"], { cwd: temporary, stdio: "inherit" });
   execFileSync("pnpm", ["exec", "node", "--input-type=module", "-e", [
     'import assert from "node:assert/strict";',
-    'import { ArticleTableOfContents, Button, Checkbox, Combobox, RadioGroup, RangeField, Rating, Select, TextField, Textarea, ThemeScope, ToggleGroup } from "@workspace/design-system";',
+    'import { ArticleTableOfContents, Button, Checkbox, Combobox, Popover, RadioGroup, RangeField, Rating, Select, TextField, Textarea, ThemeScope, ToggleGroup } from "@workspace/design-system";',
     'import { BREAKPOINT_MEDIA_ALIASES, breakpointMediaVitePlugin } from "@workspace/design-system/breakpoint-media";',
     'assert.equal(typeof Button, "object");',
     'assert.equal(typeof ArticleTableOfContents, "object");',
@@ -79,6 +82,7 @@ try {
     'assert.equal(typeof RadioGroup, "object");',
     'assert.equal(typeof Select, "object");',
     'assert.equal(typeof Combobox, "object");',
+    'assert.equal(typeof Popover, "object");',
     'assert.equal(typeof TextField, "object");',
     'assert.equal(typeof Textarea, "object");',
     'assert.equal(typeof ThemeScope, "function");',

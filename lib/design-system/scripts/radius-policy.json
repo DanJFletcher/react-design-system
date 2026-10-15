@@ -28,6 +28,7 @@
     { "file": "Carousel/Carousel.module.css", "selector": ".indicator::before", "role": "circle", "reason": "Decorative slide dot." },
     { "file": "Carousel/Carousel.module.css", "selector": ".indicator[aria-current=\"true\"]::before", "role": "circle", "reason": "Intentionally capsule-shaped selected slide marker." },
     { "file": "Dialog/Dialog.module.css", "selector": ".closeButton", "role": "action", "reason": "Dialog dismissal control, not its panel." },
+    { "file": "Popover/Popover.module.css", "selector": ".closeButton", "role": "action", "reason": "Popover dismissal control, not its content surface." },
     { "file": "FormControls/FormControls.module.css", "selector": ".control", "role": "form", "reason": "Single-line text, date, file and select controls." },
     { "file": "Combobox/Combobox.module.css", "selector": ".control", "role": "form", "reason": "The searchable text input follows the theme's form-control corner shape." },
     { "file": "Combobox/Combobox.module.css", "selector": ".clearButton", "role": "action", "reason": "The inline clear action follows the theme's button corner shape." },
