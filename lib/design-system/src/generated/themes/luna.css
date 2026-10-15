@@ -303,6 +303,7 @@
   --ds-radius-tooltip: 32px;
   --ds-shadow-color: #000000;
   --ds-shadow-elevation-control: none;
+  --ds-shadow-elevation-overlay: 0px 8px 24px color-mix(in srgb, var(--ds-shadow-color) 18%, transparent);
   --ds-shadow-elevation-surface: none;
   --ds-shadow-offset-control: 0px;
   --ds-shadow-offset-surface: 0px;

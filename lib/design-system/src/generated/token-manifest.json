@@ -624,6 +624,11 @@
       "description": "Complete box-shadow treatment for interactive controls."
     },
     {
+      "name": "shadow.elevation.overlay",
+      "type": "boxShadow",
+      "description": "Soft elevation treatment for floating controls and navigation overlays."
+    },
+    {
       "name": "shadow.elevation.surface",
       "type": "boxShadow",
       "description": "Complete box-shadow treatment for raised content surfaces."
@@ -1796,6 +1801,7 @@
       "shadow.offset.control": "0px",
       "shadow.elevation.surface": "none",
       "shadow.elevation.control": "none",
+      "shadow.elevation.overlay": "0px 8px 24px color-mix(in srgb, var(--ds-shadow-color) 18%, transparent)",
       "radius.surface": "12px",
       "radius.control": "6px",
       "radius.tooltip": "6px",
@@ -1854,6 +1860,7 @@
       "shadow.offset.control": "3px",
       "shadow.elevation.surface": "0px 6px 0px 0px #FF3D8D",
       "shadow.elevation.control": "0px 3px 0px 0px #FF3D8D",
+      "shadow.elevation.overlay": "0px 8px 24px color-mix(in srgb, var(--ds-shadow-color) 18%, transparent)",
       "radius.surface": "8px",
       "radius.control": "4px",
       "radius.tooltip": "8px",
@@ -1912,6 +1919,7 @@
       "shadow.offset.control": "0px",
       "shadow.elevation.surface": "none",
       "shadow.elevation.control": "none",
+      "shadow.elevation.overlay": "0px 8px 24px color-mix(in srgb, var(--ds-shadow-color) 18%, transparent)",
       "radius.surface": "32px",
       "radius.control": "9999px",
       "radius.tooltip": "32px",
@@ -1970,6 +1978,7 @@
       "shadow.offset.control": "0px",
       "shadow.elevation.surface": "none",
       "shadow.elevation.control": "none",
+      "shadow.elevation.overlay": "0px 8px 24px color-mix(in srgb, var(--ds-shadow-color) 18%, transparent)",
       "radius.surface": "12px",
       "radius.control": "16px",
       "radius.tooltip": "16px",
@@ -2028,6 +2037,7 @@
       "shadow.offset.control": "0px",
       "shadow.elevation.surface": "none",
       "shadow.elevation.control": "none",
+      "shadow.elevation.overlay": "0px 8px 24px color-mix(in srgb, var(--ds-shadow-color) 18%, transparent)",
       "radius.surface": "4px",
       "radius.control": "4px",
       "radius.tooltip": "4px",

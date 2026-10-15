@@ -30,7 +30,7 @@ New theme roles are checked against their documented text and indicator contrast
 
 Border color and width are independent semantic decisions. Use `border.width.subtle` for separators and low-emphasis boundaries, `border.width.default` for ordinary component edges, and `border.width.strong` for prominent outlines. Pair them with the appropriate `color.border.*` role; do not use a thicker border as a substitute for sufficient contrast.
 
-Use `shadow.elevation.surface` and `shadow.elevation.control` as complete `box-shadow` values for raised content and interactive controls. Themes can define soft shadows, hard offset shadows, or `none` without every component rebuilding a shadow from color and offset fragments. Atom uses vivid, unblurred offsets; the other themes currently keep these roles flat. The older `shadow.color` and `shadow.offset.*` tokens remain available for compatibility, but new component styles should consume the semantic elevation roles.
+Use `shadow.elevation.surface`, `shadow.elevation.control`, and `shadow.elevation.overlay` as complete `box-shadow` values for content surfaces, controls, and floating overlays. Themes can define soft shadows, hard offsets, or `none` without every component rebuilding a shadow from color and offset fragments. Atom uses vivid, unblurred offsets for surfaces and controls; floating overlays retain a soft shadow. The older `shadow.color` and `shadow.offset.*` tokens remain available for compatibility and scrim tinting, but new component styles should consume the semantic elevation roles.
 
 ### Layer scale
 

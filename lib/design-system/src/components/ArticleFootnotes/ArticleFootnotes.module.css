@@ -21,7 +21,7 @@
   min-inline-size: 0;
   margin-block: var(--ds-space-8) 0;
   padding-block-start: var(--ds-space-4);
-  border-block-start: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  border-block-start: var(--ds-border-width-subtle) solid var(--ds-color-border-control);
   color: var(--ds-color-text-primary);
   font-family: var(--ds-font-family-sans);
   font-size: var(--ds-font-size-sm);

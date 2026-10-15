@@ -93,7 +93,7 @@
   justify-content: space-between;
   gap: var(--ds-space-4);
   padding: var(--ds-dialog-padding, var(--_dialog-padding));
-  border-block-end: var(--ds-border-width-default) solid var(--ds-dialog-border, var(--_dialog-border));
+  border-block-end: var(--ds-border-width-subtle) solid var(--ds-dialog-border, var(--_dialog-border));
 }
 
 .headingGroup {
@@ -164,7 +164,7 @@
   justify-content: flex-end;
   gap: var(--ds-space-3);
   padding: var(--ds-dialog-padding, var(--_dialog-padding));
-  border-block-start: var(--ds-border-width-default) solid var(--ds-dialog-border, var(--_dialog-border));
+  border-block-start: var(--ds-border-width-subtle) solid var(--ds-dialog-border, var(--_dialog-border));
 }
 
 @media (max-width: 32rem) {

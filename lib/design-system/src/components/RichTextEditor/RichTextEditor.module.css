@@ -35,14 +35,14 @@
   gap: var(--ds-space-1);
   min-inline-size: 0;
   padding: var(--ds-space-2);
-  border-block-end: var(--ds-border-width-default) solid var(--_rte-border);
+  border-block-end: var(--ds-border-width-subtle) solid var(--_rte-border);
   border-start-start-radius: var(--ds-radius-form-group);
   border-start-end-radius: var(--ds-radius-form-group);
   background: var(--ds-color-surface-secondary, var(--_rte-surface));
 }
 .group { display: inline-flex; align-items: center; gap: var(--ds-space-1); }
 .toolbarSpacer { flex: 1 1 auto; }
-.divider { inline-size: var(--ds-border-width-default); block-size: var(--ds-space-6); margin-inline: var(--ds-space-1); background: var(--_rte-border); }
+.divider { inline-size: var(--ds-border-width-subtle); block-size: var(--ds-space-6); margin-inline: var(--ds-space-1); background: var(--_rte-border); }
 .toolButton, .blockSelect {
   box-sizing: border-box;
   min-block-size: var(--ds-control-min-block-size-sm);

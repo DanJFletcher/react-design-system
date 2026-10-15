@@ -50,6 +50,7 @@
     "shadow.offset.control": { "type": "dimension", "value": { "amount": 0, "unit": "px" }, "description": "Hard offset used by interactive controls." },
     "shadow.elevation.surface": { "type": "boxShadow", "value": "none", "description": "Complete box-shadow treatment for raised content surfaces." },
     "shadow.elevation.control": { "type": "boxShadow", "value": "none", "description": "Complete box-shadow treatment for interactive controls." },
+    "shadow.elevation.overlay": { "type": "boxShadow", "value": "0px 8px 24px color-mix(in srgb, var(--ds-shadow-color) 18%, transparent)", "description": "Soft elevation treatment for floating controls and navigation overlays." },
     "radius.surface": { "type": "dimension", "value": { "amount": 12, "unit": "px" }, "description": "Bounded corners for content panels, cards, code blocks, media, and other surfaces; never use action-control or full radii for these defaults." },
     "radius.control": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Default action button and intentionally pill-shaped action control radius, not a content surface radius." },
     "radius.tooltip": { "type": "dimension", "value": { "amount": 6, "unit": "px" }, "description": "Default corner radius for supplementary tooltip content." },

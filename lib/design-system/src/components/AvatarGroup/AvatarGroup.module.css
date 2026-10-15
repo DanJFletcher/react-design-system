@@ -48,7 +48,7 @@
   display: grid;
   place-items: center;
   box-sizing: border-box;
-  border: calc(2 * var(--ds-border-width-default)) solid var(--ds-color-border-control);
+  border: var(--ds-border-width-strong) solid var(--ds-color-border-control);
   background: var(--ds-color-canvas);
   color: var(--ds-color-text-primary);
   font-size: var(--ds-font-size-xs);
@@ -104,10 +104,10 @@
   overflow: auto;
   margin: 0;
   padding: var(--ds-space-3);
-  border: var(--ds-border-width-default) solid var(--ds-color-border-subtle);
+  border: var(--ds-border-width-subtle) solid var(--ds-color-border-subtle);
   border-radius: var(--ds-radius-surface);
   background: var(--ds-color-surface-primary);
-  box-shadow: var(--ds-shadow-surface);
+  box-shadow: var(--ds-shadow-elevation-surface);
   color: var(--ds-color-text-primary);
   list-style: none;
 }

@@ -51,6 +51,7 @@
     "shadow.offset.control": { "amount": 0, "unit": "px" },
     "shadow.elevation.surface": "none",
     "shadow.elevation.control": "none",
+    "shadow.elevation.overlay": "0px 8px 24px color-mix(in srgb, var(--ds-shadow-color) 18%, transparent)",
     "radius.surface": { "amount": 12, "unit": "px" },
     "radius.control": { "amount": 6, "unit": "px" },
     "radius.tooltip": { "amount": 6, "unit": "px" },

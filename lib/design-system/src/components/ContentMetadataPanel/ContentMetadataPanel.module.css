@@ -152,7 +152,7 @@
   justify-content: space-between;
   gap: var(--ds-space-3);
   padding: var(--ds-space-3) var(--ds-space-4);
-  border-block-end: var(--ds-border-width-default) solid var(--_metadata-border);
+  border-block-end: var(--ds-border-width-subtle) solid var(--_metadata-border);
 }
 
 .previewTitle {

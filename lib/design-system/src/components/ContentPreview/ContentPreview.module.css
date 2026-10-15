@@ -107,7 +107,7 @@
   border: var(--ds-border-width-default) solid var(--ds-color-border-control);
   border-radius: var(--ds-radius-surface);
   background: var(--ds-color-surface-primary);
-  box-shadow: var(--ds-shadow-surface);
+  box-shadow: var(--ds-shadow-elevation-surface);
 }
 
 .frame[data-full-width] {

@@ -139,7 +139,7 @@
   justify-content: space-between;
   gap: var(--ds-space-3);
   padding-block-start: var(--ds-space-3);
-  border-block-start: var(--ds-border-width-default) solid var(--ds-card-border, var(--_card-border));
+  border-block-start: var(--ds-border-width-subtle) solid var(--ds-card-border, var(--_card-border));
 }
 
 .footerContent {

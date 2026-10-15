@@ -11,7 +11,7 @@
   min-inline-size: 0;
   gap: var(--ds-space-1);
   overflow-x: auto;
-  border-block-end: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  border-block-end: var(--ds-border-width-subtle) solid var(--ds-color-border-control);
 }
 
 .tab {
@@ -55,9 +55,9 @@
 
 .tabs[data-variant="line"] .tab[aria-selected="true"]::after {
   position: absolute;
-  inset-block-end: calc(-1 * var(--ds-border-width-default));
+  inset-block-end: calc(-1 * var(--ds-border-width-subtle));
   inset-inline: var(--ds-space-3);
-  block-size: var(--ds-border-width-default);
+  block-size: var(--ds-border-width-subtle);
   background-color: var(--ds-color-action-primary-bg);
   content: "";
 }
@@ -118,14 +118,14 @@
   flex-direction: column;
   overflow-x: visible;
   border-block-end: 0;
-  border-inline-end: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  border-inline-end: var(--ds-border-width-subtle) solid var(--ds-color-border-control);
 }
 
 .tabs[data-orientation="vertical"][data-variant="line"]
   .tab[aria-selected="true"]::after {
   inset-block: var(--ds-space-2);
-  inset-inline: auto calc(-1 * var(--ds-border-width-default));
-  inline-size: var(--ds-border-width-default);
+  inset-inline: auto calc(-1 * var(--ds-border-width-subtle));
+  inline-size: var(--ds-border-width-subtle);
   block-size: auto;
 }
 

@@ -200,7 +200,7 @@
   box-sizing: border-box;
   block-size: 0;
   margin-block: var(--ds-space-1);
-  border-block-start: var(--ds-border-width-default) solid var(--ds-menu-border, var(--ds-color-border-control));
+  border-block-start: var(--ds-border-width-subtle) solid var(--ds-menu-border, var(--ds-color-border-control));
 }
 
 .emptyItem {
@@ -231,7 +231,7 @@
   .submenuList {
     border-block: 0;
     border-inline-end: 0;
-    border-inline-start: var(--ds-border-width-default) solid var(--ds-menu-border, var(--ds-color-border-control));
+    border-inline-start: var(--ds-border-width-subtle) solid var(--ds-menu-border, var(--ds-color-border-control));
     border-radius: 0;
   }
 

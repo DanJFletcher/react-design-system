@@ -118,7 +118,7 @@
   justify-content: space-between;
   gap: var(--ds-space-3) var(--ds-space-5);
   padding-block-start: var(--ds-space-4);
-  border-block-start: var(--ds-border-width-default) solid var(--_footer-border);
+  border-block-start: var(--ds-border-width-subtle) solid var(--_footer-border);
 }
 
 .bottomContent {

@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Border color and width are separate roles. Use subtle, default, and strong widths for increasing emphasis. Surface and control elevation tokens provide complete theme-owned box-shadow values, including none.",
+          "Border color and width are separate roles. Use subtle, default, and strong widths for increasing emphasis. Surface, control, and overlay elevation tokens provide complete theme-owned box-shadow values, including none.",
       },
     },
   },
@@ -91,6 +91,18 @@ export const ThemeComparison: Story = {
           >
             Interactive control · <code>shadow.elevation.control</code>
           </button>
+          <div
+            data-testid={`${theme}-overlay-elevation`}
+            style={{
+              justifySelf: "start",
+              padding: "var(--ds-space-3)",
+              border: "var(--ds-border-width-default) solid var(--ds-color-border-control)",
+              background: "var(--ds-color-surface-overlay)",
+              boxShadow: "var(--ds-shadow-elevation-overlay)",
+            }}
+          >
+            Floating overlay · <code>shadow.elevation.overlay</code>
+          </div>
         </section>
       ))}
     </div>
@@ -100,12 +112,14 @@ export const ThemeComparison: Story = {
     const lunaSurface = canvas.getByTestId("luna-surface-elevation");
     const atomSurface = canvas.getByTestId("atom-surface-elevation");
     const atomControl = canvas.getByTestId("atom-control-elevation");
+    const lunaOverlay = canvas.getByTestId("luna-overlay-elevation");
     const atomSubtleBorder = canvas.getByTestId("atom-subtle-border");
     const atomStrongBorder = canvas.getByTestId("atom-strong-border");
 
     expect(getComputedStyle(lunaSurface).boxShadow).toBe("none");
     expect(getComputedStyle(atomSurface).boxShadow).not.toBe("none");
     expect(getComputedStyle(atomControl).boxShadow).not.toBe("none");
+    expect(getComputedStyle(lunaOverlay).boxShadow).not.toBe("none");
     expect(getComputedStyle(atomSubtleBorder).borderTopWidth).toBe("2px");
     expect(getComputedStyle(atomStrongBorder).borderTopWidth).toBe("4px");
   },
