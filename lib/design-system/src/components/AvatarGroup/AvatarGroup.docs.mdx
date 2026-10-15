@@ -1,0 +1,30 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+import * as AvatarGroupStories from "./AvatarGroup.stories";
+
+<Meta of={AvatarGroupStories} />
+
+# Avatar group
+
+Show a compact team of people using the shared Avatar component. Set `maxVisible` to control how many faces appear in the stack. If members are hidden, the `+N` disclosure opens an accessible list of their names.
+
+<Canvas of={AvatarGroupStories.TeamMembers} />
+
+## Provide members
+
+Give each member a stable `id` and a meaningful `name`. `src` and `initials` use the same image and fallback behavior as Avatar. The group preserves the order you provide.
+
+```tsx
+<AvatarGroup
+  label="Project team"
+  members={members}
+  maxVisible={4}
+  size="md"
+/>;
+```
+
+`overflowLabel` can provide a localized accessible label for the disclosure. The disclosure uses native `<details>` and `<summary>` behavior, so it works with keyboard input without custom focus management.
+
+<Canvas of={AvatarGroupStories.OverflowDisclosure} />
+<Canvas of={AvatarGroupStories.SmallGroup} />
+<Canvas of={AvatarGroupStories.AllMembersHidden} />
+<Canvas of={AvatarGroupStories.ThemeCoverage} />

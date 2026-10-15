@@ -3,8 +3,8 @@
   flex: 0 0 auto;
   place-items: center;
   overflow: hidden;
-  border: var(--ds-border-width-default) solid var(--ds-color-border-subtle);
-  background: var(--ds-color-surface-secondary);
+  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  background: var(--ds-color-canvas);
   color: var(--ds-color-text-primary);
   font-family: var(--ds-font-family-sans);
   font-weight: var(--ds-font-weight-semibold);

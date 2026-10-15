@@ -20,6 +20,11 @@ export type {
   AvatarShape,
   AvatarSize,
 } from "./components/Avatar/Avatar";
+export { AvatarGroup } from "./components/AvatarGroup/AvatarGroup";
+export type {
+  AvatarGroupMember,
+  AvatarGroupProps,
+} from "./components/AvatarGroup/AvatarGroup";
 export { Callout } from "./components/Callout/Callout";
 export type { CalloutProps, CalloutTone } from "./components/Callout/Callout";
 export { AnnouncementBar } from "./components/AnnouncementBar/AnnouncementBar";
