@@ -130,7 +130,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
             data-disabled={item.disabled || undefined}
             key={item.id}
           >
-            <Heading className={styles.heading}>
+            <Heading className={styles.heading} data-ds-accordion-heading>
               <button
                 aria-controls={panelId}
                 aria-expanded={isOpen}
@@ -141,7 +141,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
                 onClick={() => toggleItem(item)}
                 type="button"
               >
-                <span className={styles.title}>{item.title}</span>
+                <span className={styles.title} data-ds-accordion-title>{item.title}</span>
                 <Icon
                   aria-hidden="true"
                   className={styles.chevron}

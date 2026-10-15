@@ -156,6 +156,14 @@ export const ThemeCoverage: Story = {
     await expect(getComputedStyle(atomAccordion).boxShadow).toBe("none");
     await expect(getComputedStyle(atomItem).boxShadow).toBe("none");
     await expect(getComputedStyle(atomTrigger).boxShadow).toBe("none");
+    const heading = atomTrigger.closest("h3");
+    const title = atomTrigger.querySelector<HTMLElement>("[data-ds-accordion-title]");
+    if (!heading || !title) throw new Error("Expected an H3 accordion title.");
+    await expect(getComputedStyle(heading, "::before").content).toBe("none");
+    await expect(getComputedStyle(heading, "::after").content).toBe("none");
+    await expect(getComputedStyle(title, "::before").backgroundColor).toBe("rgb(150, 63, 157)");
+    await expect(getComputedStyle(title, "::after").backgroundColor).toBe("rgb(255, 61, 141)");
+    await expect(title.getBoundingClientRect().width).toBeLessThan(atomTrigger.getBoundingClientRect().width);
   },
 };
 

@@ -11,8 +11,8 @@
 
 /* Limit the marker treatment to the nearest Atom theme boundary. */
 @scope ([data-ds-theme="atom"]) to ([data-ds-theme]:not([data-ds-theme="atom"])) {
-  :scope :is(h1, h2, h3),
-  :scope :is(h1, h2, h3)[data-tone] {
+  :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title]),
+  :scope :is(h1, h2, h3:not([data-ds-accordion-heading]))[data-tone] {
     position: relative;
     isolation: isolate;
     display: inline-block;
@@ -25,8 +25,8 @@
     overflow-wrap: anywhere;
   }
 
-  :scope :is(h1, h2, h3)::before,
-  :scope :is(h1, h2, h3)::after {
+  :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title])::before,
+  :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title])::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -54,31 +54,31 @@
     transform: translate(-0.12em, -0.1em);
   }
 
-  :scope h3,
-  :scope h3[data-tone] {
+  :scope :is(h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title]),
+  :scope h3:not([data-ds-accordion-heading])[data-tone] {
     color: var(--ds-color-text-primary);
   }
 
-  :scope h3::before {
+  :scope :is(h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title])::before {
     z-index: -1;
     background-color: var(--ds-color-accent-border);
     transform: translate(0.12em, 0.1em);
   }
 
-  :scope h3::after {
+  :scope :is(h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title])::after {
     z-index: -2;
     background-color: var(--ds-color-action-primary-bg);
     transform: translate(-0.12em, -0.1em);
   }
 
   @media (forced-colors: active) {
-    :scope :is(h1, h2, h3),
-    :scope :is(h1, h2, h3)[data-tone] {
+    :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title]),
+    :scope :is(h1, h2, h3:not([data-ds-accordion-heading]))[data-tone] {
       color: CanvasText;
     }
 
-    :scope :is(h1, h2, h3)::before,
-    :scope :is(h1, h2, h3)::after {
+    :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title])::before,
+    :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title])::after {
       content: none;
     }
   }

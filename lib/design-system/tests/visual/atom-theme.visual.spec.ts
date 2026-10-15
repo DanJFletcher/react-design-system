@@ -191,6 +191,46 @@ test("Atom H1–H2 and H3 use their layered marker colors with clipped highlight
   }
 });
 
+test("Atom accordion H3 markers stay on title spans with full-width click targets", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/iframe.html?id=components-accordion--theme-coverage&viewMode=story");
+  const accordion = page.getByRole("group", { name: "atom questions" });
+  const trigger = accordion.getByRole("button").first();
+  const heading = accordion.locator("h3").first();
+  const title = trigger.locator("[data-ds-accordion-title]");
+  await expect(trigger).toBeVisible();
+  const geometry = await title.evaluate((element) => {
+    const trigger = element.closest("button")!;
+    const icon = trigger.querySelector("svg")!;
+    return {
+      titleRight: element.getBoundingClientRect().right,
+      iconLeft: icon.getBoundingClientRect().left,
+      titleWidth: element.getBoundingClientRect().width,
+      triggerWidth: trigger.getBoundingClientRect().width,
+      front: getComputedStyle(element, "::before").backgroundColor,
+      back: getComputedStyle(element, "::after").backgroundColor,
+    };
+  });
+  expect(geometry.front).toBe("rgb(150, 63, 157)");
+  expect(geometry.back).toBe("rgb(255, 61, 141)");
+  expect(geometry.titleRight).toBeLessThan(geometry.iconLeft);
+  expect(geometry.titleWidth).toBeLessThan(geometry.triggerWidth);
+  for (const pseudo of ["::before", "::after"]) {
+    expect(await heading.evaluate((element, pseudo) =>
+      getComputedStyle(element, pseudo).content, pseudo)).toBe("none");
+  }
+  const bounds = await trigger.boundingBox();
+  await trigger.click({ position: { x: bounds!.width - 8, y: bounds!.height / 2 } });
+  await expect(trigger).toHaveAttribute("aria-expanded", "true");
+  expect(await page.evaluate(() =>
+    document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.emulateMedia({ forcedColors: "active" });
+  for (const pseudo of ["::before", "::after"]) {
+    expect(await title.evaluate((element, pseudo) =>
+      getComputedStyle(element, pseudo).content, pseudo)).toBe("none");
+  }
+});
+
 test("Atom uses a dark palette, thick borders, and hard shadows", async ({
   page,
 }) => {
