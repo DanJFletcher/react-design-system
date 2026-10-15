@@ -43,11 +43,11 @@
 }
 
 .dialog[data-motion="slide"][data-motion-state="entering"] {
-  transform: translateY(var(--ds-space-3)) scale(0.98);
+  transform: translateY(var(--ds-motion-distance-prominent)) scale(0.98);
 }
 
 .dialog[data-motion="slide"][data-motion-state="exiting"] {
-  transform: translateY(var(--ds-space-2)) scale(0.98);
+  transform: translateY(var(--ds-motion-distance-standard)) scale(0.98);
 }
 
 .dialog[data-motion-state="exiting"] {

@@ -71,11 +71,11 @@
 }
 
 .toast[data-motion="slide"][data-motion-state="entering"] {
-  transform: translateY(var(--ds-space-2));
+  transform: translateY(var(--ds-motion-distance-standard));
 }
 
 .toast[data-motion="slide"][data-motion-state="exiting"] {
-  transform: translateY(calc(-1 * var(--ds-space-2)));
+  transform: translateY(calc(-1 * var(--ds-motion-distance-standard)));
 }
 
 .toast[data-motion-state="exiting"] {

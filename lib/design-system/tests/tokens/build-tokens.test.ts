@@ -44,7 +44,16 @@ test("generation is deterministic and produces complete themes", async () => {
   assert.equal(first.themes.get("orchid")!["color.status.neutral.bg"], "#EEE4EF");
   assert.match(first.files.get("tokens.css")!, /--ds-motion-duration-standard: 200ms;/);
   assert.match(first.files.get("tokens.css")!, /--ds-motion-easing-standard: cubic-bezier\(0\.2, 0, 0, 1\);/);
+  assert.match(first.files.get("tokens.css")!, /--ds-motion-distance-subtle: 2px;/);
+  assert.match(first.files.get("tokens.css")!, /--ds-motion-distance-standard: 8px;/);
+  assert.match(first.files.get("tokens.css")!, /--ds-motion-distance-prominent: 12px;/);
   assert.match(first.files.get("token-types.ts")!, /"motion\.easing\.standard"/);
+  assert.match(first.files.get("token-types.ts")!, /"motion\.distance\.standard"/);
+  for (const themeName of ["acme", "luna", "orchid", "atom", "sublime"]) {
+    const themeCss = first.files.get(`themes/${themeName}.css`)!;
+    assert.match(themeCss, /--ds-motion-distance-standard: 8px;/);
+    assert.match(themeCss, /--ds-motion-distance-prominent: 12px;/);
+  }
   assert.ok(first.contrastResults.length >= 120);
   assert.ok(first.contrastResults.some((result) => result.name === "Primary text on overlay surface"));
   assert.ok(first.contrastResults.some((result) => result.name === "Strong boundary on overlay surface"));

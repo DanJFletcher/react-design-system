@@ -72,7 +72,7 @@
 
 .uploadButton:hover,
 .confirmButton:hover:not(:disabled) {
-  transform: translateY(calc(var(--ds-space-half) * -1));
+  transform: translateY(calc(var(--ds-motion-distance-subtle) * -1));
 }
 
 @media (prefers-reduced-motion: reduce) {

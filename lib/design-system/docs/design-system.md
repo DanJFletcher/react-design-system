@@ -16,6 +16,12 @@ Token sources use a deliberately small schema in `src/tokens/schema.json`; this 
 
 Every token has a stable dotted name, a supported type, a value, and a description. Dimensions are constrained by category: font sizes are `rem`; spacing, layout, control, focus, radius, and border values are `px`; line heights are unitless; font weights are numeric; motion durations are `ms`. The shared font families include sans and monospace stacks. Structural CSS values such as `0`, `auto`, `currentColor`, and `transparent` are permitted where appropriate.
 
+### Motion
+
+Use `motion.duration.*` for transition timing, `motion.easing.*` for the standard, enter, and exit curves, and `motion.distance.*` for movement offsets. Distance tokens describe animation movement, not layout spacing: use `subtle` for small feedback, `standard` for menus and toasts, and `prominent` for dialogs and other high-emphasis overlays. Keep large structural movements such as an off-canvas drawer proportional to its own size.
+
+Reduced motion is a user preference, not a theme token. Components must respect `prefers-reduced-motion`, removing nonessential movement and stopping motion-driven behavior such as carousel autoplay. Do not rely on zeroing token values alone: disable transitions and transforms where needed, and preserve immediate state changes and functionality.
+
 The compiler validates names, descriptions, types, units, references, cycles, reference type compatibility, theme completeness, and generated CSS-variable collisions. It resolves references to concrete values, generates deterministic CSS, TypeScript names and a manifest, and exits with an error if checked-in output is stale. Add or edit source files only; never hand-edit `src/generated/`.
 
 ### Semantic color roles

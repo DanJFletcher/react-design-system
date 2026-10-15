@@ -32,6 +32,9 @@
   --ds-layout-grid-item-sm: 14rem;
   --ds-line-height-normal: 1.5;
   --ds-line-height-tight: 1.2;
+  --ds-motion-distance-prominent: 12px;
+  --ds-motion-distance-standard: 8px;
+  --ds-motion-distance-subtle: 2px;
   --ds-motion-duration-fast: 120ms;
   --ds-motion-duration-slow: 320ms;
   --ds-motion-duration-spinner: 750ms;

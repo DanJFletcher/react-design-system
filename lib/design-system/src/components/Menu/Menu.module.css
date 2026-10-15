@@ -35,7 +35,7 @@
 
 .panelAnimated {
   opacity: 0;
-  transform: translateY(calc(-1 * var(--ds-space-2)));
+  transform: translateY(calc(-1 * var(--ds-motion-distance-standard)));
   visibility: hidden;
   pointer-events: none;
   transition:
@@ -59,7 +59,7 @@
 }
 
 .root[data-placement^="top"] > .panelAnimated {
-  transform: translateY(var(--ds-space-2));
+  transform: translateY(var(--ds-motion-distance-standard));
 }
 
 .root[data-placement^="top"] > .panelAnimated[data-open="true"] {
@@ -92,7 +92,7 @@
   grid-template-rows: 0fr;
   overflow: hidden;
   opacity: 0;
-  transform: translateY(calc(-1 * var(--ds-space-2)));
+  transform: translateY(calc(-1 * var(--ds-motion-distance-standard)));
   visibility: hidden;
   pointer-events: none;
   transition:

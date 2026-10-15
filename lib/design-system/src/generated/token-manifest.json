@@ -195,6 +195,24 @@
       "description": "Compact unitless line height."
     },
     {
+      "name": "motion.distance.prominent",
+      "type": "dimension",
+      "value": "12px",
+      "description": "More noticeable movement distance for dialogs and prominent overlays."
+    },
+    {
+      "name": "motion.distance.standard",
+      "type": "dimension",
+      "value": "8px",
+      "description": "Standard movement distance for menus, toasts, and small overlays."
+    },
+    {
+      "name": "motion.distance.subtle",
+      "type": "dimension",
+      "value": "2px",
+      "description": "Small movement for subtle hover and feedback transitions."
+    },
+    {
       "name": "motion.duration.fast",
       "type": "duration",
       "value": "120ms",
