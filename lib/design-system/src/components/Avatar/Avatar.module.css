@@ -1,0 +1,73 @@
+.avatar {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  overflow: hidden;
+  border: var(--ds-border-width-default) solid var(--ds-color-border-subtle);
+  background: var(--ds-color-surface-secondary);
+  color: var(--ds-color-text-primary);
+  font-family: var(--ds-font-family-sans);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.sm {
+  inline-size: var(--ds-space-8);
+  block-size: var(--ds-space-8);
+  font-size: var(--ds-font-size-xs);
+}
+
+.md {
+  inline-size: var(--ds-space-10);
+  block-size: var(--ds-space-10);
+  font-size: var(--ds-font-size-sm);
+}
+
+.lg {
+  inline-size: var(--ds-space-12);
+  block-size: var(--ds-space-12);
+  font-size: var(--ds-font-size-md);
+}
+
+.xl {
+  inline-size: var(--ds-space-16);
+  block-size: var(--ds-space-16);
+  font-size: var(--ds-font-size-lg);
+}
+
+.circle {
+  border-radius: var(--ds-radius-full);
+}
+
+.rounded {
+  border-radius: var(--ds-radius-surface);
+}
+
+.square {
+  border-radius: 0;
+}
+
+.image {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.initials {
+  display: grid;
+  place-items: center;
+  inline-size: 100%;
+  block-size: 100%;
+  padding: var(--ds-space-1);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+@media (forced-colors: active) {
+  .avatar {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+}

@@ -1,0 +1,27 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+import * as AvatarStories from "./Avatar.stories";
+
+<Meta of={AvatarStories} />
+
+# Avatar
+
+Represent a person with an image or initials fallback. The avatar has an accessible name from `name`; the image itself is decorative to assistive technology.
+
+<Canvas of={AvatarStories.Playground} />
+
+## Image and initials fallback
+
+When `src` is missing or the image fails to load, the component derives up to two initials from `name`. Pass `initials` to override the generated fallback.
+
+```tsx
+<Avatar name="Maya Chen" src="/media/maya-chen.jpg" size="md" />
+<Avatar name="Theo Park" size="lg" shape="rounded" />
+```
+
+Sizes are `sm`, `md`, `lg`, and `xl`. Shapes are `circle` (default), `rounded`, and `square`.
+
+<Canvas of={AvatarStories.InitialsFallback} />
+<Canvas of={AvatarStories.CustomInitials} />
+<Canvas of={AvatarStories.ImageFallback} />
+<Canvas of={AvatarStories.SizeAndShapeOptions} />
+<Canvas of={AvatarStories.ThemeCoverage} />

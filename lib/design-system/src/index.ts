@@ -14,6 +14,12 @@ export type {
   BadgeSize,
   BadgeTone,
 } from "./components/Badge/Badge";
+export { Avatar } from "./components/Avatar/Avatar";
+export type {
+  AvatarProps,
+  AvatarShape,
+  AvatarSize,
+} from "./components/Avatar/Avatar";
 export { Callout } from "./components/Callout/Callout";
 export type { CalloutProps, CalloutTone } from "./components/Callout/Callout";
 export { AnnouncementBar } from "./components/AnnouncementBar/AnnouncementBar";
