@@ -26,7 +26,7 @@
   border: var(--ds-border-width-default) solid var(--_rte-border);
   border-radius: var(--ds-radius-form-group);
   background: var(--_rte-surface);
-  box-shadow: var(--ds-shadow-offset-surface) var(--ds-shadow-offset-surface) 0 var(--ds-shadow-color);
+  box-shadow: var(--ds-shadow-elevation-surface);
 }
 .toolbar {
   display: flex;
@@ -130,7 +130,7 @@
   border-radius: var(--ds-dialog-radius, var(--ds-radius-surface));
   background: var(--ds-color-surface-primary);
   color: var(--_rte-text);
-  box-shadow: var(--ds-shadow-offset-surface) var(--ds-shadow-offset-surface) 0 var(--ds-shadow-color);
+  box-shadow: var(--ds-shadow-elevation-surface);
 }
 .formHeading { font-weight: var(--ds-font-weight-semibold); }
 .formField { display: grid; gap: var(--ds-space-1); font-size: var(--ds-font-size-sm); font-weight: var(--ds-font-weight-medium); }

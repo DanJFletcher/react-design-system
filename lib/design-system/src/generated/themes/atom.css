@@ -251,6 +251,8 @@
 :root[data-ds-theme="atom"],
 [data-ds-theme="atom"] {
   --ds-border-width-default: 3px;
+  --ds-border-width-strong: 4px;
+  --ds-border-width-subtle: 2px;
   --ds-color-accent-bg: #FFE05A;
   --ds-color-accent-border: #963F9D;
   --ds-color-accent-fg: #161018;
@@ -300,6 +302,8 @@
   --ds-radius-textarea: 8px;
   --ds-radius-tooltip: 8px;
   --ds-shadow-color: #FF3D8D;
+  --ds-shadow-elevation-control: 0px 3px 0px 0px #FF3D8D;
+  --ds-shadow-elevation-surface: 0px 6px 0px 0px #FF3D8D;
   --ds-shadow-offset-control: 3px;
   --ds-shadow-offset-surface: 6px;
 }

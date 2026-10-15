@@ -6,9 +6,7 @@
   min-block-size: var(--_header-size);
   color: var(--ds-color-text-primary);
   background-color: var(--ds-color-surface-primary);
-  box-shadow:
-    var(--ds-shadow-offset-surface) var(--ds-shadow-offset-surface) 0
-    var(--ds-shadow-color);
+  box-shadow: var(--ds-shadow-elevation-surface);
 }
 
 .header[data-size="sm"] {

@@ -250,6 +250,8 @@
 :root,
 [data-ds-theme="acme"] {
   --ds-border-width-default: 1px;
+  --ds-border-width-strong: 2px;
+  --ds-border-width-subtle: 1px;
   --ds-color-accent-bg: #DBEAFE;
   --ds-color-accent-border: #64748B;
   --ds-color-accent-fg: #1E3A8A;
@@ -299,6 +301,8 @@
   --ds-radius-textarea: 6px;
   --ds-radius-tooltip: 6px;
   --ds-shadow-color: #000000;
+  --ds-shadow-elevation-control: none;
+  --ds-shadow-elevation-surface: none;
   --ds-shadow-offset-control: 0px;
   --ds-shadow-offset-surface: 0px;
 }

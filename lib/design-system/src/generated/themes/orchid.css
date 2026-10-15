@@ -251,6 +251,8 @@
 :root[data-ds-theme="orchid"],
 [data-ds-theme="orchid"] {
   --ds-border-width-default: 1px;
+  --ds-border-width-strong: 2px;
+  --ds-border-width-subtle: 1px;
   --ds-color-accent-bg: #F6CF67;
   --ds-color-accent-border: #8B5E88;
   --ds-color-accent-fg: #38143D;
@@ -300,6 +302,8 @@
   --ds-radius-textarea: 16px;
   --ds-radius-tooltip: 16px;
   --ds-shadow-color: #000000;
+  --ds-shadow-elevation-control: none;
+  --ds-shadow-elevation-surface: none;
   --ds-shadow-offset-control: 0px;
   --ds-shadow-offset-surface: 0px;
 }

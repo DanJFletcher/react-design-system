@@ -26,6 +26,12 @@ Use `color.text.disabled` for inactive content and `color.text.inverse` for fore
 
 New theme roles are checked against their documented text and indicator contrast pairs. Add contrast pairs whenever a role is intended to be readable or visible on a specific surface.
 
+### Border widths and elevation
+
+Border color and width are independent semantic decisions. Use `border.width.subtle` for separators and low-emphasis boundaries, `border.width.default` for ordinary component edges, and `border.width.strong` for prominent outlines. Pair them with the appropriate `color.border.*` role; do not use a thicker border as a substitute for sufficient contrast.
+
+Use `shadow.elevation.surface` and `shadow.elevation.control` as complete `box-shadow` values for raised content and interactive controls. Themes can define soft shadows, hard offset shadows, or `none` without every component rebuilding a shadow from color and offset fragments. Atom uses vivid, unblurred offsets; the other themes currently keep these roles flat. The older `shadow.color` and `shadow.offset.*` tokens remain available for compatibility, but new component styles should consume the semantic elevation roles.
+
 ### Layer scale
 
 The shared `layer.*` foundation tokens establish a consistent stacking order: base content, sticky bars, fixed navigation, dropdowns and popovers, scrims, tooltips, then notifications. A navigation scrim covers page dropdowns; its panel and toggle sit just above the scrim. Use these levels for overlays shared between components. Small `z-index` values used only to order items inside one component (for example, a focused tab above its siblings) may remain local. Native modal dialogs use the browser top layer and are not ordered by this scale.

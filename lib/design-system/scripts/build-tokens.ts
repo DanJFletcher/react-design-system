@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-type TokenType = "color" | "dimension" | "duration" | "easing" | "fontFamily" | "fontWeight" | "lineHeight" | "number";
+type TokenType = "boxShadow" | "color" | "dimension" | "duration" | "easing" | "fontFamily" | "fontWeight" | "lineHeight" | "number";
 type Dimension = { amount: number; unit: string };
 type Reference = { ref: string };
 type TokenValue = string | number | Dimension | Reference;
@@ -112,6 +112,14 @@ function resolveValue(
     cache.set(name, token.value);
     return token.value;
   }
+  if (token.type === "boxShadow") {
+    if (typeof token.value !== "string" || !token.value.trim() || /[;{}\r\n]/.test(token.value)) {
+      fail(`Box-shadow token "${name}" must be a non-empty CSS value without declaration delimiters.`);
+    }
+    const resolved = token.value.trim();
+    cache.set(name, resolved);
+    return resolved;
+  }
   if (token.type === "easing") {
     if (typeof token.value !== "string" || !timingFunctionPattern.test(token.value.trim())) {
       fail(`Easing token "${name}" must use a CSS timing keyword or cubic-bezier() function.`);
@@ -188,7 +196,7 @@ export async function compileTokens(tokenDir = defaultTokenDir): Promise<Compila
   if (!Array.isArray(allowedUnits) || !allowedUnits.every((unit) => typeof unit === "string")) {
     fail("schema.units must be an array of unit names.");
   }
-  if (!["color", "dimension", "duration", "easing", "fontFamily", "fontWeight", "lineHeight", "number"].every((type) => allowedTypes.has(type))) {
+  if (!["boxShadow", "color", "dimension", "duration", "easing", "fontFamily", "fontWeight", "lineHeight", "number"].every((type) => allowedTypes.has(type))) {
     fail("schema.types must declare every supported token type.");
   }
 

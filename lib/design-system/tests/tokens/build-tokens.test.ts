@@ -16,8 +16,15 @@ test("generation is deterministic and produces complete themes", async () => {
   assert.equal(first.themes.get("orchid")!["color.canvas"], "#FFF2FD");
   assert.equal(first.themes.get("atom")!["color.canvas"], "#11111D");
   assert.equal(first.themes.get("atom")!["border.width.default"], "3px");
+  assert.equal(first.themes.get("atom")!["border.width.subtle"], "2px");
+  assert.equal(first.themes.get("atom")!["border.width.strong"], "4px");
   assert.equal(first.themes.get("atom")!["shadow.offset.surface"], "6px");
   assert.equal(first.themes.get("atom")!["shadow.offset.control"], "3px");
+  assert.equal(first.themes.get("atom")!["shadow.elevation.surface"], "0px 6px 0px 0px #FF3D8D");
+  assert.equal(first.themes.get("atom")!["shadow.elevation.control"], "0px 3px 0px 0px #FF3D8D");
+  assert.equal(first.themes.get("luna")!["shadow.elevation.surface"], "none");
+  assert.match(first.files.get("tokens.css")!, /--ds-shadow-elevation-surface: none;/);
+  assert.match(first.files.get("token-types.ts")!, /"shadow\.elevation\.control"/);
   assert.equal(first.themes.get("sublime")!["color.canvas"], "#1F242C");
   assert.equal(first.themes.get("sublime")!["color.action.primary.bg"], "#66D9EF");
   assert.equal(first.themes.get("sublime")!["radius.surface"], "4px");
@@ -49,6 +56,8 @@ test("Atom uses dark comic colors with hard, block-style elevation", async () =>
   assert.equal(atom["shadow.color"], "#FF3D8D");
   assert.equal(atom["shadow.offset.surface"], "6px");
   assert.equal(atom["shadow.offset.control"], "3px");
+  assert.equal(atom["shadow.elevation.surface"], "0px 6px 0px 0px #FF3D8D");
+  assert.equal(atom["shadow.elevation.control"], "0px 3px 0px 0px #FF3D8D");
 });
 
 test("contrast ratio matches the WCAG reference examples", () => {
@@ -82,6 +91,20 @@ test("incompatible token references fail validation", async () => {
     json.tokens["color.canvas"]!.value = { ref: "space.4" };
     await writeFile(file, JSON.stringify(json));
     await assert.rejects(() => compileTokens(temporary), /incompatible type/);
+  } finally {
+    await rm(temporary, { recursive: true, force: true });
+  }
+});
+
+test("box-shadow tokens reject declaration injection", async () => {
+  const temporary = await mkdtemp(join(tmpdir(), "design-system-shadow-values-"));
+  try {
+    await cp(source, temporary, { recursive: true });
+    const file = join(temporary, "themes/acme.json");
+    const json = JSON.parse(await readFile(file, "utf8")) as { values: Record<string, unknown> };
+    json.values["shadow.elevation.surface"] = "none; color: red";
+    await writeFile(file, JSON.stringify(json));
+    await assert.rejects(() => compileTokens(temporary), /Box-shadow token .* declaration delimiters/);
   } finally {
     await rm(temporary, { recursive: true, force: true });
   }

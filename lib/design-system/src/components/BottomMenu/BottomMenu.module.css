@@ -9,7 +9,7 @@
   box-sizing: border-box;
   color: var(--ds-color-text-primary);
   background: var(--ds-color-surface-primary);
-  box-shadow: var(--ds-shadow-offset-surface) var(--ds-shadow-offset-surface) 0 var(--ds-shadow-color);
+  box-shadow: var(--ds-shadow-elevation-surface);
   padding-block-end: env(safe-area-inset-bottom, 0px);
 }
 
