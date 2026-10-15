@@ -59,6 +59,10 @@ body {
     padding-block: var(--ds-space-4);
     padding-inline: 0;
   }
+
+  .sbdocs-preview .storybook-canvas {
+    padding-inline: var(--ds-space-2);
+  }
 }
 
 .button-story-grid,
