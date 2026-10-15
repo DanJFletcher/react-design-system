@@ -1,0 +1,71 @@
+.link {
+  color: var(--ds-color-action-ghost-fg);
+  font: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: var(--ds-border-width-default);
+  text-underline-offset: var(--ds-space-1);
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition: color var(--ds-motion-duration-fast) var(--ds-motion-easing-standard);
+}
+
+.link[data-variant="muted"] {
+  color: var(--ds-color-text-muted);
+}
+
+.link:visited {
+  color: var(--ds-color-text-muted);
+}
+
+.link[data-variant="muted"]:visited {
+  color: var(--ds-color-action-ghost-fg);
+}
+
+.link:hover {
+  color: var(--ds-color-action-primary-bg);
+}
+
+.link:active {
+  color: var(--ds-color-action-primary-pressed);
+}
+
+.link:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.link[data-underline="hover"] {
+  text-decoration-color: transparent;
+}
+
+.link[data-underline="hover"]:hover {
+  text-decoration-color: currentColor;
+}
+
+.link[data-underline="none"] {
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(html:not([data-ds-motion-preference="full"])) .link {
+    transition-duration: 0ms;
+  }
+}
+
+@media (forced-colors: active) {
+  .link,
+  .link:hover,
+  .link:active {
+    color: LinkText;
+  }
+
+  .link:visited,
+  .link:visited:hover,
+  .link:visited:active {
+    color: VisitedText;
+  }
+
+  .link:focus-visible {
+    outline-color: Highlight;
+  }
+}

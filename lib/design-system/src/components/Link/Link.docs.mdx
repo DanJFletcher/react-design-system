@@ -1,0 +1,35 @@
+import { Canvas, Controls, Meta } from "@storybook/addon-docs/blocks";
+import * as LinkStories from "./Link.stories";
+
+<Meta of={LinkStories} />
+
+# Link
+
+A theme-aware native anchor for inline text and standalone navigation. It preserves native link behavior and supports a visible keyboard focus state.
+
+## Interactive playground
+
+<Canvas of={LinkStories.Playground} />
+<Controls of={LinkStories.Playground} />
+
+## Inline text and style options
+
+Keep link text descriptive and meaningful out of context. Inline links are underlined by default; standalone links can use `underline="hover"` or `underline="none"` when their navigation role is clear.
+
+<Canvas of={LinkStories.InlineInText} />
+<Canvas of={LinkStories.StyleOptions} />
+
+## New tabs and themes
+
+The component forwards native anchor props. When `target="_blank"` is used, it adds `noopener` to `rel` while preserving any supplied relation tokens.
+
+<Canvas of={LinkStories.OpensInNewTab} />
+<Canvas of={LinkStories.ThemeCoverage} />
+
+## Behavior
+
+- `href` is required. Native anchor props, refs, `className`, and typed `style` are forwarded.
+- `variant` is `default` (theme link accent) or `muted`.
+- `underline` is `always` by default, with `hover` and `none` alternatives.
+- Visited, hover, active, focus-visible, reduced-motion, and forced-colors states are supported.
+- The component never changes destinations or opens a new tab unless the consumer sets `target`.

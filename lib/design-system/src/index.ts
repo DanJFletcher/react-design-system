@@ -6,6 +6,12 @@ export type {
   ButtonSize,
   ButtonVariant,
 } from "./components/Button/Button";
+export { Link } from "./components/Link/Link";
+export type {
+  LinkProps,
+  LinkUnderline,
+  LinkVariant,
+} from "./components/Link/Link";
 export { ButtonGroup } from "./components/ButtonGroup/ButtonGroup";
 export type {
   ButtonGroupAlignment,
