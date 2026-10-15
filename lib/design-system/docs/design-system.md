@@ -135,6 +135,25 @@ Items render as native toggle buttons with `aria-pressed`. Each button remains i
 />
 ```
 
+## RangeField
+
+`RangeField` is a labeled native `<input type="range">` with a visible current-value output. It uses `min` (default `0`), `max` (default `100`), and `step` (default `1`) constraints. If neither `value` nor `defaultValue` is supplied, it starts at the midpoint rounded to the nearest step. `value` with `onValueChange` provides controlled state; `defaultValue` initializes uncontrolled state. Native `onChange`, `name`, and other input attributes are forwarded.
+
+`formatValue` formats the visible output without changing the numeric slider value. `getAriaValueText` provides a localized or unit-bearing accessible value. `label` is required; `description`, `error`, `invalid`, and `disabled` follow the shared form-field contract. Range inputs always have a value, so the native `required` validation state is not exposed. The slider retains native Tab, arrow-key, and form-submission behavior. The output is hidden from assistive technology because the range input already exposes its current value.
+
+```tsx
+<RangeField
+  label="Moving budget"
+  name="budget"
+  min={0}
+  max={1000}
+  step={50}
+  defaultValue={250}
+  formatValue={(value) => `$${value}`}
+  getAriaValueText={(value) => `${value} dollars`}
+/>
+```
+
 ## Badge
 
 ```tsx

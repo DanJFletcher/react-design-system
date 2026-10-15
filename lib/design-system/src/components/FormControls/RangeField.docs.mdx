@@ -1,0 +1,41 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as RangeFieldStories from "./RangeField.stories";
+
+<Meta of={RangeFieldStories} />
+
+<Title>Range field</Title>
+
+<Subtitle>A native, theme-aware range input for adjusting a numeric value in a form.</Subtitle>
+
+<Canvas of={RangeFieldStories.Playground} />
+
+## Values and formatting
+
+The control defaults to `min={0}`, `max={100}`, and `step={1}`. If no `value` or `defaultValue` is supplied, the initial value is the midpoint, rounded to the nearest step. Use `value` and `onValueChange` for controlled state or `defaultValue` for uncontrolled state. Native `onChange` is also forwarded.
+
+`formatValue` changes the visible value beside the label. The slider's accessible value remains numeric by default; provide `getAriaValueText` to announce units or a localized description. The native input preserves `name` and participates in ordinary form submission.
+
+```tsx
+<RangeField
+  label="Moving budget"
+  name="budget"
+  min={0}
+  max={1000}
+  step={50}
+  defaultValue={250}
+  formatValue={(value) => `$${value.toLocaleString()}`}
+  getAriaValueText={(value) => `${value} dollars`}
+/>
+```
+
+<Canvas of={RangeFieldStories.ControlledAndFormatted} />
+
+## Field states and themes
+
+`label` is required. `description`, `error`, `invalid`, `disabled`, `id`, `aria-describedby`, and native input attributes follow the other form fields. A provided error is connected to the slider and sets `aria-invalid`. Range inputs always have a value, so the native `required` validation state is intentionally not exposed.
+
+The native range input retains browser keyboard behavior: Tab focuses it, and the arrow keys adjust the value according to `step`. The visible formatted output is decorative to assistive technology; the slider itself exposes its current value and optional `aria-valuetext`.
+
+<Canvas of={RangeFieldStories.DisabledAndInvalid} />
+<Canvas of={RangeFieldStories.ThemeCoverage} />
+<Canvas of={RangeFieldStories.RightToLeft} />

@@ -1,5 +1,6 @@
 import { Canvas, Meta, Title } from "@storybook/addon-docs/blocks";
 import * as FormControlsStories from "./FormControls.stories";
+import * as RangeFieldStories from "./RangeField.stories";
 
 <Meta of={FormControlsStories} />
 
@@ -18,6 +19,12 @@ Use `TextField` for a single-line input. It forwards native input attributes suc
 <Canvas of={FormControlsStories.TextareaBasics} />
 
 `Textarea` forwards native multiline input props, including `rows`, `maxLength`, and native change handlers. It defaults to four rows and can be resized vertically.
+
+## RangeField
+
+Use `RangeField` to adjust a numeric value with a native slider. It supports min/max/step constraints, a visible formatted value, descriptions, errors, and disabled state. See the [RangeField documentation](iframe.html?id=components-range-field--docs&viewMode=docs) for its controlled-state and formatting API.
+
+<Canvas of={RangeFieldStories.Playground} />
 
 ## Select
 

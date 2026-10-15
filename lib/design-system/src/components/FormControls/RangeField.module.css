@@ -1,0 +1,152 @@
+.heading {
+  display: flex;
+  min-inline-size: 0;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+}
+
+.value {
+  flex: 0 0 auto;
+  color: var(--ds-color-text-primary);
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-sm);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--ds-font-weight-medium);
+  line-height: var(--ds-line-height-normal);
+}
+
+.range {
+  --range-progress: 50%;
+
+  box-sizing: border-box;
+  display: block;
+  inline-size: 100%;
+  block-size: var(--ds-space-8);
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.range::-webkit-slider-runnable-track {
+  block-size: var(--ds-space-2);
+  border: var(--ds-border-width-subtle) solid var(--ds-color-border-control);
+  border-radius: var(--ds-radius-full);
+  background: linear-gradient(
+    to right,
+    var(--ds-color-action-primary-bg) 0 var(--range-progress),
+    var(--ds-color-surface-secondary) var(--range-progress) 100%
+  );
+}
+
+.range::-webkit-slider-thumb {
+  box-sizing: border-box;
+  inline-size: var(--ds-space-5);
+  block-size: var(--ds-space-5);
+  margin-block-start: calc((var(--ds-space-2) - var(--ds-space-5)) / 2);
+  appearance: none;
+  border: var(--ds-border-width-strong) solid var(--ds-color-border-control);
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-action-primary-bg);
+  box-shadow: var(--ds-shadow-elevation-control);
+}
+
+.range::-moz-range-track {
+  block-size: var(--ds-space-2);
+  border: var(--ds-border-width-subtle) solid var(--ds-color-border-control);
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-surface-secondary);
+}
+
+.range::-moz-range-progress {
+  block-size: var(--ds-space-2);
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-action-primary-bg);
+}
+
+.range::-moz-range-thumb {
+  box-sizing: border-box;
+  inline-size: var(--ds-space-5);
+  block-size: var(--ds-space-5);
+  border: var(--ds-border-width-strong) solid var(--ds-color-border-control);
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-action-primary-bg);
+  box-shadow: var(--ds-shadow-elevation-control);
+}
+
+.range:dir(rtl)::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to left,
+    var(--ds-color-action-primary-bg) 0 var(--range-progress),
+    var(--ds-color-surface-secondary) var(--range-progress) 100%
+  );
+}
+
+.range:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.range[aria-invalid="true"]::-webkit-slider-runnable-track,
+.range[aria-invalid="true"]::-moz-range-track {
+  border-color: var(--ds-color-border-error);
+}
+
+.range:disabled {
+  cursor: not-allowed;
+}
+
+.range:disabled::-webkit-slider-runnable-track,
+.range:disabled::-moz-range-track {
+  border-color: var(--ds-color-action-disabled-fg);
+  background: var(--ds-color-action-disabled-bg);
+}
+
+.range:disabled::-moz-range-progress {
+  background: var(--ds-color-action-disabled-bg);
+}
+
+.range:disabled::-webkit-slider-thumb,
+.range:disabled::-moz-range-thumb {
+  border-color: var(--ds-color-action-disabled-fg);
+  background: var(--ds-color-action-disabled-bg);
+  box-shadow: none;
+}
+
+@media (forced-colors: active) {
+  .range::-webkit-slider-runnable-track,
+  .range::-moz-range-track {
+    border-color: CanvasText;
+    background: Canvas;
+  }
+
+  .range::-moz-range-progress {
+    background: Highlight;
+  }
+
+  .range::-webkit-slider-thumb,
+  .range::-moz-range-thumb {
+    border-color: HighlightText;
+    background: Highlight;
+    box-shadow: none;
+  }
+
+  .range:focus-visible {
+    outline-color: Highlight;
+  }
+
+  .range:disabled::-webkit-slider-runnable-track,
+  .range:disabled::-moz-range-track,
+  .range:disabled::-moz-range-progress {
+    border-color: GrayText;
+    background: Canvas;
+  }
+
+  .range:disabled::-webkit-slider-thumb,
+  .range:disabled::-moz-range-thumb {
+    border-color: GrayText;
+    background: Canvas;
+  }
+}
