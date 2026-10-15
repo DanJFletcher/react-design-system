@@ -41,7 +41,7 @@ Choose `symbol="star"`, `"heart"`, or `"thumbs"`; stars are the default. Accessi
 
 ## Scale, size, and themes
 
-`max` must be an integer from 1 to 10 and defaults to `5`. Input mode uses whole-star values by default; `step={0.5}` adds half-star options while preserving native radio keyboard behavior. Read-only mode supports fractional values and fills the final star proportionally. `size` accepts `sm`, `md`, or `lg`.
+`max` must be an integer from 1 to 10 and defaults to `5`. Input mode uses whole-star values by default; `step={0.5}` adds half-star options while preserving native radio keyboard behavior. Read-only mode supports fractional values. Fractional fills clip a full-size symbol, keeping its filled and outlined portions aligned rather than shrinking the filled drawing. This applies to stars, hearts, and thumbs in both modes. `size` accepts `sm`, `md`, or `lg`.
 
 <Canvas of={RatingStories.CustomScaleAndSize} />
 <Canvas of={RatingStories.ThemeCoverage} />

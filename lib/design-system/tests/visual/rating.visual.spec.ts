@@ -39,4 +39,33 @@ test("Rating follows theme colors and fits a narrow viewport", async ({ page }) 
   for (const symbol of ["star", "heart", "thumbs"]) {
     await expect(page.locator(`[data-ds-theme] [data-rating-symbol="${symbol}"]`).first()).toBeVisible();
   }
+
+  const fractionalSymbols = await page.locator("[data-rating-star-fill]").evaluateAll((fills) =>
+    fills
+      .filter((fill) => (fill as HTMLElement).style.getPropertyValue("--rating-fill") === "50%")
+      .map((fill) => {
+        const outline = fill.previousElementSibling!.getBoundingClientRect();
+        const solid = fill.querySelector("svg")!.getBoundingClientRect();
+        const clip = fill.getBoundingClientRect();
+        return {
+          outlineWidth: outline.width,
+          outlineHeight: outline.height,
+          solidWidth: solid.width,
+          solidHeight: solid.height,
+          solidTop: solid.top,
+          outlineTop: outline.top,
+          clipWidth: clip.width,
+          overflow: getComputedStyle(fill).overflow,
+        };
+      }),
+  );
+  expect(fractionalSymbols).toHaveLength(15);
+  for (const symbol of fractionalSymbols) {
+    expect(symbol.outlineWidth).toBeGreaterThan(0);
+    expect(symbol.solidWidth).toBeCloseTo(symbol.outlineWidth, 1);
+    expect(symbol.solidHeight).toBeCloseTo(symbol.outlineHeight, 1);
+    expect(symbol.solidTop).toBeCloseTo(symbol.outlineTop, 1);
+    expect(symbol.clipWidth).toBeCloseTo(symbol.outlineWidth / 2, 1);
+    expect(symbol.overflow).toBe("hidden");
+  }
 });

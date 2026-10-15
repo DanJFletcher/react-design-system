@@ -65,6 +65,8 @@
 }
 
 .symbolSolid {
+  /* Keep the full-size drawing inside the fractional-width clipping container. */
+  inline-size: var(--rating-symbol-size);
   fill: currentColor;
 }
 
