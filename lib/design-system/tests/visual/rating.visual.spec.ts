@@ -40,6 +40,27 @@ test("Rating follows theme colors and fits a narrow viewport", async ({ page }) 
     await expect(page.locator(`[data-ds-theme] [data-rating-symbol="${symbol}"]`).first()).toBeVisible();
   }
 
+  const heartShape = await page.locator('[data-rating-symbol="heart"] > svg path').first()
+    .evaluate((element) => {
+      const path = element as SVGGeometryElement;
+      return {
+        leftLobe: path.isPointInFill(new DOMPoint(8, 4.5)),
+        rightLobe: path.isPointInFill(new DOMPoint(16, 4.5)),
+        notch: path.isPointInFill(new DOMPoint(12, 4.5)),
+        tip: path.isPointInFill(new DOMPoint(12, 20)),
+        lowerLeft: path.isPointInFill(new DOMPoint(9, 20)),
+        lowerRight: path.isPointInFill(new DOMPoint(15, 20)),
+      };
+    });
+  expect(heartShape).toEqual({
+    leftLobe: true,
+    rightLobe: true,
+    notch: false,
+    tip: true,
+    lowerLeft: false,
+    lowerRight: false,
+  });
+
   const fractionalSymbols = await page.locator("[data-rating-star-fill]").evaluateAll((fills) =>
     fills
       .filter((fill) => (fill as HTMLElement).style.getPropertyValue("--rating-fill") === "50%")
