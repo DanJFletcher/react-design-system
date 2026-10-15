@@ -92,7 +92,7 @@ test("Atom callouts have border-matching left and diagonal corner halftone strip
   }
 });
 
-test("Atom H1–H2 and H3 use their layered marker colors with clipped highlights", async ({ page }) => {
+test("Atom H1–H5 use their layered marker colors with clipped highlights", async ({ page }) => {
   await page.goto("/iframe.html?id=foundations-atom-theme--heading-highlights&viewMode=story");
   for (const id of ["atom-marker-h1", "atom-marker-h2", "atom-marker-component"]) {
     const heading = page.getByTestId(id);
@@ -133,7 +133,14 @@ test("Atom H1–H2 and H3 use their layered marker colors with clipped highlight
     expect(styles.yellowY).toBeLessThan(0);
     expect(styles.yellowLayer).toBeLessThan(styles.cyanLayer);
   }
-  for (const id of ["atom-marker-h3", "atom-marker-h3-component"]) {
+  for (const [id, frontColor] of [
+    ["atom-marker-h3", "rgb(150, 63, 157)"],
+    ["atom-marker-h3-component", "rgb(150, 63, 157)"],
+    ["atom-marker-h4", "rgb(0, 0, 0)"],
+    ["atom-marker-h5", "rgb(0, 0, 0)"],
+    ["atom-marker-h4-component", "rgb(0, 0, 0)"],
+    ["atom-marker-h5-component", "rgb(0, 0, 0)"],
+  ]) {
     const heading = page.getByTestId(id);
     await expect(heading).toBeVisible();
     const styles = await heading.evaluate((element) => {
@@ -155,7 +162,7 @@ test("Atom H1–H2 and H3 use their layered marker colors with clipped highlight
         pinkLayer: Number(pink.zIndex),
       };
     });
-    expect(styles.purple).toBe("rgb(150, 63, 157)");
+    expect(styles.purple).toBe(frontColor);
     expect(styles.pink).toBe("rgb(255, 61, 141)");
     expect(styles.clip).toContain("polygon(");
     expect(styles.pinkClip).toBe(styles.clip);
@@ -166,7 +173,7 @@ test("Atom H1–H2 and H3 use their layered marker colors with clipped highlight
     expect(styles.pinkY).toBeLessThan(0);
     expect(styles.pinkLayer).toBeLessThan(styles.purpleLayer);
   }
-  for (const id of ["luna-unmarked-heading"]) {
+  for (const id of ["luna-unmarked-heading", "luna-unmarked-h4", "luna-unmarked-h5", "atom-unmarked-h6"]) {
     for (const pseudo of ["::before", "::after"]) {
       expect(await page.getByTestId(id).evaluate((element, selector) =>
         getComputedStyle(element, selector).content,
@@ -182,7 +189,7 @@ test("Atom H1–H2 and H3 use their layered marker colors with clipped highlight
     document.documentElement.scrollWidth <= window.innerWidth,
   )).toBe(true);
   await page.emulateMedia({ forcedColors: "active" });
-  for (const id of ["atom-marker-h2", "atom-marker-h3"]) {
+  for (const id of ["atom-marker-h2", "atom-marker-h3", "atom-marker-h4", "atom-marker-h5"]) {
     for (const pseudo of ["::before", "::after"]) {
       expect(await page.getByTestId(id).evaluate((element, selector) =>
         getComputedStyle(element, selector).content,

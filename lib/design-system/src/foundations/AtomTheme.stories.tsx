@@ -23,7 +23,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Atom is a dark comic-inspired theme with inked borders, cyan table borders, vivid print-like accents, subtle halftone texture, hard offset shadows on content surfaces and controls, and clipped marker highlights. H1 and H2 use cyan over electric yellow; H3 uses purple over electric pink. Page layout components and article bodies remain flat.",
+          "Atom is a dark comic-inspired theme with inked borders, cyan table borders, vivid print-like accents, subtle halftone texture, hard offset shadows on content surfaces and controls, and clipped marker highlights. H1 and H2 use cyan over electric yellow; H3 uses purple over electric pink; H4 and H5 use black over hot pink. Page layout components and article bodies remain flat.",
       },
     },
   },
@@ -239,10 +239,25 @@ export const HeadingHighlights: Story = {
       <Heading level={3} data-testid="atom-marker-h3-component">
         Component H3 headings follow the same marker style.
       </Heading>
+      <h4 data-testid="atom-marker-h4" style={{ margin: 0 }}>
+        Fourth-level headings use black over hot pink.
+      </h4>
+      <h5 data-testid="atom-marker-h5" style={{ margin: 0 }}>
+        Fifth-level headings share the same bold layers.
+      </h5>
+      <Heading level={4} tone="muted" data-testid="atom-marker-h4-component">
+        Component H4 headings use the same marker style.
+      </Heading>
+      <Heading level={5} tone="muted" data-testid="atom-marker-h5-component">
+        Component H5 headings use the same marker style.
+      </Heading>
+      <h6 data-testid="atom-unmarked-h6">H6 keeps its usual appearance.</h6>
       <div data-ds-theme="luna">
         <Heading level={2} data-testid="luna-unmarked-heading">
           Nested themes keep their own typography.
         </Heading>
+        <h4 data-testid="luna-unmarked-h4">Luna H4 stays unmarked.</h4>
+        <h5 data-testid="luna-unmarked-h5">Luna H5 stays unmarked.</h5>
       </div>
     </section>
   ),

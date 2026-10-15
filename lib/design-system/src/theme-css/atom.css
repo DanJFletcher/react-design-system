@@ -11,8 +11,8 @@
 
 /* Limit the marker treatment to the nearest Atom theme boundary. */
 @scope ([data-ds-theme="atom"]) to ([data-ds-theme]:not([data-ds-theme="atom"])) {
-  :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title]),
-  :scope :is(h1, h2, h3:not([data-ds-accordion-heading]))[data-tone] {
+  :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title], h4, h5),
+  :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h4, h5)[data-tone] {
     position: relative;
     isolation: isolate;
     display: inline-block;
@@ -20,13 +20,12 @@
     inline-size: fit-content;
     max-inline-size: calc(100% - 0.12em);
     padding: 0.1em 0.25em;
-    color: var(--ds-typography-color, var(--ds-color-canvas));
     box-shadow: none;
     overflow-wrap: anywhere;
   }
 
-  :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title])::before,
-  :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title])::after {
+  :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title], h4, h5)::before,
+  :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title], h4, h5)::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -40,6 +39,11 @@
       0.05em 65%, 0 35%
     );
     pointer-events: none;
+  }
+
+  :scope :is(h1, h2),
+  :scope :is(h1, h2)[data-tone] {
+    color: var(--ds-typography-color, var(--ds-color-canvas));
   }
 
   :scope :is(h1, h2)::before {
@@ -71,14 +75,31 @@
     transform: translate(-0.12em, -0.1em);
   }
 
+  :scope :is(h4, h5),
+  :scope :is(h4, h5)[data-tone] {
+    color: var(--ds-color-text-primary);
+  }
+
+  :scope :is(h4, h5)::before {
+    z-index: -1;
+    background-color: #000;
+    transform: translate(0.12em, 0.1em);
+  }
+
+  :scope :is(h4, h5)::after {
+    z-index: -2;
+    background-color: var(--ds-color-action-primary-bg);
+    transform: translate(-0.12em, -0.1em);
+  }
+
   @media (forced-colors: active) {
-    :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title]),
-    :scope :is(h1, h2, h3:not([data-ds-accordion-heading]))[data-tone] {
+    :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title], h4, h5),
+    :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h4, h5)[data-tone] {
       color: CanvasText;
     }
 
-    :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title])::before,
-    :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title])::after {
+    :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title], h4, h5)::before,
+    :scope :is(h1, h2, h3:not([data-ds-accordion-heading]), h3 [data-ds-accordion-title], h4, h5)::after {
       content: none;
     }
   }
