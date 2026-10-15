@@ -22,7 +22,7 @@ For a separate project, build and pack the library, then install the resulting t
 cd lib/design-system
 pnpm pack
 cd /path/to/my-app
-pnpm add /path/to/design-system/workspace-design-system-0.1.0.tgz
+pnpm add /absolute/path/to/repository/lib/design-system/workspace-design-system-0.1.0.tgz
 ```
 
 The library requires React 18 or newer as a peer dependency. This package is not currently documented as a public registry install; publish it to your registry before using a registry-based install command.
@@ -50,8 +50,8 @@ import { Button, ThemeScope } from "@workspace/design-system";
 
 export function ProfileActions() {
   return (
-    <ThemeScope theme="luna">
-      <Button variant="primary" shape="pill" onClick={() => saveProfile()}>
+<ThemeScope theme="luna">
+  <Button variant="primary" shape="pill">
         Save profile
       </Button>
     </ThemeScope>
@@ -118,3 +118,4 @@ pnpm --filter @workspace/design-system run check
 ```
 
 Storybook contains component documentation, interactive controls, themes, and examples. For component authoring conventions, see [`docs/component-development.md`](docs/component-development.md).
+For a categorized list of all components with links to their documentation, open **Foundations → Component catalog** in Storybook.

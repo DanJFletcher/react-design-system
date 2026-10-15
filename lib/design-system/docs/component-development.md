@@ -8,7 +8,7 @@ Buttons and reviewed action targets use `radius.control`; single-line form contr
 
 The style checker assumes a surface role for every radius declaration, including private variable chains and hook fallbacks. Non-surface declarations require a reviewed exact-selector entry with a reason in `scripts/radius-policy.json`; unknown tokens, inappropriate fallbacks, unresolved aliases, cycles, and stale exceptions fail. This governs authored defaults, not consumer CSS/hook overrides.
 
-The initial scope established Button. The approved core form-control set adds TextField, Textarea, native Select, Checkbox, and RadioGroup. Further additions require a written API and an approved roadmap entry before implementation.
+The library has grown beyond its initial Button and core form-control scope. Browse Storybook's **Foundations → Component catalog** for the current public components and their docs. For new additions, use the planning template below to define the user need, scope, API, accessibility, and validation before implementation.
 
 For a future component, use this planning template:
 
@@ -23,9 +23,9 @@ For a future component, use this planning template:
 9. Validation commands
 10. Completion checklist
 
-## Approved component scope
+## Selected component contracts
 
-The user approved implementing `Accordion`, `Footer`, `Dialog`, `Toast`, `Text`, `Heading`, `Icon`, `ArticleFootnotes`, `Pagination`, `Testimonials`, and `FAQSection` as component additions. Their API and accessibility contracts are:
+The contracts below capture decisions for selected components; this list is not an exhaustive inventory or a limit on the current library. The component catalog is the current index. These notes document the API and accessibility contracts for:
 
 ### Accordion
 
