@@ -40,6 +40,24 @@ test("ServicesSection adapts its configured columns to tablet and mobile widths"
   expect(dimensions.documentWidth).toBeLessThanOrEqual(dimensions.viewportWidth);
 });
 
+test("ServicesSection switches at the compact and medium breakpoint edges", async ({ page }) => {
+  await page.setViewportSize({ width: 640, height: 900 });
+  await page.goto("/iframe.html?id=components-services-section--playground&viewMode=story");
+  const grid = page.locator("[data-slot='services-grid']");
+  const countColumns = async () => {
+    const template = await grid.evaluate((element) => getComputedStyle(element).gridTemplateColumns);
+    return template.trim().split(/\s+/).length;
+  };
+
+  await expect.poll(countColumns).toBe(1);
+  await page.setViewportSize({ width: 641, height: 900 });
+  await expect.poll(countColumns).toBe(2);
+  await page.setViewportSize({ width: 767, height: 900 });
+  await expect.poll(countColumns).toBe(2);
+  await page.setViewportSize({ width: 768, height: 900 });
+  await expect.poll(countColumns).toBe(3);
+});
+
 test("ServicesSection links are keyboard reachable and a headingless section can be named", async ({ page }) => {
   await page.goto("/iframe.html?id=components-services-section--playground&viewMode=story");
   const firstLink = page.getByRole("link", { name: "Explore custom woodwork" });

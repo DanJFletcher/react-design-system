@@ -42,6 +42,24 @@ test("Split pricing details stack on mobile and sit side by side on desktop", as
   expect(desktopPosition.detailsLeft).toBeGreaterThan(desktopPosition.mainLeft!);
 });
 
+test("Split pricing details switch exactly at the medium breakpoint", async ({ page }) => {
+  await page.setViewportSize({ width: 767, height: 900 });
+  await page.goto("/iframe.html?id=components-pricing-details--layout-examples&viewMode=story");
+  const pricing = page.locator("article[data-layout='split']").first();
+  const columns = async () => pricing.evaluate((element) =>
+    getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length,
+  );
+
+  await expect.poll(columns).toBe(1);
+  await page.setViewportSize({ width: 768, height: 900 });
+  await expect.poll(columns).toBe(2);
+
+  const main = pricing.locator("[data-slot='main']").boundingBox();
+  const details = pricing.locator("[data-slot='details']").boundingBox();
+  expect(await details).not.toBeNull();
+  expect((await details)!.x).toBeGreaterThan((await main)!.x);
+});
+
 test("PricingDetails follows theme tokens and scoped component hooks", async ({ page }) => {
   await page.goto("/iframe.html?id=components-pricing-details--theme-coverage&viewMode=story");
 

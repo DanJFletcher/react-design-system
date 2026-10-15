@@ -92,3 +92,19 @@ test("Testimonials grid collapses to one column without narrow-screen overflow",
   }));
   expect(dimensions.documentWidth).toBeLessThanOrEqual(dimensions.viewportWidth);
 });
+
+test("Testimonials expands a three-column grid at the wide breakpoint", async ({ page }) => {
+  await page.setViewportSize({ width: 1151, height: 900 });
+  await page.goto("/iframe.html?id=components-testimonials--three-column-grid&viewMode=story");
+
+  const section = page.getByRole("region", { name: "Wide customer testimonials" });
+  const grid = section.locator("[data-layout='grid']");
+  const columns = async () => grid.evaluate((element) =>
+    getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length,
+  );
+
+  await expect(section.getByRole("article")).toHaveCount(3);
+  await expect.poll(columns).toBe(2);
+  await page.setViewportSize({ width: 1152, height: 900 });
+  await expect.poll(columns).toBe(3);
+});

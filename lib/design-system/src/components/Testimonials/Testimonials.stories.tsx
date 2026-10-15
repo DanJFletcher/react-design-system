@@ -242,3 +242,14 @@ export const NarrowLayout: Story = {
     </div>
   ),
 };
+
+export const ThreeColumnGrid: Story = {
+  render: () => (
+    <Testimonials
+      aria-label="Wide customer testimonials"
+      items={testimonials}
+      layout="grid"
+      columns={3}
+    />
+  ),
+};
