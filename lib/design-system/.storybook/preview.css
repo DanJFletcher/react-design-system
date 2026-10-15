@@ -40,9 +40,9 @@ body {
 
   .sbdocs-preview {
     box-sizing: border-box !important;
-    width: 100vw !important;
-    max-width: 100vw !important;
-    margin-inline: calc(50% - 50vw) !important;
+    width: calc(100vw - var(--ds-space-4)) !important;
+    max-width: calc(100vw - var(--ds-space-4)) !important;
+    margin-inline: calc(50% - 50vw + var(--ds-space-2)) !important;
     padding-inline: 0 !important;
     border-radius: 0 !important;
   }
