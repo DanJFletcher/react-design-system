@@ -21,6 +21,7 @@
   border-radius: var(--ds-radius-surface);
   background: var(--ds-color-surface-primary);
   color: var(--ds-color-text-primary);
+  transition: inline-size var(--ds-motion-duration-standard) var(--ds-motion-easing-standard);
 }
 
 .wrapper[data-position="sticky"] .root {
@@ -56,6 +57,7 @@
 
 .wrapper[data-side="right"] .root { margin-inline-start: auto; }
 .wrapper[data-collapsed="true"] .root { inline-size: var(--_nav-rail); }
+.mobileScrim { display: none; }
 .mobilePanel { min-inline-size: 0; }
 .mobilePanelInner { min-block-size: 0; }
 .header, .footer { padding: var(--ds-space-2); }
@@ -221,31 +223,84 @@
 
 @media (max-width: 48rem) {
   .wrapper { inline-size: 100%; }
-  .wrapper .mobileToggle { display: inline-flex; margin-block-end: var(--ds-space-2); }
+  .wrapper .mobileToggle {
+    position: relative;
+    z-index: 32;
+    display: inline-flex;
+    margin-block-end: var(--ds-space-2);
+  }
+  .wrapper[data-mobile-open="true"] .mobileToggle {
+    position: relative;
+    z-index: 32;
+    border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+    background: var(--ds-color-surface-primary);
+    color: var(--ds-color-text-primary);
+    box-shadow:
+      0 var(--ds-space-1) var(--ds-space-4)
+      color-mix(in srgb, var(--ds-shadow-color) 18%, transparent);
+  }
+  .wrapper .mobileScrim {
+    position: fixed;
+    z-index: 30;
+    inset: 0;
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    padding: 0;
+    border: 0;
+    background: color-mix(in srgb, var(--ds-shadow-color) 48%, transparent);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity var(--ds-motion-duration-standard) var(--ds-motion-easing-enter),
+      visibility 0s linear var(--ds-motion-duration-standard);
+  }
+  .wrapper[data-mobile-open="true"] .mobileScrim {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
   .wrapper .mobilePanel {
-    display: grid;
-    grid-template-rows: 0fr;
-    overflow: hidden;
+    position: fixed;
+    z-index: 31;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inline-size: min(var(--_nav-width), calc(100vw - var(--ds-space-16)));
+    block-size: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: var(--ds-color-surface-primary);
     opacity: 0;
     transform: translateX(-100%);
+    visibility: hidden;
+    pointer-events: none;
     transition:
-      grid-template-rows var(--ds-motion-duration-standard) var(--ds-motion-easing-standard),
       opacity var(--ds-motion-duration-standard) var(--ds-motion-easing-enter),
-      transform var(--ds-motion-duration-standard) var(--ds-motion-easing-enter);
+      transform var(--ds-motion-duration-standard) var(--ds-motion-easing-enter),
+      visibility 0s linear var(--ds-motion-duration-standard);
+  }
+  .wrapper[data-side="right"] .mobilePanel {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+    transform: translateX(100%);
   }
   .wrapper .mobilePanel[data-open="true"] {
-    grid-template-rows: 1fr;
     opacity: 1;
     transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
   }
-  .wrapper .mobilePanelInner { min-block-size: 0; overflow: hidden; }
-  .wrapper .root {
+  .wrapper .mobilePanelInner { min-block-size: 100%; }
+  .wrapper .mobilePanel .root {
     position: static;
     inline-size: 100%;
-    min-block-size: 0;
+    min-block-size: 100%;
     max-block-size: none;
     overflow: visible;
-    border-radius: var(--ds-radius-surface);
+    border-radius: 0;
   }
   .wrapper .collapseButton { display: none; }
   .wrapper[data-collapsed="true"] .root { inline-size: 100%; }
@@ -264,7 +319,9 @@
 @media (prefers-reduced-motion: reduce) {
   :global(html:not([data-ds-motion-preference="full"])) .entry,
   :global(html:not([data-ds-motion-preference="full"])) .groupChildrenAnimated,
-  :global(html:not([data-ds-motion-preference="full"])) .mobilePanel {
+  :global(html:not([data-ds-motion-preference="full"])) .mobilePanel,
+  :global(html:not([data-ds-motion-preference="full"])) .mobileScrim,
+  :global(html:not([data-ds-motion-preference="full"])) .root {
     transition: none;
   }
 }

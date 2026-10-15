@@ -3,6 +3,7 @@ import {
   useEffect,
   useId,
   useMemo,
+  useRef,
   useState,
   type ComponentPropsWithRef,
   type CSSProperties,
@@ -140,6 +141,8 @@ export const SideNavigation = forwardRef<HTMLElement, SideNavigationProps>(funct
   const expanded = controlledExpanded ? expandedIds : internalExpanded;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
+  const wasMobileOpen = useRef(false);
   const id = useId();
 
   useEffect(() => {
@@ -155,6 +158,31 @@ export const SideNavigation = forwardRef<HTMLElement, SideNavigationProps>(funct
       setInternalExpanded((current) => [...new Set([...current, ...activeAncestors])]);
     }
   }, [activeAncestors, controlledExpanded]);
+
+  useEffect(() => {
+    if (!isMobileViewport || !mobileOpen) {
+      if (wasMobileOpen.current) mobileToggleRef.current?.focus();
+      wasMobileOpen.current = false;
+      return;
+    }
+
+    wasMobileOpen.current = true;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMobileOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMobileViewport, mobileOpen]);
+
+  useEffect(() => {
+    if (!isMobileViewport) setMobileOpen(false);
+  }, [isMobileViewport]);
 
   const setCollapsed = (next: boolean) => {
     if (!controlledCollapsed) setInternalCollapsed(next);
@@ -178,6 +206,7 @@ export const SideNavigation = forwardRef<HTMLElement, SideNavigationProps>(funct
     item.onSelect?.(event);
     if (!controlledActive) setInternalActiveId(item.id);
     onActiveChange?.(item.id, item);
+    if (isMobileViewport) setMobileOpen(false);
   };
 
   const selectAction = (event: SideNavigationSelectEvent, item: SideNavigationActionItem) => {
@@ -276,12 +305,22 @@ export const SideNavigation = forwardRef<HTMLElement, SideNavigationProps>(funct
         aria-expanded={mobileOpen}
         className={styles.mobileToggle}
         data-testid="side-navigation-mobile-toggle"
+        ref={mobileToggleRef}
         type="button"
         onClick={() => setMobileOpen((open) => !open)}
       >
         <Icon name={mobileOpen ? "close" : "menu"} size="sm" />
         <span>{mobileToggleLabel}</span>
       </button>
+      <button
+        aria-hidden="true"
+        className={styles.mobileScrim}
+        data-testid="side-navigation-mobile-scrim"
+        inert={!isMobileViewport || !mobileOpen ? true : undefined}
+        tabIndex={-1}
+        type="button"
+        onClick={() => setMobileOpen(false)}
+      />
       <div
         id={`${id}-mobile-panel`}
         aria-hidden={isMobileViewport && !mobileOpen ? true : undefined}

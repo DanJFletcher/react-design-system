@@ -196,7 +196,7 @@ export const MobileResponsive: Story = {
   globals: { motion: "full", viewport: "mobile1" },
   render: (args) => (
     <div style={{ inlineSize: "min(100%, 24rem)", minBlockSize: "35rem", marginInline: "auto", padding: "var(--ds-space-3)" }}>
-      <p style={{ color: "var(--ds-color-text-muted)" }}>Navigation expands in the page flow, above this content.</p>
+        <p style={{ color: "var(--ds-color-text-muted)" }}>Navigation overlays this content while open.</p>
       <SideNavigation {...args} />
       <main style={{ padding: "var(--ds-space-4)", border: "var(--ds-border-width-default) solid var(--ds-color-border-control)", borderRadius: "var(--ds-radius-surface)" }}>Page content stays in view.</main>
     </div>
@@ -211,6 +211,8 @@ export const MobileResponsive: Story = {
       ? canvasElement.querySelector<HTMLElement>(`[id="${panelId}"]`)
       : null;
     if (!panel) throw new Error("Expected the mobile navigation panel.");
+    const pageContent = canvas.getByRole("main");
+    const pageContentTop = pageContent.getBoundingClientRect().top;
 
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
     await expect(panel).toHaveAttribute("aria-hidden", "true");
@@ -221,17 +223,31 @@ export const MobileResponsive: Story = {
     await expect(panel).toHaveAttribute("data-open", "true");
     await expect(panel).not.toHaveAttribute("aria-hidden", "true");
     await expect(panel).not.toHaveAttribute("inert");
+    await expect(getComputedStyle(panel).position).toBe("fixed");
     await expect(getComputedStyle(panel).transitionDuration.split(",").some((duration) => Number.parseFloat(duration) > 0)).toBe(true);
     await new Promise((resolve) => window.setTimeout(resolve, 250));
     await expect(new DOMMatrixReadOnly(getComputedStyle(panel).transform).m41).toBeCloseTo(0);
     await expect(canvas.getByRole("link", { name: "Overview" })).toBeVisible();
+    await expect(toggle).toHaveFocus();
+    await expect(pageContent.getBoundingClientRect().top).toBe(pageContentTop);
     await expect(getComputedStyle(canvas.getByTestId("side-navigation-collapse-toggle")).display).toBe("none");
-    await userEvent.click(toggle);
+    await userEvent.click(canvas.getByTestId("side-navigation-mobile-scrim"));
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
     await expect(panel).toHaveAttribute("aria-hidden", "true");
     await expect(panel).toHaveAttribute("inert");
+    await expect(toggle).toHaveFocus();
     await new Promise((resolve) => window.setTimeout(resolve, 250));
     await expect(new DOMMatrixReadOnly(getComputedStyle(panel).transform).m41).toBeLessThan(0);
+
+    await userEvent.click(toggle);
+    await userEvent.keyboard("{Escape}");
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await expect(toggle).toHaveFocus();
+
+    await userEvent.click(toggle);
+    await userEvent.click(canvas.getByRole("link", { name: "Overview" }));
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await expect(toggle).toHaveFocus();
   },
 };
 

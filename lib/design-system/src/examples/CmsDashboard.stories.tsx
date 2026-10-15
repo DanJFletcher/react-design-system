@@ -118,6 +118,23 @@ export const Interactions: Story = {
     const canvas = within(canvasElement);
     await expect(canvas.getByRole("heading", { name: /Good morning, Mara/ })).toBeVisible();
 
+    if (window.matchMedia("(min-width: 48.001rem)").matches) {
+      const dashboard = canvasElement.querySelector<HTMLElement>("[data-cms-dashboard='true']");
+      const page = canvas.getByRole("main");
+      if (!dashboard) throw new Error("Expected the CMS dashboard shell.");
+      const expandedLeft = page.getBoundingClientRect().left;
+      await userEvent.click(canvas.getByRole("button", { name: "Collapse navigation" }));
+      await expect(dashboard).toHaveAttribute("data-sidebar-collapsed", "true");
+      await new Promise((resolve) => window.setTimeout(resolve, 300));
+      const collapsedLeft = page.getBoundingClientRect().left;
+      await expect(collapsedLeft).toBeLessThan(expandedLeft);
+
+      await userEvent.click(canvas.getByRole("button", { name: "Expand navigation" }));
+      await expect(dashboard).toHaveAttribute("data-sidebar-collapsed", "false");
+      await new Promise((resolve) => window.setTimeout(resolve, 300));
+      await expect(page.getBoundingClientRect().left).toBeGreaterThan(collapsedLeft);
+    }
+
     const articlesNavigation = canvas.getByRole("link", { name: /Articles/ });
     await userEvent.click(articlesNavigation);
     await expect(articlesNavigation).toHaveAttribute("aria-current", "page");
@@ -152,6 +169,7 @@ export const Interactions: Story = {
 function CmsDashboard() {
   const [articles, setArticles] = useState(initialArticles);
   const [activeNav, setActiveNav] = useState("overview");
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [filter, setFilter] = useState<StatusFilter>("all");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<TableSort | null>(null);
@@ -264,7 +282,11 @@ function CmsDashboard() {
   };
 
   return (
-    <div className={styles.app} data-cms-dashboard="true">
+    <div
+      className={styles.app}
+      data-cms-dashboard="true"
+      data-sidebar-collapsed={sidebarCollapsed ? "true" : "false"}
+    >
       <aside className={styles.sidebar}>
         <a className={styles.brand} href="#overview" onClick={(event) => { event.preventDefault(); setActiveNav("overview"); }}>
           <span className={styles.brandMark} aria-hidden="true">J</span>
@@ -273,7 +295,7 @@ function CmsDashboard() {
         <SideNavigation
           activeId={activeNav}
           className={styles.sideNavigation}
-          defaultCollapsed={false}
+          collapsed={sidebarCollapsed}
           groupMotion="none"
           header={
             <div className={styles.workspace}>
@@ -288,6 +310,7 @@ function CmsDashboard() {
           items={navItems}
           navigationLabel="Juniper Press workspace"
           onActiveChange={(id) => setActiveNav(id)}
+          onCollapsedChange={setSidebarCollapsed}
           position="static"
           size="md"
           footer={

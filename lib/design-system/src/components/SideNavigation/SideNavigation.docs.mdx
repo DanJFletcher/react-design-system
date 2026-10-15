@@ -42,7 +42,9 @@ Disabled links omit their `href`, do not navigate, are removed from sequential k
 
 `position="static"` is the default. `sticky` remains in normal flow and sticks within its scrolling ancestor. `fixed` pins the navigation to the viewport and removes it from flow. A fixed navigation can cover page content: the host layout must reserve an offset matching its width and positioning; the component intentionally does not guess the content layout. Sticky positioning can be constrained by overflow on ancestors.
 
-Below 48rem, navigation switches to an accessible inline disclosure. It slides in from off-screen left as it expands above the page content, without creating an overlay or trapping focus. Closed navigation is removed from keyboard and screen-reader navigation. The transition respects reduced-motion preferences.
+Below 48rem, navigation switches to an off-canvas drawer that slides in from its configured side over the page. It does not take up page space while open. A scrim, Escape, or selecting a link closes the drawer. Focus stays on the toggle when it opens and returns there when it closes. Closed navigation is removed from keyboard and screen-reader navigation. The transition respects reduced-motion preferences.
+
+On wider screens, the collapse control changes the navigation to a compact rail. To animate the page content alongside that change, bind `collapsed` and `onCollapsedChange` to the host layout and transition its grid column or content offset. The component does not make assumptions about sibling page layout. The CMS Dashboard example demonstrates this pattern.
 
 ## Customization slots
 

@@ -20,6 +20,11 @@
   color: var(--ink);
   background: var(--paper-light);
   font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif;
+  transition: grid-template-columns var(--ds-motion-duration-standard) var(--ds-motion-easing-standard);
+}
+
+.app[data-sidebar-collapsed="true"] {
+  grid-template-columns: 90px minmax(0, 1fr);
 }
 
 .app *,
@@ -73,6 +78,26 @@
   color: #904631;
 }
 
+.app[data-sidebar-collapsed="true"] .brand {
+  align-self: center;
+  margin-inline: 0;
+}
+
+.app[data-sidebar-collapsed="true"] .brandName,
+.app[data-sidebar-collapsed="true"] .workspaceLabel,
+.app[data-sidebar-collapsed="true"] .workspaceSwitch > span:nth-child(2),
+.app[data-sidebar-collapsed="true"] .workspaceSwitch > svg,
+.app[data-sidebar-collapsed="true"] .helpCard,
+.app[data-sidebar-collapsed="true"] .profile > span:nth-child(2),
+.app[data-sidebar-collapsed="true"] .profile > svg {
+  display: none;
+}
+
+.app[data-sidebar-collapsed="true"] .workspaceSwitch,
+.app[data-sidebar-collapsed="true"] .profile {
+  justify-content: center;
+}
+
 .sideNavigation {
   flex: 1 1 auto;
   min-block-size: 0;
@@ -96,11 +121,6 @@
 .sideNavigation :global([data-ds-layout-component="side-navigation"] > div:first-child) {
   padding: 0 4px 18px;
   border-block-end: 1px solid #dcd6c9;
-}
-
-.sideNavigation :global([data-testid="side-navigation-collapse-toggle"]),
-.sideNavigation :global([data-ds-layout-component="side-navigation"] > div:nth-child(2)) {
-  display: none;
 }
 
 .sideNavigation :global([data-ds-layout-component="side-navigation"] ul) {
@@ -1259,8 +1279,10 @@
 }
 
 @media (max-width: 820px) {
-  .app {
+  .app,
+  .app[data-sidebar-collapsed="true"] {
     grid-template-columns: 1fr;
+    transition: none;
   }
 
   .sidebar {
