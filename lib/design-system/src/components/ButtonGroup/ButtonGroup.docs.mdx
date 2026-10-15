@@ -1,0 +1,33 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+import * as ButtonGroupStories from "./ButtonGroup.stories";
+
+<Meta of={ButtonGroupStories} />
+
+# Button group
+
+Arrange related Button components under one accessible group name. ButtonGroup controls layout only; each Button retains its own variant, size, shape, state, and click behavior.
+
+<Canvas of={ButtonGroupStories.Playground} />
+
+## Layout options
+
+Choose horizontal or vertical orientation, one of four spacing levels, and start, center, or end alignment. `fullWidth` makes the group fill its container; `equalWidth` gives direct children equal widths in a horizontal group or stretches them to the same width in a vertical group. `wrap` allows horizontal groups to continue on another line when space is limited.
+
+<Canvas of={ButtonGroupStories.VerticalActions} />
+<Canvas of={ButtonGroupStories.EqualWidthActions} />
+<Canvas of={ButtonGroupStories.CenteredAndWrapped} />
+
+## Accessible name
+
+Provide either `aria-label` or `aria-labelledby`. The group does not change Button keyboard behavior or add toggle/selection semantics.
+
+```tsx
+<ButtonGroup aria-label="Page actions" orientation="horizontal" spacing="sm">
+  <Button>Save draft</Button>
+  <Button variant="secondary">Preview</Button>
+  <Button variant="ghost">Publish</Button>
+</ButtonGroup>
+```
+
+<Canvas of={ButtonGroupStories.LabelledBy} />
+<Canvas of={ButtonGroupStories.ThemeCoverage} />

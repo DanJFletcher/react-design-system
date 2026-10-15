@@ -6,6 +6,13 @@ export type {
   ButtonSize,
   ButtonVariant,
 } from "./components/Button/Button";
+export { ButtonGroup } from "./components/ButtonGroup/ButtonGroup";
+export type {
+  ButtonGroupAlignment,
+  ButtonGroupOrientation,
+  ButtonGroupProps,
+  ButtonGroupSpacing,
+} from "./components/ButtonGroup/ButtonGroup";
 export { Badge } from "./components/Badge/Badge";
 export type {
   BadgeIconPosition,
