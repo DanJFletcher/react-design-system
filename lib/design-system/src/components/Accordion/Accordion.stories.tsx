@@ -143,6 +143,20 @@ export const ThemeCoverage: Story = {
       ))}
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const atomAccordion = canvas.getByRole("group", { name: "atom questions" });
+    const atomItem = atomAccordion.querySelector<HTMLElement>("[data-ds-accordion-item]");
+    const atomTrigger = atomAccordion.querySelector<HTMLElement>("[data-ds-accordion-trigger]");
+
+    if (!atomItem || !atomTrigger) {
+      throw new Error("Expected Atom accordion items and triggers to be rendered.");
+    }
+
+    await expect(getComputedStyle(atomAccordion).boxShadow).toBe("none");
+    await expect(getComputedStyle(atomItem).boxShadow).toBe("none");
+    await expect(getComputedStyle(atomTrigger).boxShadow).toBe("none");
+  },
 };
 
 export const DisabledItem: Story = {

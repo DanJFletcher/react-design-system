@@ -109,6 +109,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
       {...divProps}
       ref={ref}
       className={[styles.accordion, className].filter(Boolean).join(" ")}
+      data-ds-accordion
       data-variant={variant}
       data-size={size}
       data-shape={shape}
@@ -125,6 +126,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
           <div
             className={styles.item}
             data-open={isOpen || undefined}
+            data-ds-accordion-item
             data-disabled={item.disabled || undefined}
             key={item.id}
           >
@@ -133,6 +135,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
                 aria-controls={panelId}
                 aria-expanded={isOpen}
                 className={styles.trigger}
+                data-ds-accordion-trigger
                 disabled={item.disabled}
                 id={triggerId}
                 onClick={() => toggleItem(item)}
