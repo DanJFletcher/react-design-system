@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/landscaping-demo/"
+title = "Meadow & Mill Landscaping"
+description = "A responsive five-page marketing website demo for a fictional small landscaping company, with a locally scoped custom theme, services, contact information, a blog index, and three example article pages. The frontend is static and does not submit leads to a backend."
+version = "1.0.0"
+id = "artifacts/landscaping-demo"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/landscaping-demo/" ]
+localPort = 22910
+
+[services.development]
+run = "pnpm --filter @workspace/landscaping-demo run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/landscaping-demo", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/landscaping-demo/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22910"
+BASE_PATH = "/landscaping-demo/"
