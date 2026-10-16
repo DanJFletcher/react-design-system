@@ -39,6 +39,21 @@ const featuredSlides: CarouselSlide[] = [
   },
 ];
 
+const manySlides: CarouselSlide[] = Array.from({ length: 12 }, (_, index) => {
+  const slideNumber = index + 1;
+  return {
+    id: `gallery-${slideNumber}`,
+    label: `Gallery item ${slideNumber}`,
+    content: (
+      <SlideContent
+        index={String(slideNumber).padStart(2, "0")}
+        title={`Gallery item ${slideNumber}`}
+        description="Browse a larger set of featured stories."
+      />
+    ),
+  };
+});
+
 const meta = {
   title: "Components/Carousel",
   component: Carousel,
@@ -48,6 +63,7 @@ const meta = {
     loop: true,
     showControls: true,
     indicators: "dots",
+    indicatorTargetSize: "comfortable",
     controlsPosition: "below",
     overlaySafeArea: true,
     variant: "surface",
@@ -71,6 +87,7 @@ const meta = {
     playLabel: { control: "text" },
     reducedMotionLabel: { control: "text" },
     indicators: { control: "inline-radio", options: ["dots", "fraction", "none"] },
+    indicatorTargetSize: { control: "inline-radio", options: ["compact", "comfortable"] },
     controlsPosition: { control: "inline-radio", options: ["overlay", "below"] },
     overlaySafeArea: { control: "boolean" },
     previousLabel: { control: "text" },
@@ -153,6 +170,26 @@ export const ControlsExamples: Story = {
         controlsPosition="below"
         indicators="dots"
         variant="subtle"
+      />
+    </div>
+  ),
+};
+
+export const IndicatorTargetSizes: Story = {
+  render: () => (
+    <div style={{ display: "grid", minInlineSize: 0, gap: "var(--ds-space-4)" }}>
+      <Carousel
+        label="Comfortable indicator targets"
+        slides={manySlides}
+        loop
+        controlsPosition="below"
+      />
+      <Carousel
+        label="Compact indicator targets"
+        slides={manySlides}
+        indicatorTargetSize="compact"
+        loop
+        controlsPosition="below"
       />
     </div>
   ),

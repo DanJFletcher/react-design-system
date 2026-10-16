@@ -108,7 +108,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: var(--ds-carousel-gap, var(--_carousel-gap));
+  min-inline-size: 0;
 }
 
 .controls[data-position="below"] {
@@ -165,18 +167,46 @@
 .indicators {
   display: flex;
   align-items: center;
+  align-content: center;
   justify-content: center;
+  flex: 1 1 0;
+  flex-wrap: wrap;
   gap: var(--ds-space-2);
+  min-inline-size: 0;
+  max-inline-size: 100%;
 }
 
 .controls[data-position="overlay"] .indicators {
   position: absolute;
   inset-block-end: var(--ds-carousel-gap, var(--_carousel-gap));
   inset-inline-start: 50%;
+  inline-size: max-content;
+  max-inline-size: calc(
+    100% -
+    var(--ds-control-min-block-size-md) -
+    var(--ds-control-min-block-size-md) -
+    var(--ds-carousel-gap, var(--_carousel-gap)) -
+    var(--ds-carousel-gap, var(--_carousel-gap))
+  );
+  flex: 0 1 auto;
   transform: translateX(-50%);
   padding: var(--ds-space-2) var(--ds-space-3);
   border-radius: var(--ds-radius-surface);
   background-color: var(--ds-carousel-indicator-surface, var(--ds-color-surface-primary));
+}
+
+.controls[data-position="overlay"][data-auto-play="true"] .indicators {
+  max-inline-size: calc(
+    100% -
+    var(--ds-control-min-block-size-md) -
+    var(--ds-control-min-block-size-md) -
+    var(--ds-control-min-block-size-md) -
+    var(--ds-control-min-block-size-md) -
+    var(--ds-carousel-gap, var(--_carousel-gap)) -
+    var(--ds-carousel-gap, var(--_carousel-gap)) -
+    var(--ds-carousel-gap, var(--_carousel-gap)) -
+    var(--ds-carousel-gap, var(--_carousel-gap))
+  );
 }
 
 .indicator {
@@ -192,6 +222,12 @@
   border-radius: var(--ds-radius-control);
   background-color: transparent;
   cursor: pointer;
+  pointer-events: auto;
+}
+
+.indicators[data-target-size="comfortable"] .indicator {
+  inline-size: var(--ds-control-min-block-size-sm);
+  block-size: var(--ds-control-min-block-size-sm);
 }
 
 .indicator::before {
@@ -237,6 +273,9 @@
   }
 
   .frame[data-controls-position="overlay"] .controls[data-position="overlay"] .indicators {
+    inline-size: auto;
+    max-inline-size: 100%;
+    flex: 1 1 0;
     padding: 0;
     border-radius: 0;
   }
@@ -273,16 +312,22 @@
     border-color: CanvasText;
   }
 
-  .controlButton,
-  .indicator {
+  .controlButton {
     border: var(--ds-border-width-default) solid ButtonText;
   }
 
+  .indicator {
+    border: 0;
+  }
+
   .indicator::before {
+    box-sizing: border-box;
+    border: var(--ds-border-width-default) solid ButtonText;
     background-color: ButtonText;
   }
 
   .indicator[aria-current="true"]::before {
+    border-color: Highlight;
     background-color: Highlight;
   }
 

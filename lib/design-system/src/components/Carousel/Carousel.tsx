@@ -22,6 +22,7 @@ export type CarouselSlide = {
 };
 
 export type CarouselIndicator = "dots" | "fraction" | "none";
+export type CarouselIndicatorTargetSize = "compact" | "comfortable";
 export type CarouselControlsPosition = "overlay" | "below";
 export type CarouselVariant = "surface" | "outlined" | "subtle" | "accent";
 export type CarouselSize = "sm" | "md" | "lg";
@@ -40,6 +41,7 @@ export type CarouselProps = Omit<
   loop?: boolean;
   showControls?: boolean;
   indicators?: CarouselIndicator;
+  indicatorTargetSize?: CarouselIndicatorTargetSize;
   controlsPosition?: CarouselControlsPosition;
   overlaySafeArea?: boolean;
   previousLabel?: string;
@@ -73,6 +75,7 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
     loop = false,
     showControls = true,
     indicators = "dots",
+    indicatorTargetSize = "comfortable",
     controlsPosition = "below",
     overlaySafeArea = true,
     previousLabel = "Previous slide",
@@ -329,7 +332,12 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
         )}
 
         {shouldRenderControls && (
-          <div className={styles.controls} data-position={controlsPosition} data-slot="controls">
+          <div
+            className={styles.controls}
+            data-position={controlsPosition}
+            data-auto-play={autoPlay ? "true" : undefined}
+            data-slot="controls"
+          >
             {autoPlay && (
               <button
                 className={styles.controlButton}
@@ -376,6 +384,7 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
               <div
                 className={styles.indicators}
                 data-slot="indicators"
+                data-target-size={indicatorTargetSize}
                 role="group"
                 aria-label={`${label} slide indicators`}
               >

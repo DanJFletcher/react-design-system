@@ -547,11 +547,12 @@ Long labels wrap at narrow widths. Link colors, spacing, corner radius, and visi
   ]}
   loop
   indicators="dots"
+  indicatorTargetSize="comfortable"
   controlsPosition="below"
 />
 ```
 
-`Carousel` supports controlled or uncontrolled slide selection, optional looping and autoplay, previous/next buttons, dot or fraction indicators, overlay/below control placement, custom slide content, and an empty state. Keyboard users can focus the carousel and use Left/Right Arrow, Home, and End; touch users can swipe horizontally. Inactive slides are hidden and inert.
+`Carousel` supports controlled or uncontrolled slide selection, optional looping and autoplay, previous/next buttons, dot or fraction indicators, overlay/below control placement, custom slide content, and an empty state. `indicatorTargetSize` is `comfortable` by default, with 44px hit targets; choose `compact` for 24px targets. The dot and selected marker remain compact at both sizes, and longer dot sets wrap within the controls row. Keyboard users can focus the carousel and use Left/Right Arrow, Home, and End; touch users can swipe horizontally. Inactive slides are hidden and inert.
 
 Autoplay is opt-in through `autoPlay` and advances at `autoPlayInterval` (default 5 seconds). Its pause/start control is always available when enabled. Rotation pauses on hover, stops on keyboard focus or manual navigation, and stops on the last slide unless looping is enabled. Reduced-motion preferences disable autoplay and slide transitions.
 

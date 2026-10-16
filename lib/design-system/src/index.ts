@@ -279,6 +279,7 @@ export { Carousel } from "./components/Carousel/Carousel";
 export type {
   CarouselControlsPosition,
   CarouselIndicator,
+  CarouselIndicatorTargetSize,
   CarouselProps,
   CarouselSize,
   CarouselSlide,

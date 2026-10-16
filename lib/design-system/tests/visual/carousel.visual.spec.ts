@@ -31,6 +31,108 @@ test("Carousel buttons, indicators, keyboard navigation, and slide focus state w
   await expect(carousel.getByRole("group", { name: "Build your flow, 2 of 3" })).toBeVisible();
 });
 
+test("Carousel indicator targets resize independently from their markers and wrap on phones", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/iframe.html?id=components-carousel--indicator-target-sizes&viewMode=story");
+
+  const comfortable = page.getByRole("region", { name: "Comfortable indicator targets" });
+  const compact = page.getByRole("region", { name: "Compact indicator targets" });
+  const comfortableIndicators = comfortable.locator('[data-slot="indicators"]');
+  const compactIndicators = compact.locator('[data-slot="indicators"]');
+  const comfortableFirst = comfortableIndicators.getByRole("button", {
+    name: "Go to slide 1",
+    exact: true,
+  });
+  const comfortableSecond = comfortableIndicators.getByRole("button", {
+    name: "Go to slide 2",
+    exact: true,
+  });
+  const compactFirst = compactIndicators.getByRole("button", {
+    name: "Go to slide 1",
+    exact: true,
+  });
+
+  await expect(comfortableIndicators).toHaveAttribute("data-target-size", "comfortable");
+  await expect(compactIndicators).toHaveAttribute("data-target-size", "compact");
+
+  const comfortableTargetBox = await comfortableFirst.boundingBox();
+  const compactTargetBox = await compactFirst.boundingBox();
+  expect(comfortableTargetBox?.width).toBe(44);
+  expect(comfortableTargetBox?.height).toBe(44);
+  expect(compactTargetBox?.width).toBe(24);
+  expect(compactTargetBox?.height).toBe(24);
+
+  const markerSizes = await Promise.all(
+    [comfortableFirst, comfortableSecond, compactFirst].map((button) =>
+      button.evaluate((element) => {
+        const marker = getComputedStyle(element, "::before");
+        return { width: marker.width, height: marker.height };
+      }),
+    ),
+  );
+  expect(markerSizes).toEqual([
+    { width: "20px", height: "8px" },
+    { width: "8px", height: "8px" },
+    { width: "20px", height: "8px" },
+  ]);
+
+  await comfortable.focus();
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Tab");
+  await expect(comfortableFirst).toBeFocused();
+  const focusStyle = await comfortableFirst.evaluate((element) => ({
+    visible: element.matches(":focus-visible"),
+    outlineStyle: getComputedStyle(element).outlineStyle,
+    outlineWidth: getComputedStyle(element).outlineWidth,
+  }));
+  expect(focusStyle).toEqual({ visible: true, outlineStyle: "solid", outlineWidth: "3px" });
+
+  await page.keyboard.press("Tab");
+  await expect(comfortableSecond).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(comfortable).toHaveAttribute("data-index", "1");
+  await expect(comfortableSecond).toHaveAttribute("aria-current", "true");
+  await expect(comfortable.getByRole("group", { name: "Gallery item 2, 2 of 12" })).toBeVisible();
+
+  await compactIndicators.getByRole("button", { name: "Go to slide 12" }).click();
+  await expect(compact).toHaveAttribute("data-index", "11");
+  await expect(compact.getByRole("group", { name: "Gallery item 12, 12 of 12" })).toBeVisible();
+
+  for (const carousel of [comfortable, compact]) {
+    const controls = carousel.locator('[data-slot="controls"]');
+    const indicators = carousel.locator('[data-slot="indicators"]');
+    const controlsBox = await controls.boundingBox();
+    const indicatorsBox = await indicators.boundingBox();
+    const previousBox = await carousel.getByRole("button", { name: "Previous slide" }).boundingBox();
+    const nextBox = await carousel.getByRole("button", { name: "Next slide" }).boundingBox();
+    expect(controlsBox).not.toBeNull();
+    expect(indicatorsBox).not.toBeNull();
+    expect(previousBox).not.toBeNull();
+    expect(nextBox).not.toBeNull();
+    expect(indicatorsBox!.height).toBeGreaterThan(44);
+    expect(indicatorsBox!.x).toBeGreaterThanOrEqual(controlsBox!.x);
+    expect(indicatorsBox!.x + indicatorsBox!.width)
+      .toBeLessThanOrEqual(controlsBox!.x + controlsBox!.width);
+
+    const intersects = (
+      first: NonNullable<typeof indicatorsBox>,
+      second: NonNullable<typeof previousBox>,
+    ) =>
+      first.x < second.x + second.width &&
+      first.x + first.width > second.x &&
+      first.y < second.y + second.height &&
+      first.y + first.height > second.y;
+    expect(intersects(indicatorsBox!, previousBox!)).toBe(false);
+    expect(intersects(indicatorsBox!, nextBox!)).toBe(false);
+  }
+
+  const dimensions = await page.evaluate(() => ({
+    bodyWidth: document.body.scrollWidth,
+    viewportWidth: window.innerWidth,
+  }));
+  expect(dimensions.bodyWidth).toBeLessThanOrEqual(dimensions.viewportWidth);
+});
+
 test("Carousel disables navigation at non-looping boundaries", async ({ page }) => {
   await page.goto("/iframe.html?id=components-carousel--controls-examples&viewMode=story");
 

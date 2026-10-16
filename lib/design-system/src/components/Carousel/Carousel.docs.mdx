@@ -16,9 +16,12 @@ import * as CarouselStories from "./Carousel.stories";
 ## Controls and layouts
 
 <Canvas of={CarouselStories.ControlsExamples} />
+<Canvas of={CarouselStories.IndicatorTargetSizes} />
 <Canvas of={CarouselStories.VariantExamples} />
 
-`loop` wraps navigation at the first and last slides. `showControls` displays previous/next buttons. `indicators` accepts `dots`, `fraction`, or `none`. Controls are placed `below` the slides by default, which avoids covering slide content. With `controlsPosition="overlay"`, `overlaySafeArea` (default `true`) reserves space for normal-flow content around the arrows and indicators. In narrow carousel containers, overlay controls always move below the slide, including when `overlaySafeArea={false}`. At wider sizes, setting `overlaySafeArea={false}` allows controls over full-bleed content; the carousel cannot detect or move absolutely positioned content. `variant` accepts `surface`, `outlined`, `subtle`, or `accent`, and `size` accepts `sm`, `md`, or `lg`.
+`loop` wraps navigation at the first and last slides. `showControls` displays previous/next buttons. `indicators` accepts `dots`, `fraction`, or `none`. `indicatorTargetSize` controls only the buttons around dot indicators: `comfortable` (default) provides 44px targets; `compact` uses the existing 24px targets. The visual dots and selected marker stay compact in either mode. Long dot sets wrap within the controls row on narrow screens.
+
+Controls are placed `below` the slides by default, which avoids covering slide content. With `controlsPosition="overlay"`, `overlaySafeArea` (default `true`) reserves space for normal-flow content around the arrows and indicators. In narrow carousel containers, overlay controls always move below the slide, including when `overlaySafeArea={false}`. At wider sizes, setting `overlaySafeArea={false}` allows controls over full-bleed content; the carousel cannot detect or move absolutely positioned content. `variant` accepts `surface`, `outlined`, `subtle`, or `accent`, and `size` accepts `sm`, `md`, or `lg`.
 
 Keyboard users can focus the carousel and use Left/Right Arrow, Home, and End. Touch users can swipe horizontally; vertical page scrolling remains available. Inactive slides are hidden from assistive technology and removed from keyboard focus.
 
