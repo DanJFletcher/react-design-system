@@ -285,6 +285,66 @@ describe("form controls", () => {
     expect(screen.getByText("Daily digest").closest("label")).not.toHaveAttribute("data-disabled");
   });
 
+  it("keeps checkbox and switch help connected when validation errors change", () => {
+    const renderControls = (errorVersion: "A" | "B") => (
+      <>
+        <Checkbox
+          aria-describedby="terms-help"
+          description="Review the terms before continuing."
+          error={`${errorVersion}: Consent is required.`}
+          id="terms"
+          label="Accept terms"
+        />
+        <span id="terms-help">The agreement applies to all workspace members.</span>
+        <Switch
+          aria-describedby="alerts-help"
+          description="Choose whether to receive account alerts."
+          error={`${errorVersion}: Choose an alert preference.`}
+          id="account-alerts"
+          label="Account alerts"
+        />
+        <span id="alerts-help">You can change this setting at any time.</span>
+      </>
+    );
+
+    const { rerender } = render(renderControls("A"));
+    rerender(renderControls("B"));
+
+    const fields = [
+      {
+        control: screen.getByRole("checkbox", { name: "Accept terms" }),
+        describedBy: "terms-help terms-description terms-error",
+        description: "Review the terms before continuing.",
+        descriptionId: "terms-description",
+        error: "B: Consent is required.",
+        errorId: "terms-error",
+        externalHelp: "The agreement applies to all workspace members.",
+        externalHelpId: "terms-help",
+        oldError: "A: Consent is required.",
+      },
+      {
+        control: screen.getByRole("switch", { name: "Account alerts" }),
+        describedBy: "alerts-help account-alerts-description account-alerts-error",
+        description: "Choose whether to receive account alerts.",
+        descriptionId: "account-alerts-description",
+        error: "B: Choose an alert preference.",
+        errorId: "account-alerts-error",
+        externalHelp: "You can change this setting at any time.",
+        externalHelpId: "alerts-help",
+        oldError: "A: Choose an alert preference.",
+      },
+    ];
+
+    for (const field of fields) {
+      expect(field.control).toHaveAttribute("aria-invalid", "true");
+      expect(field.control).toHaveAttribute("aria-describedby", field.describedBy);
+      expect(screen.getByText(field.externalHelp)).toHaveAttribute("id", field.externalHelpId);
+      expect(screen.getByText(field.description)).toHaveAttribute("id", field.descriptionId);
+      expect(document.getElementById(field.errorId)).toHaveTextContent(field.error);
+      expect(screen.queryByText(field.oldError)).not.toBeInTheDocument();
+    }
+  });
+
   it("renders text, date, file, select, and textarea fields with native constraints", () => {
     render(
       <>
