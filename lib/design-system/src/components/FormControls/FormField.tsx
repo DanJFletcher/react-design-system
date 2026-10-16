@@ -22,17 +22,27 @@ export interface FormFieldMetadata {
   invalid: boolean;
 }
 
+export type FormFieldOptions = Pick<
+  FormFieldProps,
+  "id" | "description" | "error" | "invalid" | "aria-describedby"
+>;
+
 function hasContent(content: ReactNode): boolean {
   return content !== undefined && content !== null && content !== false && content !== "";
 }
 
+/**
+ * Creates the shared ID and accessibility metadata for a form control.
+ * Apply `id`, `describedBy`, and `invalid` to the actual control; native
+ * required and disabled semantics remain the control owner's responsibility.
+ */
 export function useFormField({
   id,
   description,
   error,
   invalid = false,
   "aria-describedby": externalDescribedBy,
-}: Pick<FormFieldProps, "id" | "description" | "error" | "invalid" | "aria-describedby">): FormFieldMetadata {
+}: FormFieldOptions): FormFieldMetadata {
   const generatedId = useId();
   const fieldId = id ?? generatedId;
   const descriptionId = hasContent(description) ? `${fieldId}-description` : undefined;
@@ -52,7 +62,7 @@ export function useFormField({
   };
 }
 
-interface FieldLabelProps {
+export interface FormFieldLabelProps {
   id: string;
   labelId?: string;
   label: ReactNode;
@@ -66,7 +76,7 @@ export function FieldLabel({
   label,
   required = false,
   disabled = false,
-}: FieldLabelProps) {
+}: FormFieldLabelProps) {
   return (
     <Label disabled={disabled} htmlFor={id} id={labelId} required={required}>
       {label}
@@ -74,7 +84,7 @@ export function FieldLabel({
   );
 }
 
-export function FieldLegend({ label, required = false }: Omit<FieldLabelProps, "id" | "disabled" | "labelId">) {
+export function FieldLegend({ label, required = false }: Omit<FormFieldLabelProps, "id" | "disabled" | "labelId">) {
   return (
     <legend className={labelStyles.label}>
       {label}
@@ -83,14 +93,14 @@ export function FieldLegend({ label, required = false }: Omit<FieldLabelProps, "
   );
 }
 
-interface MessagesProps {
+export interface FormFieldMessagesProps {
   description?: ReactNode;
   descriptionId?: string;
   error?: ReactNode;
   errorId?: string;
 }
 
-export function FieldMessages({ description, descriptionId, error, errorId }: MessagesProps) {
+export function FieldMessages({ description, descriptionId, error, errorId }: FormFieldMessagesProps) {
   const showDescription = hasContent(description);
   const showError = hasContent(error);
 
@@ -111,3 +121,6 @@ export function FieldMessages({ description, descriptionId, error, errorId }: Me
     </>
   );
 }
+
+/** Public composition helpers for custom native and third-party form controls. */
+export { FieldLabel as FormFieldLabel, FieldMessages as FormFieldMessages };

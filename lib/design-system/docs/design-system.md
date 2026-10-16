@@ -851,6 +851,8 @@ Every individual control requires a visible `label` and forwards native props, r
 
 `description` and `error` content are connected with `aria-describedby` while preserving IDs supplied by the caller. An `error` sets `aria-invalid`; use `invalid` when an invalid state has no message. Native `required` and `disabled` behavior is retained. The controls do not provide a form state manager, validation rules, or asynchronous submission handling.
 
+Custom controls can reuse the same accessible pattern through the public `useFormField`, `FormFieldLabel`, and `FormFieldMessages` exports. The hook provides the control ID, description/error IDs, combined `aria-describedby` value, and invalid state. Consumers apply those accessibility attributes and native required/disabled semantics to their own control; the label and messages remain presentational.
+
 `DateField` allows `date`, `datetime-local`, `month`, `time`, and `week` input types, defaulting to `date`. `FileField` keeps browser-native file selection and accepts the native `accept` and `multiple` attributes; it intentionally does not expose controlled file values. `Switch` is a checkbox with switch role semantics, so native checked state, keyboard activation, required validation, and `name`/`value` form submission are preserved.
 
 `TextField` accepts optional `prefix` and `suffix` React-node slots for accessible text, decorative icons, or consumer-owned inline actions. The native input keeps its normal label, messages, ref, and form behavior; its group flexes within narrow containers, with the input taking the remaining width. Interactive affixes keep their own native semantics and must be disabled separately when the field is disabled.

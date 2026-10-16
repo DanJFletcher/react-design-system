@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { Button } from "../Button/Button";
+import { FormFieldLabel, FormFieldMessages, useFormField } from "../../index";
 import { Checkbox } from "./Checkbox";
 import { DateField } from "./DateField";
 import { FileField } from "./FileField";
@@ -23,6 +24,43 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+function CustomNativeFieldExample() {
+  const description = "Use lowercase letters, numbers, and hyphens.";
+  const error = "This workspace slug is already in use.";
+  const field = useFormField({
+    id: "workspace-slug",
+    description,
+    error,
+    invalid: true,
+    "aria-describedby": "slug-policy",
+  });
+
+  return (
+    <div style={{ display: "grid", gap: "var(--ds-space-2)", maxWidth: "32rem" }}>
+      <FormFieldLabel id={field.id} label="Workspace slug" required />
+      <input
+        id={field.id}
+        name="slug"
+        type="text"
+        required
+        defaultValue="meadow-team"
+        aria-describedby={field.describedBy}
+        aria-invalid={field.invalid || undefined}
+      />
+      <FormFieldMessages
+        description={description}
+        descriptionId={field.descriptionId}
+        error={error}
+        errorId={field.errorId}
+      />
+      <p id="slug-policy">This value appears in your workspace URL.</p>
+      <label>
+        <input type="checkbox" disabled checked readOnly /> Invite members later
+      </label>
+    </div>
+  );
+}
 
 export const TextFieldStates: Story = {
   render: () => (
@@ -55,6 +93,29 @@ export const TextFieldStates: Story = {
     await expect(organization).toHaveAttribute("aria-describedby", expect.stringContaining("error"));
     await expect(canvas.getByText("Enter the organization name shown on your account.")).toBeVisible();
     await expect(canvas.getByRole("textbox", { name: "Account ID" })).toBeDisabled();
+  },
+};
+
+export const CustomControlComposition: Story = {
+  render: () => <CustomNativeFieldExample />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const control = canvas.getByRole("textbox", { name: "Workspace slug" });
+    const describedBy = control.getAttribute("aria-describedby")?.split(/\s+/) ?? [];
+
+    await expect(control).toBeRequired();
+    await expect(control).toHaveAttribute("aria-invalid", "true");
+    await expect(describedBy).toHaveLength(3);
+    await expect(describedBy).toContain("slug-policy");
+    await expect(canvas.getByText("Use lowercase letters, numbers, and hyphens.")).toHaveAttribute(
+      "id",
+      expect.stringContaining("description"),
+    );
+    await expect(canvas.getByText("This workspace slug is already in use.")).toHaveAttribute(
+      "id",
+      expect.stringContaining("error"),
+    );
+    await expect(canvas.getByRole("checkbox", { name: "Invite members later" })).toBeDisabled();
   },
 };
 

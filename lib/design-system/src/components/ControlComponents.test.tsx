@@ -20,8 +20,59 @@ import { ToggleButton } from "./ToggleButton/ToggleButton";
 import { ToggleGroup } from "./ToggleGroup/ToggleGroup";
 import { Icon } from "./Icon/Icon";
 import { Spinner } from "./Spinner/Spinner";
+import {
+  FormFieldLabel,
+  FormFieldMessages,
+  useFormField,
+} from "../index";
 
 describe("form controls", () => {
+  it("exports shared field helpers for custom controls without taking over native semantics", () => {
+    function CustomControl() {
+      const description = "Use a unique workspace name.";
+      const error = "This name is already taken.";
+      const field = useFormField({
+        id: "custom-workspace",
+        description,
+        error,
+        "aria-describedby": "external-help external-help",
+      });
+
+      return (
+        <>
+          <FormFieldLabel id={field.id} label="Workspace name" required disabled />
+          <input
+            id={field.id}
+            required
+            disabled
+            aria-describedby={field.describedBy}
+            aria-invalid={field.invalid || undefined}
+          />
+          <FormFieldMessages
+            description={description}
+            descriptionId={field.descriptionId}
+            error={error}
+            errorId={field.errorId}
+          />
+          <span id="external-help">Shown to invited members.</span>
+        </>
+      );
+    }
+
+    render(<CustomControl />);
+    const control = screen.getByRole("textbox", { name: "Workspace name" });
+    const describedBy = control.getAttribute("aria-describedby")?.split(/\s+/) ?? [];
+
+    expect(control).toBeRequired();
+    expect(control).toBeDisabled();
+    expect(control).toHaveAttribute("aria-invalid", "true");
+    expect(describedBy).toHaveLength(3);
+    expect(describedBy[0]).toBe("external-help");
+    expect(screen.getByText("Use a unique workspace name.").id).toContain("description");
+    expect(screen.getByText("This name is already taken.").id).toContain("error");
+    expect(control.labels?.[0]).toHaveTextContent("Workspace name");
+  });
+
   it("associates checkbox and switch labels, descriptions, errors, and external descriptions", () => {
     render(
       <>

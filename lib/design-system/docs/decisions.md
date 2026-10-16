@@ -32,6 +32,14 @@ Orchid demonstrates extending Luna while retaining a flattened output map. It is
 
 The core form controls preserve native input, select, checkbox, radio, and fieldset behavior. Shared internal helpers provide consistent labels and accessible description/error relationships; form state and validation rules remain the consumer's responsibility.
 
+## Custom controls reuse the field accessibility helpers
+
+The shared field ID, description/error association, label, and message helpers are part of the public package API for custom native and third-party controls. The helpers provide metadata and presentation only; required, disabled, and invalid semantics stay on the actual control.
+
+**Why:** consumers need the built-in fields' accessible association pattern even when they supply their own control implementation.
+
+**How to apply:** use `useFormField` to create message IDs and combine external `aria-describedby` references, then apply its returned attributes to the control and render `FormFieldLabel` and `FormFieldMessages`.
+
 ## Labels remain presentational wrappers around native semantics
 
 The public `Label` renders a native `<label>` with field and choice layouts. Its required marker is decorative, while required and disabled validation state remains on the native control. Form controls reuse the same label implementation; group names continue to use native `<legend>`.

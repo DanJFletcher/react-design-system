@@ -82,6 +82,35 @@ These primitives do not manage values, submission, or validation. Keep those res
 
 Each individual control requires a visible `label`. `description` and `error` are connected to the control or group through `aria-describedby`; an error also sets `aria-invalid`. Set `invalid` when the control is invalid but has no message. Existing `aria-describedby` IDs are preserved and combined. Native `required` and `disabled` behavior is retained.
 
+## Compose a custom control
+
+<Canvas of={FormControlsStories.CustomControlComposition} />
+
+Use the public `useFormField`, `FormFieldLabel`, and `FormFieldMessages` helpers when a built-in field does not fit your control. The hook returns the control `id`, message IDs, the combined `describedBy` value, and `invalid` state. Apply those values to the actual control:
+
+```tsx
+const description = "Use your organization name.";
+const error = "That name is already in use.";
+const field = useFormField({ description, error, "aria-describedby": "organization-hint" });
+
+<FormFieldLabel id={field.id} label="Organization" required />
+<MyControl
+  id={field.id}
+  aria-describedby={field.describedBy}
+  aria-invalid={field.invalid || undefined}
+  required
+/>
+<FormFieldMessages
+  description={description}
+  descriptionId={field.descriptionId}
+  error={error}
+  errorId={field.errorId}
+/>
+<p id="organization-hint">This name is shown to your team.</p>
+```
+
+`required` and `disabled` on `FormFieldLabel` only affect its visual marker and label styling; set native `required` and `disabled` (or the appropriate third-party control props) on the control itself. Keep `aria-invalid` and `aria-describedby` on the control, not the label or message elements.
+
 ## Themes
 
 <Canvas of={FormControlsStories.ThemeCoverage} />
