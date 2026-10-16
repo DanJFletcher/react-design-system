@@ -172,34 +172,16 @@
   opacity: 0;
 }
 
-.spinner {
+.loadingSpinnerPosition {
   position: absolute;
   inset-block-start: 50%;
   inset-inline-start: 50%;
-  box-sizing: border-box;
-  inline-size: var(--ds-space-4);
-  block-size: var(--ds-space-4);
-  margin-block-start: calc(0px - var(--ds-space-2));
-  margin-inline-start: calc(0px - var(--ds-space-2));
-  border: var(--ds-border-width-default) solid currentColor;
-  border-inline-end-color: transparent;
-  border-radius: var(--ds-radius-full);
-  animation: button-spin var(--ds-motion-duration-spinner) linear infinite;
-}
-
-@keyframes button-spin {
-  to {
-    transform: rotate(360deg);
-  }
+  transform: translate(-50%, -50%);
 }
 
 @media (prefers-reduced-motion: reduce) {
   :global(html:not([data-ds-motion-preference="full"])) .button {
     transition-duration: 0ms;
-  }
-
-  :global(html:not([data-ds-motion-preference="full"])) .spinner {
-    animation: none;
   }
 }
 

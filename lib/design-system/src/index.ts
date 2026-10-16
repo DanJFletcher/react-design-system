@@ -74,6 +74,8 @@ export type {
 } from "./components/AnnouncementBar/AnnouncementBar";
 export { Progress } from "./components/Progress/Progress";
 export type { ProgressProps } from "./components/Progress/Progress";
+export { Spinner } from "./components/Spinner/Spinner";
+export type { SpinnerProps, SpinnerSize } from "./components/Spinner/Spinner";
 export { ContactSection } from "./components/ContactSection/ContactSection";
 export type {
   BusinessDayOfWeek,

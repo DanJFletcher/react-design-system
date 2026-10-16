@@ -195,6 +195,15 @@ The contracts below capture decisions for selected components; this list is not 
 - Customization: use semantic theme tokens and registered `progress.*` hooks for track, indicator, label/value text, height, radius, and spacing. Support ACME, Luna, Orchid, custom themes, and nested boundaries.
 - Validation: Storybook determinate, indeterminate, custom-scale, theme, nested, and custom-hook examples; browser checks for ARIA values, clamping, status text, reduced motion, responsive labels, and custom themes; lint, typecheck, token checks, Storybook, package build, and package-consumer checks.
 
+### Spinner
+
+- Objective: indicate indeterminate work with a compact circular loader, distinct from linear or measurable `Progress` and content-shaped `Skeleton` placeholders.
+- Dependencies: existing React package, CSS Modules, shared spacing, full-radius, border-width, and spinner-motion tokens; no new semantic token, component hook, or runtime dependency.
+- Public API: `size` (`sm`, `md`, `lg`, default `md`), `label` (default `Loading`), and `decorative` (default `false`). Native `span` props, ref, `className`, and typed `DesignSystemStyle` are supported; `role`, `aria-label`, `aria-hidden`, and `style` are owned by the component.
+- Semantics and interaction: standalone use renders `role="status"` with the accessible `label`. Decorative use sets `aria-hidden` and omits the status role and name, for contexts whose parent already communicates loading. The component is stateless and does not represent numeric progress.
+- Customization: inherit `currentColor`; sizes use the shared spacing scale. Respect reduced motion and forced colors across ACME, Luna, Orchid, Atom, Sublime, and nested theme boundaries without theme-specific rendering.
+- Validation: Storybook playground, size, decorative, and theme examples; story tests for status naming and decorative semantics; lint, typecheck, design rules, Storybook build/tests, and package-consumer checks.
+
 ### Tooltip
 
 - Objective: reveal short, non-essential explanations consistently on pointer hover, keyboard focus, and touch.

@@ -203,7 +203,7 @@
 }
 
 :where([data-ds-theme="atom"]) :where(
-  :not([data-ds-typography]):is(
+  :not([data-ds-typography]):not([data-ds-spinner]):is(
     [data-ds-surface],
     [data-variant="surface"],
     [data-variant="accent"],

@@ -1,0 +1,31 @@
+import { Canvas, Controls, Meta } from "@storybook/addon-docs/blocks";
+import * as SpinnerStories from "./Spinner.stories";
+
+<Meta of={SpinnerStories} />
+
+# Spinner
+
+A circular indicator for indeterminate work. Use `Progress` when work has a linear track or measurable completion; use `Skeleton` when the shape of the content is known but not ready.
+
+## Interactive playground
+
+<Canvas of={SpinnerStories.Playground} />
+<Controls of={SpinnerStories.Playground} />
+
+## Sizes and decorative use
+
+<Canvas of={SpinnerStories.Sizes} />
+<Canvas of={SpinnerStories.Decorative} />
+
+## Themes
+
+<Canvas of={SpinnerStories.ThemeCoverage} />
+
+## Accessibility and behavior
+
+- A standalone spinner defaults to `role="status"` with the accessible name `Loading`. Set `label` to describe the work, such as `Loading search results`.
+- Use `decorative` when nearby text or a containing control already communicates the loading state. Decorative spinners are hidden from assistive technology.
+- The indicator inherits `currentColor`, so it follows the text color of its context. Its `sm`, `md`, and `lg` sizes use the shared spacing scale.
+- Rotation stops when reduced motion is requested; forced-colors mode retains a visible system-colored ring.
+- The component is stateless. The consumer controls when it appears and owns any longer task status or progress value.
+- Native `span` attributes, refs, `className`, and typed `DesignSystemStyle` are forwarded. The component owns `role`, `aria-label`, `aria-hidden`, and `style`.

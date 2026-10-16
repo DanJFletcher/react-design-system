@@ -1,5 +1,6 @@
 import { forwardRef, type ComponentPropsWithRef, type CSSProperties, type ReactNode } from "react";
 import type { DesignSystemStyle } from "../../generated/token-types";
+import { Spinner } from "../Spinner/Spinner";
 import styles from "./Button.module.css";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "destructive";
@@ -95,7 +96,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       {!iconOnly && <span className={styles.label}>{children}</span>}
       {iconPosition === "right" && iconElement}
       {loading && (
-        <span className={styles.spinner} aria-hidden="true" />
+        <Spinner decorative className={styles.loadingSpinnerPosition} size="sm" />
       )}
     </button>
   );

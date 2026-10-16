@@ -702,6 +702,20 @@ Determinate progress exposes `aria-valuemin`, `aria-valuemax`, and `aria-valueno
 
 The `progress.*` hooks customize track, indicator, label/value text, height, radius, and spacing. Theme tokens and scoped overrides inherit through nested ACME, Luna, Orchid, and custom themes. Reduced-motion and forced-colors preferences are supported.
 
+## Spinner
+
+```tsx
+<Spinner label="Loading search results" />
+
+<Button loading>
+  Save changes
+</Button>
+```
+
+`Spinner` is a circular indicator for indeterminate work. Its standalone default uses `role="status"` and the accessible name `Loading`; set `label` to describe the operation. Use `decorative` when nearby text or a containing control already communicates the loading state. Button uses Spinner in this decorative mode while retaining its own busy and disabled semantics.
+
+`size` supports `sm`, `md`, and `lg` and defaults to `md`. The indicator inherits `currentColor`, follows the active theme and parent context, and stops rotating when reduced motion is requested. It is an indicator rather than a content surface, so it does not receive surface elevation. Forced-colors mode retains a visible system-colored ring. Use `Progress` for linear or measurable work and `Skeleton` for content-shaped loading placeholders.
+
 ## Toast
 
 ```tsx

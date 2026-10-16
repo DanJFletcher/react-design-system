@@ -20,7 +20,7 @@
     { "file": "Button/Button.module.css", "selector": ".rounded", "role": "shape", "reason": "Explicit rounded button shape." },
     { "file": "Button/Button.module.css", "selector": ".square", "role": "shape", "reason": "Explicit square button shape." },
     { "file": "Button/Button.module.css", "selector": ".pill", "role": "shape", "reason": "Explicit pill button shape." },
-    { "file": "Button/Button.module.css", "selector": ".spinner", "role": "circle", "reason": "Circular loading indicator." },
+    { "file": "Spinner/Spinner.module.css", "selector": ".indicator", "role": "circle", "reason": "Circular loading indicator." },
     { "file": "ArticleCard/ArticleCard.module.css", "selector": ".avatar", "role": "circle", "reason": "Equal-sized author portrait." },
     { "file": "Carousel/Carousel.module.css", "selector": ".controlButton", "role": "action", "reason": "Previous/next and autoplay action controls." },
     { "file": "Gallery/Gallery.module.css", "selector": ".controlButton", "role": "action", "reason": "Previous/next image navigation controls in the lightbox." },
