@@ -27,7 +27,7 @@ import {
 } from "../index";
 
 describe("form controls", () => {
-  it("keeps custom control help connected as validation errors appear and clear", () => {
+  it("keeps custom control help connected as validation errors change and clear", () => {
     function CustomControl({ error }: { error?: string }) {
       const description = "Use a unique workspace name.";
       const field = useFormField({
@@ -85,13 +85,26 @@ describe("form controls", () => {
       "custom-workspace-error",
     );
 
+    rerender(<CustomControl error="Use only letters and numbers." />);
+    expect(control).toHaveAttribute("aria-invalid", "true");
+    expect(control).toHaveAttribute(
+      "aria-describedby",
+      "external-help custom-workspace-description custom-workspace-error",
+    );
+    expect(screen.queryByText("This name is already taken.")).not.toBeInTheDocument();
+    expect(screen.getByText("Use only letters and numbers.")).toHaveAttribute(
+      "id",
+      "custom-workspace-error",
+    );
+    expect(document.querySelectorAll("#custom-workspace-error")).toHaveLength(1);
+
     rerender(<CustomControl />);
     expect(control).not.toHaveAttribute("aria-invalid");
     expect(control).toHaveAttribute(
       "aria-describedby",
       "external-help custom-workspace-description",
     );
-    expect(screen.queryByText("This name is already taken.")).not.toBeInTheDocument();
+    expect(screen.queryByText("Use only letters and numbers.")).not.toBeInTheDocument();
   });
 
   it("associates checkbox and switch labels, descriptions, errors, and external descriptions", () => {
