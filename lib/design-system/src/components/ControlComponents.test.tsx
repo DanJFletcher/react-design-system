@@ -259,6 +259,155 @@ describe("form controls", () => {
     }
   });
 
+  it("removes built-in field errors when validation clears while preserving help connections", () => {
+    const renderFields = (showErrors: boolean) => (
+      <>
+        <TextField
+          aria-describedby="name-help"
+          description="Enter your display name."
+          error={showErrors ? "A display name is required." : undefined}
+          id="display-name"
+          label="Display name"
+        />
+        <span id="name-help">Names are visible to your team.</span>
+
+        <DateField
+          aria-describedby="start-date-help"
+          description="Choose the first day of the project."
+          error={showErrors ? "Enter a valid start date." : undefined}
+          id="start-date"
+          label="Start date"
+        />
+        <span id="start-date-help">The project begins on this date.</span>
+
+        <FileField
+          aria-describedby="attachments-help"
+          description="Add relevant project files."
+          error={showErrors ? "Select a supported file." : undefined}
+          id="project-files"
+          label="Project files"
+        />
+        <span id="attachments-help">PDF files are preferred.</span>
+
+        <RangeField
+          aria-describedby="volume-help"
+          description="Set the expected weekly volume."
+          error={showErrors ? "Choose a valid weekly volume." : undefined}
+          id="weekly-volume"
+          label="Weekly volume"
+        />
+        <span id="volume-help">You can update this estimate later.</span>
+
+        <Select
+          aria-describedby="region-help"
+          description="Choose your team's region."
+          error={showErrors ? "Choose a region." : undefined}
+          id="team-region"
+          label="Team region"
+        >
+          <option value="west">West</option>
+        </Select>
+        <span id="region-help">You can change this later.</span>
+
+        <Textarea
+          aria-describedby="project-notes-help"
+          description="Include any details the team should know."
+          error={showErrors ? "Add a project summary." : undefined}
+          id="project-notes"
+          label="Project notes"
+        />
+        <span id="project-notes-help">Keep the summary brief.</span>
+      </>
+    );
+
+    const fields = [
+      {
+        label: "Display name",
+        describedBy: "name-help display-name-description",
+        error: "A display name is required.",
+        errorId: "display-name-error",
+        description: "Enter your display name.",
+        descriptionId: "display-name-description",
+        externalHelp: "Names are visible to your team.",
+        externalHelpId: "name-help",
+      },
+      {
+        label: "Start date",
+        describedBy: "start-date-help start-date-description",
+        error: "Enter a valid start date.",
+        errorId: "start-date-error",
+        description: "Choose the first day of the project.",
+        descriptionId: "start-date-description",
+        externalHelp: "The project begins on this date.",
+        externalHelpId: "start-date-help",
+      },
+      {
+        label: "Project files",
+        describedBy: "attachments-help project-files-description",
+        error: "Select a supported file.",
+        errorId: "project-files-error",
+        description: "Add relevant project files.",
+        descriptionId: "project-files-description",
+        externalHelp: "PDF files are preferred.",
+        externalHelpId: "attachments-help",
+      },
+      {
+        label: "Weekly volume",
+        describedBy: "volume-help weekly-volume-description",
+        error: "Choose a valid weekly volume.",
+        errorId: "weekly-volume-error",
+        description: "Set the expected weekly volume.",
+        descriptionId: "weekly-volume-description",
+        externalHelp: "You can update this estimate later.",
+        externalHelpId: "volume-help",
+      },
+      {
+        label: "Team region",
+        describedBy: "region-help team-region-description",
+        error: "Choose a region.",
+        errorId: "team-region-error",
+        description: "Choose your team's region.",
+        descriptionId: "team-region-description",
+        externalHelp: "You can change this later.",
+        externalHelpId: "region-help",
+      },
+      {
+        label: "Project notes",
+        describedBy: "project-notes-help project-notes-description",
+        error: "Add a project summary.",
+        errorId: "project-notes-error",
+        description: "Include any details the team should know.",
+        descriptionId: "project-notes-description",
+        externalHelp: "Keep the summary brief.",
+        externalHelpId: "project-notes-help",
+      },
+    ];
+
+    const { rerender } = render(renderFields(true));
+
+    for (const field of fields) {
+      const control = screen.getByLabelText(field.label);
+      expect(control).toHaveAttribute("aria-invalid", "true");
+      expect(control).toHaveAttribute(
+        "aria-describedby",
+        `${field.externalHelpId} ${field.descriptionId} ${field.errorId}`,
+      );
+      expect(document.getElementById(field.errorId)).toHaveTextContent(field.error);
+    }
+
+    rerender(renderFields(false));
+
+    for (const field of fields) {
+      const control = screen.getByLabelText(field.label);
+      expect(control).not.toHaveAttribute("aria-invalid");
+      expect(control).toHaveAttribute("aria-describedby", field.describedBy);
+      expect(screen.getByText(field.externalHelp)).toHaveAttribute("id", field.externalHelpId);
+      expect(screen.getByText(field.description)).toHaveAttribute("id", field.descriptionId);
+      expect(document.getElementById(field.errorId)).not.toBeInTheDocument();
+      expect(screen.queryByText(field.error)).not.toBeInTheDocument();
+    }
+  });
+
   it("associates checkbox and switch labels, descriptions, errors, and external descriptions", () => {
     render(
       <>
