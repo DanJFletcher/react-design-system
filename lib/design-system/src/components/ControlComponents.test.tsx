@@ -176,6 +176,58 @@ describe("form controls", () => {
     expect(screen.queryByText("A: Choose a region.")).not.toBeInTheDocument();
   });
 
+  it("keeps built-in fields invalid without creating an error message or dangling error ID", () => {
+    render(
+      <>
+        <TextField
+          aria-describedby="name-help"
+          description="Enter your display name."
+          id="display-name"
+          invalid
+          label="Display name"
+        />
+        <span id="name-help">Names are visible to your team.</span>
+        <Select
+          aria-describedby="region-help"
+          error=""
+          id="team-region"
+          invalid
+          label="Team region"
+        >
+          <option value="west">West</option>
+        </Select>
+        <span id="region-help">You can change this later.</span>
+      </>,
+    );
+
+    const textField = screen.getByRole("textbox", { name: "Display name" });
+    const select = screen.getByRole("combobox", { name: "Team region" });
+
+    expect(textField).toHaveAttribute("aria-invalid", "true");
+    expect(textField).toHaveAttribute(
+      "aria-describedby",
+      "name-help display-name-description",
+    );
+    expect(select).toHaveAttribute("aria-invalid", "true");
+    expect(select).toHaveAttribute("aria-describedby", "region-help");
+
+    expect(document.getElementById("display-name-error")).not.toBeInTheDocument();
+    expect(document.getElementById("team-region-error")).not.toBeInTheDocument();
+    expect(document.querySelectorAll('[aria-live="polite"]')).toHaveLength(0);
+    expect(screen.getByText("Enter your display name.")).toHaveAttribute(
+      "id",
+      "display-name-description",
+    );
+    expect(screen.getByText("Names are visible to your team.")).toHaveAttribute(
+      "id",
+      "name-help",
+    );
+    expect(screen.getByText("You can change this later.")).toHaveAttribute(
+      "id",
+      "region-help",
+    );
+  });
+
   it("keeps DateField, FileField, RangeField, and Textarea help connected when errors change", () => {
     const renderFields = (errorVersion: "A" | "B") => (
       <>
