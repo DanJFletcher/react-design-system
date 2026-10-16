@@ -78,11 +78,10 @@ export const Gallery = forwardRef<HTMLElement, GalleryProps>(function Gallery(
     selectedIndex === null || items.length === 0
       ? null
       : Math.min(selectedIndex, items.length - 1);
-  const activeItem = activeIndex === null ? null : items[activeIndex] ?? null;
+  const activeItem = activeIndex === null ? null : items[activeIndex]!;
 
   const movePreview = (direction: -1 | 1) => {
-    if (activeIndex === null || items.length < 2) return;
-    const requestedIndex = activeIndex + direction;
+    const requestedIndex = activeIndex! + direction;
     const nextIndex = loop
       ? (requestedIndex + items.length) % items.length
       : Math.max(0, Math.min(requestedIndex, items.length - 1));
@@ -216,9 +215,7 @@ export const Gallery = forwardRef<HTMLElement, GalleryProps>(function Gallery(
           activeItem?.caption ??
           (activeIndex === null ? undefined : `Image ${activeIndex + 1} of ${items.length}`)
         }
-        onOpenChange={(open) => {
-          if (!open) setSelectedIndex(null);
-        }}
+        onOpenChange={() => setSelectedIndex(null)}
         open={activeItem !== null}
         size="lg"
       >

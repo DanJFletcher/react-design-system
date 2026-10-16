@@ -173,17 +173,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(function Popover
   }, [disabled, isOpen, updateOpen]);
 
   useLayoutEffect(() => {
-    const panel = panelRef.current;
-    if (!panel) return undefined;
-
-    if (animationFrameRef.current !== null) {
-      window.cancelAnimationFrame(animationFrameRef.current);
-      animationFrameRef.current = null;
-    }
-    if (closeTimerRef.current !== null) {
-      window.clearTimeout(closeTimerRef.current);
-      closeTimerRef.current = null;
-    }
+    const panel = panelRef.current!;
 
     const duration = motion === "none" || prefersReducedMotion
       ? 0
@@ -235,18 +225,13 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(function Popover
   }, [autoFocus, isOpen, motion, prefersReducedMotion, returnFocusOnClose]);
 
   useLayoutEffect(() => {
-    const root = rootRef.current;
-    const triggerElement = triggerRef.current;
-    const panel = panelRef.current;
+    const root = rootRef.current!;
+    const triggerElement = triggerRef.current!;
+    const panel = panelRef.current!;
     if (!isOpen) {
       if (!panel?.matches(":popover-open")) setPositioned(false);
       return undefined;
     }
-    if (!root || !triggerElement || !panel) {
-      setPositioned(false);
-      return undefined;
-    }
-
     const updatePosition = () => {
       const anchor = triggerElement.getBoundingClientRect();
       const panelRect = panel.getBoundingClientRect();
@@ -331,8 +316,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(function Popover
 
   useEffect(() => {
     if (!isOpen || !autoFocus || !positioned) return;
-    const panel = panelRef.current;
-    if (!panel) return;
+    const panel = panelRef.current!;
     const firstFocusable = panel.querySelector<HTMLElement>(
       'a[href], button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex="0"]',
     );

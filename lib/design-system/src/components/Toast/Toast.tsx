@@ -23,6 +23,13 @@ export type ToastVariant = "info" | "success" | "warning" | "error";
 export type ToastPosition = "top-start" | "top-end" | "bottom-start" | "bottom-end";
 type ToastMotionState = "entering" | "open" | "exiting";
 
+/** @internal */
+export function clearToastDismissalTimer(timerRef: { current: number | null }) {
+  if (timerRef.current === null) return;
+  window.clearTimeout(timerRef.current);
+  timerRef.current = null;
+}
+
 export type ToastAction = {
   label: string;
   onClick: () => void;
@@ -115,10 +122,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(function Toast(
     }
 
     if (motionState === "exiting" && (motion === "none" || prefersReducedMotion)) {
-      if (dismissalTimerRef.current !== null) {
-        window.clearTimeout(dismissalTimerRef.current);
-        dismissalTimerRef.current = null;
-      }
+      clearToastDismissalTimer(dismissalTimerRef);
       onDismiss();
     }
 
@@ -135,9 +139,6 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(function Toast(
     () => () => {
       if (dismissalTimerRef.current !== null) {
         window.clearTimeout(dismissalTimerRef.current);
-      }
-      if (entranceFrameRef.current !== null) {
-        window.cancelAnimationFrame(entranceFrameRef.current);
       }
     },
     [],

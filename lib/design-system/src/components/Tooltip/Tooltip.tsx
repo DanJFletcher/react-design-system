@@ -101,15 +101,14 @@ export const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(function Toolti
   }, [open]);
 
   useLayoutEffect(() => {
-    const tooltip = tooltipRef.current;
+    const tooltip = tooltipRef.current!;
     if (!open) {
-      if (tooltip?.matches(":popover-open")) tooltip.hidePopover();
+      if (tooltip.matches(":popover-open")) tooltip.hidePopover();
       setPositioned(false);
       return;
     }
 
-    const anchor = anchorRef.current;
-    if (!anchor || !tooltip) return;
+    const anchor = anchorRef.current!;
     if (!tooltip.matches(":popover-open")) tooltip.showPopover();
 
     const updatePosition = () => {

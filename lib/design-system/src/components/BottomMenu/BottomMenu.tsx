@@ -85,10 +85,6 @@ export const BottomMenu = forwardRef<HTMLElement, BottomMenuProps>(
     const selectedId = activeId !== undefined ? activeId : uncontrolledActiveId;
 
     const handleSelect = (event: BottomMenuSelectEvent, item: BottomMenuItem) => {
-      if (item.disabled) {
-        event.preventDefault();
-        return;
-      }
       item.onClick?.(event as never);
       item.onSelect?.(event);
       if (!event.defaultPrevented) {

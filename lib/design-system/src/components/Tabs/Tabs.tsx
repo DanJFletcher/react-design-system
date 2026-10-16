@@ -85,7 +85,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
 
   const focusEnabledItem = (currentId: string, direction: -1 | 1) => {
     const currentIndex = enabledItems.findIndex((item) => item.id === currentId);
-    if (currentIndex < 0 || enabledItems.length < 2) return;
+    if (enabledItems.length < 2) return;
 
     const nextIndex =
       (currentIndex + direction + enabledItems.length) % enabledItems.length;
@@ -126,9 +126,8 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
         event.key === "Home"
           ? enabledItems[0]
           : enabledItems[enabledItems.length - 1];
-      if (!destination) return;
-      tabRefs.current.get(destination.id)?.focus();
-      if (activationMode === "automatic") selectValue(destination.id);
+      tabRefs.current.get(destination!.id)?.focus();
+      if (activationMode === "automatic") selectValue(destination!.id);
     }
   };
 
@@ -167,9 +166,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
               disabled={item.disabled}
               id={tabId}
               key={item.id}
-              onClick={() => {
-                if (!item.disabled) selectValue(item.id);
-              }}
+              onClick={() => selectValue(item.id)}
               onKeyDown={(event) => handleKeyDown(event, item)}
               ref={(element) => {
                 if (element) tabRefs.current.set(item.id, element);

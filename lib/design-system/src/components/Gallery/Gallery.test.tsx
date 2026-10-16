@@ -109,6 +109,20 @@ describe("Gallery", () => {
     );
   });
 
+  it("derives native link labels from image alt text and falls back for decorative images", () => {
+    render(
+      <Gallery
+        items={[
+          { id: "described", src: "/images/described.jpg", alt: "Courtyard garden", href: "/courtyard" },
+          { id: "decorative", src: "/images/decorative.jpg", alt: "", href: "/decorative" },
+        ]}
+        label="Linked gardens"
+      />,
+    );
+    expect(screen.getByRole("link", { name: "Courtyard garden" })).toHaveAttribute("href", "/courtyard");
+    expect(screen.getByRole("link", { name: "View image 2" })).toHaveAttribute("href", "/decorative");
+  });
+
   it("uses default link labels and custom lightbox labels", () => {
     render(
       <Gallery
@@ -125,6 +139,18 @@ describe("Gallery", () => {
     );
     expect(screen.getByRole("button", { name: /Preview 3\/3:/ })).toBeInTheDocument();
     expect(screen.getByText("View spring garden")).toHaveAttribute("href", "/gardens/spring");
+  });
+
+  it("uses fallback detail labels and clears a preview if its item is removed", () => {
+    const singleItem: GalleryItem[] = [
+      { id: "detail", src: "/images/detail.jpg", alt: "Detail garden", href: "/gardens/detail" },
+    ];
+    const { rerender } = render(<Gallery items={singleItem} label="Detail gallery" lightbox />);
+    expect(screen.getByRole("link", { name: "View details" })).toHaveAttribute("href", "/gardens/detail");
+    fireEvent.click(screen.getByRole("button", { name: "Open image 1: Detail garden" }));
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    rerender(<Gallery items={[]} label="Detail gallery" lightbox />);
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
   it("opens, navigates, loops, and closes the image preview", () => {

@@ -131,7 +131,6 @@ export const MediaLibrary = forwardRef<HTMLElement, MediaLibraryProps>(function 
   };
 
   const toggleAsset = (asset: MediaAsset) => {
-    if (selectionDisabled) return;
     const isSelected = selectedSet.has(asset.id);
     if (selectionMode === "single") {
       updateSelection(isSelected ? [] : [asset.id]);

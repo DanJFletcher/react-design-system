@@ -175,8 +175,6 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
   ]);
 
   const goTo = (requested: number) => {
-    if (slides.length < 2) return;
-
     let next = requested;
     if (loop) {
       next = ((requested % slides.length) + slides.length) % slides.length;
@@ -365,7 +363,7 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
                 onClick={() => {
                   if (rotationEnabled) {
                     setRotationEnabled(false);
-                  } else if (!prefersReducedMotion) {
+                  } else {
                     if (!loop && activeIndex === slides.length - 1) goTo(0);
                     setRotationEnabled(true);
                   }

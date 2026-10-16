@@ -50,10 +50,6 @@ function isHeadingLevel(value: number): value is FAQSectionHeadingLevel {
 }
 
 function validateItems(items: readonly FAQSectionItem[]) {
-  if (!Array.isArray(items)) {
-    throw new Error("FAQSection `items` must be an array.");
-  }
-
   const seenIds = new Set<string>();
   items.forEach((item, index) => {
     if (item == null || typeof item !== "object") {

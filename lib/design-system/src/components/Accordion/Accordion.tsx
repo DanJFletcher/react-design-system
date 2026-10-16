@@ -94,7 +94,6 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
   };
 
   const toggleItem = (item: AccordionItem) => {
-    if (item.disabled) return;
     const isOpen = currentOpenItems.includes(item.id);
     const nextOpenItems = isOpen
       ? currentOpenItems.filter((id) => id !== item.id)

@@ -161,6 +161,14 @@ function toCssLength(value: CSSProperties["maxHeight"]): CSSProperties["maxHeigh
   return typeof value === "number" ? `${value}px` : value;
 }
 
+/** @internal */
+export function compareTableSortValues(leftValue: unknown, rightValue: unknown): number {
+  if (leftValue == null && rightValue == null) return 0;
+  if (leftValue == null) return 1;
+  if (rightValue == null) return -1;
+  return compareValues(leftValue, rightValue);
+}
+
 export function Table<T extends object>({
   data,
   columns,
@@ -301,10 +309,7 @@ export function Table<T extends object>({
             const rightValue = activeSortColumn.sortValue
               ? activeSortColumn.sortValue(right.row)
               : getCellValue(right.row, activeSortColumn);
-            if (leftValue == null && rightValue == null) result = 0;
-            else if (leftValue == null) result = 1;
-            else if (rightValue == null) result = -1;
-            else result = compareValues(leftValue, rightValue);
+            result = compareTableSortValues(leftValue, rightValue);
           }
           if (!Number.isFinite(result) || result === 0) {
             return left.rowIndex - right.rowIndex;
@@ -343,7 +348,6 @@ export function Table<T extends object>({
   };
 
   const updateSort = (column: TableColumn<T>) => {
-    if (!column.sortable) return;
     const nextSort: TableSort | null =
       currentSort?.columnId !== column.id
         ? { columnId: column.id, direction: "asc" }

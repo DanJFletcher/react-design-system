@@ -211,6 +211,20 @@ export const RequestForm = forwardRef<HTMLElement, RequestFormProps>(
     const [submissionState, setSubmissionState] =
       useState<SubmissionState>("idle");
     const isSubmitting = submissionState === "submitting";
+    if (typeof heading !== "string" || !heading.trim()) {
+      throw new Error("RequestForm requires a non-empty `heading`.");
+    }
+    if (!isHeadingLevel(headingLevel)) {
+      throw new Error("RequestForm `headingLevel` must be an integer from 1 to 6.");
+    }
+    if (!["quote", "appointment"].includes(requestType)) {
+      throw new Error("RequestForm `requestType` must be `quote` or `appointment`.");
+    }
+    if (!Array.isArray(serviceOptions)) {
+      throw new Error("RequestForm `serviceOptions` must be an array.");
+    }
+    validateServiceOptions(serviceOptions);
+
     const showPreferredDate = includePreferredDate ?? requestType === "appointment";
     const showPreferredTime = includePreferredTime ?? requestType === "appointment";
     const resolvedServicePlaceholder =
@@ -226,20 +240,6 @@ export const RequestForm = forwardRef<HTMLElement, RequestFormProps>(
       (requestType === "appointment"
         ? "Your appointment request has been sent. We'll be in touch to confirm a time."
         : "Your quote request has been sent. We'll be in touch soon.");
-
-    if (typeof heading !== "string" || !heading.trim()) {
-      throw new Error("RequestForm requires a non-empty `heading`.");
-    }
-    if (!isHeadingLevel(headingLevel)) {
-      throw new Error("RequestForm `headingLevel` must be an integer from 1 to 6.");
-    }
-    if (!["quote", "appointment"].includes(requestType)) {
-      throw new Error("RequestForm `requestType` must be `quote` or `appointment`.");
-    }
-    if (!Array.isArray(serviceOptions)) {
-      throw new Error("RequestForm `serviceOptions` must be an array.");
-    }
-    validateServiceOptions(serviceOptions);
 
     const updateField = <Key extends keyof FieldValues>(
       key: Key,

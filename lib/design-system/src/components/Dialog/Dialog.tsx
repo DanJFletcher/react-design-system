@@ -89,17 +89,7 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
   useImperativeHandle(ref, () => dialogRef.current as HTMLDialogElement, []);
 
   useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-
-    if (animationFrameRef.current !== null) {
-      window.cancelAnimationFrame(animationFrameRef.current);
-      animationFrameRef.current = null;
-    }
-    if (closeTimerRef.current !== null) {
-      window.clearTimeout(closeTimerRef.current);
-      closeTimerRef.current = null;
-    }
+    const dialog = dialogRef.current!;
 
     if (open) {
       if (!dialog.open) {
@@ -125,7 +115,7 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
       } else {
         setMotionState("exiting");
         closeTimerRef.current = window.setTimeout(() => {
-          if (dialog.open) dialog.close();
+          dialog.close();
           closeTimerRef.current = null;
           setMotionState("closed");
         }, getStandardMotionDurationMs());

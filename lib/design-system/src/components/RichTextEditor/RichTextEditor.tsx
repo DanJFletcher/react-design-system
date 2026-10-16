@@ -60,8 +60,8 @@ function ToolButton({
   );
 }
 
-function applyLink(editor: Editor, href: string, text: string) {
-  const { from, to, empty } = editor.state.selection;
+export function applyLink(editor: Editor, href: string, text: string) {
+  const { empty } = editor.state.selection;
   if (!empty) {
     editor.chain().focus().setLink({ href }).run();
     return;
@@ -72,7 +72,7 @@ function applyLink(editor: Editor, href: string, text: string) {
     marks: [{ type: "link", attrs: { href } }],
   }).run();
   // Keep the caret outside the newly inserted link.
-  if (from === to) editor.commands.focus();
+  editor.commands.focus();
 }
 
 export function RichTextEditor({
@@ -170,19 +170,20 @@ export function RichTextEditor({
 
   function submitInsert(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!editor || !form) return;
+    const activeEditor = editor!;
+    const activeForm = form!;
     if (!isWebUrl(url.trim())) {
       setFormError("Enter a valid HTTP or HTTPS URL.");
       return;
     }
-    if (form === "image") {
+    if (activeForm === "image") {
       if (!alt.trim()) {
         setFormError("Add alternative text for this image.");
         return;
       }
-      editor.chain().focus().setImage({ src: url.trim(), alt: alt.trim() }).run();
+      activeEditor.chain().focus().setImage({ src: url.trim(), alt: alt.trim() }).run();
     } else {
-      applyLink(editor, url.trim(), linkText.trim() || url.trim());
+      applyLink(activeEditor, url.trim(), linkText.trim() || url.trim());
     }
     setForm(null);
   }
@@ -204,10 +205,10 @@ export function RichTextEditor({
               disabled={unavailable}
               value={editorState.heading}
               onChange={(event) => {
-                if (!editor) return;
+                const activeEditor = editor!;
                 const choice = event.currentTarget.value;
-                if (choice === "paragraph") editor.chain().focus().setParagraph().run();
-                else editor.chain().focus().toggleHeading({ level: Number(choice.slice(1)) as 1 | 2 | 3 }).run();
+                if (choice === "paragraph") activeEditor.chain().focus().setParagraph().run();
+                else activeEditor.chain().focus().toggleHeading({ level: Number(choice.slice(1)) as 1 | 2 | 3 }).run();
               }}
             >
               <option value="paragraph">Paragraph</option>

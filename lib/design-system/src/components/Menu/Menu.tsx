@@ -394,7 +394,7 @@ function MenuList({
   const [openSubmenuId, setOpenSubmenuId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (focusFirstOnMount) getEnabledMenuItems(listRef.current)[0]?.focus();
+    if (focusFirstOnMount) getEnabledMenuItems(listRef.current!)[0]?.focus();
   }, [focusFirstOnMount]);
 
   useEffect(() => () => {
@@ -402,9 +402,7 @@ function MenuList({
   }, []);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {
-    const currentMenu = event.target instanceof Element
-      ? event.target.closest('[role="menu"]')
-      : null;
+    const currentMenu = (event.target as Element).closest('[role="menu"]');
     if (currentMenu !== event.currentTarget) return;
 
     if (event.key === "Escape") {
@@ -448,7 +446,7 @@ function MenuList({
         ...enabledItems.slice(0, currentIndex + 1),
       ];
       const match = searchOrder.find((item) =>
-        (item.getAttribute("aria-label") ?? item.textContent ?? "")
+          (item.getAttribute("aria-label") ?? item.textContent!)
           .trim()
           .toLocaleLowerCase()
           .startsWith(typeaheadRef.current),
@@ -626,7 +624,7 @@ function SubmenuEntry({
         onFocus={onFocus}
         onMouseEnter={onFocus}
         onKeyDown={(event) => {
-          if (event.key === "ArrowRight" && !item.disabled) {
+          if (event.key === "ArrowRight") {
             event.preventDefault();
             if (!open) onToggle();
           }
@@ -679,8 +677,7 @@ function ItemContent({ label, icon }: { label: string; icon?: ReactNode }) {
   );
 }
 
-function getEnabledMenuItems(menu: HTMLUListElement | null): HTMLElement[] {
-  if (!menu) return [];
+function getEnabledMenuItems(menu: HTMLUListElement): HTMLElement[] {
   return Array.from(menu.querySelectorAll<HTMLElement>(":scope > li > [role='menuitem']"))
     .filter((item) => !item.hasAttribute("disabled") && item.getAttribute("aria-disabled") !== "true");
 }

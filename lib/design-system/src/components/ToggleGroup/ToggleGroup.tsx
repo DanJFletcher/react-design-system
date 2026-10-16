@@ -106,7 +106,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
 
     function toggleValue(itemValue: string) {
       if (selectionMode === "multiple") {
-        const selected = Array.isArray(selectedValue) ? selectedValue : [];
+        const selected = selectedValue as readonly string[];
         const nextValue = selected.includes(itemValue)
           ? selected.filter((selectedItem) => selectedItem !== itemValue)
           : [...selected, itemValue];
