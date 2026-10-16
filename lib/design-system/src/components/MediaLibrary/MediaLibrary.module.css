@@ -352,8 +352,7 @@
   font-size: var(--ds-font-size-xs);
 }
 
-.noSelection,
-.emptyState {
+.noSelection {
   display: grid;
   place-items: center;
   align-content: center;
@@ -363,8 +362,7 @@
   text-align: center;
 }
 
-.noSelection p,
-.emptyState p {
+.noSelection p {
   max-inline-size: var(--ds-layout-container-narrow);
   margin: var(--ds-space-2) 0 0;
   font-size: var(--ds-font-size-sm);
@@ -377,12 +375,6 @@
   border-radius: var(--ds-radius-surface);
 }
 
-.emptyState h3 {
-  margin: var(--ds-space-2) 0 0;
-  color: var(--ds-color-text-primary);
-  font-size: var(--ds-font-size-md);
-}
-
 .emptySymbol,
 .selectionOutline {
   color: var(--media-accent);
@@ -391,6 +383,7 @@
 }
 
 .emptyTip {
+  display: block;
   margin-block-start: var(--ds-space-3);
   font-size: var(--ds-font-size-xs);
 }

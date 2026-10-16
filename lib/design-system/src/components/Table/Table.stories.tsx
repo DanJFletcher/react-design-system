@@ -241,6 +241,23 @@ export const Empty: Story = {
     data: [],
     emptyState: "No businesses match these filters.",
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText("No businesses match these filters.")).toBeVisible();
+    await expect(canvas.queryByRole("heading", { name: "No rows to display." })).not.toBeInTheDocument();
+  },
+};
+
+export const DefaultEmpty: Story = {
+  args: {
+    data: [],
+    emptyState: undefined,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("region", { name: "No rows to display." })).toBeVisible();
+    await expect(canvas.getByRole("heading", { level: 3, name: "No rows to display." })).toBeVisible();
+  },
 };
 
 export const Loading: Story = {

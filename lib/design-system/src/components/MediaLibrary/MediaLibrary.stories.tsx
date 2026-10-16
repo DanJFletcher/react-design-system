@@ -82,6 +82,13 @@ export const BrowseOnly: Story = {
 
 export const EmptyLibrary: Story = {
   args: { assets: [], emptyMessage: "No files have been added to this workspace." },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("region", { name: "No media yet" })).toBeVisible();
+    await expect(canvas.getByRole("heading", { level: 3, name: "No media yet" })).toBeVisible();
+    await expect(canvas.getByText("No files have been added to this workspace.")).toBeVisible();
+    await expect(canvas.getByLabelText("Add media")).toBeInTheDocument();
+  },
 };
 
 export const NoResults: Story = {
@@ -91,6 +98,7 @@ export const NoResults: Story = {
     const canvas = within(canvasElement);
     await userEvent.type(canvas.getByRole("searchbox", { name: "Search media" }), "does-not-exist");
     await expect(canvas.getByText("Nothing found")).toBeVisible();
+    await expect(canvas.getByRole("status", { name: "Nothing found" })).toBeVisible();
     await userEvent.click(canvas.getByRole("button", { name: "Clear filters" }));
     await expect(canvas.getByRole("button", { name: /Dawn over the ridge/ })).toBeVisible();
   },

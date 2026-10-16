@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import type { DesignSystemStyle } from "../../generated/token-types";
+import { EmptyState } from "../EmptyState/EmptyState";
 import { Search } from "../Search/Search";
 import { Spinner } from "../Spinner/Spinner";
 import styles from "./Table.module.css";
@@ -186,7 +187,7 @@ export function Table<T extends object>({
   caption,
   captionHidden = false,
   captionSide = "top",
-  emptyState = "No rows to display.",
+  emptyState,
   noResultsState = "No matching rows found.",
   loading = false,
   loadingMessage = "Loading rows…",
@@ -522,7 +523,9 @@ export function Table<T extends object>({
                     ? loadingMessage
                     : searchable && normalizedSearchQuery
                       ? noResultsState
-                      : emptyState}
+                      : emptyState !== undefined
+                        ? emptyState
+                        : <EmptyState headingLevel={3} title="No rows to display." />}
                 </td>
               </tr>
             ) : (

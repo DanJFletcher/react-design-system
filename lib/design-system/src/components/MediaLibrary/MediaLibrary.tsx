@@ -1,5 +1,6 @@
 import { forwardRef, useId, useMemo, useState, type ChangeEvent, type CSSProperties } from "react";
 import type { DesignSystemStyle } from "../../generated/token-types";
+import { EmptyState } from "../EmptyState/EmptyState";
 import { Spinner } from "../Spinner/Spinner";
 import styles from "./MediaLibrary.module.css";
 
@@ -229,25 +230,40 @@ export const MediaLibrary = forwardRef<HTMLElement, MediaLibraryProps>(function 
       <div className={styles.workspace}>
         <div className={styles.browsePane}>
           {assets.length === 0 ? (
-            <div className={styles.emptyState}>
-              <span aria-hidden="true" className={styles.emptySymbol}>＋</span>
-              <h3>No media yet</h3>
-              <p>{emptyMessage}</p>
-              {onFilesSelected && <span className={styles.emptyTip}>Start by adding an image, document, or clip.</span>}
-            </div>
+            <EmptyState
+              className={styles.emptyState}
+              description={(
+                <>
+                  {emptyMessage}
+                  {onFilesSelected && (
+                    <span className={styles.emptyTip}>
+                      Start by adding an image, document, or clip.
+                    </span>
+                  )}
+                </>
+              )}
+              headingLevel={3}
+              icon={<span className={styles.emptySymbol}>＋</span>}
+              title="No media yet"
+            />
           ) : filteredAssets.length === 0 ? (
-            <div className={styles.emptyState} role="status">
-              <span aria-hidden="true" className={styles.emptySymbol}>⌕</span>
-              <h3>Nothing found</h3>
-              <p>{noResultsMessage}</p>
-              <button
-                className={styles.resetButton}
-                onClick={() => { setQuery(""); setTypeFilter("all"); }}
-                type="button"
-              >
-                Clear filters
-              </button>
-            </div>
+            <EmptyState
+              actions={(
+                <button
+                  className={styles.resetButton}
+                  onClick={() => { setQuery(""); setTypeFilter("all"); }}
+                  type="button"
+                >
+                  Clear filters
+                </button>
+              )}
+              className={styles.emptyState}
+              description={noResultsMessage}
+              headingLevel={3}
+              icon={<span className={styles.emptySymbol}>⌕</span>}
+              role="status"
+              title="Nothing found"
+            />
           ) : (
             <ul aria-label="Available media" className={styles.assetGrid}>
               {filteredAssets.map((asset) => {
