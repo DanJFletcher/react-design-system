@@ -1,4 +1,6 @@
 import { useId, type ReactNode } from "react";
+import { Label } from "../Label/Label";
+import labelStyles from "../Label/Label.module.css";
 import styles from "./FormControls.module.css";
 
 export interface FormFieldProps {
@@ -50,27 +52,33 @@ export function useFormField({
   };
 }
 
-interface LabelProps {
+interface FieldLabelProps {
   id: string;
   labelId?: string;
   label: ReactNode;
   required?: boolean;
+  disabled?: boolean;
 }
 
-export function FieldLabel({ id, labelId, label, required = false }: LabelProps) {
+export function FieldLabel({
+  id,
+  labelId,
+  label,
+  required = false,
+  disabled = false,
+}: FieldLabelProps) {
   return (
-    <label className={styles.label} htmlFor={id} id={labelId}>
+    <Label disabled={disabled} htmlFor={id} id={labelId} required={required}>
       {label}
-      {required && <span className={styles.requiredMark} aria-hidden="true"> *</span>}
-    </label>
+    </Label>
   );
 }
 
-export function FieldLegend({ label, required = false }: Omit<LabelProps, "id">) {
+export function FieldLegend({ label, required = false }: Omit<FieldLabelProps, "id" | "disabled" | "labelId">) {
   return (
-    <legend className={styles.label}>
+    <legend className={labelStyles.label}>
       {label}
-      {required && <span className={styles.requiredMark} aria-hidden="true"> *</span>}
+      {required && <span className={labelStyles.requiredMark} aria-hidden="true"> *</span>}
     </legend>
   );
 }

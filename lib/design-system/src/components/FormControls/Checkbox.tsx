@@ -1,5 +1,6 @@
 import { forwardRef, type ComponentPropsWithRef } from "react";
 import { FieldMessages, type FormFieldProps, useFormField } from "./FormField";
+import { Label } from "../Label/Label";
 import styles from "./FormControls.module.css";
 
 export type CheckboxProps = Omit<
@@ -27,7 +28,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
 
   return (
     <div className={styles.choiceField}>
-      <label className={styles.choiceLabel} htmlFor={field.id}>
+      <Label disabled={disabled} htmlFor={field.id} required={required} variant="choice">
         <input
           {...inputProps}
           ref={ref}
@@ -41,9 +42,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
         />
         <span className={styles.choiceText}>
           {label}
-          {required && <span className={styles.requiredMark} aria-hidden="true"> *</span>}
         </span>
-      </label>
+      </Label>
       <FieldMessages
         description={description}
         descriptionId={field.descriptionId}

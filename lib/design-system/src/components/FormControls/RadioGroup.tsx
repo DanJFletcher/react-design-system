@@ -1,5 +1,6 @@
 import { forwardRef, type ChangeEventHandler, type ComponentPropsWithRef, type ReactNode } from "react";
 import { FieldLegend, FieldMessages, type FormFieldProps, useFormField } from "./FormField";
+import { Label } from "../Label/Label";
 import styles from "./FormControls.module.css";
 
 export interface RadioOption {
@@ -57,7 +58,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(funct
         {options.map((option, index) => {
           const optionId = `${field.id}-option-${index}`;
           return (
-            <label className={styles.choiceLabel} htmlFor={optionId} key={option.value}>
+            <Label disabled={disabled || option.disabled} htmlFor={optionId} key={option.value} variant="choice">
               <input
                 id={optionId}
                 className={styles.choiceControl}
@@ -71,7 +72,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(funct
                 onChange={onChange}
               />
               <span className={styles.choiceText}>{option.label}</span>
-            </label>
+            </Label>
           );
         })}
       </div>

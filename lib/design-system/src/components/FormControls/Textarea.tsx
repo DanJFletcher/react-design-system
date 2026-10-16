@@ -28,7 +28,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
 
   return (
     <div className={styles.field}>
-      <FieldLabel id={field.id} label={label} required={required} />
+      <FieldLabel disabled={disabled} id={field.id} label={label} required={required} />
       <textarea
         {...textareaProps}
         ref={ref}

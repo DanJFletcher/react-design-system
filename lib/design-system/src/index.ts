@@ -6,6 +6,7 @@ export type {
   ButtonSize,
   ButtonVariant,
 } from "./components/Button/Button";
+export { Label, type LabelProps, type LabelVariant } from "./components/Label/Label";
 export { Link } from "./components/Link/Link";
 export type {
   LinkProps,

@@ -802,6 +802,12 @@ The menu uses semantic surface, text, border, focus, spacing, action, and `radiu
 ## Core form controls
 
 ```tsx
+<Label htmlFor="company" required>Company name</Label>
+<input id="company" required />
+<Label htmlFor="updates" variant="choice">
+  <input id="updates" type="checkbox" />
+  Send me occasional updates
+</Label>
 <TextField label="Email" type="email" required description="Used for account updates." />
 <Textarea label="Message" rows={4} />
 <Select label="Region" name="region"><option value="ca">Canada</option></Select>
@@ -825,6 +831,8 @@ The menu uses semantic surface, text, border, focus, spacing, action, and `radiu
   </FieldGroup>
 </FormLayout>
 ```
+
+`Label` is the public native label primitive. Its `required` marker is visual only; native `required` and `disabled` state still belongs on the associated control. The `choice` variant supports labels that wrap a checkbox, radio, or switch. `FieldGroup` and `RadioGroup` continue to use native `legend` elements for group names.
 
 Every individual control requires a visible `label` and forwards native props, refs, controlled/uncontrolled values, and form behavior. `TextField`, `DateField`, `FileField`, `Textarea`, and `Select` use native input elements; `Checkbox` and `Switch` use native checkboxes; `RadioGroup` uses a `fieldset`, `legend`, and native radios with a required shared `name`.
 

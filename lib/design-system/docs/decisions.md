@@ -32,6 +32,12 @@ Orchid demonstrates extending Luna while retaining a flattened output map. It is
 
 The core form controls preserve native input, select, checkbox, radio, and fieldset behavior. Shared internal helpers provide consistent labels and accessible description/error relationships; form state and validation rules remain the consumer's responsibility.
 
+## Labels remain presentational wrappers around native semantics
+
+The public `Label` renders a native `<label>` with field and choice layouts. Its required marker is decorative, while required and disabled validation state remains on the native control. Form controls reuse the same label implementation; group names continue to use native `<legend>`.
+
+**Why:** applications need consistent labels outside the higher-level form controls without introducing a second source of validation or control state.
+
 ## Form-control radii are independently themed
 
 Single-line inputs, textareas, field groups, and action buttons each have separate radius tokens. This lets Luna keep its pill-shaped text/select controls while giving textareas and field groups a 32px rounded-rectangle shape.

@@ -1,0 +1,36 @@
+import { Canvas, Controls, Meta, Story } from "@storybook/addon-docs/blocks";
+import * as LabelStories from "./Label.stories";
+
+<Meta of={LabelStories} />
+
+# Label
+
+A reusable, theme-aware native label for associating visible text with form controls.
+
+## Interactive playground
+
+<Canvas of={LabelStories.Playground} />
+<Controls of={LabelStories.Playground} />
+
+## Field and choice labels
+
+<Canvas of={LabelStories.FieldAndChoice} />
+
+Use the default `field` variant above a single control. Use `variant="choice"` to wrap a checkbox, radio, or switch with its text and make the whole label a pointer target. The component does not own the control's value, validation, or interaction state.
+
+## Required and disabled states
+
+<Canvas of={LabelStories.RequiredAndDisabled} />
+
+## Themes
+
+<Canvas of={LabelStories.ThemeCoverage} />
+
+## Behavior and accessibility
+
+- Renders a native `<label>` and forwards native label attributes, `htmlFor`, `className`, and a ref.
+- `variant` is `field` by default or `choice` for inline control-and-text layout.
+- `required` adds a decorative asterisk hidden from assistive technology. It does not make the associated control required; use the control's native `required` prop.
+- `disabled` changes the label's visual state only. Set `disabled` on the associated native control as well.
+- Text, spacing, and disabled colors use shared semantic tokens across ACME, Luna, Orchid, Atom, Sublime, and custom themes.
+- The component intentionally has no `as` prop; use native `<legend>` through `FieldGroup` or `RadioGroup` for group names.

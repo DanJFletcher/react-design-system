@@ -28,7 +28,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
 
   return (
     <div className={styles.field}>
-      <FieldLabel id={field.id} label={label} required={required} />
+      <FieldLabel disabled={disabled} id={field.id} label={label} required={required} />
       <div className={styles.selectWrapper}>
         <select
           {...selectProps}

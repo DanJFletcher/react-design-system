@@ -35,7 +35,7 @@ export const FileField = forwardRef<HTMLInputElement, FileFieldProps>(function F
 
   return (
     <div className={styles.field}>
-      <FieldLabel id={field.id} label={label} required={required} />
+      <FieldLabel disabled={disabled} id={field.id} label={label} required={required} />
       <input
         {...inputProps}
         ref={ref}

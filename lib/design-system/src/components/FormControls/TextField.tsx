@@ -30,7 +30,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function T
 
   return (
     <div className={styles.field}>
-      <FieldLabel id={field.id} label={label} required={required} />
+      <FieldLabel disabled={disabled} id={field.id} label={label} required={required} />
       <input
         {...inputProps}
         ref={ref}

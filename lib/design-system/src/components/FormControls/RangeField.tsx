@@ -104,7 +104,7 @@ export const RangeField = forwardRef<HTMLInputElement, RangeFieldProps>(
     return (
       <div className={fieldStyles.field}>
         <div className={styles.heading}>
-          <FieldLabel id={field.id} label={label} />
+          <FieldLabel disabled={disabled} id={field.id} label={label} />
           <output className={styles.value} htmlFor={field.id} aria-hidden="true">
             {formatValue ? formatValue(currentValue) : currentValue}
           </output>

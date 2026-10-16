@@ -32,7 +32,7 @@ export const DateField = forwardRef<HTMLInputElement, DateFieldProps>(function D
 
   return (
     <div className={styles.field}>
-      <FieldLabel id={field.id} label={label} required={required} />
+      <FieldLabel disabled={disabled} id={field.id} label={label} required={required} />
       <input
         {...inputProps}
         ref={ref}
