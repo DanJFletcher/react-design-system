@@ -1,0 +1,41 @@
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  background-color: var(--ds-color-surface-secondary);
+  box-shadow: var(--ds-shadow-elevation-control);
+  color: var(--ds-color-text-primary);
+  font-family: var(--ds-font-family-mono);
+  font-weight: var(--ds-font-weight-medium);
+  line-height: var(--ds-line-height-tight);
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.sm {
+  padding: var(--ds-space-half) var(--ds-space-2);
+  font-size: var(--ds-font-size-xs);
+}
+
+.md {
+  padding: var(--ds-space-1) var(--ds-space-3);
+  font-size: var(--ds-font-size-sm);
+}
+
+.square {
+  border-radius: var(--ds-radius-shape-square);
+}
+
+.rounded {
+  border-radius: var(--ds-radius-shape-rounded);
+}
+
+@media (forced-colors: active) {
+  .kbd {
+    border-color: ButtonText;
+    background-color: Canvas;
+    box-shadow: none;
+    color: CanvasText;
+  }
+}

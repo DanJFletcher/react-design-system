@@ -269,6 +269,18 @@ Icons are decorative and hidden from assistive technology by default. Set `decor
 
 The paths use `currentColor`, so icons inherit the surrounding text color in ACME, Luna, Orchid, and custom themes. The catalog is inline SVG and adds no third-party icon dependency.
 
+## Kbd
+
+```tsx
+import { Kbd } from "@workspace/design-system";
+
+<p>
+  Press <Kbd>Ctrl</Kbd> + <Kbd>K</Kbd> to search.
+</p>
+```
+
+`Kbd` renders a native `<kbd>` for one key or key name. Compose multiple instances with visible separators to show a shortcut chord. It is display-only and does not register or handle keyboard events. `size` accepts `sm` or `md`; `shape` accepts `square` or `rounded` and defaults to `square`. It uses the shared monospace font and semantic surface, text, border, and elevation roles; forced-colors mode uses system colors.
+
 ## Typography
 
 ```tsx

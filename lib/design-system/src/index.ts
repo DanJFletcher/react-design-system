@@ -398,6 +398,8 @@ export type {
 } from "./components/Typography/Typography";
 export { Icon, iconNames } from "./components/Icon/Icon";
 export type { IconName, IconProps, IconSize } from "./components/Icon/Icon";
+export { Kbd } from "./components/Kbd/Kbd";
+export type { KbdProps, KbdShape, KbdSize } from "./components/Kbd/Kbd";
 export { Hero } from "./components/Hero/Hero";
 export type {
   HeroAlignment,

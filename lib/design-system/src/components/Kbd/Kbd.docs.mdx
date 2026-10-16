@@ -1,0 +1,31 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as KbdStories from "./Kbd.stories";
+
+<Meta of={KbdStories} />
+
+<Title>Kbd</Title>
+
+<Subtitle>Theme-aware keycaps for keyboard keys and shortcuts.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={KbdStories.Playground} />
+<Controls of={KbdStories.Playground} />
+
+## Shortcuts, size, and shape
+
+<Canvas of={KbdStories.ShortcutExamples} />
+<Canvas of={KbdStories.SizeAndShapeExamples} />
+
+## Themes
+
+<Canvas of={KbdStories.ThemeCoverage} />
+
+## Behavior and accessibility
+
+- Renders the native `<kbd>` element and forwards its attributes and ref.
+- Compose several instances with visible separators to display shortcut chords. `Kbd` is display-only; it does not handle key events or activate commands.
+- `size` accepts `sm` or `md` and defaults to `md`. `shape` accepts `square` or `rounded` and defaults to `square`.
+- The text inside the keycaps supplies their accessible content; no extra ARIA label is added.
+- Uses the shared monospace font, semantic surface/text/border colors, and control elevation across ACME, Luna, Orchid, Atom, Sublime, custom themes, and nested theme boundaries.
+- In forced-colors mode, system colors replace the themed surface and border.
