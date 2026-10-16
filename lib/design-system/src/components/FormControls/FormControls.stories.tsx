@@ -556,9 +556,12 @@ export const ThemeCoverage: Story = {
       if (!(indicator instanceof SVGElement)) {
         throw new Error("The select chevron should follow its native select.");
       }
-      await expect(getComputedStyle(indicator).insetInlineEnd).toBe(
-        getComputedStyle(select).paddingInlineStart,
-      );
+      const indicatorStyle = getComputedStyle(indicator);
+      const selectStyle = getComputedStyle(select);
+      const indicatorInset = Number.parseFloat(indicatorStyle.insetInlineEnd);
+      const indicatorSize = Number.parseFloat(indicatorStyle.inlineSize);
+      const textInset = Number.parseFloat(selectStyle.paddingInlineStart);
+      await expect(indicatorInset + indicatorSize / 4).toBe(textInset);
     }
   },
 };

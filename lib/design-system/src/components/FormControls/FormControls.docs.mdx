@@ -49,7 +49,7 @@ Use `RangeField` to adjust a numeric value with a native slider. It supports min
 
 <Canvas of={FormControlsStories.SelectInteraction} />
 
-`Select` renders a native `<select>` and accepts native `<option>` or `<optgroup>` children. This keeps platform keyboard navigation and form submission behavior. Its decorative chevron is positioned with the same inset as the text padding across all themes.
+`Select` renders a native `<select>` and accepts native `<option>` or `<optgroup>` children. This keeps platform keyboard navigation and form submission behavior. The visible edge of its decorative chevron aligns with the text's inset across all themes; positioning accounts for the blank space inside the icon's SVG view box.
 
 For long option lists where users benefit from searching, use the separate <a href="iframe.html?id=components-combobox--docs&amp;viewMode=docs">Combobox</a>. It provides a searchable, keyboard-accessible single selection while retaining the selected option's value for form submission.
 

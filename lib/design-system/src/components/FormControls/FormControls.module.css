@@ -144,7 +144,7 @@
 .selectIndicator {
   position: absolute;
   inset-block-start: 50%;
-  inset-inline-end: var(--ds-space-3);
+  inset-inline-end: calc(var(--ds-space-3) - var(--ds-space-1));
   inline-size: var(--ds-space-4);
   block-size: var(--ds-space-4);
   transform: translateY(-50%);
