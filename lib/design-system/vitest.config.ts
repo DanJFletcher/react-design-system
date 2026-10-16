@@ -5,6 +5,13 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
+    coverage: {
+      provider: "v8",
+      include: ["src/components/**/*.tsx"],
+      exclude: ["src/components/**/*.stories.tsx", "src/components/**/*.test.tsx"],
+      reportsDirectory: resolve(import.meta.dirname, "../../coverage/design-system"),
+      reporter: ["text", "html", "json-summary"],
+    },
     projects: [
       {
         extends: true,
@@ -22,6 +29,15 @@ export default defineConfig({
             provider: playwright({}),
             instances: [{ browser: "chromium" }],
           },
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: "unit",
+          include: ["src/components/**/*.test.{ts,tsx}"],
+          environment: "jsdom",
+          setupFiles: [resolve(import.meta.dirname, "tests/unit/setup.ts")],
         },
       },
     ],

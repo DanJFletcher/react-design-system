@@ -17,3 +17,4 @@
 - [Storybook viewport tests](storybook-viewport-vitest.md) — Vitest mobile stories may need a story-level viewport preset to update the iframe's actual media-query width.
 - [Storybook site-example accessibility](storybook-site-example-a11y.md) — full-page Storybook examples need contrast and label checks across the entire page, not just the first viewport.
 - [Storybook preview vs. browser tests](storybook-playwright-preview-discrepancy.md) — compare the app preview and standalone Playwright server before treating a blank story iframe as a component failure.
+- [Unit-only component coverage](unit-only-component-coverage.md) — the 100% component implementation target must come from unit tests alone; report Storybook/browser coverage separately.

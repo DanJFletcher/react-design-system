@@ -61,11 +61,17 @@ pnpm --filter @workspace/design-system run lint
 pnpm --filter @workspace/design-system run typecheck
 pnpm --filter @workspace/design-system run test:design-rules
 pnpm --filter @workspace/design-system run test:tokens
+pnpm --filter @workspace/design-system run test:unit
+pnpm --filter @workspace/design-system run test:unit:coverage
 pnpm --filter @workspace/design-system run test:storybook
+pnpm --filter @workspace/design-system run test:storybook:coverage
+pnpm --filter @workspace/design-system run test:coverage
 pnpm --filter @workspace/design-system run build-storybook
 pnpm --filter @workspace/design-system run test:visual
 pnpm --filter @workspace/design-system run test:package
 ```
+
+Coverage reports instrument executable component implementation files in `src/components/**/*.tsx`; Storybook stories and test files are excluded. The unit-only report is the acceptance measure for the 100% component-code target. Storybook and combined reports remain useful, but their coverage must not be used to claim that unit tests reach the target. Reports include statements, branches, functions, and lines.
 
 Before merging a component, token, or package change, run the full suite:
 
