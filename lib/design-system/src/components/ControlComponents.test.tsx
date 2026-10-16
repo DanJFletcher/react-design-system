@@ -27,10 +27,9 @@ import {
 } from "../index";
 
 describe("form controls", () => {
-  it("exports shared field helpers for custom controls without taking over native semantics", () => {
-    function CustomControl() {
+  it("keeps custom control help connected as validation errors appear and clear", () => {
+    function CustomControl({ error }: { error?: string }) {
       const description = "Use a unique workspace name.";
-      const error = "This name is already taken.";
       const field = useFormField({
         id: "custom-workspace",
         description,
@@ -59,18 +58,40 @@ describe("form controls", () => {
       );
     }
 
-    render(<CustomControl />);
+    const { rerender } = render(<CustomControl />);
     const control = screen.getByRole("textbox", { name: "Workspace name" });
-    const describedBy = control.getAttribute("aria-describedby")?.split(/\s+/) ?? [];
 
     expect(control).toBeRequired();
     expect(control).toBeDisabled();
-    expect(control).toHaveAttribute("aria-invalid", "true");
-    expect(describedBy).toHaveLength(3);
-    expect(describedBy[0]).toBe("external-help");
+    expect(control).not.toHaveAttribute("aria-invalid");
+    expect(control).toHaveAttribute(
+      "aria-describedby",
+      "external-help custom-workspace-description",
+    );
     expect(screen.getByText("Use a unique workspace name.").id).toContain("description");
-    expect(screen.getByText("This name is already taken.").id).toContain("error");
-    expect(control.labels?.[0]).toHaveTextContent("Workspace name");
+    expect(screen.getByText("Workspace name").closest("label")).toHaveAttribute(
+      "for",
+      "custom-workspace",
+    );
+
+    rerender(<CustomControl error="This name is already taken." />);
+    expect(control).toHaveAttribute("aria-invalid", "true");
+    expect(control).toHaveAttribute(
+      "aria-describedby",
+      "external-help custom-workspace-description custom-workspace-error",
+    );
+    expect(screen.getByText("This name is already taken.")).toHaveAttribute(
+      "id",
+      "custom-workspace-error",
+    );
+
+    rerender(<CustomControl />);
+    expect(control).not.toHaveAttribute("aria-invalid");
+    expect(control).toHaveAttribute(
+      "aria-describedby",
+      "external-help custom-workspace-description",
+    );
+    expect(screen.queryByText("This name is already taken.")).not.toBeInTheDocument();
   });
 
   it("associates checkbox and switch labels, descriptions, errors, and external descriptions", () => {
