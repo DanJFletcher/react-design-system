@@ -470,6 +470,12 @@ export { FormLayout } from "./components/FormControls/FormLayout";
 export type { FormLayoutProps } from "./components/FormControls/FormLayout";
 export { Container } from "./components/Layout/Container";
 export type { ContainerMaxWidth, ContainerProps } from "./components/Layout/Container";
+export { AspectRatio } from "./components/Layout/AspectRatio";
+export type {
+  AspectRatioFit,
+  AspectRatioProps,
+  AspectRatioStyle,
+} from "./components/Layout/AspectRatio";
 export { Stack } from "./components/Layout/Stack";
 export type { StackProps } from "./components/Layout/Stack";
 export { Inline } from "./components/Layout/Inline";

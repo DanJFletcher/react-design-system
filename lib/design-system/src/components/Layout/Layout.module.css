@@ -198,6 +198,44 @@
   );
 }
 
+.aspectRatio {
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+.aspectRatio > :is(img, video, iframe, picture) {
+  display: block;
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.aspectRatio > img,
+.aspectRatio > video,
+.aspectRatio > picture > img {
+  object-fit: cover;
+}
+
+.aspectRatio[data-fit="contain"] > img,
+.aspectRatio[data-fit="contain"] > video,
+.aspectRatio[data-fit="contain"] > picture > img {
+  object-fit: contain;
+}
+
+.aspectRatio > iframe {
+  border: 0;
+}
+
+.aspectRatio > picture > img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
 .visuallyHidden {
   position: absolute;
   inline-size: var(--ds-space-half);

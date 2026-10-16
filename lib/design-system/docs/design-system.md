@@ -938,6 +938,10 @@ Error copy and invalid borders use `color.text.error` and `color.border.error`. 
 
 Single-line text and select controls use `radius.form-control`; textareas and field groups use the independent `radius.textarea` and `radius.form-group` tokens. Luna keeps text inputs, selects, and buttons pill-shaped, with a 32px radius for both textareas and field groups.
 
+## AspectRatio layout helper
+
+`AspectRatio` renders a native `div` frame with a positive, finite width-to-height `ratio`, defaulting to `16 / 9`. Direct `img`, `video`, `iframe`, and `picture` children fill the frame; `fit="cover"` or `fit="contain"` controls how images and videos scale. Other children remain in normal flow. The frame adds no surface, radius, color, or theme-specific styling; children retain their own accessible semantics.
+
 ## Enforcement
 
 `pnpm check` is the complete gate. Token sources and output, raw component styling values, type/prop contracts, contrast, interaction, visual snapshots, and the packaged consumer are mechanically checked. Storybook documentation includes manual keyboard-navigation, screen-reader naming, zoom, and focus-clipping checks; automated accessibility checks do not replace them.

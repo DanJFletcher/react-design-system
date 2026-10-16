@@ -1,0 +1,26 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as AspectRatioStories from "./AspectRatio.stories";
+
+<Meta of={AspectRatioStories} />
+
+<Title>Aspect ratio</Title>
+
+<Subtitle>A responsive frame that preserves a width-to-height ratio for media.</Subtitle>
+
+## Playground
+
+<Canvas of={AspectRatioStories.Playground} />
+
+`ratio` is a positive finite number representing width divided by height. It defaults to `16 / 9`. `fit` defaults to `cover`; choose `contain` to keep the complete image visible inside the frame.
+
+## Common shapes
+
+<Canvas of={AspectRatioStories.SquareContain} />
+
+<Canvas of={AspectRatioStories.PortraitCrop} />
+
+Direct `img`, `video`, `iframe`, and `picture` children fill the frame. `fit` applies to direct images and videos (including an image inside a direct `picture`); other child content remains in normal flow.
+
+The component renders a native `div`, forwards its native attributes and ref, and adds no surface decoration or ARIA role. Give images meaningful `alt` text (or an empty `alt` for decorative images) and provide an accessible title for embedded frames.
+
+<Controls of={AspectRatioStories.Playground} />

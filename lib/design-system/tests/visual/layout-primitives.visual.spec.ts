@@ -58,6 +58,39 @@ test("grid automatically adds columns as the viewport grows", async ({ page }) =
   expect(desktopColumns).toBeGreaterThan(mobileColumns);
 });
 
+test("aspect-ratio frames preserve media proportions across narrow and wide viewports", async ({
+  page,
+}) => {
+  await page.goto(
+    "/iframe.html?id=components-layout-aspectratio--playground&viewMode=story",
+  );
+
+  const frame = page.locator('[data-testid="aspect-ratio-frame"]');
+  const image = frame.locator("img");
+  await expect(frame).toHaveAttribute("data-fit", "cover");
+  await expect(image).toHaveCSS("object-fit", "cover");
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobileBox = await frame.boundingBox();
+  expect(mobileBox).not.toBeNull();
+  expect(mobileBox!.height).toBeCloseTo(mobileBox!.width * (9 / 16), 1);
+
+  await page.setViewportSize({ width: 1280, height: 900 });
+  const desktopBox = await frame.boundingBox();
+  expect(desktopBox).not.toBeNull();
+  expect(desktopBox!.width).toBeGreaterThan(mobileBox!.width);
+  expect(desktopBox!.height).toBeCloseTo(desktopBox!.width * (9 / 16), 1);
+
+  await page.goto(
+    "/iframe.html?id=components-layout-aspectratio--square-contain&viewMode=story",
+  );
+  const squareFrame = page.locator('[data-testid="aspect-ratio-frame"]');
+  await expect(squareFrame.locator("img")).toHaveCSS("object-fit", "contain");
+  const squareBox = await squareFrame.boundingBox();
+  expect(squareBox).not.toBeNull();
+  expect(squareBox!.height).toBeCloseTo(squareBox!.width, 1);
+});
+
 test("visually hidden text remains an accessible description and skip links reveal on focus", async ({
   page,
 }) => {
