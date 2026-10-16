@@ -197,6 +197,24 @@ An optional `icon` is decorative and appears on the left by default; set `iconPo
 
 `Badge` renders a native `span` and adds no interaction or live-region behavior. It forwards native span props, refs, `className`, and typed `style`. The component follows ACME, Luna, Orchid, nested, and custom themes without theme-specific rendering.
 
+## Chip
+
+```tsx
+<Chip>Design systems</Chip>
+
+<Chip selected={isSelected} onSelect={setIsSelected}>
+  Accessibility
+</Chip>
+
+<Chip onRemove={removeTag} removeLabel="Remove Drafts">
+  Drafts
+</Chip>
+```
+
+`Chip` presents a compact content tag or filter. A chip is static by default. Pass `selected` with `onSelect(nextSelected)` to render a native toggle button with `aria-pressed`; selection is controlled by the consumer. Pass `onRemove` with a localized `removeLabel` to add a separate remove button. When both actions are present, they render as sibling buttons rather than nested controls. `disabled` disables available actions.
+
+The component supports `sm`, `md` (default), and `lg` sizes, uses the active theme's semantic surface, border, accent, disabled, and focus tokens, and follows the theme's control radius. It forwards native span attributes, refs, `className`, and typed `style` and supports nested/custom themes without theme-specific rendering.
+
 ## Tooltip
 
 ```tsx

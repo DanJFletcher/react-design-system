@@ -2,6 +2,7 @@
   "exceptions": [
     { "file": "Accordion/Accordion.module.css", "selector": ".trigger", "role": "inherited", "reason": "Question buttons inherit the bounded item surface corners." },
     { "file": "Badge/Badge.module.css", "selector": ".badge", "role": "action", "reason": "Compact category/status labels intentionally follow the pill-control shape." },
+    { "file": "Chip/Chip.module.css", "selector": ".chip", "role": "action", "reason": "Compact content tags and filter controls follow the active theme's control corner shape." },
     { "file": "Badge/Badge.module.css", "selector": ".rounded", "role": "shape", "reason": "Explicit rounded shape prop." },
     { "file": "Badge/Badge.module.css", "selector": ".square", "role": "shape", "reason": "Explicit square shape prop." },
     { "file": "Badge/Badge.module.css", "selector": ".pill", "role": "shape", "reason": "Explicit pill shape prop." },

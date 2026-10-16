@@ -1,0 +1,32 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as ChipStories from "./Chip.stories";
+
+<Meta of={ChipStories} />
+
+<Title>Chip</Title>
+
+<Subtitle>Compact labels for content tags and filters, with optional selection and removal actions.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={ChipStories.Playground} />
+<Controls of={ChipStories.Playground} />
+
+## Sizes and interaction
+
+<Canvas of={ChipStories.SizeExamples} />
+<Canvas of={ChipStories.SelectableAndRemovable} />
+
+## Themes and long labels
+
+<Canvas of={ChipStories.ThemeCoverage} />
+<Canvas of={ChipStories.LongLabel} />
+
+## Behavior and accessibility
+
+- A chip without actions is a static `span`.
+- Pass both `selected` and `onSelect` to render a native toggle button. `onSelect` receives the next selected value; the consumer owns and updates `selected`.
+- Pass both `onRemove` and a localized `removeLabel` to add an independent, named remove button. The selection and remove actions are separate sibling buttons, never nested.
+- `disabled` disables available actions and applies the theme's disabled colors.
+- `size` accepts `sm`, `md`, or `lg`. Selection uses the accent semantic color pair; all other visuals use semantic theme tokens.
+- Native span attributes, refs, `className`, and typed `style` are forwarded. The component supports all built-in themes, custom themes, and nested theme boundaries without theme-specific rendering.

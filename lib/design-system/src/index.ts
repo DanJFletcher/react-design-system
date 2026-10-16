@@ -52,6 +52,8 @@ export type {
   BadgeSize,
   BadgeTone,
 } from "./components/Badge/Badge";
+export { Chip } from "./components/Chip/Chip";
+export type { ChipProps, ChipSize } from "./components/Chip/Chip";
 export { Avatar } from "./components/Avatar/Avatar";
 export type {
   AvatarProps,

@@ -175,6 +175,16 @@ The contracts below capture decisions for selected components; this list is not 
 - Customization: use public tone, size, and shape props with semantic tokens and CSS Modules; do not add theme-specific rendering, undocumented hooks, or interaction semantics.
 - Validation: Storybook tone, size, shape, icon/dot, ACME/Luna/Orchid, and nested-theme examples; browser checks for contrast, static semantics, indicators, and dimensions; token contrast checks, lint, typecheck, Storybook, package build, and package-consumer checks.
 
+### Chip
+
+- Objective: compact content tags and filter choices with optional selection and removal actions; unlike `Badge`, a Chip may be interactive.
+- Dependencies: existing React package, built-in `Icon`, CSS Modules, and semantic surface, text, border, accent, disabled-action, focus, spacing, radius, and type tokens; no new token, component hook, or runtime dependency is required.
+- Public API: `children` is the visible label; `size` accepts `sm`, `md`, or `lg` (default `md`). A selectable Chip requires both controlled `selected` and `onSelect(nextSelected)` props. A removable Chip requires `onRemove` and a non-empty localized `removeLabel`. `disabled` disables available actions. Native `span` attributes, refs, `className`, and typed `DesignSystemStyle` are forwarded.
+- Semantics and interaction: a static Chip is a native `span`; a selectable Chip renders a native toggle button with `aria-pressed`; a removable Chip adds an independent named native button. Selection and removal buttons are siblings, not nested. Native Enter/Space activation and Tab behavior are retained.
+- State: the consumer owns selection and tag removal. `onSelect` reports the next boolean state; the Chip does not maintain internal selection.
+- Customization: use semantic theme tokens and CSS Modules. Selection uses the accent semantic color pair; focus and disabled states use their dedicated semantic roles. The compact tag follows the active theme's control radius across built-in, custom, and nested themes.
+- Validation: Storybook playground, size, selection/removal interaction, disabled, long-label, all-theme and nested-theme examples; browser checks for toggle and removal semantics, keyboard operation, focus, forced colors, responsive wrapping, and theme boundaries; lint, typecheck, Storybook, package build, and package-consumer checks.
+
 ### Callout
 
 - Objective: persistent, in-flow content for important status, guidance, and next steps; unlike Toast, it is not queued or automatically dismissed.

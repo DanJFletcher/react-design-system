@@ -1,0 +1,138 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  max-inline-size: 100%;
+  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  border-radius: var(--ds-radius-control);
+  background-color: var(--ds-color-surface-primary);
+  color: var(--ds-color-text-primary);
+  font-family: var(--ds-font-family-sans);
+  font-weight: var(--ds-font-weight-medium);
+  line-height: var(--ds-line-height-normal);
+  vertical-align: middle;
+}
+
+.chip[data-selected="true"] {
+  border-color: var(--ds-color-accent-bg);
+  background-color: var(--ds-color-accent-bg);
+  color: var(--ds-color-accent-fg);
+}
+
+.chip[data-disabled="true"] {
+  border-color: var(--ds-color-border-control);
+  background-color: var(--ds-color-action-disabled-bg);
+  color: var(--ds-color-action-disabled-fg);
+  cursor: not-allowed;
+}
+
+.sm {
+  min-block-size: var(--ds-control-min-block-size-sm);
+  font-size: var(--ds-font-size-xs);
+}
+
+.md {
+  min-block-size: var(--ds-control-min-block-size-md);
+  font-size: var(--ds-font-size-sm);
+}
+
+.lg {
+  min-block-size: var(--ds-control-min-block-size-lg);
+  font-size: var(--ds-font-size-md);
+}
+
+.label {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.selectButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-1);
+  min-inline-size: 0;
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.sm .label,
+.sm .selectButton {
+  padding: var(--ds-space-half) var(--ds-space-2);
+}
+
+.md .label,
+.md .selectButton {
+  padding: var(--ds-space-1) var(--ds-space-3);
+}
+
+.lg .label,
+.lg .selectButton {
+  padding: var(--ds-space-2) var(--ds-space-4);
+}
+
+.selectButton:focus-visible,
+.removeButton:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.selectButton:not(:disabled):hover,
+.removeButton:not(:disabled):hover {
+  background-color: var(--ds-color-action-secondary-hover);
+}
+
+.chip[data-selected="true"] .selectButton:not(:disabled):hover {
+  background-color: var(--ds-color-action-primary-hover);
+}
+
+.selectButton:disabled,
+.removeButton:disabled {
+  color: inherit;
+  cursor: not-allowed;
+}
+
+.removeButton {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--ds-space-6);
+  block-size: var(--ds-space-6);
+  margin-inline-end: var(--ds-space-1);
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.removeButton svg {
+  display: block;
+}
+
+@media (forced-colors: active) {
+  .chip {
+    border-color: ButtonText;
+    background-color: Canvas;
+    color: CanvasText;
+  }
+
+  .chip[data-selected="true"] {
+    border-color: Highlight;
+  }
+
+  .chip[data-disabled="true"] {
+    color: GrayText;
+  }
+
+  .selectButton:focus-visible,
+  .removeButton:focus-visible {
+    outline-color: Highlight;
+  }
+}
