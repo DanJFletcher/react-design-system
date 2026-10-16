@@ -1,0 +1,26 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [
+    ".astro/types.d.ts",
+    "src/**/*.astro",
+    "src/components/SiteFooter.tsx",
+    "src/components/HomeServices.tsx",
+    "src/components/PreviewFormNotice.tsx"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "src/components/error-boundary.tsx",
+    "src/components/ui/**",
+    "src/hooks/**",
+    "src/lib/**"
+  ],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "types": ["astro/client", "vite/client"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}

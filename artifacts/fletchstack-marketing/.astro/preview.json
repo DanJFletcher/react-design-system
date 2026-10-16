@@ -1,0 +1,18 @@
+{
+	"pid": 32904,
+	"port": 25853,
+	"url": "http://localhost:25853",
+	"urls": {
+		"local": [
+			"http://localhost:25853/fletchstack-marketing/"
+		],
+		"network": [
+			"http://172.24.0.2:25853/fletchstack-marketing/"
+		],
+		"networkInterfaceNames": [
+			"eth0"
+		]
+	},
+	"background": true,
+	"startedAt": "2026-10-16T21:36:17.041Z"
+}

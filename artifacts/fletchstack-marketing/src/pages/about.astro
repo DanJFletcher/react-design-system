@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter";
+const base = import.meta.env.BASE_URL;
+const title = "About FletchStack | A Canadian software studio";
+const description = "Meet FletchStack, a Canadian software development studio focused on useful custom software, thoughtful AI, and professional web experiences.";
+---
+<BaseLayout title={title} description={description}>
+  <SiteHeader base={base} current="about" />
+  <main id="main-content">
+    <section class="page-intro"><div class="page-intro-inner">
+      <span class="eyebrow">About / FletchStack</span>
+        <h1>Clear thinking. Systems-level perspective.</h1>
+      <p class="intro-copy">FletchStack is a Canadian software development studio for people with a real problem to solve and the curiosity to find a better way through it.</p>
+    </div></section>
+    <section class="section"><div class="container about-panel">
+      <div>
+        <span class="kicker">A connected view</span>
+        <h2>We like the space between the pieces.</h2>
+        <p>Software rarely exists on its own. It connects people, information, and everyday processes. We think about how those parts fit together—and how a well-chosen tool can make the whole thing feel simpler.</p>
+        <p>That can mean building a custom application, helping a team make sense of a technical decision, connecting existing systems, exploring an AI-assisted workflow, or creating a polished website for a small business.</p>
+        <p>We aim for solutions that are clear to use, sensible to maintain, and genuinely suited to the work.</p>
+        <a class="inline-link" href={`${base}services/`}>Explore the services →</a>
+      </div>
+      <div class="about-illustration"><img src={`${base}assets/fletchstack-systems.webp`} alt="FletchStack's connected software systems illustration, showing software modules working together" width="1024" height="682" loading="lazy" /></div>
+    </div></section>
+    <section class="section section-soft"><div class="container">
+      <div class="section-heading"><span class="kicker">What matters in the work</span><h2>Approachable by design. Precise where it counts.</h2></div>
+      <div class="principle-grid">
+        <article class="principle"><h3>Curiosity before assumptions</h3><p>Understand the goal and the context before deciding what the solution should be.</p></article>
+        <article class="principle"><h3>Practical technology</h3><p>Use tools and techniques in service of a clear purpose, with trade-offs in the open.</p></article>
+        <article class="principle"><h3>Useful, not just impressive</h3><p>The measure of the work is whether it helps someone do something better.</p></article>
+      </div>
+    </div></section>
+    <section class="section"><div class="container cta-band"><h2>Let’s see if there’s a good fit for the work.</h2><a class="button" href={`${base}contact/`}>Get in touch <span class="button-arrow" aria-hidden="true">↗</span></a></div></section>
+  </main>
+  <SiteFooter base={base} />
+</BaseLayout>

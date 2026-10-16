@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter";
+const base = import.meta.env.BASE_URL;
+const title = "Services | FletchStack";
+const description = "Explore custom software development, AI-powered automation and integrations, SaaS products, and professional small-business websites from FletchStack.";
+---
+<BaseLayout title={title} description={description}>
+  <SiteHeader base={base} current="services" />
+  <main id="main-content">
+    <section class="page-intro"><div class="page-intro-inner">
+      <span class="eyebrow">Services / Capabilities</span>
+      <h1>Tools that move good work forward.</h1>
+      <p class="intro-copy">Work can span the whole digital picture. We help make the right thing, whether that is a custom application, an AI-assisted workflow, or a more effective web presence.</p>
+    </div></section>
+    <section class="section">
+      <div class="container page-layout">
+        <div><span class="kicker">What we can help with</span><h2>One problem at a time. The right tools for it.</h2><p>Start with a clear need. We’ll work together to shape an approach that fits your goals, people, and constraints.</p><a class="inline-link" href={`${base}contact/`}>Talk through your project →</a></div>
+        <ol class="detail-list">
+          <li id="custom-software"><span class="list-no">01</span><div><h3>Custom software & web applications</h3><p>Applications designed around the way your organization works: internal tools, customer-facing experiences, workflow software, and web-based products.</p></div></li>
+          <li id="consulting"><span class="list-no">02</span><div><h3>Software consulting & development</h3><p>Bring a question, an existing application, or a plan that needs a technical perspective. Get help evaluating options and making the next development step clearer.</p></div></li>
+          <li id="ai-automation"><span class="list-no">03</span><div><h3>AI tools, automation & integrations</h3><p>Explore practical uses for AI, connect the tools you already rely on, and reduce repetitive steps. The focus is on a useful fit—not adding AI for its own sake.</p></div></li>
+          <li id="digital-products"><span class="list-no">04</span><div><h3>SaaS & consumer software</h3><p>Shape and build subscription software or consumer-facing digital products, from an early concept through a working, maintainable application.</p></div></li>
+          <li id="business-websites"><span class="list-no">05</span><div><h3>Professional small-business websites</h3><p>Present your services clearly, make your business easier to understand, and help visitors find the right next step with a considered website.</p></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="section section-soft"><div class="container">
+      <div class="section-heading"><span class="kicker">A thoughtful fit</span><h2>Not sure which service fits? That’s a good place to start.</h2><p>We can discuss the problem before deciding what to build. A first conversation is about understanding the work and whether there is a useful path forward.</p></div>
+      <a class="button" href={`${base}contact/`}>Describe the challenge <span class="button-arrow" aria-hidden="true">↗</span></a>
+    </div></section>
+  </main>
+  <SiteFooter base={base} />
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter";
+import PreviewFormNotice from "../components/PreviewFormNotice";
+const base = import.meta.env.BASE_URL;
+const title = "Contact FletchStack | Start a project conversation";
+const description = "Start a conversation about custom software, AI automation, SaaS, consulting, or a professional small-business website with FletchStack.";
+---
+<BaseLayout title={title} description={description}>
+  <SiteHeader base={base} />
+  <main id="main-content">
+    <section class="page-intro"><div class="page-intro-inner">
+      <span class="eyebrow">Contact / First conversation</span>
+      <h1>Tell us what you’re working through.</h1>
+      <p class="intro-copy">A rough outline is plenty. Share the problem, the idea, or the bit you haven’t quite figured out yet.</p>
+    </div></section>
+    <section class="section"><div class="container contact-grid">
+      <aside>
+        <div class="contact-callout"><h2>Start with the challenge.</h2><p>We’ll use the conversation to understand what you need and whether FletchStack could be a useful partner. No elaborate brief required.</p></div>
+      </aside>
+      <form class="contact-form" id="form" aria-describedby="form-notice">
+        <div id="form-notice"><PreviewFormNotice /></div>
+        <div class="form-row" style="margin-top:22px">
+          <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" placeholder="Name" disabled /></div>
+          <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" disabled /></div>
+        </div>
+        <div class="field"><label for="topic">What would you like to explore?</label>
+          <select id="topic" name="topic" disabled>
+            <option>Choose a topic</option><option>Custom software or web app</option><option>Consulting and development</option><option>AI, automation, or integration</option><option>SaaS or consumer software</option><option>Small-business website</option><option>Something else</option>
+          </select>
+        </div>
+        <div class="field"><label for="message">A little about the project</label><textarea id="message" name="message" placeholder="What are you hoping to make easier or possible?" disabled></textarea></div>
+        <button class="button" type="button" disabled>Inquiry form unavailable in preview</button>
+        <p class="form-hint">No information is transmitted by these controls.</p>
+      </form>
+    </div></section>
+    <section class="section section-soft"><div class="container split-story"><div><span class="kicker">Not sure where to begin?</span><h2>Start with what feels stuck.</h2></div><div><p>Describe what takes too long, what is hard to keep track of, or what you wish your customers could do. We can work out the useful questions from there.</p><a class="inline-link" href={`${base}approach/`}>Read about our approach →</a></div></div></section>
+  </main>
+  <SiteFooter base={base} />
+</BaseLayout>

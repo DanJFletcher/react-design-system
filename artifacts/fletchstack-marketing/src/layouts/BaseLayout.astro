@@ -1,0 +1,48 @@
+---
+import "@workspace/design-system/tokens.css";
+import "@workspace/design-system/styles.css";
+import "@workspace/design-system/themes/acme.css";
+import globalCss from "../styles/global.css?inline";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "FletchStack | Software built for what comes next",
+  description =
+    "FletchStack is a Canadian software development studio building custom software, AI-powered tools, SaaS products, and professional small-business websites.",
+} = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+const socialImage = `${baseUrl}assets/fletchstack-systems.webp`;
+---
+
+<!doctype html>
+<html lang="en" data-ds-theme="acme">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f7faff" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FletchStack" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/png" href={`${baseUrl}assets/favicon.png`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <slot name="head" />
+    <style is:global set:html={globalCss}></style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,62 @@
+---
+interface Props {
+  base: string;
+  current?: "home" | "services" | "approach" | "about";
+}
+
+const { base, current = "home" } = Astro.props;
+const links = [
+  { label: "Services", href: `${base}services/`, key: "services" },
+  { label: "Approach", href: `${base}approach/`, key: "approach" },
+  { label: "About", href: `${base}about/`, key: "about" },
+];
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href={base} aria-label="FletchStack home">
+      <img
+        src={`${base}assets/fletchstack-logo.webp`}
+        alt="FletchStack"
+        width="1024"
+        height="280"
+      />
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      {links.map((link) => (
+        <a
+          class="nav-link"
+          href={link.href}
+          aria-current={current === link.key ? "page" : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    <a class="header-cta" href={`${base}contact/`}>
+      Start a project <span class="button-arrow" aria-hidden="true">↗</span>
+    </a>
+    <details class="mobile-nav">
+      <summary aria-label="Site navigation">
+        <span class="sr-only">Site navigation</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+      </summary>
+      <nav class="mobile-panel" aria-label="Main navigation">
+        <a href={base} aria-current={current === "home" ? "page" : undefined}>Home</a>
+        {links.map((link) => (
+          <a
+            href={link.href}
+            aria-current={current === link.key ? "page" : undefined}
+          >
+            {link.label}
+          </a>
+        ))}
+        <a class="mobile-cta" href={`${base}contact/`}>
+          Start a project <span class="button-arrow" aria-hidden="true">↗</span>
+        </a>
+      </nav>
+    </details>
+  </div>
+</header>

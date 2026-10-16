@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/fletchstack-marketing/"
+title = "FletchStack"
+description = "A polished, responsive marketing website for FletchStack, a Canadian software development studio offering custom software, consulting, AI integrations, SaaS products, and small-business websites."
+version = "1.0.0"
+id = "artifacts/fletchstack-marketing"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/fletchstack-marketing/" ]
+localPort = 25852
+
+[services.development]
+run = "pnpm --filter @workspace/fletchstack-marketing run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/fletchstack-marketing", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/fletchstack-marketing/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25852"
+BASE_PATH = "/fletchstack-marketing/"

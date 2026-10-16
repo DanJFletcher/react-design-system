@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter";
+const base = import.meta.env.BASE_URL;
+const title = "Our approach | FletchStack";
+const description = "See how FletchStack approaches software consulting and development: understand the problem, shape a useful scope, build collaboratively, and refine.";
+---
+<BaseLayout title={title} description={description}>
+  <SiteHeader base={base} current="approach" />
+  <main id="main-content">
+    <section class="page-intro"><div class="page-intro-inner">
+      <span class="eyebrow">Approach / How we work</span>
+      <h1>Clear thinking. Useful progress.</h1>
+      <p class="intro-copy">Software projects can feel complicated before they begin. We make the work easier to navigate by keeping the conversation open, the scope understandable, and the next decision visible.</p>
+    </div></section>
+    <section class="section"><div class="container">
+      <div class="section-heading"><span class="kicker">The working rhythm</span><h2>Make the important decisions together.</h2><p>Every project has its own shape. The steps below offer a shared way to move from an idea to something people can use.</p></div>
+      <div class="steps" style="border-color:var(--line)">
+        <article class="step"><span class="step-no">01 / LISTEN</span><h3>Understand the context</h3><p>We begin with your goals, users, current tools, and the friction you want to remove. We ask questions before prescribing a solution.</p></article>
+        <article class="step"><span class="step-no">02 / FRAME</span><h3>Define a useful first step</h3><p>We work through the options, agree on a practical scope, and make the key assumptions and trade-offs visible.</p></article>
+        <article class="step"><span class="step-no">03 / MAKE</span><h3>Build and learn</h3><p>We develop the solution in considered steps, checking the result against the original need as the work takes shape.</p></article>
+      </div>
+    </div></section>
+    <section class="section section-soft"><div class="container">
+      <div class="section-heading"><span class="kicker">Principles, not ceremony</span><h2>How we keep the work grounded.</h2></div>
+      <div class="principle-grid">
+        <article class="principle"><h3>Start with the actual problem</h3><p>Technology is a means. We try to understand what would change for the people doing the work.</p></article>
+        <article class="principle"><h3>Choose a sensible scope</h3><p>Build what is useful now, and leave a clear path for what may need to happen later.</p></article>
+        <article class="principle"><h3>Keep the language human</h3><p>Good collaboration depends on shared understanding, not a wall of unexplained technical terms.</p></article>
+      </div>
+    </div></section>
+    <section class="section"><div class="container cta-band"><h2>Bring the messy first version of the idea.</h2><a class="button" href={`${base}contact/`}>Start a conversation <span class="button-arrow" aria-hidden="true">↗</span></a></div></section>
+  </main>
+  <SiteFooter base={base} />
+</BaseLayout>

@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter";
+import HomeServices from "../components/HomeServices";
+const base = import.meta.env.BASE_URL;
+const title = "FletchStack | Software made for the way you work";
+const description = "FletchStack is a Canadian software development studio building custom applications, AI-powered tools, SaaS products, and professional small-business websites.";
+---
+<BaseLayout title={title} description={description}>
+  <SiteHeader base={base} current="home" />
+  <main id="main-content">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">Software studio · Canada</span>
+          <h1>Build the thing<br />your work <em>needs.</em></h1>
+          <p>FletchStack turns good ideas and everyday bottlenecks into useful software—from custom applications and AI-powered workflows to websites that make small businesses look their best.</p>
+          <div class="hero-actions">
+            <a class="button" href={`${base}contact/`}>Tell us what you’re building <span class="button-arrow" aria-hidden="true">↗</span></a>
+            <a class="button button-secondary" href={`${base}services/`}>Explore what we do</a>
+          </div>
+        </div>
+        <figure class="hero-visual">
+          <img src={`${base}assets/fletchstack-systems.webp`} alt="Abstract software illustration featuring the FletchStack mark alongside connected interface panels" width="1024" height="682" fetchpriority="high" />
+          <figcaption class="visual-caption">Connected systems. Clear purpose.</figcaption>
+        </figure>
+        <span class="hero-index">01 / IDEAS INTO WORKING SOFTWARE</span>
+      </div>
+    </section>
+    <section class="section" aria-label="Services">
+      <div class="container"><HomeServices base={base} /></div>
+    </section>
+    <section class="section section-soft">
+      <div class="container split-story">
+        <div>
+          <span class="kicker">Built around the work</span>
+          <h2>Good software starts with a better question.</h2>
+        </div>
+        <div>
+          <p class="story-note">What is slowing the work down? What would make the next version meaningfully easier?</p>
+          <p>We take time to understand the context before reaching for a technology. Sometimes the answer is a new application. Sometimes it is a sharper website, a thoughtful integration, or a smaller first step.</p>
+          <a class="inline-link" href={`${base}approach/`}>See how we work <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+    <section class="section section-dark">
+      <div class="container">
+        <div class="section-heading">
+          <span class="kicker">A clear way forward</span>
+          <h2>From fuzzy challenge to useful first release.</h2>
+          <p>Good collaboration is practical, direct, and built around shared understanding.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><span class="step-no">01 / UNDERSTAND</span><h3>Start with the why</h3><p>We learn the goal, users, constraints, and what success needs to mean for this work.</p></article>
+          <article class="step"><span class="step-no">02 / SHAPE</span><h3>Find a sensible scope</h3><p>We turn what we know into an approach, a useful first release, and clear decisions.</p></article>
+          <article class="step"><span class="step-no">03 / BUILD</span><h3>Make it real</h3><p>We build, test, and refine the solution with you—then make room for what comes next.</p></article>
+        </div>
+        <p style="margin:34px 0 0"><a class="inline-link" style="color:#8dbdff" href={`${base}approach/`}>A closer look at the process →</a></p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container cta-band">
+        <h2>Have a problem worth solving—or an idea worth testing?</h2>
+        <a class="button" href={`${base}contact/`}>Start a project conversation <span class="button-arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+  <SiteFooter base={base} />
+</BaseLayout>
