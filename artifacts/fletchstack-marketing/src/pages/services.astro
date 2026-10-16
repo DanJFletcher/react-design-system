@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter";
-const base = import.meta.env.BASE_URL;
+const base = `${import.meta.env.BASE_URL.replace(/\/+$/, "")}/`;
 const title = "Services | FletchStack";
 const description = "Explore custom software development, AI-powered automation and integrations, SaaS products, and professional small-business websites from FletchStack.";
 ---

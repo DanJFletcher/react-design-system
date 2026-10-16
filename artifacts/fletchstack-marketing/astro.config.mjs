@@ -9,7 +9,7 @@ export default defineConfig({
   base: basePath,
   integrations: [react()],
   output: "static",
-  trailingSlash: "always",
+  trailingSlash: "ignore",
   outDir: "./dist/public",
   devToolbar: {
     enabled: false,

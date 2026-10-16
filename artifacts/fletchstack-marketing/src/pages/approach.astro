@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter";
-const base = import.meta.env.BASE_URL;
+const base = `${import.meta.env.BASE_URL.replace(/\/+$/, "")}/`;
 const title = "Our approach | FletchStack";
 const description = "See how FletchStack approaches software consulting and development: understand the problem, shape a useful scope, build collaboratively, and refine.";
 ---

@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter";
 import PreviewFormNotice from "../components/PreviewFormNotice";
-const base = import.meta.env.BASE_URL;
+const base = `${import.meta.env.BASE_URL.replace(/\/+$/, "")}/`;
 const title = "Contact FletchStack | Start a project conversation";
 const description = "Start a conversation about custom software, AI automation, SaaS, consulting, or a professional small-business website with FletchStack.";
 ---

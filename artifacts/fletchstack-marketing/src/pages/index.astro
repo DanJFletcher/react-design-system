@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter";
 import HomeServices from "../components/HomeServices";
-const base = import.meta.env.BASE_URL;
+const base = `${import.meta.env.BASE_URL.replace(/\/+$/, "")}/`;
 const title = "FletchStack | Software made for the way you work";
 const description = "FletchStack is a Canadian software development studio building custom applications, AI-powered tools, SaaS products, and professional small-business websites.";
 ---
