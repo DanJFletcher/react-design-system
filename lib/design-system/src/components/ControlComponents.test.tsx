@@ -176,6 +176,89 @@ describe("form controls", () => {
     expect(screen.queryByText("A: Choose a region.")).not.toBeInTheDocument();
   });
 
+  it("keeps DateField, FileField, RangeField, and Textarea help connected when errors change", () => {
+    const renderFields = (errorVersion: "A" | "B") => (
+      <>
+        <DateField
+          aria-describedby="start-date-help"
+          description="Choose the first day of the project."
+          error={`${errorVersion}: Enter a valid start date.`}
+          id="start-date"
+          label="Start date"
+        />
+        <span id="start-date-help">The project begins on this date.</span>
+
+        <FileField
+          aria-describedby="attachments-help"
+          description="Add relevant project files."
+          error={`${errorVersion}: Select a supported file.`}
+          id="project-files"
+          label="Project files"
+        />
+        <span id="attachments-help">PDF files are preferred.</span>
+
+        <RangeField
+          aria-describedby="volume-help"
+          description="Set the expected weekly volume."
+          error={`${errorVersion}: Choose a valid weekly volume.`}
+          id="weekly-volume"
+          label="Weekly volume"
+        />
+        <span id="volume-help">You can update this estimate later.</span>
+
+        <Textarea
+          aria-describedby="project-notes-help"
+          description="Include any details the team should know."
+          error={`${errorVersion}: Add a project summary.`}
+          id="project-notes"
+          label="Project notes"
+        />
+        <span id="project-notes-help">Keep the summary brief.</span>
+      </>
+    );
+
+    const { rerender } = render(renderFields("A"));
+    rerender(renderFields("B"));
+
+    const fields = [
+      {
+        control: screen.getByLabelText("Start date"),
+        describedBy: "start-date-help start-date-description start-date-error",
+        errorId: "start-date-error",
+        error: "B: Enter a valid start date.",
+        oldError: "A: Enter a valid start date.",
+      },
+      {
+        control: screen.getByLabelText("Project files"),
+        describedBy: "attachments-help project-files-description project-files-error",
+        errorId: "project-files-error",
+        error: "B: Select a supported file.",
+        oldError: "A: Select a supported file.",
+      },
+      {
+        control: screen.getByLabelText("Weekly volume"),
+        describedBy: "volume-help weekly-volume-description weekly-volume-error",
+        errorId: "weekly-volume-error",
+        error: "B: Choose a valid weekly volume.",
+        oldError: "A: Choose a valid weekly volume.",
+      },
+      {
+        control: screen.getByLabelText("Project notes"),
+        describedBy: "project-notes-help project-notes-description project-notes-error",
+        errorId: "project-notes-error",
+        error: "B: Add a project summary.",
+        oldError: "A: Add a project summary.",
+      },
+    ];
+
+    for (const field of fields) {
+      expect(field.control).toHaveAttribute("aria-invalid", "true");
+      expect(field.control).toHaveAttribute("aria-describedby", field.describedBy);
+      expect(document.getElementById(field.errorId)).toHaveTextContent(field.error);
+      expect(screen.queryByText(field.oldError)).not.toBeInTheDocument();
+    }
+  });
+
   it("associates checkbox and switch labels, descriptions, errors, and external descriptions", () => {
     render(
       <>
