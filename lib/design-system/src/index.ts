@@ -322,7 +322,12 @@ export type { FileFieldProps } from "./components/FormControls/FileField";
 export { Switch } from "./components/FormControls/Switch";
 export type { SwitchProps } from "./components/FormControls/Switch";
 export { Header } from "./components/Header/Header";
-export type { HeaderNavItem, HeaderProps, HeaderSize } from "./components/Header/Header";
+export type {
+  HeaderMobileNavigationRenderProps,
+  HeaderNavItem,
+  HeaderProps,
+  HeaderSize,
+} from "./components/Header/Header";
 export { BottomMenu } from "./components/BottomMenu/BottomMenu";
 export type {
   BottomMenuActionItem,
@@ -410,6 +415,8 @@ export type {
   MenuDividerItem,
   MenuEntry,
   MenuLinkProps,
+  MenuNavigationEntry,
+  MenuNavigationItem,
   MenuPanelMotion,
   MenuPlacement,
   MenuProps,

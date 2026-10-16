@@ -40,9 +40,11 @@ Single-line inputs, textareas, field groups, and action buttons each have separa
 
 Spinner communicates indeterminate waiting with a circular status indicator; Progress represents linear work that may have a measurable value. Standalone Spinner names its status accessibly, while embedded use can mark it decorative when its containing control already exposes the loading state. As an indicator rather than a content surface, it does not receive surface elevation. Button reuses the decorative mode rather than maintaining a second loading-ring implementation.
 
-## Header uses one responsive navigation and CTA slot
+## Header defaults to composable responsive navigation
 
-The Header keeps its logo, native-link navigation, and CTA in one component tree. CSS Grid places the same CTA inline on desktop and inside the expanded mobile menu, avoiding duplicate interactive elements and IDs. The mobile menu remains a disclosure rather than a custom navigation system.
+The Header uses the shared Menu in `navigation` mode across breakpoints: it opens as a disclosure on narrow screens and becomes inline native-link navigation on desktop. Menu navigation mode preserves ordinary navigation landmark and link semantics instead of applying the ARIA application-menu keyboard model. Consumers can replace the default mobile navigation with a render slot that receives the nav items and controlled open state.
+
+**Why:** Reuse the design system's menu presentation and interaction while keeping site navigation accessible and allowing products to supply specialized mobile navigation.
 
 ## Hero uses content slots and semantic layout options
 

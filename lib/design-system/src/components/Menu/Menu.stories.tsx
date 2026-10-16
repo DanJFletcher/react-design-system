@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { Icon } from "../Icon/Icon";
-import { Menu, type MenuEntry } from "./Menu";
+import { Menu, type MenuEntry, type MenuNavigationEntry } from "./Menu";
 
 const createProject = fn();
 const showList = fn();
@@ -29,6 +29,13 @@ const menuItems: MenuEntry[] = [
     href: "#menu-documentation",
   },
   { type: "item", id: "archived", label: "Archived projects", disabled: true },
+];
+
+const navigationItems: MenuNavigationEntry[] = [
+  { type: "item", id: "home", label: "Home", href: "#home", linkProps: { "aria-current": "page" } },
+  { type: "item", id: "services", label: "Services", href: "#services" },
+  { type: "divider", id: "nav-divider" },
+  { type: "item", id: "contact", label: "Contact", href: "#contact" },
 ];
 
 const iconChoices = {
@@ -84,7 +91,26 @@ const meta = {
     triggerClassName: { control: "text" },
     style: { control: false },
   },
-  render: (args) => <Menu {...args} items={resolveItems(args.items)} />,
+  render: (args) => {
+    const {
+      items,
+      navigationFooter: _navigationFooter,
+      desktopInline: _desktopInline,
+      mode: _mode,
+      ...menuArgs
+    } = args;
+    void _navigationFooter;
+    void _desktopInline;
+    void _mode;
+
+    return (
+      <Menu
+        {...menuArgs}
+        mode="menu"
+        items={resolveItems(items as readonly MenuEntry[])}
+      />
+    );
+  },
 } satisfies Meta<typeof Menu>;
 
 export default meta;
@@ -114,6 +140,46 @@ export const Playground: Story = {
     await userEvent.click(within(submenu).getByRole("menuitem", { name: "List view" }));
     await expect(showList).toHaveBeenCalledOnce();
     await expect(canvas.queryByRole("menu", { name: "Workspace actions" })).not.toBeInTheDocument();
+    await expect(trigger).toHaveFocus();
+  },
+};
+
+export const NavigationMode: Story = {
+  render: () => (
+    <Menu
+      mode="navigation"
+      triggerLabel="Site navigation"
+      trigger={<Icon name="menu" />}
+      triggerIcon={null}
+      triggerAriaLabel="Open site navigation"
+      triggerVariant="ghost"
+      menuLabel="Site navigation"
+      items={navigationItems}
+      navigationFooter={<a href="#plan">Plan a garden</a>}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { name: "Open site navigation" });
+
+    await expect(trigger).not.toHaveAttribute("aria-haspopup");
+    await userEvent.click(trigger);
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
+
+    const navigation = canvas.getByRole("navigation", { name: "Site navigation" });
+    await expect(navigation).toBeVisible();
+    await expect(canvas.queryByRole("menu")).not.toBeInTheDocument();
+    await expect(canvas.getByRole("link", { name: "Home" })).toHaveAttribute("aria-current", "page");
+    await expect(trigger).toHaveFocus();
+
+    await userEvent.tab();
+    await expect(canvas.getByRole("link", { name: "Home" })).toHaveFocus();
+    await userEvent.keyboard("{Escape}");
+    await expect(navigation).toHaveAttribute("aria-hidden", "true");
+    await expect(navigation).toHaveAttribute("inert");
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
+    await expect(navigation).not.toBeVisible();
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
     await expect(trigger).toHaveFocus();
   },
 };

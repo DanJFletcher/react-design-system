@@ -121,6 +121,25 @@
   padding: 0;
 }
 
+.navigationList {
+  display: grid;
+  gap: var(--ds-space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navigationList > li {
+  margin: 0;
+  padding: 0;
+}
+
+.navigationFooter {
+  margin-block-start: var(--ds-space-1);
+  padding-block-start: var(--ds-space-2);
+  border-block-start: var(--ds-border-width-subtle) solid var(--ds-menu-border, var(--ds-color-border-control));
+}
+
 .submenuItem {
   position: relative;
 }
@@ -241,6 +260,62 @@
   }
 }
 
+@media (--ds-viewport-medium-up) {
+  .root[data-responsive-navigation="true"] {
+    display: block;
+    inline-size: 100%;
+    max-inline-size: none;
+  }
+
+  .root[data-responsive-navigation="true"] > .trigger {
+    display: none;
+  }
+
+  .root[data-responsive-navigation="true"] > .menu[data-desktop-inline="true"] {
+    position: static;
+    display: flex;
+    align-items: center;
+    min-inline-size: 0;
+    max-inline-size: none;
+    max-block-size: none;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+    pointer-events: auto;
+    transition: none;
+  }
+
+  .root[data-responsive-navigation="true"] .navigationList {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--ds-space-2);
+  }
+
+  .root[data-responsive-navigation="true"] .menuItem {
+    inline-size: auto;
+    min-block-size: var(--ds-control-min-block-size-sm);
+    padding-block: 0;
+    padding-inline: var(--ds-space-3);
+  }
+
+  .root[data-responsive-navigation="true"] .navigationFooter {
+    flex: 0 0 auto;
+    margin-block-start: 0;
+    margin-inline-start: var(--ds-space-2);
+    padding: 0;
+    border: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   :global(html:not([data-ds-motion-preference="full"])) .submenuAnimated,
   :global(html:not([data-ds-motion-preference="full"])) .panelAnimated {
@@ -259,6 +334,10 @@
   }
 
   .divider {
+    border-color: CanvasText;
+  }
+
+  .navigationFooter {
     border-color: CanvasText;
   }
 }

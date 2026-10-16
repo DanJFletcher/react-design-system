@@ -55,12 +55,17 @@ export type MenuDividerItem = {
 
 export type MenuEntry = MenuActionItem | MenuSubmenuItem | MenuDividerItem;
 
-export type MenuProps = Omit<
+export type MenuNavigationItem = Omit<MenuActionItem, "href" | "disabled"> & {
+  href: string;
+};
+
+export type MenuNavigationEntry = MenuNavigationItem | MenuDividerItem;
+
+type MenuCommonProps = Omit<
   ComponentPropsWithRef<"div">,
   "children" | "style"
 > & {
   triggerLabel: string;
-  items: readonly MenuEntry[];
   trigger?: ReactNode;
   triggerIcon?: ReactNode;
   triggerAriaLabel?: string;
@@ -83,10 +88,28 @@ export type MenuProps = Omit<
   style?: DesignSystemStyle;
 };
 
-export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
-  {
-    triggerLabel,
+export type MenuProps = MenuCommonProps & (
+  | {
+      mode?: "menu";
+      items: readonly MenuEntry[];
+      navigationFooter?: never;
+      desktopInline?: never;
+    }
+  | {
+      mode: "navigation";
+      items: readonly MenuNavigationEntry[];
+      navigationFooter?: ReactNode;
+      desktopInline?: boolean;
+    }
+);
+
+export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(props, ref) {
+  const {
+    mode: requestedMode,
     items,
+    navigationFooter,
+    desktopInline,
+    triggerLabel,
     trigger,
     triggerIcon = <Icon name="chevron-down" />,
     triggerAriaLabel,
@@ -108,10 +131,12 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
     triggerClassName,
     className,
     style,
+    onKeyDown,
+    onBlurCapture,
     ...divProps
-  },
-  ref,
-) {
+  } = props;
+  const mode = requestedMode ?? "menu";
+  const desktopInlineNavigation = mode === "navigation" && desktopInline === true;
   const controlled = open !== undefined;
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const isOpen = controlled ? open : internalOpen;
@@ -145,7 +170,29 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
 
   const closeFromEscape = () => {
     updateOpen(false);
-    triggerRef.current?.focus();
+    if (triggerRef.current?.getClientRects().length) {
+      triggerRef.current.focus();
+    }
+  };
+
+  const handleRootKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    onKeyDown?.(event);
+    if (!event.defaultPrevented && mode === "navigation" && event.key === "Escape" && isOpen) {
+      event.preventDefault();
+      closeFromEscape();
+    }
+  };
+
+  const handleBlurCapture = (event: React.FocusEvent<HTMLDivElement>) => {
+    onBlurCapture?.(event);
+    if (
+      !event.defaultPrevented &&
+      mode === "navigation" &&
+      isOpen &&
+      !event.currentTarget.contains(event.relatedTarget as Node | null)
+    ) {
+      updateOpen(false);
+    }
   };
 
   const handleSelect = (event: MenuSelectEvent, item: MenuActionItem) => {
@@ -167,7 +214,10 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
       className={[styles.root, className].filter(Boolean).join(" ")}
       data-placement={placement}
       data-size={size}
+      data-responsive-navigation={desktopInlineNavigation ? "true" : undefined}
       style={style as CSSProperties | undefined}
+      onKeyDown={handleRootKeyDown}
+      onBlurCapture={handleBlurCapture}
     >
       <Button
         ref={triggerRef}
@@ -178,8 +228,8 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
         disabled={disabled}
         icon={triggerIcon}
         iconPosition="right"
+        aria-haspopup={mode === "menu" ? "menu" : undefined}
         aria-label={triggerAriaLabel ?? (trigger == null ? undefined : triggerLabel)}
-        aria-haspopup="menu"
         aria-expanded={isOpen}
         aria-controls={menuId}
         onClick={() => updateOpen(!isOpen)}
@@ -188,28 +238,120 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
       </Button>
 
       {(isOpen || menuMotion !== "none") && (
-        <MenuList
-          id={menuId}
-          items={items}
-          label={menuLabel}
-          size={size}
-          level={0}
-          panelMotion={menuMotion}
-          panelOpen={isOpen}
-          submenuMotion={submenuMotion}
-          emptyMessage={emptyMessage}
-          menuClassName={menuClassName}
-          itemClassName={itemClassName}
-          focusFirstOnMount={menuMotion === "none" || isOpen}
-          onDismiss={closeFromEscape}
-          onSelect={handleSelect}
-        />
+        props.mode === "navigation" ? (
+          <NavigationList
+            id={menuId}
+            items={items as readonly MenuNavigationEntry[]}
+            label={menuLabel}
+            size={size}
+            panelMotion={menuMotion}
+            panelOpen={isOpen}
+            navigationFooter={navigationFooter}
+            desktopInline={desktopInlineNavigation}
+            menuClassName={menuClassName}
+            itemClassName={itemClassName}
+            onSelect={handleSelect}
+          />
+        ) : (
+          <MenuList
+            id={menuId}
+            items={items as readonly MenuEntry[]}
+            label={menuLabel}
+            size={size}
+            level={0}
+            panelMotion={menuMotion}
+            panelOpen={isOpen}
+            submenuMotion={submenuMotion}
+            emptyMessage={emptyMessage}
+            menuClassName={menuClassName}
+            itemClassName={itemClassName}
+            focusFirstOnMount={menuMotion === "none" || isOpen}
+            onDismiss={closeFromEscape}
+            onSelect={handleSelect}
+          />
+        )
       )}
     </div>
   );
 });
 
 Menu.displayName = "Menu";
+
+type NavigationListProps = {
+  id: string;
+  items: readonly MenuNavigationEntry[];
+  label: string;
+  size: ButtonSize;
+  panelMotion: MenuPanelMotion;
+  panelOpen: boolean;
+  navigationFooter?: ReactNode;
+  desktopInline: boolean;
+  menuClassName?: string;
+  itemClassName?: string;
+  onSelect: (event: MenuSelectEvent, item: MenuActionItem) => void;
+};
+
+function NavigationList({
+  id,
+  items,
+  label,
+  size,
+  panelMotion,
+  panelOpen,
+  navigationFooter,
+  desktopInline,
+  menuClassName,
+  itemClassName,
+  onSelect,
+}: NavigationListProps) {
+  const animated = panelMotion !== "none";
+
+  return (
+    <nav
+      id={id}
+      className={[
+        styles.menu,
+        styles.panel,
+        animated ? styles.panelAnimated : undefined,
+        menuClassName,
+      ].filter(Boolean).join(" ")}
+      aria-label={label}
+      aria-hidden={animated && !panelOpen && !desktopInline ? true : undefined}
+      inert={animated && !panelOpen && !desktopInline ? true : undefined}
+      data-open={animated ? panelOpen : undefined}
+      data-desktop-inline={desktopInline ? "true" : undefined}
+      data-size={size}
+    >
+      <ul className={styles.navigationList}>
+        {items.map((item) => {
+          if (item.type === "divider") {
+            return <li key={item.id} className={styles.divider} role="separator" aria-orientation="horizontal" />;
+          }
+
+          const itemClasses = [styles.menuItem, itemClassName, item.linkProps?.className]
+            .filter(Boolean)
+            .join(" ");
+
+          return (
+            <li key={item.id}>
+              <a
+                {...item.linkProps}
+                href={item.href}
+                className={itemClasses}
+                onClick={(event) => onSelect(event, item)}
+              >
+                <ItemContent label={item.label} icon={item.icon} />
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+      {navigationFooter != null && (
+        <div className={styles.navigationFooter}>{navigationFooter}</div>
+      )}
+    </nav>
+  );
+}
 
 type MenuListProps = {
   id: string;

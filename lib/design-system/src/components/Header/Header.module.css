@@ -60,7 +60,15 @@
   outline-offset: var(--ds-focus-offset);
 }
 
-.menuToggle {
+.mobileNavigation {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-self: end;
+}
+
+.responsiveNavigation {
   grid-column: 2;
   grid-row: 1;
   justify-self: end;
@@ -70,11 +78,6 @@
   grid-column: 1 / -1;
   grid-row: 2;
   display: none;
-}
-
-.inner[data-menu-open="true"] .navigation {
-  display: flex;
-  flex-direction: column;
 }
 
 .navList {
@@ -89,6 +92,7 @@
 .navLink {
   display: inline-flex;
   align-items: center;
+  gap: var(--ds-space-2);
   min-block-size: var(--ds-control-min-block-size-sm);
   padding-inline: var(--ds-space-3);
   border-radius: var(--ds-radius-control);
@@ -97,6 +101,22 @@
   font-size: var(--ds-font-size-md);
   line-height: var(--ds-line-height-normal);
   text-decoration: none;
+}
+
+.navIcon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--ds-space-4);
+  block-size: var(--ds-space-4);
+  line-height: 0;
+}
+
+.navIcon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
 }
 
 .navLink:hover {
@@ -117,10 +137,6 @@
   padding-block-end: var(--ds-space-2);
 }
 
-.inner[data-menu-open="true"] .ctaSlot {
-  display: flex;
-}
-
 .inner[data-has-navigation="false"] .ctaSlot {
   grid-column: 2;
   grid-row: 1;
@@ -129,17 +145,32 @@
   padding-block-end: 0;
 }
 
+.inner[data-custom-mobile-navigation="true"] .ctaSlot {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+}
+
 @media (--ds-viewport-medium-up) {
   .inner {
     grid-template-columns: auto minmax(0, 1fr) auto;
   }
 
-  .navigation,
-  .inner[data-menu-open="true"] .navigation {
+  .mobileNavigation {
+    display: none;
+  }
+
+  .navigation {
     grid-column: 2;
     grid-row: 1;
     display: flex;
     justify-content: center;
+  }
+
+  .responsiveNavigation {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: stretch;
   }
 
   .navList {
@@ -149,8 +180,7 @@
     gap: var(--ds-space-2);
   }
 
-  .ctaSlot,
-  .inner[data-menu-open="true"] .ctaSlot {
+  .ctaSlot {
     grid-column: 3;
     grid-row: 1;
     display: flex;
@@ -159,9 +189,5 @@
 
   .inner[data-has-navigation="false"] .ctaSlot {
     grid-column: 3;
-  }
-
-  .menuToggle {
-    display: none;
   }
 }

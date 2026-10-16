@@ -14,11 +14,19 @@ import * as MenuStories from "./Menu.stories";
 
 Edit `triggerLabel`, `menuLabel`, `items`, `placement`, `size`, trigger variant and shape, disabled state, and close behavior in the Controls panel. Item `icon` values in the story control can be `Folder`, `Grid`, `List`, `Book`, or `Sparkle`.
 
+## Navigation mode
+
+<Canvas of={MenuStories.NavigationMode} />
+
+Set `mode="navigation"` to render a named native `<nav>` containing ordinary links and optional dividers. It uses normal Tab order instead of the ARIA application-menu arrow-key pattern. In this mode, `items` accepts links with required `href` values and dividers; nested action submenus are not supported. `navigationFooter` adds consumer-owned content, such as a CTA, after the link list. Set `desktopInline` to hide the trigger and show the panel as inline navigation at the medium breakpoint and above while retaining the dropdown on narrower screens.
+
+Use this mode for site navigation. Keep the default `mode="menu"` for action menus and nested menu interactions.
+
 ## Keyboard navigation
 
 <Canvas of={MenuStories.KeyboardNavigation} />
 
-The trigger opens with Enter or Space and moves focus to the first enabled item. Arrow Up/Down move through the current menu; Home/End go to its first/last item. Typing a letter or number moves focus to the next item whose label starts with that text. Arrow Right opens a focused submenu and moves focus into it; Arrow Left or Escape returns to the parent item. Escape at the root closes the menu and restores focus to its trigger. Tab closes the menu without blocking the browser's normal focus movement.
+In the default action-menu mode, the trigger opens with Enter or Space and moves focus to the first enabled item. Arrow Up/Down move through the current menu; Home/End go to its first/last item. Typing a letter or number moves focus to the next item whose label starts with that text. Arrow Right opens a focused submenu and moves focus into it; Arrow Left or Escape returns to the parent item. Escape at the root closes the menu and restores focus to its trigger. Tab closes the menu without blocking the browser's normal focus movement.
 
 ## Submenu motion
 

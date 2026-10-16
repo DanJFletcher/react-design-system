@@ -1,16 +1,15 @@
 import {
   forwardRef,
   useId,
-  useRef,
   useState,
   type ComponentPropsWithRef,
   type ComponentPropsWithoutRef,
   type CSSProperties,
-  type KeyboardEvent,
+  type MouseEvent as ReactMouseEvent,
   type ReactNode,
 } from "react";
-import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
+import { Menu, type MenuNavigationEntry, type MenuSelectEvent } from "../Menu/Menu";
 import type { DesignSystemStyle } from "../../generated/token-types";
 import styles from "./Header.module.css";
 
@@ -23,6 +22,15 @@ export type HeaderNavItem = Omit<
   label: string;
   href: string;
   current?: boolean;
+  icon?: ReactNode;
+};
+
+export type HeaderMobileNavigationRenderProps = {
+  id: string;
+  navItems: readonly HeaderNavItem[];
+  navigationLabel: string;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 };
 
 export type HeaderProps = Omit<
@@ -33,6 +41,7 @@ export type HeaderProps = Omit<
   logoHref?: string;
   logoLabel?: string;
   navItems?: readonly HeaderNavItem[];
+  renderMobileNavigation?: (props: HeaderMobileNavigationRenderProps) => ReactNode;
   cta?: ReactNode;
   navigationLabel?: string;
   size?: HeaderSize;
@@ -41,12 +50,13 @@ export type HeaderProps = Omit<
   style?: DesignSystemStyle;
 };
 
-export const Header = forwardRef<HTMLElement, HeaderProps>(function Header(
-  {
+export const Header = forwardRef<HTMLElement, HeaderProps>(function Header(props, ref) {
+  const {
     logo,
     logoHref = "/",
     logoLabel = "Home",
     navItems = [],
+    renderMobileNavigation,
     cta,
     navigationLabel = "Primary navigation",
     size = "md",
@@ -54,15 +64,12 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(function Header(
     borderBottom = true,
     className,
     style,
-    onKeyDown,
     ...headerProps
-  },
-  ref,
-) {
+  } = props;
   const [menuOpen, setMenuOpen] = useState(false);
-  const navigationId = useId();
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const hasNavigation = navItems.length > 0;
+  const desktopNavigationId = useId();
+  const mobileNavigationId = useId();
+  const hasNavigation = navItems.length > 0 || renderMobileNavigation != null;
   const headerClassName = [
     styles.header,
     sticky && styles.sticky,
@@ -70,15 +77,42 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(function Header(
     className,
   ].filter(Boolean).join(" ");
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    onKeyDown?.(event);
-    if (!event.defaultPrevented && event.key === "Escape" && menuOpen) {
-      setMenuOpen(false);
-      if (menuButtonRef.current?.getClientRects().length) {
-        menuButtonRef.current.focus();
-      }
-    }
-  };
+  const mobileNavItems = navItems.map((item) => ({
+    ...item,
+    onClick: (event: ReactMouseEvent<HTMLAnchorElement>) => {
+      item.onClick?.(event);
+      if (!event.defaultPrevented) setMenuOpen(false);
+    },
+  }));
+
+  const menuItems: MenuNavigationEntry[] = navItems.map((item, index) => {
+    const {
+      label,
+      href,
+      current,
+      icon,
+      className: linkClassName,
+      onClick,
+      ...linkProps
+    } = item;
+
+    return {
+      type: "item",
+      id: `header-navigation-${index}`,
+      label,
+      href,
+      icon,
+      linkProps: {
+        ...linkProps,
+        className: linkClassName,
+        "aria-current": current ? "page" : undefined,
+      },
+      onSelect: (event: MenuSelectEvent) => {
+        onClick?.(event as ReactMouseEvent<HTMLAnchorElement>);
+        if (!event.defaultPrevented) setMenuOpen(false);
+      },
+    };
+  });
 
   return (
     <header
@@ -87,12 +121,12 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(function Header(
       className={headerClassName}
       data-ds-layout-component="header"
       data-size={size}
-      onKeyDown={handleKeyDown}
       style={style as CSSProperties | undefined}
     >
       <div
         className={styles.inner}
         data-has-navigation={hasNavigation ? "true" : "false"}
+        data-custom-mobile-navigation={renderMobileNavigation ? "true" : "false"}
         data-menu-open={menuOpen ? "true" : "false"}
       >
         {logo != null && (
@@ -106,26 +140,22 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(function Header(
           </a>
         )}
 
-        {hasNavigation && (
-          <Button
-            ref={menuButtonRef}
-            className={styles.menuToggle}
-            variant="ghost"
-            size="sm"
-            shape="rounded"
-            icon={<Icon name={menuOpen ? "close" : "menu"} />}
-            iconOnly
-            aria-label={menuOpen ? "Close navigation" : "Open navigation"}
-            aria-expanded={menuOpen}
-            aria-controls={navigationId}
-            onClick={() => setMenuOpen((open) => !open)}
-          />
+        {hasNavigation && renderMobileNavigation && (
+          <div className={styles.mobileNavigation} data-header-mobile-navigation>
+            {renderMobileNavigation({
+              id: mobileNavigationId,
+              navItems: mobileNavItems,
+              navigationLabel,
+              open: menuOpen,
+              onOpenChange: setMenuOpen,
+            })}
+          </div>
         )}
 
-        {hasNavigation && (
-          <nav id={navigationId} className={styles.navigation} aria-label={navigationLabel}>
+        {navItems.length > 0 && renderMobileNavigation && (
+          <nav id={desktopNavigationId} className={styles.navigation} aria-label={navigationLabel}>
             <ul className={styles.navList}>
-              {navItems.map(({ label, href, current = false, className: linkClassName, onClick, ...linkProps }, index) => (
+              {navItems.map(({ label, href, current = false, icon, className: linkClassName, onClick, ...linkProps }, index) => (
                 <li key={`${href}-${label}-${index}`}>
                   <a
                     {...linkProps}
@@ -137,7 +167,8 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(function Header(
                       setMenuOpen(false);
                     }}
                   >
-                    {label}
+                    {icon != null && <span className={styles.navIcon} aria-hidden="true">{icon}</span>}
+                    <span>{label}</span>
                   </a>
                 </li>
               ))}
@@ -145,7 +176,30 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(function Header(
           </nav>
         )}
 
-        {cta != null && <div className={styles.ctaSlot}>{cta}</div>}
+        {navItems.length > 0 && !renderMobileNavigation && (
+          <Menu
+            className={styles.responsiveNavigation}
+            triggerLabel={navigationLabel}
+            trigger={<Icon name={menuOpen ? "close" : "menu"} />}
+            triggerIcon={null}
+            triggerAriaLabel={menuOpen ? "Close navigation" : "Open navigation"}
+            triggerVariant="ghost"
+            triggerShape="rounded"
+            size="sm"
+            mode="navigation"
+            desktopInline
+            menuLabel={navigationLabel}
+            items={menuItems}
+            navigationFooter={cta}
+            placement="bottom-end"
+            open={menuOpen}
+            onOpenChange={setMenuOpen}
+          />
+        )}
+
+        {cta != null && (renderMobileNavigation || navItems.length === 0) && (
+          <div className={styles.ctaSlot}>{cta}</div>
+        )}
       </div>
     </header>
   );

@@ -5,13 +5,13 @@ import * as HeaderStories from "./Header.stories";
 
 <Title>Header</Title>
 
-<Subtitle>A responsive site header with logo, navigation, a CTA slot, and Storybook controls for size, stickiness, and its bottom border.</Subtitle>
+<Subtitle>A responsive site header with a logo, inline desktop links, configurable mobile navigation, a CTA slot, and controls for size, stickiness, and its bottom border.</Subtitle>
 
 ## Responsive playground
 
 <Canvas of={HeaderStories.Playground} />
 
-Use the Storybook controls to edit navigation links, the accessible logo link, the three height sizes, sticky behavior, and the bottom border. On mobile, the menu button reveals the navigation and moves the single CTA slot into the menu; on desktop, the links and CTA appear inline.
+Use the Storybook controls to edit navigation links, the accessible logo link, the three height sizes, sticky behavior, and the bottom border. By default, Header uses the design-system `Menu` in navigation mode: it opens as a compact menu on narrow screens and lays out inline with the CTA at desktop widths.
 
 ## Height sizes
 
@@ -33,6 +33,8 @@ The component uses semantic surface, text, border, focus, and spacing tokens, so
 
 ## Accessibility and API
 
-`logo` accepts any React node; `logoHref` and `logoLabel` configure its home link. Provide a useful `logoLabel` when replacing the default logo. `navItems` is an array of native anchor props plus a required `label` and `href`; set `current` for the current page. `cta` accepts a React node so it can contain the design-system `Button` or another custom action.
+`logo` accepts any React node; `logoHref` and `logoLabel` configure its home link. Provide a useful `logoLabel` when replacing the default logo. `navItems` is an array of native anchor props plus a required `label` and `href`; set `current` for the current page and use `icon` for optional decorative icon content. `cta` accepts a React node so it can contain the design-system `Button` or another custom action. By default, the same CTA slot appears in the mobile navigation panel and inline at desktop widths.
 
-The mobile menu button exposes `aria-expanded` and `aria-controls`. Escape closes the menu and returns focus to its button; choosing a navigation link closes the menu. Navigation and CTA remain native links/buttons, and keyboard focus is visible.
+The default mobile navigation uses `Menu` with `mode="navigation"`, so its panel is a named native navigation landmark with ordinary links rather than an ARIA application menu. Tab follows normal document order. Escape closes the panel and restores focus to its trigger; choosing a link closes it.
+
+Set `renderMobileNavigation` to replace the default mobile `Menu`. The render function receives an `id`, the navigation label, `navItems` with close-on-activation handlers, and the controlled `open` state with `onOpenChange`. The replacement owns its trigger, landmark, and focus behavior. Header keeps its CTA as a separate slot below a custom mobile navigation and inline at desktop widths.

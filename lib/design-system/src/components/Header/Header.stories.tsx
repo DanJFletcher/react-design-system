@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "../Button/Button";
-import { Header, type HeaderNavItem } from "./Header";
+import { Icon } from "../Icon/Icon";
+import { Header, type HeaderMobileNavigationRenderProps, type HeaderNavItem } from "./Header";
 
 const navItems: HeaderNavItem[] = [
   { label: "Products", href: "#products" },
@@ -27,6 +28,7 @@ const meta = {
     logoLabel: { control: "text" },
     cta: { control: false },
     navigationLabel: { control: "text" },
+    renderMobileNavigation: { control: false },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     sticky: { control: "boolean" },
     borderBottom: { control: "boolean", name: "Bottom border" },
@@ -44,6 +46,18 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {};
+
+export const CustomMobileNavigation: Story = {
+  parameters: { viewport: { defaultViewport: "mobile1" } },
+  render: (args) => (
+    <Header
+      {...args}
+      logo={<strong>ACME</strong>}
+      cta={<Button size="sm">Get started</Button>}
+      renderMobileNavigation={(navigationProps) => <CustomNavigation {...navigationProps} />}
+    />
+  ),
+};
 
 export const HeightExamples: Story = {
   render: () => (
@@ -91,4 +105,59 @@ export const ThemeCoverage: Story = {
     </div>
   ),
 };
+
+function CustomNavigation({
+  id,
+  navItems,
+  navigationLabel,
+  open,
+  onOpenChange,
+}: HeaderMobileNavigationRenderProps) {
+  return (
+    <div style={{ display: "grid", justifyItems: "end", gap: "var(--ds-space-2)" }}>
+      <Button
+        size="sm"
+        variant="ghost"
+        shape="rounded"
+        icon={<Icon name={open ? "close" : "menu"} />}
+        iconOnly
+        aria-label={open ? "Close custom navigation" : "Open custom navigation"}
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={() => onOpenChange(!open)}
+      />
+      {open && (
+        <nav
+          id={id}
+          aria-label={navigationLabel}
+          style={{
+            display: "grid",
+            gap: "var(--ds-space-2)",
+            minInlineSize: "var(--ds-space-40)",
+            padding: "var(--ds-space-3)",
+            border: "var(--ds-border-width-default) solid var(--ds-color-border-control)",
+            borderRadius: "var(--ds-radius-surface)",
+            backgroundColor: "var(--ds-color-surface-primary)",
+          }}
+        >
+          <ul>
+            {navItems.map(({ label, href, current, icon, onClick, ...linkProps }) => (
+              <li key={href}>
+                <a
+                  {...linkProps}
+                  href={href}
+                  aria-current={current ? "page" : undefined}
+                  onClick={onClick}
+                >
+                  {icon != null && <span aria-hidden="true">{icon}</span>}
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+    </div>
+  );
+}
 
