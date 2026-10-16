@@ -1,0 +1,31 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as PageHeaderStories from "./PageHeader.stories";
+
+<Meta of={PageHeaderStories} />
+
+<Title>Page Header</Title>
+
+<Subtitle>A page-level heading with optional breadcrumbs, supporting text, status, and actions.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={PageHeaderStories.Playground} />
+<Controls of={PageHeaderStories.Playground} />
+
+## Minimal and narrow layouts
+
+<Canvas of={PageHeaderStories.Minimal} />
+<Canvas of={PageHeaderStories.NarrowLayout} />
+
+## Themes
+
+<Canvas of={PageHeaderStories.ThemeCoverage} />
+
+## Behavior and accessibility
+
+- Renders a native `<header>` containing a semantic `Heading`. `headingLevel` defaults to `1`; select a different level when the page's heading outline requires it.
+- `title` is required. `description`, `breadcrumbs`, `status`, and `actions` are optional consumer-owned content slots.
+- Use the existing `Breadcrumbs` component in the `breadcrumbs` slot. Supply your own `Badge` or other content for status, and native buttons or links for actions.
+- At narrow widths, the actions stack below the title and description. At wider widths, actions sit beside the page copy and wrap when needed.
+- The component does not own navigation, status meaning, action behavior, or page data.
+- Native header attributes, refs, `className`, and typed `DesignSystemStyle` are forwarded. Spacing and typography inherit shared tokens across built-in, custom, and nested themes.

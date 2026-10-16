@@ -323,6 +323,8 @@ export { FileField } from "./components/FormControls/FileField";
 export type { FileFieldProps } from "./components/FormControls/FileField";
 export { Switch } from "./components/FormControls/Switch";
 export type { SwitchProps } from "./components/FormControls/Switch";
+export { PageHeader } from "./components/PageHeader/PageHeader";
+export type { PageHeaderProps } from "./components/PageHeader/PageHeader";
 export { Header } from "./components/Header/Header";
 export type {
   HeaderMobileNavigationRenderProps,

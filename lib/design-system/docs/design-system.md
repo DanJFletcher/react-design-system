@@ -527,6 +527,27 @@ The current page uses `aria-current="page"`; callback mode uses native buttons a
 
 Long labels wrap at narrow widths. Link colors, spacing, corner radius, and visible keyboard focus inherit built-in, custom, and nested theme tokens.
 
+## PageHeader
+
+```tsx
+import { Badge, Breadcrumbs, Button, PageHeader } from "@workspace/design-system";
+
+<PageHeader
+  breadcrumbs={
+    <Breadcrumbs items={[
+      { label: "Workspace", href: "/" },
+      { label: "Pages", current: true },
+    ]} />
+  }
+  title="Content dashboard"
+  description="Review drafts and keep publishing on track."
+  status={<Badge>Draft</Badge>}
+  actions={<Button>Create page</Button>}
+/>
+```
+
+`PageHeader` renders a native page-level `<header>` with a semantic `Heading` (level 1 by default). Breadcrumbs, description, status, and actions are optional content slots; navigation, status meaning, and action behavior remain consumer-owned. On narrow screens the action slot stacks below the page copy; wider layouts place it beside the title and description. Native header attributes, refs, and `className` are forwarded.
+
 ## Pricing details
 
 ```tsx

@@ -767,6 +767,35 @@ describe("form controls", () => {
     expect(screen.getByRole("button", { name: "Clear" })).toBeEnabled();
   });
 
+  it("omits empty affixes and leaves valid affixed fields unmarked", () => {
+    render(
+      <>
+        <TextField label="Null prefix" prefix={null} suffix="USD" />
+        <TextField label="False prefix" prefix={false} suffix="USD" />
+        <TextField label="Empty prefix" prefix="" suffix="USD" />
+        <TextField label="Null suffix" prefix="$" suffix={null} />
+        <TextField label="False suffix" prefix="$" suffix={false} />
+        <TextField label="Empty suffix" prefix="$" suffix="" />
+      </>,
+    );
+
+    for (const label of [
+      "Null prefix",
+      "False prefix",
+      "Empty prefix",
+      "Null suffix",
+      "False suffix",
+      "Empty suffix",
+    ]) {
+      const input = screen.getByRole("textbox", { name: label });
+      const group = input.parentElement!;
+
+      expect(input).not.toHaveAttribute("aria-invalid");
+      expect(group).not.toHaveAttribute("data-invalid");
+      expect(group).not.toHaveAttribute("data-disabled");
+    }
+  });
+
   it("supports controlled and uncontrolled radio selections with disabled choices", () => {
     const onChange = vi.fn();
     const options = [
