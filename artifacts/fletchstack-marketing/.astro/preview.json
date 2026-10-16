@@ -1,18 +1,18 @@
 {
-	"pid": 34421,
-	"port": 25853,
-	"url": "http://localhost:25853",
+	"pid": 38328,
+	"port": 25854,
+	"url": "http://localhost:25854",
 	"urls": {
 		"local": [
-			"http://localhost:25853/fletchstack-marketing"
+			"http://localhost:25854/fletchstack-marketing"
 		],
 		"network": [
-			"http://172.24.0.2:25853/fletchstack-marketing"
+			"http://172.24.0.2:25854/fletchstack-marketing"
 		],
 		"networkInterfaceNames": [
 			"eth0"
 		]
 	},
 	"background": true,
-	"startedAt": "2026-10-16T21:52:40.484Z"
+	"startedAt": "2026-10-16T22:27:37.397Z"
 }

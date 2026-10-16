@@ -179,7 +179,11 @@ h1,h2,h3 { font-family:var(--display); letter-spacing:-.045em; }
 .notice strong { display:block; margin-bottom:3px; color:var(--navy); }
 .contact-form { padding:30px; border:1px solid var(--line); border-radius:14px; background:white; }
 .contact-form label { display:block; margin:0 0 7px; color:var(--navy); font-size:.88rem; font-weight:700; }
-.contact-form input,.contact-form textarea,.contact-form select { width:100%; min-height:48px; padding:12px 13px; border:1px solid #b9c9d9; border-radius:7px; background:#fbfdff; color:var(--ink); font:inherit; }
+.contact-form input,.contact-form textarea { width:100%; min-height:48px; padding:12px 13px; border:1px solid #b9c9d9; border-radius:7px; background:#fbfdff; color:var(--ink); font:inherit; }
+.contact-form .select-field label { margin-bottom:0; }
+.contact-form .contact-topic-select { width:100%; min-height:48px; padding:12px calc(13px + var(--ds-space-6)) 12px 13px; border:1px solid #b9c9d9; border-radius:7px; background:#fbfdff; color:var(--ink); font:inherit; appearance:none; }
+.contact-form .select-field > div > div:has(> .contact-topic-select + svg[data-icon="chevron-down"]) { position:relative; width:100%; min-width:0; }
+.contact-form .contact-topic-select + svg[data-icon="chevron-down"] { position:absolute; inset-block-start:50%; inset-inline-end:calc(13px - var(--ds-space-1)); width:var(--ds-space-4); height:var(--ds-space-4); transform:translateY(-50%); color:var(--ink); pointer-events:none; }
 .contact-form textarea { min-height:145px; resize:vertical; }
 .contact-form fieldset { border:0; padding:0; margin:0; }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:18px; }
