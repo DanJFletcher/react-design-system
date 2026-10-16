@@ -1,0 +1,30 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as ActivityFeedStories from "./ActivityFeed.stories";
+
+<Meta of={ActivityFeedStories} />
+
+<Title>Activity Feed</Title>
+
+<Subtitle>A workspace-level timeline of content and team updates.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={ActivityFeedStories.Playground} />
+<Controls of={ActivityFeedStories.Playground} />
+
+## Empty and long content
+
+<Canvas of={ActivityFeedStories.Empty} />
+<Canvas of={ActivityFeedStories.LongContent} />
+
+## Themes
+
+<Canvas of={ActivityFeedStories.ThemeCoverage} />
+
+## Event and accessibility contract
+
+- Supply events in the order they should appear, usually newest first. The component does not sort, fetch, authorize, or persist activity.
+- Each event includes a stable `id`, visible `actor`, action phrase, localized `dateText`, and machine-readable `dateTime`. An optional `subject` can be linked with `href`; optional `avatar` content is treated as decorative because the actor name is visible.
+- `details` adds supporting text. `emptyMessage` appears when `events` is empty.
+- The feed renders a named section and an ordered list. Timestamps use native `<time>` elements; the consumer owns locale and time-zone formatting.
+- Native section attributes, refs, `className`, and typed `DesignSystemStyle` are forwarded. Colors and surface shape use semantic tokens across built-in, custom, and nested themes.

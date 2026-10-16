@@ -1,0 +1,144 @@
+.panel {
+  box-sizing: border-box;
+  display: grid;
+  gap: var(--ds-space-4);
+  min-inline-size: 0;
+  padding: var(--ds-space-5);
+  border: var(--ds-border-width-default) solid var(--ds-color-border-subtle);
+  border-radius: var(--ds-radius-surface);
+  background: var(--ds-color-surface-primary);
+  color: var(--ds-color-text-primary);
+  font-family: var(--ds-font-family-sans);
+}
+
+.header {
+  min-inline-size: 0;
+}
+
+.headingBlock {
+  min-inline-size: 0;
+}
+
+.heading {
+  margin: 0;
+}
+
+.description {
+  max-inline-size: var(--ds-layout-container-narrow);
+  margin: var(--ds-space-1) 0 0;
+}
+
+.eventList {
+  display: grid;
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.event {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: var(--ds-space-3);
+  min-inline-size: 0;
+  padding-block: var(--ds-space-3);
+  border-block-end: var(--ds-border-width-default) solid var(--ds-color-border-subtle);
+}
+
+.event:first-child {
+  padding-block-start: 0;
+}
+
+.event:last-child {
+  padding-block-end: 0;
+  border-block-end: 0;
+}
+
+.avatar {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-block-start: var(--ds-space-1);
+}
+
+.eventContent {
+  display: grid;
+  min-inline-size: 0;
+  gap: var(--ds-space-1);
+}
+
+.summary {
+  margin: 0;
+  color: var(--ds-color-text-primary);
+  font-size: var(--ds-font-size-md);
+  line-height: var(--ds-line-height-relaxed);
+  overflow-wrap: anywhere;
+}
+
+.actor {
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.subject {
+  font-weight: var(--ds-font-weight-medium);
+}
+
+.subjectLink {
+  color: var(--ds-color-text-primary);
+  font-weight: var(--ds-font-weight-medium);
+  text-decoration-line: underline;
+  text-decoration-color: var(--ds-color-border-control);
+  text-underline-offset: var(--ds-space-1);
+}
+
+.subjectLink:hover {
+  text-decoration-thickness: var(--ds-border-width-strong);
+}
+
+.subjectLink:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.details {
+  min-inline-size: 0;
+  color: var(--ds-color-text-secondary);
+  font-size: var(--ds-font-size-sm);
+  line-height: var(--ds-line-height-relaxed);
+  overflow-wrap: anywhere;
+}
+
+.timestamp {
+  color: var(--ds-color-text-muted);
+  font-size: var(--ds-font-size-xs);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--ds-line-height-normal);
+}
+
+.emptyMessage {
+  margin: 0;
+}
+
+@media (--ds-viewport-compact) {
+  .panel {
+    padding: var(--ds-space-4);
+  }
+}
+
+@media (forced-colors: active) {
+  .panel,
+  .event {
+    border-color: CanvasText;
+  }
+
+  .subjectLink {
+    color: LinkText;
+    text-decoration-color: LinkText;
+  }
+
+  .subjectLink:focus-visible {
+    outline-color: Highlight;
+  }
+}

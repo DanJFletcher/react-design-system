@@ -563,6 +563,29 @@ import { Button, EmptyState, Icon } from "@workspace/design-system";
 
 `EmptyState` renders a labelled section with a semantic heading (level 2 by default). It is presentation-only: the consumer supplies the content and any recovery actions. The `compact` layout is intended for a collection or panel; `full` centers the content within its parent's available height, so give that parent an explicit block size. The component does not announce itself as a live region.
 
+## ActivityFeed
+
+```tsx
+import { ActivityFeed, Avatar } from "@workspace/design-system";
+
+<ActivityFeed
+  events={[
+    {
+      id: "published-guide",
+      actor: "Mara Ellison",
+      action: "published",
+      subject: "Spring service guide",
+      href: "/content/spring-service-guide",
+      avatar: <Avatar name="Mara Ellison" size="sm" />,
+      dateText: "Today at 10:30 AM",
+      dateTime: "2026-10-16T10:30:00-04:00",
+    },
+  ]}
+/>;
+```
+
+`ActivityFeed` renders the events in the supplied order as a named section and ordered list. Supply localized `dateText` and a machine-readable `dateTime`; the component does not sort, fetch, or authorize events. `RevisionHistory` remains the component for versions of a single content item.
+
 ## Pricing details
 
 ```tsx

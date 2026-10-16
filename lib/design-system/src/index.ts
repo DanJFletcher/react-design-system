@@ -186,6 +186,11 @@ export type {
   ContentPreviewProps,
   ContentPreviewViewport,
 } from "./components/ContentPreview/ContentPreview";
+export { ActivityFeed } from "./components/ActivityFeed/ActivityFeed";
+export type {
+  ActivityFeedItem,
+  ActivityFeedProps,
+} from "./components/ActivityFeed/ActivityFeed";
 export { RevisionHistory } from "./components/RevisionHistory/RevisionHistory";
 export type {
   ContentRevision,

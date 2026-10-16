@@ -788,6 +788,14 @@ describe("Table", () => {
         aria-label="Empty table"
         columns={[{ id: "name", header: "Name" }]}
         data={[]}
+      />,
+    );
+    expect(screen.getByRole("heading", { level: 3, name: "No rows to display." })).toBeInTheDocument();
+    rerender(
+      <Table
+        aria-label="Empty table"
+        columns={[{ id: "name", header: "Name" }]}
+        data={[]}
         loading
         loadingMessage="Still loading."
         searchable
