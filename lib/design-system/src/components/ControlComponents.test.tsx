@@ -144,6 +144,10 @@ describe("form controls", () => {
       "aria-describedby",
       "name-help display-name-description display-name-error",
     );
+    expect(document.getElementById("display-name-error"))
+      .toHaveAttribute("aria-live", "polite");
+    expect(document.getElementById("display-name-error"))
+      .toHaveAttribute("aria-atomic", "true");
     expect(document.getElementById("display-name-error")).toHaveTextContent(
       "B: Use at least two characters.",
     );
@@ -152,6 +156,10 @@ describe("form controls", () => {
       "aria-describedby",
       "region-help team-region-description team-region-error",
     );
+    expect(document.getElementById("team-region-error"))
+      .toHaveAttribute("aria-live", "polite");
+    expect(document.getElementById("team-region-error"))
+      .toHaveAttribute("aria-atomic", "true");
     expect(document.getElementById("team-region-error")).toHaveTextContent(
       "B: Select a valid region.",
     );
@@ -306,6 +314,8 @@ describe("form controls", () => {
     for (const field of fields) {
       expect(field.control).toHaveAttribute("aria-invalid", "true");
       expect(field.control).toHaveAttribute("aria-describedby", field.describedBy);
+      expect(document.getElementById(field.errorId)).toHaveAttribute("aria-live", "polite");
+      expect(document.getElementById(field.errorId)).toHaveAttribute("aria-atomic", "true");
       expect(document.getElementById(field.errorId)).toHaveTextContent(field.error);
       expect(screen.queryByText(field.oldError)).not.toBeInTheDocument();
     }
@@ -444,6 +454,8 @@ describe("form controls", () => {
         "aria-describedby",
         `${field.externalHelpId} ${field.descriptionId} ${field.errorId}`,
       );
+      expect(document.getElementById(field.errorId)).toHaveAttribute("aria-live", "polite");
+      expect(document.getElementById(field.errorId)).toHaveAttribute("aria-atomic", "true");
       expect(document.getElementById(field.errorId)).toHaveTextContent(field.error);
     }
 
@@ -541,6 +553,8 @@ describe("form controls", () => {
       expect(field.control).toHaveAttribute("aria-describedby", field.describedBy);
       expect(screen.getByText(field.externalHelp)).toHaveAttribute("id", field.externalHelpId);
       expect(screen.getByText(field.description)).toHaveAttribute("id", field.descriptionId);
+      expect(document.getElementById(field.errorId)).toHaveAttribute("aria-live", "polite");
+      expect(document.getElementById(field.errorId)).toHaveAttribute("aria-atomic", "true");
       expect(document.getElementById(field.errorId)).toHaveTextContent(field.error);
       expect(screen.queryByText(field.oldError)).not.toBeInTheDocument();
     }
@@ -616,6 +630,7 @@ describe("form controls", () => {
       expect(document.getElementById(field.errorId)).not.toBeInTheDocument();
       expect(screen.queryByText(field.error)).not.toBeInTheDocument();
     }
+    expect(document.querySelectorAll('[aria-live="polite"]')).toHaveLength(0);
   });
 
   it("renders text, date, file, select, and textarea fields with native constraints", () => {
