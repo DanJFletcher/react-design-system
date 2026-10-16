@@ -107,6 +107,93 @@ describe("form controls", () => {
     expect(screen.queryByText("Use only letters and numbers.")).not.toBeInTheDocument();
   });
 
+  it("keeps generated custom field help IDs unique and connected to their own controls", () => {
+    function CustomControl({
+      label,
+      description,
+      error,
+    }: {
+      label: string;
+      description: string;
+      error: string;
+    }) {
+      const field = useFormField({ description, error });
+
+      return (
+        <div>
+          <FormFieldLabel id={field.id} label={label} />
+          <input
+            id={field.id}
+            aria-describedby={field.describedBy}
+            aria-invalid={field.invalid || undefined}
+          />
+          <FormFieldMessages
+            description={description}
+            descriptionId={field.descriptionId}
+            error={error}
+            errorId={field.errorId}
+          />
+        </div>
+      );
+    }
+
+    render(
+      <>
+        <CustomControl
+          label="Project name"
+          description="Name shown to collaborators."
+          error="Enter a project name."
+        />
+        <CustomControl
+          label="Team name"
+          description="Name shown to team members."
+          error="Enter a team name."
+        />
+      </>,
+    );
+
+    const projectControl = screen.getByRole("textbox", { name: "Project name" });
+    const teamControl = screen.getByRole("textbox", { name: "Team name" });
+    const projectDescription = screen.getByText("Name shown to collaborators.");
+    const projectError = screen.getByText("Enter a project name.");
+    const teamDescription = screen.getByText("Name shown to team members.");
+    const teamError = screen.getByText("Enter a team name.");
+
+    expect(projectControl).toHaveAttribute(
+      "aria-describedby",
+      `${projectDescription.id} ${projectError.id}`,
+    );
+    expect(teamControl).toHaveAttribute(
+      "aria-describedby",
+      `${teamDescription.id} ${teamError.id}`,
+    );
+
+    const generatedIds = [
+      projectControl.id,
+      teamControl.id,
+      projectDescription.id,
+      projectError.id,
+      teamDescription.id,
+      teamError.id,
+    ];
+    expect(new Set(generatedIds).size).toBe(generatedIds.length);
+
+    expect(projectDescription.id).not.toBe(teamDescription.id);
+    expect(projectError.id).not.toBe(teamError.id);
+    expect(document.getElementById(projectDescription.id)).toHaveTextContent(
+      "Name shown to collaborators.",
+    );
+    expect(document.getElementById(projectError.id)).toHaveTextContent(
+      "Enter a project name.",
+    );
+    expect(document.getElementById(teamDescription.id)).toHaveTextContent(
+      "Name shown to team members.",
+    );
+    expect(document.getElementById(teamError.id)).toHaveTextContent(
+      "Enter a team name.",
+    );
+  });
+
   it("keeps built-in field errors connected when validation messages change", () => {
     const renderFields = (textError: string, selectError: string) => (
       <>
