@@ -54,6 +54,7 @@ export type CarouselProps = Omit<
   emptyMessage?: ReactNode;
   variant?: CarouselVariant;
   size?: CarouselSize;
+  frameAspectRatio?: number;
   style?: DesignSystemStyle;
 };
 
@@ -88,6 +89,7 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
     emptyMessage = "No slides to display.",
     variant = "surface",
     size = "md",
+    frameAspectRatio,
     className,
     style,
     "aria-label": ariaLabel,
@@ -100,6 +102,13 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
   },
   ref,
 ) {
+  if (
+    frameAspectRatio !== undefined &&
+    (!Number.isFinite(frameAspectRatio) || frameAspectRatio <= 0)
+  ) {
+    throw new RangeError("Carousel frameAspectRatio must be a positive finite number.");
+  }
+
   const carouselId = useId();
   const isControlled = index !== undefined;
   const [internalIndex, setInternalIndex] = useState(defaultIndex);
@@ -287,10 +296,12 @@ export const Carousel = forwardRef<HTMLElement, CarouselProps>(function Carousel
             className={styles.viewport}
             id={carouselId}
             data-slot="viewport"
+            data-frame-aspect-ratio={frameAspectRatio}
             data-overlay-safe-area={usesOverlaySafeArea ? "true" : undefined}
             data-controls-navigation={showControls ? "true" : undefined}
             data-controls-indicators={indicators !== "none" ? "true" : undefined}
             data-controls-auto-play={autoPlay ? "true" : undefined}
+            style={frameAspectRatio === undefined ? undefined : { aspectRatio: frameAspectRatio }}
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
             onPointerCancel={() => {

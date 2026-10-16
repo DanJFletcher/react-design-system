@@ -68,6 +68,21 @@
   touch-action: pan-y;
 }
 
+.viewport[data-frame-aspect-ratio] {
+  position: relative;
+}
+
+.viewport[data-frame-aspect-ratio] .track {
+  position: absolute;
+  inset: 0;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.viewport[data-frame-aspect-ratio] .slide {
+  min-block-size: 0;
+  overflow: auto;
+}
+
 .track {
   display: grid;
   min-inline-size: 0;

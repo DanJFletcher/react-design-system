@@ -133,6 +133,39 @@ test("Carousel indicator targets resize independently from their markers and wra
   expect(dimensions.bodyWidth).toBeLessThanOrEqual(dimensions.viewportWidth);
 });
 
+test("Carousel frame aspect ratio stays responsive without changing slide navigation", async ({ page }) => {
+  const ratio = 16 / 9;
+  for (const width of [1280, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/iframe.html?id=components-carousel--frame-aspect-ratio&viewMode=story");
+
+    const carousel = page.getByRole("region", { name: "Featured landscape and story" });
+    const viewport = carousel.locator('[data-slot="viewport"]');
+    const initialBox = await viewport.boundingBox();
+    expect(initialBox).not.toBeNull();
+    expect(await viewport.getAttribute("data-frame-aspect-ratio")).toBe(String(ratio));
+    expect(initialBox!.width / initialBox!.height).toBeCloseTo(ratio, 1);
+
+    await expect(carousel.getByRole("group", { name: "Mountain landscape, 1 of 2" })).toBeVisible();
+    await carousel.getByRole("button", { name: "Next slide" }).click();
+    await expect(carousel.getByRole("group", { name: "A longer story, 2 of 2" })).toBeVisible();
+    const nextBox = await viewport.boundingBox();
+    expect(nextBox).not.toBeNull();
+    expect(nextBox!.height).toBeCloseTo(initialBox!.height, 1);
+    await expect(carousel).toHaveAttribute("data-index", "1");
+
+    await carousel.getByRole("button", { name: "Previous slide" }).click();
+    await expect(carousel.getByRole("group", { name: "Mountain landscape, 1 of 2" })).toBeVisible();
+    await expect(carousel).toHaveAttribute("data-index", "0");
+  }
+
+  await page.goto("/iframe.html?id=components-carousel--playground&viewMode=story");
+  const contentSizedViewport = page.getByRole("region", { name: "Featured stories" })
+    .locator('[data-slot="viewport"]');
+  await expect(contentSizedViewport).not.toHaveAttribute("data-frame-aspect-ratio");
+  await expect(contentSizedViewport).toHaveCSS("aspect-ratio", "auto");
+});
+
 test("Carousel disables navigation at non-looping boundaries", async ({ page }) => {
   await page.goto("/iframe.html?id=components-carousel--controls-examples&viewMode=story");
 

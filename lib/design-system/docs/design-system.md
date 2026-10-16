@@ -549,6 +549,7 @@ Long labels wrap at narrow widths. Link colors, spacing, corner radius, and visi
   indicators="dots"
   indicatorTargetSize="comfortable"
   controlsPosition="below"
+  frameAspectRatio={16 / 9}
 />
 ```
 
@@ -557,6 +558,8 @@ Long labels wrap at narrow widths. Link colors, spacing, corner radius, and visi
 Autoplay is opt-in through `autoPlay` and advances at `autoPlayInterval` (default 5 seconds). Its pause/start control is always available when enabled. Rotation pauses on hover, stops on keyboard focus or manual navigation, and stops on the last slide unless looping is enabled. Reduced-motion preferences disable autoplay and slide transitions.
 
 Provide an accessible `label` and unique slide `id` values. Use `getSlideLabel` and `getIndicatorLabel` for localized accessible names. The `carousel.*` hooks customize theme colors, controls, indicators, spacing, and corners.
+
+`frameAspectRatio` optionally reserves a responsive slide frame using a positive finite width-to-height ratio, such as `16 / 9`. Omit it to retain content-driven sizing. With a ratio set, content remains within the frame and longer slide content can scroll internally.
 
 ## Accordion
 

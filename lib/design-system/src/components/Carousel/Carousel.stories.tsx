@@ -54,6 +54,48 @@ const manySlides: CarouselSlide[] = Array.from({ length: 12 }, (_, index) => {
   };
 });
 
+const frameSlides: CarouselSlide[] = [
+  {
+    id: "landscape",
+    label: "Mountain landscape",
+    content: (
+      <img
+        alt="Layered mountain ridges beneath a bright sky"
+        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cdefs%3E%3ClinearGradient id='sky' x2='0' y2='1'%3E%3Cstop stop-color='%2399d8f2'/%3E%3Cstop offset='1' stop-color='%23f7e3bc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23sky)' d='M0 0h1600v900H0z'/%3E%3Ccircle cx='1240' cy='205' r='92' fill='%23fff3cb'/%3E%3Cpath fill='%237c9f9a' d='m0 670 330-380 280 330 300-420 390 470 190-245 110 130v415H0z'/%3E%3Cpath fill='%233f6e68' d='m0 770 300-275 240 205 360-330 320 380 230-240 150 170v220H0z'/%3E%3C/svg%3E"
+        style={{ display: "block", inlineSize: "100%", blockSize: "100%", objectFit: "cover" }}
+      />
+    ),
+  },
+  {
+    id: "story",
+    label: "A longer story",
+    content: (
+      <div
+        style={{
+          display: "grid",
+          alignContent: "center",
+          gap: "var(--ds-space-3)",
+          boxSizing: "border-box",
+          blockSize: "100%",
+          overflow: "auto",
+          padding: "var(--ds-space-6)",
+          backgroundColor: "var(--ds-color-canvas)",
+          color: "var(--ds-color-text-primary)",
+        }}
+      >
+        <h3 style={{ margin: 0, fontSize: "var(--ds-font-size-2xl)" }}>
+          Make room for a longer story
+        </h3>
+        <p style={{ margin: 0, color: "var(--ds-color-text-muted)" }}>
+          A reserved frame keeps the page steady as people explore. Text can wrap
+          naturally inside the frame, and longer content remains available by
+          scrolling within the slide.
+        </p>
+      </div>
+    ),
+  },
+];
+
 const meta = {
   title: "Components/Carousel",
   component: Carousel,
@@ -90,6 +132,7 @@ const meta = {
     indicatorTargetSize: { control: "inline-radio", options: ["compact", "comfortable"] },
     controlsPosition: { control: "inline-radio", options: ["overlay", "below"] },
     overlaySafeArea: { control: "boolean" },
+    frameAspectRatio: { control: "number" },
     previousLabel: { control: "text" },
     nextLabel: { control: "text" },
     emptyMessage: { control: "text" },
@@ -193,6 +236,16 @@ export const IndicatorTargetSizes: Story = {
       />
     </div>
   ),
+};
+
+export const FrameAspectRatio: Story = {
+  args: {
+    label: "Featured landscape and story",
+    slides: frameSlides,
+    frameAspectRatio: 16 / 9,
+    indicators: "fraction",
+    controlsPosition: "below",
+  },
 };
 
 export const VariantExamples: Story = {
