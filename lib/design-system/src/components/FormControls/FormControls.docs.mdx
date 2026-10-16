@@ -18,6 +18,21 @@ The public <a href="iframe.html?id=components-label--docs&amp;viewMode=docs">Lab
 
 Use `TextField` for a single-line input. It forwards native input attributes such as `type`, `name`, `autoComplete`, `value`, `defaultValue`, and `onChange`. `label` is required; `description`, `error`, `required`, `disabled`, and `invalid` are optional.
 
+Use the optional `prefix` and `suffix` slots to attach text, decorative icons, or interactive elements before or after the native input:
+
+```tsx
+<TextField label="Monthly budget" name="budget" prefix="$" suffix="USD" type="number" />
+<TextField
+  label="Website"
+  name="website"
+  prefix={<span aria-hidden="true">↗</span>}
+  suffix={<Button type="button" variant="secondary">Check</Button>}
+  type="url"
+/>
+```
+
+Affix content remains in the accessibility tree unless the consumer marks it decorative, and interactive suffix elements keep their own native keyboard behavior and tab stop. The input retains its label, description, error, ref, and native form behavior. The group shrinks with its container; long affix text can wrap, and the input keeps the remaining available width. When the field is disabled, disable any interactive affix elements separately.
+
 ## Textarea
 
 <Canvas of={FormControlsStories.TextareaBasics} />

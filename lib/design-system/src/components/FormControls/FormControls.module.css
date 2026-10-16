@@ -40,6 +40,68 @@
   cursor: not-allowed;
 }
 
+.inputGroup {
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  inline-size: 100%;
+  min-inline-size: 0;
+  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  border-radius: var(--ds-radius-form-control);
+  background-color: var(--ds-color-surface-primary);
+  box-shadow: var(--ds-shadow-elevation-control);
+}
+
+.inputGroup:focus-within {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.inputGroup[data-invalid="true"] {
+  border-color: var(--ds-color-border-error);
+}
+
+.inputGroup[data-disabled="true"] {
+  border-color: var(--ds-color-action-disabled-bg);
+  background-color: var(--ds-color-action-disabled-bg);
+}
+
+.inputGroup .control,
+.inputGroup .control:disabled {
+  flex: 1 1 auto;
+  inline-size: auto;
+  min-inline-size: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.inputGroup .control:focus-visible {
+  outline: 0;
+}
+
+.inputGroup .control[aria-invalid="true"] {
+  border-color: transparent;
+}
+
+.inputAffix {
+  display: inline-flex;
+  flex: 0 1 auto;
+  align-items: center;
+  min-inline-size: 0;
+  padding-inline: var(--ds-space-3);
+  color: var(--ds-color-text-muted);
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-md);
+  line-height: var(--ds-line-height-normal);
+  overflow-wrap: anywhere;
+}
+
+.inputGroup[data-disabled="true"] .inputAffix {
+  color: var(--ds-color-action-disabled-fg);
+}
+
 .fileInput::file-selector-button {
   margin-inline-end: var(--ds-space-3);
   padding-block: var(--ds-space-2);
@@ -250,6 +312,7 @@
 
 @media (forced-colors: active) {
   .control:focus-visible,
+  .inputGroup:focus-within,
   .choiceControl:focus-visible {
     outline-color: Highlight;
   }

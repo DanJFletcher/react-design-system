@@ -7,6 +7,7 @@ import { DateField } from "./DateField";
 import { FileField } from "./FileField";
 import { FieldGroup } from "./FieldGroup";
 import { FormLayout } from "./FormLayout";
+import { Icon } from "../Icon/Icon";
 import { RadioGroup } from "./RadioGroup";
 import { Select } from "./Select";
 import { Switch } from "./Switch";
@@ -54,6 +55,47 @@ export const TextFieldStates: Story = {
     await expect(organization).toHaveAttribute("aria-describedby", expect.stringContaining("error"));
     await expect(canvas.getByText("Enter the organization name shown on your account.")).toBeVisible();
     await expect(canvas.getByRole("textbox", { name: "Account ID" })).toBeDisabled();
+  },
+};
+
+export const TextFieldPrefixesAndSuffixes: Story = {
+  render: () => (
+    <div style={{ display: "grid", gap: "var(--ds-space-5)", maxWidth: "24rem", minWidth: 0 }}>
+      <TextField
+        label="Monthly budget"
+        name="budget"
+        prefix="$"
+        suffix="USD"
+        type="number"
+        min={0}
+        defaultValue="1250"
+        description="Enter an amount in US dollars."
+      />
+      <TextField
+        label="Website"
+        name="website"
+        prefix={<Icon name="search" size="sm" decorative />}
+        suffix={<Button size="sm" type="button" variant="secondary">Check</Button>}
+        type="url"
+        placeholder="example.com"
+      />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const budget = canvas.getByRole("spinbutton", { name: "Monthly budget" });
+    const website = canvas.getByRole("textbox", { name: "Website" });
+    const check = canvas.getByRole("button", { name: "Check" });
+
+    await expect(canvas.getByText("$")).toBeVisible();
+    await expect(canvas.getByText("USD")).toBeVisible();
+    await expect(website).toHaveAttribute("type", "url");
+    await userEvent.tab();
+    await expect(budget).toHaveFocus();
+    await userEvent.tab();
+    await expect(website).toHaveFocus();
+    await userEvent.tab();
+    await expect(check).toHaveFocus();
   },
 };
 
@@ -418,6 +460,7 @@ export const ThemeCoverage: Story = {
                     : "Orchid custom theme"}
           </h2>
           <TextField label="Workspace name" defaultValue="Moonlight" />
+          <TextField label="Monthly budget" defaultValue="1250" prefix="$" suffix="USD" type="number" />
           <Textarea label="Description" rows={2} defaultValue="A shared project space." />
           <Select label="Visibility" defaultValue="private">
             <option value="private">Private</option>

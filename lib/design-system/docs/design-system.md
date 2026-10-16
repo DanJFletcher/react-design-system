@@ -821,6 +821,7 @@ The menu uses semantic surface, text, border, focus, spacing, action, and `radiu
   Send me occasional updates
 </Label>
 <TextField label="Email" type="email" required description="Used for account updates." />
+<TextField label="Monthly budget" name="budget" prefix="$" suffix="USD" type="number" />
 <Textarea label="Message" rows={4} />
 <Select label="Region" name="region"><option value="ca">Canada</option></Select>
 <Checkbox label="Receive updates" name="updates" value="yes" />
@@ -851,6 +852,8 @@ Every individual control requires a visible `label` and forwards native props, r
 `description` and `error` content are connected with `aria-describedby` while preserving IDs supplied by the caller. An `error` sets `aria-invalid`; use `invalid` when an invalid state has no message. Native `required` and `disabled` behavior is retained. The controls do not provide a form state manager, validation rules, or asynchronous submission handling.
 
 `DateField` allows `date`, `datetime-local`, `month`, `time`, and `week` input types, defaulting to `date`. `FileField` keeps browser-native file selection and accepts the native `accept` and `multiple` attributes; it intentionally does not expose controlled file values. `Switch` is a checkbox with switch role semantics, so native checked state, keyboard activation, required validation, and `name`/`value` form submission are preserved.
+
+`TextField` accepts optional `prefix` and `suffix` React-node slots for accessible text, decorative icons, or consumer-owned inline actions. The native input keeps its normal label, messages, ref, and form behavior; its group flexes within narrow containers, with the input taking the remaining width. Interactive affixes keep their own native semantics and must be disabled separately when the field is disabled.
 
 `FieldGroup` adds semantic grouping through a native `fieldset` and `legend`; setting `disabled` applies native fieldset disabling to its descendant controls. `FormLayout` provides a responsive, one- or two-column grid and spacing choices without changing form semantics. Both leave values, submission, and validation with the owning form and controls.
 

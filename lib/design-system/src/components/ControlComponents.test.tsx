@@ -70,6 +70,31 @@ describe("form controls", () => {
     expect(screen.getByLabelText("Notes")).toHaveValue("Initial note");
   });
 
+  it("keeps TextField affixes accessible without changing its native form control", () => {
+    render(
+      <TextField
+        description="Enter a monthly amount."
+        error="Use a valid amount."
+        label="Monthly budget"
+        name="budget"
+        prefix="$"
+        suffix={<button type="button">Clear</button>}
+        type="number"
+        value={125}
+        readOnly
+      />,
+    );
+
+    const input = screen.getByRole("spinbutton", { name: "Monthly budget" });
+    expect(input).toHaveValue(125);
+    expect(input).toHaveAttribute("name", "budget");
+    expect(input).toHaveAttribute("aria-invalid", "true");
+    expect(input).toHaveAttribute("aria-describedby", expect.stringContaining("description"));
+    expect(input).toHaveAttribute("aria-describedby", expect.stringContaining("error"));
+    expect(screen.getByText("$")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Clear" })).toBeEnabled();
+  });
+
   it("supports controlled and uncontrolled radio selections with disabled choices", () => {
     const onChange = vi.fn();
     const options = [
