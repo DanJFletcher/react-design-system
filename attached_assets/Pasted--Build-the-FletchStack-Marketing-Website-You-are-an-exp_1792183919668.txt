@@ -1,0 +1,111 @@
+# Build the FletchStack Marketing Website
+
+You are an experienced web developer, UI/UX designer, accessibility specialist, and technical lead.
+
+Your task is to design and implement a polished, production-quality marketing website for **FletchStack**, a Canadian software development studio.
+
+**You must use the installed `/marketing-website` Agent Skill throughout this project.** Read its `SKILL.md` and relevant reference files before making implementation decisions. Treat its accessibility, mobile-first design, performance, SEO, and quality-assurance requirements as acceptance criteria, not optional suggestions.
+
+If the `/react-design-system` skill is available, use it when working with the existing component library or design tokens.
+
+## 1. Understand FletchStack
+
+FletchStack is a software development company intended to build and offer:
+
+- Custom web applications and software
+- Software consulting and development services
+- AI-powered tools, automation, and integrations
+- SaaS products and consumer-facing software
+- Professional websites for small businesses
+
+FletchStack should feel like a **modern, creative software studio**, rather than a generic IT consulting company or traditional corporate agency.
+
+The brand personality should be:
+
+- Technically sophisticated but approachable
+- Playful and creative without appearing childish
+- Confident without making exaggerated claims
+- Contemporary, memorable, and visually distinctive
+- Professional enough to attract paying business clients
+
+FletchStack may eventually establish a separate brand specifically for affordable small-business websites. For now, this website represents the broader FletchStack business.
+
+Do not make affordable websites the company's entire identity.
+
+Do not claim the company has completed projects, launched products, earned awards, or worked with specific customers unless that information is verified.
+
+Use **FletchStack** as the public-facing brand. Use **FletchStack Software Inc.** as a legal business name only if its status is confirmed.
+
+## 2. Primary Website Goals
+
+The website should accomplish four things:
+
+1. Clearly communicate what FletchStack does and who it helps.
+2. Establish trust through excellent design, thoughtful copy, and clear explanations of its capabilities.
+3. Encourage prospective clients to contact FletchStack about development projects or consulting.
+4. Provide a foundation for showcasing software products, applications, and case studies as they become available.
+
+**Primary conversion:** A prospective client initiates a project inquiry.
+
+**Secondary conversion:** A visitor explores FletchStack's services and capabilities.
+
+Use meaningful calls to action, such as **Start a Project**, **Let's Build Something**, or **Explore Our Services**.
+
+Avoid generic filler copy, exaggerated promises, or misleading social proof.
+
+## 3. Design Direction
+
+Create a visually distinctive identity inspired by software development, modular systems, and the idea of building or stacking things together.
+
+Explore design elements such as:
+
+- Modular geometric compositions
+- Subtle references to code, interfaces, or connected systems
+- Strong, modern typography
+- Generous spacing and clear visual hierarchy
+- Restrained, purposeful motion
+- Thoughtful contrasts between surfaces and accent colors
+- Custom interface-inspired illustrations or graphics
+
+The goal is **a beautiful, memorable website that feels intentionally designed**.
+
+Avoid common AI-generated website clichés:
+
+- Generic gradient backgrounds everywhere
+- Excessive glowing orbs
+- Unnecessary glassmorphism
+- Repetitive cards without clear information hierarchy
+- Decorative animations that harm performance
+- Generic stock photography of people in offices
+- Large amounts of vague marketing language
+
+Review any existing FletchStack logos, brand assets, and design work in the project before establishing the final visual direction. Existing approved assets take priority over new concepts.
+
+Ensure the design remains cohesive across the entire website.
+
+## 4. Technology and Architecture
+
+Inspect the existing project before selecting or changing its technology stack.
+
+**For a new project, prefer Astro with TypeScript**, because this is primarily a marketing website where fast loading, excellent SEO, and minimal client-side JavaScript are important.
+
+Use React selectively for components that genuinely require interactive behavior.
+
+Where feasible, integrate my existing React design-system library:
+
+https://github.com/DanJFletcher/react-design-system
+
+Before integrating it, review its README, package exports, token architecture, and installation instructions. Do not assume it is published to npm.
+
+Follow these principles:
+
+- Reuse available components before building replacements.
+- Reuse semantic design tokens for colors, typography, spacing, surfaces, and layout.
+- Use the design system's documented theme and customization APIs.
+- Avoid hardcoded design values when an appropriate token exists.
+- Avoid unnecessary dependencies and duplicate styling systems.
+- Keep content, layout, and reusable components well organized.
+- Minimize browser hydration and client-side JavaScript.
+- Use semantic HTML.
+
+If the library requires changes, first read its `CONTRIBUTING.md` and `AGENTS.md` and follow the `/react-design-system` skill. Do not

@@ -88,6 +88,7 @@
     "@tiptap/extension-placeholder": "^3.32.0",
     "@tiptap/react": "^3.32.0",
     "@tiptap/starter-kit": "^3.32.0",
-    "postcss": "8.5.29"
+    "postcss": "8.5.29",
+    "prism-react-renderer": "^2.4.1"
   }
 }

@@ -191,6 +191,8 @@ export type {
   ActivityFeedItem,
   ActivityFeedProps,
 } from "./components/ActivityFeed/ActivityFeed";
+export { CodeBlock } from "./components/CodeBlock/CodeBlock";
+export type { CodeBlockProps } from "./components/CodeBlock/CodeBlock";
 export { RevisionHistory } from "./components/RevisionHistory/RevisionHistory";
 export type {
   ContentRevision,

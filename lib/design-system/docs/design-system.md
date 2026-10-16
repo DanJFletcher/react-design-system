@@ -419,6 +419,22 @@ Input mode uses `mode="input"` and a required visible `label`. It renders a nati
 />
 ```
 
+## Code block
+
+```tsx
+<CodeBlock
+  code={`export function greeting(name: string) {
+  return \`Hello, \${name}!\`;
+}`}
+  language="typescript"
+  label="greeting.ts"
+/>
+```
+
+`CodeBlock` renders consumer-provided source as text with Prism syntax highlighting. `language` accepts a Prism language name or alias, defaults to plain text, and falls back to plain text for unsupported names. An optional `label` supplies a visible filename or caption; otherwise, the language is shown. The native, keyboard-focusable `<pre>` scrolls long lines within its container instead of widening the page.
+
+Syntax colors use existing semantic tokens rather than fixed theme colors, so highlighting follows ACME, Luna, Orchid, Atom, Sublime, custom themes, and nested theme boundaries. The component does not execute source code. Use it inside `ArticleBody` for highlighted examples; ordinary semantic `<pre><code>` content remains supported there.
+
 ## Article body
 
 ```tsx

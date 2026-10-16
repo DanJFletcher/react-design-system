@@ -1,7 +1,7 @@
 - [Playwright in NixOS](playwright-nixos.md) — browser downloads need Nix shared libraries as well as Playwright's Chromium install.
 - [Storybook file-input tests](storybook-file-input-tests.md) — iframe-based stories may expose uploaded files on the input but not through cross-realm `File`/`FormData` assumptions.
 - [Native dialog tests](storybook-native-dialog-tests.md) — use browser keyboard events for native Escape behavior and open through a trigger when checking focus return.
-- [Storybook play isolation](storybook-play-test-isolation.md) — direct iframe routes run play functions; use isolated stories for browser-driven state and keyboard checks.
+- [Storybook play and focus isolation](storybook-play-test-isolation.md) — isolate play state and check visible focus on the target, not an assumed iframe Tab order.
 - [Design-system verification](design-system-verification.md) — the combined check can exceed the shell time limit when browser tests follow builds; run the visual suite separately.
 - [Unique Storybook landmarks](storybook-landmark-uniqueness.md) — stacked theme stories need distinct names for repeated semantic regions to pass axe’s landmark-unique rule.
 - [Pagination browser tests](pagination-browser-tests.md) — treat the current page separately from clickable page controls and use exact accessible-name matches for numbered pages.

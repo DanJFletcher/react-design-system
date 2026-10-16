@@ -1,0 +1,27 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as CodeBlockStories from "./CodeBlock.stories";
+
+<Meta of={CodeBlockStories} />
+
+<Title>Code block</Title>
+
+<Subtitle>A theme-aware code surface with Prism syntax highlighting.</Subtitle>
+
+## Interactive example
+
+<Canvas of={CodeBlockStories.Playground} />
+
+`CodeBlock` renders source as text; it never evaluates code. Set `code` to the source string and `language` to a Prism language name or alias. The default language is plain text, and an unsupported language safely falls back to plain text. The `label` prop adds a visible caption such as a filename; without a label, the language name is shown.
+
+The scrollable native `<pre>` can receive keyboard focus, so keyboard users can inspect horizontally overflowing lines. Syntax colors use semantic design tokens and follow ACME, Luna, Orchid, Atom, Sublime, custom themes, and nested theme boundaries. Forced-colors mode preserves readable text and a visible focus indicator.
+
+Use `CodeBlock` inside `ArticleBody` when an article needs language-aware code presentation. For trusted article markup that does not need syntax highlighting, `ArticleBody` continues to style native `<pre><code>` elements.
+
+## Plain text and long lines
+
+<Canvas of={CodeBlockStories.PlainText} />
+<Canvas of={CodeBlockStories.LongLines} />
+
+## Built-in theme coverage
+
+<Canvas of={CodeBlockStories.ThemeCoverage} />
