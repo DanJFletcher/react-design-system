@@ -345,6 +345,78 @@ describe("form controls", () => {
     }
   });
 
+  it("keeps checkbox and switch help connected when validation errors clear", () => {
+    const renderControls = (showError: boolean) => (
+      <>
+        <Checkbox
+          aria-describedby="terms-help"
+          description="Review the terms before continuing."
+          error={showError ? "Consent is required." : undefined}
+          id="terms"
+          label="Accept terms"
+        />
+        <span id="terms-help">The agreement applies to all workspace members.</span>
+        <Switch
+          aria-describedby="alerts-help"
+          description="Choose whether to receive account alerts."
+          error={showError ? "Choose an alert preference." : undefined}
+          id="account-alerts"
+          label="Account alerts"
+        />
+        <span id="alerts-help">You can change this setting at any time.</span>
+      </>
+    );
+
+    const fields = [
+      {
+        role: "checkbox" as const,
+        label: "Accept terms",
+        describedBy: "terms-help terms-description",
+        description: "Review the terms before continuing.",
+        descriptionId: "terms-description",
+        error: "Consent is required.",
+        errorId: "terms-error",
+        externalHelp: "The agreement applies to all workspace members.",
+        externalHelpId: "terms-help",
+      },
+      {
+        role: "switch" as const,
+        label: "Account alerts",
+        describedBy: "alerts-help account-alerts-description",
+        description: "Choose whether to receive account alerts.",
+        descriptionId: "account-alerts-description",
+        error: "Choose an alert preference.",
+        errorId: "account-alerts-error",
+        externalHelp: "You can change this setting at any time.",
+        externalHelpId: "alerts-help",
+      },
+    ];
+
+    const { rerender } = render(renderControls(true));
+
+    for (const field of fields) {
+      const control = screen.getByRole(field.role, { name: field.label });
+      expect(control).toHaveAttribute("aria-invalid", "true");
+      expect(control).toHaveAttribute(
+        "aria-describedby",
+        `${field.externalHelpId} ${field.descriptionId} ${field.errorId}`,
+      );
+      expect(document.getElementById(field.errorId)).toHaveTextContent(field.error);
+    }
+
+    rerender(renderControls(false));
+
+    for (const field of fields) {
+      const control = screen.getByRole(field.role, { name: field.label });
+      expect(control).not.toHaveAttribute("aria-invalid");
+      expect(control).toHaveAttribute("aria-describedby", field.describedBy);
+      expect(screen.getByText(field.externalHelp)).toHaveAttribute("id", field.externalHelpId);
+      expect(screen.getByText(field.description)).toHaveAttribute("id", field.descriptionId);
+      expect(document.getElementById(field.errorId)).not.toBeInTheDocument();
+      expect(screen.queryByText(field.error)).not.toBeInTheDocument();
+    }
+  });
+
   it("renders text, date, file, select, and textarea fields with native constraints", () => {
     render(
       <>
