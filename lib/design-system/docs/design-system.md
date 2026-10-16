@@ -548,6 +548,21 @@ import { Badge, Breadcrumbs, Button, PageHeader } from "@workspace/design-system
 
 `PageHeader` renders a native page-level `<header>` with a semantic `Heading` (level 1 by default). Breadcrumbs, description, status, and actions are optional content slots; navigation, status meaning, and action behavior remain consumer-owned. On narrow screens the action slot stacks below the page copy; wider layouts place it beside the title and description. Native header attributes, refs, and `className` are forwarded.
 
+## EmptyState
+
+```tsx
+import { Button, EmptyState, Icon } from "@workspace/design-system";
+
+<EmptyState
+  icon={<Icon name="folder" size="xl" />}
+  title="No pages yet"
+  description="Create your first page to start building your site."
+  actions={<Button>Create a page</Button>}
+/>
+```
+
+`EmptyState` renders a labelled section with a semantic heading (level 2 by default). It is presentation-only: the consumer supplies the content and any recovery actions. The `compact` layout is intended for a collection or panel; `full` centers the content within its parent's available height, so give that parent an explicit block size. The component does not announce itself as a live region.
+
 ## Pricing details
 
 ```tsx

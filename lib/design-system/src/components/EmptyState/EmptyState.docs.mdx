@@ -1,0 +1,35 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as EmptyStateStories from "./EmptyState.stories";
+
+<Meta of={EmptyStateStories} />
+
+<Title>Empty State</Title>
+
+<Subtitle>A reusable message for empty collections, search results, and other no-content views.</Subtitle>
+
+## Interactive playground
+
+<Canvas of={EmptyStateStories.Playground} />
+<Controls of={EmptyStateStories.Playground} />
+
+## No results
+
+<Canvas of={EmptyStateStories.NoResults} />
+
+## Full-page layout
+
+<Canvas of={EmptyStateStories.FullPage} />
+
+The full layout centers its content within the available height of its parent. Give the parent a block size when the empty state should fill a page or main-content area.
+
+## Themes
+
+<Canvas of={EmptyStateStories.ThemeCoverage} />
+
+## Semantics and content
+
+- Renders a native `<section>` labelled by its title heading. `headingLevel` defaults to `2`; choose another level to fit the surrounding document outline.
+- `title` is required. `icon`, `description`, and `actions` are optional consumer-owned slots. Icons are treated as decorative because the title communicates the state.
+- `layout` is `compact` by default; use `full` to center content in the parent's available height.
+- The component is static presentation: it does not fetch data, change filters, own navigation, or announce itself as a live region. Put search recovery buttons or links in `actions`.
+- Pass `aria-labelledby` when the section should use an external accessible name. Native section attributes, refs, `className`, and typed `DesignSystemStyle` are forwarded.
