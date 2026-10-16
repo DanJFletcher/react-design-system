@@ -160,7 +160,7 @@ Items render as native toggle buttons with `aria-pressed`. Each button remains i
 
 The text input exposes the ARIA combobox/listbox pattern. Focus opens the list; Arrow keys, Home, and End move the active option while skipping disabled entries; Enter selects; Escape closes and restores the selected label; Tab leaves the field. Pointer selection keeps focus on the input. `value` with `onValueChange` provides controlled state; `defaultValue` initializes uncontrolled state. A hidden named input submits the selected option's value. `required`, `disabled`, `description`, `error`, and `invalid` follow the shared form-field contract; required validation only passes after an option is selected.
 
-`loading` and `loadingMessage` announce asynchronous loading states; `noResultsMessage` customizes the empty result message. `allowClear` defaults to `true`, and `clearLabel` localizes its accessible name. Invalid or duplicate options and a non-loading selected value that does not match an option fail explicitly. The control uses semantic form/menu tokens and supports all built-in and nested themes.
+`loading` and `loadingMessage` announce asynchronous loading states; the message is paired with a decorative small Spinner. `noResultsMessage` customizes the empty result message. `allowClear` defaults to `true`, and `clearLabel` localizes its accessible name. Invalid or duplicate options and a non-loading selected value that does not match an option fail explicitly. The control uses semantic form/menu tokens and supports all built-in and nested themes.
 
 ```tsx
 <Combobox

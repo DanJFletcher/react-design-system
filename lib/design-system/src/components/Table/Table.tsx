@@ -9,6 +9,7 @@ import {
 } from "react";
 import type { DesignSystemStyle } from "../../generated/token-types";
 import { Search } from "../Search/Search";
+import { Spinner } from "../Spinner/Spinner";
 import styles from "./Table.module.css";
 
 export type TableRowKey = string | number;
@@ -398,7 +399,8 @@ export function Table<T extends object>({
       >
         {loading && (
           <div className={styles.loadingMessage} role="status">
-            {loadingMessage}
+            <Spinner decorative size="sm" />
+            <div>{loadingMessage}</div>
           </div>
         )}
         <table

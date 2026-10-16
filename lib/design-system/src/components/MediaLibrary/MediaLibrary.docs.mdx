@@ -17,7 +17,7 @@ Pass `onConfirmSelection` to show an explicit action. The callback receives the 
 
 ## Upload ownership
 
-The file chooser only calls `onFilesSelected` with the selected `File[]`. It does not upload, create object URLs, or persist files. Upload transport, validation, persistence, and updating the `assets` collection belong to the consuming application. Use `uploading` and `uploadError` to reflect the caller's upload state.
+The file chooser only calls `onFilesSelected` with the selected `File[]`. It does not upload, create object URLs, or persist files. Upload transport, validation, persistence, and updating the `assets` collection belong to the consuming application. Use `uploading` and `uploadError` to reflect the caller's upload state; while uploading, a decorative Spinner appears in the upload control while its text and hint remain visible.
 
 <Canvas of={MediaLibraryStories.SelectionAndUpload} />
 <Canvas of={MediaLibraryStories.EmptyLibrary} />

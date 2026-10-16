@@ -1,6 +1,7 @@
 import { forwardRef, useId, type ComponentPropsWithRef, type CSSProperties } from "react";
 import { Badge } from "../Badge/Badge";
 import { Button } from "../Button/Button";
+import { Spinner } from "../Spinner/Spinner";
 import type { DesignSystemStyle } from "../../generated/token-types";
 import styles from "./RevisionHistory.module.css";
 
@@ -86,7 +87,10 @@ export const RevisionHistory = forwardRef<HTMLElement, RevisionHistoryProps>(
         </header>
 
         {loading ? (
-          <p className={styles.loadingState} role="status">Loading revision history…</p>
+          <p className={styles.loadingState} role="status">
+            <Spinner decorative size="sm" />
+            <span>Loading revision history…</span>
+          </p>
         ) : revisions.length === 0 ? (
           <p className={styles.emptyState}>{emptyMessage}</p>
         ) : (

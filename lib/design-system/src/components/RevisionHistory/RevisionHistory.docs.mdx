@@ -26,6 +26,9 @@ Compare and restore buttons only appear when their callbacks are provided. The h
 
 <Canvas of={RevisionHistoryStories.RecentVersions} />
 <Canvas of={RevisionHistoryStories.Empty} />
+
+While `loading` is true, the announced status message is paired with a decorative Spinner.
+
 <Canvas of={RevisionHistoryStories.Loading} />
 <Canvas of={RevisionHistoryStories.Disabled} />
 <Canvas of={RevisionHistoryStories.RestoringVersion} />

@@ -13,6 +13,7 @@ import {
 } from "react";
 import type { DesignSystemStyle } from "../../generated/token-types";
 import { Icon } from "../Icon/Icon";
+import { Spinner } from "../Spinner/Spinner";
 import { FieldLabel, FieldMessages, type FormFieldProps, useFormField } from "../FormControls/FormField";
 import styles from "./Combobox.module.css";
 
@@ -363,7 +364,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(function Com
           ))}
         </ul>
         {showNoResults && <div className={styles.status} role="status">{noResultsMessage}</div>}
-        {popupOpen && loading && <div className={styles.status} role="status">{loadingMessage}</div>}
+        {popupOpen && loading && (
+          <div className={[styles.status, styles.loadingStatus].join(" ")} role="status">
+            <Spinner decorative size="sm" />
+            <div>{loadingMessage}</div>
+          </div>
+        )}
         {name && (
           <input
             disabled={disabled}

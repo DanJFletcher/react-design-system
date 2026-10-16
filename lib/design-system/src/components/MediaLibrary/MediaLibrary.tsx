@@ -1,5 +1,6 @@
 import { forwardRef, useId, useMemo, useState, type ChangeEvent, type CSSProperties } from "react";
 import type { DesignSystemStyle } from "../../generated/token-types";
+import { Spinner } from "../Spinner/Spinner";
 import styles from "./MediaLibrary.module.css";
 
 export type MediaAsset = {
@@ -179,7 +180,11 @@ export const MediaLibrary = forwardRef<HTMLElement, MediaLibraryProps>(function 
               type="file"
             />
             <label className={styles.uploadButton} htmlFor={`${id}-upload`}>
-              <span aria-hidden="true" className={styles.uploadMark}>+</span>
+              {uploading ? (
+                <Spinner decorative size="sm" />
+              ) : (
+                <span aria-hidden="true" className={styles.uploadMark}>+</span>
+              )}
               {uploading ? "Adding files…" : uploadLabel}
             </label>
             <span className={styles.uploadHint} id={`${id}-upload-hint`}>

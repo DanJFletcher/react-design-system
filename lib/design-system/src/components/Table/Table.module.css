@@ -176,6 +176,9 @@
 }
 
 .loadingMessage {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
   padding: var(--ds-space-2) var(--ds-table-padding, var(--ds-space-3));
   border-block-end: var(--ds-border-width-default) solid
     var(--ds-table-border, var(--ds-color-border-control));
