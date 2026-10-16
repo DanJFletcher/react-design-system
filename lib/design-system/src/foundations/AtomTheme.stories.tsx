@@ -261,6 +261,7 @@ export const HeadingHighlights: Story = {
         <Heading level={2} data-testid="luna-unmarked-heading">
           Nested themes keep their own typography.
         </Heading>
+        <h3 data-testid="luna-unmarked-h3">A nested subsection keeps the heading outline in order.</h3>
         <h4 data-testid="luna-unmarked-h4">Luna H4 stays unmarked.</h4>
         <h5 data-testid="luna-unmarked-h5">Luna H5 stays unmarked.</h5>
         <h6 data-testid="luna-unmarked-h6">Luna H6 stays unmarked.</h6>

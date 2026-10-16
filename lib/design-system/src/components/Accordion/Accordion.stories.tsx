@@ -161,8 +161,8 @@ export const ThemeCoverage: Story = {
     if (!heading || !title) throw new Error("Expected an H3 accordion title.");
     await expect(getComputedStyle(heading, "::before").content).toBe("none");
     await expect(getComputedStyle(heading, "::after").content).toBe("none");
-    await expect(getComputedStyle(title, "::before").backgroundColor).toBe("rgb(150, 63, 157)");
-    await expect(getComputedStyle(title, "::after").backgroundColor).toBe("rgb(255, 61, 141)");
+    await expect(getComputedStyle(title, "::before").backgroundColor).toBe("rgb(255, 61, 141)");
+    await expect(getComputedStyle(title, "::after").backgroundColor).toBe("rgb(112, 232, 255)");
     await expect(title.getBoundingClientRect().width).toBeLessThan(atomTrigger.getBoundingClientRect().width);
   },
 };
