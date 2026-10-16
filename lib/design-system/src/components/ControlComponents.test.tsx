@@ -107,6 +107,75 @@ describe("form controls", () => {
     expect(screen.queryByText("Use only letters and numbers.")).not.toBeInTheDocument();
   });
 
+  it("keeps built-in field errors connected when validation messages change", () => {
+    const renderFields = (textError: string, selectError: string) => (
+      <>
+        <TextField
+          aria-describedby="name-help"
+          description="Enter your display name."
+          error={textError}
+          id="display-name"
+          label="Display name"
+        />
+        <span id="name-help">Names are visible to your team.</span>
+        <Select
+          aria-describedby="region-help"
+          description="Choose your team's region."
+          error={selectError}
+          id="team-region"
+          label="Team region"
+        >
+          <option value="west">West</option>
+        </Select>
+        <span id="region-help">You can change this later.</span>
+      </>
+    );
+
+    const { rerender } = render(
+      renderFields("A: Name is required.", "A: Choose a region."),
+    );
+    const textField = screen.getByRole("textbox", { name: "Display name" });
+    const select = screen.getByRole("combobox", { name: "Team region" });
+
+    rerender(renderFields("B: Use at least two characters.", "B: Select a valid region."));
+
+    expect(textField).toHaveAttribute("aria-invalid", "true");
+    expect(textField).toHaveAttribute(
+      "aria-describedby",
+      "name-help display-name-description display-name-error",
+    );
+    expect(document.getElementById("display-name-error")).toHaveTextContent(
+      "B: Use at least two characters.",
+    );
+    expect(select).toHaveAttribute("aria-invalid", "true");
+    expect(select).toHaveAttribute(
+      "aria-describedby",
+      "region-help team-region-description team-region-error",
+    );
+    expect(document.getElementById("team-region-error")).toHaveTextContent(
+      "B: Select a valid region.",
+    );
+
+    expect(screen.getByText("Enter your display name.")).toHaveAttribute(
+      "id",
+      "display-name-description",
+    );
+    expect(screen.getByText("Names are visible to your team.")).toHaveAttribute(
+      "id",
+      "name-help",
+    );
+    expect(screen.getByText("Choose your team's region.")).toHaveAttribute(
+      "id",
+      "team-region-description",
+    );
+    expect(screen.getByText("You can change this later.")).toHaveAttribute(
+      "id",
+      "region-help",
+    );
+    expect(screen.queryByText("A: Name is required.")).not.toBeInTheDocument();
+    expect(screen.queryByText("A: Choose a region.")).not.toBeInTheDocument();
+  });
+
   it("associates checkbox and switch labels, descriptions, errors, and external descriptions", () => {
     render(
       <>
