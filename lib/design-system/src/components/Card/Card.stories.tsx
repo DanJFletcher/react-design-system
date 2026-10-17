@@ -4,7 +4,8 @@ import { Button } from "../Button/Button";
 import { Card } from "./Card";
 
 const meta = {
-  title: "Components/Card",
+  title: "Components/Content/Card",
+  id: "components-card",
   component: Card,
   args: {
     eyebrow: "Workspace",

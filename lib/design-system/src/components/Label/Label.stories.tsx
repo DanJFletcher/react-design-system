@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Label } from "./Label";
 
 const meta = {
-  title: "Components/Label",
+  title: "Components/Forms/Label",
+  id: "components-label",
   component: Label,
   args: {
     children: "Company name",

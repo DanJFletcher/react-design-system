@@ -85,7 +85,8 @@ function MapPreview() {
 }
 
 const meta = {
-  title: "Components/Location & Hours",
+  title: "Compositions/Marketing/Location & Hours",
+  id: "components-location-hours",
   component: LocationHours,
   args: {
     heading: "Visit Harbor & Pine Studio",

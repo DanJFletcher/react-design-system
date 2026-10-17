@@ -30,7 +30,8 @@ function ControlledMenu() {
 }
 
 const meta = {
-  title: "Components/BottomMenu",
+  title: "Components/Navigation/Bottom menu",
+  id: "components-bottommenu",
   component: BottomMenu,
   args: {
     items: sampleItems,

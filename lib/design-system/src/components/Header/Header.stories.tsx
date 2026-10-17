@@ -10,7 +10,8 @@ const navItems: HeaderNavItem[] = [
 ];
 
 const meta = {
-  title: "Components/Header",
+  title: "Compositions/Marketing/Header",
+  id: "components-header",
   component: Header,
   args: {
     navItems,

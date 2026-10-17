@@ -22,7 +22,8 @@ const previewSubmit: RequestFormProps["onSubmit"] = async ({ email }) => {
 };
 
 const meta = {
-  title: "Components/Request form",
+  title: "Compositions/Marketing/Request form",
+  id: "components-request-form",
   component: RequestForm,
   args: {
     heading: "Tell us about your project",

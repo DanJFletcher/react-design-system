@@ -6,7 +6,8 @@ const tones: BadgeTone[] = ["neutral", "accent", "success", "warning", "error"];
 const sizes: BadgeSize[] = ["sm", "md", "lg"];
 
 const meta = {
-  title: "Components/Badge",
+  title: "Components/Identity/Badge",
+  id: "components-badge",
   component: Badge,
   args: {
     children: "Published",

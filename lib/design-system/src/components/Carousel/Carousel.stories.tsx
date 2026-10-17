@@ -97,7 +97,8 @@ const frameSlides: CarouselSlide[] = [
 ];
 
 const meta = {
-  title: "Components/Carousel",
+  title: "Components/Media/Carousel",
+  id: "components-carousel",
   component: Carousel,
   args: {
     label: "Featured stories",

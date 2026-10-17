@@ -30,7 +30,8 @@ const revisions: readonly ContentRevision[] = [
 ];
 
 const meta = {
-  title: "Components/Revision history",
+  title: "Compositions/CMS/Revision history",
+  id: "components-revision-history",
   component: RevisionHistory,
   args: {
     revisions,

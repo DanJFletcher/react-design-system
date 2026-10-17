@@ -95,7 +95,8 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ["Foundations", "Components"],
+        method: "alphabetical",
+        order: ["Foundations", "Components", "Compositions", "Examples", "*"],
       },
     },
   },

@@ -16,7 +16,8 @@ function resolveIcon(value: ReactNode, fallback: IconName): ReactNode {
 }
 
 const meta = {
-  title: "Components/Search",
+  title: "Components/Forms/Search",
+  id: "components-search",
   component: Search,
   args: {
     label: "Search the site",

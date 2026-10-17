@@ -13,7 +13,8 @@ const regions: readonly ComboboxOption[] = [
 ];
 
 const meta = {
-  title: "Components/Combobox",
+  title: "Components/Forms/Combobox",
+  id: "components-combobox",
   component: Combobox,
   args: {
     label: "Service region",

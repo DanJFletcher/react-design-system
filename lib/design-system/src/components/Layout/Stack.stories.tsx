@@ -3,7 +3,8 @@ import { Stack } from "./Stack";
 import styles from "./Layout.stories.module.css";
 
 const meta = {
-  title: "Components/Layout/Stack",
+  title: "Foundations/Layout helpers/Stack",
+  id: "components-layout-stack",
   component: Stack,
   args: {
     gap: "md",

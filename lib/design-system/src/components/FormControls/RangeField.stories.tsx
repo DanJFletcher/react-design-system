@@ -4,7 +4,8 @@ import { expect, fireEvent, fn, within } from "storybook/test";
 import { RangeField } from "./RangeField";
 
 const meta = {
-  title: "Components/Range field",
+  title: "Components/Forms/Range field",
+  id: "components-range-field",
   component: RangeField,
   args: {
     label: "Project budget",

@@ -20,3 +20,4 @@
 - [Unit-only component coverage](unit-only-component-coverage.md) — the 100% component implementation target must come from unit tests alone; report Storybook/browser coverage separately.
 - [Astro managed workflows](astro-managed-workflow.md) — prevent Astro dev from detaching from Replit's managed workflow and avoid stale Vite entry scanning.
 - [Native stepper disabled state](native-stepper-disabled-state.md) — keep disabled conditions on native buttons instead of repeating unreachable guards in click handlers.
+- [Storybook stable story IDs](storybook-stable-ids.md) — preserve story URLs when changing sidebar titles by keeping explicit IDs on the stories.

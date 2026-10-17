@@ -7,7 +7,8 @@ const previewSubmit: NonNullable<NewsletterSignupProps["onSubmit"]> = async ({ e
 };
 
 const meta = {
-  title: "Components/Newsletter signup",
+  title: "Compositions/Marketing/Newsletter signup",
+  id: "components-newsletter-signup",
   component: NewsletterSignup,
   args: {
     onSubmit: previewSubmit,

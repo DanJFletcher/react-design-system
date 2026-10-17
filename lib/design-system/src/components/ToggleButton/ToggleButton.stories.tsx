@@ -6,7 +6,8 @@ import { Icon } from "../Icon/Icon";
 import { ToggleButton } from "./ToggleButton";
 
 const meta = {
-  title: "Components/ToggleButton",
+  title: "Components/Actions/Toggle button",
+  id: "components-togglebutton",
   component: ToggleButton,
   args: {
     children: "Bold",

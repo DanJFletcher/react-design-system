@@ -3,7 +3,8 @@ import { expect, userEvent, within } from "storybook/test";
 import { Link } from "./Link";
 
 const meta = {
-  title: "Components/Link",
+  title: "Components/Actions/Link",
+  id: "components-link",
   component: Link,
   args: {
     href: "/services",

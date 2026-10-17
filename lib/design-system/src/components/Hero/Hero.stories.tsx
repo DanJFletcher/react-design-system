@@ -4,7 +4,8 @@ import { Button } from "../Button/Button";
 import { Hero } from "./Hero";
 
 const meta = {
-  title: "Components/Hero",
+  title: "Compositions/Marketing/Hero",
+  id: "components-hero",
   component: Hero,
   args: {
     eyebrow: "A clearer way forward",

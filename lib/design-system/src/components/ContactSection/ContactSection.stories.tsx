@@ -54,7 +54,8 @@ function ContactFormExample() {
 }
 
 const meta = {
-  title: "Components/Contact section",
+  title: "Compositions/Marketing/Contact section",
+  id: "components-contact-section",
   component: ContactSection,
   args: {
     heading: "Visit Harbor & Pine Studio",

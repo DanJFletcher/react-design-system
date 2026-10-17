@@ -3,7 +3,8 @@ import { Inline } from "./Inline";
 import styles from "./Layout.stories.module.css";
 
 const meta = {
-  title: "Components/Layout/Inline",
+  title: "Foundations/Layout helpers/Inline",
+  id: "components-layout-inline",
   component: Inline,
   args: {
     gap: "sm",

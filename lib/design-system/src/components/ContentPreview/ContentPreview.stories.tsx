@@ -89,7 +89,8 @@ const pageDocument = `<!doctype html>
 </html>`;
 
 const meta = {
-  title: "Components/Content preview",
+  title: "Compositions/CMS/Content preview",
+  id: "components-content-preview",
   component: ContentPreview,
   args: {
     srcDoc: pageDocument,

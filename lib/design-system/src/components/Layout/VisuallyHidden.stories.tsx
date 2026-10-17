@@ -3,7 +3,8 @@ import { VisuallyHidden } from "./VisuallyHidden";
 import styles from "./Layout.stories.module.css";
 
 const meta = {
-  title: "Components/Layout/Visually Hidden",
+  title: "Foundations/Accessibility/Visually hidden",
+  id: "components-layout-visually-hidden",
   component: VisuallyHidden,
   args: {
     focusable: false,

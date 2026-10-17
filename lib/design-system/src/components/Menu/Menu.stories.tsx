@@ -48,7 +48,8 @@ const iconChoices = {
 type StoryIconName = keyof typeof iconChoices;
 
 const meta = {
-  title: "Components/Menu",
+  title: "Components/Navigation/Menu",
+  id: "components-menu",
   component: Menu,
   args: {
     triggerLabel: "Workspace",

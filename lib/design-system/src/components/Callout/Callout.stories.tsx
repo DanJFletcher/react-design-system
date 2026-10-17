@@ -7,7 +7,8 @@ import { Callout, type CalloutProps, type CalloutTone } from "./Callout";
 const tones: CalloutTone[] = ["info", "success", "warning", "error", "neutral"];
 
 const meta = {
-  title: "Components/Callout",
+  title: "Components/Feedback/Callout",
+  id: "components-callout",
   component: Callout,
   args: {
     title: "Project created",

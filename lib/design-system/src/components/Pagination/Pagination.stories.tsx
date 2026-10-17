@@ -28,7 +28,8 @@ function ControlledPaginationExample({
 }
 
 const meta = {
-  title: "Components/Pagination",
+  title: "Components/Navigation/Pagination",
+  id: "components-pagination",
   component: Pagination,
   args: {
     "aria-label": "Article pagination",

@@ -8,7 +8,8 @@ const illustrationSrc = `data:image/svg+xml,${encodeURIComponent(
 )}`;
 
 const meta = {
-  title: "Components/Article body",
+  title: "Compositions/Editorial/Article body",
+  id: "components-article-body",
   component: ArticleBody,
   args: {
     "aria-label": "A calmer morning routine for your studio",

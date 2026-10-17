@@ -34,7 +34,8 @@ const designServices = [
 ] satisfies ServicesSectionProps["items"];
 
 const meta = {
-  title: "Components/Services section",
+  title: "Compositions/Marketing/Services section",
+  id: "components-services-section",
   component: ServicesSection,
   args: {
     eyebrow: "Harbor & Pine Studio",

@@ -4,7 +4,8 @@ import { expect, userEvent, within } from "storybook/test";
 import { NumberField } from "./NumberField";
 
 const meta = {
-  title: "Components/Number field",
+  title: "Components/Forms/Number field",
+  id: "components-number-field",
   component: NumberField,
   args: {
     label: "Quantity",

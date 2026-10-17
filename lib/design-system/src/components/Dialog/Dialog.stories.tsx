@@ -6,7 +6,8 @@ import { Tooltip } from "../Tooltip/Tooltip";
 import { Dialog, type DialogProps } from "./Dialog";
 
 const meta = {
-  title: "Components/Dialog",
+  title: "Components/Overlays/Dialog",
+  id: "components-dialog",
   component: Dialog,
   args: {
     open: false,

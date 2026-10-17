@@ -53,7 +53,8 @@ const portfolioItems: GalleryItem[] = [
 ];
 
 const meta = {
-  title: "Components/Gallery",
+  title: "Components/Media/Gallery",
+  id: "components-gallery",
   component: Gallery,
   args: {
     label: "Studio portfolio",

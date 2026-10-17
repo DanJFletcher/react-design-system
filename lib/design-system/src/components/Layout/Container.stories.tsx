@@ -3,7 +3,8 @@ import { Container, type ContainerMaxWidth } from "./Container";
 import styles from "./Layout.stories.module.css";
 
 const meta = {
-  title: "Components/Layout/Container",
+  title: "Foundations/Layout helpers/Container",
+  id: "components-layout-container",
   component: Container,
   args: {
     maxWidth: "content",

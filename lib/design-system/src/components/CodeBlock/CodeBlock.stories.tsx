@@ -12,7 +12,8 @@ export function formatService(service: Service) {
 }`;
 
 const meta = {
-  title: "Components/Code block",
+  title: "Components/Content/Code block",
+  id: "components-code-block",
   component: CodeBlock,
   args: {
     code: exampleCode,

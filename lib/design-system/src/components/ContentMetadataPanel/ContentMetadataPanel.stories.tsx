@@ -16,7 +16,8 @@ const sampleImages: readonly ContentMetadataImage[] = [
 ];
 
 const meta = {
-  title: "Components/Content metadata panel",
+  title: "Compositions/CMS/Content metadata panel",
+  id: "components-content-metadata-panel",
   component: ContentMetadataPanel,
   args: {
     images: sampleImages,

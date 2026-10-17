@@ -5,7 +5,8 @@ import { Icon } from "../Icon/Icon";
 import { EmptyState } from "./EmptyState";
 
 const meta = {
-  title: "Components/Empty state",
+  title: "Components/Feedback/Empty state",
+  id: "components-empty-state",
   component: EmptyState,
   args: {
     title: "No pages yet",

@@ -3,7 +3,8 @@ import { expect, within } from "storybook/test";
 import { Spinner } from "./Spinner";
 
 const meta = {
-  title: "Components/Spinner",
+  title: "Components/Feedback/Spinner",
+  id: "components-spinner",
   component: Spinner,
   args: {
     label: "Loading search results",

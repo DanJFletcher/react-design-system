@@ -14,7 +14,8 @@ const sampleAssets: MediaAsset[] = [
 ];
 
 const meta = {
-  title: "Components/Media library",
+  title: "Compositions/CMS/Media library",
+  id: "components-media-library",
   component: MediaLibrary,
   args: {
     assets: sampleAssets,

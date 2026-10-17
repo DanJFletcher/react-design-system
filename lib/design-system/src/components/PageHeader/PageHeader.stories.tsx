@@ -6,7 +6,8 @@ import { Button } from "../Button/Button";
 import { PageHeader } from "./PageHeader";
 
 const meta = {
-  title: "Components/Page Header",
+  title: "Components/Navigation/Page header",
+  id: "components-page-header",
   component: PageHeader,
   args: {
     title: "Content dashboard",

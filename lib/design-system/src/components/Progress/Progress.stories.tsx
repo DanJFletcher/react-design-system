@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Progress, type ProgressProps } from "./Progress";
 
 const meta = {
-  title: "Components/Progress",
+  title: "Components/Feedback/Progress",
+  id: "components-progress",
   component: Progress,
   args: {
     label: "Uploading project assets",

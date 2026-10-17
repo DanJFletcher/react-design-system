@@ -49,7 +49,8 @@ function ConnectedArticle({
 }
 
 const meta = {
-  title: "Components/Article table of contents",
+  title: "Compositions/Editorial/Article table of contents",
+  id: "components-article-table-of-contents",
   component: ArticleTableOfContents,
   args: {
     "aria-label": "Article table of contents",

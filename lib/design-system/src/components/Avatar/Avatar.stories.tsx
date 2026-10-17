@@ -7,7 +7,8 @@ const portrait = `data:image/svg+xml,${encodeURIComponent(
 )}`;
 
 const meta = {
-  title: "Components/Avatar",
+  title: "Components/Identity/Avatar",
+  id: "components-avatar",
   component: Avatar,
   args: {
     name: "Maya Chen",

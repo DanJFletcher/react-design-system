@@ -21,7 +21,8 @@ const faqItems: AccordionItem[] = [
 ];
 
 const meta = {
-  title: "Components/Accordion",
+  title: "Components/Feedback/Accordion",
+  id: "components-accordion",
   component: Accordion,
   args: {
     items: faqItems,

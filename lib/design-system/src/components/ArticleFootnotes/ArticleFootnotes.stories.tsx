@@ -91,7 +91,8 @@ function ConnectedArticle({
 }
 
 const meta = {
-  title: "Components/Article footnotes",
+  title: "Compositions/Editorial/Article footnotes",
+  id: "components-article-footnotes",
   component: ArticleFootnotes,
   args: {
     items: createExampleNotes("sample"),

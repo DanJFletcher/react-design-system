@@ -10,7 +10,8 @@ const layoutItems: ToggleGroupItem[] = [
 ];
 
 const meta = {
-  title: "Components/Toggle group",
+  title: "Components/Actions/Toggle group",
+  id: "components-toggle-group",
   component: ToggleGroup,
   args: {
     "aria-label": "View mode",

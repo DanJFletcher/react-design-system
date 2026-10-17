@@ -5,7 +5,8 @@ import { ToggleButton } from "../ToggleButton/ToggleButton";
 import { ButtonGroup } from "./ButtonGroup";
 
 const meta = {
-  title: "Components/Button group",
+  title: "Components/Actions/Button group",
+  id: "components-button-group",
   component: ButtonGroup,
   args: {
     "aria-label": "Page actions",

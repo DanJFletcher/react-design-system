@@ -12,7 +12,8 @@ const businessServices = [
 ];
 
 const meta = {
-  title: "Components/Layout/Grid",
+  title: "Foundations/Layout helpers/Grid",
+  id: "components-layout-grid",
   component: Grid,
   args: {
     gap: "md",

@@ -4,7 +4,8 @@ import { Header } from "../Header/Header";
 import { BlogLayout } from "./BlogLayout";
 
 const meta = {
-  title: "Components/Layout/Blog layout",
+  title: "Compositions/Editorial/Blog layout",
+  id: "components-layout-blog-layout",
   component: BlogLayout,
   args: {
     footerGap: "2xl",

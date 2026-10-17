@@ -16,7 +16,8 @@ const teamMembers: readonly AvatarGroupMember[] = [
 ];
 
 const meta = {
-  title: "Components/Avatar group",
+  title: "Components/Identity/Avatar group",
+  id: "components-avatar-group",
   component: AvatarGroup,
   args: {
     members: teamMembers,

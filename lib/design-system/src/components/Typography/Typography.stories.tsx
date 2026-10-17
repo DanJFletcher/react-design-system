@@ -13,7 +13,8 @@ const variants: TextVariant[] = ["display", "body", "body-small", "lead", "label
 const measures: TypographyMeasure[] = ["none", "narrow", "content", "wide"];
 
 const meta = {
-  title: "Components/Typography",
+  title: "Components/Content/Typography",
+  id: "components-typography",
   component: Text,
   args: {
     children: "Readable type keeps content clear and consistent.",

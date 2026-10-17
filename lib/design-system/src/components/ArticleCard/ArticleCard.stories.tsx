@@ -30,7 +30,8 @@ const article = {
 };
 
 const meta = {
-  title: "Components/Article card",
+  title: "Compositions/Editorial/Article card",
+  id: "components-article-card",
   component: ArticleCard,
   args: {
     ...article,

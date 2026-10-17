@@ -16,7 +16,8 @@ import { Textarea } from "./Textarea";
 import { TextField } from "./TextField";
 
 const meta = {
-  title: "Components/Form controls",
+  title: "Components/Forms/Form controls",
+  id: "components-form-controls",
   component: TextField,
   args: { label: "Example field" },
   parameters: { layout: "padded" },

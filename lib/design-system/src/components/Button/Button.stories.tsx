@@ -6,7 +6,8 @@ import { Icon, iconNames, type IconName } from "../Icon/Icon";
 import { Button, type ButtonShape } from "./Button";
 
 const meta = {
-  title: "Components/Button",
+  title: "Components/Actions/Button",
+  id: "components-button",
   component: Button,
   args: {
     children: "Save changes",

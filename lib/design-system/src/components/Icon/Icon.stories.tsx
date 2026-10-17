@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Icon, iconNames } from "./Icon";
 
 const meta = {
-  title: "Components/Icon",
+  title: "Components/Identity/Icon",
+  id: "components-icon",
   component: Icon,
   args: {
     name: "sparkle",

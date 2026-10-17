@@ -6,7 +6,8 @@ const sizes: KbdSize[] = ["sm", "md"];
 const shapes: KbdShape[] = ["square", "rounded"];
 
 const meta = {
-  title: "Components/Kbd",
+  title: "Components/Identity/Kbd",
+  id: "components-kbd",
   component: Kbd,
   args: {
     children: "Ctrl",

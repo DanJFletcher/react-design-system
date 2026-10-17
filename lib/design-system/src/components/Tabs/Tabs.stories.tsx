@@ -40,7 +40,8 @@ function ControlledTabsExample() {
 }
 
 const meta = {
-  title: "Components/Tabs",
+  title: "Components/Navigation/Tabs",
+  id: "components-tabs",
   component: Tabs,
   args: {
     items: sampleItems,

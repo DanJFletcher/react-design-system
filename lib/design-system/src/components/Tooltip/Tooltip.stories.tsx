@@ -8,7 +8,8 @@ type PlaygroundArgs = {
 };
 
 const meta = {
-  title: "Components/Tooltip",
+  title: "Components/Overlays/Tooltip",
+  id: "components-tooltip",
   args: {
     content: "Brief contextual help appears on hover or keyboard focus.",
     placement: "top",

@@ -37,7 +37,8 @@ const events: readonly ActivityFeedItem[] = [
 ];
 
 const meta = {
-  title: "Components/Activity feed",
+  title: "Compositions/CMS/Activity feed",
+  id: "components-activity-feed",
   component: ActivityFeed,
   args: {
     events,

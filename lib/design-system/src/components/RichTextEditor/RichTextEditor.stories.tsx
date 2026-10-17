@@ -11,7 +11,8 @@ const article: RichTextEditorDocument = {
 };
 
 const meta = {
-  title: "Components/RichTextEditor",
+  title: "Compositions/CMS/Rich text editor",
+  id: "components-richtexteditor",
   component: RichTextEditor,
   args: {
     label: "Article body",

@@ -6,7 +6,8 @@ import { Chip, type ChipSize } from "./Chip";
 const sizes: ChipSize[] = ["sm", "md", "lg"];
 
 const meta = {
-  title: "Components/Chip",
+  title: "Components/Identity/Chip",
+  id: "components-chip",
   component: Chip,
   args: {
     children: "Design systems",

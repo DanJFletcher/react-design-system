@@ -10,7 +10,8 @@ const items = [
 ] as const;
 
 const meta = {
-  title: "Components/Breadcrumbs",
+  title: "Components/Navigation/Breadcrumbs",
+  id: "components-breadcrumbs",
   component: Breadcrumbs,
   args: {
     "aria-label": "Breadcrumb",

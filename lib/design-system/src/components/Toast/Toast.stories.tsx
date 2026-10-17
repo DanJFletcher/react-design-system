@@ -11,7 +11,8 @@ import {
 } from "./Toast";
 
 const meta = {
-  title: "Components/Toast",
+  title: "Components/Feedback/Toast",
+  id: "components-toast",
   component: Toast,
   args: {
     title: "Changes saved",

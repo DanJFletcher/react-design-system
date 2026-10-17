@@ -4,7 +4,8 @@ import { expect, fn, userEvent, within } from "storybook/test";
 import { PublishingWorkflow, type PublishingReviewStep, type PublishingWorkflowStatus } from "./PublishingWorkflow";
 
 const meta = {
-  title: "Components/Publishing workflow",
+  title: "Compositions/CMS/Publishing workflow",
+  id: "components-publishing-workflow",
   component: PublishingWorkflow,
   args: {
     status: "draft",

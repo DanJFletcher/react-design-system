@@ -5,7 +5,8 @@ import { Rating } from "./Rating";
 import type { RatingInputProps } from "./Rating";
 
 const meta = {
-  title: "Components/Rating",
+  title: "Components/Content/Rating",
+  id: "components-rating",
   component: Rating,
   args: {
     mode: "display",

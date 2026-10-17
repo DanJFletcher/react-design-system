@@ -63,7 +63,8 @@ const projects = [
 ] satisfies PortfolioSectionProps["items"];
 
 const meta = {
-  title: "Components/Portfolio section",
+  title: "Compositions/Marketing/Portfolio section",
+  id: "components-portfolio-section",
   component: PortfolioSection,
   args: {
     eyebrow: "Recent work",

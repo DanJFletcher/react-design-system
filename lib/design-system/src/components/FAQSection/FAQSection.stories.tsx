@@ -24,7 +24,8 @@ const faqItems: FAQSectionItem[] = [
 ];
 
 const meta = {
-  title: "Components/FAQ Section",
+  title: "Compositions/Marketing/FAQ section",
+  id: "components-faq-section",
   component: FAQSection,
   args: {
     heading: "Frequently asked questions",

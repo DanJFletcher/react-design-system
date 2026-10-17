@@ -48,7 +48,8 @@ const testimonials: TestimonialItem[] = [
 ];
 
 const meta = {
-  title: "Components/Testimonials",
+  title: "Compositions/Marketing/Testimonials",
+  id: "components-testimonials",
   component: Testimonials,
   args: {
     items: testimonials,

@@ -119,7 +119,8 @@ function ControlledSearchExample() {
 }
 
 const meta = {
-  title: "Components/Table",
+  title: "Components/Data display/Table",
+  id: "components-table",
   component: Table,
   args: {
     "aria-label": "Local businesses",

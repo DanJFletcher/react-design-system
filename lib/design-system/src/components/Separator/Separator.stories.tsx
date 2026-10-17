@@ -3,7 +3,8 @@ import { expect, within } from "storybook/test";
 import { Separator } from "./Separator";
 
 const meta = {
-  title: "Components/Separator",
+  title: "Foundations/Layout helpers/Separator",
+  id: "components-separator",
   component: Separator,
   args: {
     orientation: "horizontal",

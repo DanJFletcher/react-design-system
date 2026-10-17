@@ -11,7 +11,8 @@ const renderImageFrame = (args: AspectRatioProps) => (
 );
 
 const meta = {
-  title: "Components/Layout/AspectRatio",
+  title: "Foundations/Layout helpers/Aspect ratio",
+  id: "components-layout-aspectratio",
   component: AspectRatio,
   args: {
     ratio: 16 / 9,

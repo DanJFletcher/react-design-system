@@ -4,7 +4,8 @@ import { Button } from "../Button/Button";
 import { PricingDetails } from "./PricingDetails";
 
 const meta = {
-  title: "Components/Pricing details",
+  title: "Compositions/Marketing/Pricing details",
+  id: "components-pricing-details",
   component: PricingDetails,
   args: {
     eyebrow: "Annual plan",

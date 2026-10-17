@@ -5,7 +5,8 @@ import { Button } from "../Button/Button";
 import { Popover } from "./Popover";
 
 const meta = {
-  title: "Components/Popover",
+  title: "Components/Overlays/Popover",
+  id: "components-popover",
   component: Popover,
   args: {
     triggerLabel: "Project details",

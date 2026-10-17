@@ -24,7 +24,8 @@ const groups = [
 ];
 
 const meta = {
-  title: "Components/Footer",
+  title: "Compositions/Marketing/Footer",
+  id: "components-footer",
   component: Footer,
   args: {
     variant: "plain",

@@ -41,7 +41,8 @@ function ControlledNavigation() {
 }
 
 const meta = {
-  title: "Components/SideNavigation",
+  title: "Components/Navigation/Side navigation",
+  id: "components-sidenavigation",
   component: SideNavigation,
   args: {
     items: sampleItems,

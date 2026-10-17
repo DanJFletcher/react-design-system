@@ -9,7 +9,8 @@ const tones: AnnouncementBarTone[] = ["info", "success", "warning", "error", "ne
 const themes = ["acme", "luna", "orchid", "atom", "sublime"] as const;
 
 const meta = {
-  title: "Components/AnnouncementBar",
+  title: "Compositions/Marketing/Announcement bar",
+  id: "components-announcementbar",
   component: AnnouncementBar,
   args: {
     title: "A little update",
