@@ -158,3 +158,47 @@ test("ArticleBody and wide tables remain usable at phone width", async ({ page }
   });
   expect(lineMeasure.lineHeight / lineMeasure.fontSize).toBeGreaterThanOrEqual(1.5);
 });
+
+test("ArticleBody footnotes with long source URLs stay usable at 320px", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto(
+    "/iframe.html?id=components-article-footnotes--narrow-screen-long-content&viewMode=story",
+  );
+
+  const article = page.getByRole("article", {
+    name: "A guide to preparing a welcoming studio",
+  });
+  const citation = article.getByRole("link", { name: "Footnote 1", exact: true });
+  const note = article.locator("#narrow-long-note-source");
+  const source = note.getByRole("link", {
+    name: "https://example.org/research/archive/2026/field-notes/extended-source-reference",
+  });
+  const backlink = note.getByRole("link", {
+    name: "Back to citation 1 for footnote 1",
+  });
+
+  await expect(article).toBeVisible();
+  await expect(note).toBeVisible();
+  await expect(source).toBeVisible();
+  await expect(backlink).toBeVisible();
+
+  const dimensions = await page.evaluate(() => ({
+    documentWidth: document.documentElement.scrollWidth,
+    viewportWidth: document.documentElement.clientWidth,
+  }));
+  const noteWidths = await note.evaluate((element) => ({
+    width: element.getBoundingClientRect().width,
+    scrollWidth: element.scrollWidth,
+  }));
+  expect(dimensions.documentWidth).toBeLessThanOrEqual(dimensions.viewportWidth);
+  expect(noteWidths.scrollWidth).toBeLessThanOrEqual(noteWidths.width);
+
+  await citation.focus();
+  await expect(citation).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(source).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(backlink).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(citation).toBeFocused();
+});

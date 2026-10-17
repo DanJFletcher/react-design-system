@@ -33,15 +33,37 @@ const createExampleNotes = (prefix: string): readonly ArticleFootnoteEntry[] => 
   },
 ];
 
+const createNarrowScreenNotes = (prefix: string): readonly ArticleFootnoteEntry[] => [
+  {
+    id: `${prefix}-note-source`,
+    label: "1",
+    content: (
+      <>
+        <p>
+          This note includes enough supporting detail to wrap across several lines on a
+          narrow phone screen without making the citation difficult to follow.
+        </p>
+        <p>
+          Source:{" "}
+          <a href="https://example.org/research/archive/2026/field-notes/extended-source-reference">
+            https://example.org/research/archive/2026/field-notes/extended-source-reference
+          </a>
+        </p>
+      </>
+    ),
+    backlinks: [{ id: `${prefix}-citation-source` }],
+  },
+];
+
 function ConnectedArticle({
   args,
   prefix,
+  items = createExampleNotes(prefix),
 }: {
   args: ArticleFootnotesProps;
   prefix: string;
+  items?: readonly ArticleFootnoteEntry[];
 }) {
-  const items = createExampleNotes(prefix);
-
   return (
     <ArticleBody aria-label="A guide to preparing a welcoming studio">
       <h1>A guide to preparing a welcoming studio</h1>
@@ -120,6 +142,18 @@ export const NarrowScreen: Story = {
   render: (args) => (
     <div style={{ inlineSize: "min(100%, 20rem)", marginInline: "auto" }}>
       <ConnectedArticle args={args} prefix="narrow" />
+    </div>
+  ),
+};
+
+export const NarrowScreenLongContent: Story = {
+  render: (args) => (
+    <div style={{ inlineSize: "min(100%, 20rem)", marginInline: "auto" }}>
+      <ConnectedArticle
+        args={args}
+        prefix="narrow-long"
+        items={createNarrowScreenNotes("narrow-long")}
+      />
     </div>
   ),
 };
