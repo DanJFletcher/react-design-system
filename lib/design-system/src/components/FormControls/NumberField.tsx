@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useState, type ComponentPropsWithRef } from "react";
+import { forwardRef, useEffect, useRef, useState, type ComponentPropsWithRef } from "react";
 import { FieldLabel, FieldMessages, type FormFieldProps, useFormField } from "./FormField";
 import fieldStyles from "./FormControls.module.css";
 import styles from "./NumberField.module.css";
@@ -70,6 +70,26 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>(functi
     if (!isControlled) setUncontrolledValue(event.currentTarget.value);
     onChange?.(event);
   };
+
+  useEffect(() => {
+    if (isControlled) return;
+    const input = inputRef.current;
+    const form = input?.form;
+    if (!input || !form) return;
+
+    let isMounted = true;
+    const handleFormReset = () => {
+      queueMicrotask(() => {
+        if (isMounted) setUncontrolledValue(input.value);
+      });
+    };
+
+    form.addEventListener("reset", handleFormReset);
+    return () => {
+      isMounted = false;
+      form.removeEventListener("reset", handleFormReset);
+    };
+  }, [inputProps.form, isControlled]);
 
   const stepValue = (direction: "up" | "down") => {
     const input = inputRef.current;

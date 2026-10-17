@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { NumberField } from "./NumberField";
@@ -120,6 +120,51 @@ describe("NumberField", () => {
     fireEvent.click(screen.getByRole("button", { name: "Maximum count Decrease" }));
     expect(maximumInput).toHaveValue(3);
     expect(screen.getByRole("button", { name: "Maximum count Increase" })).toBeEnabled();
+  });
+
+  it("keeps step buttons accurate after an uncontrolled form reset", async () => {
+    render(
+      <form aria-label="Counts">
+        <NumberField defaultValue={1} label="Minimum count" min={1} max={5} showSteppers />
+        <NumberField defaultValue={5} label="Maximum count" min={1} max={5} showSteppers />
+        <NumberField defaultValue={3} label="In-range count" min={1} max={5} showSteppers />
+      </form>,
+    );
+
+    const form = screen.getByRole("form", { name: "Counts" });
+    const minimumInput = screen.getByRole("spinbutton", { name: "Minimum count" });
+    const maximumInput = screen.getByRole("spinbutton", { name: "Maximum count" });
+    const inRangeInput = screen.getByRole("spinbutton", { name: "In-range count" });
+
+    fireEvent.change(minimumInput, { target: { value: "2" } });
+    fireEvent.change(maximumInput, { target: { value: "4" } });
+    fireEvent.change(inRangeInput, { target: { value: "4" } });
+
+    await act(async () => {
+      (form as HTMLFormElement).reset();
+      await Promise.resolve();
+    });
+
+    expect(minimumInput).toHaveValue(1);
+    expect(screen.getByRole("button", { name: "Minimum count Decrease" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Minimum count Increase" })).toBeEnabled();
+
+    expect(maximumInput).toHaveValue(5);
+    expect(screen.getByRole("button", { name: "Maximum count Decrease" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Maximum count Increase" })).toBeDisabled();
+
+    expect(inRangeInput).toHaveValue(3);
+    expect(screen.getByRole("button", { name: "In-range count Decrease" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "In-range count Increase" })).toBeEnabled();
+
+    fireEvent.click(screen.getByRole("button", { name: "Minimum count Increase" }));
+    expect(minimumInput).toHaveValue(2);
+    fireEvent.click(screen.getByRole("button", { name: "Maximum count Decrease" }));
+    expect(maximumInput).toHaveValue(4);
+    fireEvent.click(screen.getByRole("button", { name: "In-range count Decrease" }));
+    expect(inRangeInput).toHaveValue(2);
+    fireEvent.click(screen.getByRole("button", { name: "In-range count Increase" }));
+    expect(inRangeInput).toHaveValue(3);
   });
 
   it("gives step buttons native button semantics and localized accessible names", () => {
