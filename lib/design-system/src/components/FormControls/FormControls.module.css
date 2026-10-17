@@ -40,6 +40,40 @@
   cursor: not-allowed;
 }
 
+.colorFieldControls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  min-inline-size: 0;
+  gap: var(--ds-space-3);
+}
+
+.colorHexInput {
+  min-inline-size: 0;
+}
+
+.colorPicker {
+  box-sizing: border-box;
+  inline-size: var(--ds-control-min-block-size-md);
+  block-size: var(--ds-control-min-block-size-md);
+  padding: var(--ds-space-1);
+  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  border-radius: var(--ds-radius-form-control);
+  background-color: var(--ds-color-surface-primary);
+  cursor: pointer;
+}
+
+.colorPicker:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.colorPicker:disabled {
+  border-color: var(--ds-color-action-disabled-bg);
+  background-color: var(--ds-color-action-disabled-bg);
+  cursor: not-allowed;
+}
+
 .inputGroup {
   box-sizing: border-box;
   display: flex;
@@ -312,9 +346,14 @@
 
 @media (forced-colors: active) {
   .control:focus-visible,
+  .colorPicker:focus-visible,
   .inputGroup:focus-within,
   .choiceControl:focus-visible {
     outline-color: Highlight;
+  }
+
+  .colorPicker {
+    border-color: CanvasText;
   }
 
   .switch,

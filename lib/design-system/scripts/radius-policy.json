@@ -33,6 +33,7 @@
     { "file": "Dialog/Dialog.module.css", "selector": ".closeButton", "role": "action", "reason": "Dialog dismissal control, not its panel." },
     { "file": "Popover/Popover.module.css", "selector": ".closeButton", "role": "action", "reason": "Popover dismissal control, not its content surface." },
     { "file": "FormControls/FormControls.module.css", "selector": ".control", "role": "form", "reason": "Single-line text, date, file and select controls." },
+    { "file": "FormControls/FormControls.module.css", "selector": ".colorPicker", "role": "form", "reason": "The native swatch is a single-line color form control." },
     { "file": "FormControls/FormControls.module.css", "selector": ".inputGroup", "role": "form", "reason": "Input groups keep the active single-line form-control corner shape." },
     { "file": "FormControls/NumberField.module.css", "selector": ".group", "role": "form", "reason": "The number input and its step buttons share the theme's form-control corner shape." },
     { "file": "FormControls/NumberField.module.css", "selector": ".stepButton:last-child", "role": "form", "reason": "The final step button follows the outer form-control corner shape." },

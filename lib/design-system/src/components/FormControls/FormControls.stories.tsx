@@ -4,6 +4,7 @@ import { expect, userEvent, within } from "storybook/test";
 import { Button } from "../Button/Button";
 import { FormFieldLabel, FormFieldMessages, useFormField } from "../../index";
 import { Checkbox } from "./Checkbox";
+import { ColorField } from "./ColorField";
 import { DateField } from "./DateField";
 import { FileField } from "./FileField";
 import { FieldGroup } from "./FieldGroup";
@@ -94,6 +95,38 @@ export const TextFieldStates: Story = {
     await expect(organization).toHaveAttribute("aria-describedby", expect.stringContaining("error"));
     await expect(canvas.getByText("Enter the organization name shown on your account.")).toBeVisible();
     await expect(canvas.getByRole("textbox", { name: "Account ID" })).toBeDisabled();
+  },
+};
+
+export const ColorFieldInteraction: Story = {
+  render: () => (
+    <form aria-label="Brand color form" style={{ maxWidth: "32rem" }}>
+      <ColorField
+        label="Brand color"
+        name="brandColor"
+        defaultValue="#1769E0"
+        required
+        description="Enter a six-digit hex value or open the native picker."
+      />
+    </form>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const valueInput = canvasElement.querySelector(
+      'input[type="text"][name="brandColor"]',
+    ) as HTMLInputElement | null;
+    if (!valueInput) throw new Error("ColorField should render its named hex input.");
+    const picker = valueInput.parentElement?.querySelector('input[type="color"]') as HTMLInputElement | null;
+    if (!picker) throw new Error("ColorField should expose a native color picker.");
+
+    await expect(valueInput).toBeRequired();
+    await expect(valueInput).toHaveValue("#1769E0");
+    await expect(picker).toHaveValue("#1769e0");
+    await userEvent.clear(valueInput);
+    await userEvent.type(valueInput, "#16A34A");
+    await expect(picker).toHaveValue("#16a34a");
+    const form = canvas.getByRole("form", { name: "Brand color form" }) as HTMLFormElement;
+    await expect(new FormData(form).get("brandColor")).toBe("#16A34A");
   },
 };
 
@@ -523,6 +556,7 @@ export const ThemeCoverage: Story = {
           </h2>
           <TextField label="Workspace name" defaultValue="Moonlight" />
           <TextField label="Monthly budget" defaultValue="1250" prefix="$" suffix="USD" type="number" />
+          <ColorField label="Brand color" name={`brand-color-${theme}`} defaultValue="#1769E0" />
           <Textarea label="Description" rows={2} defaultValue="A shared project space." />
           <Select label="Visibility" defaultValue="private">
             <option value="private">Private</option>

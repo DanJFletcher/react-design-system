@@ -344,6 +344,8 @@ export { RadioGroup } from "./components/FormControls/RadioGroup";
 export type { RadioGroupProps, RadioOption } from "./components/FormControls/RadioGroup";
 export { DateField } from "./components/FormControls/DateField";
 export type { DateFieldProps, DateFieldType } from "./components/FormControls/DateField";
+export { ColorField } from "./components/FormControls/ColorField";
+export type { ColorFieldProps } from "./components/FormControls/ColorField";
 export { FileField } from "./components/FormControls/FileField";
 export type { FileFieldProps } from "./components/FormControls/FileField";
 export { Switch } from "./components/FormControls/Switch";

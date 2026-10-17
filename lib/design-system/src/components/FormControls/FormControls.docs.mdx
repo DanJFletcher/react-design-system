@@ -33,6 +33,14 @@ Use the optional `prefix` and `suffix` slots to attach text, decorative icons, o
 
 Affix content remains in the accessibility tree unless the consumer marks it decorative, and interactive suffix elements keep their own native keyboard behavior and tab stop. The input retains its label, description, error, ref, and native form behavior. The group shrinks with its container; long affix text can wrap, and the input keeps the remaining available width. When the field is disabled, disable any interactive affix elements separately.
 
+## ColorField
+
+<Canvas of={FormControlsStories.ColorFieldInteraction} />
+
+`ColorField` combines an editable hexadecimal text value with a native color picker. Values use the six-digit `#RRGGBB` format; the text input's native `pattern` validation prevents invalid values from passing a required form. `name` is submitted once from the text input. The picker is labeled from the visible field label by default, or can use `pickerLabel` for a separate localized name.
+
+Use `value` with `onValueChange` for controlled state or `defaultValue` for uncontrolled state. `onValueChange` receives the string selected or typed, and native `onChange` receives the originating input event. While the text is temporarily not a valid hex color, the native picker displays black until a valid six-digit value is entered.
+
 ## Textarea
 
 <Canvas of={FormControlsStories.TextareaBasics} />
@@ -118,4 +126,4 @@ const field = useFormField({ description, error, "aria-describedby": "organizati
 
 In Atom, `FieldGroup` has no drop shadow; its contained form controls retain their normal theme styling.
 
-Controls use the active theme's semantic text, surface, border, focus, spacing, and radius tokens. ACME, Atom, Luna, and Orchid theme coverage includes date, file, and switch examples. Control boundaries, file-picker action text, disabled actions, and active switch tracks have documented contrast checks. Luna keeps single-line text and select controls pill-shaped and uses a 32px radius for both textareas and field groups. Atom uses compact, squared control corners, 8px field-group corners, thick outlines, and hard offset shadows. Error text and invalid borders use dedicated semantic roles with contrast checked across all themes.
+Controls use the active theme's semantic text, surface, border, focus, spacing, and radius tokens. ACME, Atom, Luna, Orchid, and Sublime theme coverage includes color, date, file, and switch examples. Control boundaries, file-picker action text, disabled actions, and active switch tracks have documented contrast checks. Luna keeps single-line text and select controls pill-shaped and uses a 32px radius for both textareas and field groups. Atom uses compact, squared control corners, 8px field-group corners, thick outlines, and hard offset shadows. Error text and invalid borders use dedicated semantic roles with contrast checked across all themes.

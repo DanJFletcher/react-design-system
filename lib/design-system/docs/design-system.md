@@ -173,6 +173,21 @@ Set `showSteppers` to add optional decrease/increase buttons. They use the nativ
 />
 ```
 
+## ColorField
+
+`ColorField` combines an editable six-digit hexadecimal value with a native color picker. The visible label names both inputs by default; `pickerLabel` provides a separate accessible name when needed. `name` is applied only to the hex text input, so a form submits one value.
+
+`value` with `onValueChange` provides controlled state; `defaultValue` initializes uncontrolled state and defaults to `#000000`. `onValueChange` receives the current string from either control, while native `onChange` receives the event from the control that changed. The text input uses a native `pattern` for `#RRGGBB`; invalid or incomplete hex text remains editable but the native picker displays black until the text is valid.
+
+```tsx
+<ColorField
+  label="Brand color"
+  name="brandColor"
+  defaultValue="#1769E0"
+  description="Choose or enter a six-digit hex color."
+/>
+```
+
 ## Combobox
 
 `Combobox` is a searchable single-select form control. `options` is a readonly list of unique `{ value, label, disabled? }` entries. Matching is case-insensitive against the option label by default; `filterOptions(options, query)` can supply custom filtering. Editing the query clears any previous selection, and free-form query text is not submitted as an option.
