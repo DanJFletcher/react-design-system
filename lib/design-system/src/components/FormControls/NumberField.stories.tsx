@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { NumberField } from "./NumberField";
 
@@ -74,6 +75,68 @@ export const WithStepControls: Story = {
     await expect(increase).toHaveFocus();
     await userEvent.keyboard(" ");
     await expect(input).toHaveValue(4);
+  },
+};
+
+export const LiveConstraints: Story = {
+  render: () => {
+    const [constraints, setConstraints] = useState({ min: 0, max: 10, step: 1 });
+    const [controlledValue, setControlledValue] = useState(4);
+
+    return (
+      <div style={{ display: "grid", gap: "var(--ds-space-4)", width: "32rem", maxWidth: "100%" }}>
+        <button
+          onClick={() => setConstraints({ min: 2, max: 8, step: 2 })}
+          type="button"
+        >
+          Use updated constraints
+        </button>
+        <NumberField
+          defaultValue={4}
+          label="Uncontrolled changing quantity"
+          {...constraints}
+          showSteppers
+        />
+        <NumberField
+          label="Controlled changing quantity"
+          onChange={(event) => setControlledValue(Number(event.currentTarget.value))}
+          value={controlledValue}
+          {...constraints}
+          showSteppers
+        />
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const labels = ["Uncontrolled changing quantity", "Controlled changing quantity"];
+
+    await userEvent.click(canvas.getByRole("button", { name: "Use updated constraints" }));
+
+    for (const label of labels) {
+      const input = canvas.getByRole("spinbutton", { name: label }) as HTMLInputElement;
+      const decrease = canvas.getByRole("button", { name: `${label} Decrease` });
+      const increase = canvas.getByRole("button", { name: `${label} Increase` });
+
+      await expect(input).toHaveAttribute("min", "2");
+      await expect(input).toHaveAttribute("max", "8");
+      await expect(input).toHaveAttribute("step", "2");
+      await expect(input.validity.valid).toBe(true);
+
+      await userEvent.click(decrease);
+      await expect(input).toHaveValue(2);
+      await expect(input.validity.valid).toBe(true);
+      await expect(decrease).toBeDisabled();
+
+      await userEvent.click(increase);
+      await expect(input).toHaveValue(4);
+      await userEvent.click(increase);
+      await expect(input).toHaveValue(6);
+      await userEvent.click(increase);
+      await expect(input).toHaveValue(8);
+      await expect(input.validity.valid).toBe(true);
+      await expect(increase).toBeDisabled();
+    }
   },
 };
 

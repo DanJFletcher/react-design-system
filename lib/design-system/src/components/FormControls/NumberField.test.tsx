@@ -83,6 +83,80 @@ describe("NumberField", () => {
     expect(onControlledChange).toHaveBeenCalledWith("8");
   });
 
+  it("updates native constraints and step buttons when the parent changes min, max, and step", () => {
+    function ChangingConstraints() {
+      const [constraints, setConstraints] = useState({ min: 0, max: 10, step: 1 });
+      const [controlledValue, setControlledValue] = useState(4);
+
+      return (
+        <>
+          <button
+            onClick={() => setConstraints({ min: 2, max: 8, step: 2 })}
+            type="button"
+          >
+            Use updated constraints
+          </button>
+          <NumberField
+            defaultValue={4}
+            label="Uncontrolled changing quantity"
+            {...constraints}
+            showSteppers
+          />
+          <NumberField
+            label="Controlled changing quantity"
+            onChange={(event) => setControlledValue(Number(event.currentTarget.value))}
+            value={controlledValue}
+            {...constraints}
+            showSteppers
+          />
+        </>
+      );
+    }
+
+    render(<ChangingConstraints />);
+
+    const labels = ["Uncontrolled changing quantity", "Controlled changing quantity"];
+    const inputs = labels.map(
+      (label) => screen.getByRole("spinbutton", { name: label }) as HTMLInputElement,
+    );
+
+    for (const input of inputs) {
+      expect(input).toHaveAttribute("min", "0");
+      expect(input).toHaveAttribute("max", "10");
+      expect(input).toHaveAttribute("step", "1");
+      expect(input).toHaveValue(4);
+    }
+
+    fireEvent.click(screen.getByRole("button", { name: "Use updated constraints" }));
+
+    for (const input of inputs) {
+      expect(input).toHaveAttribute("min", "2");
+      expect(input).toHaveAttribute("max", "8");
+      expect(input).toHaveAttribute("step", "2");
+      expect(input.validity.valid).toBe(true);
+    }
+
+    for (const label of labels) {
+      const input = screen.getByRole("spinbutton", { name: label }) as HTMLInputElement;
+      const decrease = screen.getByRole("button", { name: `${label} Decrease` });
+      const increase = screen.getByRole("button", { name: `${label} Increase` });
+
+      fireEvent.click(decrease);
+      expect(input).toHaveValue(2);
+      expect(input.validity.valid).toBe(true);
+      expect(decrease).toBeDisabled();
+
+      fireEvent.click(increase);
+      expect(input).toHaveValue(4);
+      fireEvent.click(increase);
+      expect(input).toHaveValue(6);
+      fireEvent.click(increase);
+      expect(input).toHaveValue(8);
+      expect(input.validity.valid).toBe(true);
+      expect(increase).toBeDisabled();
+    }
+  });
+
   it("adds accessible, native step controls and disables them at min and max", () => {
     render(
       <>
