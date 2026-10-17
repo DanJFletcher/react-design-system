@@ -485,6 +485,10 @@ The reading column is limited to 72 characters per line and fluidly fits narrow 
     A short opening checklist can make busy mornings easier
     <ArticleFootnote id="citation-checklist" noteId="note-checklist" label="1" />.
   </p>
+  <p>
+    The same checklist can help during weekly reviews
+    <ArticleFootnote id="citation-weekly-review" noteId="note-checklist" label="1" />.
+  </p>
   <ArticleFootnotes
     heading="Sources and notes"
     headingLevel={2}
@@ -493,16 +497,19 @@ The reading column is limited to 72 characters per line and fluidly fits narrow 
         id: "note-checklist",
         label: "1",
         content: <>See the <a href="/journal/opening-checklist">full opening checklist</a>.</>,
-        backlinks: [{ id: "citation-checklist" }],
+        backlinks: [
+          { id: "citation-checklist" },
+          { id: "citation-weekly-review" },
+        ],
       },
     ]}
   />
 </ArticleBody>
 ```
 
-`ArticleFootnote` renders an in-text superscript anchor to a note. `ArticleFootnotes` renders a named section with an ordered list and return links to each citation marker. Supply a stable, unique marker `id`, the matching note `id` as `noteId`, and the same IDs in each note's `backlinks` list. A note can link back to multiple in-text citations. `label` controls the visible and accessible marker text; `headingLevel` keeps the notes heading in the article's semantic outline. Note content is consumer-provided React content, so external source links and formatting remain under caller control.
+`ArticleFootnote` renders an in-text superscript anchor to a note. `ArticleFootnotes` renders a named section with an ordered list and return links to each citation marker. Supply stable IDs that are unique across the whole document: give every marker its own `id`, set its `noteId` to the matching note's `id`, and list every marker ID in that note's `backlinks`. A note can link back to multiple in-text citations. `label` controls the visible marker text and its accessible name; `headingLevel` keeps the notes heading in the article's semantic outline. Note content is consumer-provided React content, so external source links and formatting remain under caller control.
 
-The components use native fragment links without JavaScript navigation, inherit ACME, Luna, Orchid, custom, and nested theme tokens, and preserve visible focus indicators and forced-colors support. The component does not resolve sources, assign citation numbering, or fetch content.
+The components use native fragment links without JavaScript navigation. Activating a citation moves keyboard focus to its note, where a visible target outline identifies the destination; return links move focus back to the corresponding marker. The named section, ordered list, link names, and note content remain available to assistive technology. The components inherit ACME, Luna, Orchid, custom, and nested theme tokens, and preserve visible focus indicators and forced-colors support. The component does not resolve sources, assign citation numbering, or fetch content.
 
 ## Article table of contents
 

@@ -19,8 +19,13 @@ The reading column is capped at 72 characters per line and narrows fluidly on sm
 
 <Canvas of={ArticleBodyStories.ThemeCoverage} />
 <Canvas of={ArticleBodyStories.NarrowScreen} />
+<Canvas of={ArticleBodyStories.CitationsAndFootnotes} />
 
 Typography and colors follow the active ACME, Atom, Luna, Orchid, or custom theme. Links have a visible keyboard focus outline, and forced-colors mode uses system colors.
+
+## Citations and footnotes
+
+Use `ArticleFootnote` for each superscript citation and `ArticleFootnotes` for the named notes section. Give every marker and note a document-unique ID, and include every citation marker ID in its note's `backlinks`. The links use native fragments; activating a citation focuses the note, and each return link focuses its matching marker. The example demonstrates the keyboard path and accessible names.
 
 ## Native article attributes
 

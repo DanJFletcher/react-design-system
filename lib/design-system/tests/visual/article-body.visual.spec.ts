@@ -46,6 +46,41 @@ test("ArticleBody exposes native reading structure, helpful alternatives, and ke
   await expect(link).toHaveCSS("outline-style", "solid");
 });
 
+test("ArticleBody citations navigate to notes and keyboard backlinks return to their markers", async ({ page }) => {
+  await page.goto("/iframe.html?id=components-article-body--citations-and-footnotes&viewMode=story");
+
+  const article = page.getByRole("article", { name: "A guide to preparing your studio" });
+  const citations = article.getByRole("link", { name: "Footnote 1", exact: true });
+  const firstCitation = citations.first();
+  const secondCitation = citations.last();
+  const notes = article.getByRole("region", { name: "Sources and notes" });
+  const note = notes.getByRole("listitem");
+  const backlinks = notes.getByRole("link", { name: /Back to citation/ });
+
+  await expect(article).toBeVisible({ timeout: 15_000 });
+  await expect(notes.getByRole("list")).toBeVisible();
+  await expect(firstCitation).toHaveAttribute("href", "#article-note-checklist");
+  await expect(secondCitation).toHaveAttribute("href", "#article-note-checklist");
+  await expect(backlinks).toHaveCount(2);
+  await expect(backlinks.nth(0)).toHaveAttribute("href", "#article-citation-checklist");
+  await expect(backlinks.nth(1)).toHaveAttribute("href", "#article-citation-weekly-review");
+
+  await firstCitation.focus();
+  await expect(firstCitation).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(note).toBeFocused();
+  await expect(note).toHaveCSS("outline-style", "solid");
+  await expect(page).toHaveURL(/#article-note-checklist$/);
+
+  await page.keyboard.press("Tab");
+  await expect(notes.getByRole("link", { name: "full opening checklist" })).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(backlinks.first()).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(firstCitation).toBeFocused();
+  await expect(page).toHaveURL(/#article-citation-checklist$/);
+});
+
 test("ArticleBody follows all built-in theme boundaries", async ({ page }) => {
   await page.goto("/iframe.html?id=components-article-body--theme-coverage&viewMode=story");
 

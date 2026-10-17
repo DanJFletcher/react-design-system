@@ -12,7 +12,7 @@ import * as ArticleFootnotesStories from "./ArticleFootnotes.stories";
 <Canvas of={ArticleFootnotesStories.Playground} />
 <Controls of={ArticleFootnotesStories.Playground} />
 
-Each marker is a native fragment link. A note may have more than one citation marker, and each backlink returns to its own marker.
+Each marker is a native fragment link. A note may have more than one citation marker, and each backlink returns to its own marker. Activating a citation focuses the note without adding it to the normal Tab order; the visible target outline identifies where the link led.
 
 ## Themes and narrow screens
 
@@ -48,6 +48,6 @@ Each marker is a native fragment link. A note may have more than one citation ma
 </ArticleBody>
 ```
 
-Supply a localized `backlinkLabel` or a per-backlink `ariaLabel` when needed. Choose `headingLevel` to fit the surrounding article outline. Note content is React content supplied by the consumer; the component does not assign numbering, resolve sources, or sanitize HTML.
+Supply a localized `backlinkLabel` or a per-backlink `ariaLabel` when needed. Choose `headingLevel` to fit the surrounding article outline. Keep marker and note IDs unique across the entire document. Note content is React content supplied by the consumer; the component does not assign numbering, resolve sources, or sanitize HTML.
 
 The marker and return links are keyboard accessible, visibly focused, and theme-aware. The components inherit custom and nested themes and provide system colors in forced-colors mode.

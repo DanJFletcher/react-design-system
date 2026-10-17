@@ -69,6 +69,12 @@
   margin-block-start: var(--ds-space-2);
 }
 
+.articleBody :where(sup) {
+  font-size: var(--ds-font-size-sm);
+  line-height: 0;
+  vertical-align: super;
+}
+
 .articleBody :where(a) {
   color: var(--ds-color-action-secondary-fg);
   text-decoration: underline;

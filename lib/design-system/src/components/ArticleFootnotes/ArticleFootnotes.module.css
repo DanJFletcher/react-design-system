@@ -6,9 +6,16 @@
 }
 
 .markerLink {
+  display: inline-flex;
+  min-inline-size: var(--ds-space-5);
+  min-block-size: var(--ds-space-5);
+  align-items: center;
+  justify-content: center;
   padding-inline: var(--ds-space-1);
   border-radius: var(--ds-radius-surface);
+  background-color: var(--ds-color-surface-secondary);
   color: var(--ds-color-action-secondary-fg);
+  font-weight: var(--ds-font-weight-semibold);
   text-decoration: underline;
   text-decoration-thickness: var(--ds-border-width-default);
   text-underline-offset: var(--ds-space-1);
@@ -52,6 +59,13 @@
   align-items: start;
   gap: var(--ds-space-2) var(--ds-space-3);
   min-inline-size: 0;
+  scroll-margin-block: var(--ds-space-6);
+}
+
+.note:target {
+  border-radius: var(--ds-radius-surface);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-space-2);
 }
 
 .noteLabel {
@@ -92,10 +106,8 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--ds-radius-surface);
+  background-color: var(--ds-color-surface-secondary);
   color: var(--ds-color-action-secondary-fg);
-  text-decoration: underline;
-  text-decoration-thickness: var(--ds-border-width-default);
-  text-underline-offset: var(--ds-space-1);
 }
 
 .markerLink:focus-visible,
@@ -130,6 +142,10 @@
   .noteContent :where(a),
   .backlink {
     color: LinkText;
+  }
+
+  .note:target {
+    outline-color: Highlight;
   }
 
   .markerLink:focus-visible,

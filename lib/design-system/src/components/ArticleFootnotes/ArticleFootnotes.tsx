@@ -115,7 +115,7 @@ const ArticleFootnotesSection = forwardRef<HTMLElement, ArticleFootnotesProps>(
         </HeadingTag>
         <ol className={styles.list}>
           {items.map((item) => (
-            <li className={styles.note} id={item.id} key={item.id}>
+            <li className={styles.note} id={item.id} key={item.id} tabIndex={-1}>
               <span className={styles.noteLabel}>{item.label}</span>
               <div className={styles.noteContent}>{item.content}</div>
               <div className={styles.backlinks}>

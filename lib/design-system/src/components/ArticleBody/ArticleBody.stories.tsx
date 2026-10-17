@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { expect, within } from "storybook/test";
+import { expect, userEvent, within } from "storybook/test";
 import { ArticleBody } from "./ArticleBody";
+import { ArticleFootnote, ArticleFootnotes } from "../ArticleFootnotes/ArticleFootnotes";
 
 const illustrationSrc = `data:image/svg+xml,${encodeURIComponent(
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480"><rect width="960" height="480" fill="#e4efe8"/><circle cx="740" cy="130" r="68" fill="#f4c66a"/><path d="M0 360 210 170l170 155 175-175 405 310v20H0Z" fill="#83a98a"/><path d="M0 405 270 265l180 130 195-105 315 150v40H0Z" fill="#426b55"/></svg>',
@@ -110,6 +111,89 @@ export const FullArticle: Story = {
       name: "Three useful moments to reset the studio",
     })).toBeVisible();
     await expect(canvas.getByRole("rowheader", { name: "Monday" })).toBeVisible();
+  },
+};
+
+function CitationsAndFootnotesExample() {
+  return (
+    <ArticleBody aria-label="A guide to preparing your studio">
+      <h2>A useful opening checklist</h2>
+      <p>
+        A short opening checklist helps the team prepare the studio{" "}
+        <ArticleFootnote
+          id="article-citation-checklist"
+          noteId="article-note-checklist"
+          label="1"
+        />
+        .
+      </p>
+      <p>
+        The same checklist is useful during weekly reviews{" "}
+        <ArticleFootnote
+          id="article-citation-weekly-review"
+          noteId="article-note-checklist"
+          label="1"
+        />
+        .
+      </p>
+      <ArticleFootnotes
+        heading="Sources and notes"
+        headingLevel={2}
+        items={[
+          {
+            id: "article-note-checklist",
+            label: "1",
+            content: (
+              <>
+                See the{" "}
+                <a href="/journal/opening-checklist">full opening checklist</a>.
+              </>
+            ),
+            backlinks: [
+              { id: "article-citation-checklist" },
+              { id: "article-citation-weekly-review" },
+            ],
+          },
+        ]}
+      />
+    </ArticleBody>
+  );
+}
+
+export const CitationsAndFootnotes: Story = {
+  render: () => <CitationsAndFootnotesExample />,
+};
+
+export const CitationsAndFootnotesKeyboard: Story = {
+  render: () => <CitationsAndFootnotesExample />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const citations = canvas.getAllByRole("link", { name: "Footnote 1" });
+    const firstCitation = citations[0];
+    const secondCitation = citations[1];
+    const note = canvas.getByRole("listitem");
+    const backlinks = canvas.getAllByRole("link", {
+      name: /Back to citation/,
+    });
+
+    await expect(canvas.getByRole("region", { name: "Sources and notes" })).toBeVisible();
+    await expect(canvas.getByRole("list")).toBeVisible();
+    await expect(firstCitation).toHaveAttribute("href", "#article-note-checklist");
+    await expect(secondCitation).toHaveAttribute("href", "#article-note-checklist");
+    await expect(backlinks[0]).toHaveAttribute("href", "#article-citation-checklist");
+    await expect(backlinks[1]).toHaveAttribute("href", "#article-citation-weekly-review");
+
+    await userEvent.tab();
+    await expect(firstCitation).toHaveFocus();
+    await userEvent.tab();
+    await expect(secondCitation).toHaveFocus();
+    await userEvent.tab();
+    await expect(canvas.getByRole("link", { name: "full opening checklist" })).toHaveFocus();
+    await userEvent.tab();
+    await expect(backlinks[0]).toHaveFocus();
+    await userEvent.tab();
+    await expect(backlinks[1]).toHaveFocus();
+    await expect(note).toHaveAttribute("id", "article-note-checklist");
   },
 };
 
