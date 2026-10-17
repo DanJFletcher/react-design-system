@@ -1,0 +1,203 @@
+.portfolio {
+  --_portfolio-surface: transparent;
+  --_portfolio-text: var(--ds-color-text-primary);
+  --_portfolio-muted: var(--ds-color-text-muted);
+  --_portfolio-border: transparent;
+
+  box-sizing: border-box;
+  display: grid;
+  gap: var(--ds-space-6);
+  min-inline-size: 0;
+  padding: 0;
+  border: var(--ds-border-width-default) solid var(--_portfolio-border);
+  border-radius: var(--ds-radius-surface);
+  background-color: var(--_portfolio-surface);
+  color: var(--_portfolio-text);
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-md);
+}
+
+.portfolio[data-variant="surface"] {
+  --_portfolio-surface: var(--ds-color-surface-primary);
+  --_portfolio-border: var(--ds-color-border-control);
+
+  padding: var(--ds-space-6);
+}
+
+.portfolio[data-variant="accent"] {
+  --_portfolio-surface: var(--ds-color-accent-bg);
+  --_portfolio-text: var(--ds-color-accent-fg);
+  --_portfolio-muted: var(--ds-color-accent-fg);
+  --_portfolio-border: var(--ds-color-accent-fg);
+
+  padding: var(--ds-space-6);
+}
+
+.intro {
+  display: grid;
+  gap: var(--ds-space-2);
+  min-inline-size: 0;
+}
+
+.sectionEyebrow {
+  color: var(--_portfolio-muted);
+  font-size: var(--ds-font-size-sm);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-normal);
+}
+
+.heading {
+  margin: 0;
+  color: var(--_portfolio-text);
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-2xl);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+.description,
+.empty {
+  margin: 0;
+  color: var(--_portfolio-muted);
+  line-height: var(--ds-line-height-relaxed);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ds-space-4);
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.portfolio[data-columns="1"] .grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.portfolio[data-columns="2"] .grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.portfolio[data-columns="4"] .grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.item,
+.card {
+  min-inline-size: 0;
+}
+
+.card {
+  block-size: 100%;
+}
+
+.image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2) var(--ds-space-4);
+  color: var(--_portfolio-muted);
+  font-size: var(--ds-font-size-sm);
+  line-height: var(--ds-line-height-normal);
+}
+
+.location,
+.metadata time {
+  overflow-wrap: anywhere;
+}
+
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+  text-underline-offset: var(--ds-space-1);
+}
+
+.titleLink:hover {
+  text-decoration: underline;
+}
+
+.titleLink:focus-visible {
+  border-radius: var(--ds-radius-surface);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-space-1);
+}
+
+.link {
+  color: var(--ds-color-action-ghost-fg);
+  text-decoration: underline;
+  text-underline-offset: var(--ds-space-1);
+  overflow-wrap: anywhere;
+}
+
+.link:hover {
+  text-decoration-thickness: var(--ds-border-width-default);
+}
+
+.link:focus-visible {
+  border-radius: var(--ds-radius-surface);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-space-1);
+}
+
+.sectionAction {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-3);
+}
+
+@media (--ds-viewport-below-medium) {
+  .portfolio[data-columns="3"] .grid,
+  .portfolio[data-columns="4"] .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (--ds-viewport-compact) {
+  .grid,
+  .portfolio[data-columns="2"] .grid,
+  .portfolio[data-columns="3"] .grid,
+  .portfolio[data-columns="4"] .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .portfolio[data-variant="surface"],
+  .portfolio[data-variant="accent"] {
+    padding: var(--ds-space-4);
+  }
+}
+
+@media (forced-colors: active) {
+  .portfolio[data-variant="surface"],
+  .portfolio[data-variant="accent"] {
+    border-color: CanvasText;
+    background-color: Canvas;
+    color: CanvasText;
+  }
+
+  .sectionEyebrow,
+  .heading,
+  .description,
+  .empty,
+  .metadata {
+    color: CanvasText;
+  }
+
+  .link,
+  .titleLink {
+    color: LinkText;
+  }
+
+  .link:focus-visible,
+  .titleLink:focus-visible {
+    outline-color: Highlight;
+  }
+}

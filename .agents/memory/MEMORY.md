@@ -19,3 +19,4 @@
 - [Storybook preview vs. browser tests](storybook-playwright-preview-discrepancy.md) — compare the app preview and standalone Playwright server before treating a blank story iframe as a component failure.
 - [Unit-only component coverage](unit-only-component-coverage.md) — the 100% component implementation target must come from unit tests alone; report Storybook/browser coverage separately.
 - [Astro managed workflows](astro-managed-workflow.md) — prevent Astro dev from detaching from Replit's managed workflow and avoid stale Vite entry scanning.
+- [Native stepper disabled state](native-stepper-disabled-state.md) — keep disabled conditions on native buttons instead of repeating unreachable guards in click handlers.

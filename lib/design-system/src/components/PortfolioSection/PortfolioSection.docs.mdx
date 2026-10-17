@@ -1,0 +1,74 @@
+import { Meta, Canvas, Controls, Story, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./PortfolioSection.stories";
+
+<Meta of={Stories} />
+
+# Portfolio section
+
+`PortfolioSection` presents completed work as a responsive, semantic project grid.
+It composes the existing `Card` and `Badge` components rather than duplicating
+their visual behavior.
+
+## Project content
+
+Each item requires a stable `id` and `title`. Optional fields add a description,
+category badge, location, completion date, image, project link, and consumer
+action. Provide meaningful image `alt` text when an image conveys project
+information. The project link also makes the title clickable and adds a
+separately labeled “View project” action.
+
+```tsx
+<PortfolioSection
+  heading="Selected work"
+  description="A few recent projects."
+  columns={3}
+  items={[
+    {
+      id: "garden",
+      title: "A quieter garden",
+      category: "Landscape design",
+      location: "Toronto, ON",
+      image: {
+        src: "/images/garden.jpg",
+        alt: "Stone path through a planted garden",
+      },
+      link: {
+        href: "/projects/garden",
+        label: "View project",
+      },
+    },
+  ]}
+/>
+```
+
+## Customization
+
+Use `columns` to choose one to four columns; three- and four-column layouts
+reduce to two columns at medium widths and one column on compact screens.
+`cardVariant`, `cardSize`, `cardShape`, `cardAlignment`, `mediaAspectRatio`,
+and `mediaFit` are passed through to `Card`.
+
+`variant` controls the section wrapper (`plain`, `surface`, or `accent`). The
+optional `action` slot appears after the project grid, and `emptyMessage`
+customizes the message when `items` is empty. Use `headingLevel` to match the
+surrounding page outline; project card headings advance one level when a section
+heading is present.
+
+Filtering and image lightboxes are intentionally left to the consumer. Use
+`Gallery` when the primary task is browsing images rather than understanding
+individual projects.
+
+<Canvas of={Stories.Playground} />
+<Controls of={Stories.Playground} />
+
+## Empty state
+
+<Canvas of={Stories.EmptyPortfolio} />
+
+## Theme coverage
+
+<Canvas of={Stories.ThemeCoverage} />
+
+## Props
+
+<ArgTypes of={Stories.Playground} />

@@ -271,6 +271,17 @@ export type {
   PaginationProps,
   PaginationSummaryLabel,
 } from "./components/Pagination/Pagination";
+export { PortfolioSection } from "./components/PortfolioSection/PortfolioSection";
+export type {
+  PortfolioItem,
+  PortfolioItemDate,
+  PortfolioItemImage,
+  PortfolioItemLink,
+  PortfolioSectionColumns,
+  PortfolioSectionHeadingLevel,
+  PortfolioSectionProps,
+  PortfolioSectionVariant,
+} from "./components/PortfolioSection/PortfolioSection";
 export type {
   CardAlignment,
   CardHeadingLevel,

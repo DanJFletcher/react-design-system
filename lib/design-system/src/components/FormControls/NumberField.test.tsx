@@ -1,9 +1,26 @@
+import { createRef } from "react";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { NumberField } from "./NumberField";
 
 describe("NumberField", () => {
+  it("forwards an object ref to the native number input", () => {
+    const ref = createRef<HTMLInputElement>();
+    render(<NumberField label="Quantity" ref={ref} />);
+
+    expect(ref.current).toBe(screen.getByRole("spinbutton", { name: "Quantity" }));
+  });
+
+  it("forwards a callback ref to the native number input", () => {
+    const ref = vi.fn();
+    render(<NumberField label="Callback quantity" ref={ref} />);
+
+    expect(ref).toHaveBeenLastCalledWith(
+      screen.getByRole("spinbutton", { name: "Callback quantity" }),
+    );
+  });
+
   it("renders a labeled native number input with native constraints and connected help", () => {
     render(
       <NumberField
@@ -355,6 +372,21 @@ describe("NumberField", () => {
     expect(inRangeInput).toHaveValue(2);
     fireEvent.click(screen.getByRole("button", { name: "In-range count Increase" }));
     expect(inRangeInput).toHaveValue(3);
+  });
+
+  it("ignores a queued form reset after the field has unmounted", async () => {
+    const { unmount } = render(
+      <form aria-label="Resetting counts">
+        <NumberField defaultValue={3} label="Count" />
+      </form>,
+    );
+    const form = screen.getByRole("form", { name: "Resetting counts" });
+
+    await act(async () => {
+      (form as HTMLFormElement).reset();
+      unmount();
+      await Promise.resolve();
+    });
   });
 
   it("gives step buttons native button semantics and localized accessible names", () => {

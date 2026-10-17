@@ -52,7 +52,7 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>(functi
   const inputRef = useRef<HTMLInputElement>(null);
   const [uncontrolledValue, setUncontrolledValue] = useState(String(defaultValue ?? ""));
   const isControlled = controlledValue !== undefined;
-  const currentValue = isControlled ? String(controlledValue ?? "") : uncontrolledValue;
+  const currentValue = isControlled ? String(controlledValue) : uncontrolledValue;
   const labelId = `${field.id}-label`;
   const controlClassName = [
     fieldStyles.control,
@@ -92,8 +92,7 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>(functi
   }, [inputProps.form, isControlled]);
 
   const stepValue = (direction: "up" | "down") => {
-    const input = inputRef.current;
-    if (!input || disabled || readOnly || step === "any") return;
+    const input = inputRef.current!;
     if (direction === "up") input.stepUp();
     else input.stepDown();
     input.dispatchEvent(new Event("input", { bubbles: true }));
