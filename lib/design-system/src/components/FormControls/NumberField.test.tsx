@@ -83,6 +83,60 @@ describe("NumberField", () => {
     expect(onControlledChange).toHaveBeenCalledWith("8");
   });
 
+  it("keeps a controlled value, native validity, and step buttons in sync with parent updates", () => {
+    function ParentUpdatedValue() {
+      const [value, setValue] = useState(4);
+
+      return (
+        <>
+          <button onClick={() => setValue(0)} type="button">Set minimum</button>
+          <button onClick={() => setValue(10)} type="button">Set maximum</button>
+          <button onClick={() => setValue(12)} type="button">Set above maximum</button>
+          <NumberField
+            label="Parent-updated quantity"
+            max={10}
+            min={0}
+            onChange={(event) => setValue(Number(event.currentTarget.value))}
+            showSteppers
+            step={2}
+            value={value}
+          />
+        </>
+      );
+    }
+
+    render(<ParentUpdatedValue />);
+
+    const input = screen.getByRole("spinbutton", { name: "Parent-updated quantity" }) as HTMLInputElement;
+    const decrease = screen.getByRole("button", { name: "Parent-updated quantity Decrease" });
+    const increase = screen.getByRole("button", { name: "Parent-updated quantity Increase" });
+
+    expect(input).toHaveValue(4);
+    expect(input.validity.valid).toBe(true);
+    expect(decrease).toBeEnabled();
+    expect(increase).toBeEnabled();
+
+    fireEvent.click(screen.getByRole("button", { name: "Set minimum" }));
+    expect(screen.getByRole("spinbutton", { name: "Parent-updated quantity" })).toBe(input);
+    expect(input).toHaveValue(0);
+    expect(input.validity.valid).toBe(true);
+    expect(decrease).toBeDisabled();
+    expect(increase).toBeEnabled();
+
+    fireEvent.click(screen.getByRole("button", { name: "Set maximum" }));
+    expect(input).toHaveValue(10);
+    expect(input.validity.valid).toBe(true);
+    expect(decrease).toBeEnabled();
+    expect(increase).toBeDisabled();
+
+    fireEvent.click(screen.getByRole("button", { name: "Set above maximum" }));
+    expect(input).toHaveValue(12);
+    expect(input.validity.rangeOverflow).toBe(true);
+    expect(input.validity.stepMismatch).toBe(false);
+    expect(decrease).toBeEnabled();
+    expect(increase).toBeDisabled();
+  });
+
   it("updates native constraints and step buttons when the parent changes min, max, and step", () => {
     function ChangingConstraints() {
       const [constraints, setConstraints] = useState({ min: 0, max: 10, step: 1 });

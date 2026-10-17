@@ -140,6 +140,61 @@ export const LiveConstraints: Story = {
   },
 };
 
+export const ControlledParentUpdates: Story = {
+  render: () => {
+    const [value, setValue] = useState(4);
+
+    return (
+      <div style={{ display: "grid", gap: "var(--ds-space-4)", width: "32rem", maxWidth: "100%" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--ds-space-2)" }}>
+          <button onClick={() => setValue(0)} type="button">Set minimum</button>
+          <button onClick={() => setValue(10)} type="button">Set maximum</button>
+          <button onClick={() => setValue(12)} type="button">Set above maximum</button>
+        </div>
+        <NumberField
+          label="Parent-updated quantity"
+          max={10}
+          min={0}
+          onChange={(event) => setValue(Number(event.currentTarget.value))}
+          showSteppers
+          step={2}
+          value={value}
+        />
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole("spinbutton", { name: "Parent-updated quantity" }) as HTMLInputElement;
+    const decrease = canvas.getByRole("button", { name: "Parent-updated quantity Decrease" });
+    const increase = canvas.getByRole("button", { name: "Parent-updated quantity Increase" });
+
+    await expect(input).toHaveValue(4);
+    await expect(input.validity.valid).toBe(true);
+    await expect(decrease).toBeEnabled();
+    await expect(increase).toBeEnabled();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Set minimum" }));
+    await expect(input).toHaveValue(0);
+    await expect(input.validity.valid).toBe(true);
+    await expect(decrease).toBeDisabled();
+    await expect(increase).toBeEnabled();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Set maximum" }));
+    await expect(input).toHaveValue(10);
+    await expect(input.validity.valid).toBe(true);
+    await expect(decrease).toBeEnabled();
+    await expect(increase).toBeDisabled();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Set above maximum" }));
+    await expect(input).toHaveValue(12);
+    await expect(input.validity.rangeOverflow).toBe(true);
+    await expect(input.validity.stepMismatch).toBe(false);
+    await expect(decrease).toBeEnabled();
+    await expect(increase).toBeDisabled();
+  },
+};
+
 export const FractionalStepControls: Story = {
   render: () => (
     <div style={{ display: "grid", gap: "var(--ds-space-4)", width: "32rem", maxWidth: "100%" }}>
