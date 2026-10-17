@@ -154,6 +154,25 @@ Items render as native toggle buttons with `aria-pressed`. Each button remains i
 />
 ```
 
+## NumberField
+
+`NumberField` is a labeled native `<input type="number">` for numeric form values. It forwards native input props, including `min`, `max`, `step`, `name`, `value`, `defaultValue`, and `onChange`; browser validation, form submission, and arrow-key stepping remain native. The field uses the shared `description`, `error`, `invalid`, `required`, and `disabled` contract, with messages connected to the input.
+
+Set `showSteppers` to add optional decrease/increase buttons. They use the native `stepDown()` and `stepUp()` methods and participate in normal keyboard focus order. Their accessible names combine the field's visible label with `decrementLabel` / `incrementLabel` (defaulting to “Decrease” and “Increase”). Controls are disabled at min/max bounds, while disabled or read-only, and for `step="any"`.
+
+```tsx
+<NumberField
+  label="Quantity"
+  name="quantity"
+  min={1}
+  max={20}
+  step={1}
+  defaultValue={4}
+  description="Choose between 1 and 20 items."
+  showSteppers
+/>
+```
+
 ## Combobox
 
 `Combobox` is a searchable single-select form control. `options` is a readonly list of unique `{ value, label, disabled? }` entries. Matching is case-insensitive against the option label by default; `filterOptions(options, query)` can supply custom filtering. Editing the query clears any previous selection, and free-form query text is not submitted as an option.

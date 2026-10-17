@@ -295,6 +295,8 @@ export type {
 } from "./components/Carousel/Carousel";
 export { TextField } from "./components/FormControls/TextField";
 export type { TextFieldProps } from "./components/FormControls/TextField";
+export { NumberField } from "./components/FormControls/NumberField";
+export type { NumberFieldProps } from "./components/FormControls/NumberField";
 export { RangeField } from "./components/FormControls/RangeField";
 export type { RangeFieldProps } from "./components/FormControls/RangeField";
 export { Search } from "./components/Search/Search";

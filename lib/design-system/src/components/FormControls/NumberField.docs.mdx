@@ -1,0 +1,42 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as NumberFieldStories from "./NumberField.stories";
+
+<Meta of={NumberFieldStories} />
+
+<Title>Number field</Title>
+
+<Subtitle>A labeled native number input for quantities, counts, and other bounded numeric values.</Subtitle>
+
+<Canvas of={NumberFieldStories.Playground} />
+
+## Native constraints and messages
+
+`NumberField` renders `<input type="number">` and forwards native input attributes. Use `min`, `max`, and `step` for browser validation and keyboard stepping. `label` is required; `description`, `error`, `invalid`, `required`, and `disabled` follow the shared form-field contract. Help and error messages are connected to the input through `aria-describedby`; an error also marks it invalid.
+
+```tsx
+<NumberField
+  label="Quantity"
+  name="quantity"
+  min={1}
+  max={20}
+  step={1}
+  defaultValue={4}
+  description="Choose between 1 and 20 items."
+/>
+```
+
+The native input retains browser keyboard behavior, including arrow-key adjustment by the configured step. `value` and `onChange` provide controlled input; `defaultValue` initializes an uncontrolled input. The field does not clamp or otherwise replace the browser's native validation behavior.
+
+## Optional step controls
+
+Set `showSteppers` to add separate decrease and increase buttons. They use native `stepDown()` and `stepUp()` behavior and remain keyboard-operable buttons. Their accessible names combine the field label with `decrementLabel` and `incrementLabel`; customize these strings for localization. The buttons are disabled at native min/max bounds, when the field is disabled or read-only, and when `step="any"` does not define an increment.
+
+<Canvas of={NumberFieldStories.WithStepControls} />
+
+<Canvas of={NumberFieldStories.InvalidAndDisabled} />
+
+## Themes
+
+The field and optional buttons use shared semantic form and action tokens, with no theme-specific rendering. The input's focus, invalid, disabled, and forced-colors states are retained when the step controls are shown.
+
+<Canvas of={NumberFieldStories.ThemeCoverage} />

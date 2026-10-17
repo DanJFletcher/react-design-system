@@ -1,0 +1,145 @@
+.group {
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  inline-size: 100%;
+  min-inline-size: 0;
+  border: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  border-radius: var(--ds-radius-form-control);
+  background-color: var(--ds-color-surface-primary);
+  box-shadow: var(--ds-shadow-elevation-control);
+}
+
+.group:focus-within {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.group[data-invalid="true"] {
+  border-color: var(--ds-color-border-error);
+}
+
+.group[data-disabled="true"] {
+  border-color: var(--ds-color-action-disabled-bg);
+  background-color: var(--ds-color-action-disabled-bg);
+}
+
+.inputWithSteppers {
+  flex: 1 1 auto;
+  inline-size: auto;
+  min-inline-size: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.inputWithSteppers:focus-visible {
+  outline: 0;
+}
+
+.inputWithSteppers[aria-invalid="true"] {
+  border-color: transparent;
+}
+
+.inputWithSteppers::-webkit-inner-spin-button,
+.inputWithSteppers::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.inputWithSteppers {
+  appearance: textfield;
+}
+
+.stepButton {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: var(--ds-control-min-block-size-md);
+  min-block-size: var(--ds-control-min-block-size-md);
+  padding: var(--ds-space-2);
+  border: 0;
+  border-inline-start: var(--ds-border-width-default) solid var(--ds-color-border-control);
+  background-color: var(--ds-color-action-secondary-bg);
+  color: var(--ds-color-action-secondary-fg);
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-lg);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-tight);
+  cursor: pointer;
+}
+
+.stepButton:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: var(--ds-focus-width) solid var(--ds-color-focus-ring);
+  outline-offset: calc(-1 * var(--ds-focus-offset));
+}
+
+.stepButton:hover:not(:disabled) {
+  background-color: var(--ds-color-action-secondary-hover-bg);
+  color: var(--ds-color-action-secondary-hover-fg);
+}
+
+.stepButton:active:not(:disabled) {
+  background-color: var(--ds-color-action-secondary-pressed-bg);
+  color: var(--ds-color-action-secondary-pressed-fg);
+}
+
+.stepButton:disabled {
+  background-color: var(--ds-color-action-disabled-bg);
+  color: var(--ds-color-action-disabled-fg);
+  cursor: not-allowed;
+}
+
+.stepButton:last-child {
+  border-start-end-radius: var(--ds-radius-form-control);
+  border-end-end-radius: var(--ds-radius-form-control);
+}
+
+.group[data-disabled="true"] .stepButton {
+  border-color: var(--ds-color-action-disabled-fg);
+}
+
+.visuallyHidden {
+  position: absolute;
+  inline-size: var(--ds-space-1);
+  block-size: var(--ds-space-1);
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+@media (forced-colors: active) {
+  .group {
+    border-color: CanvasText;
+    background-color: Canvas;
+    box-shadow: none;
+  }
+
+  .group[data-invalid="true"] {
+    border-color: Mark;
+  }
+
+  .stepButton {
+    border-inline-start-color: CanvasText;
+    background-color: ButtonFace;
+    color: ButtonText;
+  }
+
+  .stepButton:focus-visible,
+  .group:focus-within {
+    outline-color: Highlight;
+  }
+
+  .stepButton:disabled,
+  .group[data-disabled="true"] .stepButton {
+    border-inline-start-color: GrayText;
+    background-color: Canvas;
+    color: GrayText;
+  }
+}
