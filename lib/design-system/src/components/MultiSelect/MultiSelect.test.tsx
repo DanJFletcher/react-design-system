@@ -174,6 +174,63 @@ describe("MultiSelect", () => {
     expect(input).toHaveAttribute("aria-expanded", "false");
   });
 
+  it("enforces the selection limit for uncontrolled values and announces unavailable options", () => {
+    render(
+      <MultiSelect
+        defaultValue={["design"]}
+        label="Topics"
+        maxSelections={2}
+        maxSelectionsMessage={(count) => `No more than ${count} topics.`}
+        options={options}
+      />,
+    );
+    const input = screen.getByRole("combobox", { name: "Topics" });
+    fireEvent.focus(input);
+    fireEvent.click(screen.getByRole("option", { name: "Accessibility" }));
+
+    expect(screen.getByRole("button", { name: "Remove Accessibility" })).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent("No more than 2 topics.");
+    expect(screen.getByRole("option", { name: "React" })).toHaveAttribute("aria-disabled", "true");
+    fireEvent.click(screen.getByRole("option", { name: "React" }));
+    expect(screen.queryByRole("button", { name: "Remove React" })).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Remove Design systems" }));
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+    expect(screen.getByRole("option", { name: "React" })).not.toHaveAttribute("aria-disabled", "true");
+    fireEvent.click(screen.getByRole("option", { name: "React" }));
+    expect(screen.getByRole("button", { name: "Remove React" })).toBeInTheDocument();
+  });
+
+  it("enforces the selection limit for controlled values without emitting an over-limit update", () => {
+    const onValueChange = vi.fn();
+    const { rerender } = render(
+      <MultiSelect
+        label="Topics"
+        maxSelections={2}
+        onValueChange={onValueChange}
+        options={options}
+        value={["design"]}
+      />,
+    );
+    const input = screen.getByRole("combobox", { name: "Topics" });
+    fireEvent.focus(input);
+    fireEvent.click(screen.getByRole("option", { name: "Accessibility" }));
+    expect(onValueChange).toHaveBeenCalledWith(["design", "a11y"]);
+
+    rerender(
+      <MultiSelect
+        label="Topics"
+        maxSelections={2}
+        onValueChange={onValueChange}
+        options={options}
+        value={["design", "a11y"]}
+      />,
+    );
+    expect(screen.getByRole("status")).toHaveTextContent("Maximum of 2 selections reached.");
+    fireEvent.click(screen.getByRole("option", { name: "React" }));
+    expect(onValueChange).toHaveBeenCalledTimes(1);
+  });
+
   it("closes on outside pointer and keeps the popup open when focus moves within the control", () => {
     render(<MultiSelect defaultValue={["design"]} label="Topics" options={options} />);
     const input = screen.getByRole("combobox", { name: "Topics" });
@@ -277,6 +334,12 @@ describe("MultiSelect", () => {
     );
     expect(() => render(renderWith({ value: ["design", "design"] }))).toThrow(
       'MultiSelect values must be unique: "design".',
+    );
+    expect(() => render(renderWith({ maxSelections: -1 }))).toThrow(
+      "MultiSelect maxSelections must be a non-negative integer.",
+    );
+    expect(() => render(renderWith({ maxSelections: 1.5 }))).toThrow(
+      "MultiSelect maxSelections must be a non-negative integer.",
     );
     expect(() => render(renderWith({ loading: true, value: ["pending"] }))).not.toThrow();
   });

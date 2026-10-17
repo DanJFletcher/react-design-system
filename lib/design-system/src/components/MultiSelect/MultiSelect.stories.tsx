@@ -27,6 +27,8 @@ const meta = {
     value: { control: false },
     defaultValue: { control: false },
     name: { control: "text" },
+    maxSelections: { control: "number" },
+    maxSelectionsMessage: { control: false },
     required: { control: "boolean" },
     disabled: { control: "boolean" },
     allowClear: { control: "boolean" },
@@ -95,6 +97,30 @@ function ControlledTopicsExample() {
   );
 }
 
+function SelectionLimitExample() {
+  const [controlledValue, setControlledValue] = useState<string[]>(["design"]);
+
+  return (
+    <div style={{ display: "grid", maxWidth: "32rem", gap: "var(--ds-space-4)" }}>
+      <MultiSelect
+        defaultValue={["design"]}
+        label="Choose up to two topics"
+        maxSelections={2}
+        options={tags}
+        description="Uncontrolled example; remove a topic to choose another."
+      />
+      <MultiSelect
+        label="Controlled topics"
+        maxSelections={2}
+        onValueChange={setControlledValue}
+        options={tags}
+        value={controlledValue}
+      />
+      <output aria-live="polite">Controlled selection: {controlledValue.join(", ") || "none"}</output>
+    </div>
+  );
+}
+
 export const SearchAndFormSubmission: Story = {
   render: () => <TopicRequestForm />,
   play: async ({ canvasElement }) => {
@@ -139,6 +165,34 @@ export const RemoveSelections: Story = {
 
 export const ControlledSelection: Story = {
   render: () => <ControlledTopicsExample />,
+};
+
+export const SelectionLimit: Story = {
+  render: () => <SelectionLimitExample />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const uncontrolled = canvas.getByRole("combobox", { name: "Choose up to two topics" });
+    await userEvent.click(uncontrolled);
+    const uncontrolledListbox = within(
+      canvas.getByRole("listbox", { name: "Choose up to two topics" }),
+    );
+    await userEvent.click(uncontrolledListbox.getByRole("option", { name: "Accessibility" }));
+    await expect(canvas.getByText("Maximum of 2 selections reached. Remove a selection to choose another."))
+      .toBeVisible();
+    await expect(uncontrolledListbox.getByRole("option", { name: "React" })).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
+
+    const controlled = canvas.getByRole("combobox", { name: "Controlled topics" });
+    await userEvent.click(controlled);
+    const controlledListbox = within(canvas.getByRole("listbox", { name: "Controlled topics" }));
+    await userEvent.click(controlledListbox.getByRole("option", { name: "Accessibility" }));
+    await expect(canvas.getByText("Controlled selection: design, accessibility")).toBeVisible();
+    await expect(
+      canvas.getAllByText("Maximum of 2 selections reached. Remove a selection to choose another."),
+    ).toHaveLength(2);
+  },
 };
 
 export const KeyboardAndDisabledOptions: Story = {

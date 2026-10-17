@@ -97,6 +97,14 @@
   overflow-wrap: anywhere;
 }
 
+.limitStatus {
+  flex: 0 0 100%;
+  min-inline-size: 0;
+  color: var(--ds-color-text-muted);
+  font-size: var(--ds-font-size-sm);
+  line-height: var(--ds-line-height-normal);
+}
+
 .removeButton,
 .clearButton {
   display: inline-grid;

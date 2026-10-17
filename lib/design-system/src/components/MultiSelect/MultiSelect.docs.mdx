@@ -28,9 +28,28 @@ MultiSelect filters options as the user types. Each chosen value appears as a re
 
 Use `value` with `onValueChange` for controlled state, or `defaultValue` for uncontrolled state. `filterOptions` customizes matching; by default the search is case-insensitive and checks visible labels. Options and selected values must be unique; values must match an option unless `loading` is true.
 
+## Limit the number of selections
+
+Set `maxSelections` to a non-negative integer to cap the number of selected values. When the limit is reached, unselected options are marked unavailable to assistive technology and cannot be selected; selected options remain available for removal. A polite status message explains how to choose a different option. Customize its localized text with `maxSelectionsMessage`.
+
+The limit applies to controlled and uncontrolled selections. If a controlled value already exceeds a newly configured limit, existing values are preserved and can be removed, but additional options cannot be selected.
+
+```tsx
+<MultiSelect
+  label="Article topics"
+  options={topics}
+  maxSelections={3}
+  maxSelectionsMessage={(count) =>
+    `Choose no more than ${count} topics. Remove a topic to choose another.`
+  }
+/>
+```
+
+<Canvas of={MultiSelectStories.SelectionLimit} />
+
 ## Keyboard and form behavior
 
-The text input follows the ARIA combobox pattern and its popup is a multiselectable listbox. Focus opens the list. Arrow keys move through enabled options, Home and End move to the first or last enabled option, Enter toggles the active choice, Escape closes the list, and Tab leaves it. Backspace with an empty query removes the last enabled selection.
+The text input follows the ARIA combobox pattern and its popup is a multiselectable listbox. Focus opens the list. Arrow keys move through options; options explicitly marked `disabled` are skipped, while unselected options unavailable because of `maxSelections` remain reviewable and expose their disabled state. Home and End move to the first or last enabled option, Enter toggles the active choice, Escape closes the list, and Tab leaves it. Backspace with an empty query removes the last enabled selection.
 
 Selected tags have individually named remove buttons. `removeLabel` customizes each accessible remove name, while `clearLabel` names the optional clear-all button. `allowClear` defaults to `true`. Required validity is based on whether at least one option is selected; query text alone does not satisfy it.
 

@@ -53,6 +53,8 @@ export type MultiSelectProps = NativeInputProps &
     value?: readonly string[];
     defaultValue?: readonly string[];
     onValueChange?: (value: string[]) => void;
+    maxSelections?: number;
+    maxSelectionsMessage?: (maxSelections: number) => string;
     filterOptions?: (
       options: readonly MultiSelectOption[],
       query: string,
@@ -72,6 +74,7 @@ function validateOptions(
   options: readonly MultiSelectOption[],
   selectedValues: readonly string[],
   loading: boolean,
+  maxSelections?: number,
 ) {
   const values = new Set<string>();
 
@@ -94,6 +97,10 @@ function validateOptions(
     if (!loading && !values.has(value)) {
       throw new Error(`MultiSelect value must match an option: "${value}".`);
     }
+  }
+
+  if (maxSelections !== undefined && (!Number.isInteger(maxSelections) || maxSelections < 0)) {
+    throw new Error("MultiSelect maxSelections must be a non-negative integer.");
   }
 }
 
@@ -124,6 +131,9 @@ export const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(functi
     value,
     defaultValue = [],
     onValueChange,
+    maxSelections,
+    maxSelectionsMessage = (count) =>
+      `Maximum of ${count} selections reached. Remove a selection to choose another.`,
     filterOptions,
     allowClear = true,
     clearLabel = "Clear selections",
@@ -163,7 +173,8 @@ export const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(functi
   const selectedValues = value !== undefined ? [...value] : uncontrolledValues;
   const selectedSet = useMemo(() => new Set(selectedValues), [selectedValues]);
 
-  validateOptions(options, selectedValues, loading);
+  validateOptions(options, selectedValues, loading, maxSelections);
+  const reachedSelectionLimit = maxSelections !== undefined && selectedValues.length >= maxSelections;
 
   const filteredOptions = useMemo(() => {
     if (filterOptions) return filterOptions(options, query);
@@ -206,6 +217,7 @@ export const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(functi
     if (selectedSet.has(option.value)) {
       updateValues(selectedValues.filter((selectedValue) => selectedValue !== option.value));
     } else {
+      if (reachedSelectionLimit) return;
       updateValues([...selectedValues, option.value]);
     }
     setQuery("");
@@ -343,6 +355,11 @@ export const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(functi
               </button>
             </span>
           ))}
+          {maxSelections !== undefined && reachedSelectionLimit && (
+            <span className={styles.limitStatus} role="status">
+              {maxSelectionsMessage(maxSelections)}
+            </span>
+          )}
           <input
             {...inputProps}
             ref={(node) => {
@@ -396,11 +413,15 @@ export const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>(functi
         >
           {filteredOptions.map((option, index) => (
             <li
-              aria-disabled={option.disabled || undefined}
+              aria-disabled={
+                option.disabled || (reachedSelectionLimit && !selectedSet.has(option.value)) || undefined
+              }
               aria-selected={selectedSet.has(option.value)}
               className={styles.option}
               data-active={activeIndex === index || undefined}
-              data-disabled={option.disabled || undefined}
+              data-disabled={
+                option.disabled || (reachedSelectionLimit && !selectedSet.has(option.value)) || undefined
+              }
               id={`${listboxId}-option-${index}`}
               key={option.value}
               onClick={() => toggleOption(option)}

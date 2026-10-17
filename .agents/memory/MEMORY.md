@@ -6,6 +6,7 @@
 - [Unique Storybook landmarks](storybook-landmark-uniqueness.md) — stacked theme stories need distinct names for repeated semantic regions to pass axe’s landmark-unique rule.
 - [Pagination browser tests](pagination-browser-tests.md) — treat the current page separately from clickable page controls and use exact accessible-name matches for numbered pages.
 - [Repeated accessible values](storybook-repeated-values.md) — when repeated items share an accessible name, assert through a plural locator and expected count.
+- [Storybook live-region queries](storybook-live-region-queries.md) — `<output aria-live="polite">` also has the status role; scope or match exact text when other statuses render.
 - [Luna radius intent](luna-radius-intent.md) — Luna surfaces use 32px square-rounded corners; buttons and form controls keep their intentional pill shapes.
 - [Theme coverage ordering](theme-coverage-order.md) — append new themes after existing comparisons; prefer theme-name locators over positional checks.
 - [Storybook theme CSS ordering](storybook-theme-css-order.md) — load custom theme overrides after all generated theme sheets in multi-theme previews.

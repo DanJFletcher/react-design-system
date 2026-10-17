@@ -211,9 +211,9 @@ The text input exposes the ARIA combobox/listbox pattern. Focus opens the list; 
 
 ## MultiSelect
 
-`MultiSelect` is a searchable multi-value form control. Its readonly `options` use unique `{ value, label, disabled? }` entries; `value` and `defaultValue` are arrays of option values. `filterOptions(options, query)` customizes matching; the default filter matches option labels case-insensitively.
+`MultiSelect` is a searchable multi-value form control. Its readonly `options` use unique `{ value, label, disabled? }` entries; `value` and `defaultValue` are arrays of option values. `filterOptions(options, query)` customizes matching; the default filter matches option labels case-insensitively. Set `maxSelections` to a non-negative integer to cap selections, and use `maxSelectionsMessage(maxSelections)` to customize the polite limit announcement.
 
-Each selected value is rendered as a removable tag and submitted as a repeated hidden input with the same `name`. The input and popup follow the ARIA combobox and multiselectable listbox patterns: Arrow keys, Home, and End navigate enabled options; Enter toggles the active option; Escape closes; Backspace with an empty query removes the last enabled selection. Required validation succeeds only when at least one value is selected. `removeLabel` customizes each tag's accessible remove name; `allowClear` defaults to `true`.
+Each selected value is rendered as a removable tag and submitted as a repeated hidden input with the same `name`. The input and popup follow the ARIA combobox and multiselectable listbox patterns: Arrow keys, Home, and End navigate options; explicitly disabled options are skipped, but unselected options unavailable at the selection limit remain reviewable and expose `aria-disabled`. Enter toggles the active option; Escape closes; Backspace with an empty query removes the last enabled selection. Selected values remain removable at the limit. Required validation succeeds only when at least one value is selected. `removeLabel` customizes each tag's accessible remove name; `allowClear` defaults to `true`.
 
 ```tsx
 <MultiSelect
