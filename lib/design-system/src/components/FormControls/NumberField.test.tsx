@@ -122,6 +122,68 @@ describe("NumberField", () => {
     expect(screen.getByRole("button", { name: "Maximum count Increase" })).toBeEnabled();
   });
 
+  it("uses native fractional steps without crossing non-aligned bounds", () => {
+    render(
+      <>
+        <NumberField
+          defaultValue={0.3}
+          label="Fractional amount"
+          min={0.1}
+          max={0.65}
+          step={0.2}
+          showSteppers
+        />
+        <NumberField
+          defaultValue={0.45}
+          label="Fractional range"
+          min={0.15}
+          max={0.85}
+          step={0.3}
+          showSteppers
+        />
+      </>,
+    );
+
+    const amount = screen.getByRole("spinbutton", { name: "Fractional amount" }) as HTMLInputElement;
+    const amountIncrease = screen.getByRole("button", { name: "Fractional amount Increase" });
+    const amountDecrease = screen.getByRole("button", { name: "Fractional amount Decrease" });
+
+    fireEvent.click(amountIncrease);
+    expect(amount).toHaveValue(0.5);
+    expect(amount.validity.valid).toBe(true);
+
+    // 0.7 is the next valid step, but it would exceed the non-aligned max of 0.65.
+    fireEvent.click(amountIncrease);
+    expect(amount).toHaveValue(0.5);
+    expect(amount.validity.rangeOverflow).toBe(false);
+    expect(amount.validity.stepMismatch).toBe(false);
+
+    fireEvent.click(amountDecrease);
+    expect(amount).toHaveValue(0.3);
+    fireEvent.click(amountDecrease);
+    expect(amount).toHaveValue(0.1);
+    expect(amount.validity.rangeUnderflow).toBe(false);
+
+    const range = screen.getByRole("spinbutton", { name: "Fractional range" }) as HTMLInputElement;
+    const rangeIncrease = screen.getByRole("button", { name: "Fractional range Increase" });
+    const rangeDecrease = screen.getByRole("button", { name: "Fractional range Decrease" });
+
+    fireEvent.click(rangeIncrease);
+    expect(range).toHaveValue(0.75);
+    expect(range.validity.valid).toBe(true);
+    // The next aligned value is 1.05, outside max=0.85, so native stepping stays put.
+    fireEvent.click(rangeIncrease);
+    expect(range).toHaveValue(0.75);
+    expect(range.validity.rangeOverflow).toBe(false);
+
+    fireEvent.click(rangeDecrease);
+    expect(range).toHaveValue(0.45);
+    fireEvent.click(rangeDecrease);
+    expect(range).toHaveValue(0.15);
+    expect(range.validity.rangeUnderflow).toBe(false);
+    expect(range.validity.stepMismatch).toBe(false);
+  });
+
   it("keeps step buttons accurate after an uncontrolled form reset", async () => {
     render(
       <form aria-label="Counts">

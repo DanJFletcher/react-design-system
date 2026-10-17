@@ -77,6 +77,71 @@ export const WithStepControls: Story = {
   },
 };
 
+export const FractionalStepControls: Story = {
+  render: () => (
+    <div style={{ display: "grid", gap: "var(--ds-space-4)", width: "32rem", maxWidth: "100%" }}>
+      <NumberField
+        label="Fractional amount"
+        min={0.1}
+        max={0.65}
+        step={0.2}
+        defaultValue={0.3}
+        showSteppers
+      />
+      <NumberField
+        label="Fractional range"
+        min={0.15}
+        max={0.85}
+        step={0.3}
+        defaultValue={0.45}
+        showSteppers
+      />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const amount = canvas.getByRole("spinbutton", { name: "Fractional amount" }) as HTMLInputElement;
+    const amountIncrease = canvas.getByRole("button", { name: "Fractional amount Increase" });
+    const amountDecrease = canvas.getByRole("button", { name: "Fractional amount Decrease" });
+
+    await userEvent.click(amountIncrease);
+    await expect(amount).toHaveValue(0.5);
+    await expect(amount.validity.valid).toBe(true);
+
+    // The next valid step, 0.7, would exceed max=0.65.
+    await userEvent.click(amountIncrease);
+    await expect(amount).toHaveValue(0.5);
+    await expect(amount.validity.rangeOverflow).toBe(false);
+    await expect(amount.validity.stepMismatch).toBe(false);
+
+    await userEvent.click(amountDecrease);
+    await expect(amount).toHaveValue(0.3);
+    await userEvent.click(amountDecrease);
+    await expect(amount).toHaveValue(0.1);
+    await expect(amount.validity.rangeUnderflow).toBe(false);
+
+    const range = canvas.getByRole("spinbutton", { name: "Fractional range" }) as HTMLInputElement;
+    const rangeIncrease = canvas.getByRole("button", { name: "Fractional range Increase" });
+    const rangeDecrease = canvas.getByRole("button", { name: "Fractional range Decrease" });
+
+    await userEvent.click(rangeIncrease);
+    await expect(range).toHaveValue(0.75);
+    await expect(range.validity.valid).toBe(true);
+
+    // The next valid step, 1.05, is above max=0.85 and must not be applied.
+    await userEvent.click(rangeIncrease);
+    await expect(range).toHaveValue(0.75);
+    await expect(range.validity.rangeOverflow).toBe(false);
+
+    await userEvent.click(rangeDecrease);
+    await expect(range).toHaveValue(0.45);
+    await userEvent.click(rangeDecrease);
+    await expect(range).toHaveValue(0.15);
+    await expect(range.validity.rangeUnderflow).toBe(false);
+    await expect(range.validity.stepMismatch).toBe(false);
+  },
+};
+
 const themes = ["acme", "luna", "orchid", "atom", "sublime"] as const;
 
 export const ThemeCoverage: Story = {
