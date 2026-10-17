@@ -333,6 +333,11 @@ export { Select } from "./components/FormControls/Select";
 export type { SelectProps } from "./components/FormControls/Select";
 export { Combobox } from "./components/Combobox/Combobox";
 export type { ComboboxOption, ComboboxProps } from "./components/Combobox/Combobox";
+export { MultiSelect } from "./components/MultiSelect/MultiSelect";
+export type {
+  MultiSelectOption,
+  MultiSelectProps,
+} from "./components/MultiSelect/MultiSelect";
 export { Checkbox } from "./components/FormControls/Checkbox";
 export type { CheckboxProps } from "./components/FormControls/Checkbox";
 export { RadioGroup } from "./components/FormControls/RadioGroup";

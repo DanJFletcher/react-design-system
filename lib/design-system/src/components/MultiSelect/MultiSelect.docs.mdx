@@ -1,0 +1,46 @@
+import { Canvas, Meta, Subtitle, Title } from "@storybook/addon-docs/blocks";
+import * as MultiSelectStories from "./MultiSelect.stories";
+
+<Meta of={MultiSelectStories} />
+
+<Title />
+
+<Subtitle>Search, choose, and remove multiple values in an accessible, theme-aware form control.</Subtitle>
+
+## Search and submit values
+
+MultiSelect filters options as the user types. Each chosen value appears as a removable tag, and form submission includes one value for each selection under the same `name`.
+
+<Canvas of={MultiSelectStories.SearchAndFormSubmission} />
+
+```tsx
+<MultiSelect
+  label="Topics"
+  name="topics"
+  options={[
+    { value: "design", label: "Design systems" },
+    { value: "accessibility", label: "Accessibility" },
+  ]}
+  required
+  placeholder="Search topics"
+/>
+```
+
+Use `value` with `onValueChange` for controlled state, or `defaultValue` for uncontrolled state. `filterOptions` customizes matching; by default the search is case-insensitive and checks visible labels. Options and selected values must be unique; values must match an option unless `loading` is true.
+
+## Keyboard and form behavior
+
+The text input follows the ARIA combobox pattern and its popup is a multiselectable listbox. Focus opens the list. Arrow keys move through enabled options, Home and End move to the first or last enabled option, Enter toggles the active choice, Escape closes the list, and Tab leaves it. Backspace with an empty query removes the last enabled selection.
+
+Selected tags have individually named remove buttons. `removeLabel` customizes each accessible remove name, while `clearLabel` names the optional clear-all button. `allowClear` defaults to `true`. Required validity is based on whether at least one option is selected; query text alone does not satisfy it.
+
+<Canvas of={MultiSelectStories.RemoveSelections} />
+<Canvas of={MultiSelectStories.KeyboardAndDisabledOptions} />
+<Canvas of={MultiSelectStories.ValidationDisabledAndThemes} />
+
+## Loading and narrow layouts
+
+Set `loading` while options are being refreshed to announce `loadingMessage`. `noResultsMessage` is announced when filtering has no matches. The control wraps selected tags on narrow screens and keeps the option list within its own width and the viewport.
+
+<Canvas of={MultiSelectStories.LoadingAndNoResults} />
+<Canvas of={MultiSelectStories.NarrowLongOptions} />
